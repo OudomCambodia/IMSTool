@@ -1,0 +1,2039 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Testing.Forms
+{
+    public partial class frmSendEmailClaim : Form
+    {
+        public string UserName = "Default";
+        CRUD crud = new CRUD();
+        CommonFunctions.ListViewColumnSorter lvwColumnSorter = new CommonFunctions.ListViewColumnSorter();
+        //email information
+        string smtpSer;
+        string mail_add;
+        string mail_pass;
+        int port;
+        string HashPass = "Forte@2017";
+
+        public frmSendEmailClaim()
+        {
+            InitializeComponent();
+        }
+
+        private void frmSendEmailClaim_Load(object sender, EventArgs e)
+        {
+            refreshGrid();
+
+            //populate the pending grid view
+            PendingGrid();
+
+
+            //Rejection Letter
+            //DataTable dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF order by TYPE");
+
+            //lvDefExclu.CheckBoxes = true;
+            //lvDefExclu.View = View.Details;
+
+            //lvDefExclu.Columns.Add("Type", 110);
+            //lvDefExclu.Columns.Add("Eng", 275);
+            //lvDefExclu.Columns.Add("Kh", 275);
+
+            //foreach (DataRow dr in dt.Rows)
+            //{
+            //    ListViewItem lvi = new ListViewItem(dr["TYPE"].ToString());
+            //    lvi.SubItems.Add(dr["ENG"].ToString());
+            //    lvi.SubItems.Add(dr["KH"].ToString());
+
+            //    lvDefExclu.Items.Add(lvi);
+            //}
+
+
+            //Settlement Letter
+            //DataTable dt = crud.ExecQuery("SELECT * FROM USER_CLAIM_SIGNATURE order by FULL_NAME");
+            DataTable dt = crud.ExecQuery("SELECT * FROM USER_CLAIM_SIGNATURE");
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    cbSignature.Items.Add(new ComboboxMultiVal(dr["FULL_NAME"].ToString()
+                        , new Dictionary<string, string>() { 
+                            {"Email",dr["EMAIL"].ToString()},{"Signature",dr["SIGNATURE"].ToString()}
+                        }));
+                }
+            }
+            cbSignature.SelectedIndex = 0;
+            //
+
+            dgvNonPayClaimNo.RowsDefaultCellStyle.ForeColor = Color.Black;
+            dgvNonPayClaimNo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+        }
+        //private void Combobox_Load()
+        //{
+        //    DataTable dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF order by TYPE");
+        //    lvDefExclu.Columns.Add("Type", 110);
+        //    lvDefExclu.Columns.Add("Eng", 275);
+        //    lvDefExclu.Columns.Add("Kh", 275);
+        //}
+        private void disabledButt(Button bn)
+        {
+            bn.Enabled = false;
+            bn.BackColor = Color.Gray;
+        }
+
+        private void enabledButt(Button bn)
+        {
+            bn.Enabled = true;
+            bn.BackColor = Color.FromArgb(0, 9, 47);
+        }
+
+        public void refreshWhole()
+        {
+            refreshGrid();
+            PendingGrid();
+            if (lbClaimNo.Text.Length >= 20)
+                ClaimSearch(lbClaimNo.Text);
+            else
+                bnClear_Click(new Object(), new EventArgs());
+        }
+
+        private void refreshGrid()
+        {
+            //load all history information
+            tbHisSearch.Text = "";
+            dgvAllHis.DefaultCellStyle.ForeColor = Color.Black;
+            dgvAllHis.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", "" });
+            dgvAllHis.Columns[0].Visible = false;
+        }
+
+        private void PendingGrid()
+        {
+            //clear old data
+            dgvPending.Columns.Clear();
+
+            //bind data source
+            dgvPending.DefaultCellStyle.ForeColor = Color.Black;
+            dgvPending.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "Pending", "" });
+            dgvPending.Columns["REM_NO"].Visible = false;
+
+            //add button for Send in grid
+            DataGridViewButtonColumn btnSend = new DataGridViewButtonColumn();
+            btnSend.HeaderText = "Send Email";
+            btnSend.Text = "Send";
+            btnSend.Name = "bnPeSend";
+            btnSend.UseColumnTextForButtonValue = true;
+            dgvPending.Columns.Add(btnSend);
+
+            //add button for Document Received in grid
+            DataGridViewButtonColumn btnRec = new DataGridViewButtonColumn();
+            btnRec.HeaderText = "Document Received";
+            btnRec.Text = "All";
+            btnRec.Name = "bnPeDone";
+            btnRec.UseColumnTextForButtonValue = true;
+            dgvPending.Columns.Add(btnRec);
+        }
+
+        private void OpenDetForm(bool IsResend, string type, string remSeq = "")
+        {
+            frmSendEmailClaimDet cl_det = new frmSendEmailClaimDet();
+            cl_det.sp_type = type;
+            cl_det.remind = remSeq;
+            cl_det.resend = IsResend;
+            cl_det.lbClaimNo.Text = lbClaimNo.Text;
+            cl_det.sec = this;
+            cl_det.FormClosed += new FormClosedEventHandler(cl_det_FormClosed); //Update 16-Jul-19 (Edit Email Content)
+            cl_det.ShowDialog();
+
+        }
+
+        void cl_det_FormClosed(object sender, FormClosedEventArgs e) //Update 16-Jul-19 (Edit Email Content)
+        {
+            frmSendEmailClaimDet.finalizecontent = "";
+        }
+
+        private void ClaimSearch(string ClaimNo)
+        {
+            DataTable dt = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { ClaimNo, "ValClaimNo", "" });
+
+            if (ClaimNo.Length < 20)
+            {
+                Msgbox.Show("Incorrect Claim No");
+                return;
+            }
+
+            if (dt.Rows.Count <= 0)
+            {
+                Msgbox.Show("Invalid Claim No");
+                return;
+            }
+
+            pnQuery.Visible = true;
+            lbClaimNo.Text = dt.Rows[0].ItemArray[0].ToString();
+
+            //disable and enable buttons
+            disabledButt(bnAckResend);
+            disabledButt(bnRejResend);
+            disabledButt(bnParResend);
+            disabledButt(bnPayResend);
+            disabledButt(bnRem1Resend);
+            disabledButt(bnRem2Resend);
+            disabledButt(bnRem2Send);
+            disabledButt(bnRem3Resend);
+            disabledButt(bnRem3Send);
+            disabledButt(bnDocReqResend); //Update 17-Jul-19 (Document Request)
+            enabledButt(bnDocReqSend); //Update 17-Jul-19 (Document Request)
+            enabledButt(bnAckSend);
+            enabledButt(bnRejSend);
+            enabledButt(bnParSend);
+            enabledButt(bnPaySend);
+            enabledButt(bnRem1Send);
+            enabledButt(bnDocRec);
+
+            //validating buttons for enabled and not
+            DataTable dtInfo = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", lbClaimNo.Text });
+            dgvHisClaim.DataSource = dtInfo;
+            dgvHisClaim.Columns[0].Visible = false;
+
+            //validate the step of reminder emails
+            DataTable dtStep = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "CurRem", "" });
+            for (int i = 0; i < dtStep.Rows.Count; i++)
+            {
+                if (dtStep.Rows[0].ItemArray[1].ToString() == "1")
+                {
+                    disabledButt(bnRem1Send);
+                    disabledButt(bnRem3Send);
+                    enabledButt(bnRem2Send);
+                }
+                else if (dtStep.Rows[0].ItemArray[1].ToString() == "2")
+                {
+                    disabledButt(bnRem1Send);
+                    disabledButt(bnRem2Send);
+                    enabledButt(bnRem3Send);
+                }
+            }
+
+            //Update 17-Jul-19 (Document Request) 
+            DataTable dtTemp = crud.ExecQuery("SELECT HIST_SEQ FROM USER_CLAIM_EMAIL_HIST WHERE CLAIM_NO ='" + lbClaimNo.Text + "' AND SEND_TYPE = 'DocReq'");
+            if (dtTemp.Rows.Count == 0)
+            {
+                enabledButt(bnDocReqSend);
+                disabledButt(bnDocReqResend);
+                disabledButt(bnRem1Send);
+            }
+            else
+            {
+                enabledButt(bnDocReqResend);
+                disabledButt(bnDocReqSend);
+                enabledButt(bnRem1Send);
+            }
+            //End of Update
+
+
+
+            //validate the doc received button
+            DataTable dtDoc = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "DocRec", "" });
+            if (dtDoc.Rows.Count == 0) //Update 17-Jul-19 (Document Request)
+            {
+                //if (dtDoc.Rows[0].ItemArray[0].ToString() == "Y")
+                //    disabledButt(bnDocRec);
+                //Update 18-Jul-19
+                dtDoc = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "DocRecDocReq", "" });
+                if (dtDoc.Rows.Count == 0)
+                    disabledButt(bnDocRec);
+                else enabledButt(bnDocRec);
+            }
+            else enabledButt(bnDocRec);
+            //End of Update
+
+            //disable buttons if emails are sent once before
+            for (int i = 0; i < dtInfo.Rows.Count; i++)
+            {
+                if (dtInfo.Rows[i].ItemArray[0].ToString() == "Ack")
+                {
+                    disabledButt(bnAckSend);
+                    enabledButt(bnAckResend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "Rej")
+                {
+                    disabledButt(bnRejSend);
+                    enabledButt(bnRejResend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "Par")
+                {
+                    disabledButt(bnParSend);
+                    enabledButt(bnParResend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "Pay")
+                {
+                    disabledButt(bnPaySend);
+                    enabledButt(bnPayResend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "DocReq") //Update 17-Jul-19 (Document Request)
+                {
+                    disabledButt(bnDocReqSend);
+                    enabledButt(bnDocReqResend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemFirst")
+                {
+                    disabledButt(bnRem1Send);
+                    enabledButt(bnRem1Resend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemSecond")
+                {
+                    disabledButt(bnRem2Send);
+                    enabledButt(bnRem2Resend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemThird")
+                {
+                    disabledButt(bnRem3Send);
+                    enabledButt(bnRem3Resend);
+                }
+            }
+
+
+            //Update 04-07-19 Claim Basic Info
+
+            string sql = "SELECT * FROM VIEW_CLAIM_BASIC_INFO WHERE INT_CLAIM_NO = '" + tbClaimNo.Text.ToUpper() + "'";
+            DataTable dttemp = crud.ExecQuery(sql);
+            tbInsName.Text = dttemp.Rows[0][1].ToString();
+            tbRiskName.Text = dttemp.Rows[0][2].ToString();
+            tbDOL.Text = dttemp.Rows[0][3].ToString();
+            tbPolNo.Text = dttemp.Rows[0][4].ToString();
+
+        }
+
+        private void bnClaimSearch_Click(object sender, EventArgs e)
+        {
+            ClaimSearch(tbClaimNo.Text.Trim().ToUpper());
+        }
+
+        private void bnAckSend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Ack");
+        }
+
+        private void bnRejSend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Rej");
+        }
+
+        private void bnParSend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Par");
+        }
+
+        private void bnPaySend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Pay");
+        }
+
+        private void bnRem1Send_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Rem", "First");
+        }
+
+        private void bnRem2Send_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Rem", "Second");
+        }
+
+        private void bnRem3Send_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(false, "Rem", "Third");
+        }
+
+        private void bnAckResend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Ack");
+        }
+
+        private void bnRejResend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Rej");
+        }
+
+        private void bnParResend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Par");
+        }
+
+        private void bnPayResend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Pay");
+        }
+
+        private void bnRem1Resend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Rem", "First");
+        }
+
+        private void bnRem2Resend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Rem", "Second");
+        }
+
+        private void bnRem3Resend_Click(object sender, EventArgs e)
+        {
+            OpenDetForm(true, "Rem", "Third");
+        }
+
+        private void bnClear_Click(object sender, EventArgs e)
+        {
+            tbClaimNo.Text = "";
+            pnQuery.Visible = false;
+        }
+
+        private void bnHisSearch_Click(object sender, EventArgs e)
+        {
+            dgvAllHis.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", tbHisSearch.Text });
+            dgvAllHis.Columns[0].Visible = false;
+        }
+
+        private void bnRefresh_Click(object sender, EventArgs e)
+        {
+            PendingGrid();
+        }
+
+        private void bnDocRec_Click(object sender, EventArgs e)
+        {
+            if (crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "DocRec", "" }).Rows.Count <= 0)
+            {
+                if (crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "DocRecDocReq", "" }).Rows.Count <= 0) //Update 18-Jul-19
+                {
+                    Msgbox.Show("There aren't any document request emails or reminder emails yet!");
+                    return;
+                }
+            }
+
+            frmSendEmailClaimDet cl_det = new frmSendEmailClaimDet();
+            cl_det.sp_type = "Rem";
+            //cl_det.remind = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "CurRemName", "" }).Rows[0].ItemArray[1].ToString();
+            //Update 17-Jul-19 (Document Request)
+            DataTable dtTemp = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "CurRemName", "" });
+            if (dtTemp.Rows.Count == 0) cl_det.remind = "";
+            else cl_det.remind = dtTemp.Rows[0].ItemArray[1].ToString();
+            //End of Update
+            cl_det.rec_form = true;
+            cl_det.lbClaimNo.Text = lbClaimNo.Text;
+            cl_det.sec = this;
+            cl_det.ShowDialog();
+        }
+
+        private void dgvPending_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int RowIndex = dgvPending.SelectedCells[0].RowIndex;
+            string remSeq = dgvPending.Rows[RowIndex].Cells["REM_NO"].Value.ToString();
+            string claimNo = dgvPending.Rows[RowIndex].Cells["CLAIM_NO"].Value.ToString();
+
+            if (e.ColumnIndex == dgvPending.Columns["bnPeSend"].Index && e.RowIndex >= 0)
+            {
+                frmSendEmailClaimDet cl_det = new frmSendEmailClaimDet();
+                cl_det.sp_type = "Rem";
+                cl_det.remind = remSeq == "First" ? "Second" : (remSeq == "Second" ? "Third" : "");
+                cl_det.resend = false;
+                cl_det.lbClaimNo.Text = claimNo;
+                cl_det.sec = this;
+                cl_det.ShowDialog();
+            }
+            else if (e.ColumnIndex == dgvPending.Columns["bnPeDone"].Index && e.RowIndex >= 0)
+            {
+                RecDoc(claimNo, remSeq);
+            }
+        }
+
+        public bool RecDoc(string claimNum, string remNo)
+        {
+            DialogResult dr = Msgbox.Show("Have you received the all document(s) from the client yet?", "Confirmation");
+            if (dr == System.Windows.Forms.DialogResult.No)
+                return false;
+
+            crud.ExecSP_NoOutPara("sp_user_claim_input", new string[] { "cl_input_type", "cl_e_claim", "cl_e_type", "cl_e_rec", "cl_e_cont", "cl_e_doc", "cl_e_req", "cl_e_rem", "cl_e_non", "cl_e_re", "cl_e_dr", "cl_e_cc", "cl_e_rec_date", "cl_e_user" },
+                    new string[] { "UpdateDocRec", claimNum, remNo, "", "", "", "", "", "", "", "", "", "", "" });
+
+            refreshWhole();
+            return true;
+        }
+
+        private void bnDocReqSend_Click(object sender, EventArgs e) //Update 17-Jul-19 (Document Request)
+        {
+            OpenDetForm(false, "DocReq");
+        }
+
+        private void bnDocReqResend_Click(object sender, EventArgs e) //Update 17-Jul-19 (Document Request)
+        {
+            OpenDetForm(true, "DocReq");
+        }
+
+        private void tbClaimNo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                bnClaimSearch.PerformClick();
+            }
+        }
+
+        private void frmSendEmailClaim_Activated(object sender, EventArgs e)
+        {
+            tbClaimNo.Focus();
+            requeryEmailSuggestion();
+        }
+
+
+
+        #region Rejection Letter
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            string ClNo = tbRejectClNo.Text.Trim().ToUpper();
+            if (ClNo != "")
+            {
+
+                if (ClNo.Length < 20)
+                {
+                    Msgbox.Show("Incorrect Claim No");
+                    return;
+                }
+                
+                string pro = ClNo.Substring(7, 3);
+                if (pro != "GPA" && pro != "PAC" && pro != "HNS")
+                {
+                    Msgbox.Show("Only GPA ,PAC and HNS product available in this function.");
+                    return;
+                }
+                else if (pro == "GPA" || pro == "PAC") { 
+                Cursor.Current = Cursors.WaitCursor;
+
+                DataTable result = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+                "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+                "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
+                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                "INT_BPARTY_CODE CC from CL_T_INTIMATION where INT_CLAIM_NO = '" + ClNo + "'");
+
+                if (result.Rows.Count <= 0)
+                {
+                    Msgbox.Show("Not record found!");
+                    return;
+                }
+
+                string SecondPara = "By virtue of Personal Accident Policy, the policy will cover medical expenses for bodily injury to the insured Person caused solely and directly by ",
+                    SecondParaKh = "ដោយផ្អែកលើបណ្ណសន្យាគ្រោះថ្នាក់បុគ្គល ";
+
+                if (lvDefExclu.CheckedItems.Count > 0)
+                {
+                    foreach (ListViewItem lvi in lvDefExclu.CheckedItems)
+                    {
+                        if (lvDefExclu.CheckedItems.Count == 1)
+                        {
+                            SecondPara += lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
+                            SecondParaKh += KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
+                            break;
+                        }
+                        else
+                        {
+                            SecondPara += Environment.NewLine + Environment.NewLine + "•  " + lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
+                            SecondParaKh += Environment.NewLine + "•  " + KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
+                        }
+                    }
+                }
+
+
+                result.Columns.Add("SECOND_PARA", typeof(System.String));
+                foreach (DataRow row in result.Rows)
+                {
+                    row["SECOND_PARA"] = SecondPara;
+                }
+
+                DataTable resultKh = result.Copy();
+                string clamt = "";
+                foreach (DataRow row in resultKh.Rows)
+                {
+                    row["SECOND_PARA"] = SecondParaKh;
+                    clamt = row["CLAIMED_AMOUNT"].ToString();
+                }
+
+                Reports.RejectionLetter report = new Reports.RejectionLetter();
+                report.SetDataSource(result);
+                crystalReportViewer1.ReportSource = report;
+
+                Reports.RejectionLetterKH report1 = new Reports.RejectionLetterKH();
+                report1.SetDataSource(resultKh);
+                report1.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
+                report1.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
+                crystalReportViewer2.ReportSource = report1;
+
+                
+            }
+                else if (pro == "HNS")
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+
+                    DataTable result = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+                    "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+                    "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+                    "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
+                    "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                    "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                    "INT_BPARTY_CODE CC from CL_T_INTIMATION where INT_CLAIM_NO = '" + ClNo + "'");
+
+                    if (result.Rows.Count <= 0)
+                    {
+                        Msgbox.Show("Not record found!");
+                        return;
+                    }
+
+                    string SecondPara = "By virtue of the Group Hospital and Surgical Insurance Policy at ",
+                        SecondParaKh = "ដោយផ្អែកលើបណ្ណសន្យារ៉ាប់រងសម្រាកពេទ្យ និងវះកាត់ត្រង់ ";
+
+                    if (lvDefExclu.CheckedItems.Count > 0)
+                    {
+                        foreach (ListViewItem lvi in lvDefExclu.CheckedItems)
+                        {
+                            if (lvDefExclu.CheckedItems.Count == 1)
+                            {
+                                //SecondPara += lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
+                                //SecondParaKh += KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
+                                SecondPara += " " + lvi.SubItems[1].Text;
+                                SecondParaKh += " " + lvi.SubItems[2].Text;
+                                break;
+                            }
+                            else
+                            {
+                                SecondPara += Environment.NewLine +Environment.NewLine + "•  " + lvi.SubItems[1].Text ;
+                                SecondParaKh += Environment.NewLine +Environment.NewLine + "•  " + lvi.SubItems[2].Text ;
+                            }
+                        }
+                    }
+
+                    Reports.RejectionLetterHNS report = new Reports.RejectionLetterHNS();
+                    result.Columns.Add("SECOND_PARA", typeof(System.String));
+                    result.Columns.Add("SECOND_PARA_KH", typeof(System.String));
+                    string clamt = "";
+                    foreach (DataRow row in result.Rows)
+                    {
+                        row["SECOND_PARA"] = SecondPara;
+                        row["SECOND_PARA_KH"] = SecondParaKh;
+                        clamt = row["CLAIMED_AMOUNT"].ToString();
+                    }
+
+
+                    //DataTable resultKh = result.Copy();
+                    //string clamt = "";
+                    //foreach (DataRow row in resultKh.Rows)
+                    //{
+                        
+                    //    clamt = row["CLAIMED_AMOUNT"].ToString();
+                    //}
+                    
+                    
+                    report.SetDataSource(result);
+                    report.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
+                    report.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
+                    
+                    crystalReportViewer2.ReportSource = report;
+                    crystalReportViewer2.Location = new System.Drawing.Point(250, 250);
+                    crystalReportViewer1.Visible = false;
+                    //Reports.RejectionLetterKHHNS report1 = new Reports.RejectionLetterKHHNS();
+                    //report1.SetDataSource(resultKh);
+                    //report1.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
+                    //report1.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
+                    //crystalReportViewer2.ReportSource = report1;
+                    
+                }
+                Cursor.Current = Cursors.AppStarting;
+            }
+        }
+
+        private void tbRejectClNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnGenerate.PerformClick();
+            }
+        }
+
+        string KhTranslate(string eng)
+        {
+            if (eng == "Definitions")
+                return "និយមន័យ";
+            else if (eng == "Exclusions")
+                return "ករណីមិនធានា";
+            else return "";
+        }
+        #endregion
+
+        #region Non Payable Letter
+        private void btnGenerateNonPay_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                if (dgvNonPayClaimNo.Rows.Count <= 0)
+                {
+                    Msgbox.Show("Claim No not found.");
+                    return;
+                }
+
+                int CurrentRow = dgvNonPayClaimNo.CurrentCell.RowIndex;
+
+                if (CurrentRow == -1)
+                {
+                    Msgbox.Show("Please select Claim No.");
+                    return;
+                }
+
+                string clno = dgvNonPayClaimNo.Rows[CurrentRow].Cells["CLAIM_NO"].Value.ToString();
+
+                string pro = clno.Substring(7, 3);
+                if (pro != "GPA" && pro != "PAC")
+                {
+                    Msgbox.Show("Only GPA and PAC product available in this function.");
+                    return;
+                }
+
+
+      //          string cmd = " select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE,TOTAL_COST,CC from " +
+      //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+      //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
+      //"nvl((select SUM(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_INT_SEQ = INT_SEQ_NO),0) PAYABLE, INT_BPARTY_CODE CC, " +
+      //"(select ADR_LOC_DESCRIPTION || ', ' || " +
+      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE  " +
+      //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+      //"from CL_T_INTIMATION  " +
+      //"where INT_CLAIM_NO = '" + clno + "')";
+
+
+      //          string cmd = " select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE,TOTAL_COST,CC from " +
+      //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+      //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null and " +
+      //"CREATED_DATE = (select MAX(CREATED_DATE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null)),0) TOTAL_COST, " +
+      //"nvl((select SUM(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_INT_SEQ = INT_SEQ_NO),0) PAYABLE, INT_BPARTY_CODE CC, " +
+      //"(select ADR_LOC_DESCRIPTION || ', ' || " +
+      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE  " +
+      //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+      //"from CL_T_INTIMATION  " +
+      //"where INT_CLAIM_NO = '" + clno + "')";
+
+                string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
+        "(case when PAYABLE = 0 then PAID else PAYABLE end) as PAYABLE,CC from " +
+        "(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+        "nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
+        "nvl((select sum(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 ),0) " +
+        "- nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAYABLE, " +
+        "nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAID, INT_BPARTY_CODE CC, " +
+        "(select ADR_LOC_DESCRIPTION || ', ' || " +
+        "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+        "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+        "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " + 
+        "from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+        "from CL_T_INTIMATION  " +
+        "where INT_CLAIM_NO = '" + clno + "')";
+
+                DataTable result = crud.ExecQuery(cmd);
+
+
+                if (result.Rows.Count <= 0)
+                {
+                    Msgbox.Show("Not record found!");
+                    return;
+                }
+
+                string PaymentMethod = "",
+                    NonPayItem = tbNonPayItem.Text.Trim();
+
+                if (rbNonPayChequeNo.Checked)
+                    PaymentMethod = "Cheque No." + tbNonPayChequeNo.Text.Trim();
+                else if (rbNonPayBankTranNo.Checked)
+                    PaymentMethod = "Bank Transfer No." + tbNonPayBankTranNo.Text.Trim();
+                else if (rbNonPayRequisition.Checked)
+                    PaymentMethod = "Cash";
+
+                double NonPay = 0;
+
+                string HtmlPara = "However, we regret to inform you that the amount of ";
+
+                if (NonPayItem != String.Empty)
+                {
+                    Dictionary<string, string> NonPayItemList = new Dictionary<string, string>(); //store Non-payable Item
+                    string[] temp = NonPayItem.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None); //split string on newline
+                    foreach (string s in temp)
+                    {
+                        if (s.Trim() == string.Empty)
+                            continue;
+                        if (!s.Contains("="))
+                        {
+                            Msgbox.Show("Non-payable Item wrong format.");
+                            return;
+                        }
+                        string[] sTemp = s.Split('=');
+                        NonPayItemList.Add(sTemp[0].Trim(), sTemp[1].Trim()); //Non-payable Item, Non-payable Amount
+                    }
+
+                    if (NonPayItemList.Count > 1)
+                    {
+                        foreach (KeyValuePair<string, string> entry in NonPayItemList)
+                        {
+                            HtmlPara += "<br>      •  <b>US$ " + entry.Value + "</b> for the <b>" + entry.Key + "</b>";
+                        }
+                        HtmlPara += "<br>";
+                    }
+                    else if (NonPayItemList.Count == 1)
+                    {
+                        HtmlPara += "<b>US$ " + NonPayItemList.ElementAt(0).Value + "</b> for the <b>" + NonPayItemList.ElementAt(0).Key + "</b> ";
+                    }
+
+                    NonPay = NonPayItemList.Sum(x => Convert.ToDouble(x.Value));
+                }
+
+                HtmlPara += "was not covered under The Group Personal Accident insurance policy.";
+
+
+                //result.Columns.Add("PAYABLE", typeof(System.String));
+                result.Columns.Add("TOTAL_COST", typeof(System.String));
+                result.Columns.Add("NON_PAYABLE", typeof(System.String));
+                result.Columns.Add("CASH_OR_CHEQUE", typeof(System.String));
+                result.Columns.Add("HTML_PARA", typeof(System.String));
+                result.Columns.Add("USER_NAME", typeof(System.String));
+
+                foreach (DataRow row in result.Rows)
+                {
+                    //row["PAYABLE"] = String.Format("{0:N}", Convert.ToDecimal(Convert.ToDouble(row["TOTAL_COST"]) - NonPay));
+                    row["TOTAL_COST"] = String.Format("{0:N}", Convert.ToDecimal(Convert.ToDouble(row["PAYABLE"]) + NonPay));
+                    row["NON_PAYABLE"] = String.Format("{0:N}", NonPay);
+                    row["CASH_OR_CHEQUE"] = PaymentMethod;
+                    row["HTML_PARA"] = HtmlPara;
+                    row["USER_NAME"] = UserName;
+                }
+                Reports.NonPayLetter report = new Reports.NonPayLetter();
+                report.SetDataSource(result);
+                crystalReportViewer3.ReportSource = report;
+
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void btnGetClNo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                DataTable dtTemp = new DataTable();
+                string RefNo = "";
+
+                dgvNonPayClaimNo.DataSource = null;
+
+                if (rbNonPayChequeNo.Checked)
+                {
+                    string ChequeNo = tbNonPayChequeNo.Text.ToUpper().Trim();
+                    if (ChequeNo == "")
+                    {
+                        Msgbox.Show("Please input Cheque No.");
+                        tbNonPayChequeNo.Focus();
+                        return;
+                    }
+                    dtTemp = crud.ExecQuery("SELECT CLAIM_NO FROM VIEW_REQUISITION WHERE CHQ_NO = '" + ChequeNo + "'");
+
+                    if (dtTemp.Rows.Count <= 0)
+                    {
+                        Msgbox.Show("No Claim No Found with Cheque No.: " + ChequeNo);
+                        return;
+                    }
+                    RefNo = ChequeNo;
+                }
+                else if (rbNonPayBankTranNo.Checked)
+                {
+                    string BankTranNo = tbNonPayBankTranNo.Text.ToUpper().Trim();
+                    if (BankTranNo == "")
+                    {
+                        Msgbox.Show("Please input Bank Transfer No.");
+                        tbNonPayBankTranNo.Focus();
+                        return;
+                    }
+                    dtTemp = crud.ExecQuery("SELECT CLAIM_NO FROM VIEW_REQUISITION WHERE BANK_TRAN_NO = '" + BankTranNo + "'");
+
+                    if (dtTemp.Rows.Count <= 0)
+                    {
+                        Msgbox.Show("No Claim No Found with Bank Transfer No.: " + BankTranNo);
+                        return;
+                    }
+                    RefNo = BankTranNo;
+                }
+                else if (rbNonPayRequisition.Checked)
+                {
+                    List<string> SelectedItem = new List<string>();
+                    string SelectedRequi = "";
+
+                    if (lvNonPayRequisition.CheckedItems.Count > 0)
+                    {
+                        foreach (ListViewItem lvi in lvNonPayRequisition.CheckedItems)
+                        {
+                            SelectedItem.Add("'" + lvi.SubItems[0].Text + "'");
+                            //SelectedRequi += "'" + lvi.SubItems[0].Text + "',";
+                        }
+
+                        SelectedItem.Sort();
+                        SelectedRequi = SelectedItem.Aggregate((i, j) => i + "," + j); //Concat list item with ","
+                        //SelectedRequi = SelectedRequi.Remove(SelectedRequi.Length - 1);
+
+                        dtTemp = crud.ExecQuery("SELECT CLAIM_NO FROM VIEW_REQUISITION WHERE REQUISITION_NO IN (" + SelectedRequi + ")");
+
+                        if (dtTemp.Rows.Count <= 0)
+                        {
+                            Msgbox.Show("No Claim Detail Found.");
+                            return;
+                        }
+                        RefNo = SelectedRequi;
+                    }
+                    else
+                    {
+                        Msgbox.Show("No record selected in Requisition Table.");
+                        return;
+                    }
+                }
+
+                dgvNonPayClaimNo.DataSource = dtTemp;
+
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnNonPayRefreshTable_Click(object sender, EventArgs e)
+        {
+            RefreshRequisitionTable(dtpNonPayFrom.Value, dtpNonPayTo.Value, lvNonPayRequisition);
+        }
+
+        private void dgvNonPayClaimNo_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (dgvNonPayClaimNo.Rows.Count > 0)
+                frmDocumentControl.enabledButt(btnGenerateNonPay);
+            else
+                frmDocumentControl.disabledButt(btnGenerateNonPay);
+        }
+
+        private void rbNonPayChequeNo_CheckedChanged(object sender, EventArgs e)
+        {
+            NonPaySelectChange();
+        }
+
+        private void rbNonPayBankTranNo_CheckedChanged(object sender, EventArgs e)
+        {
+            NonPaySelectChange();
+        }
+
+        private void rbNonPayRequisition_CheckedChanged(object sender, EventArgs e)
+        {
+            NonPaySelectChange();
+        }
+
+        void NonPaySelectChange()
+        {
+            tbNonPayChequeNo.Enabled = false;
+            tbNonPayBankTranNo.Enabled = false;
+            dtpNonPayFrom.Enabled = false;
+            dtpNonPayTo.Enabled = false;
+            frmDocumentControl.disabledButt(btnNonPayRefreshTable);
+            lvNonPayRequisition.Enabled = false;
+            dgvNonPayClaimNo.DataSource = null;
+
+            if (rbNonPayChequeNo.Checked)
+            {
+                tbNonPayChequeNo.Enabled = true;
+                tbNonPayBankTranNo.Text = "";
+            }
+            else if (rbNonPayBankTranNo.Checked)
+            {
+                tbNonPayBankTranNo.Enabled = true;
+                tbNonPayChequeNo.Text = "";
+            }
+            else if (rbNonPayRequisition.Checked)
+            {
+                dtpNonPayFrom.Enabled = true;
+                dtpNonPayTo.Enabled = true;
+                frmDocumentControl.enabledButt(btnNonPayRefreshTable);
+                lvNonPayRequisition.Enabled = true;
+            }
+        }
+
+        private void lvNonPayRequisition_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.lvNonPayRequisition.Sort();
+        }
+
+
+
+        #endregion
+
+        #region Settlement Report
+        /// Settlement Report
+
+        void RefreshRequisitionTable(DateTime dtFrom, DateTime dtTo, ListView lv)
+        {
+            try
+            {
+
+                if (dtTo.Date < dtFrom.Date)
+                {
+                    Msgbox.Show("Date to must be greater or equal to Date from!");
+                    return;
+                }
+
+                Cursor.Current = Cursors.WaitCursor;
+                DataTable dt = crud.ExecQuery("select REQUISITION_NO,REQ_AMOUNT,CLAIM_NO,INSURED from " +
+                    "(select REQ_REQUISITION_NO REQUISITION_NO,REQ_AMOUNT,INT_CLAIM_NO CLAIM_NO,INSURED,CREATED_DATE from " +
+                    "( " +
+                    "select REQ_REQUISITION_NO,TRIM(TO_CHAR(REQ_AMOUNT,'999,999,999,990.99')) REQ_AMOUNT,INT_CLAIM_NO, " +
+                    "(SELECT nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) FROM UW_M_CUSTOMERS WHERE CUS_CODE = INT_CUS_CODE) INSURED, " +
+                    "b.CREATED_DATE from CL_T_INTIMATION a, CL_T_REQUISITION b, CL_T_REQ_PAYEES c " +
+                    "where a.INT_SEQ_NO = b.REQ_INT_SEQ and b.REQ_SEQ_NO = c.RPQ_REQ_NO " +
+                    ")) " +
+                    "where CREATED_DATE >= TO_DATE('" + dtFrom.ToString("yyyy/MM/dd") + " 00:00:00" + "','YYYY/MM/DD HH24:MI:SS') " +
+                    "and CREATED_DATE <= TO_DATE('" + dtTo.ToString("yyyy/MM/dd") + " 23:59:59" + "','YYYY/MM/DD HH24:MI:SS') " +
+                    "and (CLAIM_NO like '%GPA%' or CLAIM_NO like '%PAC%' or CLAIM_NO like '%HNS%') order by REQUISITION_NO");
+
+                //lvRequisition.Columns.Clear();
+                lv.Clear();
+
+                lv.CheckBoxes = true;
+                lv.View = View.Details;
+                lv.ListViewItemSorter = lvwColumnSorter;
+
+                lv.Columns.Add("Requisition No.", 160);
+                lv.Columns.Add("Amount", 80);
+                lv.Columns.Add("Claim No.", 180);
+                lv.Columns.Add("Policyholder.", 245);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ListViewItem lvi = new ListViewItem(dr["REQUISITION_NO"].ToString());
+                    lvi.SubItems.Add(dr["REQ_AMOUNT"].ToString());
+                    lvi.SubItems.Add(dr["CLAIM_NO"].ToString());
+                    lvi.SubItems.Add(dr["INSURED"].ToString());
+
+                    lv.Items.Add(lvi);
+                }
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+
+        private void btnGenerateClaimDetail_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                DataTable dtTemp = new DataTable();
+                string RefNo = "";
+
+                dgvClaimDetail.DataSource = null;
+
+                if (rbChequeNo.Checked)
+                {
+                    string ChequeNo = tbChequeNo.Text.ToUpper().Trim();
+                    if (ChequeNo == "")
+                    {
+                        Msgbox.Show("Please input Cheque No.");
+                        tbChequeNo.Focus();
+                        return;
+                    }
+                    dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE CHQ_NO = '" + ChequeNo + "'");
+
+                    if (dtTemp.Rows.Count <= 0)
+                    {
+                        Msgbox.Show("No Claim Detail Found with Cheque No.: " + ChequeNo);
+                        return;
+                    }
+                    RefNo = ChequeNo;
+                }
+                else if (rbBankTranNo.Checked)
+                {
+                    string BankTranNo = tbBankTranNo.Text.ToUpper().Trim();
+                    if (BankTranNo == "")
+                    {
+                        Msgbox.Show("Please input Bank Transfer No.");
+                        tbBankTranNo.Focus();
+                        return;
+                    }
+                    dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE BANK_TRAN_NO = '" + BankTranNo + "'");
+
+                    if (dtTemp.Rows.Count <= 0)
+                    {
+                        Msgbox.Show("No Claim Detail Found with Bank Transfer No.: " + BankTranNo);
+                        return;
+                    }
+                    RefNo = BankTranNo;
+                }
+                else if (rbRequisition.Checked)
+                {
+                    List<string> SelectedItem = new List<string>();
+                    string SelectedRequi = "";
+
+                    if (lvRequisition.CheckedItems.Count > 0)
+                    {
+                        foreach (ListViewItem lvi in lvRequisition.CheckedItems)
+                        {
+                            SelectedItem.Add("'" + lvi.SubItems[0].Text + "'");
+                            //SelectedRequi += "'" + lvi.SubItems[0].Text + "',";
+                        }
+
+                        SelectedItem.Sort();
+                        SelectedRequi = SelectedItem.Aggregate((i, j) => i + "," + j); //Concat list item with ","
+                        //SelectedRequi = SelectedRequi.Remove(SelectedRequi.Length - 1);
+
+                        dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE REQUISITION_NO IN (" + SelectedRequi + ")");
+
+                        if (dtTemp.Rows.Count <= 0)
+                        {
+                            Msgbox.Show("No Claim Detail Found.");
+                            return;
+                        }
+                        RefNo = SelectedRequi;
+                    }
+                    else
+                    {
+                        Msgbox.Show("No record selected in Requisition Table.");
+                        return;
+                    }
+                }
+
+                if (rbToInsured.Checked)
+                {
+                    dtTemp.Columns.Add("PREVIOUS_PAYMENT", typeof(string));
+                    dtTemp.Columns.Add("LAST_PAYMENT", typeof(string));
+
+                    foreach (DataRow dr in dtTemp.Rows)
+                    {
+                        dr["PREVIOUS_PAYMENT"] = "0.00";
+                        dr["LAST_PAYMENT"] = "0.00";
+                        dr["PAYABLE_AMT"] = dr["REQ_AMOUNT"]; //Change due to request on display
+                    }
+
+
+                }
+                else if (rbToHospital.Checked)
+                {
+                    dtTemp.Columns.Add("DISCOUNT", typeof(string));
+
+                    foreach (DataRow dr in dtTemp.Rows)
+                    {
+                        dr["DISCOUNT"] = "0.00";
+                        dr["CLAIMED_AMT"] = dr["REQ_AMOUNT"]; //Change due to request on display
+                    }
+                }
+
+                dgvClaimDetail.DataSource = dtTemp;
+
+                dgvClaimDetail.Columns["REQUISITION_NO"].Visible = false;
+                dgvClaimDetail.Columns["REQ_AMOUNT"].Visible = false;
+                dgvClaimDetail.Columns["INSURED"].Visible = false;
+                dgvClaimDetail.Columns["CREATED_DATE"].Visible = false;
+                dgvClaimDetail.Columns["PV"].Visible = false;
+                dgvClaimDetail.Columns["ADDRESS"].Visible = false;
+                dgvClaimDetail.Columns["CC"].Visible = false;
+                dgvClaimDetail.Columns["BANK_TRAN_NO"].Visible = false;
+                dgvClaimDetail.Columns["CHQ_NO"].Visible = false;
+                dgvClaimDetail.Columns["HOSPITAL_ADDRESS"].Visible = false;
+                dgvClaimDetail.Columns["PANEL_HOSPITAL"].Visible = false;
+
+                frmDocumentControl.enabledButt(btnSave);
+
+
+                //Get Letter Hist
+                if (rbRequisition.Checked) RefNo = RefNo.Replace("'", "");
+                dtTemp = crud.ExecQuery("SELECT * FROM USER_LETTER_HIST WHERE LETTER_TYPE = 'SETTLEMENT' AND REF_NO like '%" + RefNo + "%'");
+                if (dtTemp.Rows.Count > 0)
+                {
+                    tbDear.Text = dtTemp.Rows[0]["DEAR"].ToString();
+                    cbSignature.SelectedIndex = cbSignature.FindStringExact(dtTemp.Rows[0]["SIGNATURE"].ToString());
+                    tbCC.Text = dtTemp.Rows[0]["CC"].ToString();
+                    tbText.Text = dtTemp.Rows[0]["NOTE"].ToString();
+                }
+                //
+
+                gbSettleSendEmail.Visible = true;
+
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void btnRefreshTable_Click(object sender, EventArgs e)
+        {
+            RefreshRequisitionTable(dtpFrom.Value, dtpTo.Value, lvRequisition);
+        }
+
+        private void btnGenerateLetter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                DataTable Latest = new DataTable();
+                foreach (DataGridViewColumn col in dgvClaimDetail.Columns)
+                {
+                    Latest.Columns.Add(col.Name);
+                }
+
+                foreach (DataGridViewRow row in dgvClaimDetail.Rows)
+                {
+                    DataRow dRow = Latest.NewRow();
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        dRow[cell.ColumnIndex] = cell.Value;
+                    }
+                    Latest.Rows.Add(dRow);
+                }
+
+                if (rbToInsured.Checked)
+                {
+                    Latest.Columns.Add("NON_PAYABLE", typeof(string));
+                    foreach (DataRow dr in Latest.Rows)
+                        dr["NON_PAYABLE"] = String.Format("{0:N}",
+                            Convert.ToDecimal(Convert.ToDouble(dr["CLAIMED_AMT"]) - Convert.ToDouble(dr["PAYABLE_AMT"])));
+                }
+                else if (rbToHospital.Checked)
+                {
+                    Latest.Columns.Add("AMT_AFTER_DIS", typeof(string));
+                    foreach (DataRow dr in Latest.Rows)
+                        dr["AMT_AFTER_DIS"] = String.Format("{0:N}",
+                            Convert.ToDecimal(Convert.ToDouble(dr["CLAIMED_AMT"]) -
+                            (Convert.ToDouble(dr["CLAIMED_AMT"]) * Convert.ToDouble(dr["DISCOUNT"]) / 100)));
+
+                }
+
+                Latest.Columns.Add("DEAR", typeof(string));
+                Latest.Columns.Add("TEXT", typeof(string));
+                Latest.Columns.Add("EMAIL", typeof(string));
+                Latest.Columns.Add("SIGNATURE", typeof(string));
+                Latest.Columns.Add("USER_CC", typeof(string));
+
+                string Dear = tbDear.Text.Trim(), CC = tbCC.Text.Trim();
+                if (Dear == "") Dear = "Sir or Madam,";
+
+                foreach (DataRow dr in Latest.Rows)
+                {
+                    dr["DEAR"] = Dear;
+                    dr["TEXT"] = tbText.Text.Trim();
+                    dr["EMAIL"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Email"];
+                    dr["SIGNATURE"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Signature"];
+                    dr["USER_CC"] = CC;
+                }
+
+                //var report = new Reports.SettlementLetterToInsured();
+                CrystalDecisions.CrystalReports.Engine.ReportClass report = new CrystalDecisions.CrystalReports.Engine.ReportClass();
+                if (rbToInsured.Checked)
+                    report = new Reports.SettlementLetterToInsured();
+                else if (rbToHospital.Checked)
+                    report = new Reports.SettlementLetterToHospital();
+                report.SetDataSource(Latest);
+                var frm = new frmViewInstructionNote();
+                frm.rpt = report;
+                frm.Text = "Settlement Letter";
+                frm.Show();
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void dgvClaimDetail_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (dgvClaimDetail.Rows.Count > 0)
+                frmDocumentControl.enabledButt(btnGenerateLetter);
+            else
+                frmDocumentControl.disabledButt(btnGenerateLetter);
+        }
+
+        private void rbChequeNo_CheckedChanged(object sender, EventArgs e)
+        {
+            SettlementSelectChange();
+        }
+
+        void SettlementSelectChange()
+        {
+            tbChequeNo.Enabled = false;
+            tbBankTranNo.Enabled = false;
+            dtpFrom.Enabled = false;
+            dtpTo.Enabled = false;
+            frmDocumentControl.disabledButt(btnRefreshTable);
+            frmDocumentControl.disabledButt(btnSave);
+            lvRequisition.Enabled = false;
+
+            if (rbChequeNo.Checked)
+            {
+                tbChequeNo.Enabled = true;
+                tbBankTranNo.Text = "";
+            }
+            else if (rbBankTranNo.Checked)
+            {
+                tbBankTranNo.Enabled = true;
+                tbChequeNo.Text = "";
+            }
+            else if (rbRequisition.Checked)
+            {
+                dtpFrom.Enabled = true;
+                dtpTo.Enabled = true;
+                frmDocumentControl.enabledButt(btnRefreshTable);
+                lvRequisition.Enabled = true;
+            }
+        }
+
+        private void rbBankTranNo_CheckedChanged(object sender, EventArgs e)
+        {
+            SettlementSelectChange();
+        }
+
+        private void rbRequisition_CheckedChanged(object sender, EventArgs e)
+        {
+            SettlementSelectChange();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            rbChequeNo.Checked = true;
+            SettlementSelectChange();
+            lvRequisition.Clear();
+            dgvClaimDetail.DataSource = null;
+            tbDear.Text = "";
+            tbCC.Text = "";
+            tbText.Text = "";
+
+            dgvFile.Rows.Clear();
+            tbSettleReceiver.Text = "";
+            tbSettleCC.Text = "";
+            gbSettleSendEmail.Visible = false;
+        }
+
+        private void rbToInsured_CheckedChanged(object sender, EventArgs e)
+        {
+            btnClear.PerformClick();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                DataTable dtTemp = new DataTable();
+                string RefNo = "";
+
+                if (rbChequeNo.Checked)
+                {
+                    RefNo = tbChequeNo.Text.ToUpper().Trim();
+                }
+                else if (rbBankTranNo.Checked)
+                {
+                    RefNo = tbBankTranNo.Text.ToUpper().Trim();
+                }
+                else if (rbRequisition.Checked)
+                {
+                    List<string> SelectedItem = new List<string>();
+                    string SelectedRequi = "";
+
+                    if (lvRequisition.CheckedItems.Count > 0)
+                    {
+                        foreach (ListViewItem lvi in lvRequisition.CheckedItems)
+                        {
+                            SelectedItem.Add("'" + lvi.SubItems[0].Text + "'");
+                        }
+                        SelectedItem.Sort();
+                        SelectedRequi = SelectedItem.Aggregate((i, j) => i + "," + j); //Concat list item with ","
+                    }
+
+                    RefNo = SelectedRequi;
+                }
+
+                if (RefNo == "")
+                {
+                    Msgbox.Show("Error When Saving Record. (No RefNo)");
+                    return;
+                }
+
+                if (rbRequisition.Checked) RefNo = RefNo.Replace("'", "");
+                dtTemp = crud.ExecQuery("SELECT * FROM USER_LETTER_HIST WHERE LETTER_TYPE = 'SETTLEMENT' AND REF_NO like '%" + RefNo + "%'");
+                if (dtTemp.Rows.Count > 0) //Has hist => Update
+                {
+                    Oracle.ManagedDataAccess.Client.OracleCommand cmd = new Oracle.ManagedDataAccess.Client.OracleCommand();
+                    cmd.CommandText = "UPDATE USER_LETTER_HIST SET NOTE = :textbox, DEAR = :dear, SIGNATURE = :signature, CC = :cc WHERE LETTER_TYPE = 'SETTLEMENT' AND REF_NO like '%" + RefNo + "%'";
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("textbox", tbText.Text));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("dear", tbDear.Text));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("signature", cbSignature.Text));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("cc", tbCC.Text));
+                    crud.ExecNonQuery(cmd);
+                }
+                else //No Hist => Insert
+                {
+                    Oracle.ManagedDataAccess.Client.OracleCommand cmd = new Oracle.ManagedDataAccess.Client.OracleCommand();
+                    cmd.CommandText = "INSERT INTO USER_LETTER_HIST(LETTER_TYPE,REF_NO,NOTE,DEAR,SIGNATURE,CC) VALUES (:lettertype,:refno,:textbox,:dear,:signature,:cc)";
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("lettertype", "SETTLEMENT"));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("refno", RefNo));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("textbox", tbText.Text));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("dear", tbDear.Text));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("signature", cbSignature.Text));
+                    cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("cc", tbCC.Text));
+                    crud.ExecNonQuery(cmd);
+                }
+
+                Msgbox.Show("Record Saved!");
+
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void lvRequisition_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.lvRequisition.Sort();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofdUpload = new OpenFileDialog();
+            ofdUpload.Filter = "Common Files(*.JPEG;*.JPG;*.GIF;*.PNG;*.DOCX;*.DOC;*.XLSX;*.XLS;*.PDF)|*.BMP;*.JPG;*.GIF;*.PNG;*.DOCX;*.DOC;*.XLSX;*.XLS;*.PDF|All files (*.*)|*.*";
+            ofdUpload.Multiselect = true;
+            if (ofdUpload.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string path in ofdUpload.FileNames)
+                {
+                    string filename = Path.GetFileName(path);
+
+                    for (int i = 0; i < dgvFile.Rows.Count; i++)
+                    {
+                        if (dgvFile.Rows[i].Cells[0].Value.ToString() == filename)
+                        {
+                            Msgbox.Show(filename + " already exists in the list. Please check the file again.");
+                            return;
+                        }
+                    }
+
+                    dgvFile.Rows.Add(filename, path);
+                }
+            }
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            OpenFile();
+
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (dgvFile.Rows.Count <= 0)
+            {
+                Msgbox.Show("No record to remove!");
+                return;
+            }
+
+            foreach (DataGridViewRow dgvr in dgvFile.SelectedRows)
+                dgvFile.Rows.Remove(dgvr);
+        }
+
+        private void dgvFile_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+
+            OpenFile();
+        }
+
+        private void dgvFile_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] FileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            foreach (string file in FileList)
+                dgvFile.Rows.Add(Path.GetFileName(file), file);
+        }
+
+        private void dgvFile_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy; // Okay
+            else
+                e.Effect = DragDropEffects.None; // Unknown data, ignore it
+        }
+
+        private void OpenFile()
+        {
+            if (dgvFile.Rows.Count <= 0)
+            {
+                Msgbox.Show("No file to open!");
+                return;
+            }
+
+            foreach (DataGridViewRow dgvr in dgvFile.SelectedRows)
+                System.Diagnostics.Process.Start(dgvr.Cells[1].Value.ToString());
+
+        }
+
+        private void btnSettlePreview_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (dgvClaimDetail.Rows.Count <= 0)
+                {
+                    Msgbox.Show("Claim detail unavailable. Please try again.");
+                    return;
+                }
+
+                string content = getSettleMailContent();
+
+                var frm = new frmViewEmail();
+                frmViewEmail.type = "A&H";
+                frmViewEmail.resetcontent = content;
+                frmViewEmail.finalizemailadd = "hnsclaims@forteinsurance.com";
+                frmViewEmail.finalizeusername = "HNS Claims Team";
+                string body = string.Empty;
+                using (StreamReader reader = new StreamReader("Html/2020Email.html"))
+                {
+                    body = reader.ReadToEnd();
+                }
+                body = body.Replace("{text}", content);
+                body = body.Replace("{username}", "HNS Claims Team");
+                body = body.Replace("{department}", "A&H Claims Unit | Underwriting Department");
+                body = body.Replace("{user_email}", "hnsclaims@forteinsurance.com");
+                body = body.Replace("cid:Forte_Logo", Application.StartupPath + @"\Html\Standard_Forte.png");
+                body = body.Replace("cid:FB_logo", Application.StartupPath + @"\Html\fb.png");
+                body = body.Replace("cid:YT_logo", Application.StartupPath + @"\Html\yt.png");
+                body = body.Replace("cid:Mail_logo", Application.StartupPath + @"\Html\mail.png");
+
+                frm.wbEmail.DocumentText = body;
+                frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void btnSettleSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvClaimDetail.Rows.Count <= 0)
+                {
+                    Msgbox.Show("Claim detail unavailable. Please try again.");
+                    return;
+                }
+
+                DataTable dtEmailIn = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "emailInfo", UserName });
+                smtpSer = dtEmailIn.Rows[0].ItemArray[0].ToString();
+                mail_add = dtEmailIn.Rows[0].ItemArray[1].ToString();
+                if (dtEmailIn.Rows[0].ItemArray[2].ToString() != "")
+                    mail_pass = Cipher.Decrypt(dtEmailIn.Rows[0].ItemArray[2].ToString(), HashPass);
+                else
+                    mail_pass = "";
+                port = Convert.ToInt16(dtEmailIn.Rows[0].ItemArray[3].ToString());
+
+                if (mail_add.Trim() == "" || mail_pass == "")
+                {
+                    Msgbox.Show("Your account does not have enough information to be able to send the email! Please contact the system admin to update your account.");
+                    return;
+                }
+
+                if (tbSettleReceiver.Text.Trim() == "")
+                {
+                    Msgbox.Show("Please input email reciever!");
+                    return;
+                }
+
+                DialogResult dr = Msgbox.Show("Are you sure you want to send Email?", "Confirmation", "Yes", "No");
+                if (dr == System.Windows.Forms.DialogResult.Yes)
+                {
+                    string body = "", content = getSettleMailContent();
+                    using (StreamReader reader = new StreamReader("Html/2020Email.html"))
+                    {
+                        body = reader.ReadToEnd();
+                    }
+                    body = body.Replace("{text}", content);
+                    body = body.Replace("{username}", "HNS Claims Team");
+                    body = body.Replace("{department}", "A&H Claims Unit | Underwriting Department");
+                    body = body.Replace("{user_email}", "hnsclaims@forteinsurance.com");
+
+
+                    //SmtpClient client = new SmtpClient(smtpSer);
+
+                    MailMessage message = new MailMessage();
+
+                    //set formatting email message
+                    message.BodyEncoding = Encoding.UTF8;
+                    message.IsBodyHtml = true;
+                    message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                    message.From = new MailAddress(mail_add);
+
+                    System.Net.ServicePointManager.Expect100Continue = true;
+                    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+                    if (tbSettleReceiver.Text.Trim() != "")
+                    {
+                        string[] to = tbSettleReceiver.Text.Split(',');
+                        foreach (string s in to)
+                        {
+                            if (s.Trim() != "")
+                                message.To.Add(s.Trim());
+                        }
+                    }
+
+                    message.Subject = crud.ExecQuery("SELECT EMAIL_SUB FROM USER_CLAIM_EMAIL WHERE EMAIL_TYPE = 'PaymentNotice'").Rows[0][0].ToString();
+                    message.Subject = message.Subject.Replace("%PolHolder%", dgvClaimDetail.Rows[0].Cells["INSURED"].Value.ToString());
+
+                    message.CC.Add(new MailAddress(mail_add)); //cc the sender to store in Inbox
+                    if (tbSettleCC.Text.Trim() != "")
+                    {
+                        string[] cc = tbSettleCC.Text.Split(',');
+                        foreach (string s in cc)
+                        {
+                            if (s.Trim() != "")
+                                message.CC.Add(new MailAddress(s.Trim()));
+                        }
+                    }
+
+                    //attachment
+                    if (dgvFile.Rows.Count > 0)
+                    {
+                        foreach (DataGridViewRow dgvr in dgvFile.Rows)
+                        {
+                            message.Attachments.Add(new Attachment(dgvr.Cells[1].Value.ToString()));
+                        }
+                    }
+                    //
+
+                    //embeded pictures
+                    AlternateView avHtml = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
+                    LinkedResource img1 = new LinkedResource(@"Html\Standard_Forte.png", "image/png");
+                    img1.ContentId = "Forte_Logo";
+                    LinkedResource img2 = new LinkedResource(@"Html\fb.png", "image/png");
+                    img2.ContentId = "FB_logo";
+                    LinkedResource img3 = new LinkedResource(@"Html\yt.png", "image/png");
+                    img3.ContentId = "YT_logo";
+                    LinkedResource img4 = new LinkedResource(@"Html\mail.png", "image/png");
+                    img4.ContentId = "Mail_logo";
+
+                    avHtml.LinkedResources.Add(img1);
+                    avHtml.LinkedResources.Add(img2);
+                    avHtml.LinkedResources.Add(img3);
+                    avHtml.LinkedResources.Add(img4);
+                    message.AlternateViews.Add(avHtml);
+
+                    //client.Credentials = new System.Net.NetworkCredential(mail_add, mail_pass);
+                    //client.EnableSsl = false;
+
+                    //client.Host = smtpSer;
+                    //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    //client.UseDefaultCredentials = true;
+                    //client.Credentials = new System.Net.NetworkCredential
+                    //{
+                    //    UserName = "no-reply@forteinsurance.com",
+                    //    Password = "Forte@12345"
+                    //};
+                    //client.EnableSsl = true;
+                    //client.Port = port;
+                    //client.Send(message);
+                    var Credential = new System.Net.NetworkCredential(mail_add, mail_pass);
+                    var result = CommonFunctions.SendEmail(Credential, message);
+                    message.Dispose();
+                    //client.Dispose();
+
+                    crud.ExecSP_NoOutPara("sp_user_claim_input", new string[] { "cl_input_type", "cl_e_claim", "cl_e_type", "cl_e_rec", "cl_e_cont", "cl_e_doc", "cl_e_req", "cl_e_rem", "cl_e_non", "cl_e_re", "cl_e_dr", "cl_e_cc", "cl_e_rec_date", "cl_e_user" },
+                           new string[] { "Insert", dgvClaimDetail.Rows[0].Cells["CLAIM_NO"].Value.ToString(), "PaymentNotice", tbSettleReceiver.Text, content, "", "", "", "", "", "", tbSettleCC.Text, DateTime.Now.ToString("dd-MMM-yyyy"), UserName });
+
+                    saveEmailHistory(tbSettleReceiver.Text.Trim().Replace(" ", String.Empty), tbSettleCC.Text.Trim().Replace(" ", String.Empty));
+                    requeryEmailSuggestion();
+
+                    Msgbox.Show("Email sent!");
+                    Cursor.Current = Cursors.AppStarting;
+                }
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        string getSettleMailContent()
+        {
+            string dear = tbDear.Text.Trim(), transfermethod = "", tabledata = "";
+            if (dear == "")
+                dear = "Sir or Madam";
+            if (rbChequeNo.Checked)
+                transfermethod = "cheque";
+            else if (rbBankTranNo.Checked)
+                transfermethod = "bank transfer";
+            else if (rbRequisition.Checked)
+                transfermethod = "cash";
+
+            foreach (DataGridViewRow dr in dgvClaimDetail.Rows)
+            {
+                tabledata += "<tr>";
+                tabledata += "<td>" + (dr.Cells[0].RowIndex + 1).ToString() + "</td>";
+                tabledata += "<td>" + dr.Cells["CLAIM_NO"].Value.ToString() + "</td>";
+                tabledata += "<td>" + dr.Cells["RISK_NAME"].Value.ToString() + "</td>";
+                tabledata += "</tr>";
+            }
+
+            return crud.ExecFunc_String("USER_GET_EMAIL_CONTENT_AUTO",
+                    new string[] { "MailType","Reminder","AdditionalInsured","PolicyNo", "ClaimNo",
+                        "VehicleNo","DateofLoss","PlaceofAccident","OSday", "SecondNote", "SentHistory" },
+                    new string[] { "PaymentNotice", dear, transfermethod, tabledata, "", "", "", "", "", "", "" });
+        }
+
+        void requeryEmailSuggestion()
+        {
+            tbSettleReceiver.EmailAutocompleteSource = null;
+            tbSettleCC.EmailAutocompleteSource = null;
+            // Add Email suggestion
+            string[] email = new string[1];
+            DataTable dtTemp = crud.ExecQuery("SELECT DISTINCT SENDER FROM USER_EMAIL_SENDER_HIST WHERE USER_CODE = '" + UserName + "'");
+            foreach (DataRow dr in dtTemp.Rows)
+            {
+                email[email.Length - 1] = dr["SENDER"].ToString();
+                if (email.Length < dtTemp.Rows.Count)
+                    Array.Resize(ref email, email.Length + 1);
+            }
+            tbSettleReceiver.EmailAutocompleteSource = email;
+            email = new string[1];
+            dtTemp = crud.ExecQuery("SELECT DISTINCT CC FROM USER_EMAIL_CC_HIST WHERE USER_CODE = '" + UserName + "'");
+            foreach (DataRow dr in dtTemp.Rows)
+            {
+                email[email.Length - 1] = dr["CC"].ToString();
+                if (email.Length < dtTemp.Rows.Count)
+                    Array.Resize(ref email, email.Length + 1);
+            }
+            tbSettleCC.EmailAutocompleteSource = email;
+            //
+        }
+
+        void saveEmailHistory(string receiver, string cc)
+        {
+            string sql = "";
+            string[] temp = receiver.Split(',');
+            foreach (string s in temp)
+            {
+                if (s != "")
+                {
+                    sql = "INSERT INTO USER_EMAIL_SENDER_HIST (USER_CODE,SENDER) " +
+                        "SELECT '" + UserName + "','" + s + "' FROM DUAL WHERE NOT EXISTS " +
+                        "(SELECT * FROM USER_EMAIL_SENDER_HIST WHERE (USER_CODE = '" + UserName + "' AND SENDER = '" + s + "'))";
+                    crud.ExecNonQuery(sql);
+                }
+            }
+
+            temp = cc.Split(',');
+            foreach (string s in temp)
+            {
+                if (s != "")
+                {
+                    sql = "INSERT INTO USER_EMAIL_CC_HIST (USER_CODE,CC) " +
+                        "SELECT '" + UserName + "','" + s + "' FROM DUAL WHERE NOT EXISTS " +
+                        "(SELECT * FROM USER_EMAIL_CC_HIST WHERE (USER_CODE = '" + UserName + "' AND CC = '" + s + "'))";
+                    crud.ExecNonQuery(sql);
+                }
+            }
+        }
+
+        #endregion
+
+        #region GPA Claim Checking
+        private void bnGenerate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                string clno = tbClNoGPAClCheck.Text.ToUpper().Trim();
+
+                if (clno.Length < 20)
+                {
+                    Msgbox.Show("Incorrect Claim No");
+                    return;
+                }
+
+                string pro = clno.Substring(7, 3);
+                if (pro != "GPA" && pro != "PAC" && pro != "TRI" && pro!= "PAE" && pro!="PAP")
+                {
+                    Msgbox.Show("Only GPA PAC TRI PAE, and PAP product available in this function.");
+                    return;
+                }
+
+                string[] Key = new string[] { "p_claim_no" };
+                string[] Value = new string[] { clno };
+
+                //DataTable result = crud.ExecQuery("SELECT * FROM VIEW_GPA_CLAIM_CHECK WHERE CLAIM_NO = '" + clno + "'");
+                DataTable result = crud.ExecSP_OutPara("sp_gpa_claim_checking", Key, Value);
+
+                if (result.Rows.Count <= 0)
+                {
+                    Msgbox.Show("Not record found!");
+                    return;
+                }
+
+                string NotPayable = tbNotPayable.Text.Trim(),
+                    GrandTotal = tbGrandTotal.Text.Trim(),
+                    NotPayableRemark = tbNotPayableRemark.Text.Trim(),
+                    GrandTotalRemark = tbGrandTotalRemark.Text.Trim();
+
+                //if blank no need to convert to currency
+                NotPayable = (NotPayable == "") ? "" : String.Format("{0:N}", Convert.ToDecimal(NotPayable));
+                GrandTotal = (GrandTotal == "") ? "" : String.Format("{0:N}", Convert.ToDecimal(GrandTotal));
+
+                //remove $ sign 
+                NotPayable = NotPayable.Replace("$", "");
+                GrandTotal = GrandTotal.Replace("$", "");
+
+                //add bracket if remark not null
+                NotPayableRemark = (NotPayableRemark == "") ? "" : " (" + NotPayableRemark + ")";
+                GrandTotalRemark = (GrandTotalRemark == "") ? "" : " (" + GrandTotalRemark + ")";
+
+                //add new column to result
+                result.Columns.Add("NOT_PAYABLE", typeof(System.String));
+                result.Columns.Add("GRAND_TOTAL", typeof(System.String));
+                result.Columns.Add("PRODUCT", typeof(System.String));
+                result.Columns.Add("USER_NAME", typeof(System.String));
+
+
+                foreach (DataRow row in result.Rows)
+                {
+                    row["NOT_PAYABLE"] = NotPayable + NotPayableRemark;
+                    row["GRAND_TOTAL"] = GrandTotal + GrandTotalRemark;
+                    row["PRODUCT"] = pro;
+                    row["USER_NAME"] = UserName;
+                }
+
+                Reports.GPAClaimChecking report = new Reports.GPAClaimChecking();
+                report.SetDataSource(result);
+                GPAClCheckViewer.ReportSource = report;
+
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void tbClNoGPAClCheck_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bnGenerate.PerformClick();
+            }
+        }
+
+        #endregion
+
+        private void tbRejectClNo_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExclDef_Click(object sender, EventArgs e)
+        {
+            lvDefExclu.Clear();
+            string ClNo = tbRejectClNo.Text.Trim().ToUpper();
+            if (ClNo != "")
+            {
+                if (ClNo.Length < 20)
+                {
+                    Msgbox.Show("Incorrect Claim No");
+                    return;
+                }
+
+                string pro = ClNo.Substring(7, 3);
+                if (pro != "GPA" && pro != "PAC" && pro != "HNS")
+                {
+                    Msgbox.Show("Only GPA, PAC and HNS product available in this function.");
+                    return;
+                }
+                else if (pro == "GPA" || pro == "PAC")
+                {
+                    DataTable dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'GPA' order by TYPE");
+
+                    lvDefExclu.CheckBoxes = true;
+                    lvDefExclu.View = View.Details;
+
+                    lvDefExclu.Columns.Add("Type", 110);
+                    lvDefExclu.Columns.Add("Eng", 350);
+                    lvDefExclu.Columns.Add("Kh", 350);
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        ListViewItem lvi = new ListViewItem(dr["TYPE"].ToString());
+                        lvi.SubItems.Add(dr["ENG"].ToString());
+                        lvi.SubItems.Add(dr["KH"].ToString());
+
+                        lvDefExclu.Items.Add(lvi);
+                    }
+                }
+                else if (pro == "HNS")
+                {
+                    DataTable dt;
+                    DataTable plan_dt = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+                  "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+                  "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+                  "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
+                  "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                  "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                  "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + ClNo + "'");
+                    if (plan_dt.Rows.Count != 0)
+                    {
+                        DataRow dr_plan = plan_dt.Rows[0];
+                        //string plan = dr_plan[10].ToString().Substring(6, 2);
+                        string plan = dr_plan[10].ToString();
+                        if (plan.Count()==8)
+                        {
+                            dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'HNS++' order by ENG");
+                        }
+                        else
+                        {
+                            dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'HNS' order by ENG");
+                        }
+                        lvDefExclu.CheckBoxes = true;
+                        lvDefExclu.View = View.Details;
+
+                        lvDefExclu.Columns.Add("Type", 110);
+                        lvDefExclu.Columns.Add("Eng", 350);
+                        lvDefExclu.Columns.Add("Kh", 350);
+
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            ListViewItem lvi = new ListViewItem(dr["TYPE"].ToString());
+                            lvi.SubItems.Add(dr["ENG"].ToString());
+                            lvi.SubItems.Add(dr["KH"].ToString());
+
+                            lvDefExclu.Items.Add(lvi);
+                        }
+                    }
+                    else
+                    {
+                        Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
+                    }
+                    Cursor.Current = Cursors.WaitCursor;
+                }
+            }
+            else
+            {
+                Msgbox.Show("This transaction appears to have no content - Please input claim No.");
+            }
+        }
+
+        private void tbRejectClNo_MouseClick(object sender, MouseEventArgs e)
+        {
+            cbProduct.Text = "";
+            cbProductType.Text = "";
+            txtEnglish.Text = null;
+            txtKhmer.Text = null;
+
+        }
+
+        private void btnClearDef_Click(object sender, EventArgs e)
+        {
+            cbProduct.Text = "";
+            cbProductType.Text = "";
+            txtEnglish.Text = null;
+            txtKhmer.Text = null;
+            lvDefExclu.Clear();
+        }
+
+        private void btnAddDefExcl_Click(object sender, EventArgs e)
+        {
+            if (cbProduct.Text == "" || cbProductType.Text == "" || txtEnglish.Text == null || txtKhmer.Text == null)
+            {
+                Msgbox.Show("The input field can not be null");
+            }
+            else
+            {
+                DataTable def_dt = crud.ExecQuery("SELECT * FROM USER_CLAIM_EMAIL_EXCLU_DEF WHERE TYPE = '" + cbProductType.Text + "' and ENG = '" + txtEnglish.Text + "' and PRODUCT = '" + cbProduct.Text + "' and KH = '"+txtKhmer.Text+ "'");
+                if (def_dt.Rows.Count == 0)
+                {
+                    string a = "INSERT INTO USER_CLAIM_EMAIL_EXCLU_DEF VALUES ( '"+cbProduct.Text+"','"+cbProductType.Text+"','"+txtEnglish.Text+"','"+txtKhmer.Text+"')";
+                    crud.ExecNonQuery(a);
+                    Cursor.Current = Cursors.WaitCursor;
+                    Msgbox.Show("Added Successfully - Please regenerate the Exlusion/Definitions to see result");
+                }
+                else
+                {
+                    Msgbox.Show("Items are already existing");
+                }
+            }
+            
+        }
+    }
+}

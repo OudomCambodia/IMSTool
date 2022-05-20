@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\</ReferencePath>
+    <ProjectView>ProjectFiles</ProjectView>
+    <PublishUrlHistory>\\fipnhdcs01\public%24\MIS\Software\IMS Tool\|\\fipnh\public%24\MIS\Software\IMS Tool\|\\192.168.110.250\public%24\MIS\Software\IMS Tool\|\\Fipnhdcs01\public%24\MIS\Software\IMS Tool\|\\fipnhdcs01\MIS\Software\IMS Tool\</PublishUrlHistory>
+    <InstallUrlHistory>\\fipnhdcs01\public%24\MIS\Software\IMS Tool\|\\192.168.110.250\public%24\MIS\Software\IMS Tool\|\\Fipnhdcs01\public%24\MIS\Software\IMS Tool\|\\fipnhdcs01\MIS\Software\IMS Tool\|https://forteinsurancebeta.com/IMS Tool/</InstallUrlHistory>
+    <SupportUrlHistory>\\Fipnhdcs01\public%24\MIS\Software\IMS Tool</SupportUrlHistory>
+    <UpdateUrlHistory>\\192.168.110.250\public%24\MIS\Software\IMS Tool\|\\Fipnhdcs01\public%24\MIS\Software\IMS Tool\|\\fipnhdcs01\MIS\Software\IMS Tool\</UpdateUrlHistory>
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>
