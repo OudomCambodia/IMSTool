@@ -210,6 +210,21 @@ namespace Testing.Forms
 
         private void CardPrinting_Load(object sender, EventArgs e)
         {
+            //DataTable dtuser = Mydb.ExecQuery("select role from [DocumentControlDB].[dbo].[tbDOC_USER] where ");
+            DataTable dtuser = crud.ExecQuery("select remark from user_print_system where user_name = '" + username.Replace("-IMS","") + "'");
+            if (dtuser.Rows[0][0].ToString() == "PRODUCER")
+            {
+                //bnSearch.Enabled = false;
+                //btnPreview.Enabled = false;
+                //btnClear.Enabled = false;
+                //btnSend.Enabled = false;
+                //btnHistory.Enabled = false;
+                //frmDocumentControl.disabledButt(bnSearch);
+                frmDocumentControl.disabledButt(btnPreview);
+                //frmDocumentControl.disabledButt(btnClear);
+                frmDocumentControl.disabledButt(btnSend);
+                frmDocumentControl.disabledButt(btnHistory);
+            }
             //  InsertToSQL();
 
             //if (PrintCard)
@@ -217,6 +232,8 @@ namespace Testing.Forms
             //    txtPolicyNo.Text = fwdpolno;
             //    bnSearch.PerformClick();
             //}
+
+
         }
 
         //private void txtPolicyNo_Leave(object sender, EventArgs e)
