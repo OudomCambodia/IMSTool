@@ -18,6 +18,7 @@ namespace Testing
         public string UserName = "SICL";
         public string FullName = "SICL";
         
+
         string title;
         public bool abort = false;
         CRUD crud = new CRUD();
@@ -298,6 +299,7 @@ namespace Testing
         {
             Forms.CardPrinting card = new Forms.CardPrinting();
             card.username = FullName + "-IMS";
+            
             openForm(card, (Button)sender);
         }                
         private void btnClaimPaidPayee_Click(object sender, EventArgs e)
