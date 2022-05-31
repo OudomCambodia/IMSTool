@@ -1883,6 +1883,10 @@
     <Content Include="Html\yt.png" />
     <None Include="Resources\abc.jpg" />
     <None Include="Resources\bellicon.jpg" />
+    <None Include="Resources\bell.png" />
+    <None Include="Resources\bell 1.png" />
+    <None Include="Resources\4Tlt-unscreen.gif" />
+    <None Include="Resources\4Tlt-unscreen.png" />
     <Content Include="Resources\business-management.png" />
     <None Include="Resources\cv.png" />
     <None Include="Resources\cvv.jpg" />
@@ -1898,6 +1902,9 @@
     <None Include="Resources\newyear5.JPG" />
     <None Include="Resources\newkhmernewyear.png" />
     <None Include="Resources\Mother_Day.jpg" />
+    <None Include="Resources\notification-bell.png" />
+    <None Include="Resources\notification-bell 1.png" />
+    <None Include="Resources\notification-gif-unscreen.gif" />
     <Content Include="Resources\PCBen.jpg" />
     <None Include="Resources\Pcc_Ben.jpg" />
     <Content Include="Resources\Pchum_Ben.png" />
