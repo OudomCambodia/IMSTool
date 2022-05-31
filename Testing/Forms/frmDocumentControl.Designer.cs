@@ -67,6 +67,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbFilterdgvDoc = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnReturn = new Testing.cus_button();
+            this.btnReassignDP = new Testing.cus_button();
+            this.btnChangeStatus = new Testing.cus_button();
+            this.btnCloseReopen = new Testing.cus_button();
+            this.btnAddDoc = new Testing.cus_button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.lblTot = new System.Windows.Forms.Label();
@@ -81,11 +86,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
-            this.btnReturn = new Testing.cus_button();
-            this.btnReassignDP = new Testing.cus_button();
-            this.btnChangeStatus = new Testing.cus_button();
-            this.btnCloseReopen = new Testing.cus_button();
-            this.btnAddDoc = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pDoc.SuspendLayout();
@@ -587,6 +587,71 @@
             this.panel2.Size = new System.Drawing.Size(1087, 41);
             this.panel2.TabIndex = 44;
             // 
+            // btnReturn
+            // 
+            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReturn.FlatAppearance.BorderSize = 2;
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturn.ForeColor = System.Drawing.Color.White;
+            this.btnReturn.Location = new System.Drawing.Point(344, 6);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(100, 27);
+            this.btnReturn.TabIndex = 17;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = false;
+            // 
+            // btnReassignDP
+            // 
+            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReassignDP.FlatAppearance.BorderSize = 2;
+            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
+            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
+            this.btnReassignDP.Name = "btnReassignDP";
+            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
+            this.btnReassignDP.TabIndex = 16;
+            this.btnReassignDP.Text = "Re-assign DP";
+            this.btnReassignDP.UseVisualStyleBackColor = false;
+            // 
+            // btnChangeStatus
+            // 
+            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
+            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
+            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
+            this.btnChangeStatus.TabIndex = 18;
+            this.btnChangeStatus.Text = "Change Status";
+            this.btnChangeStatus.UseVisualStyleBackColor = false;
+            // 
+            // btnCloseReopen
+            // 
+            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
+            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
+            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
+            this.btnCloseReopen.Name = "btnCloseReopen";
+            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
+            this.btnCloseReopen.TabIndex = 15;
+            this.btnCloseReopen.Text = "Cancel/Re-open";
+            this.btnCloseReopen.UseVisualStyleBackColor = false;
+            // 
+            // btnAddDoc
+            // 
+            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAddDoc.FlatAppearance.BorderSize = 2;
+            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
+            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
+            this.btnAddDoc.Name = "btnAddDoc";
+            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
+            this.btnAddDoc.TabIndex = 14;
+            this.btnAddDoc.Text = "Add Document";
+            this.btnAddDoc.UseVisualStyleBackColor = false;
+            // 
             // btnPrint
             // 
             this.btnPrint.BackgroundImage = global::Testing.Properties.Resources.print;
@@ -730,73 +795,8 @@
             // 
             // timerNoti
             // 
-            this.timerNoti.Interval = 20000;
+            this.timerNoti.Interval = 600000;
             this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
-            // 
-            // btnReturn
-            // 
-            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReturn.FlatAppearance.BorderSize = 2;
-            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReturn.ForeColor = System.Drawing.Color.White;
-            this.btnReturn.Location = new System.Drawing.Point(344, 6);
-            this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(100, 27);
-            this.btnReturn.TabIndex = 17;
-            this.btnReturn.Text = "Return";
-            this.btnReturn.UseVisualStyleBackColor = false;
-            // 
-            // btnReassignDP
-            // 
-            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReassignDP.FlatAppearance.BorderSize = 2;
-            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
-            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
-            this.btnReassignDP.Name = "btnReassignDP";
-            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
-            this.btnReassignDP.TabIndex = 16;
-            this.btnReassignDP.Text = "Re-assign DP";
-            this.btnReassignDP.UseVisualStyleBackColor = false;
-            // 
-            // btnChangeStatus
-            // 
-            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
-            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
-            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
-            this.btnChangeStatus.Name = "btnChangeStatus";
-            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
-            this.btnChangeStatus.TabIndex = 18;
-            this.btnChangeStatus.Text = "Change Status";
-            this.btnChangeStatus.UseVisualStyleBackColor = false;
-            // 
-            // btnCloseReopen
-            // 
-            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
-            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
-            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
-            this.btnCloseReopen.Name = "btnCloseReopen";
-            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
-            this.btnCloseReopen.TabIndex = 15;
-            this.btnCloseReopen.Text = "Cancel/Re-open";
-            this.btnCloseReopen.UseVisualStyleBackColor = false;
-            // 
-            // btnAddDoc
-            // 
-            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnAddDoc.FlatAppearance.BorderSize = 2;
-            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
-            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
-            this.btnAddDoc.Name = "btnAddDoc";
-            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
-            this.btnAddDoc.TabIndex = 14;
-            this.btnAddDoc.Text = "Add Document";
-            this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
             // frmDocumentControl
             // 
