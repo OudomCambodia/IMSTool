@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Testing.Properties;
 using IExcel = Microsoft.Office.Interop.Excel;
 
 namespace Testing.Forms
@@ -20,6 +21,7 @@ namespace Testing.Forms
         public string UserName = "sicl";
         CRUD crud = new CRUD();
         DBS11SqlCrud sqlcrud = new DBS11SqlCrud();
+        DataTable _dtNoti = new DataTable();
         string[] Role = null, Status = null;
         string FullName = "", UserID = "", Team = "";
         public static Dictionary<string, string> docType = new Dictionary<string, string>() 
@@ -36,6 +38,7 @@ namespace Testing.Forms
         CheckBox checkboxHeader = new CheckBox();
 
         string status = "0"; //use as global status based on selectedStatusBtn
+        public string buttonName;
 
         public IExcel.Application xlprog = new IExcel.Application();
 
@@ -54,6 +57,12 @@ namespace Testing.Forms
         public frmDocumentControl()
         {
             InitializeComponent();
+            btnChangeStatus.Click += btnChangeStatus_Click;
+            btnAddDoc.Click += btnAddDoc_Click;
+            btnCloseReopen.Click += btnCloseReopen_Click;
+            btnReassignDP.Click += btnReassignDP_Click;
+            btnReturn.Click += btnReturn_Click;
+            dgvNoti.SelectionChanged -= dgvNoti_SelectionChanged;
         }
 
         private void frmDocumentControl_Load(object sender, EventArgs e)
@@ -78,7 +87,33 @@ namespace Testing.Forms
                 Team = dtTemp.Rows[0][3].ToString(); 
                 //
 
+                pNotification.Visible = false;
+                timerNoti.Start();
+                _dtNoti = sqlcrud.LoadData("SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
+                DataTable dtNotiCount = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
+                if (dtNotiCount.Rows.Count > 0)
+                {
+                    int notiCount = 0;
+                    for (int i = 0; i < dtNotiCount.Rows.Count; i++)
+                    {
+                        notiCount += Convert.ToInt32(dtNotiCount.Rows[i]["TOTAL_NOTI"]);
+                    }
+                    lblNotiCount.Visible = true;
+                    lblNotiCount.Text = notiCount.ToString();
 
+                    if (notiCount == 0)
+                    {
+                        lblNotiCount.Visible = false;
+                        btnNotification.Image = Resources._4Tlt_unscreen1;
+                    }
+                    else
+                        btnNotification.Image = Resources._4Tlt_unscreen;
+                }
+                
+                NotiSentDuration();
+
+                dgvNoti.DataSource = _dtNoti;
+                 
                 //set Status
                 string tmpstatus = "";
                 foreach (string s in Role)
@@ -90,7 +125,6 @@ namespace Testing.Forms
                 Status = Status.Distinct().ToArray();
                 //
 
-
                 holiday = getHolidayinOADate();
                 if (holiday == null)
                 {
@@ -100,7 +134,10 @@ namespace Testing.Forms
 
                 //requeryDGV();
 
-                if (!Role.Contains("PRODUCER") && !Role.Contains("PCD")) disabledButt(btnAddDoc); else enabledButt(btnAddDoc);
+                if (!Role.Contains("PRODUCER") && !Role.Contains("PCD")) 
+                    disabledButt(btnAddDoc);
+                else
+                    enabledButt(btnAddDoc);
                 //if (!Role.Contains("PRODUCER".Contains) && !Role.Contains("PCD".Contains)) disabledButt(btnAddDoc); else enabledButt(btnAddDoc);
                 //if (!Role.Contains("DP") disabledButt(btnReassignDP); else enabledButt(btnReassignDP);
 
@@ -150,9 +187,6 @@ namespace Testing.Forms
                 //frmAddDocument1.product.Clear();
                 //foreach(DataRow dr in dt.Rows){
                 //    frmAddDocument1.product.Add(dr["ProType"].ToString(),dr["ProLine"].ToString());
-                //}
-                
-
             }
             catch (Exception ex)
             {
@@ -611,7 +645,7 @@ namespace Testing.Forms
                 {
                     Msgbox.Show("You can't change the status of selected document(s).");
                     return;
-                }                
+                }
                 //
 
                 DataTable selectedDoc = GetDataTableFromDGV(dgvDoc);
@@ -822,7 +856,6 @@ namespace Testing.Forms
 
         private void btnCloseReopen_Click(object sender, EventArgs e)
         {
-
             try
             {
                 DataTable selectedDoc = GetDataTableFromDGV(dgvDoc);
@@ -1083,10 +1116,10 @@ namespace Testing.Forms
             }
         }
 
-
-
         private void setSelectedStatus(Button selectedBtn)
         {
+            buttonName = selectedBtn.Name;
+
             if (status == "99" || status == "7")
             {
                 gbAllRecordOption.Visible = true;
@@ -1612,6 +1645,216 @@ namespace Testing.Forms
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lblNotiCount_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNotification_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (pNotification.Visible)
+                {
+                    pNotification.Visible = false;
+                    dgvNoti.SelectionChanged -= dgvNoti_SelectionChanged;
+                    return;
+                }
+
+                pNotification.Visible = true;
+                dgvNoti.SelectionChanged += dgvNoti_SelectionChanged;
+
+                dgvNoti.DataSource = null;
+                dgvNoti.DataSource = _dtNoti;
+                dgvNoti.Columns["SEQ_NO"].Visible = false;
+                dgvNoti.Columns["NOTI_TO"].Visible = false;
+                dgvNoti.Columns["NOTI_DATE"].Visible = false;
+                dgvNoti.Columns["REMARK"].Visible = false;
+                dgvNoti.Columns["IS_READ"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void dgvNoti_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvNoti.SelectedCells.Count > 0)
+                {
+                    int selectedrowindex = dgvNoti.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dgvNoti.Rows[selectedrowindex];
+                    string seqNo = selectedRow.Cells["SEQ_NO"].Value.ToString();
+
+                    string sql = "UPDATE [DocumentControlDB].[dbo].[tbNoti] SET IS_READ = 1 WHERE SEQ_NO = '" + seqNo + "'";
+                    sqlcrud.Executing(sql);
+
+                    selectedRow.Cells["IS_READ"].Value = true;
+
+                    DataTable dt = new DataTable();
+                    dt = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
+                    if (dt.Rows.Count > 0)
+                    {
+                        int notiCount = 0;
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            notiCount += Convert.ToInt32(dt.Rows[i]["TOTAL_NOTI"]);
+                        }
+                        lblNotiCount.Visible = true;
+                        lblNotiCount.Text = Convert.ToInt32(notiCount).ToString();
+
+                        if (notiCount == 0)
+                        {
+                            lblNotiCount.Visible = false;
+                            btnNotification.Image = Resources._4Tlt_unscreen1;
+                        }
+                        else
+                            btnNotification.Image = Resources._4Tlt_unscreen;
+                    }
+                }
+                dgvNoti_CellFormatting(null, null);
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void timerNoti_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                _dtNoti = sqlcrud.LoadData("SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
+                dgvNoti.DataSource = null;
+                dgvNoti.DataSource = _dtNoti;
+                dgvNoti.Columns["SEQ_NO"].Visible = false;
+                dgvNoti.Columns["NOTI_TO"].Visible = false;
+                dgvNoti.Columns["NOTI_DATE"].Visible = false;
+                dgvNoti.Columns["REMARK"].Visible = false;
+                dgvNoti.Columns["IS_READ"].Visible = false;
+
+                DataTable dt = new DataTable();
+                dt = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
+                if (dt.Rows.Count > 0)
+                {
+                    int notiCount = 0;
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        notiCount += Convert.ToInt32(dt.Rows[i]["TOTAL_NOTI"]);
+                    }
+                    lblNotiCount.Visible = true;
+                    lblNotiCount.Text = Convert.ToInt32(notiCount).ToString();
+
+                    if (notiCount == 0)
+                    {
+                        lblNotiCount.Visible = false;
+                        btnNotification.Image = Resources._4Tlt_unscreen1;
+                    }
+                    else
+                        btnNotification.Image = Resources._4Tlt_unscreen;
+                        
+                }
+
+                NotiSentDuration();
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.Message);
+            }
+        }
+
+        private void dgvNoti_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvNoti.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["IS_READ"].Value) == false)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                    row.DefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.WhiteSmoke;
+                    row.DefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Regular);
+                }
+            }
+        }
+
+        private void dgvNoti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            status = "8";
+
+            if (!buttonName.Equals(btnCancel.Name))
+                setSelectedStatus(btnCancel);
+
+            string remark = dgvNoti.Rows[e.RowIndex].Cells["REMARK"].Value.ToString();
+            tbFilterdgvDoc.Text = remark;
+
+            if (e.ColumnIndex == dgvNoti.Columns[0].Index || e.RowIndex < 0) return;
+            int row = e.RowIndex;
+            var frm = new frmDocumentDetail1();
+            frm.DocId = dgvNoti.Rows[row].Cells["REMARK"].Value.ToString();
+            frm.printable = (Role.Contains("PRODUCER") || Role.Contains("UWHEAD")) ? true : false;
+            frm.Username = FullName;
+            frm.Show();
+        }
+
+        private void NotiSentDuration()
+        {
+            for (int i = 0; i < _dtNoti.Rows.Count; i++)
+            {
+                DataRow dr = _dtNoti.Rows[i];
+                var notiDate = Convert.ToDateTime(dr["NOTI_DATE"]);
+                var dateNow = DateTime.Now;
+                var dateSent = (dateNow - notiDate).TotalDays;
+
+                if (Math.Floor(dateSent) > 1)
+                {
+                    var tempTimeString = string.Empty;
+                    if (Math.Floor(dateSent) <= 29)
+                    {
+                        dateSent = Math.Floor(dateSent);
+                        tempTimeString = string.Concat(dateSent.ToString(), dateSent >= 2 ? " days ago" : " day ago");
+                    }
+                    else
+                    {
+                        var month = Math.Floor(dateSent / 30);
+                        if (month < 12)
+                            tempTimeString = string.Concat(Math.Floor(month).ToString(), month >= 2 ? " months ago" : " month ago");
+                        else
+                        {
+                            month = Math.Floor(month / 12);
+                            tempTimeString = string.Concat(Math.Floor(month).ToString(), month >= 2 ? " years ago" : " year ago");
+                        }
+
+                    }
+
+                    dr["NOTI_DETAIL"] = string.Concat(dr["NOTI_DETAIL"], Environment.NewLine, "------ ", tempTimeString);
+                    dr.AcceptChanges();
+                }
+                else
+                {
+                    var tempDateSent = (dateNow - notiDate).TotalHours < 1 ? 0 : (dateNow - notiDate).TotalHours;
+                    dateSent = tempDateSent;
+
+                    if (tempDateSent >= 1)
+                    {
+                        dr["NOTI_DETAIL"] = string.Concat(dr["NOTI_DETAIL"], Environment.NewLine, "------ ", Math.Floor(dateSent).ToString(), dateSent >= 2 ? " hours ago" : " hour ago");
+                        dr.AcceptChanges();
+                    }
+                }
+
+                if (Math.Floor(dateSent) < 1)
+                {
+                    dateSent = Math.Floor((dateNow - notiDate).TotalMinutes) == 0 ? 1 : Math.Floor((dateNow - notiDate).TotalMinutes);
+                    dr["NOTI_DETAIL"] = string.Concat(dr["NOTI_DETAIL"], Environment.NewLine, "------ ", dateSent.ToString(), dateSent >= 2 ? " minutes ago" : " minute ago");
+                    dr.AcceptChanges();
+                }
+            }
         }
     }
 }

@@ -26,8 +26,6 @@ namespace Testing
 
         //Noti
         DBS11SqlCrud sqlcrud = new DBS11SqlCrud();
-        int noticount = 0;
-        //
 
         public frmMain()
         {
@@ -194,7 +192,6 @@ namespace Testing
 
             timer1.Start();
             tmCheckMaint.Start();
-            notiTimer.Start();
             this.Text += " - " + UserName;
             title = this.Text;
             //add auto vertical scroll bar
@@ -237,14 +234,6 @@ namespace Testing
             //}
 
             this.WindowState = FormWindowState.Maximized;
-
-            //Noti
-            dgvNoti.RowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            dgvNoti.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //dgvNoti.DefaultCellStyle.SelectionBackColor = dgvNoti.DefaultCellStyle.BackColor;
-            //dgvNoti.DefaultCellStyle.SelectionForeColor = dgvNoti.DefaultCellStyle.ForeColor;
-            //
-
 
             //Feature in progress: Doc Control
             //notiTimer.Stop();
@@ -558,58 +547,6 @@ namespace Testing
         private void notificationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-        }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            panelNoti.Visible = false;
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dt = sqlcrud.LoadData("SELECT NOTI_DETAIL,REMARK FROM dbo.VIEW_NOTI WHERE STATUS = 'New' and NOTI_TO = '"+UserName+"' ORDER BY NOTI_DATE DESC").Tables[0];
-            dgvNoti.DataSource = null;
-            dgvNoti.DataSource = dt;
-            dgvNoti.Columns["REMARK"].Visible = false;
-            panelNoti.Visible = true;
-
-            noticount = dt.Rows.Count;
-        }
-
-        private void oldToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            dt = sqlcrud.LoadData("SELECT NOTI_DETAIL,REMARK FROM dbo.VIEW_NOTI WHERE STATUS = 'Old' and NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
-            dgvNoti.DataSource = null;
-            dgvNoti.DataSource = dt;
-            dgvNoti.Columns["REMARK"].Visible = false;
-            panelNoti.Visible = true;
-        }
-
-        private void notiTimer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                dt = sqlcrud.LoadData("SELECT NOTI_DETAIL FROM dbo.VIEW_NOTI WHERE STATUS = 'New' and NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
-                if (noticount < dt.Rows.Count)
-                {
-                    newToolStripMenuItem.PerformClick();
-                    noticount = dt.Rows.Count;
-                }
-            }
-            catch (Exception ex)
-            {
-                Msgbox.Show(ex.Message);
-            }
-        }
-
-        private void dgvNoti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //Msgbox.Show(dgvNoti.Rows[e.RowIndex].Cells["REMARK"].Value.ToString());
-            Forms.frmDocumentControl cl = new Forms.frmDocumentControl();
-            cl.UserName = UserName;
-            cl.notiTriggered = true;
-            cl.notiRemark = dgvNoti.Rows[e.RowIndex].Cells["REMARK"].Value.ToString();
-            openForm(cl, bnDocCtrl);
         }
 
         private void bnAutoClaim_Click(object sender, EventArgs e)

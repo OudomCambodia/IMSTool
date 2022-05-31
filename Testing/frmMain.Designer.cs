@@ -66,10 +66,6 @@
             this.userLoginCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.notificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.oldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateTicket = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -90,9 +86,6 @@
             this.btnProducerClaim = new System.Windows.Forms.Button();
             this.btnEngineering = new System.Windows.Forms.Button();
             this.timePendingEmail = new System.Windows.Forms.Timer(this.components);
-            this.panelNoti = new System.Windows.Forms.Panel();
-            this.dgvNoti = new System.Windows.Forms.DataGridView();
-            this.notiTimer = new System.Windows.Forms.Timer(this.components);
             this.pnSubAutoClaim = new System.Windows.Forms.Panel();
             this.bnLetter = new System.Windows.Forms.Button();
             this.bnDeductible = new System.Windows.Forms.Button();
@@ -109,8 +102,6 @@
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panelNoti.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).BeginInit();
             this.pnSubAutoClaim.SuspendLayout();
             this.pnBenifit.SuspendLayout();
             this.pnEngUW.SuspendLayout();
@@ -345,7 +336,6 @@
             this.renewalListToolStripMenuItem,
             this.adminToolStripMenuItem,
             this.quitToolStripMenuItem1,
-            this.notificationToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.CreateTicket});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -559,40 +549,6 @@
             this.quitToolStripMenuItem1.Size = new System.Drawing.Size(42, 20);
             this.quitToolStripMenuItem1.Text = "Quit";
             this.quitToolStripMenuItem1.Click += new System.EventHandler(this.quitToolStripMenuItem1_Click);
-            // 
-            // notificationToolStripMenuItem
-            // 
-            this.notificationToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.notificationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.oldToolStripMenuItem,
-            this.closeToolStripMenuItem});
-            this.notificationToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.notificationToolStripMenuItem.Name = "notificationToolStripMenuItem";
-            this.notificationToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.notificationToolStripMenuItem.Text = "Notification";
-            this.notificationToolStripMenuItem.Click += new System.EventHandler(this.notificationToolStripMenuItem_Click);
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.newToolStripMenuItem.Text = "Today";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
-            // oldToolStripMenuItem
-            // 
-            this.oldToolStripMenuItem.Name = "oldToolStripMenuItem";
-            this.oldToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.oldToolStripMenuItem.Text = "Old";
-            this.oldToolStripMenuItem.Click += new System.EventHandler(this.oldToolStripMenuItem_Click);
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -897,48 +853,6 @@
             this.timePendingEmail.Interval = 7200000;
             this.timePendingEmail.Tick += new System.EventHandler(this.timePendingEmail_Tick);
             // 
-            // panelNoti
-            // 
-            this.panelNoti.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelNoti.Controls.Add(this.dgvNoti);
-            this.panelNoti.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelNoti.Location = new System.Drawing.Point(849, 24);
-            this.panelNoti.Name = "panelNoti";
-            this.panelNoti.Size = new System.Drawing.Size(179, 871);
-            this.panelNoti.TabIndex = 14;
-            this.panelNoti.Visible = false;
-            // 
-            // dgvNoti
-            // 
-            this.dgvNoti.AllowUserToAddRows = false;
-            this.dgvNoti.AllowUserToDeleteRows = false;
-            this.dgvNoti.AllowUserToResizeColumns = false;
-            this.dgvNoti.AllowUserToResizeRows = false;
-            this.dgvNoti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvNoti.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvNoti.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvNoti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNoti.ColumnHeadersVisible = false;
-            this.dgvNoti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvNoti.Location = new System.Drawing.Point(0, 0);
-            this.dgvNoti.MultiSelect = false;
-            this.dgvNoti.Name = "dgvNoti";
-            this.dgvNoti.ReadOnly = true;
-            this.dgvNoti.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvNoti.RowHeadersVisible = false;
-            this.dgvNoti.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvNoti.RowTemplate.Height = 35;
-            this.dgvNoti.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvNoti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNoti.Size = new System.Drawing.Size(175, 867);
-            this.dgvNoti.TabIndex = 0;
-            this.dgvNoti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoti_CellDoubleClick);
-            // 
-            // notiTimer
-            // 
-            this.notiTimer.Interval = 60000;
-            this.notiTimer.Tick += new System.EventHandler(this.notiTimer_Tick);
-            // 
             // pnSubAutoClaim
             // 
             this.pnSubAutoClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -1127,7 +1041,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
             this.Controls.Add(this.pnEngUW);
-            this.Controls.Add(this.panelNoti);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnSubAutoClaim);
             this.Controls.Add(this.pnSubFL);
@@ -1151,8 +1064,6 @@
             this.pnSubClaim.ResumeLayout(false);
             this.pnSubFL.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panelNoti.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).EndInit();
             this.pnSubAutoClaim.ResumeLayout(false);
             this.pnBenifit.ResumeLayout(false);
             this.pnEngUW.ResumeLayout(false);
@@ -1205,13 +1116,6 @@
         private System.Windows.Forms.Timer timePendingEmail;
         public System.Windows.Forms.Button btnTravelRp;
         public System.Windows.Forms.Button bnDocCtrl;
-        private System.Windows.Forms.Panel panelNoti;
-        private System.Windows.Forms.ToolStripMenuItem notificationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oldToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dgvNoti;
-        private System.Windows.Forms.Timer notiTimer;
         public System.Windows.Forms.Button bnAutoClaim;
         private System.Windows.Forms.Panel pnSubAutoClaim;
         public System.Windows.Forms.Button bnWindscreen;
