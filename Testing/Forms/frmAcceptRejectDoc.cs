@@ -133,7 +133,7 @@ namespace Testing.Forms
                                 //string cuscode = dtTemp.Rows[0][0].ToString(), cusname = dtTemp.Rows[0][1].ToString(), producer = dtTemp.Rows[0][2].ToString(), doctype = dtTemp.Rows[0][3].ToString();
 
                                 cmd = new SqlCommand();
-                                cmd.CommandText = "INSERT INTO dbo.tbNoti(NOTI_DETAIL, NOTI_TO, NOTI_DATE, REMARK) SELECT DOC_TYPE + ' Document of \"' + CUS_CODE + '-' + CUS_NAME + '\" has been rejected due to \"'+ @reason +'\"',(SELECT USER_NAME FROM dbo.tbDOC_USER WHERE FULL_NAME = CREATE_BY),getdate(),DOC_CODE FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
+                                cmd.CommandText = "INSERT INTO dbo.tbNoti(NOTI_DETAIL, NOTI_TO, NOTI_DATE, REMARK) SELECT DOC_TYPE + ' Document of \"' + DOC_CODE + '-' + CUS_CODE + '-' + CUS_NAME + '\" has been rejected due to \"'+ @reason +'\"', (SELECT USER_NAME FROM dbo.tbDOC_USER WHERE FULL_NAME = CREATE_BY), getdate(), DOC_CODE FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
                                 cmd.Parameters.Add(new SqlParameter("reason", reason));
                                 crud.Executing(cmd);
                                 //crud.Executing("INSERT INTO dbo.tbNoti(NOTI_DETAIL, NOTI_TO, NOTI_DATE, REMARK) SELECT DOC_TYPE + ' Document of \"' + CUS_CODE + '-' + CUS_NAME + '\" has been rejected due to \"" + reason + "\"',(SELECT USER_NAME FROM dbo.tbDOC_USER WHERE USER_CODE = PRODUCER_CODE),getdate(),DOC_CODE FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))");

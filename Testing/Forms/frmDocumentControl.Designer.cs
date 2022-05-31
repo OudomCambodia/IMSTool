@@ -29,9 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pDoc = new System.Windows.Forms.Panel();
+            this.dgvDoc = new System.Windows.Forms.DataGridView();
+            this.pNotification = new System.Windows.Forms.Panel();
+            this.dgvNoti = new System.Windows.Forms.DataGridView();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.btnNotification = new System.Windows.Forms.PictureBox();
+            this.lblNotiCount = new System.Windows.Forms.Label();
             this.btnPendingAtDP = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -70,22 +77,26 @@
             this.btnDPPendingRemark = new System.Windows.Forms.Button();
             this.btnManageCrono = new System.Windows.Forms.Button();
             this.btnReverse = new System.Windows.Forms.Button();
-            this.btnCloseReopen = new Testing.cus_button();
-            this.btnReturn = new Testing.cus_button();
-            this.btnReassignDP = new Testing.cus_button();
-            this.btnChangeStatus = new Testing.cus_button();
-            this.btnAddDoc = new Testing.cus_button();
             this.btnRefreshdgv = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.dgvDoc = new System.Windows.Forms.DataGridView();
+            this.timerNoti = new System.Windows.Forms.Timer(this.components);
+            this.btnReturn = new Testing.cus_button();
+            this.btnReassignDP = new Testing.cus_button();
+            this.btnChangeStatus = new Testing.cus_button();
+            this.btnCloseReopen = new Testing.cus_button();
+            this.btnAddDoc = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.pDoc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).BeginInit();
+            this.pNotification.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).BeginInit();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).BeginInit();
             this.panel3.SuspendLayout();
             this.gbAllRecordOption.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -102,15 +113,97 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.dgvDoc);
+            this.panel4.Controls.Add(this.pDoc);
+            this.panel4.Controls.Add(this.pNotification);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 125);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1087, 506);
             this.panel4.TabIndex = 46;
             // 
+            // pDoc
+            // 
+            this.pDoc.Controls.Add(this.dgvDoc);
+            this.pDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pDoc.Location = new System.Drawing.Point(0, 0);
+            this.pDoc.Name = "pDoc";
+            this.pDoc.Size = new System.Drawing.Size(883, 506);
+            this.pDoc.TabIndex = 10;
+            // 
+            // dgvDoc
+            // 
+            this.dgvDoc.AllowUserToAddRows = false;
+            this.dgvDoc.AllowUserToDeleteRows = false;
+            this.dgvDoc.AllowUserToResizeRows = false;
+            this.dgvDoc.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dgvDoc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDoc.Location = new System.Drawing.Point(0, 0);
+            this.dgvDoc.Name = "dgvDoc";
+            this.dgvDoc.RowHeadersVisible = false;
+            this.dgvDoc.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvDoc.RowTemplate.Height = 30;
+            this.dgvDoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDoc.Size = new System.Drawing.Size(883, 506);
+            this.dgvDoc.TabIndex = 8;
+            this.dgvDoc.DataSourceChanged += new System.EventHandler(this.dgvDoc_DataSourceChanged);
+            this.dgvDoc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellContentClick);
+            this.dgvDoc.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellDoubleClick);
+            this.dgvDoc.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDoc_CellFormatting);
+            this.dgvDoc.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvOpen_Paint);
+            // 
+            // pNotification
+            // 
+            this.pNotification.Controls.Add(this.dgvNoti);
+            this.pNotification.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pNotification.Location = new System.Drawing.Point(883, 0);
+            this.pNotification.Name = "pNotification";
+            this.pNotification.Size = new System.Drawing.Size(204, 506);
+            this.pNotification.TabIndex = 9;
+            // 
+            // dgvNoti
+            // 
+            this.dgvNoti.AllowUserToAddRows = false;
+            this.dgvNoti.AllowUserToDeleteRows = false;
+            this.dgvNoti.AllowUserToResizeColumns = false;
+            this.dgvNoti.AllowUserToResizeRows = false;
+            this.dgvNoti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvNoti.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvNoti.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dgvNoti.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvNoti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNoti.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvNoti.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvNoti.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvNoti.Location = new System.Drawing.Point(0, 0);
+            this.dgvNoti.MultiSelect = false;
+            this.dgvNoti.Name = "dgvNoti";
+            this.dgvNoti.ReadOnly = true;
+            this.dgvNoti.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvNoti.RowHeadersVisible = false;
+            this.dgvNoti.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvNoti.RowTemplate.Height = 35;
+            this.dgvNoti.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvNoti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvNoti.Size = new System.Drawing.Size(204, 506);
+            this.dgvNoti.TabIndex = 1;
+            this.dgvNoti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoti_CellDoubleClick);
+            this.dgvNoti.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNoti_CellFormatting);
+            this.dgvNoti.SelectionChanged += new System.EventHandler(this.dgvNoti_SelectionChanged);
+            // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.btnNotification);
+            this.panel8.Controls.Add(this.lblNotiCount);
             this.panel8.Controls.Add(this.btnPendingAtDP);
             this.panel8.Controls.Add(this.btnAll);
             this.panel8.Controls.Add(this.btnCancel);
@@ -127,6 +220,34 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1087, 42);
             this.panel8.TabIndex = 45;
+            // 
+            // btnNotification
+            // 
+            this.btnNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotification.Image = global::Testing.Properties.Resources._4Tlt_unscreen1;
+            this.btnNotification.Location = new System.Drawing.Point(1038, 6);
+            this.btnNotification.Name = "btnNotification";
+            this.btnNotification.Size = new System.Drawing.Size(28, 28);
+            this.btnNotification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNotification.TabIndex = 12;
+            this.btnNotification.TabStop = false;
+            this.btnNotification.Click += new System.EventHandler(this.btnNotification_Click);
+            // 
+            // lblNotiCount
+            // 
+            this.lblNotiCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNotiCount.AutoSize = true;
+            this.lblNotiCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblNotiCount.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotiCount.ForeColor = System.Drawing.Color.Red;
+            this.lblNotiCount.Location = new System.Drawing.Point(1063, -2);
+            this.lblNotiCount.Name = "lblNotiCount";
+            this.lblNotiCount.Size = new System.Drawing.Size(21, 14);
+            this.lblNotiCount.TabIndex = 13;
+            this.lblNotiCount.Text = "99";
+            this.lblNotiCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNotiCount.TextChanged += new System.EventHandler(this.lblNotiCount_TextChanged);
             // 
             // btnPendingAtDP
             // 
@@ -444,6 +565,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnReturn);
+            this.panel2.Controls.Add(this.btnReassignDP);
+            this.panel2.Controls.Add(this.btnChangeStatus);
+            this.panel2.Controls.Add(this.btnCloseReopen);
+            this.panel2.Controls.Add(this.btnAddDoc);
             this.panel2.Controls.Add(this.btnPrint);
             this.panel2.Controls.Add(this.btnReport);
             this.panel2.Controls.Add(this.lblTot);
@@ -454,11 +580,6 @@
             this.panel2.Controls.Add(this.btnDPPendingRemark);
             this.panel2.Controls.Add(this.btnManageCrono);
             this.panel2.Controls.Add(this.btnReverse);
-            this.panel2.Controls.Add(this.btnCloseReopen);
-            this.panel2.Controls.Add(this.btnReturn);
-            this.panel2.Controls.Add(this.btnReassignDP);
-            this.panel2.Controls.Add(this.btnChangeStatus);
-            this.panel2.Controls.Add(this.btnAddDoc);
             this.panel2.Controls.Add(this.btnRefreshdgv);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -580,76 +701,6 @@
             this.btnReverse.UseVisualStyleBackColor = true;
             this.btnReverse.Click += new System.EventHandler(this.btnReverse_Click);
             // 
-            // btnCloseReopen
-            // 
-            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
-            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
-            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
-            this.btnCloseReopen.Name = "btnCloseReopen";
-            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
-            this.btnCloseReopen.TabIndex = 3;
-            this.btnCloseReopen.Text = "Cancel/Re-open";
-            this.btnCloseReopen.UseVisualStyleBackColor = false;
-            this.btnCloseReopen.Click += new System.EventHandler(this.btnCloseReopen_Click);
-            // 
-            // btnReturn
-            // 
-            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReturn.FlatAppearance.BorderSize = 2;
-            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReturn.ForeColor = System.Drawing.Color.White;
-            this.btnReturn.Location = new System.Drawing.Point(344, 6);
-            this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(100, 27);
-            this.btnReturn.TabIndex = 5;
-            this.btnReturn.Text = "Return";
-            this.btnReturn.UseVisualStyleBackColor = false;
-            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // btnReassignDP
-            // 
-            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReassignDP.FlatAppearance.BorderSize = 2;
-            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
-            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
-            this.btnReassignDP.Name = "btnReassignDP";
-            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
-            this.btnReassignDP.TabIndex = 4;
-            this.btnReassignDP.Text = "Re-assign DP";
-            this.btnReassignDP.UseVisualStyleBackColor = false;
-            this.btnReassignDP.Click += new System.EventHandler(this.btnReassignDP_Click);
-            // 
-            // btnChangeStatus
-            // 
-            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
-            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
-            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
-            this.btnChangeStatus.Name = "btnChangeStatus";
-            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
-            this.btnChangeStatus.TabIndex = 6;
-            this.btnChangeStatus.Text = "Change Status";
-            this.btnChangeStatus.UseVisualStyleBackColor = false;
-            this.btnChangeStatus.Click += new System.EventHandler(this.btnChangeStatus_Click);
-            // 
-            // btnAddDoc
-            // 
-            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnAddDoc.FlatAppearance.BorderSize = 2;
-            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
-            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
-            this.btnAddDoc.Name = "btnAddDoc";
-            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
-            this.btnAddDoc.TabIndex = 2;
-            this.btnAddDoc.Text = "Add Document";
-            this.btnAddDoc.UseVisualStyleBackColor = false;
-            this.btnAddDoc.Click += new System.EventHandler(this.btnAddDoc_Click);
-            // 
             // btnRefreshdgv
             // 
             this.btnRefreshdgv.BackgroundImage = global::Testing.Properties.Resources.refresh;
@@ -677,28 +728,75 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // dgvDoc
+            // timerNoti
             // 
-            this.dgvDoc.AllowUserToAddRows = false;
-            this.dgvDoc.AllowUserToDeleteRows = false;
-            this.dgvDoc.AllowUserToResizeRows = false;
-            this.dgvDoc.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dgvDoc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDoc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDoc.Location = new System.Drawing.Point(0, 0);
-            this.dgvDoc.Name = "dgvDoc";
-            this.dgvDoc.RowHeadersVisible = false;
-            this.dgvDoc.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvDoc.RowTemplate.Height = 30;
-            this.dgvDoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDoc.Size = new System.Drawing.Size(1087, 506);
-            this.dgvDoc.TabIndex = 8;
-            this.dgvDoc.DataSourceChanged += new System.EventHandler(this.dgvDoc_DataSourceChanged);
-            this.dgvDoc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellContentClick);
-            this.dgvDoc.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellDoubleClick);
-            this.dgvDoc.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDoc_CellFormatting);
-            this.dgvDoc.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvOpen_Paint);
+            this.timerNoti.Interval = 20000;
+            this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
+            // 
+            // btnReturn
+            // 
+            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReturn.FlatAppearance.BorderSize = 2;
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturn.ForeColor = System.Drawing.Color.White;
+            this.btnReturn.Location = new System.Drawing.Point(344, 6);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(100, 27);
+            this.btnReturn.TabIndex = 17;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = false;
+            // 
+            // btnReassignDP
+            // 
+            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReassignDP.FlatAppearance.BorderSize = 2;
+            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
+            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
+            this.btnReassignDP.Name = "btnReassignDP";
+            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
+            this.btnReassignDP.TabIndex = 16;
+            this.btnReassignDP.Text = "Re-assign DP";
+            this.btnReassignDP.UseVisualStyleBackColor = false;
+            // 
+            // btnChangeStatus
+            // 
+            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
+            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
+            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
+            this.btnChangeStatus.TabIndex = 18;
+            this.btnChangeStatus.Text = "Change Status";
+            this.btnChangeStatus.UseVisualStyleBackColor = false;
+            // 
+            // btnCloseReopen
+            // 
+            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
+            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
+            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
+            this.btnCloseReopen.Name = "btnCloseReopen";
+            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
+            this.btnCloseReopen.TabIndex = 15;
+            this.btnCloseReopen.Text = "Cancel/Re-open";
+            this.btnCloseReopen.UseVisualStyleBackColor = false;
+            // 
+            // btnAddDoc
+            // 
+            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAddDoc.FlatAppearance.BorderSize = 2;
+            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
+            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
+            this.btnAddDoc.Name = "btnAddDoc";
+            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
+            this.btnAddDoc.TabIndex = 14;
+            this.btnAddDoc.Text = "Add Document";
+            this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
             // frmDocumentControl
             // 
@@ -716,14 +814,19 @@
             this.Load += new System.EventHandler(this.frmDocumentControl_Load);
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.pDoc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).EndInit();
+            this.pNotification.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).EndInit();
             this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.gbAllRecordOption.ResumeLayout(false);
             this.gbAllRecordOption.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -732,15 +835,10 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private cus_button btnAddDoc;
         private System.Windows.Forms.Button btnRefreshdgv;
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel4;
-        private cus_button btnChangeStatus;
-        private cus_button btnCloseReopen;
-        private cus_button btnReassignDP;
-        private cus_button btnReturn;
         private System.Windows.Forms.Button btnReverse;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button btnAll;
@@ -780,6 +878,17 @@
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.DataGridView dgvDoc;
+        private System.Windows.Forms.Panel pDoc;
+        private System.Windows.Forms.Panel pNotification;
+        private System.Windows.Forms.PictureBox btnNotification;
+        private System.Windows.Forms.Label lblNotiCount;
+        private System.Windows.Forms.DataGridView dgvNoti;
+        private System.Windows.Forms.Timer timerNoti;
+        private cus_button btnAddDoc;
+        private cus_button btnCloseReopen;
+        private cus_button btnReturn;
+        private cus_button btnReassignDP;
+        private cus_button btnChangeStatus;
 
     }
 }
