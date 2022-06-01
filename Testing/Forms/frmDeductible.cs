@@ -693,11 +693,13 @@ namespace Testing.Forms
                     "select PHS_SEQ_NO,PHS_EXCESS_TXT from UW_H_POLICY_HISTORY where PHS_CLA_CODE = 'AUTO' and PHS_SEQ_NO = (select INT_POLICY_SEQ from CL_T_INTIMATION where INT_CLAIM_NO = '" + clno + "') " +
                     "union " +
                     "select NDS_SEQ_NO,NDS_EXCESS_TXT from UW_H_ENDORSEMENT_HISTORY where NDS_CLA_CODE = 'AUTO' and NDS_SEQ_NO = (select INT_POLICY_SEQ from CL_T_INTIMATION where INT_CLAIM_NO = '" + clno + "')) T1");
-                    string DedutibleText = dtTemp.Rows[0]["POL_EXCESS_TXT"].ToString(),
+                    if (dtTemp.Rows.Count > 0)
+                    {
+                        string DedutibleText = dtTemp.Rows[0]["POL_EXCESS_TXT"].ToString(),
                         CoInsurance = dtTemp.Rows[0]["CO_INSURANCE"].ToString();
-                    tbDeductible.Text = (DedutibleText == "") ? "N/A" : DedutibleText;
-                    tbCoIn.Text = (CoInsurance == "") ? "N/A" : CoInsurance;
-                    //
+                        tbDeductible.Text = (DedutibleText == "") ? "N/A" : DedutibleText;
+                        tbCoIn.Text = (CoInsurance == "") ? "N/A" : CoInsurance;
+                    }
 
                     //Risk Info
                     dtTemp = crud.ExecSP_OutPara("SP_MOTOR_CL_INFO", new string[] { "WKCLAIMNO" }, new string[] { clno });
