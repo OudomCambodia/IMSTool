@@ -728,17 +728,31 @@ namespace Testing.Forms
       //"from CL_T_INTIMATION  " +
       //"where INT_CLAIM_NO = '" + clno + "')";
 
+        //        string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
+        //"(case when PAYABLE = 0 then PAID else PAYABLE end) as PAYABLE,CC from " +
+        //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+        //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
+        //"nvl((select sum(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 ),0) " +
+        //"- nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAYABLE, " +
+        //"nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAID, INT_BPARTY_CODE CC, " +
+        //"(select ADR_LOC_DESCRIPTION || ', ' || " +
+        //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+        //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+        //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " + 
+        //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+        //"from CL_T_INTIMATION  " +
+        //"where INT_CLAIM_NO = '" + clno + "')";
+
                 string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
-        "(case when PAYABLE = 0 then PAID else PAYABLE end) as PAYABLE,CC from " +
+        "PAYABLE,CC from " +
         "(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
         "nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
-        "nvl((select sum(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 ),0) " +
-        "- nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAYABLE, " +
-        "nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAID, INT_BPARTY_CODE CC, " +
+        "nvl((select * from(select MRD_VALUE from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 and rownum = 1 order by CREATED_DATE desc)), 0) PAYABLE, " +
+        "INT_BPARTY_CODE CC, " +
         "(select ADR_LOC_DESCRIPTION || ', ' || " +
         "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
         "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
-        "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " + 
+        "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " +
         "from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
         "from CL_T_INTIMATION  " +
         "where INT_CLAIM_NO = '" + clno + "')";
@@ -797,10 +811,10 @@ namespace Testing.Forms
                     }
 
                     NonPay = NonPayItemList.Sum(x => Convert.ToDouble(x.Value));
+
+                    HtmlPara += NonPayItemList.Count >= 2 ? "are" : "is";
+                    HtmlPara += " not covered under the Group Personal Accident insurance policy.";
                 }
-
-                HtmlPara += "was not covered under The Group Personal Accident insurance policy.";
-
 
                 //result.Columns.Add("PAYABLE", typeof(System.String));
                 result.Columns.Add("TOTAL_COST", typeof(System.String));

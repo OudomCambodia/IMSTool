@@ -1812,7 +1812,7 @@ namespace Testing.Forms
                 var dateNow = DateTime.Now;
                 var dateSent = (dateNow - notiDate).TotalDays;
 
-                if (Math.Floor(dateSent) > 1)
+                if (dateSent > 1)
                 {
                     var tempTimeString = string.Empty;
                     if (Math.Floor(dateSent) <= 29)
@@ -1848,7 +1848,7 @@ namespace Testing.Forms
                     }
                 }
 
-                if (Math.Floor(dateSent) < 1)
+                if (dateSent < 1)
                 {
                     dateSent = Math.Floor((dateNow - notiDate).TotalMinutes) == 0 ? 1 : Math.Floor((dateNow - notiDate).TotalMinutes);
                     dr["NOTI_DETAIL"] = string.Concat(dr["NOTI_DETAIL"], Environment.NewLine, "------ ", dateSent.ToString(), dateSent >= 2 ? " minutes ago" : " minute ago");
