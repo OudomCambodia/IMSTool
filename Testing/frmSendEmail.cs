@@ -87,8 +87,10 @@ namespace Testing
                 client.UseDefaultCredentials = true;
                 client.Credentials = new System.Net.NetworkCredential
                 {
-                    UserName = "no-reply@forteinsurance.com",
-                    Password = "Forte@12345"
+                    //UserName = "no-reply@forteinsurance.com",
+                    //Password = "Forte@12345"
+                    UserName = "support.infoins@forteinsurance.com",
+                    Password = "IBU@0522"
                 };
 
                 ///////

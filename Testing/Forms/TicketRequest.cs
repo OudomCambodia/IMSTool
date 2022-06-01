@@ -294,7 +294,7 @@ namespace Testing.Forms
                                 client.Credentials = new System.Net.NetworkCredential
                                 {
                                     UserName = "no-reply@forteinsurance.com",
-                                    Password = "Forte@12345"
+                                    Password = "F4#2003!y"
                                 };
                                 client.EnableSsl = true;
 

@@ -59,7 +59,11 @@ namespace Testing.Forms
             rdIncurred.Checked = true;
             dataGridView.RowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.Gainsboro;
-
+            if (Username == "C-HRM")
+            {
+                label1.Visible = false;
+                cbMainClass.Visible = false;
+            }
         }
 
         private void bnSearch_Click(object sender, EventArgs e)
