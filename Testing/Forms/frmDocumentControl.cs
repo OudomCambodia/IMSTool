@@ -1815,7 +1815,7 @@ namespace Testing.Forms
                 if (dateSent > 1)
                 {
                     var tempTimeString = string.Empty;
-                    if (Math.Floor(dateSent) <= 29)
+                    if (dateSent <= 29)
                     {
                         dateSent = Math.Floor(dateSent);
                         tempTimeString = string.Concat(dateSent.ToString(), dateSent >= 2 ? " days ago" : " day ago");
