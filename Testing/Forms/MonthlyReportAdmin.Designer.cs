@@ -294,7 +294,7 @@
             this.bnSend.TabIndex = 11;
             this.bnSend.Text = "Send";
             this.bnSend.UseVisualStyleBackColor = true;
-            
+            this.bnSend.Click += new System.EventHandler(this.bnSend_Click);
             // 
             // label10
             // 

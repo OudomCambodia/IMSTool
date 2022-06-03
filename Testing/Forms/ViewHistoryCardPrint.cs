@@ -23,13 +23,24 @@ namespace Testing.Forms
 
         private void ViewHistoryCardPrint_Load(object sender, EventArgs e)
         {
-          
+
         }
 
         private void rdCYC_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
+                dtMain.DataSource = null;
+                dtMain.Columns.Clear();
+
+                DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
+                dtMain.Columns.Add(CheckboxColumn);
+
+                DataGridViewColumn column = dtMain.Columns[0];
+                column.Width = 35;
+                dtMain.Columns[0].Resizable = DataGridViewTriState.False;
+                dtMain.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
                 if (rdCYC.Checked)
                 {
                     dtMain.DataSource = Mydb.getDataTable("sp_auto_list_user", "@auto_type", "MC", "@user", username);
@@ -50,6 +61,11 @@ namespace Testing.Forms
                     dtMain.DataSource = Mydb.getDataTable("sp_hns_list_user", "@user", username);
                     Index = 2;
                 }
+                else if (rdPAE.Checked)
+                {
+                    dtMain.DataSource = Mydb.getDataTable("sp_pae_list_user", "@user", username);
+                    Index = 2;
+                }
                 else if (rdBHP.Checked)
                 {
                     dtMain.DataSource = Mydb.getDataTable("sp_figtree_blue_list_user", "@user", username);
@@ -62,6 +78,13 @@ namespace Testing.Forms
                 }
                 dtMain.Columns[0].Width = 50;
                 dtMain.Columns[1].Width = 150;
+
+
+                for (int i = 1; i < dtMain.Columns.Count; i++)
+                {
+                    dtMain.Columns[i].ReadOnly = true;
+                }
+
                 //dtMain.Refresh();
                 Mydb.Dispose();
             }
@@ -78,8 +101,8 @@ namespace Testing.Forms
 
             foreach (DataGridViewRow row in dtMain.SelectedRows)
             {
-                string value1 = row.Cells[0].Value.ToString();
-           
+                string value1 = row.Cells[1].Value.ToString();
+
                 if (rdCYC.Checked)
                 {
                     dtCardHistory.DataSource=Mydb.getDataTable("sp_auto_list_detail_admin", "@print_number", value1, "@auto_type", "MC", "@user", username);
@@ -96,6 +119,10 @@ namespace Testing.Forms
                 {
                     dtCardHistory.DataSource = Mydb.getDataTable("sp_hns_list_detail_admin", "@print_number", value1, "@user", username);
                 }
+                else if (rdPAE.Checked)
+                {
+                    dtCardHistory.DataSource = Mydb.getDataTable("sp_pae_list_detail_admin", "@print_number", value1, "@user", username);
+                }
                 else if (rdBHP.Checked)
                 {
                     dtCardHistory.DataSource = Mydb.getDataTable("sp_figtree_blue_list_detail_admin", "@print_number", value1, "@user", username);
@@ -105,7 +132,7 @@ namespace Testing.Forms
                     dtCardHistory.DataSource = Mydb.getDataTable("sp_gpa_list_detail_admin", "@print_number", value1, "@user", username);
                 }
             }
-            
+
             //dtMain.Refresh();
             Mydb.Dispose();
         }
@@ -173,116 +200,289 @@ namespace Testing.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (dtMain.CurrentRow == null)
+            DataTable dtGetCheckedRows = GetCheckedRowsFromDFV(dtMain);
+
+            if (dtGetCheckedRows.Rows.Count <= 0 || dtGetCheckedRows == null)
             {
-                Msgbox.Show("Please select a record to cancel pending!");
+                Msgbox.Show("Please check record to cancel!");
                 return;
             }
 
-            if (dtMain.SelectedRows[0].Cells[4].Value.ToString().Trim() != "A")
+            List<string> printNumbers = new List<string>();
+            int selectedRow = dtMain.SelectedCells[0].RowIndex;
+
+            for (int i = 0; i < dtGetCheckedRows.Rows.Count; i++)
             {
-                Msgbox.Show("You can only cancel the PENDING CARDS! if the cards are printed ALREADY, you can no longer cancel the process.");
-                return;
+                bool isPrinted = dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("P") || dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("D");
+                var printNumber = dtGetCheckedRows.Rows[i]["print_number"].ToString().Trim();
+
+                if (isPrinted)
+                    printNumbers.Add(printNumber);
             }
 
-            DialogResult dr = Msgbox.Show("Do you want to cancel this pending process?","Confirmation");
+            if (printNumbers.Count == dtGetCheckedRows.Rows.Count)
+            {
+                if (printNumbers.Count > 0)
+                {
+                    string printedPrintNumber = string.Empty;
+                    for (int i = 0; i < printNumbers.Count; i++)
+                    {
+                        printedPrintNumber += string.Concat(printNumbers[i], ", ");
+                    }
+                    var printedCardNumbers = printedPrintNumber.Remove(printedPrintNumber.Length - 2);
+                    Msgbox.Show(string.Format("You cannot cancel print number \"{0}\" because it is already printed or already canceled.", printedCardNumbers));
+                    return;
+                }
+            }
+
+            DialogResult dr = Msgbox.Show("Do you want to cancel all the checked record(s)?", "Confirmation");
             if (dr == System.Windows.Forms.DialogResult.Yes)
             {
+                printNumbers.Clear();
 
-                if (rdCYC.Checked)
+                for (int i = 0; i < dtGetCheckedRows.Rows.Count; i++)
                 {
-                    Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "D", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@auto_type", "MC", "@user", username);
-                    rdCYC.Checked = false;
-                    rdCYC.Checked = true;
+                    bool isPrinted = dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("P") || dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("D");
+                    var printNumber = dtGetCheckedRows.Rows[i]["print_number"].ToString().Trim();
+
+                    if (isPrinted)
+                    {
+                        printNumbers.Add(printNumber);
+                        continue;
+                    }
+
+                    if (rdCYC.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "D", "@print_number", printNumber, "@auto_type", "MC", "@user", username);
+                        //rdCYC.Checked = false;
+                        //rdCYC.Checked = true;
+                    }
+                    else if (rdVCM.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "D", "@print_number", printNumber, "@auto_type", "CV", "@user", username);
+                        //rdVCM.Checked = false;
+                        //rdVCM.Checked = true;
+                    }
+                    else if (rdVPC.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "D", "@print_number", printNumber, "@auto_type", "PV", "@user", username);
+                        //rdVPC.Checked = false;
+                        //rdVPC.Checked = true;
+                    }
+                    else if (rdHNS.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_hns_update_status", "@print_status", "D", "@print_number", printNumber, "@user", username);
+                        //rdHNS.Checked = false;
+                        //rdHNS.Checked = true;
+                    }
+                    else if (rdPAE.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_pae_update_status", "@print_status", "D", "@print_number", printNumber, "@user", username);
+                        //rdPAE.Checked = false;
+                        //rdPAE.Checked = true;
+                    }
+                    else if (rdBHP.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_figtree_blue_update_status", "@print_status", "D", "@print_number", printNumber, "@user", username);
+                        //rdBHP.Checked = false;
+                        //rdBHP.Checked = true;
+                    }
+                    else if (rdGPA.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_gpa_update_status", "@print_status", "D", "@print_number", printNumber, "@user", username);
+                        //rdGPA.Checked = false;
+                        //rdGPA.Checked = true;
+                    }
                 }
-                else if (rdVCM.Checked)
+                if (printNumbers.Count > 0)
                 {
-                    Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "D", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@auto_type", "CV", "@user", username);
-                    rdVCM.Checked = false;
-                    rdVCM.Checked = true;
+                    string printedPrintNumber = string.Empty;
+                    for (int i = 0; i < printNumbers.Count; i++)
+                    {
+                        printedPrintNumber += string.Concat(printNumbers[i], ", ");
+                    }
+                    var cancelCardNumbers = printedPrintNumber.Remove(printedPrintNumber.Length - 2);
+                    Msgbox.Show(string.Format("You cannot cancel print number \"{0}\" because it is already printed or already canceled.", cancelCardNumbers));
                 }
-                else if (rdVPC.Checked)
+                rdCYC_CheckedChanged(null, null);
+
+                if (selectedRow >= 0)
+                    dtMain.Rows[selectedRow].Selected = true;
+
+                for (int i = 0; i < dtGetCheckedRows.Rows.Count; i++)
                 {
-                    Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "D", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@auto_type", "PV", "@user", username);
-                    rdVPC.Checked = false;
-                    rdVPC.Checked = true;
-                }
-                else if (rdHNS.Checked)
-                {
-                    Mydb.ExecuteMySql("sp_hns_update_status", "@print_status", "D", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@user", username);
-                    rdHNS.Checked = false;
-                    rdHNS.Checked = true;
-                }
-                else if (rdBHP.Checked)
-                {
-                    Mydb.ExecuteMySql("sp_figtree_blue_update_status", "@print_status", "D", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@user", username);
-                    rdBHP.Checked = false;
-                    rdBHP.Checked = true;
-                }
-                else if (rdGPA.Checked)
-                {
-                    Mydb.ExecuteMySql("sp_gpa_update_status", "@print_status", "D", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@user", username);
-                    rdGPA.Checked = false;
-                    rdGPA.Checked = true;
+                    for (int j = 0; j < dtMain.Rows.Count; j++)
+                    {
+                        if (dtGetCheckedRows.Rows[i]["print_number"].ToString().Trim().Equals(dtMain.Rows[j].Cells["print_number"].Value.ToString().Trim()))
+                        {
+                            dtMain.Rows[j].Cells[0].Value = true;
+                            break;
+                        }
+                    }
                 }
             }
         }
 
         private void btnAlready_Click(object sender, EventArgs e)
         {
-            if (dtMain.CurrentRow == null)
+            DataTable dtGetCheckedRows = GetCheckedRowsFromDFV(dtMain);
+
+            if (dtGetCheckedRows.Rows.Count <= 0 || dtGetCheckedRows == null)
             {
-                Msgbox.Show("Please select a record!");
+                Msgbox.Show("Please check record to update!");
                 return;
             }
 
-            if (dtMain.SelectedRows[0].Cells[4].Value.ToString().Trim() != "A")
+            List<string> printNumbers = new List<string>();
+            int selectedRow = dtMain.SelectedCells[0].RowIndex;
+
+            for (int i = 0; i < dtGetCheckedRows.Rows.Count; i++)
             {
-                Msgbox.Show("You can only cancel the PENDING CARDS! if the cards are printed ALREADY, you can no longer cancel the process.");
-                return;
+                bool isCancel = dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("D");
+                var printNumber = dtGetCheckedRows.Rows[i]["print_number"].ToString().Trim();
+
+                if (isCancel)
+                    printNumbers.Add(printNumber);
             }
 
-            DialogResult dr = Msgbox.Show("Are you sure all the submitted card(s) are printed?", "Confirmation");
+            if (printNumbers.Count == dtGetCheckedRows.Rows.Count)
+            {
+                if (printNumbers.Count > 0)
+                {
+                    string cancelPrintNumber = string.Empty;
+                    for (int i = 0; i < printNumbers.Count; i++)
+                    {
+                        cancelPrintNumber += string.Concat(printNumbers[i], ", ");
+                    }
+                    var cancelCardNumbers = cancelPrintNumber.Remove(cancelPrintNumber.Length - 2);
+                    Msgbox.Show(string.Format("You cannot update print number \"{0}\" because it is already canceled.", cancelCardNumbers));
+                    return;
+                }
+            }
+
+            DialogResult dr = Msgbox.Show("Do you want to update all the checked record(s)?", "Confirmation");
             if (dr == System.Windows.Forms.DialogResult.Yes)
             {
+                printNumbers.Clear();
 
-                if (rdCYC.Checked)
+                for (int i = 0; i < dtGetCheckedRows.Rows.Count; i++)
                 {
-                    Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "P", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@auto_type", "MC", "@user", username);
-                    rdCYC.Checked = false;
-                    rdCYC.Checked = true;
+                    bool isActive = dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("A");
+                    bool isCancel = dtGetCheckedRows.Rows[i]["print_status"].ToString().Trim().Equals("D");
+                    var printNumber = dtGetCheckedRows.Rows[i]["print_number"].ToString().Trim();
+
+                    if (isCancel)
+                    {
+                        printNumbers.Add(printNumber);
+                        continue;
+                    }
+
+                    if (rdCYC.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@auto_type", "MC", "@user", username);
+                        //rdCYC.Checked = false;
+                        //rdCYC.Checked = true;
+                    }
+                    else if (rdVCM.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@auto_type", "CV", "@user", username);
+                        //rdVCM.Checked = false;
+                        //rdVCM.Checked = true;
+                    }
+                    else if (rdVPC.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@auto_type", "PV", "@user", username);
+                        //rdVPC.Checked = false;
+                        //rdVPC.Checked = true;
+                    }
+                    else if (rdHNS.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_hns_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@user", username);
+                        //rdHNS.Checked = false;
+                        //rdHNS.Checked = true;
+                    }
+                    else if (rdPAE.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_pae_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@user", username);
+                        //rdPAE.Checked = false;
+                        //rdPAE.Checked = true;
+                    }
+                    else if (rdBHP.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_figtree_blue_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@user", username);
+                        //rdBHP.Checked = false;
+                        //rdBHP.Checked = true;
+                    }
+                    else if (rdGPA.Checked)
+                    {
+                        Mydb.ExecuteMySql("sp_gpa_update_status", "@print_status", isActive ? "P" : "A", "@print_number", printNumber, "@user", username);
+                        //rdGPA.Checked = false;
+                        //rdGPA.Checked = true;
+                    }
                 }
-                else if (rdVCM.Checked)
+                if (printNumbers.Count > 0)
                 {
-                    Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "P", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@auto_type", "CV", "@user", username);
-                    rdVCM.Checked = false;
-                    rdVCM.Checked = true;
+                    string cancelPrintNumber = string.Empty;
+                    for (int i = 0; i < printNumbers.Count; i++)
+                    {
+                        cancelPrintNumber += string.Concat(printNumbers[i], ", ");
+                    }
+                    var cancelCardNumbers = cancelPrintNumber.Remove(cancelPrintNumber.Length - 2);
+                    Msgbox.Show(string.Format("You cannot update print number \"{0}\" because it is already canceled.", cancelCardNumbers));
                 }
-                else if (rdVPC.Checked)
+                rdCYC_CheckedChanged(null, null);
+
+                if (selectedRow >= 0)
+                    dtMain.Rows[selectedRow].Selected = true;
+
+                for (int i = 0; i < dtGetCheckedRows.Rows.Count; i++)
                 {
-                    Mydb.ExecuteMySql("sp_auto_update_status", "@print_status", "P", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@auto_type", "PV", "@user", username);
-                    rdVPC.Checked = false;
-                    rdVPC.Checked = true;
-                }
-                else if (rdHNS.Checked)
-                {
-                    Mydb.ExecuteMySql("sp_hns_update_status", "@print_status", "P", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@user", username);
-                    rdHNS.Checked = false;
-                    rdHNS.Checked = true;
-                }
-                else if (rdBHP.Checked)
-                {
-                    Mydb.ExecuteMySql("sp_figtree_blue_update_status", "@print_status", "P", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@user", username);
-                    rdBHP.Checked = false;
-                    rdBHP.Checked = true;
-                }
-                else if (rdGPA.Checked)
-                {
-                    Mydb.ExecuteMySql("sp_gpa_update_status", "@print_status", "P", "@print_number", dtMain.SelectedRows[0].Cells[0].Value.ToString().Trim(), "@user", username);
-                    rdGPA.Checked = false;
-                    rdGPA.Checked = true;
+                    for (int j = 0; j < dtMain.Rows.Count; j++)
+                    {
+                        if (dtGetCheckedRows.Rows[i]["print_number"].ToString().Trim().Equals(dtMain.Rows[j].Cells["print_number"].Value.ToString().Trim()))
+                        {
+                            dtMain.Rows[j].Cells[0].Value = true;
+                            break;
+                        }
+                    }
                 }
             }
-        }       
+        }
+
+        private void dtMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                e.SuppressKeyPress = true;
+                if (dtMain.Rows.Count <= 0) return;
+                int selectedrowindex = dtMain.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dtMain.Rows[selectedrowindex];
+                string ptintNumber = selectedRow.Cells["print_number"].Value.ToString();
+                Clipboard.SetText(ptintNumber);
+            }
+        }
+
+        private DataTable GetCheckedRowsFromDFV(DataGridView dgv)
+        {
+            var dt = new DataTable();
+
+            dt.Columns.Add("print_number");
+            dt.Columns.Add("print_status");
+
+            string status = "";
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (row.Cells[0].Value != null)
+                {
+                    status = row.Cells[0].Value.ToString();
+                    if (status == "True")
+                    {
+                        dt.Rows.Add(row.Cells["print_number"].Value.ToString(), row.Cells["print_status"].Value.ToString());
+                    }
+                }
+            }
+
+            return dt;
+        }
     }
 }
