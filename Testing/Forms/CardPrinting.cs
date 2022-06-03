@@ -1270,10 +1270,8 @@ namespace Testing.Forms
                     #region BHP Option 4
                     if (option == 4)
                     {
-                        if (row["DEPENDENT"].ToString() == "")
+                       
                             filep += "HBHP-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
-                        else
-                            filep += "HBHP-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length).ToUpper() + ".pdf";
 
                         Reports.ECardBHP rpt1 = new Reports.ECardBHP();
                         rpt1.SetDataSource(dt1);
