@@ -664,6 +664,7 @@ namespace Testing.Forms
         {
             ViewHistoryCardPrint vhcp = new ViewHistoryCardPrint();
             vhcp.username = username;
+            vhcp.WindowState = FormWindowState.Maximized;
             vhcp.ShowDialog();
         }
 

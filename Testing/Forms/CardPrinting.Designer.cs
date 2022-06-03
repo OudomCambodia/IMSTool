@@ -103,9 +103,10 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label2.Location = new System.Drawing.Point(292, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(547, 15);
+            this.label2.Size = new System.Drawing.Size(581, 15);
             this.label2.TabIndex = 52;
-            this.label2.Text = "Products available for card printing: CYC, VCM, VPC, HNS, GPA, PAC, BHP and MCW.";
+            this.label2.Text = "Products available for card printing: CYC, VCM, VPC, HNS, GPA, PAC, BHP, MCW and " +
+    "PAE.";
             // 
             // label3
             // 
