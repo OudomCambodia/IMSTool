@@ -98,6 +98,7 @@
             this.btnRemindLetter = new System.Windows.Forms.Button();
             this.btnCertificateInsurance = new System.Windows.Forms.Button();
             this.btnCustomizeSchedule = new System.Windows.Forms.Button();
+            this.userManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -499,7 +500,8 @@
             this.pendingRIToolStripMenuItem,
             this.premiumRegisterToolStripMenuItem,
             this.userLoginCountToolStripMenuItem,
-            this.addCharactersToolStripMenuItem});
+            this.addCharactersToolStripMenuItem,
+            this.userManagementToolStripMenuItem});
             this.adminToolStripMenuItem.Enabled = false;
             this.adminToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
@@ -511,7 +513,7 @@
             this.pendingRIToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.pendingRIToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.pendingRIToolStripMenuItem.Name = "pendingRIToolStripMenuItem";
-            this.pendingRIToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.pendingRIToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.pendingRIToolStripMenuItem.Text = "Pending RI";
             this.pendingRIToolStripMenuItem.Click += new System.EventHandler(this.pendingRIToolStripMenuItem_Click);
             // 
@@ -520,7 +522,7 @@
             this.premiumRegisterToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.premiumRegisterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.premiumRegisterToolStripMenuItem.Name = "premiumRegisterToolStripMenuItem";
-            this.premiumRegisterToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.premiumRegisterToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.premiumRegisterToolStripMenuItem.Text = "Premium Register";
             this.premiumRegisterToolStripMenuItem.Click += new System.EventHandler(this.premiumRegisterToolStripMenuItem_Click);
             // 
@@ -529,7 +531,7 @@
             this.userLoginCountToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.userLoginCountToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.userLoginCountToolStripMenuItem.Name = "userLoginCountToolStripMenuItem";
-            this.userLoginCountToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.userLoginCountToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.userLoginCountToolStripMenuItem.Text = "User Login Count";
             this.userLoginCountToolStripMenuItem.Click += new System.EventHandler(this.userLoginCountToolStripMenuItem_Click);
             // 
@@ -538,7 +540,7 @@
             this.addCharactersToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.addCharactersToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.addCharactersToolStripMenuItem.Name = "addCharactersToolStripMenuItem";
-            this.addCharactersToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.addCharactersToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.addCharactersToolStripMenuItem.Text = "Add Characters";
             this.addCharactersToolStripMenuItem.Click += new System.EventHandler(this.addCharactersToolStripMenuItem_Click);
             // 
@@ -1033,6 +1035,15 @@
             this.btnCustomizeSchedule.Text = "3. Customized Policy Schedule";
             this.btnCustomizeSchedule.UseVisualStyleBackColor = false;
             // 
+            // userManagementToolStripMenuItem
+            // 
+            this.userManagementToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.userManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.userManagementToolStripMenuItem.Name = "userManagementToolStripMenuItem";
+            this.userManagementToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.userManagementToolStripMenuItem.Text = "User Management";
+            this.userManagementToolStripMenuItem.Click += new System.EventHandler(this.userManagementToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1142,5 +1153,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsPremiumRegister;
         private System.Windows.Forms.ToolStripMenuItem tsPMAllDept;
         private System.Windows.Forms.ToolStripMenuItem tsPMAdmin;
+        private System.Windows.Forms.ToolStripMenuItem userManagementToolStripMenuItem;
     }
 }

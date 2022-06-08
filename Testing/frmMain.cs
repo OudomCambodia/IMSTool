@@ -695,11 +695,11 @@ namespace Testing
             frm.Show();
         }
 
-       
-
-       
-
-
+        private void userManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmUserManagement userManagement = new Forms.frmUserManagement();
+            userManagement.ShowDialog();
+        }
       
     }
 }

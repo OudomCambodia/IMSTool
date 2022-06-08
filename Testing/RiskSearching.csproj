@@ -674,6 +674,12 @@
     <Compile Include="Forms\frmUploadInformation.Designer.cs">
       <DependentUpon>frmUploadInformation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmUserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUserManagement.Designer.cs">
+      <DependentUpon>frmUserManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmViewAttachments.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1461,6 +1467,9 @@
       <DependentUpon>frmUploadInformation.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmViewAttachments.resx">
       <DependentUpon>frmViewAttachments.cs</DependentUpon>
     </EmbeddedResource>
@@ -1895,6 +1904,8 @@
     <None Include="Resources\CCHMAS.jpg" />
     <None Include="Resources\ChyMas.jpg" />
     <None Include="Resources\khmerNN.jpg" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\eye1.png" />
     <Content Include="Resources\loader.gif" />
     <Content Include="Resources\Logo_white_no_background.png" />
     <None Include="Resources\NY2022.jpg" />
