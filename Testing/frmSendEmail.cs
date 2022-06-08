@@ -21,6 +21,7 @@ namespace Testing
         private bool Loaded = false;
         private string Content = "";
         int port;
+        string HashPass = "Forte@2017";
         public frmSendEmail()
         {
             InitializeComponent();
@@ -85,12 +86,16 @@ namespace Testing
                 client.Host = tmptb.Rows[0][0].ToString();
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = true;
+                DataTable dtUserEmail = crud.ExecQuery("select MAIL_ADDRESS,MAIL_PASSWORD from user_claim_email_info where SMTP_CLIENT = 'smtp.office365.com'");
+               
                 client.Credentials = new System.Net.NetworkCredential
                 {
                     //UserName = "no-reply@forteinsurance.com",
                     //Password = "Forte@12345"
-                    UserName = "support.infoins@forteinsurance.com",
-                    Password = "IBU@0522"
+                    //UserName = "support.infoins@forteinsurance.com",
+                    //Password = "pw-IBU@321"
+                    UserName = dtUserEmail.Rows[0][0].ToString(),
+                    Password = Cipher.Decrypt(dtUserEmail.Rows[0][1].ToString(), HashPass).ToString()
                 };
 
                 ///////
