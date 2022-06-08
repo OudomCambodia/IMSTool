@@ -312,7 +312,7 @@ namespace Testing.Forms
             txtRemark.Clear();
             txtEmail.Clear();
             txtEmailPassword.Clear();
-            ActiveControl = txtUserCode;
+            ActiveControl = txtUserCode; 
         }
     }
 }
