@@ -971,8 +971,8 @@ namespace Testing.Forms
 
                     string content = "", note = tbClReNote.Text.Trim();
 
-                    if (note != "")
-                        note = "<strong>Notes: </strong>" + note;
+                    //if (note != "")
+                    //    note = "<strong>Notes: </strong>" + note;
 
                     if (type == 1)
                         content = crud.ExecFunc_String("USER_GET_EMAIL_CONTENT_AUTO",

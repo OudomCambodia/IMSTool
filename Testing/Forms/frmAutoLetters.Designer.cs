@@ -1198,6 +1198,7 @@
             // 
             // tbClReNote
             // 
+            this.tbClReNote.Font = new System.Drawing.Font("Cambria", 9F);
             this.tbClReNote.Location = new System.Drawing.Point(49, 272);
             this.tbClReNote.Multiline = true;
             this.tbClReNote.Name = "tbClReNote";
