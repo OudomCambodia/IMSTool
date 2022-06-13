@@ -169,7 +169,8 @@ namespace Testing.Forms
 
                 if (dtUserPrintSystemUserCode.Rows.Count > 0 && dtDocUser.Rows.Count <= 0)
                 {
-                    DialogResult confirmCreate = Msgbox.Show("You have already created this user in USER_PRINT_SYSTEM. Do you want to create this user in tbDOC_USER?", "Confirmation");
+                    DialogResult confirmCreate = Msgbox.Show(chkCreateDocUser.Checked ? "You have already created this user in USER_PRINT_SYSTEM. Do you want to create this user in tbDOC_USER?" :
+                        "Do you want to create this user?", "Confirmation");
                     if (confirmCreate == DialogResult.Yes)
                     {
                         UpdateUser(dtDocUser);

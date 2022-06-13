@@ -65,6 +65,7 @@
             this.premiumRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userLoginCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateTicket = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,7 +99,7 @@
             this.btnRemindLetter = new System.Windows.Forms.Button();
             this.btnCertificateInsurance = new System.Windows.Forms.Button();
             this.btnCustomizeSchedule = new System.Windows.Forms.Button();
-            this.userManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerNoti = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -543,6 +544,15 @@
             this.addCharactersToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.addCharactersToolStripMenuItem.Text = "Add Characters";
             this.addCharactersToolStripMenuItem.Click += new System.EventHandler(this.addCharactersToolStripMenuItem_Click);
+            // 
+            // userManagementToolStripMenuItem
+            // 
+            this.userManagementToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.userManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.userManagementToolStripMenuItem.Name = "userManagementToolStripMenuItem";
+            this.userManagementToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.userManagementToolStripMenuItem.Text = "User Management";
+            this.userManagementToolStripMenuItem.Click += new System.EventHandler(this.userManagementToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem1
             // 
@@ -1035,14 +1045,11 @@
             this.btnCustomizeSchedule.Text = "3. Customized Policy Schedule";
             this.btnCustomizeSchedule.UseVisualStyleBackColor = false;
             // 
-            // userManagementToolStripMenuItem
+            // timerNoti
             // 
-            this.userManagementToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.userManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.userManagementToolStripMenuItem.Name = "userManagementToolStripMenuItem";
-            this.userManagementToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.userManagementToolStripMenuItem.Text = "User Management";
-            this.userManagementToolStripMenuItem.Click += new System.EventHandler(this.userManagementToolStripMenuItem_Click);
+            this.timerNoti.Enabled = true;
+            this.timerNoti.Interval = 5000;
+            this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
             // 
             // frmMain
             // 
@@ -1154,5 +1161,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsPMAllDept;
         private System.Windows.Forms.ToolStripMenuItem tsPMAdmin;
         private System.Windows.Forms.ToolStripMenuItem userManagementToolStripMenuItem;
+        private System.Windows.Forms.Timer timerNoti;
     }
 }

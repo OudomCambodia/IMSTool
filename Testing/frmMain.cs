@@ -39,8 +39,12 @@ namespace Testing
         {
             try
             {
+                e.Cancel = true;
+                WindowState = FormWindowState.Minimized;
+
                 //Application.Exit();
-                Environment.Exit(0);
+                
+                //Environment.Exit(0);
             }
             catch (Exception ex)
             {
@@ -190,7 +194,7 @@ namespace Testing
             //runonce.AutoReset = false;
             //runonce.Start();
 
-
+            timerNoti.Start();
             timer1.Start();
             tmCheckMaint.Start();
             this.Text += " - " + UserName;
@@ -699,6 +703,11 @@ namespace Testing
         {
             Forms.frmUserManagement userManagement = new Forms.frmUserManagement();
             userManagement.ShowDialog();
+        }
+
+        private void timerNoti_Tick(object sender, EventArgs e)
+        {
+
         }
       
     }

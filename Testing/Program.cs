@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Testing
 {
@@ -12,9 +14,13 @@ namespace Testing
     static class Program
     {
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("User32.dll")]
+        static extern int SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        internal static extern bool SendMessage(IntPtr hWnd, Int32 msg, Int32 wParam, Int32 lParam);
+        static Int32 WM_SYSCOMMAND = 0x0112;
+        static Int32 SC_RESTORE = 0xF120;
 
 
         static frmLogIn frmLogInObj;
@@ -34,20 +40,31 @@ namespace Testing
                 }
                 else
                 {
-                    System.Diagnostics.Process current = System.Diagnostics.Process.GetCurrentProcess();
-                    foreach (System.Diagnostics.Process process in System.Diagnostics.Process.GetProcessesByName(current.ProcessName))
+
+                    var proc = Process.GetProcessesByName("Testing").FirstOrDefault();
+
+                    if (proc != null)
                     {
-                        if (process.Id != current.Id)
-                        {
-                            SetForegroundWindow(process.MainWindowHandle);
-                            break;
-                        }
+                        var pointer = proc.MainWindowHandle;
+
+                        SetForegroundWindow(pointer);
+                        SendMessage(pointer, WM_SYSCOMMAND, SC_RESTORE, 0);
                     }
 
-                    if (System.Diagnostics.Process.GetProcessesByName("Testing").Count() == 2)
-                    {
-                        StartApp();
-                    }
+                    //System.Diagnostics.Process current = System.Diagnostics.Process.GetCurrentProcess();
+                    //foreach (System.Diagnostics.Process process in System.Diagnostics.Process.GetProcessesByName(current.ProcessName))
+                    //{
+                    //    if (process.Id != current.Id)
+                    //    {
+                    //        SetForegroundWindow(process.MainWindowHandle);
+                    //        break;
+                    //    }
+                    //}
+
+                    //if (System.Diagnostics.Process.GetProcessesByName("Testing").Count() == 2)
+                    //{
+                    //    StartApp();
+                    //}
                 }
             }
 
