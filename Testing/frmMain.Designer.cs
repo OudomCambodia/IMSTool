@@ -1048,7 +1048,7 @@
             // timerNoti
             // 
             this.timerNoti.Enabled = true;
-            this.timerNoti.Interval = 5000;
+            this.timerNoti.Interval = 600000;
             this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
             // 
             // frmMain

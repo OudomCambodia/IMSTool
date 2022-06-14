@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Testing.Properties;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace Testing
 {
@@ -17,10 +19,12 @@ namespace Testing
     {
         public string UserName = "SICL";
         public string FullName = "SICL";
+        public static List<string> NotiInfo = new List<string>();
         
 
         string title;
         public bool abort = false;
+        private bool isOpenNotification;
         CRUD crud = new CRUD();
         DataTable dt = new DataTable();
         public frmLogIn frmLog;
@@ -31,7 +35,6 @@ namespace Testing
         public frmMain()
         {
             InitializeComponent();
-           
          //   btnClaimPaidPayee.Visible = false;
         }
 
@@ -707,8 +710,55 @@ namespace Testing
 
         private void timerNoti_Tick(object sender, EventArgs e)
         {
+            var docUserSql = sqlcrud.LoadData("SELECT USER_NAME FROM tbDOC_USER WHERE USER_NAME = '" + UserName + "' ").Tables[0];
+            var isDocUser = docUserSql.Rows.Count > 0;
 
+            if (!isDocUser)
+            {
+                timerNoti.Tick -= timerNoti_Tick;
+                return;
+            }
+
+            var notiSql = sqlcrud.LoadData("SELECT TOP 3 NOTI_DETAIL, NOTI_DATE FROM tbNoti WHERE IS_READ = 0 AND NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
+            if (notiSql.Rows.Count <= 0)
+                return;
+
+            NotiInfo.Clear();
+            for (int i = 0; i < notiSql.Rows.Count; i++)
+            {
+                string concat = string.Concat(notiSql.Rows[i]["NOTI_DETAIL"].ToString(), "*", notiSql.Rows[i]["NOTI_DATE"].ToString());
+                NotiInfo.Add(concat);
+            }
+
+            FormCollection fc = Application.OpenForms;
+           
+            foreach (Form frm in fc)
+            {
+                isOpenNotification = frm.Name == "frmNotification";
+            }
+            if (isOpenNotification) return;
+
+            Forms.frmNotification frmNoti = new Forms.frmNotification();
+            frmNoti.Show();
         }
+
+        //private List<string> EverythingBetween(string source, string start, string end)
+        //{
+        //    var results = new List<string>();
+
+        //    string pattern = string.Format(
+        //        "{0}({1}){2}",
+        //        Regex.Escape(start),
+        //        ".+?",
+        //         Regex.Escape(end));
+
+        //    foreach (Match m in Regex.Matches(source, pattern))
+        //    {
+        //        results.Add(m.Groups[1].Value);
+        //    }
+
+        //    return results;
+        //}
       
     }
 }
