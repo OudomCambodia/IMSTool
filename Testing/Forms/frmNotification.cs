@@ -20,7 +20,7 @@ namespace Testing.Forms
 
         public frmNotification()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, TOPMOST_FLAGS);
         }
 
@@ -148,7 +148,6 @@ namespace Testing.Forms
                 flpNoti.Controls.Remove(pnNoti3);
                 Size = new Size(515, 79);
             }
-
             PlaceLowerRight();
         }
     }

@@ -30,20 +30,20 @@
         {
             this.flpNoti = new System.Windows.Forms.FlowLayoutPanel();
             this.pnNoti1 = new System.Windows.Forms.Panel();
+            this.lblNoti1Date = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblNoti1 = new System.Windows.Forms.Label();
             this.btnCloseNoti1 = new System.Windows.Forms.Label();
             this.pnNoti2 = new System.Windows.Forms.Panel();
+            this.lblNoti2Date = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblNoti2 = new System.Windows.Forms.Label();
             this.btnCloseNoti2 = new System.Windows.Forms.Label();
             this.pnNoti3 = new System.Windows.Forms.Panel();
+            this.lblNoti3Date = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblNoti3 = new System.Windows.Forms.Label();
             this.btnCloseNoti3 = new System.Windows.Forms.Label();
-            this.lblNoti3Date = new System.Windows.Forms.Label();
-            this.lblNoti1Date = new System.Windows.Forms.Label();
-            this.lblNoti2Date = new System.Windows.Forms.Label();
             this.flpNoti.SuspendLayout();
             this.pnNoti1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -78,6 +78,17 @@
             this.pnNoti1.Size = new System.Drawing.Size(510, 70);
             this.pnNoti1.TabIndex = 5;
             // 
+            // lblNoti1Date
+            // 
+            this.lblNoti1Date.AutoSize = true;
+            this.lblNoti1Date.Font = new System.Drawing.Font("Hanuman", 7.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblNoti1Date.ForeColor = System.Drawing.Color.SlateGray;
+            this.lblNoti1Date.Location = new System.Drawing.Point(405, 52);
+            this.lblNoti1Date.Name = "lblNoti1Date";
+            this.lblNoti1Date.Size = new System.Drawing.Size(94, 15);
+            this.lblNoti1Date.TabIndex = 5;
+            this.lblNoti1Date.Text = "01-01-2022 9:50 AM";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Testing.Properties.Resources.notification_bell_1;
@@ -92,7 +103,7 @@
             // lblNoti1
             // 
             this.lblNoti1.Font = new System.Drawing.Font("Hanuman", 8F, System.Drawing.FontStyle.Bold);
-            this.lblNoti1.Location = new System.Drawing.Point(66, 7);
+            this.lblNoti1.Location = new System.Drawing.Point(65, 7);
             this.lblNoti1.Name = "lblNoti1";
             this.lblNoti1.Size = new System.Drawing.Size(425, 55);
             this.lblNoti1.TabIndex = 1;
@@ -124,6 +135,17 @@
             this.pnNoti2.Size = new System.Drawing.Size(512, 70);
             this.pnNoti2.TabIndex = 6;
             // 
+            // lblNoti2Date
+            // 
+            this.lblNoti2Date.AutoSize = true;
+            this.lblNoti2Date.Font = new System.Drawing.Font("Hanuman", 7.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblNoti2Date.ForeColor = System.Drawing.Color.SlateGray;
+            this.lblNoti2Date.Location = new System.Drawing.Point(404, 51);
+            this.lblNoti2Date.Name = "lblNoti2Date";
+            this.lblNoti2Date.Size = new System.Drawing.Size(94, 15);
+            this.lblNoti2Date.TabIndex = 6;
+            this.lblNoti2Date.Text = "01-01-2022 9:50 AM";
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Testing.Properties.Resources.notification_bell_1;
@@ -138,7 +160,7 @@
             // lblNoti2
             // 
             this.lblNoti2.Font = new System.Drawing.Font("Hanuman", 8F, System.Drawing.FontStyle.Bold);
-            this.lblNoti2.Location = new System.Drawing.Point(66, 7);
+            this.lblNoti2.Location = new System.Drawing.Point(65, 7);
             this.lblNoti2.Name = "lblNoti2";
             this.lblNoti2.Size = new System.Drawing.Size(425, 55);
             this.lblNoti2.TabIndex = 1;
@@ -171,6 +193,17 @@
             this.pnNoti3.Size = new System.Drawing.Size(510, 70);
             this.pnNoti3.TabIndex = 6;
             // 
+            // lblNoti3Date
+            // 
+            this.lblNoti3Date.AutoSize = true;
+            this.lblNoti3Date.Font = new System.Drawing.Font("Hanuman", 7.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblNoti3Date.ForeColor = System.Drawing.Color.SlateGray;
+            this.lblNoti3Date.Location = new System.Drawing.Point(405, 50);
+            this.lblNoti3Date.Name = "lblNoti3Date";
+            this.lblNoti3Date.Size = new System.Drawing.Size(94, 15);
+            this.lblNoti3Date.TabIndex = 4;
+            this.lblNoti3Date.Text = "01-01-2022 9:50 AM";
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Testing.Properties.Resources.notification_bell_1;
@@ -185,7 +218,7 @@
             // lblNoti3
             // 
             this.lblNoti3.Font = new System.Drawing.Font("Hanuman", 8F, System.Drawing.FontStyle.Bold);
-            this.lblNoti3.Location = new System.Drawing.Point(65, 7);
+            this.lblNoti3.Location = new System.Drawing.Point(64, 7);
             this.lblNoti3.Name = "lblNoti3";
             this.lblNoti3.Size = new System.Drawing.Size(425, 55);
             this.lblNoti3.TabIndex = 1;
@@ -205,39 +238,6 @@
             this.btnCloseNoti3.TabIndex = 3;
             this.btnCloseNoti3.Text = "X";
             this.btnCloseNoti3.Click += new System.EventHandler(this.btnCloseNoti3_Click);
-            // 
-            // lblNoti3Date
-            // 
-            this.lblNoti3Date.AutoSize = true;
-            this.lblNoti3Date.Font = new System.Drawing.Font("Hanuman", 7.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblNoti3Date.ForeColor = System.Drawing.Color.SlateGray;
-            this.lblNoti3Date.Location = new System.Drawing.Point(405, 50);
-            this.lblNoti3Date.Name = "lblNoti3Date";
-            this.lblNoti3Date.Size = new System.Drawing.Size(94, 15);
-            this.lblNoti3Date.TabIndex = 4;
-            this.lblNoti3Date.Text = "01-01-2022 9:50 AM";
-            // 
-            // lblNoti1Date
-            // 
-            this.lblNoti1Date.AutoSize = true;
-            this.lblNoti1Date.Font = new System.Drawing.Font("Hanuman", 7.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblNoti1Date.ForeColor = System.Drawing.Color.SlateGray;
-            this.lblNoti1Date.Location = new System.Drawing.Point(405, 52);
-            this.lblNoti1Date.Name = "lblNoti1Date";
-            this.lblNoti1Date.Size = new System.Drawing.Size(94, 15);
-            this.lblNoti1Date.TabIndex = 5;
-            this.lblNoti1Date.Text = "01-01-2022 9:50 AM";
-            // 
-            // lblNoti2Date
-            // 
-            this.lblNoti2Date.AutoSize = true;
-            this.lblNoti2Date.Font = new System.Drawing.Font("Hanuman", 7.5F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblNoti2Date.ForeColor = System.Drawing.Color.SlateGray;
-            this.lblNoti2Date.Location = new System.Drawing.Point(404, 51);
-            this.lblNoti2Date.Name = "lblNoti2Date";
-            this.lblNoti2Date.Size = new System.Drawing.Size(94, 15);
-            this.lblNoti2Date.TabIndex = 6;
-            this.lblNoti2Date.Text = "01-01-2022 9:50 AM";
             // 
             // frmNotification
             // 
