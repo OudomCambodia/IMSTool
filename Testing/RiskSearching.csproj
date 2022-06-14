@@ -590,6 +590,12 @@
     <Compile Include="Forms\frmManageCrono.Designer.cs">
       <DependentUpon>frmManageCrono.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNotification.Designer.cs">
+      <DependentUpon>frmNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPreClaimFL-CL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1418,6 +1424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmManageCrono.resx">
       <DependentUpon>frmManageCrono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNotification.resx">
+      <DependentUpon>frmNotification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPreClaimFL-CL.resx">
       <DependentUpon>frmPreClaimFL-CL.cs</DependentUpon>
