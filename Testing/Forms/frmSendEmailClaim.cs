@@ -2049,5 +2049,21 @@ namespace Testing.Forms
             }
             
         }
+
+       
+
+        private void btnExcluDefin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtClaimNo_Leave(object sender, EventArgs e)
+        {
+            if (txtClaimNo.Text == "" || txtClaimNo.Text.Length!=20)
+            {
+                Msgbox.Show("Claim No must be input with the correct format!");
+            }
+            
+        }
     }
 }
