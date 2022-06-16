@@ -19,6 +19,7 @@ namespace Testing.Forms
         public PolicyRemark()
         {
             InitializeComponent();
+            dgvPolRem.SelectionChanged -= dgvPolRem_SelectionChanged;
         }
 
         private void bnSearch_Click(object sender, EventArgs e)
@@ -48,8 +49,16 @@ namespace Testing.Forms
                     dgvPolRem.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 for (int i = 4; i < dgvPolRem.Columns.Count; i++)
                     dgvPolRem.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            }
 
+                dgvPolRem.SelectionChanged += dgvPolRem_SelectionChanged;
+                dgvPolRem_SelectionChanged(null, null);
+            }
+            else
+            {
+                dgvDetailPolRem.DataSource = null;
+                dgvPolRem.SelectionChanged += dgvPolRem_SelectionChanged;
+            }
+                
             Cursor.Current = Cursors.AppStarting;
         }
 
@@ -78,6 +87,31 @@ namespace Testing.Forms
         private void PolicyRemark_Activated(object sender, EventArgs e)
         {
             tbPol.Focus();
+        }
+
+        private void dgvPolRem_SelectionChanged(object sender, EventArgs e)
+        {
+            var current = dgvPolRem.CurrentRow;
+            if (current != null) 
+            {
+                string policyNo = current.Cells["POLICY_NO"].Value.ToString();
+
+                StringBuilder queryBuilder = new StringBuilder();
+                queryBuilder.Append("select distinct PRS_NAME, PPR_REMARKS ")
+                    .Append("from ( select pr.PRS_NAME, pp.PPR_REMARKS ")
+                    .Append("from uw_t_pol_risks pr ")
+                    .Append("inner join uw_t_pol_perils pp on pr.prs_seq_no = pp.ppr_prs_seq_no ")
+                    .Append("where prs_policy_no = upper('" + policyNo + "') ")
+                    .Append(") where PPR_REMARKS is not null ");
+
+                var dtRiskRemark = crud.ExecQuery(queryBuilder.ToString());
+                dgvDetailPolRem.DataSource = dtRiskRemark;
+            }
+        }
+
+        private void dgvDetailPolRem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Msgbox.Show(dgvDetailPolRem.SelectedCells[0].Value.ToString());
         }
     }
 }
