@@ -329,6 +329,7 @@
             // 
             // tbCC
             // 
+            this.tbCC.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.tbCC.EmailAutocompleteSource = null;
             this.tbCC.HighlightColor = System.Drawing.SystemColors.ControlLight;
             this.tbCC.Location = new System.Drawing.Point(96, 120);
