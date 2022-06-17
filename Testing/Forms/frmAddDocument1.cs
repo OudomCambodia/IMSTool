@@ -508,12 +508,17 @@ namespace Testing.Forms
 
             if (cbProLine.Text == "A&H")
             {
+                // Remove Leasing
+                if (cbPriority.Items.Count == 4)
+                    cbPriority.Items.RemoveAt(3);
+
                 tbNCD.Enabled = false; tbNCD.Text = "";
                 tbFleetSizeDiscount.Enabled = false; tbFleetSizeDiscount.Text = "";
                 tbDiscount.Enabled = false; tbDiscount.Text = "";
             }
             else if (cbProLine.Text == "AUTO")
             {
+                cbPriority.Items.Add(new ComboboxItem("Leasing", "L"));
                 tbOriginalRate.Enabled = false; tbOriginalRate.Text = "";
                 tbGroupDiscount.Enabled = false; tbGroupDiscount.Text = "";
                 tbDiscount.Enabled = false; tbDiscount.Text = "";
@@ -521,6 +526,10 @@ namespace Testing.Forms
             }
             else if (cbProLine.Text == "FL" || cbProLine.Text == "PE&M" || cbProLine.Text == "MICR")
             {
+                // Remove Leasing
+                if (cbPriority.Items.Count == 4)
+                    cbPriority.Items.RemoveAt(3);
+
                 tbFleetSizeDiscount.Enabled = false; tbFleetSizeDiscount.Text = "";
                 tbGroupDiscount.Enabled = false; tbGroupDiscount.Text = "";
                 tbLoyaltyDiscount.Enabled = false; tbLoyaltyDiscount.Text = "";
@@ -691,7 +700,14 @@ namespace Testing.Forms
                                 Msgbox.Show("Agent/Broker Code: " + ABCode + " not found, upload unsucessful. (Row " + (i + 2) + ")");
                                 return;
                             }
-                            if (Priority != "N" && Priority != "U" && Priority != "VU")
+                            var proLine = product[ProType];
+                            if (Priority == "L" && proLine != "AUTO")
+                            {
+                                Cursor.Current = Cursors.AppStarting;
+                                Msgbox.Show("Priority: " + Priority + " is available for product type AUTO only, upload unsucessful. (Row " + (i + 2) + ")");
+                                return;
+                            }
+                            if (Priority != "N" && Priority != "U" && Priority != "VU" && Priority != "L")
                             {
                                 Cursor.Current = Cursors.AppStarting;
                                 Msgbox.Show("Priority: " + Priority + " is unavailable, upload unsucessful. (Row " + (i + 2) + ")");

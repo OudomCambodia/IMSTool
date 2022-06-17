@@ -960,6 +960,8 @@ namespace Testing.Forms
         {
             try
             {
+                if (dgvDoc.Rows[e.RowIndex].Cells["PRIORITY_TYPE"].Value == "L")
+                    return;
 
                 double statusTimeline = getStatusTimeline(docStatus.FirstOrDefault(x => x.Value == dgvDoc.Rows[e.RowIndex].Cells["STATUS"].Value.ToString()).Key);// get Key with Value
 
