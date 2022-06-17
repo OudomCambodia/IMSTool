@@ -102,9 +102,10 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(196, 151);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 80);
+            this.label4.Size = new System.Drawing.Size(107, 111);
             this.label4.TabIndex = 157;
-            this.label4.Text = "Priority\r\n\r\nN : Normal\r\nU : Urgent\r\nVU : Very Urgent";
+            this.label4.Text = "Priority\r\n\r\nN : Normal\r\nU : Urgent\r\nVU : Very Urgent\r\nL : Leasing";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
