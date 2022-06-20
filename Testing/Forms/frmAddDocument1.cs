@@ -518,6 +518,10 @@ namespace Testing.Forms
             }
             else if (cbProLine.Text == "AUTO")
             {
+                // Remove Leasing
+                if (cbPriority.Items.Count == 4)
+                    cbPriority.Items.RemoveAt(3);
+
                 cbPriority.Items.Add(new ComboboxItem("Leasing", "L"));
                 tbOriginalRate.Enabled = false; tbOriginalRate.Text = "";
                 tbGroupDiscount.Enabled = false; tbGroupDiscount.Text = "";
