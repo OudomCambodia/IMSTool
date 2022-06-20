@@ -216,7 +216,7 @@ namespace Testing
                 return;
             }
 
-            //My_DataTable_Extensions.ExportToExcelXML(dt, path);
+            My_DataTable_Extensions.ExportToExcelXML(dt, "");
             
             My_DataTable_Extensions.ExportToExcelXMLSharepoint(dt,FileName, "https://forteinsurancegroup.sharepoint.com/sites/forteinsurance/Shared Documents/MIS/Samnang/Monthly Report/RI Pending");
             
