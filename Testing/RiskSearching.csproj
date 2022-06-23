@@ -434,6 +434,12 @@
     <Compile Include="Forms\frmAddExclusion.Designer.cs">
       <DependentUpon>frmAddExclusion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmAddNewControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAddNewControl.Designer.cs">
+      <DependentUpon>frmAddNewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmAddNewInformation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,6 +499,12 @@
     </Compile>
     <Compile Include="Forms\frmClaimRI.Designer.cs">
       <DependentUpon>frmClaimRI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCopyRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCopyRole.Designer.cs">
+      <DependentUpon>frmCopyRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCreateBank.cs">
       <SubType>Form</SubType>
@@ -626,6 +638,12 @@
     <Compile Include="Forms\frmRenewalList.Designer.cs">
       <DependentUpon>frmRenewalList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmRoleDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRoleDetail.Designer.cs">
+      <DependentUpon>frmRoleDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmSchSendMail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -685,6 +703,12 @@
     </Compile>
     <Compile Include="Forms\frmUserManagement.Designer.cs">
       <DependentUpon>frmUserManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmUserRoleManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUserRoleManagement.Designer.cs">
+      <DependentUpon>frmUserRoleManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmViewAttachments.cs">
       <SubType>Form</SubType>
@@ -1340,6 +1364,9 @@
     <EmbeddedResource Include="Forms\frmAddExclusion.resx">
       <DependentUpon>frmAddExclusion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAddNewControl.resx">
+      <DependentUpon>frmAddNewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAddNewInformation.resx">
       <DependentUpon>frmAddNewInformation.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1374,6 +1401,9 @@
     <EmbeddedResource Include="Forms\frmClaimRI.resx">
       <DependentUpon>frmClaimRI.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCopyRole.resx">
+      <DependentUpon>frmCopyRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCreateBank.resx">
       <DependentUpon>frmCreateBank.cs</DependentUpon>
@@ -1446,6 +1476,9 @@
     <EmbeddedResource Include="Forms\frmRenewalList.resx">
       <DependentUpon>frmRenewalList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRoleDetail.resx">
+      <DependentUpon>frmRoleDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSchSendMail.resx">
       <DependentUpon>FrmSchSendMail.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1478,6 +1511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUserManagement.resx">
       <DependentUpon>frmUserManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUserRoleManagement.resx">
+      <DependentUpon>frmUserRoleManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmViewAttachments.resx">
       <DependentUpon>frmViewAttachments.cs</DependentUpon>
@@ -1915,6 +1951,7 @@
     <None Include="Resources\khmerNN.jpg" />
     <None Include="Resources\eye.png" />
     <None Include="Resources\eye1.png" />
+    <None Include="Resources\cross-mark-96.png" />
     <Content Include="Resources\loader.gif" />
     <Content Include="Resources\Logo_white_no_background.png" />
     <None Include="Resources\NY2022.jpg" />
@@ -1929,6 +1966,7 @@
     <None Include="Resources\Pcc_Ben.jpg" />
     <Content Include="Resources\Pchum_Ben.png" />
     <None Include="Resources\Pchum_Ben1.png" />
+    <None Include="Resources\printer-96.png" />
     <Content Include="Resources\Standard_Forte.png" />
     <Content Include="Resources\tahoma.ttf" />
     <None Include="Resources\tahomabd.ttf" />

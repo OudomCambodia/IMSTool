@@ -91,37 +91,71 @@ namespace Testing
                     return;
                 }
 
-                sql = "SELECT allow FROM USER_PRINT_TYPE WHERE TYPE = '" + dr[3].ToString() + "'";
-                string allow = crud.ExecQuery(sql).Rows[0].ItemArray[0].ToString();
-                string[] splitAllow = allow.Split(',').ToArray();
-                sql = "select * from USER_PRINT_ALLOW_REFERENCE Where REFERENCE_NO in (";
-                foreach (string eachAllow in splitAllow)
-                    sql += "'" + eachAllow + "',";
-                sql = sql.Remove(sql.Length - 1, 1);
-                sql += ")";
-                DataTable allowRef = crud.ExecQuery(sql);
+                #region --- USER ROLE MANAGEMENT OLD CODING ---
+                //sql = "SELECT allow FROM USER_PRINT_TYPE WHERE TYPE = '" + dr[3].ToString() + "'";
+                //string allow = crud.ExecQuery(sql).Rows[0].ItemArray[0].ToString();
+                //string[] splitAllow = allow.Split(',').ToArray();
+                //sql = "select * from USER_PRINT_ALLOW_REFERENCE Where REFERENCE_NO in (";
+                //foreach (string eachAllow in splitAllow)
+                //    sql += "'" + eachAllow + "',";
+                //sql = sql.Remove(sql.Length - 1, 1);
+                //sql += ")";
+                //DataTable allowRef = crud.ExecQuery(sql);
+
+                //frmMain fm = new frmMain();
+                //fm.UserName = tbUser.Text.ToUpper();
+                //fm.FullName = dr[2].ToString();
+                //fm.frmLog = this;
+
+                //foreach (DataRow drRef in allowRef.Rows)
+                //{
+                //    if (fm.Controls.Find(drRef[2].ToString(), true).Length > 0)
+                //    {
+                //        ((Button)fm.Controls.Find(drRef[2].ToString(), true)[0]).Enabled = true;
+                //        continue;
+                //    }
+
+                //    if (fm.menuStrip1.Items.Find(drRef[2].ToString(), true).Length > 0)
+                //    {
+                //        ((ToolStripMenuItem)fm.menuStrip1.Items.Find(drRef[2].ToString(), true)[0]).Enabled = true;
+                //    }
+                //}
+                //Usert = tbUser.Text;
+                //fm.Show();
+                //this.Hide();
+                #endregion
+
+                #region --- USER ROLE MANAGEMENT NEW CODING ---
+                var userCode = tbUser.Text.Trim().ToUpper();
+                var userControlAccess = crud.ExecQuery("select upc.CONTROL_NAME, uca.VISIBLE, uca.ENABLED from USER_PRINT_CONTROL_ACCESS uca inner join USER_PRINT_CONTROL upc on upc.CONTROL_ID = uca.CONTROL_ID where uca.CODE = (select TYPE from USER_PRINT_SYSTEM where USER_CODE = '" + userCode + "')");
 
                 frmMain fm = new frmMain();
                 fm.UserName = tbUser.Text.ToUpper();
                 fm.FullName = dr[2].ToString();
                 fm.frmLog = this;
 
-                foreach (DataRow drRef in allowRef.Rows)
+                if (userControlAccess.Rows.Count > 0)
                 {
-                    if (fm.Controls.Find(drRef[2].ToString(), true).Length > 0)
+                    for (int i = 0; i < userControlAccess.Rows.Count; i++)
                     {
-                        ((Button)fm.Controls.Find(drRef[2].ToString(), true)[0]).Enabled = true;
-                        continue;
-                    }
-
-                    if (fm.menuStrip1.Items.Find(drRef[2].ToString(), true).Length > 0)
-                    {
-                        ((ToolStripMenuItem)fm.menuStrip1.Items.Find(drRef[2].ToString(), true)[0]).Enabled = true;
+                        var controlName = userControlAccess.Rows[i]["CONTROL_NAME"].ToString();
+                        var isEnabled = userControlAccess.Rows[i]["VISIBLE"].ToString().Equals("Y") && userControlAccess.Rows[i]["ENABLED"].ToString().Equals("Y");
+                        if (fm.Controls.Find(controlName, true).Length > 0)
+                        {
+                            ((Button)fm.Controls.Find(controlName, true)[0]).Enabled = isEnabled;
+                            continue;
+                        }
+                        if (fm.menuStrip1.Items.Find(controlName, true).Length > 0)
+                        {
+                            ((ToolStripMenuItem)fm.menuStrip1.Items.Find(controlName, true)[0]).Enabled = isEnabled;
+                        }
                     }
                 }
+
                 Usert = tbUser.Text;
                 fm.Show();
                 this.Hide();
+                #endregion
             }
             catch (Exception e)
             {

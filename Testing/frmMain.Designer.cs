@@ -66,6 +66,8 @@
             this.userLoginCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageUserRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateTicket = new System.Windows.Forms.ToolStripMenuItem();
@@ -548,18 +550,40 @@
             // userManagementToolStripMenuItem
             // 
             this.userManagementToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.userManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewUserToolStripMenuItem,
+            this.manageUserRoleToolStripMenuItem});
             this.userManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.userManagementToolStripMenuItem.Name = "userManagementToolStripMenuItem";
             this.userManagementToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.userManagementToolStripMenuItem.Text = "User Management";
-            this.userManagementToolStripMenuItem.Click += new System.EventHandler(this.userManagementToolStripMenuItem_Click);
+            // 
+            // createNewUserToolStripMenuItem
+            // 
+            this.createNewUserToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.createNewUserToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.createNewUserToolStripMenuItem.Name = "createNewUserToolStripMenuItem";
+            this.createNewUserToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.createNewUserToolStripMenuItem.Text = "Create New User";
+            this.createNewUserToolStripMenuItem.Click += new System.EventHandler(this.createNewUserToolStripMenuItem_Click);
+            // 
+            // manageUserRoleToolStripMenuItem
+            // 
+            this.manageUserRoleToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.manageUserRoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.manageUserRoleToolStripMenuItem.Name = "manageUserRoleToolStripMenuItem";
+            this.manageUserRoleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.manageUserRoleToolStripMenuItem.Text = "Manage User Role";
+            this.manageUserRoleToolStripMenuItem.Click += new System.EventHandler(this.manageUserRoleToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem1
             // 
+            this.quitToolStripMenuItem1.Enabled = false;
             this.quitToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
             this.quitToolStripMenuItem1.Size = new System.Drawing.Size(42, 20);
             this.quitToolStripMenuItem1.Text = "Quit";
+            this.quitToolStripMenuItem1.Visible = false;
             this.quitToolStripMenuItem1.Click += new System.EventHandler(this.quitToolStripMenuItem1_Click);
             // 
             // aboutToolStripMenuItem
@@ -1162,5 +1186,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsPMAdmin;
         private System.Windows.Forms.ToolStripMenuItem userManagementToolStripMenuItem;
         private System.Windows.Forms.Timer timerNoti;
+        private System.Windows.Forms.ToolStripMenuItem createNewUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageUserRoleToolStripMenuItem;
     }
 }

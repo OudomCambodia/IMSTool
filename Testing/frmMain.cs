@@ -702,12 +702,6 @@ namespace Testing
             frm.Show();
         }
 
-        private void userManagementToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.frmUserManagement userManagement = new Forms.frmUserManagement();
-            userManagement.ShowDialog();
-        }
-
         private void timerNoti_Tick(object sender, EventArgs e)
         {
             var docUserSql = sqlcrud.LoadData("SELECT USER_NAME FROM tbDOC_USER WHERE USER_NAME = '" + UserName + "' ").Tables[0];
@@ -740,6 +734,18 @@ namespace Testing
 
             Forms.frmNotification frmNoti = new Forms.frmNotification();
             frmNoti.Show();
+        }
+
+        private void createNewUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmUserManagement userManagement = new Forms.frmUserManagement();
+            userManagement.ShowDialog();
+        }
+
+        private void manageUserRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmUserRoleManagement userRoleManagement = new Forms.frmUserRoleManagement();
+            userRoleManagement.ShowDialog();
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)

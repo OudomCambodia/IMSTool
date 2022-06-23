@@ -28,13 +28,13 @@ namespace Testing.Forms
             txtUsername.CharacterCasing = CharacterCasing.Upper;
             txtRemark.CharacterCasing = CharacterCasing.Upper;
 
-            string sql = "SELECT DISTINCT(TYPE) FROM USER_PRINT_SYSTEM ORDER BY TYPE";
+            string sql = "SELECT DISTINCT(CODE) FROM USER_PRINT_CONTROL_ACCESS ORDER BY CODE";
             DataTable dtTypes = crud.ExecQuery(sql);
 
             if (dtTypes.Rows.Count > 0)
             {
-                cboType.ValueMember = "TYPE";
-                cboType.DisplayMember = "TYPE";
+                cboType.ValueMember = "CODE";
+                cboType.DisplayMember = "CODE";
                 cboType.DataSource = dtTypes;
             }
         }
