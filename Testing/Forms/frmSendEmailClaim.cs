@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Interactive;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +20,10 @@ namespace Testing.Forms
     {
         public string UserName = "Default";
         CRUD crud = new CRUD();
+        int num;
+        bool isChecked;
+        public DataTable selectedDoc;
+        CheckBox checkboxHeader = new CheckBox();
         CommonFunctions.ListViewColumnSorter lvwColumnSorter = new CommonFunctions.ListViewColumnSorter();
         //email information
         string smtpSer;
@@ -24,7 +31,7 @@ namespace Testing.Forms
         string mail_pass;
         int port;
         string HashPass = "Forte@2017";
-
+        DataTable dtClaimDt;
         public frmSendEmailClaim()
         {
             InitializeComponent();
@@ -76,6 +83,8 @@ namespace Testing.Forms
 
             dgvNonPayClaimNo.RowsDefaultCellStyle.ForeColor = Color.Black;
             dgvNonPayClaimNo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+            disabledButt(btnGenerateClaim);
+            CommonFunctions.HighLightGrid(dgvDefinition);
         }
         //private void Combobox_Load()
         //{
@@ -1956,51 +1965,54 @@ namespace Testing.Forms
                         lvDefExclu.Items.Add(lvi);
                     }
                 }
-                else if (pro == "HNS")
-                {
-                    DataTable dt;
-                    DataTable plan_dt = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
-                  "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
-                  "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
-                  "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
-                  "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
-                  "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
-                  "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + ClNo + "'");
-                    if (plan_dt.Rows.Count != 0)
-                    {
-                        DataRow dr_plan = plan_dt.Rows[0];
-                        //string plan = dr_plan[10].ToString().Substring(6, 2);
-                        string plan = dr_plan[10].ToString();
-                        if (plan.Count()==8)
-                        {
-                            dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'HNS++' order by ENG");
-                        }
-                        else
-                        {
-                            dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'HNS' order by ENG");
-                        }
-                        lvDefExclu.CheckBoxes = true;
-                        lvDefExclu.View = View.Details;
+                #region HNS_letter
+                //else if (pro == "HNS")
+                //{
+                //    DataTable dt;
+                //    DataTable plan_dt = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+                //  "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+                //  "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+                //  "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
+                //  "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                //  "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                //  "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + ClNo + "'");
+                //    if (plan_dt.Rows.Count != 0)
+                //    {
+                //        DataRow dr_plan = plan_dt.Rows[0];
+                //        //string plan = dr_plan[10].ToString().Substring(6, 2);
+                //        string plan = dr_plan[10].ToString();
+                //        if (plan.Count()==8)
+                //        {
+                //            dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'HNS++' order by ENG");
+                //        }
+                //        else
+                //        {
+                //            dt = crud.ExecQuery("select * from USER_CLAIM_EMAIL_EXCLU_DEF WHERE PRODUCT= 'HNS' order by ENG");
+                //        }
+                //        lvDefExclu.CheckBoxes = true;
+                //        lvDefExclu.View = View.Details;
 
-                        lvDefExclu.Columns.Add("Type", 110);
-                        lvDefExclu.Columns.Add("Eng", 350);
-                        lvDefExclu.Columns.Add("Kh", 350);
+                //        lvDefExclu.Columns.Add("Type", 110);
+                //        lvDefExclu.Columns.Add("Eng", 350);
+                //        lvDefExclu.Columns.Add("Kh", 350);
 
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            ListViewItem lvi = new ListViewItem(dr["TYPE"].ToString());
-                            lvi.SubItems.Add(dr["ENG"].ToString());
-                            lvi.SubItems.Add(dr["KH"].ToString());
+                //        foreach (DataRow dr in dt.Rows)
+                //        {
+                //            ListViewItem lvi = new ListViewItem(dr["TYPE"].ToString());
+                //            lvi.SubItems.Add(dr["ENG"].ToString());
+                //            lvi.SubItems.Add(dr["KH"].ToString());
 
-                            lvDefExclu.Items.Add(lvi);
-                        }
-                    }
-                    else
-                    {
-                        Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
-                    }
-                    Cursor.Current = Cursors.WaitCursor;
-                }
+                //            lvDefExclu.Items.Add(lvi);
+                //        }
+                //    }
+                //    else
+                //    {
+                //        Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
+                //    }
+                //    Cursor.Current = Cursors.WaitCursor;
+                //}
+#endregion
+
             }
             else
             {
@@ -2050,20 +2062,246 @@ namespace Testing.Forms
             
         }
 
-       
+        #region MedicalRejectionLetter
 
         private void btnExcluDefin_Click(object sender, EventArgs e)
         {
+            if (txtClaimNo.Text.Substring(6, 4).ToUpper() != "HHNS")
+            {
+                Msgbox.Show("Avaliable only HNS Products");
+            }
+            else
+            {
+                dtClaimDt  = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+                "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+                "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
+                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + txtClaimNo.Text.ToUpper() + "'");
 
+                if (dtClaimDt.Rows.Count != 0)
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    enabledButt(btnGenerateClaim);
+                    #region DatagridviewData
+                    dgvDefinition.Columns.Clear();
+                    DataTable dtExcDef = crud.ExecQuery("select * from user_email_med_excludef");
+                    DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
+                    //CheckBox chk = new CheckBox();
+                    dgvDefinition.Columns.Add(CheckboxColumn);
+                    dgvDefinition.DataSource = dtExcDef;
+
+                    dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dgvDefinition.Columns[1].Width = 70;
+                    dgvDefinition.Columns[2].Width = 70;
+                    dgvDefinition.Columns[3].Width = 120;
+                    DataGridViewColumn column = dgvDefinition.Columns[0];
+                    column.Width = 35;
+                    dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
+                    dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+                    // add checkbox header
+                    Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
+                    // set checkbox header to center of header cell. +1 pixel to position correctly.
+                    rect.X = rect.Location.X + 10;
+                    rect.Y = rect.Location.Y + 15;
+                    rect.Width = rect.Size.Width;
+                    rect.Height = rect.Size.Height;
+
+                    checkboxHeader.Checked = false;
+                    checkboxHeader.Visible = true;
+                    checkboxHeader.Name = "checkboxHeader";
+                    checkboxHeader.Size = new Size(15, 15);
+                    checkboxHeader.Location = rect.Location;
+                    checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
+                    dgvDefinition.Controls.Add(checkboxHeader);
+                    #endregion
+
+                }
+                else
+                {
+                    Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
+                }
+                Cursor.Current = Cursors.WaitCursor;
+            
+            }
         }
-
         private void txtClaimNo_Leave(object sender, EventArgs e)
         {
             if (txtClaimNo.Text == "" || txtClaimNo.Text.Length!=20)
             {
                 Msgbox.Show("Claim No must be input with the correct format!");
             }
-            
+
+        }  
+        private void dgvDefinition_DataSourceChanged(object sender, EventArgs e)
+        {
+            this.dgvDefinition.ForeColor = System.Drawing.Color.Black;
+            dgvDefinition.Columns[3].Width = 530;
+            dgvDefinition.Columns[4].Width = 530;
+            CommonFunctions.HighLightGrid(dgvDefinition);
+
         }
+        private void checkboxHeader_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                num = 0;
+                for (int i = 0; i < dgvDefinition.RowCount; i++)
+                {
+                    dgvDefinition[0, i].Value = ((CheckBox)dgvDefinition.Controls.Find("checkboxHeader", true)[0]).Checked;
+                    isChecked = (bool)dgvDefinition[0, i].Value;
+                    CheckCount(isChecked);
+                }
+                //lblSel.Text = num.ToString();
+                dgvDefinition.EndEdit();
+
+
+            }
+            catch (Exception EX)
+            {
+                Msgbox.Show(EX.Message);
+            }
+        }
+        private void CheckCount(bool isChecked)
+        {
+            if (isChecked)
+                num++;
+        }
+        
+
+        public void btnGenerateClaim_Click(object sender, EventArgs e)
+        {
+
+
+
+
+            
+            selectedDoc = GetDataTableFromDGV(dgvDefinition);
+            if (selectedDoc.Rows.Count <= 0)
+            {
+                Msgbox.Show("No record selected!");
+                return;
+            }
+            else
+            {
+                DataTable dtClaimDet = crud.ExecQuery("select template from user_rejectletter_temp where products= 'HNS'");
+                //Update 16-Jul-19 (Edit Email Content)
+                string body = string.Empty;
+                using (StreamReader reader = new StreamReader("Html/HNSRejectionLetter.html"))
+                {
+                    body = reader.ReadToEnd();
+                }
+
+                body = body.Replace("{text}", ""); 
+                web
+                this.webBrowser1.DocumentText = body;
+                //End of Update
+                //Update 16-Jul-19 (Edit Email Content)
+                richTextBox1.Text = "";
+                webBrowser1.Document.ExecCommand("SelectAll", false, null);
+                webBrowser1.Document.ExecCommand("Copy", false, null);
+                richTextBox1.Paste();    //Copy all text from webBrowserTrick(Visible = false) 
+                //End of Update
+                Cursor.Current = Cursors.WaitCursor;
+               
+            }
+           
+        }
+        private void dgvDefinition_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+
+            if (e.ColumnIndex != 0)
+                return;
+
+
+            if (dgvDefinition.SelectedCells[0].ColumnIndex == 0)
+            {
+                foreach (DataGridViewCell dgvc in dgvDefinition.SelectedCells)
+                {
+                    dgvDefinition[0, dgvc.RowIndex].Value = true;
+
+                }
+                for (int i = 0; i < dgvDefinition.RowCount; i++)
+                {
+                    isChecked = (bool)dgvDefinition.Rows[i].Cells[0].EditedFormattedValue;
+
+                    CheckCount(isChecked);
+                }
+                //lblSel.Text = num.ToString();
+            }
+        }
+
+        public DataTable GetDataTableFromDGV(DataGridView dgv)
+        {
+
+            DataTable dt1 = new DataTable();
+
+            dt1.Columns.Add("TYPE");
+            dt1.Columns.Add("ENG");
+            dt1.Columns.Add("KH");
+            
+            
+
+            foreach (DataGridViewRow row in dgvDefinition.Rows)
+            {
+                string status = "";
+                if (row.Cells[0].Value != null)
+                {
+                    status = row.Cells[0].Value.ToString();
+                    if (status == "True")
+                    {
+
+                        dt1.Rows.Add(row.Cells["TYPE"].Value.ToString(), row.Cells["ENG"].Value.ToString(), row.Cells["KH"].Value.ToString());
+                        
+
+                    }
+                }
+            }
+
+
+            return dt1;
+        }
+        
+        private void dgvDefinition_DataSourceChanged_1(object sender, EventArgs e)
+        {
+            this.dgvDefinition.ForeColor = System.Drawing.Color.Black;
+            dgvDefinition.Columns[3].Width = 530;
+            dgvDefinition.Columns[4].Width = 530;
+            CommonFunctions.HighLightGrid(dgvDefinition);
+        }
+
+        #endregion
+
+        private void printStripButton_Click(object sender, EventArgs e)
+        {
+            // printDialog associates with PrintDocument
+            printDialog.Document = printDocument;
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                printDocument.Print(); // Print the document
+            }
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+           
+        
+            // draws the string onto the print document
+            Font drawFont = new Font("Arial", 42);
+            e.Graphics.DrawString(webBrowser1.Text,drawFont , Brushes.Black, 100, 100);
+            
+            e.Graphics.PageUnit = GraphicsUnit.Inch; 
+        
+        }
+
+       
+
+       
+
+        
     }
 }

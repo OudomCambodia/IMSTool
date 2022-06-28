@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSendEmailClaim));
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -195,20 +196,58 @@
             this.tbGrandTotal = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.saveStripButton = new System.Windows.Forms.ToolStripButton();
+            this.openFileStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.printStripButton = new System.Windows.Forms.ToolStripButton();
+            this.printPreviewStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.undoStripButton = new System.Windows.Forms.ToolStripButton();
+            this.redoStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.fontStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.fontSizeComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.increaseStripButton = new System.Windows.Forms.ToolStripButton();
+            this.decreaseStripButton = new System.Windows.Forms.ToolStripButton();
+            this.colorStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.changeCaseDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.lowercaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uppercaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearFormattingStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.boldStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.italicStripButton = new System.Windows.Forms.ToolStripButton();
+            this.underlineStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.leftAlignStripButton = new System.Windows.Forms.ToolStripButton();
+            this.centerAlignStripButton = new System.Windows.Forms.ToolStripButton();
+            this.rightAlignStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.bulletListStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.zoomDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.panel13 = new System.Windows.Forms.Panel();
             this.btnGenerateClaim = new Testing.cus_button();
             this.panel11 = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.dgvDefinition = new System.Windows.Forms.DataGridView();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.dgvExclusion = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.btnExcluDefin = new Testing.cus_button();
             this.label41 = new System.Windows.Forms.Label();
             this.txtClaimNo = new System.Windows.Forms.TextBox();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpSend.SuspendLayout();
@@ -249,14 +288,18 @@
             this.panel6.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel11.SuspendLayout();
             this.groupBox13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDefinition)).BeginInit();
-            this.panel12.SuspendLayout();
-            this.groupBox14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvExclusion)).BeginInit();
             this.panel9.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.SuspendLayout();
@@ -369,7 +412,7 @@
             this.pnQuery.Controls.Add(this.lbClaimNo);
             this.pnQuery.Location = new System.Drawing.Point(3, 51);
             this.pnQuery.Name = "pnQuery";
-            this.pnQuery.Size = new System.Drawing.Size(1357, 533);
+            this.pnQuery.Size = new System.Drawing.Size(1357, 511);
             this.pnQuery.TabIndex = 5;
             this.pnQuery.Visible = false;
             // 
@@ -532,7 +575,7 @@
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHisClaim.RowTemplate.Height = 27;
-            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 263);
+            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 241);
             this.dgvHisClaim.TabIndex = 28;
             // 
             // label11
@@ -1578,7 +1621,6 @@
             this.crystalReportViewer2.ActiveViewIndex = -1;
             this.crystalReportViewer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer2.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer2.Name = "crystalReportViewer2";
             this.crystalReportViewer2.Size = new System.Drawing.Size(677, 452);
@@ -2267,7 +2309,9 @@
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.panel10);
+            this.panel8.Controls.Add(this.splitContainer2);
+            this.panel8.Controls.Add(this.panel13);
+            this.panel8.Controls.Add(this.panel11);
             this.panel8.Controls.Add(this.panel9);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(3, 3);
@@ -2275,111 +2319,418 @@
             this.panel8.Size = new System.Drawing.Size(1357, 657);
             this.panel8.TabIndex = 1;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.Location = new System.Drawing.Point(3, 213);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.groupBox14);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.webBrowser1);
+            this.splitContainer2.Size = new System.Drawing.Size(1349, 444);
+            this.splitContainer2.SplitterDistance = 674;
+            this.splitContainer2.TabIndex = 10;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.panel12);
+            this.groupBox14.Controls.Add(this.panel10);
+            this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox14.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox14.Location = new System.Drawing.Point(0, 0);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(674, 444);
+            this.groupBox14.TabIndex = 0;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "English Letter";
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.richTextBox1);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(3, 57);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(668, 384);
+            this.panel12.TabIndex = 1;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(107, 57);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(321, 277);
+            this.webBrowser1.TabIndex = 11;
+            // 
             // panel10
             // 
-            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel10.Controls.Add(this.panel13);
-            this.panel10.Controls.Add(this.panel11);
-            this.panel10.Controls.Add(this.panel12);
-            this.panel10.Location = new System.Drawing.Point(329, 0);
+            this.panel10.Controls.Add(this.toolStrip1);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(3, 19);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(1028, 657);
-            this.panel10.TabIndex = 8;
+            this.panel10.Size = new System.Drawing.Size(668, 38);
+            this.panel10.TabIndex = 0;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveStripButton,
+            this.openFileStripButton,
+            this.toolStripSeparator10,
+            this.printStripButton,
+            this.printPreviewStripButton,
+            this.toolStripSeparator5,
+            this.undoStripButton,
+            this.redoStripButton,
+            this.toolStripSeparator1,
+            this.fontStripComboBox,
+            this.fontSizeComboBox,
+            this.increaseStripButton,
+            this.decreaseStripButton,
+            this.colorStripDropDownButton,
+            this.changeCaseDropDownButton,
+            this.toolStripSeparator9,
+            this.clearFormattingStripButton,
+            this.toolStripSeparator2,
+            this.boldStripButton3,
+            this.italicStripButton,
+            this.underlineStripButton,
+            this.toolStripSeparator3,
+            this.leftAlignStripButton,
+            this.centerAlignStripButton,
+            this.rightAlignStripButton,
+            this.toolStripSeparator4,
+            this.bulletListStripButton,
+            this.toolStripSeparator8,
+            this.zoomDropDownButton});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(668, 31);
+            this.toolStrip1.TabIndex = 17;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // saveStripButton
+            // 
+            this.saveStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveStripButton.Image")));
+            this.saveStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveStripButton.Name = "saveStripButton";
+            this.saveStripButton.Size = new System.Drawing.Size(28, 28);
+            this.saveStripButton.Text = "Save File";
+            // 
+            // openFileStripButton
+            // 
+            this.openFileStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openFileStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openFileStripButton.Image")));
+            this.openFileStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openFileStripButton.Name = "openFileStripButton";
+            this.openFileStripButton.Size = new System.Drawing.Size(28, 28);
+            this.openFileStripButton.Text = "Open File";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 31);
+            // 
+            // printStripButton
+            // 
+            this.printStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printStripButton.Image")));
+            this.printStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printStripButton.Name = "printStripButton";
+            this.printStripButton.Size = new System.Drawing.Size(28, 28);
+            this.printStripButton.Text = "Print Page";
+            this.printStripButton.Click += new System.EventHandler(this.printStripButton_Click);
+            // 
+            // printPreviewStripButton
+            // 
+            this.printPreviewStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.printPreviewStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewStripButton.Image")));
+            this.printPreviewStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.printPreviewStripButton.Name = "printPreviewStripButton";
+            this.printPreviewStripButton.Size = new System.Drawing.Size(28, 28);
+            this.printPreviewStripButton.Text = "Print Preview";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
+            // 
+            // undoStripButton
+            // 
+            this.undoStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undoStripButton.Image = ((System.Drawing.Image)(resources.GetObject("undoStripButton.Image")));
+            this.undoStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undoStripButton.Name = "undoStripButton";
+            this.undoStripButton.Size = new System.Drawing.Size(28, 28);
+            this.undoStripButton.Text = "Undo Move";
+            // 
+            // redoStripButton
+            // 
+            this.redoStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.redoStripButton.Image = ((System.Drawing.Image)(resources.GetObject("redoStripButton.Image")));
+            this.redoStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.redoStripButton.Name = "redoStripButton";
+            this.redoStripButton.Size = new System.Drawing.Size(28, 28);
+            this.redoStripButton.Text = "Redo Move";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // fontStripComboBox
+            // 
+            this.fontStripComboBox.Name = "fontStripComboBox";
+            this.fontStripComboBox.Size = new System.Drawing.Size(155, 31);
+            this.fontStripComboBox.Sorted = true;
+            this.fontStripComboBox.Text = "Font Family";
+            this.fontStripComboBox.ToolTipText = "Font Family";
+            // 
+            // fontSizeComboBox
+            // 
+            this.fontSizeComboBox.AutoSize = false;
+            this.fontSizeComboBox.Name = "fontSizeComboBox";
+            this.fontSizeComboBox.Size = new System.Drawing.Size(73, 23);
+            this.fontSizeComboBox.Text = "Font Size";
+            this.fontSizeComboBox.ToolTipText = "Font Size";
+            // 
+            // increaseStripButton
+            // 
+            this.increaseStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.increaseStripButton.Image = ((System.Drawing.Image)(resources.GetObject("increaseStripButton.Image")));
+            this.increaseStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.increaseStripButton.Name = "increaseStripButton";
+            this.increaseStripButton.Size = new System.Drawing.Size(28, 28);
+            this.increaseStripButton.Text = "Increase Font Size";
+            // 
+            // decreaseStripButton
+            // 
+            this.decreaseStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.decreaseStripButton.Image = ((System.Drawing.Image)(resources.GetObject("decreaseStripButton.Image")));
+            this.decreaseStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.decreaseStripButton.Name = "decreaseStripButton";
+            this.decreaseStripButton.Size = new System.Drawing.Size(28, 28);
+            this.decreaseStripButton.Text = "Decrease Font Size";
+            // 
+            // colorStripDropDownButton
+            // 
+            this.colorStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.colorStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("colorStripDropDownButton.Image")));
+            this.colorStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.colorStripDropDownButton.Name = "colorStripDropDownButton";
+            this.colorStripDropDownButton.Size = new System.Drawing.Size(37, 28);
+            this.colorStripDropDownButton.Text = "Font Color";
+            // 
+            // changeCaseDropDownButton
+            // 
+            this.changeCaseDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.changeCaseDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lowercaseToolStripMenuItem,
+            this.uppercaseToolStripMenuItem});
+            this.changeCaseDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("changeCaseDropDownButton.Image")));
+            this.changeCaseDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.changeCaseDropDownButton.Name = "changeCaseDropDownButton";
+            this.changeCaseDropDownButton.Size = new System.Drawing.Size(37, 28);
+            this.changeCaseDropDownButton.Text = "Change Case";
+            // 
+            // lowercaseToolStripMenuItem
+            // 
+            this.lowercaseToolStripMenuItem.Name = "lowercaseToolStripMenuItem";
+            this.lowercaseToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.lowercaseToolStripMenuItem.Text = "&lowercase";
+            // 
+            // uppercaseToolStripMenuItem
+            // 
+            this.uppercaseToolStripMenuItem.Name = "uppercaseToolStripMenuItem";
+            this.uppercaseToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.uppercaseToolStripMenuItem.Text = "&UPPERCASE";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 31);
+            // 
+            // clearFormattingStripButton
+            // 
+            this.clearFormattingStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.clearFormattingStripButton.Image = ((System.Drawing.Image)(resources.GetObject("clearFormattingStripButton.Image")));
+            this.clearFormattingStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.clearFormattingStripButton.Name = "clearFormattingStripButton";
+            this.clearFormattingStripButton.Size = new System.Drawing.Size(28, 28);
+            this.clearFormattingStripButton.Text = "Clear All Formatting";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            // 
+            // boldStripButton3
+            // 
+            this.boldStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.boldStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("boldStripButton3.Image")));
+            this.boldStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.boldStripButton3.Name = "boldStripButton3";
+            this.boldStripButton3.Size = new System.Drawing.Size(28, 28);
+            this.boldStripButton3.Text = "Bold";
+            // 
+            // italicStripButton
+            // 
+            this.italicStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.italicStripButton.Image = ((System.Drawing.Image)(resources.GetObject("italicStripButton.Image")));
+            this.italicStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.italicStripButton.Name = "italicStripButton";
+            this.italicStripButton.Size = new System.Drawing.Size(28, 28);
+            this.italicStripButton.Text = "Italics";
+            // 
+            // underlineStripButton
+            // 
+            this.underlineStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.underlineStripButton.Image = ((System.Drawing.Image)(resources.GetObject("underlineStripButton.Image")));
+            this.underlineStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.underlineStripButton.Name = "underlineStripButton";
+            this.underlineStripButton.Size = new System.Drawing.Size(28, 28);
+            this.underlineStripButton.Text = "Underline";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
+            // leftAlignStripButton
+            // 
+            this.leftAlignStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.leftAlignStripButton.Image = ((System.Drawing.Image)(resources.GetObject("leftAlignStripButton.Image")));
+            this.leftAlignStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.leftAlignStripButton.Name = "leftAlignStripButton";
+            this.leftAlignStripButton.Size = new System.Drawing.Size(28, 28);
+            this.leftAlignStripButton.Text = "Left Align";
+            // 
+            // centerAlignStripButton
+            // 
+            this.centerAlignStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.centerAlignStripButton.Image = ((System.Drawing.Image)(resources.GetObject("centerAlignStripButton.Image")));
+            this.centerAlignStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.centerAlignStripButton.Name = "centerAlignStripButton";
+            this.centerAlignStripButton.Size = new System.Drawing.Size(28, 28);
+            this.centerAlignStripButton.Text = "Center Align";
+            // 
+            // rightAlignStripButton
+            // 
+            this.rightAlignStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.rightAlignStripButton.Image = ((System.Drawing.Image)(resources.GetObject("rightAlignStripButton.Image")));
+            this.rightAlignStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.rightAlignStripButton.Name = "rightAlignStripButton";
+            this.rightAlignStripButton.Size = new System.Drawing.Size(28, 28);
+            this.rightAlignStripButton.Text = "Right Align";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
+            // 
+            // bulletListStripButton
+            // 
+            this.bulletListStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bulletListStripButton.Image = ((System.Drawing.Image)(resources.GetObject("bulletListStripButton.Image")));
+            this.bulletListStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bulletListStripButton.Name = "bulletListStripButton";
+            this.bulletListStripButton.Size = new System.Drawing.Size(28, 28);
+            this.bulletListStripButton.Text = "Bullet List";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 31);
+            // 
+            // zoomDropDownButton
+            // 
+            this.zoomDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.zoomDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("zoomDropDownButton.Image")));
+            this.zoomDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomDropDownButton.Name = "zoomDropDownButton";
+            this.zoomDropDownButton.Size = new System.Drawing.Size(37, 28);
+            this.zoomDropDownButton.Text = "Zoom Factor";
             // 
             // panel13
             // 
             this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel13.Controls.Add(this.btnGenerateClaim);
-            this.panel13.Location = new System.Drawing.Point(4, 623);
+            this.panel13.Location = new System.Drawing.Point(331, 179);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(1018, 31);
+            this.panel13.Size = new System.Drawing.Size(1024, 31);
             this.panel13.TabIndex = 9;
             // 
             // btnGenerateClaim
             // 
             this.btnGenerateClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
             this.btnGenerateClaim.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnGenerateClaim.Enabled = false;
             this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
             this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaim.Location = new System.Drawing.Point(834, 0);
+            this.btnGenerateClaim.Location = new System.Drawing.Point(840, 0);
             this.btnGenerateClaim.Name = "btnGenerateClaim";
             this.btnGenerateClaim.Size = new System.Drawing.Size(184, 31);
             this.btnGenerateClaim.TabIndex = 6;
-            this.btnGenerateClaim.Text = "Generate Letter";
+            this.btnGenerateClaim.Text = "PREVIEW LETTER";
             this.btnGenerateClaim.UseVisualStyleBackColor = false;
+            this.btnGenerateClaim.Click += new System.EventHandler(this.btnGenerateClaim_Click);
             // 
             // panel11
             // 
             this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel11.Controls.Add(this.groupBox13);
-            this.panel11.Location = new System.Drawing.Point(4, 6);
+            this.panel11.Location = new System.Drawing.Point(329, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(1018, 302);
+            this.panel11.Size = new System.Drawing.Size(1031, 175);
             this.panel11.TabIndex = 7;
             // 
             // groupBox13
             // 
-            this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox13.Controls.Add(this.dgvDefinition);
+            this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox13.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.groupBox13.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox13.Location = new System.Drawing.Point(0, 0);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(1018, 302);
+            this.groupBox13.Size = new System.Drawing.Size(1031, 175);
             this.groupBox13.TabIndex = 0;
             this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Definition";
+            this.groupBox13.Text = "Definition/Exclusion";
             // 
             // dgvDefinition
             // 
+            this.dgvDefinition.AllowUserToAddRows = false;
+            this.dgvDefinition.AllowUserToDeleteRows = false;
+            this.dgvDefinition.AllowUserToOrderColumns = true;
+            this.dgvDefinition.AllowUserToResizeColumns = false;
+            this.dgvDefinition.AllowUserToResizeRows = false;
             this.dgvDefinition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDefinition.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDefinition.Location = new System.Drawing.Point(3, 19);
             this.dgvDefinition.Name = "dgvDefinition";
-            this.dgvDefinition.Size = new System.Drawing.Size(1012, 280);
+            this.dgvDefinition.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvDefinition.Size = new System.Drawing.Size(1025, 153);
             this.dgvDefinition.TabIndex = 0;
-            // 
-            // panel12
-            // 
-            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel12.Controls.Add(this.groupBox14);
-            this.panel12.Location = new System.Drawing.Point(4, 308);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(1018, 312);
-            this.panel12.TabIndex = 8;
-            // 
-            // groupBox14
-            // 
-            this.groupBox14.Controls.Add(this.dgvExclusion);
-            this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox14.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox14.Location = new System.Drawing.Point(0, 0);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(1018, 312);
-            this.groupBox14.TabIndex = 1;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "Exclusion";
-            // 
-            // dgvExclusion
-            // 
-            this.dgvExclusion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvExclusion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvExclusion.Location = new System.Drawing.Point(3, 19);
-            this.dgvExclusion.Name = "dgvExclusion";
-            this.dgvExclusion.Size = new System.Drawing.Size(1012, 290);
-            this.dgvExclusion.TabIndex = 0;
+            this.dgvDefinition.DataSourceChanged += new System.EventHandler(this.dgvDefinition_DataSourceChanged_1);
+            this.dgvDefinition.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDefinition_CellContentClick);
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.groupBox12);
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(325, 651);
+            this.panel9.Size = new System.Drawing.Size(325, 208);
             this.panel9.TabIndex = 7;
             // 
             // groupBox12
@@ -2427,6 +2778,23 @@
             this.txtClaimNo.Size = new System.Drawing.Size(238, 23);
             this.txtClaimNo.TabIndex = 9;
             this.txtClaimNo.Leave += new System.EventHandler(this.txtClaimNo_Leave);
+            // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(668, 384);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
             // 
             // frmSendEmailClaim
             // 
@@ -2496,14 +2864,20 @@
             this.panel6.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.panel13.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDefinition)).EndInit();
-            this.panel12.ResumeLayout(false);
-            this.groupBox14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvExclusion)).EndInit();
             this.panel9.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
@@ -2679,19 +3053,57 @@
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.DataGridView dgvDefinition;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel13;
+        private cus_button btnGenerateClaim;
         private System.Windows.Forms.GroupBox groupBox12;
         private cus_button btnExcluDefin;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.TextBox txtClaimNo;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.DataGridView dgvExclusion;
-        private System.Windows.Forms.Panel panel13;
-        private cus_button btnGenerateClaim;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton saveStripButton;
+        private System.Windows.Forms.ToolStripButton openFileStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton printStripButton;
+        private System.Windows.Forms.ToolStripButton printPreviewStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton undoStripButton;
+        private System.Windows.Forms.ToolStripButton redoStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripComboBox fontStripComboBox;
+        private System.Windows.Forms.ToolStripComboBox fontSizeComboBox;
+        private System.Windows.Forms.ToolStripButton increaseStripButton;
+        private System.Windows.Forms.ToolStripButton decreaseStripButton;
+        private System.Windows.Forms.ToolStripDropDownButton colorStripDropDownButton;
+        private System.Windows.Forms.ToolStripDropDownButton changeCaseDropDownButton;
+        private System.Windows.Forms.ToolStripMenuItem lowercaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uppercaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton clearFormattingStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton boldStripButton3;
+        private System.Windows.Forms.ToolStripButton italicStripButton;
+        private System.Windows.Forms.ToolStripButton underlineStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton leftAlignStripButton;
+        private System.Windows.Forms.ToolStripButton centerAlignStripButton;
+        private System.Windows.Forms.ToolStripButton rightAlignStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton bulletListStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripDropDownButton zoomDropDownButton;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

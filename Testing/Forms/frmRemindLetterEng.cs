@@ -379,7 +379,10 @@ namespace Testing.Forms
                             using (StreamReader reader = new StreamReader("Html/2020Email.html"))
                             {
                                 body = reader.ReadToEnd();
+                                
                             }
+                            
+                            //End of Update
                             DataTable d1 = crud.ExecQuery("select SIGNATURE from user_claim_signature where FULL_NAME ='"+ UserFullName.ToUpper()+ "'");
                             if (d1.Rows.Count != 0)
                             {

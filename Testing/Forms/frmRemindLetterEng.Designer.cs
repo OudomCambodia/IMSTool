@@ -36,6 +36,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.bnClear = new Testing.cus_button();
+            this.bnSearch = new Testing.cus_button();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,6 +47,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnRemove = new Testing.cus_button();
+            this.btnOpen = new Testing.cus_button();
+            this.btnBrowse = new Testing.cus_button();
             this.dgvFile = new System.Windows.Forms.DataGridView();
             this.File_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.File_Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,17 +57,12 @@
             this.tbCC = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tbTo = new System.Windows.Forms.TextBox();
+            this.bnSendEmail = new Testing.cus_button();
             this.label12 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.dgvResult = new System.Windows.Forms.DataGridView();
-            this.btnRemove = new Testing.cus_button();
-            this.btnOpen = new Testing.cus_button();
-            this.btnBrowse = new Testing.cus_button();
-            this.bnSendEmail = new Testing.cus_button();
             this.btnDownload = new Testing.cus_button();
-            this.bnClear = new Testing.cus_button();
-            this.bnSearch = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -82,7 +82,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1035, 46);
+            this.label1.Size = new System.Drawing.Size(1015, 46);
             this.label1.TabIndex = 14;
             this.label1.Text = "ECON/EEAR Expiry Reminder";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -93,7 +93,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1035, 71);
+            this.panel1.Size = new System.Drawing.Size(1015, 71);
             this.panel1.TabIndex = 15;
             // 
             // groupBox1
@@ -114,7 +114,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1035, 71);
+            this.groupBox1.Size = new System.Drawing.Size(1015, 71);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Policy Expiry Date";
@@ -170,6 +170,34 @@
             this.label7.TabIndex = 19;
             this.label7.Text = "Selected:";
             // 
+            // bnClear
+            // 
+            this.bnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnClear.FlatAppearance.BorderSize = 2;
+            this.bnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnClear.ForeColor = System.Drawing.Color.White;
+            this.bnClear.Location = new System.Drawing.Point(643, 30);
+            this.bnClear.Name = "bnClear";
+            this.bnClear.Size = new System.Drawing.Size(98, 26);
+            this.bnClear.TabIndex = 27;
+            this.bnClear.Text = "Clear";
+            this.bnClear.UseVisualStyleBackColor = false;
+            this.bnClear.Click += new System.EventHandler(this.bnClear_Click);
+            // 
+            // bnSearch
+            // 
+            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnSearch.FlatAppearance.BorderSize = 2;
+            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnSearch.ForeColor = System.Drawing.Color.White;
+            this.bnSearch.Location = new System.Drawing.Point(530, 30);
+            this.bnSearch.Name = "bnSearch";
+            this.bnSearch.Size = new System.Drawing.Size(98, 26);
+            this.bnSearch.TabIndex = 26;
+            this.bnSearch.Text = "Search";
+            this.bnSearch.UseVisualStyleBackColor = false;
+            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
+            // 
             // dtpDateTo
             // 
             this.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -210,7 +238,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 398);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1035, 301);
+            this.panel5.Size = new System.Drawing.Size(1015, 301);
             this.panel5.TabIndex = 17;
             // 
             // groupBox2
@@ -232,7 +260,7 @@
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1035, 301);
+            this.groupBox2.Size = new System.Drawing.Size(1015, 301);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Email";
@@ -266,6 +294,48 @@
             this.label2.Size = new System.Drawing.Size(10, 15);
             this.label2.TabIndex = 73;
             this.label2.Text = " ";
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.Color.White;
+            this.btnRemove.Location = new System.Drawing.Point(925, 130);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(69, 25);
+            this.btnRemove.TabIndex = 71;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpen.ForeColor = System.Drawing.Color.White;
+            this.btnOpen.Location = new System.Drawing.Point(925, 83);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(69, 25);
+            this.btnOpen.TabIndex = 70;
+            this.btnOpen.Text = "Open";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowse.ForeColor = System.Drawing.Color.White;
+            this.btnBrowse.Location = new System.Drawing.Point(925, 37);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(69, 25);
+            this.btnBrowse.TabIndex = 69;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // dgvFile
             // 
@@ -337,6 +407,21 @@
             this.tbTo.Size = new System.Drawing.Size(443, 49);
             this.tbTo.TabIndex = 63;
             // 
+            // bnSendEmail
+            // 
+            this.bnSendEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnSendEmail.Enabled = false;
+            this.bnSendEmail.FlatAppearance.BorderSize = 2;
+            this.bnSendEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnSendEmail.ForeColor = System.Drawing.Color.White;
+            this.bnSendEmail.Location = new System.Drawing.Point(56, 177);
+            this.bnSendEmail.Name = "bnSendEmail";
+            this.bnSendEmail.Size = new System.Drawing.Size(151, 30);
+            this.bnSendEmail.TabIndex = 62;
+            this.bnSendEmail.Text = "Send Email";
+            this.bnSendEmail.UseVisualStyleBackColor = false;
+            this.bnSendEmail.Click += new System.EventHandler(this.bnSendEmail_Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -352,7 +437,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 117);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1035, 281);
+            this.panel3.Size = new System.Drawing.Size(1015, 281);
             this.panel3.TabIndex = 16;
             // 
             // groupBox6
@@ -364,7 +449,7 @@
             this.groupBox6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox6.Location = new System.Drawing.Point(0, 0);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1035, 281);
+            this.groupBox6.Size = new System.Drawing.Size(1015, 281);
             this.groupBox6.TabIndex = 36;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = " ";
@@ -385,67 +470,10 @@
             this.dgvResult.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvResult.RowTemplate.Height = 30;
             this.dgvResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResult.Size = new System.Drawing.Size(1029, 213);
+            this.dgvResult.Size = new System.Drawing.Size(1009, 213);
             this.dgvResult.TabIndex = 17;
             this.dgvResult.DataSourceChanged += new System.EventHandler(this.dgvResult_DataSourceChanged);
             this.dgvResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellContentClick_1);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.ForeColor = System.Drawing.Color.White;
-            this.btnRemove.Location = new System.Drawing.Point(925, 130);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(69, 25);
-            this.btnRemove.TabIndex = 71;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpen.ForeColor = System.Drawing.Color.White;
-            this.btnOpen.Location = new System.Drawing.Point(925, 83);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(69, 25);
-            this.btnOpen.TabIndex = 70;
-            this.btnOpen.Text = "Open";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.ForeColor = System.Drawing.Color.White;
-            this.btnBrowse.Location = new System.Drawing.Point(925, 37);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(69, 25);
-            this.btnBrowse.TabIndex = 69;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // bnSendEmail
-            // 
-            this.bnSendEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnSendEmail.Enabled = false;
-            this.bnSendEmail.FlatAppearance.BorderSize = 2;
-            this.bnSendEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnSendEmail.ForeColor = System.Drawing.Color.White;
-            this.bnSendEmail.Location = new System.Drawing.Point(56, 177);
-            this.bnSendEmail.Name = "bnSendEmail";
-            this.bnSendEmail.Size = new System.Drawing.Size(151, 30);
-            this.bnSendEmail.TabIndex = 62;
-            this.bnSendEmail.Text = "Send Email";
-            this.bnSendEmail.UseVisualStyleBackColor = false;
-            this.bnSendEmail.Click += new System.EventHandler(this.bnSendEmail_Click);
             // 
             // btnDownload
             // 
@@ -454,7 +482,7 @@
             this.btnDownload.FlatAppearance.BorderSize = 2;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.ForeColor = System.Drawing.Color.White;
-            this.btnDownload.Location = new System.Drawing.Point(925, 239);
+            this.btnDownload.Location = new System.Drawing.Point(905, 239);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(98, 26);
             this.btnDownload.TabIndex = 16;
@@ -462,45 +490,16 @@
             this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
-            // bnClear
-            // 
-            this.bnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnClear.FlatAppearance.BorderSize = 2;
-            this.bnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnClear.ForeColor = System.Drawing.Color.White;
-            this.bnClear.Location = new System.Drawing.Point(643, 30);
-            this.bnClear.Name = "bnClear";
-            this.bnClear.Size = new System.Drawing.Size(98, 26);
-            this.bnClear.TabIndex = 27;
-            this.bnClear.Text = "Clear";
-            this.bnClear.UseVisualStyleBackColor = false;
-            this.bnClear.Click += new System.EventHandler(this.bnClear_Click);
-            // 
-            // bnSearch
-            // 
-            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnSearch.FlatAppearance.BorderSize = 2;
-            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnSearch.ForeColor = System.Drawing.Color.White;
-            this.bnSearch.Location = new System.Drawing.Point(530, 30);
-            this.bnSearch.Name = "bnSearch";
-            this.bnSearch.Size = new System.Drawing.Size(98, 26);
-            this.bnSearch.TabIndex = 26;
-            this.bnSearch.Text = "Search";
-            this.bnSearch.UseVisualStyleBackColor = false;
-            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
-            // 
             // frmRemindLetterEng
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.ClientSize = new System.Drawing.Size(1035, 705);
+            this.ClientSize = new System.Drawing.Size(1015, 694);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmRemindLetterEng";
             this.Text = "Reminding Letter-Engineering";
             this.Load += new System.EventHandler(this.frmRemindLetterEng_Load);
