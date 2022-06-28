@@ -2385,7 +2385,6 @@
             this.txtRemarkBHPOld.Size = new System.Drawing.Size(778, 43);
             this.txtRemarkBHPOld.TabIndex = 969;
             this.txtRemarkBHPOld.Text = "";
-            //this.txtRemarkBHPOld.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRemarkBHPOld_KeyPress);
             // 
             // textBox35
             // 
@@ -2600,7 +2599,6 @@
             this.txtDaignosis.Name = "txtDaignosis";
             this.txtDaignosis.Size = new System.Drawing.Size(652, 38);
             this.txtDaignosis.TabIndex = 850;
-            //this.txtDaignosis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDaignosis_KeyPress);
             // 
             // txtDesc8
             // 
@@ -3318,7 +3316,7 @@
             this.txtDesc34.ReadOnly = true;
             this.txtDesc34.Size = new System.Drawing.Size(455, 20);
             this.txtDesc34.TabIndex = 1054;
-            this.txtDesc34.Text = "Diagnostic Tests";
+            this.txtDesc34.Text = "Traditional Chinese Medicine";
             // 
             // textBox62
             // 
