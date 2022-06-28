@@ -13,6 +13,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SautinSoft;
 
 namespace Testing.Forms
 {
@@ -2173,11 +2174,7 @@ namespace Testing.Forms
 
         public void btnGenerateClaim_Click(object sender, EventArgs e)
         {
-
-
-
-
-            
+   
             selectedDoc = GetDataTableFromDGV(dgvDefinition);
             if (selectedDoc.Rows.Count <= 0)
             {
@@ -2189,21 +2186,18 @@ namespace Testing.Forms
                 DataTable dtClaimDet = crud.ExecQuery("select template from user_rejectletter_temp where products= 'HNS'");
                 //Update 16-Jul-19 (Edit Email Content)
                 string body = string.Empty;
-                using (StreamReader reader = new StreamReader("Html/HNSRejectionLetter.html"))
-                {
-                    body = reader.ReadToEnd();
-                }
+                //using (StreamReader reader = new StreamReader("Html/HNSRejectionLetter.html"))
+                //{
+                //    body = reader.ReadToEnd();
+                //}
 
-                body = body.Replace("{text}", ""); 
-                web
+                body = dtClaimDet.Rows[0][0].ToString(); 
+                    
                 this.webBrowser1.DocumentText = body;
-                //End of Update
-                //Update 16-Jul-19 (Edit Email Content)
-                richTextBox1.Text = "";
-                webBrowser1.Document.ExecCommand("SelectAll", false, null);
-                webBrowser1.Document.ExecCommand("Copy", false, null);
-                richTextBox1.Paste();    //Copy all text from webBrowserTrick(Visible = false) 
-                //End of Update
+
+                //webBrowser1.Document.ExecCommand("SelectAll", false, null);
+                //webBrowser1.Document.ExecCommand("Copy", false, null);
+                //richTextBox1.Paste();    //Copy all text from webBrowserTrick(Visible = false) 
                 Cursor.Current = Cursors.WaitCursor;
                
             }
@@ -2296,6 +2290,28 @@ namespace Testing.Forms
             
             e.Graphics.PageUnit = GraphicsUnit.Inch; 
         
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            RtfToHtml r = new RtfToHtml();
+            r.OutputFormat = RtfToHtml.eOutputFormat.HTML_401;
+
+            string html = r.ConvertString(richTextBox1.Rtf);
+
+            string url = "\"https://www.sautinsoft.com/products/rtf-to-html/order.php\"";
+            string replace = string.Format("<div style=\"text-align:center;\">The unlicensed version of &laquo;RTF to HTML .Net&raquo;.<br><a href={0}>Get the full featured version!</a></div>", url);
+
+            html = html.Replace(replace, "");
+
+            this.webBrowser1.DocumentText = html;
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Document.ExecCommand("SelectAll", false, null);
+            webBrowser1.Document.ExecCommand("Copy", false, null);
+            richTextBox1.Paste(); 
         }
 
        

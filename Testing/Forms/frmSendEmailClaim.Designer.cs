@@ -34,10 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpSend = new System.Windows.Forms.TabPage();
-            this.bnClear = new Testing.cus_button();
             this.pnQuery = new System.Windows.Forms.Panel();
-            this.bnDocReqResend = new Testing.cus_button();
-            this.bnDocReqSend = new Testing.cus_button();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -48,67 +45,42 @@
             this.tbDOL = new System.Windows.Forms.TextBox();
             this.tbRiskName = new System.Windows.Forms.TextBox();
             this.tbInsName = new System.Windows.Forms.TextBox();
-            this.bnDocRec = new Testing.cus_button();
             this.dgvHisClaim = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
-            this.bnRem3Resend = new Testing.cus_button();
-            this.bnRem3Send = new Testing.cus_button();
-            this.bnRem2Resend = new Testing.cus_button();
-            this.bnRem2Send = new Testing.cus_button();
-            this.bnRem1Resend = new Testing.cus_button();
-            this.bnRem1Send = new Testing.cus_button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.bnPayResend = new Testing.cus_button();
-            this.bnPaySend = new Testing.cus_button();
             this.label6 = new System.Windows.Forms.Label();
-            this.bnParResend = new Testing.cus_button();
-            this.bnParSend = new Testing.cus_button();
             this.label5 = new System.Windows.Forms.Label();
-            this.bnRejResend = new Testing.cus_button();
-            this.bnRejSend = new Testing.cus_button();
             this.label4 = new System.Windows.Forms.Label();
-            this.bnAckResend = new Testing.cus_button();
-            this.bnAckSend = new Testing.cus_button();
             this.label3 = new System.Windows.Forms.Label();
             this.lbSuccess = new System.Windows.Forms.Label();
             this.lbClaimNo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbClaimNo = new System.Windows.Forms.TextBox();
-            this.bnClaimSearch = new Testing.cus_button();
             this.tpHistory = new System.Windows.Forms.TabPage();
             this.tbHisSearch = new System.Windows.Forms.TextBox();
             this.dgvAllHis = new System.Windows.Forms.DataGridView();
             this.label12 = new System.Windows.Forms.Label();
-            this.bnHisSearch = new Testing.cus_button();
             this.tpPending = new System.Windows.Forms.TabPage();
-            this.bnRefresh = new Testing.cus_button();
             this.label13 = new System.Windows.Forms.Label();
             this.dgvPending = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label26 = new System.Windows.Forms.Label();
             this.tbDear = new System.Windows.Forms.TextBox();
-            this.btnSave = new Testing.cus_button();
             this.label27 = new System.Windows.Forms.Label();
             this.tbCC = new System.Windows.Forms.TextBox();
             this.cbSignature = new System.Windows.Forms.ComboBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.btnGenerateLetter = new Testing.cus_button();
             this.label29 = new System.Windows.Forms.Label();
             this.tbText = new System.Windows.Forms.RichTextBox();
             this.gbSettleSendEmail = new System.Windows.Forms.GroupBox();
             this.tbSettleReceiver = new CustomControls.TextBoxEmailAutocomplete();
             this.tbSettleCC = new CustomControls.TextBoxEmailAutocomplete();
-            this.btnSettlePreview = new Testing.cus_button();
             this.label35 = new System.Windows.Forms.Label();
-            this.btnSettleSend = new Testing.cus_button();
-            this.btnRemove = new Testing.cus_button();
-            this.btnOpen = new Testing.cus_button();
             this.label36 = new System.Windows.Forms.Label();
-            this.btnBrowse = new Testing.cus_button();
             this.dgvFile = new System.Windows.Forms.DataGridView();
             this.File_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.File_Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,8 +89,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rbBankTranNo = new System.Windows.Forms.RadioButton();
             this.tbBankTranNo = new System.Windows.Forms.TextBox();
-            this.btnRefreshTable = new Testing.cus_button();
-            this.btnGenerateClaimDetail = new Testing.cus_button();
             this.label25 = new System.Windows.Forms.Label();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.label24 = new System.Windows.Forms.Label();
@@ -131,7 +101,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rbToHospital = new System.Windows.Forms.RadioButton();
             this.rbToInsured = new System.Windows.Forms.RadioButton();
-            this.btnClear = new Testing.cus_button();
             this.tpRejection = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -139,7 +108,6 @@
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.btnAddDefExcl = new Testing.cus_button();
             this.txtKhmer = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
             this.txtEnglish = new System.Windows.Forms.TextBox();
@@ -148,12 +116,9 @@
             this.label38 = new System.Windows.Forms.Label();
             this.cbProductType = new System.Windows.Forms.ComboBox();
             this.label37 = new System.Windows.Forms.Label();
-            this.btnClearDef = new Testing.cus_button();
-            this.btnExclDef = new Testing.cus_button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lvDefExclu = new System.Windows.Forms.ListView();
             this.tbRejectClNo = new System.Windows.Forms.TextBox();
-            this.btnGenerate = new Testing.cus_button();
             this.label19 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -164,8 +129,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.rbNonPayBankTranNo = new System.Windows.Forms.RadioButton();
             this.tbNonPayBankTranNo = new System.Windows.Forms.TextBox();
-            this.btnNonPayRefreshTable = new Testing.cus_button();
-            this.btnGetClNo = new Testing.cus_button();
             this.label20 = new System.Windows.Forms.Label();
             this.dtpNonPayTo = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
@@ -178,7 +141,6 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.tbNonPayItem = new System.Windows.Forms.RichTextBox();
-            this.btnGenerateNonPay = new Testing.cus_button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
             this.GPAClCheckViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
@@ -187,7 +149,6 @@
             this.label30 = new System.Windows.Forms.Label();
             this.tbClNoGPAClCheck = new System.Windows.Forms.TextBox();
             this.tbGrandTotalRemark = new System.Windows.Forms.TextBox();
-            this.bnGenerate = new Testing.cus_button();
             this.label31 = new System.Windows.Forms.Label();
             this.tbNotPayable = new System.Windows.Forms.TextBox();
             this.tbNotPayableRemark = new System.Windows.Forms.TextBox();
@@ -199,7 +160,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.saveStripButton = new System.Windows.Forms.ToolStripButton();
@@ -233,21 +194,61 @@
             this.bulletListStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.zoomDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel13 = new System.Windows.Forms.Panel();
-            this.btnGenerateClaim = new Testing.cus_button();
             this.panel11 = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.dgvDefinition = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.btnExcluDefin = new Testing.cus_button();
             this.label41 = new System.Windows.Forms.Label();
             this.txtClaimNo = new System.Windows.Forms.TextBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bnClear = new Testing.cus_button();
+            this.bnDocReqResend = new Testing.cus_button();
+            this.bnDocReqSend = new Testing.cus_button();
+            this.bnDocRec = new Testing.cus_button();
+            this.bnRem3Resend = new Testing.cus_button();
+            this.bnRem3Send = new Testing.cus_button();
+            this.bnRem2Resend = new Testing.cus_button();
+            this.bnRem2Send = new Testing.cus_button();
+            this.bnRem1Resend = new Testing.cus_button();
+            this.bnRem1Send = new Testing.cus_button();
+            this.bnPayResend = new Testing.cus_button();
+            this.bnPaySend = new Testing.cus_button();
+            this.bnParResend = new Testing.cus_button();
+            this.bnParSend = new Testing.cus_button();
+            this.bnRejResend = new Testing.cus_button();
+            this.bnRejSend = new Testing.cus_button();
+            this.bnAckResend = new Testing.cus_button();
+            this.bnAckSend = new Testing.cus_button();
+            this.bnClaimSearch = new Testing.cus_button();
+            this.bnHisSearch = new Testing.cus_button();
+            this.bnRefresh = new Testing.cus_button();
+            this.btnSave = new Testing.cus_button();
+            this.btnGenerateLetter = new Testing.cus_button();
+            this.btnSettlePreview = new Testing.cus_button();
+            this.btnSettleSend = new Testing.cus_button();
+            this.btnRemove = new Testing.cus_button();
+            this.btnOpen = new Testing.cus_button();
+            this.btnBrowse = new Testing.cus_button();
+            this.btnRefreshTable = new Testing.cus_button();
+            this.btnGenerateClaimDetail = new Testing.cus_button();
+            this.btnClear = new Testing.cus_button();
+            this.btnAddDefExcl = new Testing.cus_button();
+            this.btnClearDef = new Testing.cus_button();
+            this.btnExclDef = new Testing.cus_button();
+            this.btnGenerate = new Testing.cus_button();
+            this.btnNonPayRefreshTable = new Testing.cus_button();
+            this.btnGetClNo = new Testing.cus_button();
+            this.btnGenerateNonPay = new Testing.cus_button();
+            this.bnGenerate = new Testing.cus_button();
+            this.btnGenerateClaim = new Testing.cus_button();
+            this.btnExcluDefin = new Testing.cus_button();
+            this.btnEdit = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpSend.SuspendLayout();
@@ -360,20 +361,6 @@
             this.tpSend.TabIndex = 0;
             this.tpSend.Text = "Send Email";
             // 
-            // bnClear
-            // 
-            this.bnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnClear.FlatAppearance.BorderSize = 2;
-            this.bnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnClear.ForeColor = System.Drawing.Color.White;
-            this.bnClear.Location = new System.Drawing.Point(442, 13);
-            this.bnClear.Name = "bnClear";
-            this.bnClear.Size = new System.Drawing.Size(108, 32);
-            this.bnClear.TabIndex = 6;
-            this.bnClear.Text = "Clear";
-            this.bnClear.UseVisualStyleBackColor = false;
-            this.bnClear.Click += new System.EventHandler(this.bnClear_Click);
-            // 
             // pnQuery
             // 
             this.pnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -412,37 +399,9 @@
             this.pnQuery.Controls.Add(this.lbClaimNo);
             this.pnQuery.Location = new System.Drawing.Point(3, 51);
             this.pnQuery.Name = "pnQuery";
-            this.pnQuery.Size = new System.Drawing.Size(1357, 511);
+            this.pnQuery.Size = new System.Drawing.Size(1357, 507);
             this.pnQuery.TabIndex = 5;
             this.pnQuery.Visible = false;
-            // 
-            // bnDocReqResend
-            // 
-            this.bnDocReqResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnDocReqResend.FlatAppearance.BorderSize = 2;
-            this.bnDocReqResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnDocReqResend.ForeColor = System.Drawing.Color.White;
-            this.bnDocReqResend.Location = new System.Drawing.Point(31, 205);
-            this.bnDocReqResend.Name = "bnDocReqResend";
-            this.bnDocReqResend.Size = new System.Drawing.Size(93, 30);
-            this.bnDocReqResend.TabIndex = 33;
-            this.bnDocReqResend.Text = "Resend";
-            this.bnDocReqResend.UseVisualStyleBackColor = false;
-            this.bnDocReqResend.Click += new System.EventHandler(this.bnDocReqResend_Click);
-            // 
-            // bnDocReqSend
-            // 
-            this.bnDocReqSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnDocReqSend.FlatAppearance.BorderSize = 2;
-            this.bnDocReqSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnDocReqSend.ForeColor = System.Drawing.Color.White;
-            this.bnDocReqSend.Location = new System.Drawing.Point(31, 169);
-            this.bnDocReqSend.Name = "bnDocReqSend";
-            this.bnDocReqSend.Size = new System.Drawing.Size(93, 30);
-            this.bnDocReqSend.TabIndex = 32;
-            this.bnDocReqSend.Text = "Send";
-            this.bnDocReqSend.UseVisualStyleBackColor = false;
-            this.bnDocReqSend.Click += new System.EventHandler(this.bnDocReqSend_Click);
             // 
             // label18
             // 
@@ -544,21 +503,6 @@
             this.tbInsName.Size = new System.Drawing.Size(335, 24);
             this.tbInsName.TabIndex = 0;
             // 
-            // bnDocRec
-            // 
-            this.bnDocRec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bnDocRec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnDocRec.FlatAppearance.BorderSize = 2;
-            this.bnDocRec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnDocRec.ForeColor = System.Drawing.Color.White;
-            this.bnDocRec.Location = new System.Drawing.Point(1213, 241);
-            this.bnDocRec.Name = "bnDocRec";
-            this.bnDocRec.Size = new System.Drawing.Size(139, 30);
-            this.bnDocRec.TabIndex = 29;
-            this.bnDocRec.Text = "Documents Received";
-            this.bnDocRec.UseVisualStyleBackColor = false;
-            this.bnDocRec.Click += new System.EventHandler(this.bnDocRec_Click);
-            // 
             // dgvHisClaim
             // 
             this.dgvHisClaim.AllowUserToAddRows = false;
@@ -575,7 +519,7 @@
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHisClaim.RowTemplate.Height = 27;
-            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 241);
+            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 237);
             this.dgvHisClaim.TabIndex = 28;
             // 
             // label11
@@ -587,90 +531,6 @@
             this.label11.Size = new System.Drawing.Size(67, 19);
             this.label11.TabIndex = 27;
             this.label11.Text = "History:";
-            // 
-            // bnRem3Resend
-            // 
-            this.bnRem3Resend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRem3Resend.FlatAppearance.BorderSize = 2;
-            this.bnRem3Resend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRem3Resend.ForeColor = System.Drawing.Color.White;
-            this.bnRem3Resend.Location = new System.Drawing.Point(548, 205);
-            this.bnRem3Resend.Name = "bnRem3Resend";
-            this.bnRem3Resend.Size = new System.Drawing.Size(93, 30);
-            this.bnRem3Resend.TabIndex = 26;
-            this.bnRem3Resend.Text = "Resend";
-            this.bnRem3Resend.UseVisualStyleBackColor = false;
-            this.bnRem3Resend.Click += new System.EventHandler(this.bnRem3Resend_Click);
-            // 
-            // bnRem3Send
-            // 
-            this.bnRem3Send.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRem3Send.FlatAppearance.BorderSize = 2;
-            this.bnRem3Send.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRem3Send.ForeColor = System.Drawing.Color.White;
-            this.bnRem3Send.Location = new System.Drawing.Point(548, 169);
-            this.bnRem3Send.Name = "bnRem3Send";
-            this.bnRem3Send.Size = new System.Drawing.Size(93, 30);
-            this.bnRem3Send.TabIndex = 25;
-            this.bnRem3Send.Text = "Send";
-            this.bnRem3Send.UseVisualStyleBackColor = false;
-            this.bnRem3Send.Click += new System.EventHandler(this.bnRem3Send_Click);
-            // 
-            // bnRem2Resend
-            // 
-            this.bnRem2Resend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRem2Resend.FlatAppearance.BorderSize = 2;
-            this.bnRem2Resend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRem2Resend.ForeColor = System.Drawing.Color.White;
-            this.bnRem2Resend.Location = new System.Drawing.Point(420, 205);
-            this.bnRem2Resend.Name = "bnRem2Resend";
-            this.bnRem2Resend.Size = new System.Drawing.Size(93, 30);
-            this.bnRem2Resend.TabIndex = 24;
-            this.bnRem2Resend.Text = "Resend";
-            this.bnRem2Resend.UseVisualStyleBackColor = false;
-            this.bnRem2Resend.Click += new System.EventHandler(this.bnRem2Resend_Click);
-            // 
-            // bnRem2Send
-            // 
-            this.bnRem2Send.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRem2Send.FlatAppearance.BorderSize = 2;
-            this.bnRem2Send.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRem2Send.ForeColor = System.Drawing.Color.White;
-            this.bnRem2Send.Location = new System.Drawing.Point(420, 169);
-            this.bnRem2Send.Name = "bnRem2Send";
-            this.bnRem2Send.Size = new System.Drawing.Size(93, 30);
-            this.bnRem2Send.TabIndex = 23;
-            this.bnRem2Send.Text = "Send";
-            this.bnRem2Send.UseVisualStyleBackColor = false;
-            this.bnRem2Send.Click += new System.EventHandler(this.bnRem2Send_Click);
-            // 
-            // bnRem1Resend
-            // 
-            this.bnRem1Resend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRem1Resend.FlatAppearance.BorderSize = 2;
-            this.bnRem1Resend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRem1Resend.ForeColor = System.Drawing.Color.White;
-            this.bnRem1Resend.Location = new System.Drawing.Point(291, 205);
-            this.bnRem1Resend.Name = "bnRem1Resend";
-            this.bnRem1Resend.Size = new System.Drawing.Size(93, 30);
-            this.bnRem1Resend.TabIndex = 22;
-            this.bnRem1Resend.Text = "Resend";
-            this.bnRem1Resend.UseVisualStyleBackColor = false;
-            this.bnRem1Resend.Click += new System.EventHandler(this.bnRem1Resend_Click);
-            // 
-            // bnRem1Send
-            // 
-            this.bnRem1Send.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRem1Send.FlatAppearance.BorderSize = 2;
-            this.bnRem1Send.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRem1Send.ForeColor = System.Drawing.Color.White;
-            this.bnRem1Send.Location = new System.Drawing.Point(291, 169);
-            this.bnRem1Send.Name = "bnRem1Send";
-            this.bnRem1Send.Size = new System.Drawing.Size(93, 30);
-            this.bnRem1Send.TabIndex = 21;
-            this.bnRem1Send.Text = "Send";
-            this.bnRem1Send.UseVisualStyleBackColor = false;
-            this.bnRem1Send.Click += new System.EventHandler(this.bnRem1Send_Click);
             // 
             // label10
             // 
@@ -712,34 +572,6 @@
             this.label7.TabIndex = 17;
             this.label7.Text = "Reminder:";
             // 
-            // bnPayResend
-            // 
-            this.bnPayResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnPayResend.FlatAppearance.BorderSize = 2;
-            this.bnPayResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnPayResend.ForeColor = System.Drawing.Color.White;
-            this.bnPayResend.Location = new System.Drawing.Point(548, 101);
-            this.bnPayResend.Name = "bnPayResend";
-            this.bnPayResend.Size = new System.Drawing.Size(93, 30);
-            this.bnPayResend.TabIndex = 16;
-            this.bnPayResend.Text = "Resend";
-            this.bnPayResend.UseVisualStyleBackColor = false;
-            this.bnPayResend.Click += new System.EventHandler(this.bnPayResend_Click);
-            // 
-            // bnPaySend
-            // 
-            this.bnPaySend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnPaySend.FlatAppearance.BorderSize = 2;
-            this.bnPaySend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnPaySend.ForeColor = System.Drawing.Color.White;
-            this.bnPaySend.Location = new System.Drawing.Point(548, 65);
-            this.bnPaySend.Name = "bnPaySend";
-            this.bnPaySend.Size = new System.Drawing.Size(93, 30);
-            this.bnPaySend.TabIndex = 15;
-            this.bnPaySend.Text = "Send";
-            this.bnPaySend.UseVisualStyleBackColor = false;
-            this.bnPaySend.Click += new System.EventHandler(this.bnPaySend_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -749,34 +581,6 @@
             this.label6.Size = new System.Drawing.Size(106, 19);
             this.label6.TabIndex = 14;
             this.label6.Text = "Full Payment";
-            // 
-            // bnParResend
-            // 
-            this.bnParResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnParResend.FlatAppearance.BorderSize = 2;
-            this.bnParResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnParResend.ForeColor = System.Drawing.Color.White;
-            this.bnParResend.Location = new System.Drawing.Point(376, 101);
-            this.bnParResend.Name = "bnParResend";
-            this.bnParResend.Size = new System.Drawing.Size(93, 30);
-            this.bnParResend.TabIndex = 13;
-            this.bnParResend.Text = "Resend";
-            this.bnParResend.UseVisualStyleBackColor = false;
-            this.bnParResend.Click += new System.EventHandler(this.bnParResend_Click);
-            // 
-            // bnParSend
-            // 
-            this.bnParSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnParSend.FlatAppearance.BorderSize = 2;
-            this.bnParSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnParSend.ForeColor = System.Drawing.Color.White;
-            this.bnParSend.Location = new System.Drawing.Point(376, 65);
-            this.bnParSend.Name = "bnParSend";
-            this.bnParSend.Size = new System.Drawing.Size(93, 30);
-            this.bnParSend.TabIndex = 12;
-            this.bnParSend.Text = "Send";
-            this.bnParSend.UseVisualStyleBackColor = false;
-            this.bnParSend.Click += new System.EventHandler(this.bnParSend_Click);
             // 
             // label5
             // 
@@ -788,34 +592,6 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Partial Payment";
             // 
-            // bnRejResend
-            // 
-            this.bnRejResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRejResend.FlatAppearance.BorderSize = 2;
-            this.bnRejResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRejResend.ForeColor = System.Drawing.Color.White;
-            this.bnRejResend.Location = new System.Drawing.Point(204, 101);
-            this.bnRejResend.Name = "bnRejResend";
-            this.bnRejResend.Size = new System.Drawing.Size(93, 30);
-            this.bnRejResend.TabIndex = 10;
-            this.bnRejResend.Text = "Resend";
-            this.bnRejResend.UseVisualStyleBackColor = false;
-            this.bnRejResend.Click += new System.EventHandler(this.bnRejResend_Click);
-            // 
-            // bnRejSend
-            // 
-            this.bnRejSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRejSend.FlatAppearance.BorderSize = 2;
-            this.bnRejSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRejSend.ForeColor = System.Drawing.Color.White;
-            this.bnRejSend.Location = new System.Drawing.Point(204, 65);
-            this.bnRejSend.Name = "bnRejSend";
-            this.bnRejSend.Size = new System.Drawing.Size(93, 30);
-            this.bnRejSend.TabIndex = 9;
-            this.bnRejSend.Text = "Send";
-            this.bnRejSend.UseVisualStyleBackColor = false;
-            this.bnRejSend.Click += new System.EventHandler(this.bnRejSend_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -825,34 +601,6 @@
             this.label4.Size = new System.Drawing.Size(79, 19);
             this.label4.TabIndex = 8;
             this.label4.Text = "Rejection";
-            // 
-            // bnAckResend
-            // 
-            this.bnAckResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnAckResend.FlatAppearance.BorderSize = 2;
-            this.bnAckResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnAckResend.ForeColor = System.Drawing.Color.White;
-            this.bnAckResend.Location = new System.Drawing.Point(31, 101);
-            this.bnAckResend.Name = "bnAckResend";
-            this.bnAckResend.Size = new System.Drawing.Size(93, 30);
-            this.bnAckResend.TabIndex = 7;
-            this.bnAckResend.Text = "Resend";
-            this.bnAckResend.UseVisualStyleBackColor = false;
-            this.bnAckResend.Click += new System.EventHandler(this.bnAckResend_Click);
-            // 
-            // bnAckSend
-            // 
-            this.bnAckSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnAckSend.FlatAppearance.BorderSize = 2;
-            this.bnAckSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnAckSend.ForeColor = System.Drawing.Color.White;
-            this.bnAckSend.Location = new System.Drawing.Point(31, 65);
-            this.bnAckSend.Name = "bnAckSend";
-            this.bnAckSend.Size = new System.Drawing.Size(93, 30);
-            this.bnAckSend.TabIndex = 6;
-            this.bnAckSend.Text = "Send";
-            this.bnAckSend.UseVisualStyleBackColor = false;
-            this.bnAckSend.Click += new System.EventHandler(this.bnAckSend_Click);
             // 
             // label3
             // 
@@ -900,20 +648,6 @@
             this.tbClaimNo.Size = new System.Drawing.Size(209, 23);
             this.tbClaimNo.TabIndex = 1;
             this.tbClaimNo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbClaimNo_KeyPress);
-            // 
-            // bnClaimSearch
-            // 
-            this.bnClaimSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnClaimSearch.FlatAppearance.BorderSize = 2;
-            this.bnClaimSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnClaimSearch.ForeColor = System.Drawing.Color.White;
-            this.bnClaimSearch.Location = new System.Drawing.Point(319, 13);
-            this.bnClaimSearch.Name = "bnClaimSearch";
-            this.bnClaimSearch.Size = new System.Drawing.Size(108, 32);
-            this.bnClaimSearch.TabIndex = 0;
-            this.bnClaimSearch.Text = "Search";
-            this.bnClaimSearch.UseVisualStyleBackColor = false;
-            this.bnClaimSearch.Click += new System.EventHandler(this.bnClaimSearch_Click);
             // 
             // tpHistory
             // 
@@ -966,20 +700,6 @@
             this.label12.TabIndex = 29;
             this.label12.Text = "History:";
             // 
-            // bnHisSearch
-            // 
-            this.bnHisSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnHisSearch.FlatAppearance.BorderSize = 2;
-            this.bnHisSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnHisSearch.ForeColor = System.Drawing.Color.White;
-            this.bnHisSearch.Location = new System.Drawing.Point(240, 6);
-            this.bnHisSearch.Name = "bnHisSearch";
-            this.bnHisSearch.Size = new System.Drawing.Size(108, 32);
-            this.bnHisSearch.TabIndex = 31;
-            this.bnHisSearch.Text = "Search";
-            this.bnHisSearch.UseVisualStyleBackColor = false;
-            this.bnHisSearch.Click += new System.EventHandler(this.bnHisSearch_Click);
-            // 
             // tpPending
             // 
             this.tpPending.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -992,21 +712,6 @@
             this.tpPending.Size = new System.Drawing.Size(1363, 663);
             this.tpPending.TabIndex = 2;
             this.tpPending.Text = "Pending Email";
-            // 
-            // bnRefresh
-            // 
-            this.bnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnRefresh.FlatAppearance.BorderSize = 2;
-            this.bnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnRefresh.ForeColor = System.Drawing.Color.White;
-            this.bnRefresh.Location = new System.Drawing.Point(1071, 5);
-            this.bnRefresh.Name = "bnRefresh";
-            this.bnRefresh.Size = new System.Drawing.Size(108, 32);
-            this.bnRefresh.TabIndex = 33;
-            this.bnRefresh.Text = "Refresh";
-            this.bnRefresh.UseVisualStyleBackColor = false;
-            this.bnRefresh.Click += new System.EventHandler(this.bnRefresh_Click);
             // 
             // label13
             // 
@@ -1093,21 +798,6 @@
             this.tbDear.Size = new System.Drawing.Size(215, 23);
             this.tbDear.TabIndex = 11;
             // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnSave.Enabled = false;
-            this.btnSave.FlatAppearance.BorderSize = 2;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(371, 52);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(107, 29);
-            this.btnSave.TabIndex = 22;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -1140,21 +830,6 @@
             this.label28.Size = new System.Drawing.Size(22, 15);
             this.label28.TabIndex = 16;
             this.label28.Text = "cc:";
-            // 
-            // btnGenerateLetter
-            // 
-            this.btnGenerateLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnGenerateLetter.Enabled = false;
-            this.btnGenerateLetter.FlatAppearance.BorderSize = 2;
-            this.btnGenerateLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerateLetter.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateLetter.Location = new System.Drawing.Point(371, 17);
-            this.btnGenerateLetter.Name = "btnGenerateLetter";
-            this.btnGenerateLetter.Size = new System.Drawing.Size(107, 29);
-            this.btnGenerateLetter.TabIndex = 19;
-            this.btnGenerateLetter.Text = "Generate Letter";
-            this.btnGenerateLetter.UseVisualStyleBackColor = false;
-            this.btnGenerateLetter.Click += new System.EventHandler(this.btnGenerateLetter_Click);
             // 
             // label29
             // 
@@ -1216,20 +891,6 @@
             this.tbSettleCC.TabIndex = 66;
             this.tbSettleCC.TextColor = System.Drawing.SystemColors.WindowText;
             // 
-            // btnSettlePreview
-            // 
-            this.btnSettlePreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnSettlePreview.FlatAppearance.BorderSize = 2;
-            this.btnSettlePreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettlePreview.ForeColor = System.Drawing.Color.White;
-            this.btnSettlePreview.Location = new System.Drawing.Point(9, 223);
-            this.btnSettlePreview.Name = "btnSettlePreview";
-            this.btnSettlePreview.Size = new System.Drawing.Size(248, 27);
-            this.btnSettlePreview.TabIndex = 62;
-            this.btnSettlePreview.Text = "Preview Email";
-            this.btnSettlePreview.UseVisualStyleBackColor = false;
-            this.btnSettlePreview.Click += new System.EventHandler(this.btnSettlePreview_Click);
-            // 
             // label35
             // 
             this.label35.AutoSize = true;
@@ -1239,48 +900,6 @@
             this.label35.TabIndex = 24;
             this.label35.Text = "Receiver:";
             // 
-            // btnSettleSend
-            // 
-            this.btnSettleSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnSettleSend.FlatAppearance.BorderSize = 2;
-            this.btnSettleSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettleSend.ForeColor = System.Drawing.Color.White;
-            this.btnSettleSend.Location = new System.Drawing.Point(263, 223);
-            this.btnSettleSend.Name = "btnSettleSend";
-            this.btnSettleSend.Size = new System.Drawing.Size(247, 27);
-            this.btnSettleSend.TabIndex = 61;
-            this.btnSettleSend.Text = "Send Email";
-            this.btnSettleSend.UseVisualStyleBackColor = false;
-            this.btnSettleSend.Click += new System.EventHandler(this.btnSettleSend_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemove.Font = new System.Drawing.Font("Cambria", 9.75F);
-            this.btnRemove.ForeColor = System.Drawing.Color.White;
-            this.btnRemove.Location = new System.Drawing.Point(422, 192);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(88, 25);
-            this.btnRemove.TabIndex = 60;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpen.Font = new System.Drawing.Font("Cambria", 9.75F);
-            this.btnOpen.ForeColor = System.Drawing.Color.White;
-            this.btnOpen.Location = new System.Drawing.Point(422, 161);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(88, 25);
-            this.btnOpen.TabIndex = 59;
-            this.btnOpen.Text = "Open";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
             // label36
             // 
             this.label36.AutoSize = true;
@@ -1289,20 +908,6 @@
             this.label36.Size = new System.Drawing.Size(24, 15);
             this.label36.TabIndex = 26;
             this.label36.Text = "CC:";
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBrowse.Font = new System.Drawing.Font("Cambria", 9.75F);
-            this.btnBrowse.ForeColor = System.Drawing.Color.White;
-            this.btnBrowse.Location = new System.Drawing.Point(422, 130);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(88, 25);
-            this.btnBrowse.TabIndex = 58;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // dgvFile
             // 
@@ -1408,35 +1013,6 @@
             this.tbBankTranNo.Name = "tbBankTranNo";
             this.tbBankTranNo.Size = new System.Drawing.Size(192, 23);
             this.tbBankTranNo.TabIndex = 10;
-            // 
-            // btnRefreshTable
-            // 
-            this.btnRefreshTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnRefreshTable.Enabled = false;
-            this.btnRefreshTable.FlatAppearance.BorderSize = 2;
-            this.btnRefreshTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefreshTable.ForeColor = System.Drawing.Color.White;
-            this.btnRefreshTable.Location = new System.Drawing.Point(279, 86);
-            this.btnRefreshTable.Name = "btnRefreshTable";
-            this.btnRefreshTable.Size = new System.Drawing.Size(52, 29);
-            this.btnRefreshTable.TabIndex = 9;
-            this.btnRefreshTable.Text = ">>";
-            this.btnRefreshTable.UseVisualStyleBackColor = false;
-            this.btnRefreshTable.Click += new System.EventHandler(this.btnRefreshTable_Click);
-            // 
-            // btnGenerateClaimDetail
-            // 
-            this.btnGenerateClaimDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnGenerateClaimDetail.FlatAppearance.BorderSize = 2;
-            this.btnGenerateClaimDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerateClaimDetail.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaimDetail.Location = new System.Drawing.Point(12, 132);
-            this.btnGenerateClaimDetail.Name = "btnGenerateClaimDetail";
-            this.btnGenerateClaimDetail.Size = new System.Drawing.Size(319, 29);
-            this.btnGenerateClaimDetail.TabIndex = 8;
-            this.btnGenerateClaimDetail.Text = "Generate Claim Detail";
-            this.btnGenerateClaimDetail.UseVisualStyleBackColor = false;
-            this.btnGenerateClaimDetail.Click += new System.EventHandler(this.btnGenerateClaimDetail_Click);
             // 
             // label25
             // 
@@ -1564,20 +1140,6 @@
             this.rbToInsured.UseVisualStyleBackColor = true;
             this.rbToInsured.CheckedChanged += new System.EventHandler(this.rbToInsured_CheckedChanged);
             // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnClear.FlatAppearance.BorderSize = 2;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(253, 23);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(86, 29);
-            this.btnClear.TabIndex = 21;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // tpRejection
             // 
             this.tpRejection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -1674,20 +1236,6 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Add Definitions/Exclusions";
             // 
-            // btnAddDefExcl
-            // 
-            this.btnAddDefExcl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnAddDefExcl.FlatAppearance.BorderSize = 2;
-            this.btnAddDefExcl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddDefExcl.ForeColor = System.Drawing.Color.White;
-            this.btnAddDefExcl.Location = new System.Drawing.Point(268, 117);
-            this.btnAddDefExcl.Name = "btnAddDefExcl";
-            this.btnAddDefExcl.Size = new System.Drawing.Size(82, 26);
-            this.btnAddDefExcl.TabIndex = 11;
-            this.btnAddDefExcl.Text = "Add";
-            this.btnAddDefExcl.UseVisualStyleBackColor = false;
-            this.btnAddDefExcl.Click += new System.EventHandler(this.btnAddDefExcl_Click);
-            // 
             // txtKhmer
             // 
             this.txtKhmer.Location = new System.Drawing.Point(63, 85);
@@ -1762,34 +1310,6 @@
             this.label37.TabIndex = 0;
             this.label37.Text = "Type:";
             // 
-            // btnClearDef
-            // 
-            this.btnClearDef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnClearDef.FlatAppearance.BorderSize = 2;
-            this.btnClearDef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearDef.ForeColor = System.Drawing.Color.White;
-            this.btnClearDef.Location = new System.Drawing.Point(625, 9);
-            this.btnClearDef.Name = "btnClearDef";
-            this.btnClearDef.Size = new System.Drawing.Size(82, 29);
-            this.btnClearDef.TabIndex = 9;
-            this.btnClearDef.Text = "Clear";
-            this.btnClearDef.UseVisualStyleBackColor = false;
-            this.btnClearDef.Click += new System.EventHandler(this.btnClearDef_Click);
-            // 
-            // btnExclDef
-            // 
-            this.btnExclDef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnExclDef.FlatAppearance.BorderSize = 2;
-            this.btnExclDef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExclDef.ForeColor = System.Drawing.Color.White;
-            this.btnExclDef.Location = new System.Drawing.Point(296, 9);
-            this.btnExclDef.Name = "btnExclDef";
-            this.btnExclDef.Size = new System.Drawing.Size(144, 29);
-            this.btnExclDef.TabIndex = 8;
-            this.btnExclDef.Text = "Exclusion/Definition";
-            this.btnExclDef.UseVisualStyleBackColor = false;
-            this.btnExclDef.Click += new System.EventHandler(this.btnExclDef_Click);
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.lvDefExclu);
@@ -1823,20 +1343,6 @@
             this.tbRejectClNo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbRejectClNo_MouseClick);
             this.tbRejectClNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbRejectClNo_KeyDown);
             this.tbRejectClNo.Leave += new System.EventHandler(this.tbRejectClNo_Leave);
-            // 
-            // btnGenerate
-            // 
-            this.btnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnGenerate.FlatAppearance.BorderSize = 2;
-            this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerate.ForeColor = System.Drawing.Color.White;
-            this.btnGenerate.Location = new System.Drawing.Point(446, 9);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(82, 29);
-            this.btnGenerate.TabIndex = 5;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = false;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // label19
             // 
@@ -1963,35 +1469,6 @@
             this.tbNonPayBankTranNo.Size = new System.Drawing.Size(192, 23);
             this.tbNonPayBankTranNo.TabIndex = 10;
             // 
-            // btnNonPayRefreshTable
-            // 
-            this.btnNonPayRefreshTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnNonPayRefreshTable.Enabled = false;
-            this.btnNonPayRefreshTable.FlatAppearance.BorderSize = 2;
-            this.btnNonPayRefreshTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNonPayRefreshTable.ForeColor = System.Drawing.Color.White;
-            this.btnNonPayRefreshTable.Location = new System.Drawing.Point(279, 86);
-            this.btnNonPayRefreshTable.Name = "btnNonPayRefreshTable";
-            this.btnNonPayRefreshTable.Size = new System.Drawing.Size(52, 29);
-            this.btnNonPayRefreshTable.TabIndex = 9;
-            this.btnNonPayRefreshTable.Text = ">>";
-            this.btnNonPayRefreshTable.UseVisualStyleBackColor = false;
-            this.btnNonPayRefreshTable.Click += new System.EventHandler(this.btnNonPayRefreshTable_Click);
-            // 
-            // btnGetClNo
-            // 
-            this.btnGetClNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnGetClNo.FlatAppearance.BorderSize = 2;
-            this.btnGetClNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGetClNo.ForeColor = System.Drawing.Color.White;
-            this.btnGetClNo.Location = new System.Drawing.Point(12, 132);
-            this.btnGetClNo.Name = "btnGetClNo";
-            this.btnGetClNo.Size = new System.Drawing.Size(319, 29);
-            this.btnGetClNo.TabIndex = 8;
-            this.btnGetClNo.Text = "Get Claim No";
-            this.btnGetClNo.UseVisualStyleBackColor = false;
-            this.btnGetClNo.Click += new System.EventHandler(this.btnGetClNo_Click);
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -2111,20 +1588,6 @@
             this.tbNonPayItem.TabIndex = 24;
             this.tbNonPayItem.Text = "";
             // 
-            // btnGenerateNonPay
-            // 
-            this.btnGenerateNonPay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnGenerateNonPay.FlatAppearance.BorderSize = 2;
-            this.btnGenerateNonPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerateNonPay.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateNonPay.Location = new System.Drawing.Point(813, 196);
-            this.btnGenerateNonPay.Name = "btnGenerateNonPay";
-            this.btnGenerateNonPay.Size = new System.Drawing.Size(198, 29);
-            this.btnGenerateNonPay.TabIndex = 8;
-            this.btnGenerateNonPay.Text = "Generate Non Payable Letter";
-            this.btnGenerateNonPay.UseVisualStyleBackColor = false;
-            this.btnGenerateNonPay.Click += new System.EventHandler(this.btnGenerateNonPay_Click);
-            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -2218,20 +1681,6 @@
             this.tbGrandTotalRemark.Name = "tbGrandTotalRemark";
             this.tbGrandTotalRemark.Size = new System.Drawing.Size(196, 23);
             this.tbGrandTotalRemark.TabIndex = 34;
-            // 
-            // bnGenerate
-            // 
-            this.bnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnGenerate.Font = new System.Drawing.Font("Cambria", 9.75F);
-            this.bnGenerate.ForeColor = System.Drawing.Color.White;
-            this.bnGenerate.Location = new System.Drawing.Point(277, 15);
-            this.bnGenerate.Name = "bnGenerate";
-            this.bnGenerate.Size = new System.Drawing.Size(84, 30);
-            this.bnGenerate.TabIndex = 27;
-            this.bnGenerate.Text = "Generate";
-            this.bnGenerate.UseVisualStyleBackColor = true;
-            this.bnGenerate.Click += new System.EventHandler(this.bnGenerate_Click);
             // 
             // label31
             // 
@@ -2360,13 +1809,15 @@
             this.panel12.Size = new System.Drawing.Size(668, 384);
             this.panel12.TabIndex = 1;
             // 
-            // webBrowser1
+            // richTextBox1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(107, 57);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(321, 277);
-            this.webBrowser1.TabIndex = 11;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(668, 384);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // panel10
             // 
@@ -2659,31 +2110,25 @@
             this.zoomDropDownButton.Size = new System.Drawing.Size(37, 28);
             this.zoomDropDownButton.Text = "Zoom Factor";
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(671, 444);
+            this.webBrowser1.TabIndex = 11;
+            // 
             // panel13
             // 
             this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel13.Controls.Add(this.btnEdit);
             this.panel13.Controls.Add(this.btnGenerateClaim);
             this.panel13.Location = new System.Drawing.Point(331, 179);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(1024, 31);
             this.panel13.TabIndex = 9;
-            // 
-            // btnGenerateClaim
-            // 
-            this.btnGenerateClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnGenerateClaim.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnGenerateClaim.Enabled = false;
-            this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
-            this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaim.Location = new System.Drawing.Point(840, 0);
-            this.btnGenerateClaim.Name = "btnGenerateClaim";
-            this.btnGenerateClaim.Size = new System.Drawing.Size(184, 31);
-            this.btnGenerateClaim.TabIndex = 6;
-            this.btnGenerateClaim.Text = "PREVIEW LETTER";
-            this.btnGenerateClaim.UseVisualStyleBackColor = false;
-            this.btnGenerateClaim.Click += new System.EventHandler(this.btnGenerateClaim_Click);
             // 
             // panel11
             // 
@@ -2747,20 +2192,6 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Claim No";
             // 
-            // btnExcluDefin
-            // 
-            this.btnExcluDefin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnExcluDefin.FlatAppearance.BorderSize = 2;
-            this.btnExcluDefin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluDefin.ForeColor = System.Drawing.Color.White;
-            this.btnExcluDefin.Location = new System.Drawing.Point(167, 69);
-            this.btnExcluDefin.Name = "btnExcluDefin";
-            this.btnExcluDefin.Size = new System.Drawing.Size(144, 29);
-            this.btnExcluDefin.TabIndex = 12;
-            this.btnExcluDefin.Text = "Exclusion/Definition";
-            this.btnExcluDefin.UseVisualStyleBackColor = false;
-            this.btnExcluDefin.Click += new System.EventHandler(this.btnExcluDefin_Click);
-            // 
             // label41
             // 
             this.label41.AutoSize = true;
@@ -2787,14 +2218,602 @@
             // 
             this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
-            // richTextBox1
+            // bnClear
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(668, 384);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.bnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnClear.FlatAppearance.BorderSize = 2;
+            this.bnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnClear.ForeColor = System.Drawing.Color.White;
+            this.bnClear.Location = new System.Drawing.Point(442, 13);
+            this.bnClear.Name = "bnClear";
+            this.bnClear.Size = new System.Drawing.Size(108, 32);
+            this.bnClear.TabIndex = 6;
+            this.bnClear.Text = "Clear";
+            this.bnClear.UseVisualStyleBackColor = false;
+            this.bnClear.Click += new System.EventHandler(this.bnClear_Click);
+            // 
+            // bnDocReqResend
+            // 
+            this.bnDocReqResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnDocReqResend.FlatAppearance.BorderSize = 2;
+            this.bnDocReqResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnDocReqResend.ForeColor = System.Drawing.Color.White;
+            this.bnDocReqResend.Location = new System.Drawing.Point(31, 205);
+            this.bnDocReqResend.Name = "bnDocReqResend";
+            this.bnDocReqResend.Size = new System.Drawing.Size(93, 30);
+            this.bnDocReqResend.TabIndex = 33;
+            this.bnDocReqResend.Text = "Resend";
+            this.bnDocReqResend.UseVisualStyleBackColor = false;
+            this.bnDocReqResend.Click += new System.EventHandler(this.bnDocReqResend_Click);
+            // 
+            // bnDocReqSend
+            // 
+            this.bnDocReqSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnDocReqSend.FlatAppearance.BorderSize = 2;
+            this.bnDocReqSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnDocReqSend.ForeColor = System.Drawing.Color.White;
+            this.bnDocReqSend.Location = new System.Drawing.Point(31, 169);
+            this.bnDocReqSend.Name = "bnDocReqSend";
+            this.bnDocReqSend.Size = new System.Drawing.Size(93, 30);
+            this.bnDocReqSend.TabIndex = 32;
+            this.bnDocReqSend.Text = "Send";
+            this.bnDocReqSend.UseVisualStyleBackColor = false;
+            this.bnDocReqSend.Click += new System.EventHandler(this.bnDocReqSend_Click);
+            // 
+            // bnDocRec
+            // 
+            this.bnDocRec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bnDocRec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnDocRec.FlatAppearance.BorderSize = 2;
+            this.bnDocRec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnDocRec.ForeColor = System.Drawing.Color.White;
+            this.bnDocRec.Location = new System.Drawing.Point(1213, 241);
+            this.bnDocRec.Name = "bnDocRec";
+            this.bnDocRec.Size = new System.Drawing.Size(139, 30);
+            this.bnDocRec.TabIndex = 29;
+            this.bnDocRec.Text = "Documents Received";
+            this.bnDocRec.UseVisualStyleBackColor = false;
+            this.bnDocRec.Click += new System.EventHandler(this.bnDocRec_Click);
+            // 
+            // bnRem3Resend
+            // 
+            this.bnRem3Resend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRem3Resend.FlatAppearance.BorderSize = 2;
+            this.bnRem3Resend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRem3Resend.ForeColor = System.Drawing.Color.White;
+            this.bnRem3Resend.Location = new System.Drawing.Point(548, 205);
+            this.bnRem3Resend.Name = "bnRem3Resend";
+            this.bnRem3Resend.Size = new System.Drawing.Size(93, 30);
+            this.bnRem3Resend.TabIndex = 26;
+            this.bnRem3Resend.Text = "Resend";
+            this.bnRem3Resend.UseVisualStyleBackColor = false;
+            this.bnRem3Resend.Click += new System.EventHandler(this.bnRem3Resend_Click);
+            // 
+            // bnRem3Send
+            // 
+            this.bnRem3Send.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRem3Send.FlatAppearance.BorderSize = 2;
+            this.bnRem3Send.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRem3Send.ForeColor = System.Drawing.Color.White;
+            this.bnRem3Send.Location = new System.Drawing.Point(548, 169);
+            this.bnRem3Send.Name = "bnRem3Send";
+            this.bnRem3Send.Size = new System.Drawing.Size(93, 30);
+            this.bnRem3Send.TabIndex = 25;
+            this.bnRem3Send.Text = "Send";
+            this.bnRem3Send.UseVisualStyleBackColor = false;
+            this.bnRem3Send.Click += new System.EventHandler(this.bnRem3Send_Click);
+            // 
+            // bnRem2Resend
+            // 
+            this.bnRem2Resend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRem2Resend.FlatAppearance.BorderSize = 2;
+            this.bnRem2Resend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRem2Resend.ForeColor = System.Drawing.Color.White;
+            this.bnRem2Resend.Location = new System.Drawing.Point(420, 205);
+            this.bnRem2Resend.Name = "bnRem2Resend";
+            this.bnRem2Resend.Size = new System.Drawing.Size(93, 30);
+            this.bnRem2Resend.TabIndex = 24;
+            this.bnRem2Resend.Text = "Resend";
+            this.bnRem2Resend.UseVisualStyleBackColor = false;
+            this.bnRem2Resend.Click += new System.EventHandler(this.bnRem2Resend_Click);
+            // 
+            // bnRem2Send
+            // 
+            this.bnRem2Send.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRem2Send.FlatAppearance.BorderSize = 2;
+            this.bnRem2Send.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRem2Send.ForeColor = System.Drawing.Color.White;
+            this.bnRem2Send.Location = new System.Drawing.Point(420, 169);
+            this.bnRem2Send.Name = "bnRem2Send";
+            this.bnRem2Send.Size = new System.Drawing.Size(93, 30);
+            this.bnRem2Send.TabIndex = 23;
+            this.bnRem2Send.Text = "Send";
+            this.bnRem2Send.UseVisualStyleBackColor = false;
+            this.bnRem2Send.Click += new System.EventHandler(this.bnRem2Send_Click);
+            // 
+            // bnRem1Resend
+            // 
+            this.bnRem1Resend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRem1Resend.FlatAppearance.BorderSize = 2;
+            this.bnRem1Resend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRem1Resend.ForeColor = System.Drawing.Color.White;
+            this.bnRem1Resend.Location = new System.Drawing.Point(291, 205);
+            this.bnRem1Resend.Name = "bnRem1Resend";
+            this.bnRem1Resend.Size = new System.Drawing.Size(93, 30);
+            this.bnRem1Resend.TabIndex = 22;
+            this.bnRem1Resend.Text = "Resend";
+            this.bnRem1Resend.UseVisualStyleBackColor = false;
+            this.bnRem1Resend.Click += new System.EventHandler(this.bnRem1Resend_Click);
+            // 
+            // bnRem1Send
+            // 
+            this.bnRem1Send.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRem1Send.FlatAppearance.BorderSize = 2;
+            this.bnRem1Send.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRem1Send.ForeColor = System.Drawing.Color.White;
+            this.bnRem1Send.Location = new System.Drawing.Point(291, 169);
+            this.bnRem1Send.Name = "bnRem1Send";
+            this.bnRem1Send.Size = new System.Drawing.Size(93, 30);
+            this.bnRem1Send.TabIndex = 21;
+            this.bnRem1Send.Text = "Send";
+            this.bnRem1Send.UseVisualStyleBackColor = false;
+            this.bnRem1Send.Click += new System.EventHandler(this.bnRem1Send_Click);
+            // 
+            // bnPayResend
+            // 
+            this.bnPayResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnPayResend.FlatAppearance.BorderSize = 2;
+            this.bnPayResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnPayResend.ForeColor = System.Drawing.Color.White;
+            this.bnPayResend.Location = new System.Drawing.Point(548, 101);
+            this.bnPayResend.Name = "bnPayResend";
+            this.bnPayResend.Size = new System.Drawing.Size(93, 30);
+            this.bnPayResend.TabIndex = 16;
+            this.bnPayResend.Text = "Resend";
+            this.bnPayResend.UseVisualStyleBackColor = false;
+            this.bnPayResend.Click += new System.EventHandler(this.bnPayResend_Click);
+            // 
+            // bnPaySend
+            // 
+            this.bnPaySend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnPaySend.FlatAppearance.BorderSize = 2;
+            this.bnPaySend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnPaySend.ForeColor = System.Drawing.Color.White;
+            this.bnPaySend.Location = new System.Drawing.Point(548, 65);
+            this.bnPaySend.Name = "bnPaySend";
+            this.bnPaySend.Size = new System.Drawing.Size(93, 30);
+            this.bnPaySend.TabIndex = 15;
+            this.bnPaySend.Text = "Send";
+            this.bnPaySend.UseVisualStyleBackColor = false;
+            this.bnPaySend.Click += new System.EventHandler(this.bnPaySend_Click);
+            // 
+            // bnParResend
+            // 
+            this.bnParResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnParResend.FlatAppearance.BorderSize = 2;
+            this.bnParResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnParResend.ForeColor = System.Drawing.Color.White;
+            this.bnParResend.Location = new System.Drawing.Point(376, 101);
+            this.bnParResend.Name = "bnParResend";
+            this.bnParResend.Size = new System.Drawing.Size(93, 30);
+            this.bnParResend.TabIndex = 13;
+            this.bnParResend.Text = "Resend";
+            this.bnParResend.UseVisualStyleBackColor = false;
+            this.bnParResend.Click += new System.EventHandler(this.bnParResend_Click);
+            // 
+            // bnParSend
+            // 
+            this.bnParSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnParSend.FlatAppearance.BorderSize = 2;
+            this.bnParSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnParSend.ForeColor = System.Drawing.Color.White;
+            this.bnParSend.Location = new System.Drawing.Point(376, 65);
+            this.bnParSend.Name = "bnParSend";
+            this.bnParSend.Size = new System.Drawing.Size(93, 30);
+            this.bnParSend.TabIndex = 12;
+            this.bnParSend.Text = "Send";
+            this.bnParSend.UseVisualStyleBackColor = false;
+            this.bnParSend.Click += new System.EventHandler(this.bnParSend_Click);
+            // 
+            // bnRejResend
+            // 
+            this.bnRejResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRejResend.FlatAppearance.BorderSize = 2;
+            this.bnRejResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRejResend.ForeColor = System.Drawing.Color.White;
+            this.bnRejResend.Location = new System.Drawing.Point(204, 101);
+            this.bnRejResend.Name = "bnRejResend";
+            this.bnRejResend.Size = new System.Drawing.Size(93, 30);
+            this.bnRejResend.TabIndex = 10;
+            this.bnRejResend.Text = "Resend";
+            this.bnRejResend.UseVisualStyleBackColor = false;
+            this.bnRejResend.Click += new System.EventHandler(this.bnRejResend_Click);
+            // 
+            // bnRejSend
+            // 
+            this.bnRejSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRejSend.FlatAppearance.BorderSize = 2;
+            this.bnRejSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRejSend.ForeColor = System.Drawing.Color.White;
+            this.bnRejSend.Location = new System.Drawing.Point(204, 65);
+            this.bnRejSend.Name = "bnRejSend";
+            this.bnRejSend.Size = new System.Drawing.Size(93, 30);
+            this.bnRejSend.TabIndex = 9;
+            this.bnRejSend.Text = "Send";
+            this.bnRejSend.UseVisualStyleBackColor = false;
+            this.bnRejSend.Click += new System.EventHandler(this.bnRejSend_Click);
+            // 
+            // bnAckResend
+            // 
+            this.bnAckResend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnAckResend.FlatAppearance.BorderSize = 2;
+            this.bnAckResend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnAckResend.ForeColor = System.Drawing.Color.White;
+            this.bnAckResend.Location = new System.Drawing.Point(31, 101);
+            this.bnAckResend.Name = "bnAckResend";
+            this.bnAckResend.Size = new System.Drawing.Size(93, 30);
+            this.bnAckResend.TabIndex = 7;
+            this.bnAckResend.Text = "Resend";
+            this.bnAckResend.UseVisualStyleBackColor = false;
+            this.bnAckResend.Click += new System.EventHandler(this.bnAckResend_Click);
+            // 
+            // bnAckSend
+            // 
+            this.bnAckSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnAckSend.FlatAppearance.BorderSize = 2;
+            this.bnAckSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnAckSend.ForeColor = System.Drawing.Color.White;
+            this.bnAckSend.Location = new System.Drawing.Point(31, 65);
+            this.bnAckSend.Name = "bnAckSend";
+            this.bnAckSend.Size = new System.Drawing.Size(93, 30);
+            this.bnAckSend.TabIndex = 6;
+            this.bnAckSend.Text = "Send";
+            this.bnAckSend.UseVisualStyleBackColor = false;
+            this.bnAckSend.Click += new System.EventHandler(this.bnAckSend_Click);
+            // 
+            // bnClaimSearch
+            // 
+            this.bnClaimSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnClaimSearch.FlatAppearance.BorderSize = 2;
+            this.bnClaimSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnClaimSearch.ForeColor = System.Drawing.Color.White;
+            this.bnClaimSearch.Location = new System.Drawing.Point(319, 13);
+            this.bnClaimSearch.Name = "bnClaimSearch";
+            this.bnClaimSearch.Size = new System.Drawing.Size(108, 32);
+            this.bnClaimSearch.TabIndex = 0;
+            this.bnClaimSearch.Text = "Search";
+            this.bnClaimSearch.UseVisualStyleBackColor = false;
+            this.bnClaimSearch.Click += new System.EventHandler(this.bnClaimSearch_Click);
+            // 
+            // bnHisSearch
+            // 
+            this.bnHisSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnHisSearch.FlatAppearance.BorderSize = 2;
+            this.bnHisSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnHisSearch.ForeColor = System.Drawing.Color.White;
+            this.bnHisSearch.Location = new System.Drawing.Point(240, 6);
+            this.bnHisSearch.Name = "bnHisSearch";
+            this.bnHisSearch.Size = new System.Drawing.Size(108, 32);
+            this.bnHisSearch.TabIndex = 31;
+            this.bnHisSearch.Text = "Search";
+            this.bnHisSearch.UseVisualStyleBackColor = false;
+            this.bnHisSearch.Click += new System.EventHandler(this.bnHisSearch_Click);
+            // 
+            // bnRefresh
+            // 
+            this.bnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bnRefresh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnRefresh.FlatAppearance.BorderSize = 2;
+            this.bnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnRefresh.ForeColor = System.Drawing.Color.White;
+            this.bnRefresh.Location = new System.Drawing.Point(1071, 5);
+            this.bnRefresh.Name = "bnRefresh";
+            this.bnRefresh.Size = new System.Drawing.Size(108, 32);
+            this.bnRefresh.TabIndex = 33;
+            this.bnRefresh.Text = "Refresh";
+            this.bnRefresh.UseVisualStyleBackColor = false;
+            this.bnRefresh.Click += new System.EventHandler(this.bnRefresh_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnSave.Enabled = false;
+            this.btnSave.FlatAppearance.BorderSize = 2;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(371, 52);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(107, 29);
+            this.btnSave.TabIndex = 22;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnGenerateLetter
+            // 
+            this.btnGenerateLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGenerateLetter.Enabled = false;
+            this.btnGenerateLetter.FlatAppearance.BorderSize = 2;
+            this.btnGenerateLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateLetter.ForeColor = System.Drawing.Color.White;
+            this.btnGenerateLetter.Location = new System.Drawing.Point(371, 17);
+            this.btnGenerateLetter.Name = "btnGenerateLetter";
+            this.btnGenerateLetter.Size = new System.Drawing.Size(107, 29);
+            this.btnGenerateLetter.TabIndex = 19;
+            this.btnGenerateLetter.Text = "Generate Letter";
+            this.btnGenerateLetter.UseVisualStyleBackColor = false;
+            this.btnGenerateLetter.Click += new System.EventHandler(this.btnGenerateLetter_Click);
+            // 
+            // btnSettlePreview
+            // 
+            this.btnSettlePreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnSettlePreview.FlatAppearance.BorderSize = 2;
+            this.btnSettlePreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettlePreview.ForeColor = System.Drawing.Color.White;
+            this.btnSettlePreview.Location = new System.Drawing.Point(9, 223);
+            this.btnSettlePreview.Name = "btnSettlePreview";
+            this.btnSettlePreview.Size = new System.Drawing.Size(248, 27);
+            this.btnSettlePreview.TabIndex = 62;
+            this.btnSettlePreview.Text = "Preview Email";
+            this.btnSettlePreview.UseVisualStyleBackColor = false;
+            this.btnSettlePreview.Click += new System.EventHandler(this.btnSettlePreview_Click);
+            // 
+            // btnSettleSend
+            // 
+            this.btnSettleSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnSettleSend.FlatAppearance.BorderSize = 2;
+            this.btnSettleSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettleSend.ForeColor = System.Drawing.Color.White;
+            this.btnSettleSend.Location = new System.Drawing.Point(263, 223);
+            this.btnSettleSend.Name = "btnSettleSend";
+            this.btnSettleSend.Size = new System.Drawing.Size(247, 27);
+            this.btnSettleSend.TabIndex = 61;
+            this.btnSettleSend.Text = "Send Email";
+            this.btnSettleSend.UseVisualStyleBackColor = false;
+            this.btnSettleSend.Click += new System.EventHandler(this.btnSettleSend_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRemove.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.btnRemove.ForeColor = System.Drawing.Color.White;
+            this.btnRemove.Location = new System.Drawing.Point(422, 192);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(88, 25);
+            this.btnRemove.TabIndex = 60;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpen.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.btnOpen.ForeColor = System.Drawing.Color.White;
+            this.btnOpen.Location = new System.Drawing.Point(422, 161);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(88, 25);
+            this.btnOpen.TabIndex = 59;
+            this.btnOpen.Text = "Open";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrowse.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.btnBrowse.ForeColor = System.Drawing.Color.White;
+            this.btnBrowse.Location = new System.Drawing.Point(422, 130);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(88, 25);
+            this.btnBrowse.TabIndex = 58;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // btnRefreshTable
+            // 
+            this.btnRefreshTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnRefreshTable.Enabled = false;
+            this.btnRefreshTable.FlatAppearance.BorderSize = 2;
+            this.btnRefreshTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefreshTable.ForeColor = System.Drawing.Color.White;
+            this.btnRefreshTable.Location = new System.Drawing.Point(279, 86);
+            this.btnRefreshTable.Name = "btnRefreshTable";
+            this.btnRefreshTable.Size = new System.Drawing.Size(52, 29);
+            this.btnRefreshTable.TabIndex = 9;
+            this.btnRefreshTable.Text = ">>";
+            this.btnRefreshTable.UseVisualStyleBackColor = false;
+            this.btnRefreshTable.Click += new System.EventHandler(this.btnRefreshTable_Click);
+            // 
+            // btnGenerateClaimDetail
+            // 
+            this.btnGenerateClaimDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGenerateClaimDetail.FlatAppearance.BorderSize = 2;
+            this.btnGenerateClaimDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateClaimDetail.ForeColor = System.Drawing.Color.White;
+            this.btnGenerateClaimDetail.Location = new System.Drawing.Point(12, 132);
+            this.btnGenerateClaimDetail.Name = "btnGenerateClaimDetail";
+            this.btnGenerateClaimDetail.Size = new System.Drawing.Size(319, 29);
+            this.btnGenerateClaimDetail.TabIndex = 8;
+            this.btnGenerateClaimDetail.Text = "Generate Claim Detail";
+            this.btnGenerateClaimDetail.UseVisualStyleBackColor = false;
+            this.btnGenerateClaimDetail.Click += new System.EventHandler(this.btnGenerateClaimDetail_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClear.FlatAppearance.BorderSize = 2;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(253, 23);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(86, 29);
+            this.btnClear.TabIndex = 21;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnAddDefExcl
+            // 
+            this.btnAddDefExcl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAddDefExcl.FlatAppearance.BorderSize = 2;
+            this.btnAddDefExcl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddDefExcl.ForeColor = System.Drawing.Color.White;
+            this.btnAddDefExcl.Location = new System.Drawing.Point(268, 117);
+            this.btnAddDefExcl.Name = "btnAddDefExcl";
+            this.btnAddDefExcl.Size = new System.Drawing.Size(82, 26);
+            this.btnAddDefExcl.TabIndex = 11;
+            this.btnAddDefExcl.Text = "Add";
+            this.btnAddDefExcl.UseVisualStyleBackColor = false;
+            this.btnAddDefExcl.Click += new System.EventHandler(this.btnAddDefExcl_Click);
+            // 
+            // btnClearDef
+            // 
+            this.btnClearDef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClearDef.FlatAppearance.BorderSize = 2;
+            this.btnClearDef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearDef.ForeColor = System.Drawing.Color.White;
+            this.btnClearDef.Location = new System.Drawing.Point(625, 9);
+            this.btnClearDef.Name = "btnClearDef";
+            this.btnClearDef.Size = new System.Drawing.Size(82, 29);
+            this.btnClearDef.TabIndex = 9;
+            this.btnClearDef.Text = "Clear";
+            this.btnClearDef.UseVisualStyleBackColor = false;
+            this.btnClearDef.Click += new System.EventHandler(this.btnClearDef_Click);
+            // 
+            // btnExclDef
+            // 
+            this.btnExclDef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnExclDef.FlatAppearance.BorderSize = 2;
+            this.btnExclDef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExclDef.ForeColor = System.Drawing.Color.White;
+            this.btnExclDef.Location = new System.Drawing.Point(296, 9);
+            this.btnExclDef.Name = "btnExclDef";
+            this.btnExclDef.Size = new System.Drawing.Size(144, 29);
+            this.btnExclDef.TabIndex = 8;
+            this.btnExclDef.Text = "Exclusion/Definition";
+            this.btnExclDef.UseVisualStyleBackColor = false;
+            this.btnExclDef.Click += new System.EventHandler(this.btnExclDef_Click);
+            // 
+            // btnGenerate
+            // 
+            this.btnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGenerate.FlatAppearance.BorderSize = 2;
+            this.btnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerate.ForeColor = System.Drawing.Color.White;
+            this.btnGenerate.Location = new System.Drawing.Point(446, 9);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(82, 29);
+            this.btnGenerate.TabIndex = 5;
+            this.btnGenerate.Text = "Generate";
+            this.btnGenerate.UseVisualStyleBackColor = false;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            // 
+            // btnNonPayRefreshTable
+            // 
+            this.btnNonPayRefreshTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnNonPayRefreshTable.Enabled = false;
+            this.btnNonPayRefreshTable.FlatAppearance.BorderSize = 2;
+            this.btnNonPayRefreshTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNonPayRefreshTable.ForeColor = System.Drawing.Color.White;
+            this.btnNonPayRefreshTable.Location = new System.Drawing.Point(279, 86);
+            this.btnNonPayRefreshTable.Name = "btnNonPayRefreshTable";
+            this.btnNonPayRefreshTable.Size = new System.Drawing.Size(52, 29);
+            this.btnNonPayRefreshTable.TabIndex = 9;
+            this.btnNonPayRefreshTable.Text = ">>";
+            this.btnNonPayRefreshTable.UseVisualStyleBackColor = false;
+            this.btnNonPayRefreshTable.Click += new System.EventHandler(this.btnNonPayRefreshTable_Click);
+            // 
+            // btnGetClNo
+            // 
+            this.btnGetClNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGetClNo.FlatAppearance.BorderSize = 2;
+            this.btnGetClNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetClNo.ForeColor = System.Drawing.Color.White;
+            this.btnGetClNo.Location = new System.Drawing.Point(12, 132);
+            this.btnGetClNo.Name = "btnGetClNo";
+            this.btnGetClNo.Size = new System.Drawing.Size(319, 29);
+            this.btnGetClNo.TabIndex = 8;
+            this.btnGetClNo.Text = "Get Claim No";
+            this.btnGetClNo.UseVisualStyleBackColor = false;
+            this.btnGetClNo.Click += new System.EventHandler(this.btnGetClNo_Click);
+            // 
+            // btnGenerateNonPay
+            // 
+            this.btnGenerateNonPay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGenerateNonPay.FlatAppearance.BorderSize = 2;
+            this.btnGenerateNonPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateNonPay.ForeColor = System.Drawing.Color.White;
+            this.btnGenerateNonPay.Location = new System.Drawing.Point(813, 196);
+            this.btnGenerateNonPay.Name = "btnGenerateNonPay";
+            this.btnGenerateNonPay.Size = new System.Drawing.Size(198, 29);
+            this.btnGenerateNonPay.TabIndex = 8;
+            this.btnGenerateNonPay.Text = "Generate Non Payable Letter";
+            this.btnGenerateNonPay.UseVisualStyleBackColor = false;
+            this.btnGenerateNonPay.Click += new System.EventHandler(this.btnGenerateNonPay_Click);
+            // 
+            // bnGenerate
+            // 
+            this.bnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnGenerate.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.bnGenerate.ForeColor = System.Drawing.Color.White;
+            this.bnGenerate.Location = new System.Drawing.Point(277, 15);
+            this.bnGenerate.Name = "bnGenerate";
+            this.bnGenerate.Size = new System.Drawing.Size(84, 30);
+            this.bnGenerate.TabIndex = 27;
+            this.bnGenerate.Text = "Generate";
+            this.bnGenerate.UseVisualStyleBackColor = true;
+            this.bnGenerate.Click += new System.EventHandler(this.bnGenerate_Click);
+            // 
+            // btnGenerateClaim
+            // 
+            this.btnGenerateClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGenerateClaim.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnGenerateClaim.Enabled = false;
+            this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
+            this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
+            this.btnGenerateClaim.Location = new System.Drawing.Point(840, 0);
+            this.btnGenerateClaim.Name = "btnGenerateClaim";
+            this.btnGenerateClaim.Size = new System.Drawing.Size(184, 31);
+            this.btnGenerateClaim.TabIndex = 6;
+            this.btnGenerateClaim.Text = "PREVIEW LETTER";
+            this.btnGenerateClaim.UseVisualStyleBackColor = false;
+            this.btnGenerateClaim.Click += new System.EventHandler(this.btnGenerateClaim_Click);
+            // 
+            // btnExcluDefin
+            // 
+            this.btnExcluDefin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnExcluDefin.FlatAppearance.BorderSize = 2;
+            this.btnExcluDefin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluDefin.ForeColor = System.Drawing.Color.White;
+            this.btnExcluDefin.Location = new System.Drawing.Point(167, 69);
+            this.btnExcluDefin.Name = "btnExcluDefin";
+            this.btnExcluDefin.Size = new System.Drawing.Size(144, 29);
+            this.btnExcluDefin.TabIndex = 12;
+            this.btnExcluDefin.Text = "Exclusion/Definition";
+            this.btnExcluDefin.UseVisualStyleBackColor = false;
+            this.btnExcluDefin.Click += new System.EventHandler(this.btnExcluDefin_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnEdit.FlatAppearance.BorderSize = 2;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.Location = new System.Drawing.Point(734, 0);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(106, 31);
+            this.btnEdit.TabIndex = 7;
+            this.btnEdit.Text = "EDIT";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // frmSendEmailClaim
             // 
@@ -3105,5 +3124,6 @@
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private cus_button btnEdit;
     }
 }
