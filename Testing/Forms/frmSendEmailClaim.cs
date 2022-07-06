@@ -2185,7 +2185,7 @@ namespace Testing.Forms
             selectedDoc = GetDataTableFromDGV(dgvDefinition);
             if (selectedDoc.Rows.Count <= 0 || selectedDoc == null)
             {
-                Msgbox.Show("Please check some Definition and Exclusion");
+                Msgbox.Show("Please check some Definition or Exclusion");
                 return;
             }
             if (dgvClaimInfo.Rows.Count <= 0)

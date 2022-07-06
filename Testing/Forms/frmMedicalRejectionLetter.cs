@@ -262,7 +262,7 @@ namespace Testing.Forms
                 doc.PageSetup.TopMargin = InchesToPoints(isKhmerHtml ? 0.5f : 0.75f);
                 doc.PageSetup.LeftMargin = InchesToPoints(0.5f);
                 doc.PageSetup.RightMargin = InchesToPoints(0.5f);
-                doc.PageSetup.BottomMargin = InchesToPoints(isKhmerHtml ? 0.5f : 0.75f);
+                doc.PageSetup.BottomMargin = InchesToPoints(0.0f);
 
                 oWord.Visible = true;
                 oWord.WindowState = Microsoft.Office.Interop.Word.WdWindowState.wdWindowStateMaximize;
