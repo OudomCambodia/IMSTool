@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SautinSoft;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -70,7 +69,6 @@ namespace Testing.Forms
         #endregion
 
         private CRUD crud = new CRUD();
-        private RtfToHtml rtfToHtml = new RtfToHtml();
 
         private DataTable dtClaims = frmSendEmailClaim.dtClaimDt;
         private DataTable dtSelectedRows = frmSendEmailClaim.selectedDoc;
