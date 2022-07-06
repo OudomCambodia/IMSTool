@@ -1,7 +1,4 @@
-﻿using Syncfusion.Pdf;
-using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf.Interactive;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +20,7 @@ namespace Testing.Forms
         CRUD crud = new CRUD();
         int num;
         bool isChecked;
-        public DataTable selectedDoc;
+        public static DataTable selectedDoc;
         CheckBox checkboxHeader = new CheckBox();
         CommonFunctions.ListViewColumnSorter lvwColumnSorter = new CommonFunctions.ListViewColumnSorter();
         //email information
@@ -32,7 +29,7 @@ namespace Testing.Forms
         string mail_pass;
         int port;
         string HashPass = "Forte@2017";
-        DataTable dtClaimDt;
+        public static DataTable dtClaimDt;
         public frmSendEmailClaim()
         {
             InitializeComponent();
@@ -82,9 +79,51 @@ namespace Testing.Forms
             cbSignature.SelectedIndex = 0;
             //
 
+            #region DatagridviewData
+            dgvDefinition.Columns.Clear();
+            DataTable dtExcDef = crud.ExecQuery("select * from user_email_med_excludef");
+            DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
+            //CheckBox chk = new CheckBox();
+            dgvDefinition.Columns.Add(CheckboxColumn);
+            dgvDefinition.DataSource = dtExcDef;
+
+            dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDefinition.Columns[1].Width = 70;
+            dgvDefinition.Columns[2].Width = 70;
+            dgvDefinition.Columns[3].Width = 120;
+            DataGridViewColumn column = dgvDefinition.Columns[0];
+            column.Width = 35;
+            dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
+            dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+            // add checkbox header
+            Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
+            // set checkbox header to center of header cell. +1 pixel to position correctly.
+            rect.X = rect.Location.X + 10;
+            rect.Y = rect.Location.Y + 15;
+            rect.Width = rect.Size.Width;
+            rect.Height = rect.Size.Height;
+
+            checkboxHeader.Checked = false;
+            checkboxHeader.Visible = true;
+            checkboxHeader.Name = "checkboxHeader";
+            checkboxHeader.Size = new Size(15, 15);
+            checkboxHeader.Location = rect.Location;
+            checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
+            dgvDefinition.Controls.Add(checkboxHeader);
+
+            dgvDefinition.Columns[1].Visible = false;
+            dgvDefinition.Columns[6].Visible = false;
+            dgvDefinition.Columns[7].Visible = false;
+
+            for (int i = 1; i < dgvDefinition.Columns.Count; i++)
+            {
+                dgvDefinition.Columns[i].ReadOnly = true;
+            }
+            #endregion
+
             dgvNonPayClaimNo.RowsDefaultCellStyle.ForeColor = Color.Black;
             dgvNonPayClaimNo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
-            disabledButt(btnGenerateClaim);
             CommonFunctions.HighLightGrid(dgvDefinition);
         }
         //private void Combobox_Load()
@@ -496,8 +535,6 @@ namespace Testing.Forms
             tbClaimNo.Focus();
             requeryEmailSuggestion();
         }
-
-
 
         #region Rejection Letter
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -2067,12 +2104,17 @@ namespace Testing.Forms
 
         private void btnExcluDefin_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtClaimNo.Text.Trim()))
+                return;
+
             if (txtClaimNo.Text.Substring(6, 4).ToUpper() != "HHNS")
             {
                 Msgbox.Show("Avaliable only HNS Products");
             }
             else
             {
+                Cursor = Cursors.WaitCursor;
+
                 dtClaimDt  = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
                 "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
                 "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
@@ -2083,49 +2125,15 @@ namespace Testing.Forms
 
                 if (dtClaimDt.Rows.Count != 0)
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-                    enabledButt(btnGenerateClaim);
-                    #region DatagridviewData
-                    dgvDefinition.Columns.Clear();
-                    DataTable dtExcDef = crud.ExecQuery("select * from user_email_med_excludef");
-                    DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
-                    //CheckBox chk = new CheckBox();
-                    dgvDefinition.Columns.Add(CheckboxColumn);
-                    dgvDefinition.DataSource = dtExcDef;
-
-                    dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    dgvDefinition.Columns[1].Width = 70;
-                    dgvDefinition.Columns[2].Width = 70;
-                    dgvDefinition.Columns[3].Width = 120;
-                    DataGridViewColumn column = dgvDefinition.Columns[0];
-                    column.Width = 35;
-                    dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
-                    dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-
-                    // add checkbox header
-                    Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
-                    // set checkbox header to center of header cell. +1 pixel to position correctly.
-                    rect.X = rect.Location.X + 10;
-                    rect.Y = rect.Location.Y + 15;
-                    rect.Width = rect.Size.Width;
-                    rect.Height = rect.Size.Height;
-
-                    checkboxHeader.Checked = false;
-                    checkboxHeader.Visible = true;
-                    checkboxHeader.Name = "checkboxHeader";
-                    checkboxHeader.Size = new Size(15, 15);
-                    checkboxHeader.Location = rect.Location;
-                    checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
-                    dgvDefinition.Controls.Add(checkboxHeader);
-                    #endregion
-
+                    dgvClaimInfo.DataSource = dtClaimDt;
+                    dgvClaimInfo.RowsDefaultCellStyle.ForeColor = Color.Black;
                 }
                 else
                 {
                     Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
                 }
-                Cursor.Current = Cursors.WaitCursor;
-            
+
+                Cursor = Cursors.Arrow;
             }
         }
         private void txtClaimNo_Leave(object sender, EventArgs e)
@@ -2173,35 +2181,20 @@ namespace Testing.Forms
         
 
         public void btnGenerateClaim_Click(object sender, EventArgs e)
-        {
-   
+        {  
             selectedDoc = GetDataTableFromDGV(dgvDefinition);
-            if (selectedDoc.Rows.Count <= 0)
+            if (selectedDoc.Rows.Count <= 0 || selectedDoc == null)
             {
-                Msgbox.Show("No record selected!");
+                Msgbox.Show("Please check some Definition and Exclusion");
                 return;
             }
-            else
+            if (dgvClaimInfo.Rows.Count <= 0)
             {
-                DataTable dtClaimDet = crud.ExecQuery("select template from user_rejectletter_temp where products= 'HNS'");
-                //Update 16-Jul-19 (Edit Email Content)
-                string body = string.Empty;
-                //using (StreamReader reader = new StreamReader("Html/HNSRejectionLetter.html"))
-                //{
-                //    body = reader.ReadToEnd();
-                //}
-
-                body = dtClaimDet.Rows[0][0].ToString(); 
-                    
-                this.webBrowser1.DocumentText = body;
-
-                //webBrowser1.Document.ExecCommand("SelectAll", false, null);
-                //webBrowser1.Document.ExecCommand("Copy", false, null);
-                //richTextBox1.Paste();    //Copy all text from webBrowserTrick(Visible = false) 
-                Cursor.Current = Cursors.WaitCursor;
-               
+                Msgbox.Show("No claim information to preview");
+                return;
             }
-           
+            frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter();
+            frmMedicalRejectionLetter.ShowDialog();
         }
         private void dgvDefinition_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -2235,6 +2228,9 @@ namespace Testing.Forms
             DataTable dt1 = new DataTable();
 
             dt1.Columns.Add("TYPE");
+            dt1.Columns.Add("PARTS");
+            dt1.Columns.Add("PARTS_KH");
+            dt1.Columns.Add("TYPE_KH");
             dt1.Columns.Add("ENG");
             dt1.Columns.Add("KH");
             
@@ -2249,7 +2245,7 @@ namespace Testing.Forms
                     if (status == "True")
                     {
 
-                        dt1.Rows.Add(row.Cells["TYPE"].Value.ToString(), row.Cells["ENG"].Value.ToString(), row.Cells["KH"].Value.ToString());
+                        dt1.Rows.Add(row.Cells["TYPE"].Value.ToString(), row.Cells["PARTS"].Value.ToString(), row.Cells["PARTS_KH"].Value.ToString(), row.Cells["TYPE_KH"].Value.ToString(), row.Cells["ENG"].Value.ToString(), row.Cells["KH"].Value.ToString());
                         
 
                     }
@@ -2282,42 +2278,50 @@ namespace Testing.Forms
 
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-           
-        
             // draws the string onto the print document
-            Font drawFont = new Font("Arial", 42);
-            e.Graphics.DrawString(webBrowser1.Text,drawFont , Brushes.Black, 100, 100);
+            //Font drawFont = new Font("Arial", 42);
+            //e.Graphics.DrawString(webBrowser1.Text,drawFont , Brushes.Black, 100, 100);
             
-            e.Graphics.PageUnit = GraphicsUnit.Inch; 
+            //e.Graphics.PageUnit = GraphicsUnit.Inch; 
         
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            RtfToHtml r = new RtfToHtml();
-            r.OutputFormat = RtfToHtml.eOutputFormat.HTML_401;
+            //RtfToHtml r = new RtfToHtml();
+            //r.OutputFormat = RtfToHtml.eOutputFormat.HTML_401;
 
-            string html = r.ConvertString(richTextBox1.Rtf);
+            //string html = r.ConvertString(richTextBox1.Rtf);
 
-            string url = "\"https://www.sautinsoft.com/products/rtf-to-html/order.php\"";
-            string replace = string.Format("<div style=\"text-align:center;\">The unlicensed version of &laquo;RTF to HTML .Net&raquo;.<br><a href={0}>Get the full featured version!</a></div>", url);
+            //string url = "\"https://www.sautinsoft.com/products/rtf-to-html/order.php\"";
+            //string replace = string.Format("<div style=\"text-align:center;\">The unlicensed version of &laquo;RTF to HTML .Net&raquo;.<br><a href={0}>Get the full featured version!</a></div>", url);
 
-            html = html.Replace(replace, "");
+            //html = html.Replace(replace, "");
 
-            this.webBrowser1.DocumentText = html;
+            //this.webBrowser1.DocumentText = html;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            webBrowser1.Document.ExecCommand("SelectAll", false, null);
-            webBrowser1.Document.ExecCommand("Copy", false, null);
-            richTextBox1.Paste(); 
+            //webBrowser1.Document.ExecCommand("SelectAll", false, null);
+            //webBrowser1.Document.ExecCommand("Copy", false, null);
+            //richTextBox1.Paste(); 
         }
 
-       
+        private void txtClaimNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnExcluDefin_Click(null, null);
+        }
 
-       
+        private void dgvDefinition_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Msgbox.Show(dgvDefinition.SelectedCells[0].Value.ToString());
+        }
 
-        
+        private void dgvClaimInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Msgbox.Show(dgvClaimInfo.SelectedCells[0].Value.ToString());
+        }
     }
 }
