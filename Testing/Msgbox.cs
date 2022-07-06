@@ -40,6 +40,23 @@ namespace Testing
             return Button_id;
         }
 
+        public static DialogResult Show(string txtMessage, Font font)
+        {
+            newMessageBox = new Msgbox();
+            newMessageBox.lblMessage.Text = txtMessage;
+            newMessageBox.lblMessage.Font = font;
+            newMessageBox.lblTitle.Text = "Information";
+            newMessageBox.btnOk.Visible = false;
+            newMessageBox.btnCancel.Text = "Close";
+            isConfirmation = false;
+            newMessageBox.TopMost = true;
+            newMessageBox.ShowDialog();
+            //newMessageBox.AcceptButton = newMessageBox.btnCancel;
+            //newMessageBox.btnCancel.DialogResult = System.Windows.Forms.DialogResult.No;
+            //newMessageBox.btnCancel.Focus();
+            return Button_id;
+        }
+
         public static DialogResult Show(string txtMessage, Color col)
         {
             newMessageBox = new Msgbox();

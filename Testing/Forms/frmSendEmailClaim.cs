@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SautinSoft;
+using System.Text.RegularExpressions;
 
 namespace Testing.Forms
 {
@@ -30,6 +31,7 @@ namespace Testing.Forms
         int port;
         string HashPass = "Forte@2017";
         public static DataTable dtClaimDt;
+        private DataTable dtExcDef;
         public frmSendEmailClaim()
         {
             InitializeComponent();
@@ -78,49 +80,6 @@ namespace Testing.Forms
             }
             cbSignature.SelectedIndex = 0;
             //
-
-            #region DatagridviewData
-            dgvDefinition.Columns.Clear();
-            DataTable dtExcDef = crud.ExecQuery("select * from user_email_med_excludef");
-            DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
-            //CheckBox chk = new CheckBox();
-            dgvDefinition.Columns.Add(CheckboxColumn);
-            dgvDefinition.DataSource = dtExcDef;
-
-            dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvDefinition.Columns[1].Width = 70;
-            dgvDefinition.Columns[2].Width = 70;
-            dgvDefinition.Columns[3].Width = 120;
-            DataGridViewColumn column = dgvDefinition.Columns[0];
-            column.Width = 35;
-            dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
-            dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-
-            // add checkbox header
-            Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
-            // set checkbox header to center of header cell. +1 pixel to position correctly.
-            rect.X = rect.Location.X + 10;
-            rect.Y = rect.Location.Y + 15;
-            rect.Width = rect.Size.Width;
-            rect.Height = rect.Size.Height;
-
-            checkboxHeader.Checked = false;
-            checkboxHeader.Visible = true;
-            checkboxHeader.Name = "checkboxHeader";
-            checkboxHeader.Size = new Size(15, 15);
-            checkboxHeader.Location = rect.Location;
-            checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
-            dgvDefinition.Controls.Add(checkboxHeader);
-
-            dgvDefinition.Columns[1].Visible = false;
-            dgvDefinition.Columns[6].Visible = false;
-            dgvDefinition.Columns[7].Visible = false;
-
-            for (int i = 1; i < dgvDefinition.Columns.Count; i++)
-            {
-                dgvDefinition.Columns[i].ReadOnly = true;
-            }
-            #endregion
 
             dgvNonPayClaimNo.RowsDefaultCellStyle.ForeColor = Color.Black;
             dgvNonPayClaimNo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
@@ -2127,6 +2086,52 @@ namespace Testing.Forms
                 {
                     dgvClaimInfo.DataSource = dtClaimDt;
                     dgvClaimInfo.RowsDefaultCellStyle.ForeColor = Color.Black;
+
+                    #region DatagridviewData
+                    dgvDefinition.Columns.Clear();
+                    var plan = Regex.Replace(dtClaimDt.Rows[0]["PLAN_DESCRIPTION"].ToString(), @"[A-Za-z]+", string.Empty).Trim();
+                    dtExcDef = plan == "+" ? crud.ExecQuery("select * from user_email_med_excludef where PRODUCTS = 'HNS' order by PARTS, ENG") 
+                        : crud.ExecQuery("select * from user_email_med_excludef where PRODUCTS = 'HNS++' order by PARTS, ENG");
+                    DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
+                    //CheckBox chk = new CheckBox();
+                    dgvDefinition.Columns.Add(CheckboxColumn);
+                    dgvDefinition.DataSource = dtExcDef;
+
+                    dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    SetDgvDefinitionColumnWidth();
+                    DataGridViewColumn column = dgvDefinition.Columns[0];
+                    column.Width = 35;
+                    dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
+                    dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+                    // add checkbox header
+                    Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
+                    // set checkbox header to center of header cell. +1 pixel to position correctly.
+                    rect.X = rect.Location.X + 10;
+                    rect.Y = rect.Location.Y + 15;
+                    rect.Width = rect.Size.Width;
+                    rect.Height = rect.Size.Height;
+
+                    checkboxHeader.Checked = false;
+                    checkboxHeader.Visible = true;
+                    checkboxHeader.Name = "checkboxHeader";
+                    checkboxHeader.Size = new Size(15, 15);
+                    checkboxHeader.Location = rect.Location;
+                    checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
+                    dgvDefinition.Controls.Add(checkboxHeader);
+
+                    dgvDefinition.Columns[1].Visible = false;
+                    dgvDefinition.Columns[6].Visible = false;
+                    dgvDefinition.Columns[7].Visible = false;
+
+                    dgvDefinition.RowsDefaultCellStyle.Font = new Font("Khmer OS Siemreap", 9.75f, FontStyle.Regular);
+
+                    for (int i = 1; i < dgvDefinition.Columns.Count; i++)
+                    {
+                        dgvDefinition.Columns[i].ReadOnly = true;
+                    }
+                    txtSearchDefExclu.Enabled = dgvDefinition.Rows.Count > 0;
+                    #endregion
                 }
                 else
                 {
@@ -2316,12 +2321,60 @@ namespace Testing.Forms
 
         private void dgvDefinition_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Msgbox.Show(dgvDefinition.SelectedCells[0].Value.ToString());
+            Msgbox.Show(dgvDefinition.SelectedCells[0].Value.ToString(), new Font("Khmer OS Siemreap", 9, FontStyle.Regular));
         }
 
         private void dgvClaimInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Msgbox.Show(dgvClaimInfo.SelectedCells[0].Value.ToString());
+        }
+
+        private void txtSearchDefExclu_Enter(object sender, EventArgs e)
+        {
+            SetDgvDefinitionColumnWidth();
+
+            if (!txtSearchDefExclu.Text.Trim().Equals("--- Search English Definition or Exclusion ---"))
+                return;
+
+            txtSearchDefExclu.Clear();
+            txtSearchDefExclu.ForeColor = Color.Black;
+        }
+
+        private void txtSearchDefExclu_Leave(object sender, EventArgs e)
+        {
+            SetDgvDefinitionColumnWidth();
+
+            if (!txtSearchDefExclu.Text.Trim().Equals(string.Empty))
+                return;
+
+            txtSearchDefExclu.Text = "--- Search English Definition or Exclusion ---";
+            txtSearchDefExclu.ForeColor = Color.Gray;
+        }
+
+        private void txtSearchDefExclu_TextChanged(object sender, EventArgs e)
+        {
+            SetDgvDefinitionColumnWidth();
+
+            if (txtSearchDefExclu.Text.Trim().Equals("--- Search English Definition or Exclusion ---"))
+            {
+                dgvDefinition.DataSource = dtExcDef;
+                return;
+            }
+
+            if (txtSearchDefExclu.Text.Trim().Equals(string.Empty))
+                return;
+
+            DataView dvExcDef = new DataView(dtExcDef);
+            dvExcDef.RowFilter = "[ENG] LIKE '%" + txtSearchDefExclu.Text.Trim() + "%'";
+            dgvDefinition.DataSource = dvExcDef;
+        }
+
+        private void SetDgvDefinitionColumnWidth()
+        {
+            dgvDefinition.Columns["TYPE"].Width = 45;
+            dgvDefinition.Columns["PARTS"].Width = 20;
+            dgvDefinition.Columns["ENG"].Width = 180;
+            dgvDefinition.Columns["KH"].Width = 180;
         }
     }
 }

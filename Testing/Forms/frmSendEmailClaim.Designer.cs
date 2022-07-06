@@ -198,7 +198,10 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.panel13 = new System.Windows.Forms.Panel();
             this.dgvDefinition = new System.Windows.Forms.DataGridView();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.txtSearchDefExclu = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.dgvClaimInfo = new System.Windows.Forms.DataGridView();
@@ -254,7 +257,9 @@
             this.panel8.SuspendLayout();
             this.panel11.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDefinition)).BeginInit();
+            this.panel12.SuspendLayout();
             this.panel10.SuspendLayout();
             this.groupBox14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClaimInfo)).BeginInit();
@@ -370,7 +375,7 @@
             this.pnQuery.Controls.Add(this.lbClaimNo);
             this.pnQuery.Location = new System.Drawing.Point(3, 51);
             this.pnQuery.Name = "pnQuery";
-            this.pnQuery.Size = new System.Drawing.Size(1357, 493);
+            this.pnQuery.Size = new System.Drawing.Size(1357, 487);
             this.pnQuery.TabIndex = 5;
             this.pnQuery.Visible = false;
             // 
@@ -533,7 +538,7 @@
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHisClaim.RowTemplate.Height = 27;
-            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 223);
+            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 217);
             this.dgvHisClaim.TabIndex = 28;
             // 
             // label11
@@ -2287,7 +2292,8 @@
             // 
             // groupBox13
             // 
-            this.groupBox13.Controls.Add(this.dgvDefinition);
+            this.groupBox13.Controls.Add(this.panel13);
+            this.groupBox13.Controls.Add(this.panel12);
             this.groupBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox13.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.groupBox13.ForeColor = System.Drawing.SystemColors.ButtonFace;
@@ -2298,23 +2304,55 @@
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Definition/Exclusion";
             // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.dgvDefinition);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(3, 44);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(1351, 443);
+            this.panel13.TabIndex = 2;
+            // 
             // dgvDefinition
             // 
             this.dgvDefinition.AllowUserToAddRows = false;
             this.dgvDefinition.AllowUserToDeleteRows = false;
             this.dgvDefinition.AllowUserToOrderColumns = true;
-            this.dgvDefinition.AllowUserToResizeColumns = false;
             this.dgvDefinition.AllowUserToResizeRows = false;
             this.dgvDefinition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDefinition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDefinition.Location = new System.Drawing.Point(3, 19);
+            this.dgvDefinition.Location = new System.Drawing.Point(0, 0);
             this.dgvDefinition.Name = "dgvDefinition";
             this.dgvDefinition.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvDefinition.Size = new System.Drawing.Size(1351, 468);
+            this.dgvDefinition.Size = new System.Drawing.Size(1351, 443);
             this.dgvDefinition.TabIndex = 0;
             this.dgvDefinition.DataSourceChanged += new System.EventHandler(this.dgvDefinition_DataSourceChanged_1);
             this.dgvDefinition.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDefinition_CellContentClick);
             this.dgvDefinition.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDefinition_CellDoubleClick);
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.txtSearchDefExclu);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(3, 19);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1351, 25);
+            this.panel12.TabIndex = 1;
+            this.panel12.Visible = false;
+            // 
+            // txtSearchDefExclu
+            // 
+            this.txtSearchDefExclu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearchDefExclu.Enabled = false;
+            this.txtSearchDefExclu.ForeColor = System.Drawing.Color.Gray;
+            this.txtSearchDefExclu.Location = new System.Drawing.Point(0, 0);
+            this.txtSearchDefExclu.Name = "txtSearchDefExclu";
+            this.txtSearchDefExclu.Size = new System.Drawing.Size(1351, 23);
+            this.txtSearchDefExclu.TabIndex = 0;
+            this.txtSearchDefExclu.Text = "--- Search English Definition or Exclusion ---\r\n";
+            this.txtSearchDefExclu.TextChanged += new System.EventHandler(this.txtSearchDefExclu_TextChanged);
+            this.txtSearchDefExclu.Enter += new System.EventHandler(this.txtSearchDefExclu_Enter);
+            this.txtSearchDefExclu.Leave += new System.EventHandler(this.txtSearchDefExclu_Leave);
             // 
             // panel10
             // 
@@ -2343,7 +2381,6 @@
             this.dgvClaimInfo.AllowUserToAddRows = false;
             this.dgvClaimInfo.AllowUserToDeleteRows = false;
             this.dgvClaimInfo.AllowUserToOrderColumns = true;
-            this.dgvClaimInfo.AllowUserToResizeColumns = false;
             this.dgvClaimInfo.AllowUserToResizeRows = false;
             this.dgvClaimInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClaimInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -2382,7 +2419,7 @@
             this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
             this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaim.Location = new System.Drawing.Point(824, 24);
+            this.btnGenerateClaim.Location = new System.Drawing.Point(777, 24);
             this.btnGenerateClaim.Name = "btnGenerateClaim";
             this.btnGenerateClaim.Size = new System.Drawing.Size(129, 29);
             this.btnGenerateClaim.TabIndex = 6;
@@ -2398,7 +2435,7 @@
             this.btnExcluDefin.ForeColor = System.Drawing.Color.White;
             this.btnExcluDefin.Location = new System.Drawing.Point(674, 24);
             this.btnExcluDefin.Name = "btnExcluDefin";
-            this.btnExcluDefin.Size = new System.Drawing.Size(144, 29);
+            this.btnExcluDefin.Size = new System.Drawing.Size(97, 29);
             this.btnExcluDefin.TabIndex = 12;
             this.btnExcluDefin.Text = "Claim Info";
             this.btnExcluDefin.UseVisualStyleBackColor = false;
@@ -2514,7 +2551,10 @@
             this.panel8.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDefinition)).EndInit();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClaimInfo)).EndInit();
@@ -2709,5 +2749,8 @@
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.DataGridView dgvDefinition;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.TextBox txtSearchDefExclu;
     }
 }
