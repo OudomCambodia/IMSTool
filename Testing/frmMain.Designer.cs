@@ -102,6 +102,9 @@
             this.btnCertificateInsurance = new System.Windows.Forms.Button();
             this.btnCustomizeSchedule = new System.Windows.Forms.Button();
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
+            this.pnInvoice = new System.Windows.Forms.Panel();
+            this.btnSubBreakdownInvoice = new System.Windows.Forms.Button();
+            this.btnSubPrintInvoice = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -109,6 +112,7 @@
             this.pnSubAutoClaim.SuspendLayout();
             this.pnBenifit.SuspendLayout();
             this.pnEngUW.SuspendLayout();
+            this.pnInvoice.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnFLRep
@@ -616,7 +620,7 @@
             this.pnSubClaim.Controls.Add(this.bnClaimRI);
             this.pnSubClaim.Controls.Add(this.btnClaimPaidPayee);
             this.pnSubClaim.Controls.Add(this.btnClaimRequisitionReport);
-            this.pnSubClaim.Location = new System.Drawing.Point(190, 147);
+            this.pnSubClaim.Location = new System.Drawing.Point(191, 147);
             this.pnSubClaim.Name = "pnSubClaim";
             this.pnSubClaim.Size = new System.Drawing.Size(180, 198);
             this.pnSubClaim.TabIndex = 4;
@@ -1075,13 +1079,59 @@
             this.timerNoti.Interval = 600000;
             this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
             // 
+            // pnInvoice
+            // 
+            this.pnInvoice.Controls.Add(this.btnSubBreakdownInvoice);
+            this.pnInvoice.Controls.Add(this.btnSubPrintInvoice);
+            this.pnInvoice.Location = new System.Drawing.Point(677, 248);
+            this.pnInvoice.Name = "pnInvoice";
+            this.pnInvoice.Size = new System.Drawing.Size(187, 81);
+            this.pnInvoice.TabIndex = 14;
+            this.pnInvoice.Visible = false;
+            // 
+            // btnSubBreakdownInvoice
+            // 
+            this.btnSubBreakdownInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnSubBreakdownInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubBreakdownInvoice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubBreakdownInvoice.Enabled = false;
+            this.btnSubBreakdownInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubBreakdownInvoice.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubBreakdownInvoice.ForeColor = System.Drawing.Color.White;
+            this.btnSubBreakdownInvoice.Location = new System.Drawing.Point(0, 40);
+            this.btnSubBreakdownInvoice.Name = "btnSubBreakdownInvoice";
+            this.btnSubBreakdownInvoice.Size = new System.Drawing.Size(187, 40);
+            this.btnSubBreakdownInvoice.TabIndex = 7;
+            this.btnSubBreakdownInvoice.Text = "Issue Breakdown Invoice";
+            this.btnSubBreakdownInvoice.UseVisualStyleBackColor = false;
+            this.btnSubBreakdownInvoice.Click += new System.EventHandler(this.btnSubBreakdownInvoice_Click);
+            // 
+            // btnSubPrintInvoice
+            // 
+            this.btnSubPrintInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnSubPrintInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubPrintInvoice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubPrintInvoice.Enabled = false;
+            this.btnSubPrintInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubPrintInvoice.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubPrintInvoice.ForeColor = System.Drawing.Color.White;
+            this.btnSubPrintInvoice.Location = new System.Drawing.Point(0, 0);
+            this.btnSubPrintInvoice.Name = "btnSubPrintInvoice";
+            this.btnSubPrintInvoice.Size = new System.Drawing.Size(187, 40);
+            this.btnSubPrintInvoice.TabIndex = 6;
+            this.btnSubPrintInvoice.Text = "Print Invoice";
+            this.btnSubPrintInvoice.UseVisualStyleBackColor = false;
+            this.btnSubPrintInvoice.Click += new System.EventHandler(this.btnSubPrintInvoice_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.BackgroundImage = global::Testing.Properties.Resources.Mother_Day;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
+            this.Controls.Add(this.pnInvoice);
             this.Controls.Add(this.pnEngUW);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnSubAutoClaim);
@@ -1109,6 +1159,7 @@
             this.pnSubAutoClaim.ResumeLayout(false);
             this.pnBenifit.ResumeLayout(false);
             this.pnEngUW.ResumeLayout(false);
+            this.pnInvoice.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1188,5 +1239,8 @@
         private System.Windows.Forms.Timer timerNoti;
         private System.Windows.Forms.ToolStripMenuItem createNewUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageUserRoleToolStripMenuItem;
+        private System.Windows.Forms.Panel pnInvoice;
+        public System.Windows.Forms.Button btnSubBreakdownInvoice;
+        public System.Windows.Forms.Button btnSubPrintInvoice;
     }
 }

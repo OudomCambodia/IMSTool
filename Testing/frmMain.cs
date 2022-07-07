@@ -361,9 +361,10 @@ namespace Testing
         
         private void btnPrintInvoice_Click_1(object sender, EventArgs e)
         {
-            Forms.frmPrintInvoice cr = new Forms.frmPrintInvoice();
-            cr.UserName = UserName;
-            openForm(cr, (Button)sender);
+            //Forms.frmPrintInvoice cr = new Forms.frmPrintInvoice();
+            //cr.UserName = UserName;
+            //openForm(cr, (Button)sender);
+            SubPan(pnInvoice);
         }
 
         private void bnClaimRI_Click(object sender, EventArgs e)
@@ -467,6 +468,7 @@ namespace Testing
             pnSubAutoClaim.Visible = false;
             pnBenifit.Visible = false;
             pnEngUW.Visible = false;
+            pnInvoice.Visible = false;
         }
 
         private void bnPolRem_Click(object sender, EventArgs e)
@@ -746,6 +748,20 @@ namespace Testing
         {
             Forms.frmUserRoleManagement userRoleManagement = new Forms.frmUserRoleManagement();
             userRoleManagement.ShowDialog();
+        }
+
+        private void btnSubPrintInvoice_Click(object sender, EventArgs e)
+        {
+            Forms.frmPrintInvoice cr = new Forms.frmPrintInvoice();
+            cr.UserName = UserName;
+            openForm(cr, (Button)sender);
+        }
+
+        private void btnSubBreakdownInvoice_Click(object sender, EventArgs e)
+        {
+            Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
+            bi.Username = UserName;
+            bi.Show();
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)
