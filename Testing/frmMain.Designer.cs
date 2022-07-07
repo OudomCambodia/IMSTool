@@ -102,6 +102,9 @@
             this.btnCertificateInsurance = new System.Windows.Forms.Button();
             this.btnCustomizeSchedule = new System.Windows.Forms.Button();
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
+            this.niIMSTool = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ctmsNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -109,6 +112,7 @@
             this.pnSubAutoClaim.SuspendLayout();
             this.pnBenifit.SuspendLayout();
             this.pnEngUW.SuspendLayout();
+            this.ctmsNotifyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnFLRep
@@ -1075,6 +1079,28 @@
             this.timerNoti.Interval = 600000;
             this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
             // 
+            // niIMSTool
+            // 
+            this.niIMSTool.ContextMenuStrip = this.ctmsNotifyIcon;
+            this.niIMSTool.Icon = ((System.Drawing.Icon)(resources.GetObject("niIMSTool.Icon")));
+            this.niIMSTool.Text = "IMS Tool";
+            this.niIMSTool.Visible = true;
+            this.niIMSTool.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niIMSTool_MouseDoubleClick);
+            // 
+            // ctmsNotifyIcon
+            // 
+            this.ctmsNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quitToolStripMenuItem});
+            this.ctmsNotifyIcon.Name = "ctmsNotifyIcon";
+            this.ctmsNotifyIcon.Size = new System.Drawing.Size(98, 26);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click_1);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1101,6 +1127,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnSubClaim.ResumeLayout(false);
@@ -1109,6 +1136,7 @@
             this.pnSubAutoClaim.ResumeLayout(false);
             this.pnBenifit.ResumeLayout(false);
             this.pnEngUW.ResumeLayout(false);
+            this.ctmsNotifyIcon.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1188,5 +1216,8 @@
         private System.Windows.Forms.Timer timerNoti;
         private System.Windows.Forms.ToolStripMenuItem createNewUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageUserRoleToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon niIMSTool;
+        private System.Windows.Forms.ContextMenuStrip ctmsNotifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
     }
 }
