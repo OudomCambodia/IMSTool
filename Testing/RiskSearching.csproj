@@ -188,6 +188,11 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\WindowsFormsApp1\packages\Microsoft.Office.Interop.Word.15.0.4797.1004\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.SharePoint.Tools, Version=16.1.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SharePointOnline.CSOM.16.1.22315.12000\lib\net45\Microsoft.Office.SharePoint.Tools.dll</HintPath>
       <Private>True</Private>
@@ -257,6 +262,9 @@
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="SautinSoft.RtfToHtml">
+      <HintPath>..\..\WindowsFormsApp1\packages\sautinsoft.rtftohtml.7.6.6.17\lib\net45\SautinSoft.RtfToHtml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -601,6 +609,12 @@
     </Compile>
     <Compile Include="Forms\frmManageCrono.Designer.cs">
       <DependentUpon>frmManageCrono.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMedicalRejectionLetter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMedicalRejectionLetter.Designer.cs">
+      <DependentUpon>frmMedicalRejectionLetter.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmNotification.cs">
       <SubType>Form</SubType>
@@ -1454,6 +1468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmManageCrono.resx">
       <DependentUpon>frmManageCrono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMedicalRejectionLetter.resx">
+      <DependentUpon>frmMedicalRejectionLetter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmNotification.resx">
       <DependentUpon>frmNotification.cs</DependentUpon>
