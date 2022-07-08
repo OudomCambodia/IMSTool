@@ -105,6 +105,9 @@
             this.pnInvoice = new System.Windows.Forms.Panel();
             this.btnSubBreakdownInvoice = new System.Windows.Forms.Button();
             this.btnSubPrintInvoice = new System.Windows.Forms.Button();
+            this.niIMSTool = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ctmsQuitApp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -113,6 +116,7 @@
             this.pnBenifit.SuspendLayout();
             this.pnEngUW.SuspendLayout();
             this.pnInvoice.SuspendLayout();
+            this.ctmsQuitApp.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnFLRep
@@ -1123,6 +1127,28 @@
             this.btnSubPrintInvoice.UseVisualStyleBackColor = false;
             this.btnSubPrintInvoice.Click += new System.EventHandler(this.btnSubPrintInvoice_Click);
             // 
+            // niIMSTool
+            // 
+            this.niIMSTool.ContextMenuStrip = this.ctmsQuitApp;
+            this.niIMSTool.Icon = ((System.Drawing.Icon)(resources.GetObject("niIMSTool.Icon")));
+            this.niIMSTool.Text = "IMS Tool";
+            this.niIMSTool.Visible = true;
+            this.niIMSTool.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niIMSTool_MouseDoubleClick);
+            // 
+            // ctmsQuitApp
+            // 
+            this.ctmsQuitApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quitToolStripMenuItem});
+            this.ctmsQuitApp.Name = "ctmsQuitApp";
+            this.ctmsQuitApp.Size = new System.Drawing.Size(153, 48);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click_1);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1151,6 +1177,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnSubClaim.ResumeLayout(false);
@@ -1160,6 +1187,7 @@
             this.pnBenifit.ResumeLayout(false);
             this.pnEngUW.ResumeLayout(false);
             this.pnInvoice.ResumeLayout(false);
+            this.ctmsQuitApp.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1242,5 +1270,8 @@
         private System.Windows.Forms.Panel pnInvoice;
         public System.Windows.Forms.Button btnSubBreakdownInvoice;
         public System.Windows.Forms.Button btnSubPrintInvoice;
+        private System.Windows.Forms.NotifyIcon niIMSTool;
+        private System.Windows.Forms.ContextMenuStrip ctmsQuitApp;
+        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
     }
 }
