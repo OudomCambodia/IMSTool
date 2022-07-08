@@ -44,10 +44,7 @@ namespace Testing
             {
                 e.Cancel = true;
                 WindowState = FormWindowState.Minimized;
-
-                //Application.Exit();
-                
-                //Environment.Exit(0);
+                ShowInTaskbar = false;
             }
             catch (Exception ex)
             {
@@ -759,9 +756,30 @@ namespace Testing
 
         private void btnSubBreakdownInvoice_Click(object sender, EventArgs e)
         {
-            Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
-            bi.Username = UserName;
-            bi.Show();
+            //Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
+            //bi.Username = UserName;
+            //bi.Show();
+        }
+
+        private void niIMSTool_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ShowInTaskbar = true;
+            niIMSTool.Visible = false;
+            WindowState = FormWindowState.Maximized;
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                ShowInTaskbar = true;
+                niIMSTool.Visible = true;
+            }
+        }
+
+        private void quitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)
