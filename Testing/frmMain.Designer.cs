@@ -1100,7 +1100,7 @@
             this.btnSubBreakdownInvoice.ForeColor = System.Drawing.Color.White;
             this.btnSubBreakdownInvoice.Location = new System.Drawing.Point(0, 40);
             this.btnSubBreakdownInvoice.Name = "btnSubBreakdownInvoice";
-            this.btnSubBreakdownInvoice.Size = new System.Drawing.Size(187, 40);
+            this.btnSubBreakdownInvoice.Size = new System.Drawing.Size(187, 41);
             this.btnSubBreakdownInvoice.TabIndex = 7;
             this.btnSubBreakdownInvoice.Text = "Issue Breakdown Invoice";
             this.btnSubBreakdownInvoice.UseVisualStyleBackColor = false;
