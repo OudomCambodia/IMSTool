@@ -960,9 +960,13 @@ namespace Testing.Forms
         {
             try
             {
-                if (dgvDoc.Rows[e.RowIndex].Cells["PRIORITY_TYPE"].Value == "L")
+                if (dgvDoc.Rows[e.RowIndex].Cells["PRIORITY_TYPE"].Value.ToString().Trim().Equals("L"))
+                {
+                    e.CellStyle.SelectionBackColor = Color.Gray;
+                    e.CellStyle.SelectionForeColor = Color.Black;
                     return;
-
+                }
+                    
                 double statusTimeline = getStatusTimeline(docStatus.FirstOrDefault(x => x.Value == dgvDoc.Rows[e.RowIndex].Cells["STATUS"].Value.ToString()).Key);// get Key with Value
 
                 if (statusTimeline > 0) //if = 0 means status with no timeline <=> status 0->6
@@ -978,12 +982,20 @@ namespace Testing.Forms
                         {
                             e.CellStyle.BackColor = Color.Khaki;
                             e.CellStyle.ForeColor = Color.Black;
+                            e.CellStyle.SelectionBackColor = Color.Olive;
+                            e.CellStyle.SelectionForeColor = Color.Black;
                         }
                         else
                         {
                             e.CellStyle.BackColor = Color.FromArgb(195, 39, 43);
                             e.CellStyle.ForeColor = Color.White;
+                            e.CellStyle.SelectionBackColor = Color.Maroon;
                         }
+                    }
+                    else
+                    {
+                        e.CellStyle.SelectionBackColor = Color.Gray;
+                        e.CellStyle.SelectionForeColor = Color.Black;
                     }
 
                     //Check Return Doc Over Timeline
@@ -1000,6 +1012,8 @@ namespace Testing.Forms
                                 //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                                 e.CellStyle.BackColor = Color.Khaki;
                                 e.CellStyle.ForeColor = Color.Black;
+                                e.CellStyle.SelectionBackColor = Color.Olive;
+                                e.CellStyle.SelectionForeColor = Color.Black;
                             }
                         }
                         else if (ReturnDate.Hour >= 12 && ReturnDate.Hour <= 23)
@@ -1022,7 +1036,14 @@ namespace Testing.Forms
                                 //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                                 e.CellStyle.BackColor = Color.Khaki;
                                 e.CellStyle.ForeColor = Color.Black;
+                                e.CellStyle.SelectionBackColor = Color.Olive;
+                                e.CellStyle.SelectionForeColor = Color.Black;
                             }
+                        }
+                        else
+                        {
+                            e.CellStyle.SelectionBackColor = Color.Gray;
+                            e.CellStyle.SelectionForeColor = Color.Black;
                         }
                     }
                     //

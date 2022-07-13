@@ -32,6 +32,19 @@ namespace Testing
         //Noti
         DBS11SqlCrud sqlcrud = new DBS11SqlCrud();
 
+        private static int WM_QUERYENDSESSION = 0x11;
+        private static bool systemShutdown = false;
+
+        protected override void WndProc(ref System.Windows.Forms.Message m)
+        {
+            if (m.Msg == WM_QUERYENDSESSION)
+                systemShutdown = true;
+
+            // If this is WM_QUERYENDSESSION, the closing event should be raised in the base WndProc.
+            base.WndProc(ref m);
+
+        }
+
         public frmMain()
         {
             InitializeComponent();
@@ -42,9 +55,14 @@ namespace Testing
         {
             try
             {
-                e.Cancel = true;
-                WindowState = FormWindowState.Minimized;
-                ShowInTaskbar = false;
+                if (systemShutdown)
+                    e.Cancel = false;
+                else
+                {
+                    e.Cancel = true;
+                    WindowState = FormWindowState.Minimized;
+                    ShowInTaskbar = false;
+                }
             }
             catch (Exception ex)
             {
@@ -756,9 +774,9 @@ namespace Testing
 
         private void btnSubBreakdownInvoice_Click(object sender, EventArgs e)
         {
-            Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
-            bi.Username = UserName;
-            bi.Show();
+            //Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
+            //bi.Username = UserName;
+            //bi.Show();
         }
 
         private void niIMSTool_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -775,6 +793,8 @@ namespace Testing
                 ShowInTaskbar = true;
                 niIMSTool.Visible = true;
             }
+            if (WindowState == FormWindowState.Maximized)
+                ShowInTaskbar = true;
         }
 
         private void quitToolStripMenuItem_Click_1(object sender, EventArgs e)
