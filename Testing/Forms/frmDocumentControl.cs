@@ -118,7 +118,7 @@ namespace Testing.Forms
                 string tmpstatus = "";
                 foreach (string s in Role)
                 {
-                    tmpstatus += sqlcrud.LoadData("SELECT STATUS FROM dbo.tbChangeStatus_Allow WHERE ROLE = '" + s + "'").Tables[0].Rows[0][0].ToString() + ",";
+                    tmpstatus += sqlcrud.LoadData("SELECT STATUS FROM dbo.tbChangeStatus_Allow WHERE ROLE = '" + s.Trim() + "'").Tables[0].Rows[0][0].ToString() + ",";
                 }
                 tmpstatus = tmpstatus.Remove(tmpstatus.Length - 1);
                 Status = tmpstatus.Split(',');
