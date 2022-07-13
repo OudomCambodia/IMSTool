@@ -756,9 +756,9 @@ namespace Testing
 
         private void btnSubBreakdownInvoice_Click(object sender, EventArgs e)
         {
-            //Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
-            //bi.Username = UserName;
-            //bi.Show();
+            Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
+            bi.Username = UserName;
+            bi.Show();
         }
 
         private void niIMSTool_MouseDoubleClick(object sender, MouseEventArgs e)
