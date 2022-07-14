@@ -53,6 +53,10 @@ namespace Testing.Forms
         //public static bool PrintCard = false;//switch to Submit Card Printing form
         //public static string fwdpolno = string.Empty;
 
+        private readonly string HEAD_FILING = "HEAD_FILING";
+        private readonly string ALL_REGIONALS = "ALL_REGIONALS";
+        private readonly string ALL_BANKS = "ALL_BANKS";
+        private readonly string ALL_BROKERS = "ALL_BROKERS";
 
         public frmDocumentControl()
         {
@@ -268,19 +272,48 @@ namespace Testing.Forms
                     : (status == "99") ? "DOC_CUR_STATUS like '%%'" : (status == "13") ? "DOC_CUR_STATUS IN (13,14,15,16) " : "DOC_CUR_STATUS = " + status);
 
                 //Role[0] is primary role
-                dgvOpensqlstring = (UserID == "S01")? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL')  " 
-                    :(Role[0]=="UWHEAD"||Role[0]=="CONTORLLER"||Role[0]=="FILLING"||Role[0]=="UNW")?dgvOpensqlstring:
-                    (Role[0]=="PRODUCER")?
-                    (UserID=="P09"||UserID=="P10")
-                    ?dgvOpensqlstring+ " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
-                    :(UserID=="P70")
-                    ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
-                    :(UserID=="P42")
-                    ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
-                    :dgvOpensqlstring+" AND CREATE_BY like '%"+FullName+"%'":
-                    (Role[0]=="DP")?dgvOpensqlstring + " AND DP_NAME = '"+FullName+"'":dgvOpensqlstring;
+                #region --- OLD CODING ---
+                dgvOpensqlstring = (UserID == "S01")
+                    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
+                    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
+                    ? dgvOpensqlstring
+                    : (Role[0] == "PRODUCER")
+                        ? (UserID == "P09" || UserID == "P10")
+                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
+                        : (UserID == "P70" || UserID == "D44")
+                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
+                        : (UserID == "P42")
+                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
+                        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
+                    : (Role[0] == "DP")
+                        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
+                        : dgvOpensqlstring;
+                #endregion
 
-                if (Role[0]=="FILLING")
+                #region --- NEW CODING ---
+                //var dsSpecialCode = sqlcrud.LoadData("select * from tbDOC_SPECIAL_CODE where USER_ID = '" + UserID + "'").Tables[0];
+                //var specialCode = string.Empty;
+                //if (dsSpecialCode.Rows.Count > 0)
+                //    specialCode = dsSpecialCode.Rows[0]["SPECIAL_CODE"].ToString().Trim();
+
+                //dgvOpensqlstring = (specialCode.Equals(HEAD_FILING))
+                //    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
+                //    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
+                //    ? dgvOpensqlstring
+                //    : (Role[0] == "PRODUCER")
+                //        ? (specialCode.Equals(ALL_REGIONALS))
+                //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
+                //        : (specialCode.Equals(ALL_BANKS))
+                //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
+                //        : (specialCode.Equals(ALL_BROKERS))
+                //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
+                //        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
+                //    : (Role[0] == "DP")
+                //        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
+                //        : dgvOpensqlstring;
+                #endregion
+
+                if (Role[0] == "FILLING")
                 {
                     if (Team != "A&H")// Filling For A&H
                         dgvOpensqlstring += " AND PRODUCT_TYPE NOT IN ('EMC','STN','MED','Chinese PA') ";
