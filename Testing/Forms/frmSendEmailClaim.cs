@@ -32,6 +32,10 @@ namespace Testing.Forms
         string HashPass = "Forte@2017";
         public static DataTable dtClaimDt;
         private DataTable dtExcDef;
+        int[] row_id;
+        DataTable dtTemp1 = null;
+        
+      
         public frmSendEmailClaim()
         {
             InitializeComponent();
@@ -1090,7 +1094,9 @@ namespace Testing.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
 
+                
                 DataTable dtTemp = new DataTable();
+                DataTable dtQ_temp = new DataTable();
                 string RefNo = "";
 
                 dgvClaimDetail.DataSource = null;
@@ -1104,7 +1110,13 @@ namespace Testing.Forms
                         tbChequeNo.Focus();
                         return;
                     }
-                    dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE CHQ_NO = '" + ChequeNo + "'");
+                    //update on save record for modification Theane 14-07-2022
+                    dtQ_temp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION_TEMP WHERE CHQ_NO = '" + ChequeNo + "'");
+                    //-----///
+                        
+                     dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE CHQ_NO = '" + ChequeNo + "'");
+
+                        
 
                     if (dtTemp.Rows.Count <= 0)
                     {
@@ -1122,6 +1134,9 @@ namespace Testing.Forms
                         tbBankTranNo.Focus();
                         return;
                     }
+                    //update on save record for modification Theane 14-07-2022
+                    dtQ_temp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION_TEMP WHERE BANK_TRAN_NO = '" + BankTranNo + "'");
+                    //-----///
                     dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE BANK_TRAN_NO = '" + BankTranNo + "'");
 
                     if (dtTemp.Rows.Count <= 0)
@@ -1147,7 +1162,9 @@ namespace Testing.Forms
                         SelectedItem.Sort();
                         SelectedRequi = SelectedItem.Aggregate((i, j) => i + "," + j); //Concat list item with ","
                         //SelectedRequi = SelectedRequi.Remove(SelectedRequi.Length - 1);
-
+                        //update on save record for modification Theane 14-07-2022
+                        dtQ_temp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION_TEMP WHERE REQUISITION_NO IN (" + SelectedRequi + ")");
+                        //-----///
                         dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE REQUISITION_NO IN (" + SelectedRequi + ")");
 
                         if (dtTemp.Rows.Count <= 0)
@@ -1188,8 +1205,45 @@ namespace Testing.Forms
                         dr["CLAIMED_AMT"] = dr["REQ_AMOUNT"]; //Change due to request on display
                     }
                 }
+                //compare two datatable in order to update cell - Theane 17-07-2022 request Chea Sovanravy
+                for (int i = 0; i < dtTemp.Rows.Count; i++)
+                {
 
+                    for (int j = 0; j < dtQ_temp.Rows.Count; j++)
+                    {
+
+                        if (dtTemp.Rows[i]["CLAIM_NO"].ToString() == dtQ_temp.Rows[j]["CLAIM_NO"].ToString())
+                        {
+
+                            dtTemp.Rows[i][0] = dtQ_temp.Rows[j][0].ToString();
+                            dtTemp.Rows[i][1] = dtQ_temp.Rows[j][1].ToString();
+                            dtTemp.Rows[i][2] = dtQ_temp.Rows[j][2].ToString();
+                            dtTemp.Rows[i][3] = dtQ_temp.Rows[j][3].ToString();
+                            dtTemp.Rows[i][4] = dtQ_temp.Rows[j][4].ToString();
+                            dtTemp.Rows[i][5] = dtQ_temp.Rows[j][5].ToString();
+                            dtTemp.Rows[i][6] = dtQ_temp.Rows[j][6].ToString();
+                            dtTemp.Rows[i][7] = dtQ_temp.Rows[j][7].ToString();
+                            dtTemp.Rows[i][8] = dtQ_temp.Rows[j][8].ToString();
+                            dtTemp.Rows[i][9] = dtQ_temp.Rows[j][9].ToString();
+                            dtTemp.Rows[i][10] = dtQ_temp.Rows[j][10].ToString();
+                            dtTemp.Rows[i][11] = dtQ_temp.Rows[j][11].ToString();
+                            dtTemp.Rows[i][12] = dtQ_temp.Rows[j][12].ToString();
+                            dtTemp.Rows[i][13] = dtQ_temp.Rows[j][13].ToString();
+                            dtTemp.Rows[i][14] = dtQ_temp.Rows[j][14].ToString();
+                            dtTemp.Rows[i][15] = dtQ_temp.Rows[j][15].ToString();
+                            dtTemp.Rows[i][16] = dtQ_temp.Rows[j][16].ToString();
+                            dtTemp.Rows[i][17] = dtQ_temp.Rows[j][17].ToString();
+
+                        }
+
+                    }
+
+                }
+                //-----------------------------------//
+                
                 dgvClaimDetail.DataSource = dtTemp;
+                //dtTemp1 = dtTemp.Copy();
+                
 
                 dgvClaimDetail.Columns["REQUISITION_NO"].Visible = false;
                 dgvClaimDetail.Columns["REQ_AMOUNT"].Visible = false;
@@ -1302,13 +1356,15 @@ namespace Testing.Forms
                 frm.Text = "Settlement Letter";
                 frm.Show();
                 Cursor.Current = Cursors.AppStarting;
+                
+                
             }
             catch (Exception ex)
             {
                 Msgbox.Show(ex.Message);
             }
         }
-
+        
         private void dgvClaimDetail_DataSourceChanged(object sender, EventArgs e)
         {
             if (dgvClaimDetail.Rows.Count > 0)
@@ -2376,5 +2432,61 @@ namespace Testing.Forms
             dgvDefinition.Columns["ENG"].Width = 180;
             dgvDefinition.Columns["KH"].Width = 180;
         }
+
+
+        private void dgvClaimDetail_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+            DataTable UpdateDt = new DataTable();
+            foreach (DataGridViewColumn col in dgvClaimDetail.Columns)
+            {
+                UpdateDt.Columns.Add(col.Name);
+            }
+
+            foreach (DataGridViewRow row in dgvClaimDetail.Rows)
+            {
+                DataRow dRow = UpdateDt.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                UpdateDt.Rows.Add(dRow);
+            }
+            //string sql = "INSERT INTO VIEW_REQUISITION_TEMP VALUES ('";
+            //foreach(DataColumn dc in UpdateDt.Columns){
+            //    sql += UpdateDt.Rows[e.RowIndex][dc] + "','";
+            //}
+            //sql += ")";
+            DataTable dtLettercheck = crud.ExecQuery("select CLAIM_NO,REQUISITION_NO from view_requisition_temp where CLAIM_NO = '" + UpdateDt.Rows[e.RowIndex][2].ToString() + "'");
+            if (dtLettercheck.Rows.Count <= 0)
+            {
+                crud.ExecSP_NoOutPara("SP_USER_INSERT_SETTLETLETTER",
+                              new string[] { "cl_input_type", "clREQUISITION_NO", 
+                                         "clREQ_AMOUNT", "clCLAIM_NO", 
+                                         "clINSURED","clRISK_NAME","clADMISSION_DATE","clCLAIMED_AMT","clPAYABLE_AMT","clCREATED_DATE","clADDRESS",
+                                         "clCC","clPANEL_HOSPITAL","clHOSPITAL_ADDRESS","clPV", "clBank_Tran_no","clChq_no","clPREVIOUS_PAYMENT","clLAST_PAYMENT"},
+                              new string[] { "letter_Insert", UpdateDt.Rows[e.RowIndex][0].ToString(), UpdateDt.Rows[e.RowIndex][1].ToString(), UpdateDt.Rows[e.RowIndex][2].ToString(), UpdateDt.Rows[e.RowIndex][3].ToString() ,
+                              UpdateDt.Rows[e.RowIndex][4].ToString(),UpdateDt.Rows[e.RowIndex][5].ToString(),UpdateDt.Rows[e.RowIndex][6].ToString(),UpdateDt.Rows[e.RowIndex][7].ToString(),Convert.ToDateTime(UpdateDt.Rows[e.RowIndex][8].ToString()).ToShortDateString(),
+                              UpdateDt.Rows[e.RowIndex][9].ToString(),UpdateDt.Rows[e.RowIndex][10].ToString(),UpdateDt.Rows[e.RowIndex][11].ToString(),UpdateDt.Rows[e.RowIndex][12].ToString(),
+                              UpdateDt.Rows[e.RowIndex][13].ToString(),UpdateDt.Rows[e.RowIndex][14].ToString(),UpdateDt.Rows[e.RowIndex][15].ToString(),UpdateDt.Rows[e.RowIndex][16].ToString(),UpdateDt.Rows[e.RowIndex][17].ToString()});
+            }
+            else
+            {
+                crud.ExecNonQuery("delete from view_requisition_temp where CLAIM_NO = '" + UpdateDt.Rows[e.RowIndex][2].ToString() + "'");
+                crud.ExecSP_NoOutPara("SP_USER_INSERT_SETTLETLETTER",
+                               new string[] { "cl_input_type", "clREQUISITION_NO", 
+                                         "clREQ_AMOUNT", "clCLAIM_NO", 
+                                         "clINSURED","clRISK_NAME","clADMISSION_DATE","clCLAIMED_AMT","clPAYABLE_AMT","clCREATED_DATE","clADDRESS",
+                                         "clCC","clPANEL_HOSPITAL","clHOSPITAL_ADDRESS","clPV", "clBank_Tran_no","clChq_no","clPREVIOUS_PAYMENT","clLAST_PAYMENT"},
+                               new string[] { "letter_Insert", UpdateDt.Rows[e.RowIndex][0].ToString(), UpdateDt.Rows[e.RowIndex][1].ToString(), UpdateDt.Rows[e.RowIndex][2].ToString(), UpdateDt.Rows[e.RowIndex][3].ToString() ,
+                              UpdateDt.Rows[e.RowIndex][4].ToString(),UpdateDt.Rows[e.RowIndex][5].ToString(),UpdateDt.Rows[e.RowIndex][6].ToString(),UpdateDt.Rows[e.RowIndex][7].ToString(),Convert.ToDateTime(UpdateDt.Rows[e.RowIndex][8].ToString()).ToShortDateString(),
+                              UpdateDt.Rows[e.RowIndex][9].ToString(),UpdateDt.Rows[e.RowIndex][10].ToString(),UpdateDt.Rows[e.RowIndex][11].ToString(),UpdateDt.Rows[e.RowIndex][12].ToString(),
+                              UpdateDt.Rows[e.RowIndex][13].ToString(),UpdateDt.Rows[e.RowIndex][14].ToString(),UpdateDt.Rows[e.RowIndex][15].ToString(),UpdateDt.Rows[e.RowIndex][16].ToString(),UpdateDt.Rows[e.RowIndex][17].ToString()});
+            }
+            
+        }
+        
+
+       
+       
     }
 }

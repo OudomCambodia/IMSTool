@@ -1330,6 +1330,7 @@
             this.dgvClaimDetail.Size = new System.Drawing.Size(1000, 129);
             this.dgvClaimDetail.TabIndex = 8;
             this.dgvClaimDetail.DataSourceChanged += new System.EventHandler(this.dgvClaimDetail_DataSourceChanged);
+            this.dgvClaimDetail.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClaimDetail_CellValueChanged_1);
             // 
             // groupBox3
             // 
