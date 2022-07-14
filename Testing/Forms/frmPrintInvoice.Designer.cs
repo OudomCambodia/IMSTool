@@ -160,7 +160,7 @@
             // 
             this.BHPLetterPrnt.AutoSize = true;
             this.BHPLetterPrnt.ForeColor = System.Drawing.Color.White;
-            this.BHPLetterPrnt.Location = new System.Drawing.Point(458, 84);
+            this.BHPLetterPrnt.Location = new System.Drawing.Point(467, 83);
             this.BHPLetterPrnt.Name = "BHPLetterPrnt";
             this.BHPLetterPrnt.Size = new System.Drawing.Size(207, 17);
             this.BHPLetterPrnt.TabIndex = 59;

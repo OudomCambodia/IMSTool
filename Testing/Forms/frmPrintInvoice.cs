@@ -209,6 +209,7 @@ namespace Testing.Forms
                 //sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + comBoxDebit.SelectedValue + "'";
                 if (comBoxDebit.SelectedIndex != 0) {
                     sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + note + "'";
+                    sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + note + "'";
                     
                 }
                     
