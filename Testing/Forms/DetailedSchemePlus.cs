@@ -20,6 +20,7 @@ namespace Testing.Forms
         DataTable dtcopy = new DataTable();
         DataTable dtv2 = new DataTable();
         public HospitalSurgicalScheme mainFrm = new HospitalSurgicalScheme();
+       
         public DetailedSchemePlus()
         {
             InitializeComponent();
