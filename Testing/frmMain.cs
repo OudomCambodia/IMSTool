@@ -48,6 +48,7 @@ namespace Testing
         public frmMain()
         {
             InitializeComponent();
+            Text = "\u00b6" + Text + "\u00b6";
          //   btnClaimPaidPayee.Visible = false;
         }
 
