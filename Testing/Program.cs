@@ -78,7 +78,7 @@ namespace Testing
             Mutex mutex = new Mutex(true, appName, out onlyInstance);
             if (!onlyInstance)
             {
-                var formTitle = GetOpenWindows().Where(f => f.Contains("Additional Tools")).FirstOrDefault();
+                var formTitle = GetOpenWindows().Where(f => f.Contains("\u00b6" + "Additional Tools" + "\u00b6")).FirstOrDefault();
                 ShowToFront(formTitle);
                 return;
             }
