@@ -127,7 +127,7 @@
             this.bnFLRep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnFLRep.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnFLRep.ForeColor = System.Drawing.Color.White;
-            this.bnFLRep.Image = global::Testing.Properties.Resources.arrow;
+            this.bnFLRep.Image = global::Testing.Properties.Resources.arrow1;
             this.bnFLRep.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnFLRep.Location = new System.Drawing.Point(0, 320);
             this.bnFLRep.Margin = new System.Windows.Forms.Padding(0);
@@ -165,6 +165,8 @@
             this.btnPrintInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrintInvoice.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrintInvoice.ForeColor = System.Drawing.Color.White;
+            this.btnPrintInvoice.Image = global::Testing.Properties.Resources.arrow1;
+            this.btnPrintInvoice.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPrintInvoice.Location = new System.Drawing.Point(0, 240);
             this.btnPrintInvoice.Margin = new System.Windows.Forms.Padding(0);
             this.btnPrintInvoice.Name = "btnPrintInvoice";
@@ -794,7 +796,7 @@
             this.bnAutoClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnAutoClaim.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnAutoClaim.ForeColor = System.Drawing.Color.White;
-            this.bnAutoClaim.Image = global::Testing.Properties.Resources.arrow;
+            this.bnAutoClaim.Image = global::Testing.Properties.Resources.arrow1;
             this.bnAutoClaim.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnAutoClaim.Location = new System.Drawing.Point(0, 520);
             this.bnAutoClaim.Margin = new System.Windows.Forms.Padding(0);
@@ -847,7 +849,7 @@
             this.btnBenifitScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBenifitScheme.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBenifitScheme.ForeColor = System.Drawing.Color.White;
-            this.btnBenifitScheme.Image = global::Testing.Properties.Resources.arrow;
+            this.btnBenifitScheme.Image = global::Testing.Properties.Resources.arrow1;
             this.btnBenifitScheme.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBenifitScheme.Location = new System.Drawing.Point(0, 640);
             this.btnBenifitScheme.Margin = new System.Windows.Forms.Padding(0);
@@ -1154,7 +1156,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.BackgroundImage = global::Testing.Properties.Resources.Mother_Day;
+            this.BackgroundImage = global::Testing.Properties.Resources.zerowaste;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
             this.Controls.Add(this.pnInvoice);
@@ -1177,6 +1179,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
+            
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

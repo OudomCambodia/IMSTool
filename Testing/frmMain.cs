@@ -231,6 +231,7 @@ namespace Testing
             //this.BackgroundImage = (Image)(O);
             object O = Resources.ResourceManager.GetObject("Logo_Red");
             this.BackgroundImage = (Image)(O);
+            
 
             if (dateEvent.Month == 12 && dateEvent.Day>=24 && dateEvent.Day<=26) //Christmas Day
             {
