@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -84,13 +85,122 @@ namespace Testing.Forms
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
                 e.Handled = true;
         }
+        private void txtTotalSI_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+        }
+
+        private void txtTotalSI_TextChanged(object sender, EventArgs e)
+        {
+            txtTotalSI.Text = String.Format("{0:N}", Convert.ToDecimal(String.IsNullOrEmpty(txtTotalSI.Text) ? 0.00 : Convert.ToDouble(txtTotalSI.Text)));
+
+        }
+
+        private void tbTotalDue_TextChanged(object sender, EventArgs e)
+        {
+            decimal a = Convert.ToDecimal(tbGross.Text);
+            decimal b = Convert.ToDecimal(lblKHM.Text);
+            decimal c = Math.Round(a * b, 2);
+            lblKhTotal.Text = String.Format("{0:N}", c);
+        }
+
+
         #endregion
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            //Invoice Option One
+            DialogResult dr_msg = Msgbox.Show("Would you like to issue breakdown invoice?", "", "Yes", "No");
+            if (dr_msg == System.Windows.Forms.DialogResult.No)
+            {
+                Cursor.Current = Cursors.AppStarting;
+                return;
+            }
+            else
+            {
+                string note = dtInvoicefrm2.Rows[0][4].ToString().ToUpper(); // debit or credit note
+                DataTable chkInvoice = crud.ExecQuery("SELECT * FROM VIEW_PRINT_INVOICE WHERE DEBIT_NOTE = '" + dtInvoicefrm2.Rows[0][4].ToString().ToUpper() + "'");
+                if (chkInvoice.Rows.Count > 0)
+                {
+                    ReportClass rpt = new ReportClass();
 
+                    if (note[0] == 'D') //Debit Note
+                    {
+                        string accountcode = dtInvoicefrm2.Rows[0][6].ToString().ToUpper();
+                        string producer = accountcode.Split('/')[1], cuscode = accountcode.Split('/')[2];
+                        DataTable dtTemp = crud.ExecQuery("SELECT DISTINCT BANK_NAME,TRANFER_TO,ACCOUNT_NO,SWIFT_CODE FROM VIEW_PAYMENT_INSTRUCTION WHERE CODE = '" + producer + "' OR CODE = '" + cuscode + "'");
+                        if (dtTemp.Rows.Count > 0) //has payment instruction set
+                        {
+                            ////check for N/A
+                            DataRow[] ToDelete = dtTemp.Select("BANK_NAME = 'N/A'"); //create this cuz cannot modify data directly in foreach
+                            foreach (DataRow dr in ToDelete)
+                            {
+                                dtTemp.Rows.Remove(dr); //remove N/A
+                            }
+                            //
+
+                            if (dtTemp.Rows.Count == 0) //that's mean has only N/A record => use NewInvoice for NA
+                            {
+                                if (chkInvoice.Rows[0]["ENDORSEMENT_NO"].ToString() != "")
+                                {
+                                    rpt = new Reports.NewInvoiceNAEndo();
+                                    rpt.SetDataSource(chkInvoice);
+                                }
+                                else
+                                {
+                                    rpt = new Reports.NewInvoiceNABreakdown();
+                                    rpt.SetDataSource(chkInvoice);
+                                }
+                            }
+                            else //after remove N/A still has other bank records => use NewInvoice with Payment instruction bank table
+                            {
+                                dtTemp.Columns.Add("DEBIT_NOTE", typeof(System.String)); //Add in order to link to another table in Report
+                                foreach (DataRow dr in dtTemp.Rows)
+                                {
+                                    dr["DEBIT_NOTE"] = chkInvoice.Rows[0]["DEBIT_NOTE"].ToString();
+                                }
+                                DataSet ds = new DataSet();
+                                chkInvoice.TableName = "VIEW_INVOICE"; //change name in order to make Crystal report recognize (Multi Datatable in Datasource need to have the same name)
+                                dtTemp.TableName = "PAYMENT_INSTRUCTION";
+                                ds.Tables.Add(chkInvoice);
+                                ds.Tables.Add(dtTemp);
+
+                                if (chkInvoice.Rows[0]["ENDORSEMENT_NO"].ToString() != "")
+                                {
+                                    rpt = new Reports.NewInvoiceEndo();
+                                    rpt.SetDataSource(ds);
+                                }
+                                else
+                                {
+                                    rpt = new Reports.NewInvoice();
+                                    rpt.SetDataSource(ds);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (chkInvoice.Rows[0]["ENDORSEMENT_NO"].ToString() != "")
+                            {
+                                rpt = new Reports.PrintInvoiceEndListAll();
+                                rpt.SetDataSource(chkInvoice);
+                            }
+                            else
+                            {
+                                rpt = new Reports.NewInvoiceNABreakdown();
+                                rpt.SetDataSource(chkInvoice);
+                            }
+                        }
+                        var frm = new frmViewInstructionNote();
+                        frm.Text = "Invoice";
+                        frm.rpt = rpt;
+                        frm.Show();
+                    }
+                }
+            }
         }
 
+       
         
         
     }

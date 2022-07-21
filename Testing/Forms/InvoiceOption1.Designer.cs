@@ -85,7 +85,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.lblKHM = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
+            this.lblKhTotal = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
@@ -316,7 +316,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(160, 310);
+            this.label15.Location = new System.Drawing.Point(160, 302);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(7, 11);
             this.label15.TabIndex = 19;
@@ -376,7 +376,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(160, 405);
+            this.label21.Location = new System.Drawing.Point(160, 419);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(7, 11);
             this.label21.TabIndex = 27;
@@ -386,7 +386,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(9, 421);
+            this.label22.Location = new System.Drawing.Point(9, 435);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(36, 11);
             this.label22.TabIndex = 26;
@@ -396,7 +396,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Khmer OS", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(8, 401);
+            this.label23.Location = new System.Drawing.Point(8, 415);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(148, 20);
             this.label23.TabIndex = 25;
@@ -406,7 +406,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(64, 437);
+            this.label24.Location = new System.Drawing.Point(64, 451);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(26, 11);
             this.label24.TabIndex = 29;
@@ -416,7 +416,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Khmer OS", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(7, 433);
+            this.label25.Location = new System.Drawing.Point(7, 447);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(63, 20);
             this.label25.TabIndex = 28;
@@ -426,7 +426,7 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(116, 462);
+            this.label26.Location = new System.Drawing.Point(116, 476);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(55, 11);
             this.label26.TabIndex = 31;
@@ -436,7 +436,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Khmer OS", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(8, 458);
+            this.label27.Location = new System.Drawing.Point(8, 472);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(110, 20);
             this.label27.TabIndex = 30;
@@ -446,7 +446,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(253, 462);
+            this.label28.Location = new System.Drawing.Point(253, 476);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(7, 11);
             this.label28.TabIndex = 32;
@@ -456,7 +456,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(253, 493);
+            this.label29.Location = new System.Drawing.Point(253, 507);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(7, 11);
             this.label29.TabIndex = 35;
@@ -466,7 +466,7 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(69, 493);
+            this.label30.Location = new System.Drawing.Point(69, 507);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(52, 11);
             this.label30.TabIndex = 34;
@@ -476,7 +476,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Khmer OS", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(8, 489);
+            this.label31.Location = new System.Drawing.Point(8, 503);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(64, 20);
             this.label31.TabIndex = 33;
@@ -486,7 +486,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(253, 527);
+            this.label32.Location = new System.Drawing.Point(253, 541);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(7, 11);
             this.label32.TabIndex = 38;
@@ -496,7 +496,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(79, 527);
+            this.label33.Location = new System.Drawing.Point(79, 541);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(86, 11);
             this.label33.TabIndex = 37;
@@ -506,7 +506,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Khmer OS", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(8, 523);
+            this.label34.Location = new System.Drawing.Point(8, 537);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(73, 20);
             this.label34.TabIndex = 36;
@@ -516,7 +516,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(253, 562);
+            this.label35.Location = new System.Drawing.Point(253, 576);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(7, 11);
             this.label35.TabIndex = 41;
@@ -526,7 +526,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(79, 562);
+            this.label36.Location = new System.Drawing.Point(79, 576);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(68, 11);
             this.label36.TabIndex = 40;
@@ -536,7 +536,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Khmer OS", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(8, 558);
+            this.label37.Location = new System.Drawing.Point(8, 572);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(70, 20);
             this.label37.TabIndex = 39;
@@ -546,7 +546,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(160, 437);
+            this.label38.Location = new System.Drawing.Point(160, 451);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(7, 11);
             this.label38.TabIndex = 42;
@@ -556,7 +556,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(266, 563);
+            this.label41.Location = new System.Drawing.Point(266, 577);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(22, 11);
             this.label41.TabIndex = 45;
@@ -600,6 +600,7 @@
             this.tbTotalDue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tbTotalDue.Size = new System.Drawing.Size(100, 11);
             this.tbTotalDue.TabIndex = 60;
+            this.tbTotalDue.TextChanged += new System.EventHandler(this.tbTotalDue_TextChanged);
             // 
             // tbAdminFee
             // 
@@ -681,9 +682,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("Khmer OS", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(173, 312);
+            this.richTextBox1.Location = new System.Drawing.Point(173, 300);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(172, 38);
+            this.richTextBox1.Size = new System.Drawing.Size(172, 51);
             this.richTextBox1.TabIndex = 47;
             this.richTextBox1.Tag = "Input Insured Name";
             this.richTextBox1.Text = "";
@@ -709,15 +710,15 @@
             this.lblKHM.Tag = "Gross Premium to Input";
             this.lblKHM.Text = "lblKhm";
             // 
-            // label48
+            // lblKhTotal
             // 
-            this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.Location = new System.Drawing.Point(578, 717);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(53, 11);
-            this.label48.TabIndex = 51;
-            this.label48.Text = "lblKhmTotal";
+            this.lblKhTotal.AutoSize = true;
+            this.lblKhTotal.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKhTotal.Location = new System.Drawing.Point(578, 717);
+            this.lblKhTotal.Name = "lblKhTotal";
+            this.lblKhTotal.Size = new System.Drawing.Size(53, 11);
+            this.lblKhTotal.TabIndex = 51;
+            this.lblKhTotal.Text = "lblKhmTotal";
             // 
             // label50
             // 
@@ -793,7 +794,7 @@
             // 
             this.lblPolicyNo.AutoSize = true;
             this.lblPolicyNo.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPolicyNo.Location = new System.Drawing.Point(266, 462);
+            this.lblPolicyNo.Location = new System.Drawing.Point(266, 476);
             this.lblPolicyNo.Name = "lblPolicyNo";
             this.lblPolicyNo.Size = new System.Drawing.Size(54, 11);
             this.lblPolicyNo.TabIndex = 58;
@@ -803,7 +804,7 @@
             // 
             this.lbProduct.AutoSize = true;
             this.lbProduct.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProduct.Location = new System.Drawing.Point(266, 493);
+            this.lbProduct.Location = new System.Drawing.Point(266, 507);
             this.lbProduct.Name = "lbProduct";
             this.lbProduct.Size = new System.Drawing.Size(51, 11);
             this.lbProduct.TabIndex = 59;
@@ -817,7 +818,7 @@
             this.rbInsured.Location = new System.Drawing.Point(173, 262);
             this.rbInsured.Name = "rbInsured";
             this.rbInsured.ReadOnly = true;
-            this.rbInsured.Size = new System.Drawing.Size(172, 38);
+            this.rbInsured.Size = new System.Drawing.Size(172, 31);
             this.rbInsured.TabIndex = 60;
             this.rbInsured.Text = "";
             // 
@@ -865,7 +866,7 @@
             // 
             this.lblEffective.AutoSize = true;
             this.lblEffective.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEffective.Location = new System.Drawing.Point(266, 527);
+            this.lblEffective.Location = new System.Drawing.Point(266, 541);
             this.lblEffective.Name = "lblEffective";
             this.lblEffective.Size = new System.Drawing.Size(51, 11);
             this.lblEffective.TabIndex = 65;
@@ -875,7 +876,7 @@
             // 
             this.lblVat.AutoSize = true;
             this.lblVat.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVat.Location = new System.Drawing.Point(173, 405);
+            this.lblVat.Location = new System.Drawing.Point(173, 419);
             this.lblVat.Name = "lblVat";
             this.lblVat.Size = new System.Drawing.Size(54, 11);
             this.lblVat.TabIndex = 67;
@@ -885,7 +886,7 @@
             // 
             this.lblTel.AutoSize = true;
             this.lblTel.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTel.Location = new System.Drawing.Point(173, 437);
+            this.lblTel.Location = new System.Drawing.Point(173, 451);
             this.lblTel.Name = "lblTel";
             this.lblTel.Size = new System.Drawing.Size(54, 11);
             this.lblTel.TabIndex = 68;
@@ -899,7 +900,7 @@
             this.rtbAddress.Location = new System.Drawing.Point(173, 357);
             this.rtbAddress.Name = "rtbAddress";
             this.rtbAddress.ReadOnly = true;
-            this.rtbAddress.Size = new System.Drawing.Size(172, 38);
+            this.rtbAddress.Size = new System.Drawing.Size(172, 59);
             this.rtbAddress.TabIndex = 69;
             this.rtbAddress.Text = "";
             // 
@@ -907,12 +908,15 @@
             // 
             this.txtTotalSI.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTotalSI.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalSI.Location = new System.Drawing.Point(288, 563);
+            this.txtTotalSI.Location = new System.Drawing.Point(288, 577);
             this.txtTotalSI.Name = "txtTotalSI";
-            this.txtTotalSI.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtTotalSI.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtTotalSI.Size = new System.Drawing.Size(100, 11);
             this.txtTotalSI.TabIndex = 70;
             this.txtTotalSI.Tag = "Input Sum Insured ";
+            this.txtTotalSI.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtTotalSI.TextChanged += new System.EventHandler(this.txtTotalSI_TextChanged);
+            this.txtTotalSI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTotalSI_KeyPress);
             // 
             // btnPrint
             // 
@@ -953,7 +957,7 @@
             this.Controls.Add(this.label54);
             this.Controls.Add(this.label52);
             this.Controls.Add(this.label51);
-            this.Controls.Add(this.label48);
+            this.Controls.Add(this.lblKhTotal);
             this.Controls.Add(this.label50);
             this.Controls.Add(this.lblKHM);
             this.Controls.Add(this.label46);
@@ -1001,6 +1005,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnImage);
             this.Name = "InvoiceOption1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InvoiceOption1";
             this.Load += new System.EventHandler(this.InvoiceOption1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1069,7 +1074,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label lblKHM;
-        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label lblKhTotal;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label52;

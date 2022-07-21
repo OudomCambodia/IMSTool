@@ -2436,6 +2436,7 @@ namespace Testing.Forms
 
         private void dgvClaimDetail_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
         {
+            //dgvClaimDetail.Refresh();
             DataTable UpdateDt = new DataTable();
             foreach (DataGridViewColumn col in dgvClaimDetail.Columns)
             {
