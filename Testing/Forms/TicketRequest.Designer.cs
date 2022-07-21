@@ -32,10 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TicketRequest));
             this.lbTitle = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnViewTicket = new Testing.cus_button();
+            this.btnCreate = new Testing.cus_button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvFile = new System.Windows.Forms.DataGridView();
             this.File_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.File_Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnChooseFile = new Testing.cus_button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbOwner = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,9 +54,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.dgvTicketView = new System.Windows.Forms.DataGridView();
-            this.btnViewTicket = new Testing.cus_button();
-            this.btnCreate = new Testing.cus_button();
-            this.btnChooseFile = new Testing.cus_button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFile)).BeginInit();
@@ -98,6 +98,35 @@
             this.groupBox1.TabIndex = 76;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create Ticket";
+            // 
+            // btnViewTicket
+            // 
+            this.btnViewTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnViewTicket.FlatAppearance.BorderSize = 2;
+            this.btnViewTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewTicket.ForeColor = System.Drawing.Color.White;
+            this.btnViewTicket.Location = new System.Drawing.Point(258, 338);
+            this.btnViewTicket.Name = "btnViewTicket";
+            this.btnViewTicket.Size = new System.Drawing.Size(139, 34);
+            this.btnViewTicket.TabIndex = 91;
+            this.btnViewTicket.Text = "View Ticket";
+            this.btnViewTicket.UseVisualStyleBackColor = false;
+            this.btnViewTicket.Visible = false;
+            this.btnViewTicket.Click += new System.EventHandler(this.btnViewTicket_Click);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnCreate.FlatAppearance.BorderSize = 2;
+            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreate.ForeColor = System.Drawing.Color.White;
+            this.btnCreate.Location = new System.Drawing.Point(415, 338);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(139, 34);
+            this.btnCreate.TabIndex = 89;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // groupBox3
             // 
@@ -145,6 +174,20 @@
             this.File_Path.Name = "File_Path";
             this.File_Path.ReadOnly = true;
             this.File_Path.Visible = false;
+            // 
+            // btnChooseFile
+            // 
+            this.btnChooseFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnChooseFile.FlatAppearance.BorderSize = 2;
+            this.btnChooseFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChooseFile.ForeColor = System.Drawing.Color.White;
+            this.btnChooseFile.Location = new System.Drawing.Point(9, 14);
+            this.btnChooseFile.Name = "btnChooseFile";
+            this.btnChooseFile.Size = new System.Drawing.Size(183, 64);
+            this.btnChooseFile.TabIndex = 87;
+            this.btnChooseFile.Text = "Choose File";
+            this.btnChooseFile.UseVisualStyleBackColor = false;
+            this.btnChooseFile.Click += new System.EventHandler(this.btnChooseFile_Click);
             // 
             // groupBox2
             // 
@@ -252,6 +295,7 @@
             // 
             // txtUsername
             // 
+            this.txtUsername.Enabled = false;
             this.txtUsername.Location = new System.Drawing.Point(72, 22);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.ReadOnly = true;
@@ -316,49 +360,7 @@
             this.dgvTicketView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTicketView.Size = new System.Drawing.Size(510, 357);
             this.dgvTicketView.TabIndex = 0;
-            // 
-            // btnViewTicket
-            // 
-            this.btnViewTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnViewTicket.FlatAppearance.BorderSize = 2;
-            this.btnViewTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewTicket.ForeColor = System.Drawing.Color.White;
-            this.btnViewTicket.Location = new System.Drawing.Point(258, 338);
-            this.btnViewTicket.Name = "btnViewTicket";
-            this.btnViewTicket.Size = new System.Drawing.Size(139, 34);
-            this.btnViewTicket.TabIndex = 91;
-            this.btnViewTicket.Text = "View Ticket";
-            this.btnViewTicket.UseVisualStyleBackColor = false;
-            this.btnViewTicket.Visible = false;
-            this.btnViewTicket.Click += new System.EventHandler(this.btnViewTicket_Click);
-            // 
-            // btnCreate
-            // 
-            this.btnCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnCreate.FlatAppearance.BorderSize = 2;
-            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreate.ForeColor = System.Drawing.Color.White;
-            this.btnCreate.Location = new System.Drawing.Point(415, 338);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(139, 34);
-            this.btnCreate.TabIndex = 89;
-            this.btnCreate.Text = "Create";
-            this.btnCreate.UseVisualStyleBackColor = false;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // btnChooseFile
-            // 
-            this.btnChooseFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnChooseFile.FlatAppearance.BorderSize = 2;
-            this.btnChooseFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChooseFile.ForeColor = System.Drawing.Color.White;
-            this.btnChooseFile.Location = new System.Drawing.Point(9, 14);
-            this.btnChooseFile.Name = "btnChooseFile";
-            this.btnChooseFile.Size = new System.Drawing.Size(183, 64);
-            this.btnChooseFile.TabIndex = 87;
-            this.btnChooseFile.Text = "Choose File";
-            this.btnChooseFile.UseVisualStyleBackColor = false;
-            this.btnChooseFile.Click += new System.EventHandler(this.btnChooseFile_Click);
+            this.dgvTicketView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvTicketView_CellFormatting);
             // 
             // TicketRequest
             // 

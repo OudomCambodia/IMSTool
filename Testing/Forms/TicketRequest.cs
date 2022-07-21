@@ -39,7 +39,6 @@ namespace Testing.Forms
 
         private void TicketRequest_Load(object sender, EventArgs e)
         {
-            dgvFile.DefaultCellStyle.ForeColor = Color.Black;
             CommonFunctions.HighLightGrid(dgvTicketView);
             txtUsername.Text = Username;
             if (Username == "ADMIN")
@@ -388,6 +387,11 @@ namespace Testing.Forms
         {
             ViewTicketRequest frmv = new ViewTicketRequest();
             frmv.Show();
+        }
+
+        private void dgvTicketView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            e.CellStyle.ForeColor = Color.Black;
         }
     }
 }
