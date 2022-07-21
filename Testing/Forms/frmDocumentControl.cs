@@ -58,6 +58,8 @@ namespace Testing.Forms
         private readonly string ALL_BANKS = "ALL_BANKS";
         private readonly string ALL_BROKERS = "ALL_BROKERS";
 
+        public static string SelectionColor;
+
         public frmDocumentControl()
         {
             InitializeComponent();
@@ -73,6 +75,23 @@ namespace Testing.Forms
         {
             try
             {
+                #region --- SELECTION COLOR ---
+                var colors = new List<string>();
+
+                colors.Add("4,124,212"); //white
+                colors.Add("0,153,153"); // white
+                colors.Add("51,204,255"); // black
+                colors.Add("51,102,153"); // white
+                colors.Add("128,128,128"); // white
+
+                for (int i = 0; i < colors.Count; i++)
+                    cboColor.Items.Add(colors[i].ToString());
+
+                var selectionColor = sqlcrud.LoadData("select SELECTION_COLOR from tbDOC_USER where USER_NAME = '" + UserName + "'").Tables[0].Rows[0][0].ToString();
+                cboColor.SelectedIndex = cboColor.FindString(selectionColor);
+                SelectionColor = selectionColor;
+                #endregion
+
                 DataTable dt = sqlcrud.LoadData("select * from dbo.Product").Tables[0];
                 frmAddDocument1.product.Clear();
                 foreach (DataRow dr in dt.Rows)
@@ -273,44 +292,44 @@ namespace Testing.Forms
 
                 //Role[0] is primary role
                 #region --- OLD CODING ---
-                dgvOpensqlstring = (UserID == "S01")
-                    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
-                    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
-                    ? dgvOpensqlstring
-                    : (Role[0] == "PRODUCER")
-                        ? (UserID == "P09" || UserID == "P10")
-                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
-                        : (UserID == "P70" || UserID == "D44")
-                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
-                        : (UserID == "P42")
-                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
-                        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
-                    : (Role[0] == "DP")
-                        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
-                        : dgvOpensqlstring;
-                #endregion
-
-                #region --- NEW CODING ---
-                //var dsSpecialCode = sqlcrud.LoadData("select * from tbDOC_SPECIAL_CODE where USER_ID = '" + UserID + "'").Tables[0];
-                //var specialCode = string.Empty;
-                //if (dsSpecialCode.Rows.Count > 0)
-                //    specialCode = dsSpecialCode.Rows[0]["SPECIAL_CODE"].ToString().Trim();
-
-                //dgvOpensqlstring = (specialCode.Equals(HEAD_FILING))
+                //dgvOpensqlstring = (UserID == "S01")
                 //    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
                 //    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
                 //    ? dgvOpensqlstring
                 //    : (Role[0] == "PRODUCER")
-                //        ? (specialCode.Equals(ALL_REGIONALS))
+                //        ? (UserID == "P09" || UserID == "P10")
                 //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
-                //        : (specialCode.Equals(ALL_BANKS))
+                //        : (UserID == "P70" || UserID == "D44")
                 //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
-                //        : (specialCode.Equals(ALL_BROKERS))
+                //        : (UserID == "P42")
                 //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
                 //        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
                 //    : (Role[0] == "DP")
                 //        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
                 //        : dgvOpensqlstring;
+                #endregion
+
+                #region --- NEW CODING ---
+                var dsSpecialCode = sqlcrud.LoadData("select * from tbDOC_SPECIAL_CODE where USER_ID = '" + UserID + "'").Tables[0];
+                var specialCode = string.Empty;
+                if (dsSpecialCode.Rows.Count > 0)
+                    specialCode = dsSpecialCode.Rows[0]["SPECIAL_CODE"].ToString().Trim();
+
+                dgvOpensqlstring = (specialCode.Equals(HEAD_FILING))
+                    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
+                    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
+                    ? dgvOpensqlstring
+                    : (Role[0] == "PRODUCER")
+                        ? (specialCode.Equals(ALL_REGIONALS))
+                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
+                        : (specialCode.Equals(ALL_BANKS))
+                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
+                        : (specialCode.Equals(ALL_BROKERS))
+                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
+                        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
+                    : (Role[0] == "DP")
+                        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
+                        : dgvOpensqlstring;
                 #endregion
 
                 if (Role[0] == "FILLING")
@@ -995,8 +1014,8 @@ namespace Testing.Forms
             {
                 if (dgvDoc.Rows[e.RowIndex].Cells["PRIORITY_TYPE"].Value.ToString().Trim().Equals("L"))
                 {
-                    e.CellStyle.SelectionBackColor = Color.Gray;
-                    e.CellStyle.SelectionForeColor = Color.Black;
+                    //e.CellStyle.SelectionBackColor = Color.Gray;
+                    //e.CellStyle.SelectionForeColor = Color.Black;
                     return;
                 }
                     
@@ -1015,20 +1034,20 @@ namespace Testing.Forms
                         {
                             e.CellStyle.BackColor = Color.Khaki;
                             e.CellStyle.ForeColor = Color.Black;
-                            e.CellStyle.SelectionBackColor = Color.Olive;
-                            e.CellStyle.SelectionForeColor = Color.Black;
+                            //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
+                            //e.CellStyle.SelectionForeColor = Color.White;
                         }
                         else
                         {
                             e.CellStyle.BackColor = Color.FromArgb(195, 39, 43);
                             e.CellStyle.ForeColor = Color.White;
-                            e.CellStyle.SelectionBackColor = Color.Maroon;
+                            //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Red
                         }
                     }
                     else
                     {
-                        e.CellStyle.SelectionBackColor = Color.Gray;
-                        e.CellStyle.SelectionForeColor = Color.Black;
+                        //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // White
+                        //e.CellStyle.SelectionForeColor = Color.White; // White
                     }
 
                     //Check Return Doc Over Timeline
@@ -1041,12 +1060,10 @@ namespace Testing.Forms
                             DateTime ReturnDateOn23 = new DateTime(ReturnDate.Year, ReturnDate.Month, ReturnDate.Day, 23, 59, 59);
                             if (!(DateTime.Compare(DateTime.Now, ReturnDate) >= 0 && DateTime.Compare(DateTime.Now, ReturnDateOn23) <= 0))
                             {
-                                //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
-                                //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                                 e.CellStyle.BackColor = Color.Khaki;
                                 e.CellStyle.ForeColor = Color.Black;
-                                e.CellStyle.SelectionBackColor = Color.Olive;
-                                e.CellStyle.SelectionForeColor = Color.Black;
+                                //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
+                                //e.CellStyle.SelectionForeColor = Color.White;
                             }
                         }
                         else if (ReturnDate.Hour >= 12 && ReturnDate.Hour <= 23)
@@ -1069,14 +1086,14 @@ namespace Testing.Forms
                                 //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                                 e.CellStyle.BackColor = Color.Khaki;
                                 e.CellStyle.ForeColor = Color.Black;
-                                e.CellStyle.SelectionBackColor = Color.Olive;
-                                e.CellStyle.SelectionForeColor = Color.Black;
+                                //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
+                                //e.CellStyle.SelectionForeColor = Color.White;
                             }
                         }
                         else
                         {
-                            e.CellStyle.SelectionBackColor = Color.Gray;
-                            e.CellStyle.SelectionForeColor = Color.Black;
+                            //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // White
+                            //e.CellStyle.SelectionForeColor = Color.White; // White
                         }
                     }
                     //
@@ -1911,6 +1928,50 @@ namespace Testing.Forms
                     dr.AcceptChanges();
                 }
             }
+        }
+
+        private void cboColor_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics graphic = e.Graphics;
+            Rectangle rectangle = e.Bounds;
+
+            if (e.Index >= 0)
+            {
+                var rgbColor = ((ComboBox)sender).Items[e.Index].ToString().Split(',');
+
+                var r = Convert.ToInt32(rgbColor[0]);
+                var g = Convert.ToInt32(rgbColor[1]);
+                var b = Convert.ToInt32(rgbColor[2]);
+
+                Color color = Color.FromArgb(r, g, b);
+                Brush brush = new SolidBrush(color);
+                graphic.FillRectangle(brush, rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+            }
+        }
+
+        private void cboColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectionColor = cboColor.SelectedItem.ToString();
+
+            var selectionColor = cboColor.SelectedItem.ToString().Split(',');
+            var r = Convert.ToInt32(selectionColor[0]);
+            var g = Convert.ToInt32(selectionColor[1]);
+            var b = Convert.ToInt32(selectionColor[2]);
+
+            if (cboColor.SelectedItem.ToString().Equals("51,204,255"))
+            {
+                dgvDoc.DefaultCellStyle.SelectionForeColor = Color.Black;
+                dgvNoti.DefaultCellStyle.SelectionForeColor = Color.Black;
+            } 
+            else
+            {
+                dgvDoc.DefaultCellStyle.SelectionForeColor = Color.White;
+                dgvNoti.DefaultCellStyle.SelectionForeColor = Color.White;
+            }
+            dgvDoc.DefaultCellStyle.SelectionBackColor = Color.FromArgb(r, g, b);
+            dgvNoti.DefaultCellStyle.SelectionBackColor = Color.FromArgb(r, g, b);
+
+            sqlcrud.Executing("update tbDOC_USER set SELECTION_COLOR = '" + cboColor.SelectedItem.ToString() + "' where USER_NAME = '" + UserName + "'");
         }
     }
 }

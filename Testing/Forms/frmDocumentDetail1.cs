@@ -35,6 +35,21 @@ namespace Testing.Forms
         {
             try
             {
+                #region --- SELECTION COLOR ---
+                var selectionColor = frmDocumentControl.SelectionColor.Split(',');
+
+                var r = Convert.ToInt32(selectionColor[0]);
+                var g = Convert.ToInt32(selectionColor[1]);
+                var b = Convert.ToInt32(selectionColor[2]);
+
+                dgvHist.DefaultCellStyle.SelectionBackColor = Color.FromArgb(r, g, b);
+
+                if (frmDocumentControl.SelectionColor.Equals("51,204,255"))
+                    dgvHist.DefaultCellStyle.SelectionForeColor = Color.Black;
+                else
+                    dgvHist.DefaultCellStyle.SelectionForeColor = Color.White;
+                #endregion
+
                 tbDocID.Text = DocId;
                 DataTable dt = crud.LoadData("SELECT * FROM VIEW_DOC_DETAIL WHERE DOC_CODE = '" + DocId + "'").Tables[0];
                 tbCreateDate.Text = dt.Rows[0]["CREATE_DATE"].ToString() + " " + dt.Rows[0]["CREATE_TIME"].ToString();
