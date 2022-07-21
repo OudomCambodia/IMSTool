@@ -30,9 +30,9 @@
         {
             this.lbTitle = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnPrint = new Testing.cus_button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbInvoiceNo = new System.Windows.Forms.TextBox();
-            this.btnPrint = new Testing.cus_button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Debit / Credit Note";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(278, 24);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(73, 30);
+            this.btnPrint.TabIndex = 169;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -82,20 +96,6 @@
             this.tbInvoiceNo.Size = new System.Drawing.Size(199, 20);
             this.tbInvoiceNo.TabIndex = 84;
             // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(278, 24);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(73, 30);
-            this.btnPrint.TabIndex = 169;
-            this.btnPrint.Text = "Print";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
             // BreakdownInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -106,6 +106,7 @@
             this.Controls.Add(this.lbTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "BreakdownInvoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BreakdownInvoice";
             this.Load += new System.EventHandler(this.BreakdownInvoice_Load);
             this.groupBox1.ResumeLayout(false);
