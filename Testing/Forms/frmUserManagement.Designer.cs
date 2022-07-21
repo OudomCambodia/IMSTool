@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            PresentationControls.CheckBoxProperties checkBoxProperties2 = new PresentationControls.CheckBoxProperties();
+            PresentationControls.CheckBoxProperties checkBoxProperties1 = new PresentationControls.CheckBoxProperties();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserManagement));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cboType = new System.Windows.Forms.ComboBox();
@@ -56,9 +58,19 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.chkCreateDocUser = new System.Windows.Forms.CheckBox();
+            this.cboRole = new PresentationControls.CheckBoxComboBox();
+            this.gbDocumentControl = new System.Windows.Forms.GroupBox();
+            this.cboSpecialCode = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboTeam = new PresentationControls.CheckBoxComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblSpecialCodeInfo = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.gbDocumentControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -117,8 +129,7 @@
             this.btnViewPassword.Size = new System.Drawing.Size(35, 28);
             this.btnViewPassword.TabIndex = 3;
             this.btnViewPassword.UseVisualStyleBackColor = true;
-            this.btnViewPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnViewPassword_MouseDown);
-            this.btnViewPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnViewPassword_MouseUp);
+            this.btnViewPassword.Click += new System.EventHandler(this.btnViewPassword_Click);
             // 
             // txtRemark
             // 
@@ -161,6 +172,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(211, 26);
             this.txtUsername.TabIndex = 1;
+            this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
             this.txtUsername.Leave += new System.EventHandler(this.txtUsername_Leave);
             // 
             // label4
@@ -204,6 +216,7 @@
             this.txtUserCode.Name = "txtUserCode";
             this.txtUserCode.Size = new System.Drawing.Size(211, 26);
             this.txtUserCode.TabIndex = 0;
+            this.txtUserCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserCode_KeyDown);
             this.txtUserCode.Leave += new System.EventHandler(this.txtUserCode_Leave);
             // 
             // label1
@@ -238,8 +251,7 @@
             this.btnViewEmailPassword.Size = new System.Drawing.Size(35, 28);
             this.btnViewEmailPassword.TabIndex = 2;
             this.btnViewEmailPassword.UseVisualStyleBackColor = true;
-            this.btnViewEmailPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnViewEmailPassword_MouseDown);
-            this.btnViewEmailPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnViewEmailPassword_MouseUp);
+            this.btnViewEmailPassword.Click += new System.EventHandler(this.btnViewEmailPassword_Click);
             // 
             // txtEmailPassword
             // 
@@ -276,7 +288,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(497, 351);
+            this.btnSave.Location = new System.Drawing.Point(498, 527);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 30);
             this.btnSave.TabIndex = 0;
@@ -286,7 +298,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(591, 351);
+            this.btnClose.Location = new System.Drawing.Point(592, 527);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(88, 30);
             this.btnClose.TabIndex = 1;
@@ -309,13 +321,115 @@
             this.chkCreateDocUser.TabIndex = 2;
             this.chkCreateDocUser.Text = "Create Document Control account for this user?";
             this.chkCreateDocUser.UseVisualStyleBackColor = true;
+            this.chkCreateDocUser.CheckedChanged += new System.EventHandler(this.chkCreateDocUser_CheckedChanged);
+            // 
+            // cboRole
+            // 
+            checkBoxProperties2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cboRole.CheckBoxProperties = checkBoxProperties2;
+            this.cboRole.DisplayMemberSingleItem = "";
+            this.cboRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRole.FormattingEnabled = true;
+            this.cboRole.Location = new System.Drawing.Point(109, 23);
+            this.cboRole.Name = "cboRole";
+            this.cboRole.Size = new System.Drawing.Size(524, 26);
+            this.cboRole.TabIndex = 3;
+            // 
+            // gbDocumentControl
+            // 
+            this.gbDocumentControl.BackColor = System.Drawing.Color.Gainsboro;
+            this.gbDocumentControl.Controls.Add(this.label13);
+            this.gbDocumentControl.Controls.Add(this.lblSpecialCodeInfo);
+            this.gbDocumentControl.Controls.Add(this.cboSpecialCode);
+            this.gbDocumentControl.Controls.Add(this.label12);
+            this.gbDocumentControl.Controls.Add(this.label11);
+            this.gbDocumentControl.Controls.Add(this.cboTeam);
+            this.gbDocumentControl.Controls.Add(this.label10);
+            this.gbDocumentControl.Controls.Add(this.cboRole);
+            this.gbDocumentControl.Location = new System.Drawing.Point(12, 348);
+            this.gbDocumentControl.Name = "gbDocumentControl";
+            this.gbDocumentControl.Size = new System.Drawing.Size(667, 173);
+            this.gbDocumentControl.TabIndex = 16;
+            this.gbDocumentControl.TabStop = false;
+            this.gbDocumentControl.Text = "Document Control account Information";
+            // 
+            // cboSpecialCode
+            // 
+            this.cboSpecialCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSpecialCode.FormattingEnabled = true;
+            this.cboSpecialCode.Location = new System.Drawing.Point(109, 87);
+            this.cboSpecialCode.Name = "cboSpecialCode";
+            this.cboSpecialCode.Size = new System.Drawing.Size(524, 26);
+            this.cboSpecialCode.TabIndex = 14;
+            this.cboSpecialCode.SelectedIndexChanged += new System.EventHandler(this.cboSpecialCode_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(23, 91);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(80, 18);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Special Code:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(23, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 18);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "Team:";
+            // 
+            // cboTeam
+            // 
+            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cboTeam.CheckBoxProperties = checkBoxProperties1;
+            this.cboTeam.DisplayMemberSingleItem = "";
+            this.cboTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTeam.FormattingEnabled = true;
+            this.cboTeam.Location = new System.Drawing.Point(109, 55);
+            this.cboTeam.Name = "cboTeam";
+            this.cboTeam.Size = new System.Drawing.Size(524, 26);
+            this.cboTeam.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(23, 28);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 18);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Role:";
+            // 
+            // lblSpecialCodeInfo
+            // 
+            this.lblSpecialCodeInfo.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblSpecialCodeInfo.Location = new System.Drawing.Point(151, 117);
+            this.lblSpecialCodeInfo.Name = "lblSpecialCodeInfo";
+            this.lblSpecialCodeInfo.Size = new System.Drawing.Size(486, 47);
+            this.lblSpecialCodeInfo.TabIndex = 19;
+            this.lblSpecialCodeInfo.Text = "N/A";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label13.ForeColor = System.Drawing.Color.DarkRed;
+            this.label13.Location = new System.Drawing.Point(106, 117);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(48, 19);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "*Note:";
             // 
             // frmUserManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(692, 387);
+            this.ClientSize = new System.Drawing.Size(692, 563);
+            this.Controls.Add(this.gbDocumentControl);
             this.Controls.Add(this.chkCreateDocUser);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -335,6 +449,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.gbDocumentControl.ResumeLayout(false);
+            this.gbDocumentControl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,5 +484,14 @@
         private System.Windows.Forms.ComboBox cboType;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.CheckBox chkCreateDocUser;
+        private PresentationControls.CheckBoxComboBox cboRole;
+        private System.Windows.Forms.GroupBox gbDocumentControl;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private PresentationControls.CheckBoxComboBox cboTeam;
+        private System.Windows.Forms.ComboBox cboSpecialCode;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblSpecialCodeInfo;
+        private System.Windows.Forms.Label label13;
     }
 }

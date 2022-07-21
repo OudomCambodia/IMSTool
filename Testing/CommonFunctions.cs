@@ -524,24 +524,13 @@ namespace Testing
     {
         private readonly SmtpClient _smtpClient;
 
-
-
         public CustomSmtpClient(NetworkCredential credential, string sectionName = "default")
         {
             SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + sectionName);
-
-
-
             _smtpClient = new SmtpClient();
-
-
-
             if (section != null)
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-
-
                 _smtpClient.Port = section.Network.Port;
                 _smtpClient.Host = section.Network.Host;
                 _smtpClient.EnableSsl = section.Network.EnableSsl;
@@ -555,8 +544,6 @@ namespace Testing
                 //};
             }
         }
-
-
 
         public void Send(MailMessage message)
         {

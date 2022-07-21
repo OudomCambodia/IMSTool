@@ -23,6 +23,7 @@ namespace Testing.Forms
         public static bool IsAddNew;
         private string groupCode = string.Empty;
         private string keyToUpdateOrDelete;
+        private string leaveNodeKey;
 
         public frmUserRoleManagement()
         {
@@ -90,6 +91,9 @@ namespace Testing.Forms
 
                 groupCode = lstCode.SelectedItems[0].ToString();
                 LoadControlAccessByGroupCode();
+
+                if (!string.IsNullOrEmpty(leaveNodeKey))
+                    RefreshTreeView(leaveNodeKey);
             }
             catch (Exception ex)
             {
@@ -150,18 +154,8 @@ namespace Testing.Forms
             {
                 var key = e.Node.Name;
                 keyToUpdateOrDelete = key;
-
-                btnUpdateControl.Enabled = crud.ExecQuery("select CONTROL_ID from USER_PRINT_CONTROL where SUBMENU_OF = '" + key + "'").Rows.Count <= 0;
-
-                dtControlToUpdate = crud.ExecQuery("select * from USER_PRINT_CONTROL WHERE CONTROL_ID = '" + key + "' ");
-
-                var enabled = crud.ExecQuery("select VISIBLE, ENABLED from USER_PRINT_CONTROL_ACCESS WHERE CODE = '" + groupCode + "' AND CONTROL_ID = '" + key + "' ");
-                var isEnabled = enabled.Rows[0]["VISIBLE"].ToString() == "Y" && enabled.Rows[0]["ENABLED"].ToString() == "Y";
-
-                if (isEnabled)
-                    rbEnabledTrue.Checked = true;
-                else
-                    rbEnabledFalse.Checked = true;
+                leaveNodeKey = key;
+                RefreshTreeView(key);
             }
             catch (Exception ex)
             {
@@ -391,7 +385,6 @@ namespace Testing.Forms
 
                     }
                 }
-
                 LoadControlAccessByGroupCode();
 
                 Cursor = Cursors.Arrow;
@@ -528,6 +521,20 @@ namespace Testing.Forms
                         tvUserRole.Nodes[index].ForeColor = Color.Black;
                 }
             }
+        }
+        private void RefreshTreeView(string key)
+        {
+            btnUpdateControl.Enabled = crud.ExecQuery("select CONTROL_ID from USER_PRINT_CONTROL where SUBMENU_OF = '" + key + "'").Rows.Count <= 0;
+
+            dtControlToUpdate = crud.ExecQuery("select * from USER_PRINT_CONTROL WHERE CONTROL_ID = '" + key + "' ");
+
+            var enabled = crud.ExecQuery("select VISIBLE, ENABLED from USER_PRINT_CONTROL_ACCESS WHERE CODE = '" + groupCode + "' AND CONTROL_ID = '" + key + "' ");
+            var isEnabled = enabled.Rows[0]["VISIBLE"].ToString() == "Y" && enabled.Rows[0]["ENABLED"].ToString() == "Y";
+
+            if (isEnabled)
+                rbEnabledTrue.Checked = true;
+            else
+                rbEnabledFalse.Checked = true;
         }
     }
 }
