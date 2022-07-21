@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Net;
+using System.Configuration;
+using System.Net.Configuration;
 
 
 namespace Testing.Forms
@@ -36,6 +39,7 @@ namespace Testing.Forms
 
         private void TicketRequest_Load(object sender, EventArgs e)
         {
+            dgvFile.DefaultCellStyle.ForeColor = Color.Black;
             CommonFunctions.HighLightGrid(dgvTicketView);
             txtUsername.Text = Username;
             if (Username == "ADMIN")
@@ -151,11 +155,6 @@ namespace Testing.Forms
 
 
                                 // DialogResult dr = Msgbox.Show("Are you sure you want to send Email?", "Confirmation", "Yes", "No");
-
-
-
-
-
 
                                 Cursor.Current = Cursors.WaitCursor;
                                 string content = crud.ExecFunc_String("USER_TICKET_EMAIL",
@@ -288,64 +287,69 @@ namespace Testing.Forms
 
                                 //client.Credentials = new System.Net.NetworkCredential(mail_add, mail_pass);
                                 //client.EnableSsl = false;
-                                client.Host = "smtp.office365.com";
-                                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                                client.UseDefaultCredentials = true;
-                                client.Credentials = new System.Net.NetworkCredential
-                                {
-                                    UserName = "no-reply@forteinsurance.com",
-                                    Password = "Nrpl@20622#"
-                                };
-                                client.EnableSsl = true;
 
-                                client.Port = 587;
+                                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("mailSettings/" + "noReply");
+                                if (section != null)
+                                {
+                                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                                    client.Port = section.Network.Port;
+                                    client.Host = section.Network.Host;
+                                    client.EnableSsl = section.Network.EnableSsl;
+                                    client.DeliveryMethod = section.DeliveryMethod;
+                                    client.UseDefaultCredentials = section.Network.DefaultCredentials;
+                                    client.Credentials = new NetworkCredential
+                                    {
+                                        UserName = section.Network.UserName,
+                                        Password = section.Network.Password
+                                    };
+                                }
                                 client.Send(message);
+
                                 message.Dispose();
                                 client.Dispose();
 
+                                //client.Host = "smtp.office365.com";
+                                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                //client.UseDefaultCredentials = true;
+                                //client.Credentials = new System.Net.NetworkCredential
+                                //{
+                                //    UserName = "no-reply@forteinsurance.com",
+                                //    Password = "$!213#Ayt^"
+                                //};
+                                //client.EnableSsl = true;
 
+                                //client.Port = 587;
 
+                                //message.Dispose();
+                                //client.Dispose();
                                 //Msgbox.Show("Email sent! ");
 
+                                Msgbox.Show("Successfully created ticket number " +
+                                sqlcrud.LoadData("select TOP 1 ticketID from [DocumentControlDB].[dbo].[tbTicketRequests] where [CreateDate] = '" +
+                                DateTime.Now.ToShortDateString() + "' and [Requestor] = '" + txtUsername.Text + "' ORDER BY [ticketID] desc ").Tables[0].Rows[0]["ticketID"].ToString());
+                                count = Convert.ToInt32(sqlcrud.LoadData("select CountTicket from [DocumentControlDB].[dbo].[tbTicketRequests] where [CreateDate] = '" +
+                                   DateTime.Now.ToShortDateString() + "' and [Requestor] = '" + txtUsername.Text + "' ORDER BY [ticketID] desc ").Tables[0].Rows[0]["CountTicket"].ToString());
+                                //if (count != 3)
+                                //{
+
+                                count++;
+                                sqlcrud.Executing("UPDATE [dbo].[tbTicketRequests] SET [CountTicket] =" + count + " where [Requestor] = '" + txtUsername.Text + "' and [CreateDate]='" + DateTime.Now.ToShortDateString() + "'");
+                                //}
+                                clearall();
+                                Cursor.Current = Cursors.WaitCursor;
+
                                 Cursor.Current = Cursors.AppStarting;
-
-
-
                             }
-
                             catch (Exception ex)
                             {
                                 Msgbox.Show(ex.Message);
                             }
-
-
-
-
-                            //////
-
-
-                            Msgbox.Show("Successfully created ticket number " +
-                                sqlcrud.LoadData("select TOP 1 ticketID from [DocumentControlDB].[dbo].[tbTicketRequests] where [CreateDate] = '" +
-                                DateTime.Now.ToShortDateString() + "' and [Requestor] = '" + txtUsername.Text + "' ORDER BY [ticketID] desc ").Tables[0].Rows[0]["ticketID"].ToString());
-                            count = Convert.ToInt32(sqlcrud.LoadData("select CountTicket from [DocumentControlDB].[dbo].[tbTicketRequests] where [CreateDate] = '" +
-                               DateTime.Now.ToShortDateString() + "' and [Requestor] = '" + txtUsername.Text + "' ORDER BY [ticketID] desc ").Tables[0].Rows[0]["CountTicket"].ToString());
-                            //if (count != 3)
-                            //{
-
-                                count++;
-                                sqlcrud.Executing("UPDATE [dbo].[tbTicketRequests] SET [CountTicket] =" + count + " where [Requestor] = '" + txtUsername.Text + "' and [CreateDate]='" + DateTime.Now.ToShortDateString() + "'");
-                            //}
-                            clearall();
-                            Cursor.Current = Cursors.WaitCursor;
                         }
                         else
                         {
-                            
                             Msgbox.Show("Some missing input field - either status and owner must input!");
                         }
                     }
-                
-              
             }
             catch (Exception ex)
             {
@@ -385,6 +389,5 @@ namespace Testing.Forms
             ViewTicketRequest frmv = new ViewTicketRequest();
             frmv.Show();
         }
-
     }
 }
