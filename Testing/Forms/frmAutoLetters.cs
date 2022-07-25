@@ -969,7 +969,7 @@ namespace Testing.Forms
                 {
                     Cursor.Current = Cursors.WaitCursor;
 
-                    string content = "", note = tbClReNote.Text.Trim();
+                    string content = "", note = tbClReNote.Text.Trim().Replace("\n", "<br>");
 
                     //if (note != "")
                     //    note = "<strong>Notes: </strong>" + note;
@@ -1235,8 +1235,5 @@ namespace Testing.Forms
                     new PointF(e.Bounds.X + 3, e.Bounds.Y + 3));
             }
         }
-
-        
-
     }
 }

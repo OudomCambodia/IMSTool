@@ -104,6 +104,7 @@
             this.bnClExpGenerate = new Testing.cus_button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panelQueryClaim = new System.Windows.Forms.Panel();
+            this.tbClReNote = new System.Windows.Forms.RichTextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.bnClReSendEmailConNoLetter = new Testing.cus_button();
             this.lblClReSentDateConNoLetter = new System.Windows.Forms.Label();
@@ -113,7 +114,6 @@
             this.bnClReSendEmailCon = new Testing.cus_button();
             this.lblClReSentDateCon = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.tbClReNote = new System.Windows.Forms.TextBox();
             this.bnClReRemove = new Testing.cus_button();
             this.bnClReOpen = new Testing.cus_button();
             this.bnClReBrowse = new Testing.cus_button();
@@ -230,7 +230,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(0, 46);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(1171, 610);
+            this.tabControlMain.Size = new System.Drawing.Size(1171, 681);
             this.tabControlMain.TabIndex = 14;
             this.tabControlMain.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlMain_DrawItem);
             // 
@@ -244,7 +244,7 @@
             this.tabQuery.Location = new System.Drawing.Point(4, 27);
             this.tabQuery.Name = "tabQuery";
             this.tabQuery.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQuery.Size = new System.Drawing.Size(1163, 579);
+            this.tabQuery.Size = new System.Drawing.Size(1163, 650);
             this.tabQuery.TabIndex = 0;
             this.tabQuery.Text = "Premium OS/Claim Occured";
             // 
@@ -267,7 +267,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 49);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1157, 527);
+            this.panel1.Size = new System.Drawing.Size(1157, 598);
             this.panel1.TabIndex = 38;
             // 
             // lblSentDate
@@ -896,7 +896,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1163, 579);
+            this.tabPage1.Size = new System.Drawing.Size(1163, 650);
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Claims Experience";
             // 
@@ -906,7 +906,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 164);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1157, 412);
+            this.panel4.Size = new System.Drawing.Size(1157, 483);
             this.panel4.TabIndex = 43;
             // 
             // ClExpViewer
@@ -917,7 +917,7 @@
             this.ClExpViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ClExpViewer.Location = new System.Drawing.Point(0, 0);
             this.ClExpViewer.Name = "ClExpViewer";
-            this.ClExpViewer.Size = new System.Drawing.Size(1157, 412);
+            this.ClExpViewer.Size = new System.Drawing.Size(1157, 483);
             this.ClExpViewer.TabIndex = 0;
             // 
             // panel3
@@ -1054,13 +1054,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1163, 579);
+            this.tabPage2.Size = new System.Drawing.Size(1163, 650);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Claims Rejection";
             // 
             // panelQueryClaim
             // 
             this.panelQueryClaim.AutoScroll = true;
+            this.panelQueryClaim.Controls.Add(this.tbClReNote);
             this.panelQueryClaim.Controls.Add(this.label27);
             this.panelQueryClaim.Controls.Add(this.bnClReSendEmailConNoLetter);
             this.panelQueryClaim.Controls.Add(this.lblClReSentDateConNoLetter);
@@ -1070,7 +1071,6 @@
             this.panelQueryClaim.Controls.Add(this.bnClReSendEmailCon);
             this.panelQueryClaim.Controls.Add(this.lblClReSentDateCon);
             this.panelQueryClaim.Controls.Add(this.label24);
-            this.panelQueryClaim.Controls.Add(this.tbClReNote);
             this.panelQueryClaim.Controls.Add(this.bnClReRemove);
             this.panelQueryClaim.Controls.Add(this.bnClReOpen);
             this.panelQueryClaim.Controls.Add(this.bnClReBrowse);
@@ -1090,15 +1090,23 @@
             this.panelQueryClaim.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelQueryClaim.Location = new System.Drawing.Point(3, 49);
             this.panelQueryClaim.Name = "panelQueryClaim";
-            this.panelQueryClaim.Size = new System.Drawing.Size(1157, 527);
+            this.panelQueryClaim.Size = new System.Drawing.Size(1157, 598);
             this.panelQueryClaim.TabIndex = 42;
+            // 
+            // tbClReNote
+            // 
+            this.tbClReNote.Location = new System.Drawing.Point(48, 275);
+            this.tbClReNote.Name = "tbClReNote";
+            this.tbClReNote.Size = new System.Drawing.Size(450, 82);
+            this.tbClReNote.TabIndex = 68;
+            this.tbClReNote.Text = "";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(289, 493);
+            this.label27.Location = new System.Drawing.Point(289, 554);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(61, 15);
             this.label27.TabIndex = 67;
@@ -1110,7 +1118,7 @@
             this.bnClReSendEmailConNoLetter.FlatAppearance.BorderSize = 2;
             this.bnClReSendEmailConNoLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClReSendEmailConNoLetter.ForeColor = System.Drawing.Color.White;
-            this.bnClReSendEmailConNoLetter.Location = new System.Drawing.Point(49, 488);
+            this.bnClReSendEmailConNoLetter.Location = new System.Drawing.Point(49, 549);
             this.bnClReSendEmailConNoLetter.Name = "bnClReSendEmailConNoLetter";
             this.bnClReSendEmailConNoLetter.Size = new System.Drawing.Size(222, 25);
             this.bnClReSendEmailConNoLetter.TabIndex = 65;
@@ -1156,7 +1164,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(288, 462);
+            this.label25.Location = new System.Drawing.Point(288, 523);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(61, 15);
             this.label25.TabIndex = 61;
@@ -1168,7 +1176,7 @@
             this.bnClReSendEmailCon.FlatAppearance.BorderSize = 2;
             this.bnClReSendEmailCon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClReSendEmailCon.ForeColor = System.Drawing.Color.White;
-            this.bnClReSendEmailCon.Location = new System.Drawing.Point(48, 457);
+            this.bnClReSendEmailCon.Location = new System.Drawing.Point(48, 518);
             this.bnClReSendEmailCon.Name = "bnClReSendEmailCon";
             this.bnClReSendEmailCon.Size = new System.Drawing.Size(222, 25);
             this.bnClReSendEmailCon.TabIndex = 59;
@@ -1196,22 +1204,13 @@
             this.label24.TabIndex = 58;
             this.label24.Text = "Note:";
             // 
-            // tbClReNote
-            // 
-            this.tbClReNote.Font = new System.Drawing.Font("Cambria", 9F);
-            this.tbClReNote.Location = new System.Drawing.Point(49, 272);
-            this.tbClReNote.Multiline = true;
-            this.tbClReNote.Name = "tbClReNote";
-            this.tbClReNote.Size = new System.Drawing.Size(449, 23);
-            this.tbClReNote.TabIndex = 57;
-            // 
             // bnClReRemove
             // 
             this.bnClReRemove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
             this.bnClReRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClReRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnClReRemove.ForeColor = System.Drawing.Color.White;
-            this.bnClReRemove.Location = new System.Drawing.Point(698, 395);
+            this.bnClReRemove.Location = new System.Drawing.Point(698, 456);
             this.bnClReRemove.Name = "bnClReRemove";
             this.bnClReRemove.Size = new System.Drawing.Size(69, 25);
             this.bnClReRemove.TabIndex = 56;
@@ -1225,7 +1224,7 @@
             this.bnClReOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClReOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnClReOpen.ForeColor = System.Drawing.Color.White;
-            this.bnClReOpen.Location = new System.Drawing.Point(698, 349);
+            this.bnClReOpen.Location = new System.Drawing.Point(698, 410);
             this.bnClReOpen.Name = "bnClReOpen";
             this.bnClReOpen.Size = new System.Drawing.Size(69, 25);
             this.bnClReOpen.TabIndex = 55;
@@ -1239,7 +1238,7 @@
             this.bnClReBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClReBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnClReBrowse.ForeColor = System.Drawing.Color.White;
-            this.bnClReBrowse.Location = new System.Drawing.Point(698, 305);
+            this.bnClReBrowse.Location = new System.Drawing.Point(698, 366);
             this.bnClReBrowse.Name = "bnClReBrowse";
             this.bnClReBrowse.Size = new System.Drawing.Size(69, 25);
             this.bnClReBrowse.TabIndex = 54;
@@ -1261,7 +1260,7 @@
             this.dgvClReAttachment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
-            this.dgvClReAttachment.Location = new System.Drawing.Point(446, 302);
+            this.dgvClReAttachment.Location = new System.Drawing.Point(446, 363);
             this.dgvClReAttachment.Name = "dgvClReAttachment";
             this.dgvClReAttachment.ReadOnly = true;
             this.dgvClReAttachment.RowHeadersVisible = false;
@@ -1438,7 +1437,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(288, 431);
+            this.label19.Location = new System.Drawing.Point(288, 492);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(61, 15);
             this.label19.TabIndex = 47;
@@ -1455,7 +1454,7 @@
             // 
             // tbClReCC
             // 
-            this.tbClReCC.Location = new System.Drawing.Point(48, 357);
+            this.tbClReCC.Location = new System.Drawing.Point(48, 418);
             this.tbClReCC.Multiline = true;
             this.tbClReCC.Name = "tbClReCC";
             this.tbClReCC.Size = new System.Drawing.Size(392, 63);
@@ -1465,7 +1464,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(16, 360);
+            this.label21.Location = new System.Drawing.Point(16, 421);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(24, 14);
             this.label21.TabIndex = 43;
@@ -1475,7 +1474,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Location = new System.Drawing.Point(16, 305);
+            this.label28.Location = new System.Drawing.Point(16, 366);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(26, 14);
             this.label28.TabIndex = 42;
@@ -1483,10 +1482,10 @@
             // 
             // tbClReTo
             // 
-            this.tbClReTo.Location = new System.Drawing.Point(49, 302);
+            this.tbClReTo.Location = new System.Drawing.Point(48, 363);
             this.tbClReTo.Multiline = true;
             this.tbClReTo.Name = "tbClReTo";
-            this.tbClReTo.Size = new System.Drawing.Size(391, 49);
+            this.tbClReTo.Size = new System.Drawing.Size(392, 49);
             this.tbClReTo.TabIndex = 41;
             // 
             // bnClReSendEmail
@@ -1495,7 +1494,7 @@
             this.bnClReSendEmail.FlatAppearance.BorderSize = 2;
             this.bnClReSendEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClReSendEmail.ForeColor = System.Drawing.Color.White;
-            this.bnClReSendEmail.Location = new System.Drawing.Point(48, 426);
+            this.bnClReSendEmail.Location = new System.Drawing.Point(48, 487);
             this.bnClReSendEmail.Name = "bnClReSendEmail";
             this.bnClReSendEmail.Size = new System.Drawing.Size(222, 25);
             this.bnClReSendEmail.TabIndex = 38;
@@ -1929,7 +1928,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.ClientSize = new System.Drawing.Size(1171, 656);
+            this.ClientSize = new System.Drawing.Size(1171, 727);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -2121,7 +2120,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox tbClReNatureofLoss;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox tbClReNote;
         private System.Windows.Forms.Label label25;
         private cus_button bnClReSendEmailCon;
         private System.Windows.Forms.Label lblClReSentDateCon;
@@ -2130,5 +2128,6 @@
         private System.Windows.Forms.Label label27;
         private cus_button bnClReSendEmailConNoLetter;
         private System.Windows.Forms.Label lblClReSentDateConNoLetter;
+        private System.Windows.Forms.RichTextBox tbClReNote;
     }
 }

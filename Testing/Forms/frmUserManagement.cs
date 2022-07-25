@@ -83,7 +83,7 @@ namespace Testing.Forms
 
                     if (dtTmpUsername.Rows.Count > 0)
                     {
-                        txtUsername.Text = dtUsername.Rows[0]["USERNAME"].ToString();
+                        txtUsername.Text = dtTmpUsername.Rows[0]["USERNAME"].ToString();
 
                         var tmpLastTwoUsername = txtUsername.Text.Substring(txtUsername.Text.Trim().Length - 2).ToLower().Trim();
                         var lastTwoUsername = string.Concat(char.ToUpper(tmpLastTwoUsername[0]), tmpLastTwoUsername.Substring(1));

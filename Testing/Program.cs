@@ -64,8 +64,8 @@ namespace Testing
         private delegate bool EnumWindowsProc(HWND hWnd, int lParam);
         #endregion
 
-        static frmLogIn frmLogInObj;
-        static SplashScreen frmSplashScreen;
+        //static frmLogIn frmLogInObj;
+        //static SplashScreen frmSplashScreen;
 
         /// <summary>D:\MIS Projest\Testing\Program.cs
         /// The main entry point for the application.
@@ -82,8 +82,11 @@ namespace Testing
                 ShowToFront(formTitle);
                 return;
             }
-            StartApp();
+            //StartApp();
             GC.KeepAlive(mutex);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmLogIn());
 
             #region --- OLD CODING ---
             //bool createdNew = true;
@@ -149,41 +152,41 @@ namespace Testing
             return windows;
         }
 
-        private static void frmLogIn_LoadCompleted(object sender, EventArgs e)
-        {
-            if (frmSplashScreen == null || frmSplashScreen.Disposing || frmSplashScreen.IsDisposed)
-                return;
-            frmSplashScreen.Invoke(new Action(() => { frmSplashScreen.Close(); }));
-            frmSplashScreen.Dispose();
-            frmSplashScreen = null;
-            frmLogInObj.TopMost = true;
-            frmLogInObj.Activate();
-            //frmLogInObj.TopMost = false;
-        }
+        //private static void frmLogIn_LoadCompleted(object sender, EventArgs e)
+        //{
+        //    if (frmSplashScreen == null || frmSplashScreen.Disposing || frmSplashScreen.IsDisposed)
+        //        return;
+        //    frmSplashScreen.Invoke(new Action(() => { frmSplashScreen.Close(); }));
+        //    frmSplashScreen.Dispose();
+        //    frmSplashScreen = null;
+        //    frmLogInObj.TopMost = true;
+        //    frmLogInObj.Activate();
+        //    //frmLogInObj.TopMost = false;
+        //}
 
-        private static void StartApp()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            frmSplashScreen = new SplashScreen();
-            if (frmSplashScreen != null)
-            {
-                Thread splashThread = new Thread(new ThreadStart(
-                    () => { Application.Run(frmSplashScreen); }));
-                splashThread.SetApartmentState(ApartmentState.STA);
-                splashThread.Start();
-            }
-            //Create and Show Main Form
-            frmLogInObj = new frmLogIn();
-            frmLogInObj.LoadCompleted += frmLogIn_LoadCompleted;
-            Application.Run(frmLogInObj);
-            if (!(frmSplashScreen == null || frmSplashScreen.Disposing || frmSplashScreen.IsDisposed))
-                frmSplashScreen.Invoke(new Action(() =>
-                {
-                    frmSplashScreen.TopMost = true;
-                    frmSplashScreen.Activate();
-                    frmSplashScreen.TopMost = false;
-                }));
-        }
+        //private static void StartApp()
+        //{
+        //    Application.EnableVisualStyles();
+        //    Application.SetCompatibleTextRenderingDefault(false);
+        //    frmSplashScreen = new SplashScreen();
+        //    if (frmSplashScreen != null)
+        //    {
+        //        Thread splashThread = new Thread(new ThreadStart(
+        //            () => { Application.Run(frmSplashScreen); }));
+        //        splashThread.SetApartmentState(ApartmentState.STA);
+        //        splashThread.Start();
+        //    }
+        //    //Create and Show Main Form
+        //    frmLogInObj = new frmLogIn();
+        //    frmLogInObj.LoadCompleted += frmLogIn_LoadCompleted;
+        //    Application.Run(frmLogInObj);
+        //    if (!(frmSplashScreen == null || frmSplashScreen.Disposing || frmSplashScreen.IsDisposed))
+        //        frmSplashScreen.Invoke(new Action(() =>
+        //        {
+        //            frmSplashScreen.TopMost = true;
+        //            frmSplashScreen.Activate();
+        //            frmSplashScreen.TopMost = false;
+        //        }));
+        //}
     }
 }

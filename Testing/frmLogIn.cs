@@ -21,6 +21,10 @@ namespace Testing
         string HashPass = "Forte@2017";
         bool Maint = false;
         public string fullusername;
+
+        SplashScreen SplashScreen = new SplashScreen();
+        int minimumDisplayTime = 2000;
+
         public frmLogIn()
         {
             InitializeComponent();
@@ -183,6 +187,7 @@ namespace Testing
         {
             try
             {
+                LoadSplashScreen();
                 Cursor.Current = Cursors.WaitCursor;
                 CheckMaint();
                 //Thread.Sleep(3000);
@@ -191,7 +196,7 @@ namespace Testing
             }
             catch (Exception ex)
             {
-                Msgbox.Show(ex.Message+ Environment.NewLine+ex.StackTrace);
+                Msgbox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
 
@@ -227,7 +232,6 @@ namespace Testing
         K: //Update 19-Jul-19 (Solve Connection Pool Problem)
             try
             {
-
                 checkMaintCon();
             }
             catch (Exception e)
@@ -283,6 +287,35 @@ namespace Testing
         private void frmLogIn_Shown(object sender, EventArgs e)
         {
             showMaint();
+        }
+
+        private void LoadSplashScreen()
+        {
+            SplashScreen.Show();
+            DateTime startTime = DateTime.Now;
+            int cnt = 0;
+
+            do
+            {
+                Thread.Sleep(100);
+                cnt++;
+                Application.DoEvents();
+
+            } while (cnt < 10);
+
+            int timeDisplayed = (DateTime.Now - startTime).Milliseconds;
+
+            if (timeDisplayed < minimumDisplayTime)
+            {
+                do
+                {
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                    timeDisplayed += 100;
+
+                } while (timeDisplayed < minimumDisplayTime);
+            }
+            SplashScreen.Close();
         }
     }
 }
