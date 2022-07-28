@@ -132,6 +132,14 @@ namespace Testing.Forms
                 {
                     dt = dt.AsEnumerable().OrderBy(ite => ite.Field<string>(insured)).CopyToDataTable();
                 }
+                if (txtPolicyNo.Text.Trim().Equals("D/001/CGPA/18/000430") || txtPolicyNo.Text.Trim().Equals("D/001/CGPA/18/000433") || txtPolicyNo.Text.Trim().Equals("D/001/CGPA/20/000433"))
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        dt.Rows[i]["SUM_INSURED"] = "15 MONTHS SALARY";
+                    }
+                    dt.AcceptChanges();
+                }
                 dtPolicy.DataSource = dt;
 
                 DataGridViewColumn column = dtPolicy.Columns[0];
