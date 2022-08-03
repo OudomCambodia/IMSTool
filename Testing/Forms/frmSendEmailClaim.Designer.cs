@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -206,6 +206,9 @@
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.dgvClaimInfo = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.btnViewHistory = new Testing.cus_button();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.cboOtherExclusions = new System.Windows.Forms.ComboBox();
             this.btnGenerateClaim = new Testing.cus_button();
             this.btnExcluDefin = new Testing.cus_button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
@@ -215,6 +218,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpSend.SuspendLayout();
@@ -264,7 +268,9 @@
             this.groupBox14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClaimInfo)).BeginInit();
             this.panel9.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.groupBox12.SuspendLayout();
+            this.groupBox16.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -375,7 +381,7 @@
             this.pnQuery.Controls.Add(this.lbClaimNo);
             this.pnQuery.Location = new System.Drawing.Point(3, 51);
             this.pnQuery.Name = "pnQuery";
-            this.pnQuery.Size = new System.Drawing.Size(1357, 487);
+            this.pnQuery.Size = new System.Drawing.Size(1357, 483);
             this.pnQuery.TabIndex = 5;
             this.pnQuery.Visible = false;
             // 
@@ -535,10 +541,10 @@
             this.dgvHisClaim.Name = "dgvHisClaim";
             this.dgvHisClaim.ReadOnly = true;
             this.dgvHisClaim.RowHeadersVisible = false;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvHisClaim.RowTemplate.Height = 27;
-            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 217);
+            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 213);
             this.dgvHisClaim.TabIndex = 28;
             // 
             // label11
@@ -2386,14 +2392,14 @@
             this.dgvClaimInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClaimInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvClaimInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 9.75F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClaimInfo.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Cambria", 9.75F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClaimInfo.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvClaimInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClaimInfo.Location = new System.Drawing.Point(3, 19);
             this.dgvClaimInfo.Name = "dgvClaimInfo";
@@ -2405,6 +2411,8 @@
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.groupBox16);
+            this.panel9.Controls.Add(this.groupBox15);
             this.panel9.Controls.Add(this.btnGenerateClaim);
             this.panel9.Controls.Add(this.btnExcluDefin);
             this.panel9.Controls.Add(this.groupBox12);
@@ -2414,13 +2422,49 @@
             this.panel9.Size = new System.Drawing.Size(1357, 74);
             this.panel9.TabIndex = 7;
             // 
+            // btnViewHistory
+            // 
+            this.btnViewHistory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnViewHistory.FlatAppearance.BorderSize = 2;
+            this.btnViewHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewHistory.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.btnViewHistory.ForeColor = System.Drawing.Color.White;
+            this.btnViewHistory.Location = new System.Drawing.Point(19, 21);
+            this.btnViewHistory.Name = "btnViewHistory";
+            this.btnViewHistory.Size = new System.Drawing.Size(218, 29);
+            this.btnViewHistory.TabIndex = 14;
+            this.btnViewHistory.Text = "View Claim Rejection History";
+            this.btnViewHistory.UseVisualStyleBackColor = false;
+            this.btnViewHistory.Click += new System.EventHandler(this.btnViewHistory_Click);
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.cboOtherExclusions);
+            this.groupBox15.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox15.Location = new System.Drawing.Point(550, 3);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(270, 63);
+            this.groupBox15.TabIndex = 13;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Other Exclusions";
+            // 
+            // cboOtherExclusions
+            // 
+            this.cboOtherExclusions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOtherExclusions.FormattingEnabled = true;
+            this.cboOtherExclusions.Location = new System.Drawing.Point(10, 24);
+            this.cboOtherExclusions.Name = "cboOtherExclusions";
+            this.cboOtherExclusions.Size = new System.Drawing.Size(252, 23);
+            this.cboOtherExclusions.TabIndex = 0;
+            this.cboOtherExclusions.SelectedIndexChanged += new System.EventHandler(this.cboOtherExclusions_SelectedIndexChanged);
+            // 
             // btnGenerateClaim
             // 
             this.btnGenerateClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
             this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
             this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaim.Location = new System.Drawing.Point(777, 24);
+            this.btnGenerateClaim.Location = new System.Drawing.Point(826, 24);
             this.btnGenerateClaim.Name = "btnGenerateClaim";
             this.btnGenerateClaim.Size = new System.Drawing.Size(129, 29);
             this.btnGenerateClaim.TabIndex = 6;
@@ -2434,7 +2478,7 @@
             this.btnExcluDefin.FlatAppearance.BorderSize = 2;
             this.btnExcluDefin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcluDefin.ForeColor = System.Drawing.Color.White;
-            this.btnExcluDefin.Location = new System.Drawing.Point(674, 24);
+            this.btnExcluDefin.Location = new System.Drawing.Point(386, 24);
             this.btnExcluDefin.Name = "btnExcluDefin";
             this.btnExcluDefin.Size = new System.Drawing.Size(97, 29);
             this.btnExcluDefin.TabIndex = 12;
@@ -2450,7 +2494,7 @@
             this.groupBox12.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox12.Location = new System.Drawing.Point(3, 3);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(665, 63);
+            this.groupBox12.Size = new System.Drawing.Size(377, 63);
             this.groupBox12.TabIndex = 0;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Claim No";
@@ -2469,7 +2513,7 @@
             this.txtClaimNo.Location = new System.Drawing.Point(73, 23);
             this.txtClaimNo.MaxLength = 20;
             this.txtClaimNo.Name = "txtClaimNo";
-            this.txtClaimNo.Size = new System.Drawing.Size(586, 23);
+            this.txtClaimNo.Size = new System.Drawing.Size(280, 23);
             this.txtClaimNo.TabIndex = 9;
             this.txtClaimNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtClaimNo_KeyDown);
             this.txtClaimNo.Leave += new System.EventHandler(this.txtClaimNo_Leave);
@@ -2481,6 +2525,17 @@
             // printDocument
             // 
             this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.btnViewHistory);
+            this.groupBox16.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox16.Location = new System.Drawing.Point(1021, 3);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(257, 63);
+            this.groupBox16.TabIndex = 14;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Claim Rejection History";
             // 
             // frmSendEmailClaim
             // 
@@ -2560,8 +2615,10 @@
             this.groupBox14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClaimInfo)).EndInit();
             this.panel9.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2753,5 +2810,9 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.TextBox txtSearchDefExclu;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.ComboBox cboOtherExclusions;
+        private cus_button btnViewHistory;
+        private System.Windows.Forms.GroupBox groupBox16;
     }
 }

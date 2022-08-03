@@ -72,13 +72,25 @@ namespace Testing.Forms
 
         private DataTable dtClaims = frmSendEmailClaim.dtClaimDt;
         private DataTable dtSelectedRows = frmSendEmailClaim.selectedDoc;
-        private string engBody = string.Empty;
+        private string bodyengBody = string.Empty;
         private string khBody = string.Empty;
+        private string engBody = string.Empty;
         private TempFileCollection tempfile = new TempFileCollection();
+        private string NA = "--- N/A ---";
+        private string otherExclusion = frmSendEmailClaim.OtherExclusion;
+        private List<string> docxNames = new List<string>();
+        private readonly string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
+        private Microsoft.Office.Interop.Word._Document khDoc;
+        private Microsoft.Office.Interop.Word._Document engDoc;
+        private bool IsViewHistory;
+        private string HistClaimNo;
             
-        public frmMedicalRejectionLetter()
+        public frmMedicalRejectionLetter(bool isViewHistory, string histClaimNo = null)
         {
             InitializeComponent();
+            IsViewHistory = isViewHistory;
+            HistClaimNo = histClaimNo;
+            Text = !IsViewHistory ? "Medical Rejection Letter" : "Medical Rejection Letter History";
         }
 
         private void frmMedicalRejectionLetter_Load(object sender, EventArgs e)
@@ -86,6 +98,81 @@ namespace Testing.Forms
             try
             {
                 Cursor = Cursors.WaitCursor;
+
+                btnSave.Visible = !IsViewHistory;
+
+                if (!IsViewHistory)
+                    LoadDoc();
+                else
+                    LoadDocHist();
+                
+                Cursor = Cursors.Arrow;
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Arrow;
+                Msgbox.Show(ex.ToString());
+                throw;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var claimNoToSave = frmSendEmailClaim.dtClaimDt.Rows[0]["CLAIM_NO"].ToString().Trim();
+
+            var isAlreadySaved = crud.ExecQuery("select CLAIM_NO from USER_MEDICAL_REJECTION_LETTER where CLAIM_NO = '" + claimNoToSave + "'").Rows.Count > 0;
+            if (isAlreadySaved)
+            {
+                Msgbox.Show("This Claim No " + claimNoToSave + " is already saved. Please check again!");
+                BringToFront();
+                return;
+            }
+
+            var confirmSave = Msgbox.Show("Are you sure you want to save this Claim Rejection?", "Save Information");
+            if (confirmSave == DialogResult.Yes)
+            {
+                try
+                {
+                    Cursor = Cursors.WaitCursor;
+
+                    var claimNo = frmSendEmailClaim.dtClaimDt.Rows[0]["CLAIM_NO"].ToString().Trim();
+                    claimNo = frmSendEmailClaim.dtClaimDt.Rows[0]["CLAIM_NO"].ToString().Trim().Replace("/", "-");
+                    var referenceDoc = string.Concat(claimNo, "-KH.docx", "*", claimNo, "-ENG.docx");
+
+                    var insertBuilder = new StringBuilder();
+                    insertBuilder.Append("insert into USER_MEDICAL_REJECTION_LETTER(SEQ_NO, CLAIM_NO, REJECTION_DATE, REJECTION_REFERENCE_DOC) ")
+                        .Append("values(USER_MEDICAL_REJECTION_SEQ.NEXTVAL, '" + claimNoToSave + "', TO_DATE('" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "','YYYY/MM/DD HH24:MI:SS'), '" + referenceDoc + "')");
+                    crud.ExecNonQuery(insertBuilder.ToString());
+
+                    khDoc.SaveAs2(path + claimNo + "-KH.docx");
+                    engDoc.SaveAs2(path + claimNo + "-ENG.docx");
+
+                    Cursor = Cursors.Arrow;
+
+                    Msgbox.Show("Claim Rejection successfully saved.");
+                }
+                catch (Exception ex)
+                {
+                    Cursor = Cursors.Arrow;
+                    Msgbox.Show(ex.ToString());
+                }
+            }
+        }
+
+        private void frmMedicalRejectionLetter_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Process[] processList = Process.GetProcesses().Where(x => x.ProcessName.ToLower() == "winword").ToArray();
+            foreach (var process in processList)
+            {
+                if (process.MainWindowHandle == (IntPtr)0x00000000)
+                    process.Kill();
+            }
+        }
+
+        private void LoadDoc()
+        {
+            if (otherExclusion.Equals(NA))
+            {
                 DataTable dtClaimTemplateEng = crud.ExecQuery("select * from USER_REJECTLETTER_TEMP where PRODUCTS = 'HNS' and LANGUAGE = 'ENG'");
                 if (dtClaimTemplateEng.Rows.Count > 0)
                     engBody = dtClaimTemplateEng.Rows[0]["TEMPLATE"].ToString();
@@ -212,13 +299,68 @@ namespace Testing.Forms
                     SetDoc(khBody, splitContainer1.Panel1, true);
                     SetDoc(engBody, splitContainer1.Panel2, false);
                 }
-                Cursor = Cursors.Arrow;
             }
-            catch (Exception ex)
+            else
             {
-                Cursor = Cursors.Arrow;
-                Msgbox.Show(ex.ToString());
-                throw;
+                DataTable dtClaimTemplate = crud.ExecQuery("select TEMPLATE, LANGUAGE from USER_REJECTLETTER_TEMP where PRODUCTS = '" + otherExclusion + "'");
+                if (dtClaimTemplate.Rows.Count > 0)
+                {
+                    engBody = dtClaimTemplate.AsEnumerable().Where(dr => dr.Field<string>("LANGUAGE").Equals("ENG")).FirstOrDefault()[0].ToString();
+                    khBody = dtClaimTemplate.AsEnumerable().Where(dr => dr.Field<string>("LANGUAGE").Equals("KH")).FirstOrDefault()[0].ToString();
+
+                    var currentDate = DateTime.Now.ToString("dd MMMM yyyy");
+                    var policyHolder = dtClaims.Rows[0]["POLICY_HOLDER"].ToString();
+                    var situationOfRisk = dtClaims.Rows[0]["ADDRESS"].ToString();
+                    var policyNo = dtClaims.Rows[0]["POLICY_NO"].ToString();
+                    var claimNo = dtClaims.Rows[0]["CLAIM_NO"].ToString();
+                    var insuredMember = dtClaims.Rows[0]["MEMBER"].ToString();
+                    var claimAmount = dtClaims.Rows[0]["CLAIMED_AMOUNT"].ToString();
+                    var claimCause = dtClaims.Rows[0]["CAUSE"].ToString();
+                    var hospital = dtClaims.Rows[0]["HOSPITAL"].ToString();
+
+                    string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy" };
+                    string treatmentDateString = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
+                    string treatmentDate = string.Empty;
+
+                    DateTime dtTreatmentDate;
+                    if (DateTime.TryParseExact(treatmentDateString, dateTimeformats, new CultureInfo("en-US"), DateTimeStyles.None, out dtTreatmentDate))
+                        treatmentDate = Convert.ToDateTime(dtClaims.Rows[0]["TREATMENT_DATE"]).ToString("dd MMMM yyyy");
+                    else
+                        treatmentDate = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
+
+                    var accountHandler = dtClaims.Rows[0]["CC"].ToString();
+
+                    engBody = engBody.Replace("%DateTimeN%", currentDate);
+                    engBody = engBody.Replace("%PolicyHolder%", policyHolder);
+                    engBody = engBody.Replace("%SituationOfRisk%", situationOfRisk);
+                    engBody = engBody.Replace("%Policy No%", policyNo);
+                    engBody = engBody.Replace("%ClaimNo%", claimNo);
+                    engBody = engBody.Replace("%InsuredMember%", insuredMember);
+                    engBody = engBody.Replace("%ClaimAmount%", claimAmount);
+                    engBody = engBody.Replace("%ClaimCause%", claimCause);
+                    engBody = engBody.Replace("%Hospital%", hospital);
+                    engBody = engBody.Replace("%Dateloss%", treatmentDate);
+                    engBody = engBody.Replace("%AccountHandler%", accountHandler);
+
+                    khBody = khBody.Replace("%DateTimeN%", CommonFunctions.KhDate(DateTime.Now));
+                    khBody = khBody.Replace("%PolicyHolder%", policyHolder);
+                    khBody = khBody.Replace("%SituationOfRisk%", situationOfRisk);
+                    khBody = khBody.Replace("%Policy No%", policyNo);
+                    khBody = khBody.Replace("%ClaimNo%", claimNo);
+                    khBody = khBody.Replace("%InsuredMember%", insuredMember);
+                    khBody = khBody.Replace("%ClaimAmount%", CommonFunctions.KhNum(Convert.ToDouble(claimAmount)));
+                    khBody = khBody.Replace("%ClaimCause%", claimCause);
+                    khBody = khBody.Replace("%Hospital%", hospital);
+
+                    if (DateTime.TryParseExact(treatmentDateString, dateTimeformats, new CultureInfo("en-US"), DateTimeStyles.None, out dtTreatmentDate))
+                        treatmentDate = CommonFunctions.KhDate(Convert.ToDateTime(treatmentDate));
+
+                    khBody = khBody.Replace("%Dateloss%", treatmentDate);
+                    khBody = khBody.Replace("%AccountHandler%", accountHandler);
+
+                    SetDoc(khBody, splitContainer1.Panel1, true);
+                    SetDoc(engBody, splitContainer1.Panel2, false);
+                }
             }
         }
 
@@ -247,20 +389,99 @@ namespace Testing.Forms
 
                 object missing = System.Reflection.Missing.Value;
                 object visible = true;
-                Microsoft.Office.Interop.Word._Document doc = oWord.Documents.Add(ref missing,
-                         ref missing,
-                         ref missing,
-                         ref visible);
+
+                if (isKhmerHtml)
+                {
+                    khDoc = oWord.Documents.Add(ref missing, ref missing, ref missing, ref visible);
+
+                    var bookMark = khDoc.Words.First.Bookmarks.Add("entry");
+                    bookMark.Range.InsertFile(fileInfo.FullName);
+
+                    khDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
+                    khDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
+                    khDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
+                    khDoc.Paragraphs.LineSpacing = InchesToPoints(0.137f);
+                    khDoc.PageSetup.TopMargin = InchesToPoints(isKhmerHtml ? 0.6f : 0.85f);
+                    khDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
+                    khDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
+                    khDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+                }
+                else
+                {
+                    engDoc = oWord.Documents.Add(ref missing, ref missing, ref missing, ref visible);
+
+                    var bookMark = engDoc.Words.First.Bookmarks.Add("entry");
+                    bookMark.Range.InsertFile(fileInfo.FullName);
+
+                    engDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
+                    engDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
+                    engDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
+                    engDoc.Paragraphs.LineSpacing = InchesToPoints(0.137f);
+                    engDoc.PageSetup.TopMargin = InchesToPoints(isKhmerHtml ? 0.6f : 0.85f);
+                    engDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
+                    engDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
+                    engDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+                }
+
+                oWord.Visible = true;
+                oWord.WindowState = Microsoft.Office.Interop.Word.WdWindowState.wdWindowStateMaximize;
+                oWord.ActiveWindow.ActivePane.View.Type = Microsoft.Office.Interop.Word.WdViewType.wdPrintView;
+
+                gpsHandle = (IntPtr)oWord.ActiveWindow.Hwnd;
+                SetParent(gpsHandle, panel.Handle);
+                SetWindowLong(gpsHandle, GWL_STYLE, WS_VISIBLE + WS_MAXIMIZE);
+                MoveWindow(gpsHandle, 0, 0, panel.Width, panel.Height, true);
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.ToString());
+                throw;
+            }
+        }
+
+        private void LoadDocHist()
+        {
+            if (string.IsNullOrEmpty(HistClaimNo))
+                return;
+
+            var dsReferenceDoc = crud.ExecQuery("select REJECTION_REFERENCE_DOC from USER_MEDICAL_REJECTION_LETTER where CLAIM_NO = '" + HistClaimNo + "'");
+            if (dsReferenceDoc.Rows.Count <= 0)
+                return;
+
+            string[] khEngDoc = dsReferenceDoc.Rows[0]["REJECTION_REFERENCE_DOC"].ToString().Split('*');
+
+            SetDocHist(khEngDoc[0], splitContainer1.Panel1, true);
+            SetDocHist(khEngDoc[1], splitContainer1.Panel2, false);
+        }
+
+        private void SetDocHist(string khEngDoc, Control panel, bool isKhDoc)
+        {
+            try
+            {
+                var fileInfo = new FileInfo(path + khEngDoc);
+
+                Microsoft.Office.Interop.Word._Application oWord = new Application();
+                object oMissing = System.Reflection.Missing.Value;
+                object oTrue = true;
+                object oFalse = false;
+
+                object missing = System.Reflection.Missing.Value;
+                object visible = true;
+
+                Microsoft.Office.Interop.Word._Document doc = oWord.Documents.Add(ref missing, ref missing, ref missing, ref visible);
+
                 var bookMark = doc.Words.First.Bookmarks.Add("entry");
                 bookMark.Range.InsertFile(fileInfo.FullName);
 
                 doc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
                 doc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                 doc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
-                doc.PageSetup.TopMargin = InchesToPoints(isKhmerHtml ? 0.5f : 0.75f);
-                doc.PageSetup.LeftMargin = InchesToPoints(0.5f);
-                doc.PageSetup.RightMargin = InchesToPoints(0.5f);
-                doc.PageSetup.BottomMargin = InchesToPoints(0.0f);
+                doc.Paragraphs.LineSpacing = InchesToPoints(0.132f);
+                doc.PageSetup.TopMargin = InchesToPoints(isKhDoc ? 0.6f : 0.85f);
+                doc.PageSetup.LeftMargin = InchesToPoints(0.6f);
+                doc.PageSetup.RightMargin = InchesToPoints(0.6f);
+                doc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+                doc.Protect(Microsoft.Office.Interop.Word.WdProtectionType.wdAllowOnlyFormFields);
 
                 oWord.Visible = true;
                 oWord.WindowState = Microsoft.Office.Interop.Word.WdWindowState.wdWindowStateMaximize;
@@ -281,16 +502,6 @@ namespace Testing.Forms
         private float InchesToPoints(float fInches)
         {
             return fInches * 72.0f;
-        }
-
-        private void frmMedicalRejectionLetter_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Process[] processList = Process.GetProcesses().Where(x => x.ProcessName.ToLower() == "winword").ToArray();
-            foreach (var process in processList)
-            {
-                if (process.MainWindowHandle == (IntPtr)0x00000000)
-                    process.Kill();
-            }
         }
 
         #region --- OLD CODING ---

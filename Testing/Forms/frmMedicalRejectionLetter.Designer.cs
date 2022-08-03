@@ -29,21 +29,37 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMedicalRejectionLetter));
+            this.btnSave = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.DarkGray;
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Calibri", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(0, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(1076, 33);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 33);
             this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Size = new System.Drawing.Size(1076, 809);
-            this.splitContainer1.SplitterDistance = 532;
-            this.splitContainer1.TabIndex = 3;
+            this.splitContainer1.Size = new System.Drawing.Size(1076, 776);
+            this.splitContainer1.SplitterDistance = 535;
+            this.splitContainer1.TabIndex = 5;
             // 
             // frmMedicalRejectionLetter
             // 
@@ -51,6 +67,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1076, 809);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.btnSave);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmMedicalRejectionLetter";
@@ -67,5 +84,6 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button btnSave;
     }
 }

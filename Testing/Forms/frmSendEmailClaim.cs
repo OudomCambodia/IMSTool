@@ -31,6 +31,7 @@ namespace Testing.Forms
         int port;
         string HashPass = "Forte@2017";
         public static DataTable dtClaimDt;
+        public static string OtherExclusion;
         private DataTable dtExcDef;
         int[] row_id;
         DataTable dtTemp1 = null;
@@ -88,6 +89,11 @@ namespace Testing.Forms
             dgvNonPayClaimNo.RowsDefaultCellStyle.ForeColor = Color.Black;
             dgvNonPayClaimNo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             CommonFunctions.HighLightGrid(dgvDefinition);
+
+            var dsOtherExclusions = crud.ExecQuery("select distinct PRODUCTS from USER_REJECTLETTER_TEMP where PRODUCTS != 'HNS' order by PRODUCTS");
+            cboOtherExclusions.ValueMember = "PRODUCTS";
+            cboOtherExclusions.DisplayMember = "PRODUCTS";
+            cboOtherExclusions.DataSource = dsOtherExclusions;
         }
         //private void Combobox_Load()
         //{
@@ -2199,12 +2205,13 @@ namespace Testing.Forms
         }
         private void txtClaimNo_Leave(object sender, EventArgs e)
         {
-            if (txtClaimNo.Text == "" || txtClaimNo.Text.Length!=20)
-            {
-                Msgbox.Show("Claim No must be input with the correct format!");
-            }
+            //if (txtClaimNo.Text == "" || txtClaimNo.Text.Length != 20)
+            //{
+            //    Msgbox.Show("Claim No must be input with the correct format!");
+            //}
 
         }  
+
         private void dgvDefinition_DataSourceChanged(object sender, EventArgs e)
         {
             this.dgvDefinition.ForeColor = System.Drawing.Color.Black;
@@ -2242,20 +2249,33 @@ namespace Testing.Forms
         
 
         public void btnGenerateClaim_Click(object sender, EventArgs e)
-        {  
-            selectedDoc = GetDataTableFromDGV(dgvDefinition);
-            if (selectedDoc.Rows.Count <= 0 || selectedDoc == null)
+        {
+            if (cboOtherExclusions.SelectedIndex == 0)
             {
-                Msgbox.Show("Please check some Definition or Exclusion");
-                return;
+                selectedDoc = GetDataTableFromDGV(dgvDefinition);
+                if (selectedDoc.Rows.Count <= 0 || selectedDoc == null)
+                {
+                    Msgbox.Show("Please check some Definition or Exclusion");
+                    return;
+                }
+                if (dgvClaimInfo.Rows.Count <= 0)
+                {
+                    Msgbox.Show("No claim information to preview");
+                    return;
+                }
+                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false);
+                frmMedicalRejectionLetter.ShowDialog();
             }
-            if (dgvClaimInfo.Rows.Count <= 0)
+            else
             {
-                Msgbox.Show("No claim information to preview");
-                return;
+                if (dgvClaimInfo.Rows.Count <= 0)
+                {
+                    Msgbox.Show("No claim information to preview");
+                    return;
+                }
+                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false);
+                frmMedicalRejectionLetter.ShowDialog();
             }
-            frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter();
-            frmMedicalRejectionLetter.ShowDialog();
         }
         private void dgvDefinition_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -2271,13 +2291,12 @@ namespace Testing.Forms
                 foreach (DataGridViewCell dgvc in dgvDefinition.SelectedCells)
                 {
                     dgvDefinition[0, dgvc.RowIndex].Value = true;
-
                 }
                 for (int i = 0; i < dgvDefinition.RowCount; i++)
                 {
                     isChecked = (bool)dgvDefinition.Rows[i].Cells[0].EditedFormattedValue;
-
                     CheckCount(isChecked);
+                    dgvDefinition.Rows[i].Cells[0].Value = isChecked;
                 }
                 //lblSel.Text = num.ToString();
             }
@@ -2377,6 +2396,9 @@ namespace Testing.Forms
 
         private void dgvDefinition_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == 0)
+                return;
+
             Msgbox.Show(dgvDefinition.SelectedCells[0].Value.ToString(), new Font("Khmer OS Siemreap", 9, FontStyle.Regular));
         }
 
@@ -2485,9 +2507,18 @@ namespace Testing.Forms
             }
             
         }
-        
 
-       
-       
+        private void cboOtherExclusions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvDefinition.Enabled = cboOtherExclusions.SelectedIndex == 0;
+            dgvDefinition.DefaultCellStyle.ForeColor = cboOtherExclusions.SelectedIndex == 0 ? Color.Black : Color.Gray;
+            OtherExclusion = cboOtherExclusions.Text;
+        }
+
+        private void btnViewHistory_Click(object sender, EventArgs e)
+        {
+            frmMedicalRejectionHistory frmMedicalRejectionHistory = new frmMedicalRejectionHistory();
+            frmMedicalRejectionHistory.ShowDialog();
+        }
     }
 }

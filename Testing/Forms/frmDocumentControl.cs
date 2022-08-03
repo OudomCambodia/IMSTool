@@ -630,13 +630,14 @@ namespace Testing.Forms
                 {
                     dgvDoc[0, dgvc.RowIndex].Value = true;
                 }
-                tbFilterdgvDoc.Focus();
                 //tbFilterdgvDoc.Text = "";
+
                 tbFilterdgvDoc.SelectAll();
                 for (int i = 0; i < dgvDoc.RowCount; i++)
                 {
                     isChecked = (bool)dgvDoc.Rows[i].Cells[0].EditedFormattedValue;
                     CheckCount(isChecked);
+                    dgvDoc.Rows[i].Cells[0].Value = isChecked;
                 }
                 lblSel.Text = num.ToString();
             }
@@ -698,8 +699,7 @@ namespace Testing.Forms
                     Msgbox.Show("You can't change the status of selected document(s).");
                     return;
                 }
-                //
-
+                
                 DataTable selectedDoc = GetDataTableFromDGV(dgvDoc);
 
                 if (selectedDoc.Rows.Count <= 0)
@@ -709,7 +709,6 @@ namespace Testing.Forms
                 }
 
                 string selectedDocCode = getSelectedDocCode(selectedDoc);
-
 
                 if (status == "0") //Submitted to UW
                 {
