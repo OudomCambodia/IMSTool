@@ -1067,7 +1067,8 @@ namespace Testing.Forms
         {
             DataTable current = crud.ExecQuery("select 'Agents',SFC_SURNAME,SFC_CODE from SM_M_SALES_FORCE where SFC_INT_EXT  like '%AGNT%' AND SFC_ACTIVE = 'Y'" +
             " union select 'Brokers',SFC_SURNAME,SFC_CODE from SM_M_SALES_FORCE where SFC_INT_EXT  like '%BROK%' AND SFC_ACTIVE = 'Y'" +
-            " union select 'Bank Service',SFC_SURNAME,SFC_CODE from SM_M_SALES_FORCE where SFC_INT_EXT  like '%FINLE%' AND SFC_ACTIVE = 'Y'");
+            " union select 'Bank Service',SFC_SURNAME,SFC_CODE from SM_M_SALES_FORCE where SFC_INT_EXT  like '%FINLE%' AND SFC_ACTIVE = 'Y'" +
+            " union select 'BizDev',SFC_SURNAME,SFC_CODE from SM_M_SALES_FORCE where SFC_INT_EXT  like '%TVAGT%' AND SFC_ACTIVE = 'Y';");
 
             DataTable dtTemp = sqlcrud.LoadData("SELECT * from dbo.tbPRODUCER where TEAM in ('Agents','Brokers','Bank Service')").Tables[0];
 
