@@ -72,25 +72,29 @@ namespace Testing.Forms
 
         private DataTable dtClaims = frmSendEmailClaim.dtClaimDt;
         private DataTable dtSelectedRows = frmSendEmailClaim.selectedDoc;
+
         private string bodyengBody = string.Empty;
         private string khBody = string.Empty;
         private string engBody = string.Empty;
-        private TempFileCollection tempfile = new TempFileCollection();
-        private string NA = "--- N/A ---";
         private string otherExclusion = frmSendEmailClaim.OtherExclusion;
-        private List<string> docxNames = new List<string>();
-        private readonly string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
+        private string HistClaimNo;
+        private const string NA = "--- N/A ---";
+        private const string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
+        
+        private bool IsViewHistory;
+
+        private TempFileCollection tempfile = new TempFileCollection();
+        
         private Microsoft.Office.Interop.Word._Document khDoc;
         private Microsoft.Office.Interop.Word._Document engDoc;
-        private bool IsViewHistory;
-        private string HistClaimNo;
+        
+        
             
         public frmMedicalRejectionLetter(bool isViewHistory, string histClaimNo = null)
         {
             InitializeComponent();
             IsViewHistory = isViewHistory;
             HistClaimNo = histClaimNo;
-            Text = !IsViewHistory ? "Medical Rejection Letter" : "Medical Rejection Letter History";
         }
 
         private void frmMedicalRejectionLetter_Load(object sender, EventArgs e)
@@ -99,12 +103,13 @@ namespace Testing.Forms
             {
                 Cursor = Cursors.WaitCursor;
 
+                Text = IsViewHistory ? "Medical Rejection Letter History" : "Medical Rejection Letter";
                 btnSave.Visible = !IsViewHistory;
 
-                if (!IsViewHistory)
-                    LoadDoc();
+                if (IsViewHistory)
+                    LoadReferenceDocumentHistory();
                 else
-                    LoadDocHist();
+                    LoadReferenceDocument();
                 
                 Cursor = Cursors.Arrow;
             }
@@ -150,9 +155,11 @@ namespace Testing.Forms
                     Cursor = Cursors.Arrow;
 
                     Msgbox.Show("Claim Rejection successfully saved.");
+                    Close();
                 }
                 catch (Exception ex)
                 {
+                    crud.ExecNonQuery("delete from USER_MEDICAL_REJECTION_LETTER where CLAIM_NO = '" + claimNoToSave + "'");
                     Cursor = Cursors.Arrow;
                     Msgbox.Show(ex.ToString());
                 }
@@ -169,7 +176,70 @@ namespace Testing.Forms
             }
         }
 
-        private void LoadDoc()
+        private void LoadReferenceDocumentHistory()
+        {
+            if (string.IsNullOrEmpty(HistClaimNo))
+                return;
+
+            var dsReferenceDoc = crud.ExecQuery("select REJECTION_REFERENCE_DOC from USER_MEDICAL_REJECTION_LETTER where CLAIM_NO = '" + HistClaimNo + "'");
+            if (dsReferenceDoc.Rows.Count <= 0)
+                return;
+
+            string[] khEngDoc = dsReferenceDoc.Rows[0]["REJECTION_REFERENCE_DOC"].ToString().Split('*');
+
+            SetReferenceDocumentHistory(khEngDoc[0], splitContainer1.Panel1, true);
+            SetReferenceDocumentHistory(khEngDoc[1], splitContainer1.Panel2, false);
+        }
+
+        private void SetReferenceDocumentHistory(string khEngDoc, Control panel, bool isKhDoc)
+        {
+            try
+            {
+                var fileInfo = new FileInfo(path + khEngDoc);
+
+                if (!fileInfo.Exists)
+                    return;
+
+                Microsoft.Office.Interop.Word._Application oWord = new Application();
+                object oMissing = System.Reflection.Missing.Value;
+                object oTrue = true;
+                object oFalse = false;
+
+                object missing = System.Reflection.Missing.Value;
+                object visible = true;
+
+                Microsoft.Office.Interop.Word._Document doc = oWord.Documents.Add(ref missing, ref missing, ref missing, ref visible);
+
+                var bookMark = doc.Words.First.Bookmarks.Add("entry");
+                bookMark.Range.InsertFile(fileInfo.FullName);
+
+                doc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
+                doc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
+                doc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
+                doc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                doc.PageSetup.TopMargin = InchesToPoints(isKhDoc ? 0.6f : 0.85f);
+                doc.PageSetup.LeftMargin = InchesToPoints(0.6f);
+                doc.PageSetup.RightMargin = InchesToPoints(0.6f);
+                doc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+                doc.Protect(Microsoft.Office.Interop.Word.WdProtectionType.wdAllowOnlyFormFields);
+
+                oWord.Visible = true;
+                oWord.WindowState = Microsoft.Office.Interop.Word.WdWindowState.wdWindowStateMaximize;
+                oWord.ActiveWindow.ActivePane.View.Type = Microsoft.Office.Interop.Word.WdViewType.wdPrintView;
+
+                gpsHandle = (IntPtr)oWord.ActiveWindow.Hwnd;
+                SetParent(gpsHandle, panel.Handle);
+                SetWindowLong(gpsHandle, GWL_STYLE, WS_VISIBLE + WS_MAXIMIZE);
+                MoveWindow(gpsHandle, 0, 0, panel.Width, panel.Height, true);
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.ToString());
+                throw;
+            }
+        }
+
+        private void LoadReferenceDocument()
         {
             if (otherExclusion.Equals(NA))
             {
@@ -296,8 +366,8 @@ namespace Testing.Forms
                     khBody = khBody.Replace("“", "&ldquo;").Replace("”", "&rdquo;");
                     khBody = khBody.Replace("‘", "&lsquo;").Replace("’", "&rsquo;");
 
-                    SetDoc(khBody, splitContainer1.Panel1, true);
-                    SetDoc(engBody, splitContainer1.Panel2, false);
+                    SetReferenceDocument(khBody, splitContainer1.Panel1, true);
+                    SetReferenceDocument(engBody, splitContainer1.Panel2, false);
                 }
             }
             else
@@ -358,13 +428,13 @@ namespace Testing.Forms
                     khBody = khBody.Replace("%Dateloss%", treatmentDate);
                     khBody = khBody.Replace("%AccountHandler%", accountHandler);
 
-                    SetDoc(khBody, splitContainer1.Panel1, true);
-                    SetDoc(engBody, splitContainer1.Panel2, false);
+                    SetReferenceDocument(khBody, splitContainer1.Panel1, true);
+                    SetReferenceDocument(engBody, splitContainer1.Panel2, false);
                 }
             }
         }
 
-        private void SetDoc(string htmlText, Control panel, bool isKhmerHtml)
+        private void SetReferenceDocument(string htmlText, Control panel, bool isKhmer)
         {
             try
             {
@@ -390,7 +460,7 @@ namespace Testing.Forms
                 object missing = System.Reflection.Missing.Value;
                 object visible = true;
 
-                if (isKhmerHtml)
+                if (isKhmer)
                 {
                     khDoc = oWord.Documents.Add(ref missing, ref missing, ref missing, ref visible);
 
@@ -400,8 +470,8 @@ namespace Testing.Forms
                     khDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
                     khDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                     khDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
-                    khDoc.Paragraphs.LineSpacing = InchesToPoints(0.137f);
-                    khDoc.PageSetup.TopMargin = InchesToPoints(isKhmerHtml ? 0.6f : 0.85f);
+                    khDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                    khDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 0.6f : 0.85f);
                     khDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
@@ -416,72 +486,12 @@ namespace Testing.Forms
                     engDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
                     engDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                     engDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
-                    engDoc.Paragraphs.LineSpacing = InchesToPoints(0.137f);
-                    engDoc.PageSetup.TopMargin = InchesToPoints(isKhmerHtml ? 0.6f : 0.85f);
+                    engDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                    engDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 0.6f : 0.85f);
                     engDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
                 }
-
-                oWord.Visible = true;
-                oWord.WindowState = Microsoft.Office.Interop.Word.WdWindowState.wdWindowStateMaximize;
-                oWord.ActiveWindow.ActivePane.View.Type = Microsoft.Office.Interop.Word.WdViewType.wdPrintView;
-
-                gpsHandle = (IntPtr)oWord.ActiveWindow.Hwnd;
-                SetParent(gpsHandle, panel.Handle);
-                SetWindowLong(gpsHandle, GWL_STYLE, WS_VISIBLE + WS_MAXIMIZE);
-                MoveWindow(gpsHandle, 0, 0, panel.Width, panel.Height, true);
-            }
-            catch (Exception ex)
-            {
-                Msgbox.Show(ex.ToString());
-                throw;
-            }
-        }
-
-        private void LoadDocHist()
-        {
-            if (string.IsNullOrEmpty(HistClaimNo))
-                return;
-
-            var dsReferenceDoc = crud.ExecQuery("select REJECTION_REFERENCE_DOC from USER_MEDICAL_REJECTION_LETTER where CLAIM_NO = '" + HistClaimNo + "'");
-            if (dsReferenceDoc.Rows.Count <= 0)
-                return;
-
-            string[] khEngDoc = dsReferenceDoc.Rows[0]["REJECTION_REFERENCE_DOC"].ToString().Split('*');
-
-            SetDocHist(khEngDoc[0], splitContainer1.Panel1, true);
-            SetDocHist(khEngDoc[1], splitContainer1.Panel2, false);
-        }
-
-        private void SetDocHist(string khEngDoc, Control panel, bool isKhDoc)
-        {
-            try
-            {
-                var fileInfo = new FileInfo(path + khEngDoc);
-
-                Microsoft.Office.Interop.Word._Application oWord = new Application();
-                object oMissing = System.Reflection.Missing.Value;
-                object oTrue = true;
-                object oFalse = false;
-
-                object missing = System.Reflection.Missing.Value;
-                object visible = true;
-
-                Microsoft.Office.Interop.Word._Document doc = oWord.Documents.Add(ref missing, ref missing, ref missing, ref visible);
-
-                var bookMark = doc.Words.First.Bookmarks.Add("entry");
-                bookMark.Range.InsertFile(fileInfo.FullName);
-
-                doc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
-                doc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
-                doc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
-                doc.Paragraphs.LineSpacing = InchesToPoints(0.132f);
-                doc.PageSetup.TopMargin = InchesToPoints(isKhDoc ? 0.6f : 0.85f);
-                doc.PageSetup.LeftMargin = InchesToPoints(0.6f);
-                doc.PageSetup.RightMargin = InchesToPoints(0.6f);
-                doc.PageSetup.BottomMargin = InchesToPoints(0.5f);
-                doc.Protect(Microsoft.Office.Interop.Word.WdProtectionType.wdAllowOnlyFormFields);
 
                 oWord.Visible = true;
                 oWord.WindowState = Microsoft.Office.Interop.Word.WdWindowState.wdWindowStateMaximize;

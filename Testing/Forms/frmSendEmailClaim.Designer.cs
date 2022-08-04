@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -206,6 +206,7 @@
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.dgvClaimInfo = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.btnViewHistory = new Testing.cus_button();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.cboOtherExclusions = new System.Windows.Forms.ComboBox();
@@ -218,7 +219,6 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tpSend.SuspendLayout();
@@ -268,9 +268,9 @@
             this.groupBox14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClaimInfo)).BeginInit();
             this.panel9.SuspendLayout();
+            this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.groupBox12.SuspendLayout();
-            this.groupBox16.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -541,8 +541,8 @@
             this.dgvHisClaim.Name = "dgvHisClaim";
             this.dgvHisClaim.ReadOnly = true;
             this.dgvHisClaim.RowHeadersVisible = false;
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHisClaim.RowTemplate.Height = 27;
             this.dgvHisClaim.Size = new System.Drawing.Size(1344, 213);
             this.dgvHisClaim.TabIndex = 28;
@@ -2392,14 +2392,14 @@
             this.dgvClaimInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClaimInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvClaimInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Cambria", 9.75F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClaimInfo.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 9.75F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClaimInfo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClaimInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvClaimInfo.Location = new System.Drawing.Point(3, 19);
             this.dgvClaimInfo.Name = "dgvClaimInfo";
@@ -2421,6 +2421,17 @@
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(1357, 74);
             this.panel9.TabIndex = 7;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.btnViewHistory);
+            this.groupBox16.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox16.Location = new System.Drawing.Point(1021, 3);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(257, 63);
+            this.groupBox16.TabIndex = 14;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Claim Rejection History";
             // 
             // btnViewHistory
             // 
@@ -2526,17 +2537,6 @@
             // 
             this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
-            // groupBox16
-            // 
-            this.groupBox16.Controls.Add(this.btnViewHistory);
-            this.groupBox16.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox16.Location = new System.Drawing.Point(1021, 3);
-            this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(257, 63);
-            this.groupBox16.TabIndex = 14;
-            this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "Claim Rejection History";
-            // 
             // frmSendEmailClaim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2615,10 +2615,10 @@
             this.groupBox14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClaimInfo)).EndInit();
             this.panel9.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
-            this.groupBox16.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

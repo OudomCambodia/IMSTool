@@ -2250,6 +2250,14 @@ namespace Testing.Forms
 
         public void btnGenerateClaim_Click(object sender, EventArgs e)
         {
+            var isAlreadySaved = crud.ExecQuery("select CLAIM_NO from USER_MEDICAL_REJECTION_LETTER where CLAIM_NO = '" + txtClaimNo.Text.Trim().ToUpper() + "'").Rows.Count > 0;
+            if (isAlreadySaved)
+            {
+                Msgbox.Show("This Claim No " + txtClaimNo.Text.Trim().ToUpper() + " is already generated Rejection Letter. Please check again!");
+                BringToFront();
+                return;
+            }
+
             if (cboOtherExclusions.SelectedIndex == 0)
             {
                 selectedDoc = GetDataTableFromDGV(dgvDefinition);
