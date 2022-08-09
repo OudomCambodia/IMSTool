@@ -518,6 +518,13 @@ namespace Testing
 
             return result;
         }
+
+        public class NotiType
+        {
+            public static string REJECTED = "REJECTED";
+            public static string PENDING = "PENDING";
+            public static string REVERSED = "REVERSED";
+        }
     }
 
     public class CustomSmtpClient

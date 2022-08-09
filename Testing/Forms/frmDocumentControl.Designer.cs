@@ -36,8 +36,14 @@
             this.dgvDoc = new System.Windows.Forms.DataGridView();
             this.pNotification = new System.Windows.Forms.Panel();
             this.dgvNoti = new System.Windows.Forms.DataGridView();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btnReject = new System.Windows.Forms.Label();
+            this.btnReverseNoti = new System.Windows.Forms.Label();
+            this.pReverse = new System.Windows.Forms.Panel();
+            this.btnPending = new System.Windows.Forms.Label();
+            this.pPending = new System.Windows.Forms.Panel();
+            this.pReject = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.btnNotification = new System.Windows.Forms.PictureBox();
             this.lblNotiCount = new System.Windows.Forms.Label();
             this.btnPendingAtDP = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
@@ -69,17 +75,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbFilterdgvDoc = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
             this.lblTot = new System.Windows.Forms.Label();
             this.lblSel = new System.Windows.Forms.Label();
-            this.btnExportRecord = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnDPPendingRemark = new System.Windows.Forms.Button();
-            this.btnManageCrono = new System.Windows.Forms.Button();
-            this.btnReverse = new System.Windows.Forms.Button();
-            this.btnRefreshdgv = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
@@ -88,17 +87,26 @@
             this.btnChangeStatus = new Testing.cus_button();
             this.btnCloseReopen = new Testing.cus_button();
             this.btnAddDoc = new Testing.cus_button();
+            this.btnNotification = new System.Windows.Forms.PictureBox();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnReport = new System.Windows.Forms.Button();
+            this.btnExportRecord = new System.Windows.Forms.Button();
+            this.btnDPPendingRemark = new System.Windows.Forms.Button();
+            this.btnManageCrono = new System.Windows.Forms.Button();
+            this.btnReverse = new System.Windows.Forms.Button();
+            this.btnRefreshdgv = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pDoc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).BeginInit();
             this.pNotification.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).BeginInit();
+            this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).BeginInit();
             this.panel3.SuspendLayout();
             this.gbAllRecordOption.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -129,7 +137,7 @@
             this.pDoc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pDoc.Location = new System.Drawing.Point(0, 0);
             this.pDoc.Name = "pDoc";
-            this.pDoc.Size = new System.Drawing.Size(883, 506);
+            this.pDoc.Size = new System.Drawing.Size(852, 506);
             this.pDoc.TabIndex = 10;
             // 
             // dgvDoc
@@ -147,7 +155,7 @@
             this.dgvDoc.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvDoc.RowTemplate.Height = 30;
             this.dgvDoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDoc.Size = new System.Drawing.Size(883, 506);
+            this.dgvDoc.Size = new System.Drawing.Size(852, 506);
             this.dgvDoc.TabIndex = 8;
             this.dgvDoc.DataSourceChanged += new System.EventHandler(this.dgvDoc_DataSourceChanged);
             this.dgvDoc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoc_CellContentClick);
@@ -158,10 +166,11 @@
             // pNotification
             // 
             this.pNotification.Controls.Add(this.dgvNoti);
+            this.pNotification.Controls.Add(this.panel7);
             this.pNotification.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pNotification.Location = new System.Drawing.Point(883, 0);
+            this.pNotification.Location = new System.Drawing.Point(852, 0);
             this.pNotification.Name = "pNotification";
-            this.pNotification.Size = new System.Drawing.Size(204, 506);
+            this.pNotification.Size = new System.Drawing.Size(235, 506);
             this.pNotification.TabIndex = 9;
             // 
             // dgvNoti
@@ -173,7 +182,7 @@
             this.dgvNoti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNoti.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvNoti.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dgvNoti.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvNoti.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvNoti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNoti.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -186,26 +195,110 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvNoti.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNoti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvNoti.Location = new System.Drawing.Point(0, 0);
+            this.dgvNoti.Location = new System.Drawing.Point(0, 29);
             this.dgvNoti.MultiSelect = false;
             this.dgvNoti.Name = "dgvNoti";
             this.dgvNoti.ReadOnly = true;
-            this.dgvNoti.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvNoti.RowHeadersVisible = false;
             this.dgvNoti.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvNoti.RowTemplate.Height = 35;
             this.dgvNoti.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvNoti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvNoti.Size = new System.Drawing.Size(204, 506);
-            this.dgvNoti.TabIndex = 1;
+            this.dgvNoti.Size = new System.Drawing.Size(235, 477);
+            this.dgvNoti.TabIndex = 12;
             this.dgvNoti.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNoti_CellDoubleClick);
             this.dgvNoti.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNoti_CellFormatting);
             this.dgvNoti.SelectionChanged += new System.EventHandler(this.dgvNoti_SelectionChanged);
             // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel7.Controls.Add(this.btnReject);
+            this.panel7.Controls.Add(this.btnReverseNoti);
+            this.panel7.Controls.Add(this.pReverse);
+            this.panel7.Controls.Add(this.btnPending);
+            this.panel7.Controls.Add(this.pPending);
+            this.panel7.Controls.Add(this.pReject);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(235, 29);
+            this.panel7.TabIndex = 11;
+            // 
+            // btnReject
+            // 
+            this.btnReject.AutoSize = true;
+            this.btnReject.BackColor = System.Drawing.Color.Transparent;
+            this.btnReject.Font = new System.Drawing.Font("Cambria", 10F);
+            this.btnReject.ForeColor = System.Drawing.Color.Black;
+            this.btnReject.Location = new System.Drawing.Point(21, 4);
+            this.btnReject.Margin = new System.Windows.Forms.Padding(0);
+            this.btnReject.Name = "btnReject";
+            this.btnReject.Size = new System.Drawing.Size(65, 16);
+            this.btnReject.TabIndex = 5;
+            this.btnReject.Text = "Rejection";
+            this.btnReject.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnReject.Click += new System.EventHandler(this.btnReject_Click);
+            this.btnReject.MouseLeave += new System.EventHandler(this.btnReject_MouseLeave);
+            this.btnReject.MouseHover += new System.EventHandler(this.btnReject_MouseHover);
+            // 
+            // btnReverseNoti
+            // 
+            this.btnReverseNoti.AutoSize = true;
+            this.btnReverseNoti.BackColor = System.Drawing.Color.Transparent;
+            this.btnReverseNoti.Font = new System.Drawing.Font("Cambria", 10F);
+            this.btnReverseNoti.ForeColor = System.Drawing.Color.Black;
+            this.btnReverseNoti.Location = new System.Drawing.Point(157, 5);
+            this.btnReverseNoti.Name = "btnReverseNoti";
+            this.btnReverseNoti.Size = new System.Drawing.Size(65, 16);
+            this.btnReverseNoti.TabIndex = 7;
+            this.btnReverseNoti.Text = "Reversed";
+            this.btnReverseNoti.Click += new System.EventHandler(this.btnReverseNoti_Click);
+            this.btnReverseNoti.MouseLeave += new System.EventHandler(this.btnReverseNoti_MouseLeave);
+            this.btnReverseNoti.MouseHover += new System.EventHandler(this.btnReverseNoti_MouseHover);
+            // 
+            // pReverse
+            // 
+            this.pReverse.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.pReverse.Location = new System.Drawing.Point(160, 21);
+            this.pReverse.Name = "pReverse";
+            this.pReverse.Size = new System.Drawing.Size(43, 3);
+            this.pReverse.TabIndex = 9;
+            // 
+            // btnPending
+            // 
+            this.btnPending.AutoSize = true;
+            this.btnPending.BackColor = System.Drawing.Color.Transparent;
+            this.btnPending.Font = new System.Drawing.Font("Cambria", 10F);
+            this.btnPending.ForeColor = System.Drawing.Color.Black;
+            this.btnPending.Location = new System.Drawing.Point(91, 5);
+            this.btnPending.Name = "btnPending";
+            this.btnPending.Size = new System.Drawing.Size(58, 16);
+            this.btnPending.TabIndex = 6;
+            this.btnPending.Text = "Pending";
+            this.btnPending.Click += new System.EventHandler(this.btnPending_Click);
+            this.btnPending.MouseLeave += new System.EventHandler(this.btnPending_MouseLeave);
+            this.btnPending.MouseHover += new System.EventHandler(this.btnPending_MouseHover);
+            // 
+            // pPending
+            // 
+            this.pPending.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.pPending.Location = new System.Drawing.Point(94, 21);
+            this.pPending.Name = "pPending";
+            this.pPending.Size = new System.Drawing.Size(36, 3);
+            this.pPending.TabIndex = 8;
+            // 
+            // pReject
+            // 
+            this.pReject.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.pReject.Location = new System.Drawing.Point(24, 21);
+            this.pReject.Name = "pReject";
+            this.pReject.Size = new System.Drawing.Size(42, 3);
+            this.pReject.TabIndex = 10;
+            // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.btnNotification);
             this.panel8.Controls.Add(this.lblNotiCount);
+            this.panel8.Controls.Add(this.btnNotification);
             this.panel8.Controls.Add(this.btnPendingAtDP);
             this.panel8.Controls.Add(this.btnAll);
             this.panel8.Controls.Add(this.btnCancel);
@@ -223,29 +316,16 @@
             this.panel8.Size = new System.Drawing.Size(1087, 42);
             this.panel8.TabIndex = 45;
             // 
-            // btnNotification
-            // 
-            this.btnNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNotification.Image = global::Testing.Properties.Resources._4Tlt_unscreen1;
-            this.btnNotification.Location = new System.Drawing.Point(1038, 6);
-            this.btnNotification.Name = "btnNotification";
-            this.btnNotification.Size = new System.Drawing.Size(28, 28);
-            this.btnNotification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnNotification.TabIndex = 12;
-            this.btnNotification.TabStop = false;
-            this.btnNotification.Click += new System.EventHandler(this.btnNotification_Click);
-            // 
             // lblNotiCount
             // 
             this.lblNotiCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNotiCount.AutoSize = true;
             this.lblNotiCount.BackColor = System.Drawing.Color.Transparent;
-            this.lblNotiCount.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotiCount.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11F);
             this.lblNotiCount.ForeColor = System.Drawing.Color.Red;
-            this.lblNotiCount.Location = new System.Drawing.Point(1063, -2);
+            this.lblNotiCount.Location = new System.Drawing.Point(1055, 2);
             this.lblNotiCount.Name = "lblNotiCount";
-            this.lblNotiCount.Size = new System.Drawing.Size(21, 14);
+            this.lblNotiCount.Size = new System.Drawing.Size(26, 17);
             this.lblNotiCount.TabIndex = 13;
             this.lblNotiCount.Text = "99";
             this.lblNotiCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -614,30 +694,6 @@
             this.panel2.Size = new System.Drawing.Size(1087, 41);
             this.panel2.TabIndex = 44;
             // 
-            // btnPrint
-            // 
-            this.btnPrint.BackgroundImage = global::Testing.Properties.Resources.print;
-            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPrint.Location = new System.Drawing.Point(706, 8);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(24, 24);
-            this.btnPrint.TabIndex = 13;
-            this.tooltip.SetToolTip(this.btnPrint, "Print Instruction Note");
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnReport
-            // 
-            this.btnReport.BackgroundImage = global::Testing.Properties.Resources.report;
-            this.btnReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReport.Location = new System.Drawing.Point(731, 8);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(24, 24);
-            this.btnReport.TabIndex = 12;
-            this.tooltip.SetToolTip(this.btnReport, "Report");
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
             // lblTot
             // 
             this.lblTot.AutoSize = true;
@@ -657,18 +713,6 @@
             this.lblSel.Name = "lblSel";
             this.lblSel.Size = new System.Drawing.Size(0, 18);
             this.lblSel.TabIndex = 0;
-            // 
-            // btnExportRecord
-            // 
-            this.btnExportRecord.BackgroundImage = global::Testing.Properties.Resources.export;
-            this.btnExportRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnExportRecord.Location = new System.Drawing.Point(631, 8);
-            this.btnExportRecord.Name = "btnExportRecord";
-            this.btnExportRecord.Size = new System.Drawing.Size(24, 24);
-            this.btnExportRecord.TabIndex = 11;
-            this.tooltip.SetToolTip(this.btnExportRecord, "Export All Records");
-            this.btnExportRecord.UseVisualStyleBackColor = true;
-            this.btnExportRecord.Click += new System.EventHandler(this.btnExportRecord_Click);
             // 
             // label8
             // 
@@ -691,54 +735,6 @@
             this.label7.Size = new System.Drawing.Size(69, 18);
             this.label7.TabIndex = 0;
             this.label7.Text = "Selected:";
-            // 
-            // btnDPPendingRemark
-            // 
-            this.btnDPPendingRemark.BackgroundImage = global::Testing.Properties.Resources.remark;
-            this.btnDPPendingRemark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDPPendingRemark.Location = new System.Drawing.Point(681, 8);
-            this.btnDPPendingRemark.Name = "btnDPPendingRemark";
-            this.btnDPPendingRemark.Size = new System.Drawing.Size(24, 24);
-            this.btnDPPendingRemark.TabIndex = 10;
-            this.tooltip.SetToolTip(this.btnDPPendingRemark, "Reverse");
-            this.btnDPPendingRemark.UseVisualStyleBackColor = true;
-            this.btnDPPendingRemark.Click += new System.EventHandler(this.btnDPPendingRemark_Click);
-            // 
-            // btnManageCrono
-            // 
-            this.btnManageCrono.BackgroundImage = global::Testing.Properties.Resources.Crono;
-            this.btnManageCrono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnManageCrono.Location = new System.Drawing.Point(606, 8);
-            this.btnManageCrono.Name = "btnManageCrono";
-            this.btnManageCrono.Size = new System.Drawing.Size(24, 24);
-            this.btnManageCrono.TabIndex = 9;
-            this.tooltip.SetToolTip(this.btnManageCrono, "Manage Crono");
-            this.btnManageCrono.UseVisualStyleBackColor = true;
-            this.btnManageCrono.Click += new System.EventHandler(this.btnManageCrono_Click);
-            // 
-            // btnReverse
-            // 
-            this.btnReverse.BackgroundImage = global::Testing.Properties.Resources.reverse;
-            this.btnReverse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReverse.Location = new System.Drawing.Point(656, 8);
-            this.btnReverse.Name = "btnReverse";
-            this.btnReverse.Size = new System.Drawing.Size(24, 24);
-            this.btnReverse.TabIndex = 8;
-            this.tooltip.SetToolTip(this.btnReverse, "Reverse");
-            this.btnReverse.UseVisualStyleBackColor = true;
-            this.btnReverse.Click += new System.EventHandler(this.btnReverse_Click);
-            // 
-            // btnRefreshdgv
-            // 
-            this.btnRefreshdgv.BackgroundImage = global::Testing.Properties.Resources.refresh;
-            this.btnRefreshdgv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRefreshdgv.Location = new System.Drawing.Point(581, 8);
-            this.btnRefreshdgv.Name = "btnRefreshdgv";
-            this.btnRefreshdgv.Size = new System.Drawing.Size(24, 24);
-            this.btnRefreshdgv.TabIndex = 7;
-            this.tooltip.SetToolTip(this.btnRefreshdgv, "Refresh");
-            this.btnRefreshdgv.UseVisualStyleBackColor = true;
-            this.btnRefreshdgv.Click += new System.EventHandler(this.btnRefreshOpendgv_Click);
             // 
             // label1
             // 
@@ -825,6 +821,103 @@
             this.btnAddDoc.Text = "Add Document";
             this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
+            // btnNotification
+            // 
+            this.btnNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotification.Image = global::Testing.Properties.Resources.notification_unscreen;
+            this.btnNotification.Location = new System.Drawing.Point(1033, 6);
+            this.btnNotification.Name = "btnNotification";
+            this.btnNotification.Size = new System.Drawing.Size(32, 32);
+            this.btnNotification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNotification.TabIndex = 12;
+            this.btnNotification.TabStop = false;
+            this.btnNotification.Click += new System.EventHandler(this.btnNotification_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackgroundImage = global::Testing.Properties.Resources.print;
+            this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPrint.Location = new System.Drawing.Point(706, 8);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(24, 24);
+            this.btnPrint.TabIndex = 13;
+            this.tooltip.SetToolTip(this.btnPrint, "Print Instruction Note");
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnReport
+            // 
+            this.btnReport.BackgroundImage = global::Testing.Properties.Resources.report;
+            this.btnReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReport.Location = new System.Drawing.Point(731, 8);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(24, 24);
+            this.btnReport.TabIndex = 12;
+            this.tooltip.SetToolTip(this.btnReport, "Report");
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btnExportRecord
+            // 
+            this.btnExportRecord.BackgroundImage = global::Testing.Properties.Resources.export;
+            this.btnExportRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExportRecord.Location = new System.Drawing.Point(631, 8);
+            this.btnExportRecord.Name = "btnExportRecord";
+            this.btnExportRecord.Size = new System.Drawing.Size(24, 24);
+            this.btnExportRecord.TabIndex = 11;
+            this.tooltip.SetToolTip(this.btnExportRecord, "Export All Records");
+            this.btnExportRecord.UseVisualStyleBackColor = true;
+            this.btnExportRecord.Click += new System.EventHandler(this.btnExportRecord_Click);
+            // 
+            // btnDPPendingRemark
+            // 
+            this.btnDPPendingRemark.BackgroundImage = global::Testing.Properties.Resources.remark;
+            this.btnDPPendingRemark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDPPendingRemark.Location = new System.Drawing.Point(681, 8);
+            this.btnDPPendingRemark.Name = "btnDPPendingRemark";
+            this.btnDPPendingRemark.Size = new System.Drawing.Size(24, 24);
+            this.btnDPPendingRemark.TabIndex = 10;
+            this.tooltip.SetToolTip(this.btnDPPendingRemark, "Pending");
+            this.btnDPPendingRemark.UseVisualStyleBackColor = true;
+            this.btnDPPendingRemark.Click += new System.EventHandler(this.btnDPPendingRemark_Click);
+            // 
+            // btnManageCrono
+            // 
+            this.btnManageCrono.BackgroundImage = global::Testing.Properties.Resources.Crono;
+            this.btnManageCrono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnManageCrono.Location = new System.Drawing.Point(606, 8);
+            this.btnManageCrono.Name = "btnManageCrono";
+            this.btnManageCrono.Size = new System.Drawing.Size(24, 24);
+            this.btnManageCrono.TabIndex = 9;
+            this.tooltip.SetToolTip(this.btnManageCrono, "Manage Crono");
+            this.btnManageCrono.UseVisualStyleBackColor = true;
+            this.btnManageCrono.Click += new System.EventHandler(this.btnManageCrono_Click);
+            // 
+            // btnReverse
+            // 
+            this.btnReverse.BackgroundImage = global::Testing.Properties.Resources.reverse;
+            this.btnReverse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReverse.Location = new System.Drawing.Point(656, 8);
+            this.btnReverse.Name = "btnReverse";
+            this.btnReverse.Size = new System.Drawing.Size(24, 24);
+            this.btnReverse.TabIndex = 8;
+            this.tooltip.SetToolTip(this.btnReverse, "Reverse");
+            this.btnReverse.UseVisualStyleBackColor = true;
+            this.btnReverse.Click += new System.EventHandler(this.btnReverse_Click);
+            // 
+            // btnRefreshdgv
+            // 
+            this.btnRefreshdgv.BackgroundImage = global::Testing.Properties.Resources.refresh;
+            this.btnRefreshdgv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefreshdgv.Location = new System.Drawing.Point(581, 8);
+            this.btnRefreshdgv.Name = "btnRefreshdgv";
+            this.btnRefreshdgv.Size = new System.Drawing.Size(24, 24);
+            this.btnRefreshdgv.TabIndex = 7;
+            this.tooltip.SetToolTip(this.btnRefreshdgv, "Refresh");
+            this.btnRefreshdgv.UseVisualStyleBackColor = true;
+            this.btnRefreshdgv.Click += new System.EventHandler(this.btnRefreshOpendgv_Click);
+            // 
             // frmDocumentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -845,15 +938,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).EndInit();
             this.pNotification.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.gbAllRecordOption.ResumeLayout(false);
             this.gbAllRecordOption.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -909,7 +1004,6 @@
         private System.Windows.Forms.Panel pNotification;
         private System.Windows.Forms.PictureBox btnNotification;
         private System.Windows.Forms.Label lblNotiCount;
-        private System.Windows.Forms.DataGridView dgvNoti;
         private System.Windows.Forms.Timer timerNoti;
         private cus_button btnAddDoc;
         private cus_button btnCloseReopen;
@@ -918,6 +1012,14 @@
         private cus_button btnChangeStatus;
         private System.Windows.Forms.ComboBox cboColor;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label btnReject;
+        private System.Windows.Forms.Panel pReject;
+        private System.Windows.Forms.Label btnPending;
+        private System.Windows.Forms.Panel pPending;
+        private System.Windows.Forms.Label btnReverseNoti;
+        private System.Windows.Forms.Panel pReverse;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.DataGridView dgvNoti;
 
     }
 }

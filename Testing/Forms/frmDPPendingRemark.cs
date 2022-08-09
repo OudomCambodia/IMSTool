@@ -53,7 +53,15 @@ namespace Testing.Forms
                     cmd.CommandText = "UPDATE dbo.tbDOC SET STATUS_REMARK = @remark, DOC_CUR_STATUS = " + (cbPending.SelectedItem as ComboboxItem).Value.ToString() + ", DOC_CUR_STATUS_SET_BY = '" + UserCode + "', DOC_CUR_STATUS_SET_ON = '" + DateTime.Now + "' WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
                     cmd.Parameters.Add(new SqlParameter("remark", DateTime.UtcNow.AddHours(7).ToString("dd'/'MM'/'yyyy")+"-"+remark+Environment.NewLine));
                     crud.Executing(cmd);
-                    Msgbox.Show("Pending Remark Set! Status change to "+cbPending.Text.ToUpper()+".");
+
+                    SqlCommand cmd1 = new SqlCommand();
+                    cmd1 = new SqlCommand();
+                    cmd1.CommandText = "INSERT INTO dbo.tbNoti(NOTI_DETAIL, NOTI_TO, NOTI_DATE, REMARK, NOTI_TYPE) SELECT 'Instruction Note No \"' + DOC_CODE + '\" has been pending due to \"'+ @reason +'\"', (SELECT USER_NAME FROM dbo.tbDOC_USER WHERE FULL_NAME = CREATE_BY), getdate(), DOC_CODE, '" + CommonFunctions.NotiType.PENDING + "' FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
+                    cmd1.Parameters.Add(new SqlParameter("reason", tbRemark.Text.Trim()));
+                    crud.Executing(cmd1);
+
+
+                    Msgbox.Show("Pending Remark Set! Status change to "+ cbPending.Text.ToUpper() +".");
                     this.Close();
                 }
             }
@@ -73,6 +81,13 @@ namespace Testing.Forms
                     cmd.CommandText = "UPDATE dbo.tbDOC SET STATUS_REMARK = STATUS_REMARK + @remark WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
                     cmd.Parameters.Add(new SqlParameter("remark", DateTime.UtcNow.AddHours(7).ToString("dd'/'MM'/'yyyy") + "-" + remark + Environment.NewLine));
                     crud.Executing(cmd);
+
+                    SqlCommand cmd1 = new SqlCommand();
+                    cmd1 = new SqlCommand();
+                    cmd1.CommandText = "INSERT INTO dbo.tbNoti(NOTI_DETAIL, NOTI_TO, NOTI_DATE, REMARK, NOTI_TYPE) SELECT 'Instruction Note No \"' + DOC_CODE + '\" has been pending due to \"'+ @reason +'\"', (SELECT USER_NAME FROM dbo.tbDOC_USER WHERE FULL_NAME = CREATE_BY), getdate(), DOC_CODE, '" + CommonFunctions.NotiType.PENDING + "' FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
+                    cmd1.Parameters.Add(new SqlParameter("reason", tbRemark.Text.Trim()));
+                    crud.Executing(cmd1);
+
                     Msgbox.Show("Pending Remark Set!");
                     this.Close();
                 }

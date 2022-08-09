@@ -39,6 +39,7 @@ namespace Testing.Forms
 
         string status = "0"; //use as global status based on selectedStatusBtn
         public string buttonName;
+        private string currentSelectedButton;
 
         public IExcel.Application xlprog = new IExcel.Application();
 
@@ -59,6 +60,10 @@ namespace Testing.Forms
         private readonly string ALL_BROKERS = "ALL_BROKERS";
 
         public static string SelectionColor;
+
+        private bool isClickReject;
+        private bool isClickPending;
+        private bool isClickReverse;
 
         public frmDocumentControl()
         {
@@ -112,8 +117,8 @@ namespace Testing.Forms
 
                 pNotification.Visible = false;
                 timerNoti.Start();
-                _dtNoti = sqlcrud.LoadData("SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
-                DataTable dtNotiCount = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
+                _dtNoti = sqlcrud.LoadData("SELECT TOP 50 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
+                DataTable dtNotiCount = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 50 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
                 if (dtNotiCount.Rows.Count > 0)
                 {
                     int notiCount = 0;
@@ -127,10 +132,10 @@ namespace Testing.Forms
                     if (notiCount == 0)
                     {
                         lblNotiCount.Visible = false;
-                        btnNotification.Image = Resources._4Tlt_unscreen1;
+                        btnNotification.Image = Resources.notification_unscreen_1;
                     }
                     else
-                        btnNotification.Image = Resources._4Tlt_unscreen;
+                        btnNotification.Image = Resources.notification_unscreen;
                 }
                 
                 NotiSentDuration();
@@ -831,7 +836,8 @@ namespace Testing.Forms
 
                 if (strSearch == "")
                 {
-                    dgvDoc.FirstDisplayedScrollingRowIndex = 0;
+                    if (dgvDoc.Rows.Count > 0)
+                        dgvDoc.FirstDisplayedScrollingRowIndex = 0;
                     return;
                 }
 
@@ -1171,6 +1177,8 @@ namespace Testing.Forms
                     return;
                 }
 
+                string SelectedDocCode = getSelectedDocCode(selectedDoc);
+
                 DialogResult dr = Msgbox.Show("Are you sure you want to reverse " + selectedDoc.Rows.Count + " selected document(s)' status?", "Confirmation", "Yes", "No");
                 if (dr == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -1178,6 +1186,11 @@ namespace Testing.Forms
                     {
                         sqlcrud.ExecuteMySql("dbo.sp_reverse_doc_status", "@DocCode", selectedDoc.Rows[i]["REF_ID"].ToString());
                     }
+
+                    SqlCommand cmd = new SqlCommand();
+                    cmd = new SqlCommand();
+                    cmd.CommandText = "INSERT INTO dbo.tbNoti(NOTI_DETAIL, NOTI_TO, NOTI_DATE, REMARK, NOTI_TYPE) SELECT 'Instruction Note No \"' + DOC_CODE + '\" has been reversed by " + frmLogIn.Usert + "', (SELECT USER_NAME FROM dbo.tbDOC_USER WHERE FULL_NAME = CREATE_BY), getdate(), DOC_CODE, '" + CommonFunctions.NotiType.REVERSED + "' FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + SelectedDocCode + "',','))";
+                    sqlcrud.Executing(cmd);
                 }
                 Msgbox.Show(selectedDoc.Rows.Count + " selected document(s)' status reversed.");
                 requeryDGV();
@@ -1190,8 +1203,6 @@ namespace Testing.Forms
 
         private void setSelectedStatus(Button selectedBtn)
         {
-            buttonName = selectedBtn.Name;
-
             if (status == "99" || status == "7")
             {
                 gbAllRecordOption.Visible = true;
@@ -1220,6 +1231,7 @@ namespace Testing.Forms
             unselectStatusBtnStyle(btnPendingAtDP);
 
             selectedStatusBtnStyle(selectedBtn);
+            currentSelectedButton = selectedBtn.Name;
 
             enabledisableFuncBtn();
 
@@ -1745,6 +1757,9 @@ namespace Testing.Forms
                 dgvNoti.Columns["NOTI_DATE"].Visible = false;
                 dgvNoti.Columns["REMARK"].Visible = false;
                 dgvNoti.Columns["IS_READ"].Visible = false;
+                dgvNoti.Columns["NOTI_TYPE"].Visible = false;
+
+                btnReject_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -1768,7 +1783,7 @@ namespace Testing.Forms
                     selectedRow.Cells["IS_READ"].Value = true;
 
                     DataTable dt = new DataTable();
-                    dt = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
+                    dt = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 50 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
                     if (dt.Rows.Count > 0)
                     {
                         int notiCount = 0;
@@ -1782,10 +1797,10 @@ namespace Testing.Forms
                         if (notiCount == 0)
                         {
                             lblNotiCount.Visible = false;
-                            btnNotification.Image = Resources._4Tlt_unscreen1;
+                            btnNotification.Image = Resources.notification_unscreen_1;
                         }
                         else
-                            btnNotification.Image = Resources._4Tlt_unscreen;
+                            btnNotification.Image = Resources.notification_unscreen;
                     }
                 }
                 dgvNoti_CellFormatting(null, null);
@@ -1800,7 +1815,7 @@ namespace Testing.Forms
         {
             try
             {
-                _dtNoti = sqlcrud.LoadData("SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
+                _dtNoti = sqlcrud.LoadData("SELECT TOP 50 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC").Tables[0];
                 dgvNoti.DataSource = null;
                 dgvNoti.DataSource = _dtNoti;
                 dgvNoti.Columns["SEQ_NO"].Visible = false;
@@ -1810,7 +1825,7 @@ namespace Testing.Forms
                 dgvNoti.Columns["IS_READ"].Visible = false;
 
                 DataTable dt = new DataTable();
-                dt = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 20 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
+                dt = sqlcrud.LoadData("SELECT COUNT(SEQ_NO) AS TOTAL_NOTI FROM (SELECT TOP 50 * FROM [DocumentControlDB].[dbo].[tbNoti] WHERE NOTI_TO = '" + UserName + "' ORDER BY NOTI_DATE DESC) t WHERE IS_READ = 0").Tables[0];
                 if (dt.Rows.Count > 0)
                 {
                     int notiCount = 0;
@@ -1858,12 +1873,32 @@ namespace Testing.Forms
 
         private void dgvNoti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            status = "8";
+            string remark = dgvNoti.Rows[e.RowIndex].Cells["REMARK"].Value.ToString().Trim();
+            string btnName = string.Empty;
 
-            if (!buttonName.Equals(btnCancel.Name))
-                setSelectedStatus(btnCancel);
+            var curStatus = sqlcrud.LoadData("select * from tbDOC where DOC_CODE = '" + remark + "'").Tables[0];
+            if (curStatus.Rows.Count > 0)
+            {
+                string cStatus = curStatus.Rows[0]["DOC_CUR_STATUS"].ToString();
+                var buttons = sqlcrud.LoadData("select top 1 BUTTON_NAME from tbDOC_STATUS where STATUS_TYPE = '" + cStatus + "'").Tables[0];
+                if (buttons.Rows.Count > 0)
+                {
+                    btnName = buttons.Rows[0]["BUTTON_NAME"].ToString();
+                    status = cStatus;
+                } 
+            }
+            else
+            {
+                Msgbox.Show("No record found with Instruction No " + remark + ".");
+                return;
+            }
 
-            string remark = dgvNoti.Rows[e.RowIndex].Cells["REMARK"].Value.ToString();
+            var btn = this.Controls.Find(btnName, true);
+            var selectedBtn = (Button)btn[0];
+
+            if (!selectedBtn.Name.Equals(currentSelectedButton))
+                setSelectedStatus(selectedBtn);
+
             tbFilterdgvDoc.Text = remark;
 
             if (e.ColumnIndex == dgvNoti.Columns[0].Index || e.RowIndex < 0) return;
@@ -1894,12 +1929,12 @@ namespace Testing.Forms
                     }
                     else
                     {
-                        var month = Math.Floor(dateSent / 30);
+                        var month = Math.Floor(dateSent / 30) <= 0 ? 1 : Math.Floor(dateSent / 30);
                         if (month < 12)
                             tempTimeString = string.Concat(Math.Floor(month).ToString(), month >= 2 ? " months ago" : " month ago");
                         else
                         {
-                            month = Math.Floor(month / 12);
+                            month = Math.Floor(month / 12) <= 0 ? 1 : Math.Floor(month / 12);
                             tempTimeString = string.Concat(Math.Floor(month).ToString(), month >= 2 ? " years ago" : " year ago");
                         }
 
@@ -1971,6 +2006,112 @@ namespace Testing.Forms
             dgvNoti.DefaultCellStyle.SelectionBackColor = Color.FromArgb(r, g, b);
 
             sqlcrud.Executing("update tbDOC_USER set SELECTION_COLOR = '" + cboColor.SelectedItem.ToString() + "' where USER_NAME = '" + UserName + "'");
+        }
+
+        private void btnReject_Click(object sender, EventArgs e)
+        {
+            isClickReject = true;
+
+            pReject.BackColor = Color.Brown;
+            pPending.BackColor = Color.Gainsboro;
+            pReverse.BackColor = Color.Gainsboro;
+
+            btnReject_MouseLeave(null, null);
+
+            filterNoti(CommonFunctions.NotiType.REJECTED);
+        }
+
+        private void btnReject_MouseHover(object sender, EventArgs e)
+        {
+            btnReject.ForeColor = Color.Brown;
+        }
+
+        private void btnReject_MouseLeave(object sender, EventArgs e)
+        {
+            if (isClickReject)
+            {
+                isClickPending = false;
+                isClickReverse = false;
+
+                btnReject.ForeColor = Color.Brown;
+                btnPending.ForeColor = Color.Black;
+                btnReverseNoti.ForeColor = Color.Black;
+            }
+            else
+                btnReject.ForeColor = Color.Black;
+        }
+
+        private void btnPending_Click(object sender, EventArgs e)
+        {
+            isClickPending = true;
+
+            pReject.BackColor = Color.Gainsboro;
+            pPending.BackColor = Color.Brown;
+            pReverse.BackColor = Color.Gainsboro;
+
+            btnPending_MouseLeave(null, null);
+
+            filterNoti(CommonFunctions.NotiType.PENDING);
+        }
+
+        private void btnPending_MouseHover(object sender, EventArgs e)
+        {
+            btnPending.ForeColor = Color.Brown;
+        }
+
+        private void btnPending_MouseLeave(object sender, EventArgs e)
+        {
+            if (isClickPending)
+            {
+                isClickReject = false;
+                isClickReverse = false;
+
+                btnReject.ForeColor = Color.Black;
+                btnPending.ForeColor = Color.Brown;
+                btnReverseNoti.ForeColor = Color.Black;
+            }
+            else
+                btnPending.ForeColor = Color.Black;
+        }
+
+        private void btnReverseNoti_Click(object sender, EventArgs e)
+        {
+            isClickReverse = true;
+
+            pReject.BackColor = Color.Gainsboro;
+            pPending.BackColor = Color.Gainsboro;
+            pReverse.BackColor = Color.Brown;
+
+            btnReverseNoti_MouseLeave(null, null);
+
+            filterNoti(CommonFunctions.NotiType.REVERSED);
+        }
+
+        private void btnReverseNoti_MouseHover(object sender, EventArgs e)
+        {
+            btnReverseNoti.ForeColor = Color.Brown;
+        }
+
+        private void btnReverseNoti_MouseLeave(object sender, EventArgs e)
+        {
+            if (isClickReverse)
+            {
+                isClickReject = false;
+                isClickPending = false;
+
+                btnReject.ForeColor = Color.Black;
+                btnPending.ForeColor = Color.Black;
+                btnReverseNoti.ForeColor = Color.Brown;
+            }
+            else
+                btnReverseNoti.ForeColor = Color.Black;
+        }
+
+        private void filterNoti(string notiType)
+        {
+            DataView dvNoti = new DataView(_dtNoti);
+            dvNoti.RowFilter = " [NOTI_TYPE] = '" + notiType + "' ";
+            dgvNoti.DataSource = dvNoti;
         }
     }
 }
