@@ -1839,10 +1839,10 @@ namespace Testing.Forms
                     if (notiCount == 0)
                     {
                         lblNotiCount.Visible = false;
-                        btnNotification.Image = Resources._4Tlt_unscreen1;
+                        btnNotification.Image = Resources.notification_unscreen_1;
                     }
                     else
-                        btnNotification.Image = Resources._4Tlt_unscreen;
+                        btnNotification.Image = Resources.notification_unscreen;
                         
                 }
 
