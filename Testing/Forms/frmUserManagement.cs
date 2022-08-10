@@ -329,7 +329,7 @@ namespace Testing.Forms
             var expiryDate = dtpExpiryDate.Value.ToString("dd-MMM-yyyy");
 
             StringBuilder updateBuilder = new StringBuilder();
-            updateBuilder.Append("UPDATE USER_PRINT_SYSTEM SET USER_NAME = '" + txtUsername.Text + "', PASSWORD = '" + encryptPassword + "', ")
+            updateBuilder.Append("UPDATE USER_PRINT_SYSTEM SET USER_NAME = '" + txtUsername.Text + "', USER_CREATE_DATE = '" + createdDate + "', PASSWORD = '" + encryptPassword + "', ")
                 .Append("EXPIRY_DATE = '" + expiryDate + "', TYPE = '" + cboType.SelectedValue + "', ")
                 .Append("REMARK = '" + txtRemark.Text.Trim() + "', EMAIL = '" + txtEmail.Text.Trim() + "', EMAIL_PW = '" + encryptEmailPassword + "' ")
                 .Append("WHERE USER_CODE = '" + txtUserCode.Text.Trim() + "' ");
@@ -429,6 +429,7 @@ namespace Testing.Forms
             txtEmailPassword.Clear();
             cboType.SelectedIndex = 0;
             cboSpecialCode.SelectedIndex = 0;
+            dtpCreatedDate.Value = DateTime.Now;
             ActiveControl = txtUserCode; 
         }
 
