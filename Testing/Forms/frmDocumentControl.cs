@@ -1239,6 +1239,8 @@ namespace Testing.Forms
 
             tbFilterdgvDoc.Text = "";
             rbRefID.Checked = true;
+
+            ActiveControl = tbFilterdgvDoc;
         }
 
         private void selectedStatusBtnStyle(Button selectedBtn)
