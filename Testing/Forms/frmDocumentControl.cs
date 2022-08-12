@@ -646,6 +646,7 @@ namespace Testing.Forms
                 }
                 lblSel.Text = num.ToString();
             }
+            tbFilterdgvDoc.Focus();
         }
 
         private void CheckCount(bool isChecked)
