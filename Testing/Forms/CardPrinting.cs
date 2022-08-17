@@ -211,6 +211,9 @@ namespace Testing.Forms
         private void CardPrinting_Load(object sender, EventArgs e)
         {
             //DataTable dtuser = Mydb.ExecQuery("select role from [DocumentControlDB].[dbo].[tbDOC_USER] where ");
+            if (username.Replace("-IMS", "").Equals("KOY DAVON"))
+                return;
+
             DataTable dtuser = crud.ExecQuery("select remark from user_print_system where user_name = '" + username.Replace("-IMS","") + "'");
             if (dtuser.Rows[0][0].ToString() == "PRODUCER")
             {
