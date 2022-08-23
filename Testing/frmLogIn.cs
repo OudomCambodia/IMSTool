@@ -23,7 +23,7 @@ namespace Testing
         public string fullusername;
 
         SplashScreen SplashScreen = new SplashScreen();
-        int minimumDisplayTime = 2000;
+        int minimumDisplayTime = 1000;
 
         public frmLogIn()
         {

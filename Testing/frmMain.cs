@@ -214,7 +214,6 @@ namespace Testing
             //runonce.Start();
 
             timerNoti.Start();
-            timer1.Start();
             tmCheckMaint.Start();
             this.Text += " - " + UserName;
             title = this.Text;
@@ -320,34 +319,6 @@ namespace Testing
             Forms.ClaimPaidReportPayee clPaidPayee = new Forms.ClaimPaidReportPayee();
             clPaidPayee.UserName = UserName;
             openForm(clPaidPayee, (Button)sender);
-        }
-
-        Point cursorPoint;
-        int minutesIdle = 0;
-
-        private bool isIdle(int minutes)
-        {
-            return minutesIdle >= minutes;
-        }
-               
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            this.Text= title +' '+ DateTime.Now.ToLongTimeString();
-
-            if (isIdle(7200)) Environment.Exit(0); //2hrs
-            if (Cursor.Position != cursorPoint)
-            {
-                // The mouse moved since last check
-                minutesIdle = 0;
-            }
-            else
-            {
-                // Mouse still stoped
-                minutesIdle++;
-            }
-
-            // Save current position
-            cursorPoint = Cursor.Position;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

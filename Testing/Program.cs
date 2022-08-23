@@ -126,6 +126,7 @@ namespace Testing
             //    }
             //}
             #endregion
+
         }
 
         public static List<string> GetOpenWindows()
@@ -151,6 +152,8 @@ namespace Testing
 
             return windows;
         }
+
+
 
         //private static void frmLogIn_LoadCompleted(object sender, EventArgs e)
         //{
