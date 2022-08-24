@@ -300,7 +300,7 @@ namespace Testing.Forms
                 {
 
                     dgvOpensqlstring += " and CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where USER_NAME in (" + dtRegional.Rows[0][2].ToString().ToUpper() + ")) ";
-                    dtDoc = sqlcrud.LoadData(dgvOpensqlstring).Tables[0];
+                    //dtDoc = sqlcrud.LoadData(dgvOpensqlstring).Tables[0];
 
                 }
                 else { 
