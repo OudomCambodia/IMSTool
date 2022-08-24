@@ -493,6 +493,26 @@ namespace Testing.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap notification_unscreen {
+            get {
+                object obj = ResourceManager.GetObject("notification_unscreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notification_unscreen_1 {
+            get {
+                object obj = ResourceManager.GetObject("notification_unscreen-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NY2022 {
             get {
                 object obj = ResourceManager.GetObject("NY2022", resourceCulture);
@@ -646,6 +666,16 @@ namespace Testing.Properties {
         internal static System.Drawing.Bitmap wrong {
             get {
                 object obj = ResourceManager.GetObject("wrong", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zerowaste {
+            get {
+                object obj = ResourceManager.GetObject("zerowaste", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

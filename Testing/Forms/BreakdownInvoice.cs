@@ -23,46 +23,34 @@ namespace Testing.Forms
 
         private void BreakdownInvoice_Load(object sender, EventArgs e)
         {
-
+            CommonFunctions.HighLightGrid(dgvInvoiceDetails);
+            this.dgvInvoiceDetails.ForeColor = System.Drawing.Color.Black;
+            this.dgvInvoiceDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void btnPrint_Click(object sender, EventArgs e)
+        private void btnOptionI_Click(object sender, EventArgs e)
         {
-            try
+            dgvInvoiceDetails.Columns.Clear();
+            string[] dgvClName = { "INSURED", "SUMINSURED", "GROSSPREMIUM", "ADMINFEE" };
+            loadOption(dgvClName,4);
+            
+        }
+        void loadOption(string[] a,int columnno)
+        {
+            for (int i = 0; i < columnno;i++ )
             {
-                if (tbInvoiceNo.Text != "")
-                {
-                    dtInvoice = crud.ExecQuery("select p.*,rate from user_exchange_rate,view_print_invoice p where TRAN_DATE = ON_DATE and DEBIT_NOTE='" + tbInvoiceNo.Text.ToUpper() + "'");
-                    if (dtInvoice.Rows.Count == 0)
-                    {
-                        Msgbox.Show("Debit / Credit Note not found!");
-                    }
-                    else
-                    {
-
-                        dtInvoice.Columns.Add("EXCHANGE_RATE", typeof(System.String));
-                        dtInvoice.Columns.Add("TOTAL_FUND_KH", typeof(System.String));
-                        dtInvoice.Columns.Add("KH_NAME", typeof(System.String));
-                        dtInvoice.Columns.Add("KH_ADDR", typeof(System.String));
-
-                        InvoiceOption1 Invoice1 = new InvoiceOption1(this);
-                        Invoice1.dtInvoicefrm2 = this.dtInvoice;
-                        Invoice1.Show();
-                    }
-
-                }
-                else
-                {
-                    Msgbox.Show("Debit / Credit note is required");
-                }
-                
-
-            }catch(Exception ex){
-                Msgbox.Show(ex.Message);
+                dgvInvoiceDetails.Columns.Add("cl"+a[i], a[i]);
             }
             
-
         }
+
+        private void btnOptionII_Click(object sender, EventArgs e)
+        {
+            dgvInvoiceDetails.Columns.Clear();
+            string[] dgvClName = { "INSURED", "ADDRESS", "NUMBER", "SUMINSURED", "GROSSPREMIUM","ADMINFEE"};
+            loadOption(dgvClName,5);
+        }
+       
 
         
     }

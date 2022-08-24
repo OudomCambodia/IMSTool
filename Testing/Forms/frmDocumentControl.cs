@@ -294,7 +294,16 @@ namespace Testing.Forms
 
                 string dgvOpensqlstring = "select * from dbo.VIEW_DOC WHERE " + ((status == "8") ? "(DOC_CUR_STATUS IN (8,9)) "
                     : (status == "99") ? "DOC_CUR_STATUS like '%%'" : (status == "13") ? "DOC_CUR_STATUS IN (13,14,15,16) " : "DOC_CUR_STATUS = " + status);
+                //update check on regional team can see each other doc - 23-08-2022 - request Oum Thavrak - Theane
+                DataTable dtRegional = sqlcrud.LoadData("select * from tbRegional where username like '%" + frmLogIn.Usert.ToUpper() + "%'").Tables[0];
+                if (dtRegional.Rows.Count != 0)
+                {
 
+                    dgvOpensqlstring += " and CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where USER_NAME in (" + dtRegional.Rows[0][2].ToString().ToUpper() + ")) ";
+                    dtDoc = sqlcrud.LoadData(dgvOpensqlstring).Tables[0];
+
+                }
+                else { 
                 //Role[0] is primary role
                 #region --- OLD CODING ---
                 //dgvOpensqlstring = (UserID == "S01")
@@ -336,7 +345,7 @@ namespace Testing.Forms
                         ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
                         : dgvOpensqlstring;
                 #endregion
-
+                }
                 if (Role[0] == "FILLING")
                 {
                     if (Team != "A&H")// Filling For A&H
@@ -374,7 +383,9 @@ namespace Testing.Forms
                     dgvOpensqlstring += " AND convert(datetime,CREATE_DATE,103) >= '" + dtpSpecificDateFr.Text + " 00:00:00' AND convert(datetime,CREATE_DATE,103) <= '" + dtpSpecificDateTo.Text + " 23:59:59'";
                 }
                 //
-
+                
+               
+                
                 dtDoc = sqlcrud.LoadData(dgvOpensqlstring + " order by REF_ID asc, CREATE_DATE asc").Tables[0];
 
 

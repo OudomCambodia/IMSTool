@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnImage = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbDNNo = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
@@ -106,11 +106,20 @@
             this.rtbAddress = new System.Windows.Forms.RichTextBox();
             this.txtTotalSI = new System.Windows.Forms.TextBox();
             this.btnPrint = new Testing.cus_button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // pnImage
+            // 
+            this.pnImage.Controls.Add(this.pictureBox1);
+            this.pnImage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnImage.Location = new System.Drawing.Point(0, 0);
+            this.pnImage.Name = "pnImage";
+            this.pnImage.Size = new System.Drawing.Size(647, 203);
+            this.pnImage.TabIndex = 3;
             // 
             // pictureBox1
             // 
@@ -122,15 +131,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // pnImage
-            // 
-            this.pnImage.Controls.Add(this.pictureBox1);
-            this.pnImage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnImage.Location = new System.Drawing.Point(0, 0);
-            this.pnImage.Name = "pnImage";
-            this.pnImage.Size = new System.Drawing.Size(647, 203);
-            this.pnImage.TabIndex = 3;
             // 
             // panel1
             // 
@@ -1008,8 +1008,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InvoiceOption1";
             this.Load += new System.EventHandler(this.InvoiceOption1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

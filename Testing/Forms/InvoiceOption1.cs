@@ -25,7 +25,12 @@ namespace Testing.Forms
         private void InvoiceOption1_Load(object sender, EventArgs e)
         {
             // DataTable dtlblKh = crud.ExecQuery("select rate from user_exchange_rate,view_print_invoice p where TRAN_DATE = ON_DATE and DEBIT_NOTE='"+  dtInvoicefrm2.Rows[0][4].ToString().ToUpper() + "'");
+            if (dtInvoicefrm2.Rows[0][21].ToString() =="")
+                lblKHM.Visible = false;
+            else
             lblKHM.Text = Convert.ToInt32(dtInvoicefrm2.Rows[0][21].ToString().ToUpper()).ToString("N").Replace(".00", "");
+            
+            //lblKHM.Text = String.Format("{0:N}", Convert.ToDecimal(String.IsNullOrEmpty(dtInvoicefrm2.Rows[0][21].ToString()) ? 0.00 : Convert.ToDouble(dtInvoicefrm2.Rows[0][21].ToString())));
             lblPolicyNo.Text = dtInvoicefrm2.Rows[0][8].ToString().ToUpper();
             lbProduct.Text = dtInvoicefrm2.Rows[0][9].ToString().ToUpper();
             rbInsured.Text = dtInvoicefrm2.Rows[0][0].ToString().ToUpper();
