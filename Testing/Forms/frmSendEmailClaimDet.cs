@@ -115,16 +115,16 @@ namespace Testing.Forms
             //if (mail_add_claim_team == String.Empty) message.Bcc.Add(new MailAddress(mail_add));
             //else message.Bcc.Add(new MailAddress(mail_add_claim_team));
 
-            if ((mail_add_claim_team != String.Empty && mail_add_claim_team.Trim() == "gpa@forteinsurance.com"))
-            {
-                message.CC.Add(new MailAddress(mail_add_claim_team));
-            }
-            else 
-            {
-                message.Bcc.Add(new MailAddress(mail_add));
-                if (mail_add_claim_team != String.Empty)
-                    message.Bcc.Add(new MailAddress(mail_add_claim_team));
-            }
+            //if ((mail_add_claim_team != String.Empty && mail_add_claim_team.Trim() == "gpa@forteinsurance.com"))
+            //{
+            //    message.CC.Add(new MailAddress(mail_add_claim_team));
+            //}
+            //else 
+            //{
+            //    message.Bcc.Add(new MailAddress(mail_add));
+            //    if (mail_add_claim_team != String.Empty)
+            //        message.Bcc.Add(new MailAddress(mail_add_claim_team));
+            //}
             //End of Update
 
             //Update 16-Aug-19 (Attach File)
@@ -164,15 +164,15 @@ namespace Testing.Forms
             }
 
             //cc field
-            if (tbCC.Text.Trim() != "")
-            {
-                string[] ccList = tbCC.Text.Split(',');
-                foreach (string str in ccList)
-                {
-                    if (str.Trim() != "")
-                        message.CC.Add(str.Trim());
-                }
-            }
+            //if (tbCC.Text.Trim() != "")
+            //{
+            //    string[] ccList = tbCC.Text.Split(',');
+            //    foreach (string str in ccList)
+            //    {
+            //        if (str.Trim() != "")
+            //            message.CC.Add(str.Trim());
+            //    }
+            //}
 
             //attached file
             // Attachment att = new Attachment("");
@@ -353,7 +353,7 @@ namespace Testing.Forms
             if (tbNonPaid.Text != "")
                 non_paid = tbNonPaid.Text;
 
-            return crud.ExecFunc_String("USER_GET_EMAIL_CONTENT_FN", new string[] { "claim_no", "doc_type", "req_doc", "remind", "requis", "nonPaid", "receiver", "noti_date" }, new string[] { lbClaimNo.Text, sp_type, code, remind, req_no, tbNonPaid.Text, tbReceiver.Text, dpNoti.Value.ToString("dd/MM/yyyy") });
+            return crud.ExecFunc_String("USER_GET_EMAIL_CONTENT_FN", new string[] { "claim_no", "doc_type", "req_doc", "remind", "requis", "nonPaid", "receiver", "noti_date","User_fullname" }, new string[] { lbClaimNo.Text, sp_type, code, remind, req_no, tbNonPaid.Text, tbReceiver.Text, dpNoti.Value.ToString("dd/MM/yyyy"),UserFullName });
         }
 
         private void frmSendEmailClaimDet_Load(object sender, EventArgs e)
@@ -800,7 +800,7 @@ namespace Testing.Forms
                         return;
 
                     //get the title
-                    string subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind" }, new string[] { lbClaimNo.Text, sp_type, remind }).ToString();
+                    string subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, UserFullName }).ToString();
 
                     Cursor.Current = Cursors.WaitCursor;
 

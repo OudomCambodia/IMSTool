@@ -154,7 +154,7 @@ namespace Testing.Forms
                                 }
                                 else
                                 {
-                                    rpt = new Reports.NewInvoiceNABreakdown();
+                                   // rpt = new Reports.NewInvoiceNABreakdown();
                                     rpt.SetDataSource(chkInvoice);
                                 }
                             }
@@ -192,7 +192,7 @@ namespace Testing.Forms
                             }
                             else
                             {
-                                rpt = new Reports.NewInvoiceNABreakdown();
+                              //  rpt = new Reports.NewInvoiceNABreakdown();
                                 rpt.SetDataSource(chkInvoice);
                             }
                         }

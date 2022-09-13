@@ -3570,6 +3570,18 @@ namespace Testing {
             
             private global::System.Data.DataColumn columnKH_ADDR;
             
+            private global::System.Data.DataColumn columnclINVOICENO;
+            
+            private global::System.Data.DataColumn columnclINSURED;
+            
+            private global::System.Data.DataColumn columnclSUMINSURED;
+            
+            private global::System.Data.DataColumn columnclGROSSPREMIUM;
+            
+            private global::System.Data.DataColumn columnclADMINFEE;
+            
+            private global::System.Data.DataColumn columnclFULLPREMIUM;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public VIEW_INVOICEDataTable() {
@@ -3797,6 +3809,54 @@ namespace Testing {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn clINVOICENOColumn {
+                get {
+                    return this.columnclINVOICENO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn clINSUREDColumn {
+                get {
+                    return this.columnclINSURED;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn clSUMINSUREDColumn {
+                get {
+                    return this.columnclSUMINSURED;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn clGROSSPREMIUMColumn {
+                get {
+                    return this.columnclGROSSPREMIUM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn clADMINFEEColumn {
+                get {
+                    return this.columnclADMINFEE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn clFULLPREMIUMColumn {
+                get {
+                    return this.columnclFULLPREMIUM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3856,7 +3916,13 @@ namespace Testing {
                         string EXCHANGE_RATE, 
                         string TOTAL_FUND_KH, 
                         string KH_NAME, 
-                        string KH_ADDR) {
+                        string KH_ADDR, 
+                        string clINVOICENO, 
+                        string clINSURED, 
+                        string clSUMINSURED, 
+                        string clGROSSPREMIUM, 
+                        string clADMINFEE, 
+                        string clFULLPREMIUM) {
                 VIEW_INVOICERow rowVIEW_INVOICERow = ((VIEW_INVOICERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NAME,
@@ -3882,7 +3948,13 @@ namespace Testing {
                         EXCHANGE_RATE,
                         TOTAL_FUND_KH,
                         KH_NAME,
-                        KH_ADDR};
+                        KH_ADDR,
+                        clINVOICENO,
+                        clINSURED,
+                        clSUMINSURED,
+                        clGROSSPREMIUM,
+                        clADMINFEE,
+                        clFULLPREMIUM};
                 rowVIEW_INVOICERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVIEW_INVOICERow);
                 return rowVIEW_INVOICERow;
@@ -3929,6 +4001,12 @@ namespace Testing {
                 this.columnTOTAL_FUND_KH = base.Columns["TOTAL_FUND_KH"];
                 this.columnKH_NAME = base.Columns["KH_NAME"];
                 this.columnKH_ADDR = base.Columns["KH_ADDR"];
+                this.columnclINVOICENO = base.Columns["clINVOICENO"];
+                this.columnclINSURED = base.Columns["clINSURED"];
+                this.columnclSUMINSURED = base.Columns["clSUMINSURED"];
+                this.columnclGROSSPREMIUM = base.Columns["clGROSSPREMIUM"];
+                this.columnclADMINFEE = base.Columns["clADMINFEE"];
+                this.columnclFULLPREMIUM = base.Columns["clFULLPREMIUM"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3982,6 +4060,18 @@ namespace Testing {
                 base.Columns.Add(this.columnKH_NAME);
                 this.columnKH_ADDR = new global::System.Data.DataColumn("KH_ADDR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnKH_ADDR);
+                this.columnclINVOICENO = new global::System.Data.DataColumn("clINVOICENO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnclINVOICENO);
+                this.columnclINSURED = new global::System.Data.DataColumn("clINSURED", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnclINSURED);
+                this.columnclSUMINSURED = new global::System.Data.DataColumn("clSUMINSURED", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnclSUMINSURED);
+                this.columnclGROSSPREMIUM = new global::System.Data.DataColumn("clGROSSPREMIUM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnclGROSSPREMIUM);
+                this.columnclADMINFEE = new global::System.Data.DataColumn("clADMINFEE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnclADMINFEE);
+                this.columnclFULLPREMIUM = new global::System.Data.DataColumn("clFULLPREMIUM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnclFULLPREMIUM);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13381,6 +13471,102 @@ namespace Testing {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string clINVOICENO {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.clINVOICENOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'clINVOICENO\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.clINVOICENOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string clINSURED {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.clINSUREDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'clINSURED\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.clINSUREDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string clSUMINSURED {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.clSUMINSUREDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'clSUMINSURED\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.clSUMINSUREDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string clGROSSPREMIUM {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.clGROSSPREMIUMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'clGROSSPREMIUM\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.clGROSSPREMIUMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string clADMINFEE {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.clADMINFEEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'clADMINFEE\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.clADMINFEEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string clFULLPREMIUM {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.clFULLPREMIUMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'clFULLPREMIUM\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.clFULLPREMIUMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNAMENull() {
                 return this.IsNull(this.tableVIEW_INVOICE.NAMEColumn);
             }
@@ -13665,6 +13851,78 @@ namespace Testing {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetKH_ADDRNull() {
                 this[this.tableVIEW_INVOICE.KH_ADDRColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsclINVOICENONull() {
+                return this.IsNull(this.tableVIEW_INVOICE.clINVOICENOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetclINVOICENONull() {
+                this[this.tableVIEW_INVOICE.clINVOICENOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsclINSUREDNull() {
+                return this.IsNull(this.tableVIEW_INVOICE.clINSUREDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetclINSUREDNull() {
+                this[this.tableVIEW_INVOICE.clINSUREDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsclSUMINSUREDNull() {
+                return this.IsNull(this.tableVIEW_INVOICE.clSUMINSUREDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetclSUMINSUREDNull() {
+                this[this.tableVIEW_INVOICE.clSUMINSUREDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsclGROSSPREMIUMNull() {
+                return this.IsNull(this.tableVIEW_INVOICE.clGROSSPREMIUMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetclGROSSPREMIUMNull() {
+                this[this.tableVIEW_INVOICE.clGROSSPREMIUMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsclADMINFEENull() {
+                return this.IsNull(this.tableVIEW_INVOICE.clADMINFEEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetclADMINFEENull() {
+                this[this.tableVIEW_INVOICE.clADMINFEEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsclFULLPREMIUMNull() {
+                return this.IsNull(this.tableVIEW_INVOICE.clFULLPREMIUMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetclFULLPREMIUMNull() {
+                this[this.tableVIEW_INVOICE.clFULLPREMIUMColumn] = global::System.Convert.DBNull;
             }
         }
         
