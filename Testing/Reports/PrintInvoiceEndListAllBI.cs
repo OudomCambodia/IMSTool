@@ -16,14 +16,14 @@ namespace Testing.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class NewInvoiceNABreakdown : ReportClass {
+    public class PrintInvoiceEndListAllBI : ReportClass {
         
-        public NewInvoiceNABreakdown() {
+        public PrintInvoiceEndListAllBI() {
         }
         
         public override string ResourceName {
             get {
-                return "NewInvoiceNABreakdown.rpt";
+                return "PrintInvoiceEndListAllBI.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Testing.Reports {
         
         public override string FullResourceName {
             get {
-                return "Testing.Reports.NewInvoiceNABreakdown.rpt";
+                return "Testing.Reports.PrintInvoiceEndListAllBI.rpt";
             }
             set {
                 // Do nothing
@@ -74,7 +74,7 @@ namespace Testing.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection5 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace Testing.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection5 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -98,7 +98,7 @@ namespace Testing.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection4 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[6];
             }
@@ -106,25 +106,17 @@ namespace Testing.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[8];
+                return this.ReportDefinition.Sections[7];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedNewInvoiceNABreakdown : Component, ICachedReport {
+    public class CachedPrintInvoiceEndListAllBI : Component, ICachedReport {
         
-        public CachedNewInvoiceNABreakdown() {
+        public CachedPrintInvoiceEndListAllBI() {
         }
         
         [Browsable(false)]
@@ -161,7 +153,7 @@ namespace Testing.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            NewInvoiceNABreakdown rpt = new NewInvoiceNABreakdown();
+            PrintInvoiceEndListAllBI rpt = new PrintInvoiceEndListAllBI();
             rpt.Site = this.Site;
             return rpt;
         }
