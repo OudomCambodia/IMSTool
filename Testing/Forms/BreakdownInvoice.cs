@@ -18,7 +18,7 @@ namespace Testing.Forms
         public string Username = "Admin";
         public  DataTable dt;
         CRUD crud = new CRUD();
-        int button_id;
+        int button_id=0;
         public BreakdownInvoice()
         {
             InitializeComponent();
@@ -176,9 +176,9 @@ namespace Testing.Forms
                     if (coldgv.Name == "clSUMINSURED" || coldgv.Name == "clADMINFEE" || coldgv.Name == "clGROSSPREMIUM")
                     {
                         dtforCopy.Rows[i][coldgv.Name] = dgvInvoiceDetails[coldgv.Name, i].Value.ToString();
-                       
+
                     }
-                      
+
 
                             //Convert.ToDouble(dgvInvoiceDetails[coldgv.Name, i].Value.ToString());
                     else
@@ -321,7 +321,7 @@ namespace Testing.Forms
                         if (dr["ENDORSEMENT_NO"].ToString() != "")
                         {
 
-                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                            Reports.NewInvoiceNAEndoBI2 myDataReport = new Reports.NewInvoiceNAEndoBI2();
 
                             myDataReport.SetDataSource(dtforCopy);
                             //crystalReportViewer1.ReportSource = myDataReport;
@@ -353,7 +353,7 @@ namespace Testing.Forms
 
                         if (dr["ENDORSEMENT_NO"].ToString() != "")
                         {
-                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                            Reports.NewInvoiceEndoBI2 myDataReport = new Reports.NewInvoiceEndoBI2();
                             myDataReport.SetDataSource(ds);
                             var frm = new frmViewInstructionNote();
                             frm.rpt = myDataReport;
@@ -361,7 +361,7 @@ namespace Testing.Forms
                         }
                         else
                         {
-                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                            Reports.NewInvoiceBI2 myDataReport = new Reports.NewInvoiceBI2();
                             myDataReport.SetDataSource(ds);
                             var frm = new frmViewInstructionNote();
                             frm.rpt = myDataReport;
@@ -373,7 +373,7 @@ namespace Testing.Forms
                 {
                     if (dr["ENDORSEMENT_NO"].ToString() != "")
                     {
-                        Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                        Reports.PrintInvoiceEndListAllBI2 myDataReport = new Reports.PrintInvoiceEndListAllBI2();
                         myDataReport.SetDataSource(dtforCopy);
                         var frm = new frmViewInstructionNote();
                         frm.rpt = myDataReport;
@@ -381,7 +381,7 @@ namespace Testing.Forms
                     }
                     else
                     {
-                        Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                        Reports.PrintInvoiceListAllBI2 myDataReport = new Reports.PrintInvoiceListAllBI2();
                         myDataReport.SetDataSource(dtforCopy);
                         var frm = new frmViewInstructionNote();
                         frm.rpt = myDataReport;
@@ -425,18 +425,35 @@ namespace Testing.Forms
 
         private void cus_button1_Click_1(object sender, EventArgs e)
         {
-            var index = this.dgvInvoiceDetails.Rows.Add();
-            this.dgvInvoiceDetails.Rows[index].Cells[0].Value = Convert.ToString(Convert.ToInt32(index)+1);
+            if (dgvInvoiceDetails.ColumnCount <= 0)
+            {
+                return;
+            }
+                
+            else
+            {
+                var index = this.dgvInvoiceDetails.Rows.Add();
+                this.dgvInvoiceDetails.Rows[index].Cells[0].Value = Convert.ToString(Convert.ToInt32(index) + 1);
+            }
+            
         
         }
 
         private void btnRowMinus_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewCell oneCell in dgvInvoiceDetails.SelectedCells)
+            if (dgvInvoiceDetails.ColumnCount <= 0)
             {
-                if (oneCell.Selected)
-                    dgvInvoiceDetails.Rows.RemoveAt(oneCell.RowIndex);
+                return;
             }
+            else
+            {
+                foreach (DataGridViewCell oneCell in dgvInvoiceDetails.SelectedCells)
+                {
+                    if (oneCell.Selected)
+                        dgvInvoiceDetails.Rows.RemoveAt(oneCell.RowIndex);
+                }
+            }
+            
         }
 
         
