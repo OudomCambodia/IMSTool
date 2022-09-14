@@ -91,6 +91,9 @@
       <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CheckBoxComboBox">
+      <HintPath>C:\Users\southeane\Downloads\CheckBoxComboBox.dll</HintPath>
+    </Reference>
     <Reference Include="ClosedXML">
       <HintPath>..\packages\ClosedXML.0.95.4\lib\net40\ClosedXML.dll</HintPath>
     </Reference>
@@ -358,6 +361,12 @@
     <Compile Include="Forms\BHPSchemeOld.Designer.cs">
       <DependentUpon>BHPSchemeOld.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\BreakdownInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BreakdownInvoice.Designer.cs">
+      <DependentUpon>BreakdownInvoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CardPrinting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -610,6 +619,12 @@
     <Compile Include="Forms\frmManageCrono.Designer.cs">
       <DependentUpon>frmManageCrono.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmMedicalRejectionHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMedicalRejectionHistory.Designer.cs">
+      <DependentUpon>frmMedicalRejectionHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMedicalRejectionLetter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -777,6 +792,12 @@
     </Compile>
     <Compile Include="Forms\HospitalSurgicalScheme.Designer.cs">
       <DependentUpon>HospitalSurgicalScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InvoiceOption1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InvoiceOption1.Designer.cs">
+      <DependentUpon>InvoiceOption1.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Latest_List_of_Insured_Members.cs">
       <SubType>Form</SubType>
@@ -1061,11 +1082,23 @@
       <DependentUpon>InstructionNotePNE.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\NewInvoiceBI.cs">
+      <DependentUpon>NewInvoiceBI.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\NewInvoice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\NewInvoiceEndoBI1.cs">
+      <DependentUpon>NewInvoiceEndoBI.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\NewInvoiceEndo.cs">
       <AutoGen>True</AutoGen>
@@ -1073,11 +1106,29 @@
       <DependentUpon>NewInvoiceEndo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\NewInvoiceNABI2.cs">
+      <DependentUpon>NewInvoiceNABI2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\NewInvoiceNABI.cs">
+      <DependentUpon>NewInvoiceNABI.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\NewInvoiceNA.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewInvoiceNA.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\NewInvoiceNAEndoBI.cs">
+      <DependentUpon>NewInvoiceNAEndoBI.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\NewInvoiceNAEndo.cs">
       <AutoGen>True</AutoGen>
@@ -1103,11 +1154,23 @@
       <DependentUpon>OPSchemeRP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\PrintInvoiceEndListAllBI.cs">
+      <DependentUpon>PrintInvoiceEndListAllBI.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\PrintInvoiceEndListAll.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PrintInvoiceEndListAll.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PrintInvoiceListAllBI.cs">
+      <DependentUpon>PrintInvoiceListAllBI.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\PrintInvoiceListAll.cs">
       <AutoGen>True</AutoGen>
@@ -1331,6 +1394,9 @@
     <EmbeddedResource Include="Forms\BHPSchemeOld.resx">
       <DependentUpon>BHPSchemeOld.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BreakdownInvoice.resx">
+      <DependentUpon>BreakdownInvoice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CardPrinting.resx">
       <DependentUpon>CardPrinting.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -1469,6 +1535,9 @@
     <EmbeddedResource Include="Forms\frmManageCrono.resx">
       <DependentUpon>frmManageCrono.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMedicalRejectionHistory.resx">
+      <DependentUpon>frmMedicalRejectionHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMedicalRejectionLetter.resx">
       <DependentUpon>frmMedicalRejectionLetter.cs</DependentUpon>
     </EmbeddedResource>
@@ -1562,6 +1631,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HospitalSurgicalScheme.resx">
       <DependentUpon>HospitalSurgicalScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InvoiceOption1.resx">
+      <DependentUpon>InvoiceOption1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Latest_List_of_Insured_Members.resx">
       <DependentUpon>Latest_List_of_Insured_Members.cs</DependentUpon>
@@ -1800,17 +1872,37 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LabelBlank1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceBI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceBI.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NewInvoice.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceEndoBI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceEndoBI1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoiceEndo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NewInvoiceEndo.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceNABI2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceNABI2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceNABI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceNABI.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoiceNA.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NewInvoiceNA.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceNAEndoBI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceNAEndoBI.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoiceNAEndo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1840,9 +1932,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrintInvoice.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintInvoiceEndListAllBI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintInvoiceEndListAllBI.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PrintInvoiceEndListAll.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrintInvoiceEndListAll.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintInvoiceListAllBI.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintInvoiceListAllBI.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\PrintInvoiceListAll.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1952,6 +2052,7 @@
     <Content Include="Html\mail.png" />
     <Content Include="Html\Standard_Forte.png" />
     <Content Include="Html\yt.png" />
+    <None Include="Resources\zerowaste.jpg" />
     <None Include="Resources\abc.jpg" />
     <None Include="Resources\bellicon.jpg" />
     <None Include="Resources\bell.png" />
@@ -1979,6 +2080,8 @@
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\notification-bell 1.png" />
     <None Include="Resources\notification-gif-unscreen.gif" />
+    <None Include="Resources\notification_unscreen.gif" />
+    <None Include="Resources\notification_unscreen-1.png" />
     <Content Include="Resources\PCBen.jpg" />
     <None Include="Resources\Pcc_Ben.jpg" />
     <Content Include="Resources\Pchum_Ben.png" />

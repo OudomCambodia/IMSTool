@@ -115,16 +115,16 @@ namespace Testing.Forms
             //if (mail_add_claim_team == String.Empty) message.Bcc.Add(new MailAddress(mail_add));
             //else message.Bcc.Add(new MailAddress(mail_add_claim_team));
 
-            //if ((mail_add_claim_team != String.Empty && mail_add_claim_team.Trim() == "gpa@forteinsurance.com"))
-            //{
-            //    message.CC.Add(new MailAddress(mail_add_claim_team));
-            //}
-            //else 
-            //{
-            //    message.Bcc.Add(new MailAddress(mail_add));
-            //    if (mail_add_claim_team != String.Empty)
-            //        message.Bcc.Add(new MailAddress(mail_add_claim_team));
-            //}
+            if ((mail_add_claim_team != String.Empty && mail_add_claim_team.Trim() == "gpa@forteinsurance.com"))
+            {
+                message.CC.Add(new MailAddress(mail_add_claim_team));
+            }
+            else
+            {
+                message.Bcc.Add(new MailAddress(mail_add));
+                if (mail_add_claim_team != String.Empty)
+                    message.Bcc.Add(new MailAddress(mail_add_claim_team));
+            }
             //End of Update
 
             //Update 16-Aug-19 (Attach File)
@@ -164,15 +164,15 @@ namespace Testing.Forms
             }
 
             //cc field
-            //if (tbCC.Text.Trim() != "")
-            //{
-            //    string[] ccList = tbCC.Text.Split(',');
-            //    foreach (string str in ccList)
-            //    {
-            //        if (str.Trim() != "")
-            //            message.CC.Add(str.Trim());
-            //    }
-            //}
+            if (tbCC.Text.Trim() != "")
+            {
+                string[] ccList = tbCC.Text.Split(',');
+                foreach (string str in ccList)
+                {
+                    if (str.Trim() != "")
+                        message.CC.Add(str.Trim());
+                }
+            }
 
             //attached file
             // Attachment att = new Attachment("");

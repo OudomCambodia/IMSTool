@@ -10,7 +10,7 @@
     <Shape ID="DesignTable:DOC_DETAIL" ZOrder="16" X="303" Y="238" Height="28" Width="209" AdapterExpanded="true" DataTableExpanded="false" OldAdapterHeight="0" OldDataTableHeight="594" SplitterPosition="24" />
     <Shape ID="DesignTable:VIEW_GPA_CLAIM_CHECK" ZOrder="18" X="84" Y="149" Height="28" Width="215" AdapterExpanded="true" DataTableExpanded="false" OldAdapterHeight="0" OldDataTableHeight="367" SplitterPosition="24" />
     <Shape ID="DesignTable:VIEW_REJECTION" ZOrder="7" X="85" Y="184" Height="28" Width="167" AdapterExpanded="true" DataTableExpanded="false" OldAdapterHeight="0" OldDataTableHeight="253" SplitterPosition="24" />
-    <Shape ID="DesignTable:VIEW_INVOICE" ZOrder="8" X="86" Y="222" Height="257" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="253" />
+    <Shape ID="DesignTable:VIEW_INVOICE" ZOrder="8" X="86" Y="222" Height="448" Width="174" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="444" />
     <Shape ID="DesignTable:VIEW_NON_PAY" ZOrder="17" X="87" Y="260" Height="28" Width="160" AdapterExpanded="true" DataTableExpanded="false" OldAdapterHeight="0" OldDataTableHeight="330" SplitterPosition="24" />
     <Shape ID="DesignTable:SETTLEMENT_INSURED" ZOrder="15" X="319" Y="273" Height="28" Width="200" AdapterExpanded="true" DataTableExpanded="false" OldAdapterHeight="0" OldDataTableHeight="253" SplitterPosition="24" />
     <Shape ID="DesignTable:SETTLEMENT_INSURED_HOS" ZOrder="14" X="316" Y="306" Height="28" Width="231" AdapterExpanded="true" DataTableExpanded="false" OldAdapterHeight="0" OldDataTableHeight="253" SplitterPosition="24" />

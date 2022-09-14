@@ -18,7 +18,7 @@ namespace Testing.Forms
         public string Username = "Admin";
         public  DataTable dt;
         CRUD crud = new CRUD();
-
+        int button_id;
         public BreakdownInvoice()
         {
             InitializeComponent();
@@ -56,7 +56,7 @@ namespace Testing.Forms
 
                 }
             }
-
+            button_id = 1;
            
             
         }
@@ -83,7 +83,7 @@ namespace Testing.Forms
                 {
                     dgvInvoiceDetails.Columns.Clear();
                     string[] dgvClName = { "INVOICENO","INSURED", "ADDRESS", "NUMBER", "SUMINSURED", "GROSSPREMIUM", "ADMINFEE" };
-                    loadOption(dgvClName, 6);
+                    loadOption(dgvClName, 7);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace Testing.Forms
 
                 }
             }
-            
+            button_id = 2;
             
         }
         bool chkInvoice()
@@ -116,6 +116,8 @@ namespace Testing.Forms
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
+            #region OptionI Invoice
+            //Option I
             frmViewInstructionNote frmReport = new frmViewInstructionNote();
             ReportClass rpt = new ReportClass();
             dt.Columns.Add("EXCHANGE_RATE", typeof(System.String));
@@ -199,7 +201,7 @@ namespace Testing.Forms
                 }
                 
             DataRow dr = dt.Rows[0];
-
+            #region check DebitNote Option I
             if (dnNumber[0] == 'D') //Debit Note
             {
                 string accountcode = dr["ACCOUNT_CODE"].ToString();
@@ -223,7 +225,9 @@ namespace Testing.Forms
                     {
                         if (dr["ENDORSEMENT_NO"].ToString() != "")
                         {
+                           
                             Reports.NewInvoiceNAEndoBI myDataReport = new Reports.NewInvoiceNAEndoBI();
+                            
                             myDataReport.SetDataSource(dtforCopy);
                             //crystalReportViewer1.ReportSource = myDataReport;
                             var frm = new frmViewInstructionNote();
@@ -290,6 +294,102 @@ namespace Testing.Forms
                     }
                 }
             }
+            #endregion
+
+            #region check DebitNote Option II
+            if (dnNumber[0] == 'D') //Debit Note
+            {
+                string accountcode = dr["ACCOUNT_CODE"].ToString();
+                string producer = accountcode.Split('/')[1], cuscode = accountcode.Split('/')[2];
+                dtTemp = crud.ExecQuery("SELECT DISTINCT BANK_NAME,TRANFER_TO,ACCOUNT_NO,SWIFT_CODE FROM VIEW_PAYMENT_INSTRUCTION WHERE CODE = '" + producer + "' OR CODE = '" + cuscode + "'");
+
+
+
+                if (dtTemp.Rows.Count > 0) //has payment instruction set
+                {
+
+                    ////check for N/A
+                    DataRow[] ToDelete = dtTemp.Select("BANK_NAME = 'N/A'"); //create this cuz cannot modify data directly in foreach
+                    foreach (DataRow row in ToDelete)
+                    {
+                        dtTemp.Rows.Remove(row); //remove N/A
+                    }
+                    //
+
+                    if (dtTemp.Rows.Count == 0) //that's mean has only N/A record => use NewInvoice for NA
+                    {
+                        if (dr["ENDORSEMENT_NO"].ToString() != "")
+                        {
+
+                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+
+                            myDataReport.SetDataSource(dtforCopy);
+                            //crystalReportViewer1.ReportSource = myDataReport;
+                            var frm = new frmViewInstructionNote();
+                            frm.rpt = myDataReport;
+                            frm.Show();
+                        }
+                        else
+                        {
+                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                            myDataReport.SetDataSource(dtforCopy);
+                            var frm = new frmViewInstructionNote();
+                            frm.rpt = myDataReport;
+                            frm.Show();
+                        }
+                    }
+                    else //after remove N/A still has other bank records => use NewInvoice with Payment instruction bank table
+                    {
+                        dtTemp.Columns.Add("DEBIT_NOTE", typeof(System.String)); //Add in order to link to another table in Report
+                        foreach (DataRow row in dtTemp.Rows)
+                        {
+                            row["DEBIT_NOTE"] = dr["DEBIT_NOTE"].ToString();
+                        }
+                        DataSet ds = new DataSet();
+                        dtforCopy.TableName = "VIEW_INVOICE"; //change name in order to make Crystal report recognize (Multi Datatable in Datasource need to have the same name)
+                        dtTemp.TableName = "PAYMENT_INSTRUCTION";
+                        ds.Tables.Add(dtforCopy);
+                        ds.Tables.Add(dtTemp);
+
+                        if (dr["ENDORSEMENT_NO"].ToString() != "")
+                        {
+                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                            myDataReport.SetDataSource(ds);
+                            var frm = new frmViewInstructionNote();
+                            frm.rpt = myDataReport;
+                            frm.Show();
+                        }
+                        else
+                        {
+                            Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                            myDataReport.SetDataSource(ds);
+                            var frm = new frmViewInstructionNote();
+                            frm.rpt = myDataReport;
+                            frm.Show();
+                        }
+                    }
+                }
+                else //use List All
+                {
+                    if (dr["ENDORSEMENT_NO"].ToString() != "")
+                    {
+                        Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                        myDataReport.SetDataSource(dtforCopy);
+                        var frm = new frmViewInstructionNote();
+                        frm.rpt = myDataReport;
+                        frm.Show();
+                    }
+                    else
+                    {
+                        Reports.NewInvoiceNABI2 myDataReport = new Reports.NewInvoiceNABI2();
+                        myDataReport.SetDataSource(dtforCopy);
+                        var frm = new frmViewInstructionNote();
+                        frm.rpt = myDataReport;
+                        frm.Show();
+                    }
+                }
+            }
+            #endregion
             //else if (dnNumber[0] == 'C') //Credit Note
             //{
             //    //if (dr[15].ToString().ElementAt(0) == 'E')
@@ -310,6 +410,9 @@ namespace Testing.Forms
             //        frm.Show();
             //    }
             //}
+            ///end of option one
+            #endregion
+           
         }
 
         
