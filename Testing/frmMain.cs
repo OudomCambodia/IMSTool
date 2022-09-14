@@ -227,10 +227,10 @@ namespace Testing
 
             //object O = Resources.ResourceManager.GetObject("Logo_Red");
             //this.BackgroundImage = (Image)(O);
-            //object O = Resources.ResourceManager.GetObject("covid");
-            //this.BackgroundImage = (Image)(O);
-            object O = Resources.ResourceManager.GetObject("Logo_Red");
+            object O = Resources.ResourceManager.GetObject("pchumbenwork");
             this.BackgroundImage = (Image)(O);
+            //object O = Resources.ResourceManager.GetObject("Logo_Red");
+            //this.BackgroundImage = (Image)(O);
             
 
             if (dateEvent.Month == 12 && dateEvent.Day>=24 && dateEvent.Day<=26) //Christmas Day
