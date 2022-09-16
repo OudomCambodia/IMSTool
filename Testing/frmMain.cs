@@ -32,18 +32,18 @@ namespace Testing
         //Noti
         DBS11SqlCrud sqlcrud = new DBS11SqlCrud();
 
-        private static int WM_QUERYENDSESSION = 0x11;
-        private static bool systemShutdown = false;
+        //private static int WM_QUERYENDSESSION = 0x11;
+        //private static bool systemShutdown = false;
 
-        protected override void WndProc(ref System.Windows.Forms.Message m)
-        {
-            if (m.Msg == WM_QUERYENDSESSION)
-                systemShutdown = true;
+        //protected override void WndProc(ref System.Windows.Forms.Message m)
+        //{
+        //    if (m.Msg == WM_QUERYENDSESSION)
+        //        systemShutdown = true;
 
-            // If this is WM_QUERYENDSESSION, the closing event should be raised in the base WndProc.
-            base.WndProc(ref m);
+        //    // If this is WM_QUERYENDSESSION, the closing event should be raised in the base WndProc.
+        //    base.WndProc(ref m);
 
-        }
+        //}
 
         public frmMain()
         {
@@ -56,14 +56,15 @@ namespace Testing
         {
             try
             {
-                if (systemShutdown)
-                    e.Cancel = false;
-                else
-                {
-                    e.Cancel = true;
-                    WindowState = FormWindowState.Minimized;
-                    ShowInTaskbar = false;
-                }
+                Application.Exit();
+                //if (systemShutdown)
+                //    e.Cancel = false;
+                //else
+                //{
+                    //e.Cancel = true;
+                    //WindowState = FormWindowState.Minimized;
+                    //ShowInTaskbar = false;
+                //}
             }
             catch (Exception ex)
             {
