@@ -61,9 +61,9 @@ namespace Testing
                 //    e.Cancel = false;
                 //else
                 //{
-                    //e.Cancel = true;
-                    //WindowState = FormWindowState.Minimized;
-                    //ShowInTaskbar = false;
+                //    e.Cancel = true;
+                //    WindowState = FormWindowState.Minimized;
+                //    ShowInTaskbar = false;
                 //}
             }
             catch (Exception ex)
@@ -214,7 +214,7 @@ namespace Testing
             //runonce.AutoReset = false;
             //runonce.Start();
 
-            timerNoti.Start();
+            //timerNoti.Start();
             tmCheckMaint.Start();
             this.Text += " - " + UserName;
             title = this.Text;

@@ -22,8 +22,8 @@ namespace Testing
         bool Maint = false;
         public string fullusername;
 
-        SplashScreen SplashScreen = new SplashScreen();
-        int minimumDisplayTime = 1000;
+        //SplashScreen SplashScreen = new SplashScreen();
+        //int minimumDisplayTime = 1000;
 
         public frmLogIn()
         {
@@ -187,7 +187,7 @@ namespace Testing
         {
             try
             {
-                LoadSplashScreen();
+                //LoadSplashScreen();
                 Cursor.Current = Cursors.WaitCursor;
                 CheckMaint();
                 //Thread.Sleep(3000);
@@ -289,33 +289,33 @@ namespace Testing
             showMaint();
         }
 
-        private void LoadSplashScreen()
-        {
-            SplashScreen.Show();
-            DateTime startTime = DateTime.Now;
-            int cnt = 0;
+        //private void LoadSplashScreen()
+        //{
+        //    SplashScreen.Show();
+        //    DateTime startTime = DateTime.Now;
+        //    int cnt = 0;
 
-            do
-            {
-                Thread.Sleep(100);
-                cnt++;
-                Application.DoEvents();
+        //    do
+        //    {
+        //        Thread.Sleep(100);
+        //        cnt++;
+        //        Application.DoEvents();
 
-            } while (cnt < 10);
+        //    } while (cnt < 10);
 
-            int timeDisplayed = (DateTime.Now - startTime).Milliseconds;
+        //    int timeDisplayed = (DateTime.Now - startTime).Milliseconds;
 
-            if (timeDisplayed < minimumDisplayTime)
-            {
-                do
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                    timeDisplayed += 100;
+        //    if (timeDisplayed < minimumDisplayTime)
+        //    {
+        //        do
+        //        {
+        //            Thread.Sleep(100);
+        //            Application.DoEvents();
+        //            timeDisplayed += 100;
 
-                } while (timeDisplayed < minimumDisplayTime);
-            }
-            SplashScreen.Close();
-        }
+        //        } while (timeDisplayed < minimumDisplayTime);
+        //    }
+        //    SplashScreen.Close();
+        //}
     }
 }
