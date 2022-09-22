@@ -1258,7 +1258,7 @@ namespace Testing.Forms
                 dgvClaimDetail.Columns["PV"].Visible = false;
                 dgvClaimDetail.Columns["ADDRESS"].Visible = false;
                 dgvClaimDetail.Columns["CC"].Visible = false;
-                dgvClaimDetail.Columns["BANK_TRAN_NO"].Visible = false;
+                dgvClaimDetail.Columns["BANK_TRAN_NO"].Visible = true;
                 dgvClaimDetail.Columns["CHQ_NO"].Visible = false;
                 dgvClaimDetail.Columns["HOSPITAL_ADDRESS"].Visible = false;
                 dgvClaimDetail.Columns["PANEL_HOSPITAL"].Visible = false;
