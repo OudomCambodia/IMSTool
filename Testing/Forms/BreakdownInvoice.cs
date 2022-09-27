@@ -35,9 +35,9 @@ namespace Testing.Forms
         private void btnOptionI_Click(object sender, EventArgs e)
         {
 
-            if (tbInvoiceNo.Text == "" || tbInvoiceNo.Text.Substring(0,1).ToUpper()=="C" )
+            if (tbInvoiceNo.Text == ""  )
             {
-                Msgbox.Show("Invoice No is required OR Can not issue Breakdown Invoice for CreditNote! ");
+                Msgbox.Show("Invoice No is required!");
             }
             else
             {
@@ -116,7 +116,7 @@ namespace Testing.Forms
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
-            #region OptionI Invoice
+            #region Option Invoice
             //Option I
             frmViewInstructionNote frmReport = new frmViewInstructionNote();
             ReportClass rpt = new ReportClass();
