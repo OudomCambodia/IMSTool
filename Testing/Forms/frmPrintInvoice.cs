@@ -274,7 +274,11 @@ namespace Testing.Forms
                     {
                         string accountcode = dr["ACCOUNT_CODE"].ToString();
                         string producer = accountcode.Split('/')[1], cuscode = accountcode.Split('/')[2];
+                        //update add condition for US Embasssy only as requested from J Cheata - update Southeane Email 28-09-2022
+                        if (dt.Rows[0]["CHK_USEMBASSY"].ToString() != "US_EMBASSY")
                         dtTemp = crud.ExecQuery("SELECT DISTINCT BANK_NAME,TRANFER_TO,ACCOUNT_NO,SWIFT_CODE FROM VIEW_PAYMENT_INSTRUCTION WHERE CODE = '" + producer + "' OR CODE = '" + cuscode + "'");
+                        else
+                            dtTemp = crud.ExecQuery("SELECT DISTINCT BANK_NAME,TRANFER_TO,ACCOUNT_NO,SWIFT_CODE FROM VIEW_PAYMENT_INSTRUCTION WHERE CODE = 'C000040017'");
                         if (dtTemp.Rows.Count > 0) //has payment instruction set
                         {
 
