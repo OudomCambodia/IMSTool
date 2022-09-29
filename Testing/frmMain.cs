@@ -228,7 +228,7 @@ namespace Testing
 
             //object O = Resources.ResourceManager.GetObject("Logo_Red");
             //this.BackgroundImage = (Image)(O);
-            object O = Resources.ResourceManager.GetObject("pchumbenwork");
+            object O = Resources.ResourceManager.GetObject("saveearthh");
             this.BackgroundImage = (Image)(O);
             //object O = Resources.ResourceManager.GetObject("Logo_Red");
             //this.BackgroundImage = (Image)(O);

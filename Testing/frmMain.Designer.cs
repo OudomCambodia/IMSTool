@@ -57,6 +57,7 @@
             this.tsPremiumRegister = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPMAllDept = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPMAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.CusProfitV2 = new System.Windows.Forms.ToolStripMenuItem();
             this.autoMonthlyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InvoiceSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,7 +108,6 @@
             this.niIMSTool = new System.Windows.Forms.NotifyIcon(this.components);
             this.ctmsQuitApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CusProfitV2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -480,6 +480,15 @@
             this.tsPMAdmin.Size = new System.Drawing.Size(154, 22);
             this.tsPMAdmin.Text = "Admin";
             this.tsPMAdmin.Click += new System.EventHandler(this.tsPMAdmin_Click);
+            // 
+            // CusProfitV2
+            // 
+            this.CusProfitV2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.CusProfitV2.Enabled = false;
+            this.CusProfitV2.ForeColor = System.Drawing.Color.White;
+            this.CusProfitV2.Name = "CusProfitV2";
+            this.CusProfitV2.Size = new System.Drawing.Size(194, 22);
+            this.CusProfitV2.Text = "Customer Profitability";
             // 
             // autoMonthlyReportToolStripMenuItem
             // 
@@ -1146,21 +1155,12 @@
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click_1);
             // 
-            // CusProfitV2
-            // 
-            this.CusProfitV2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.CusProfitV2.Enabled = false;
-            this.CusProfitV2.ForeColor = System.Drawing.Color.White;
-            this.CusProfitV2.Name = "CusProfitV2";
-            this.CusProfitV2.Size = new System.Drawing.Size(194, 22);
-            this.CusProfitV2.Text = "Customer Profitability";
-            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.BackgroundImage = global::Testing.Properties.Resources.pchumbenwork;
+            this.BackgroundImage = global::Testing.Properties.Resources.saveearthh;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
             this.Controls.Add(this.pnInvoice);
