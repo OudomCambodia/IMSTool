@@ -126,8 +126,8 @@ namespace Testing.Forms
                             //    txtAge.Text = Convert.ToString(a);
                             //}
                             month = DateTime.Today.Month - Convert.ToInt32(dr["month"].ToString());
-                            txtAge.Text = (a != 0) ? Convert.ToString(a) : Convert.ToString(month) + " month(s)";
-                           
+                            //txtAge.Text = (a != 0) ? Convert.ToString(a) : Convert.ToString(month) + " month(s)";
+                            txtAge.Text = a.ToString();
                             
                             txtGender.Text = dr["Gender"].ToString().ToUpper();
                             txtPlan.Text = dr["Plan"].ToString().ToUpper();
