@@ -112,8 +112,8 @@ namespace Testing.Forms
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
             //Update 11-Jul-19 & 12-Jul-19 (Improve BCC)
-            //if (mail_add_claim_team == String.Empty) message.Bcc.Add(new MailAddress(mail_add));
-            //else message.Bcc.Add(new MailAddress(mail_add_claim_team));
+            if (mail_add_claim_team == String.Empty) message.Bcc.Add(new MailAddress(mail_add));
+            else message.Bcc.Add(new MailAddress(mail_add_claim_team));
 
             if ((mail_add_claim_team != String.Empty && mail_add_claim_team.Trim() == "gpa@forteinsurance.com"))
             {
@@ -125,6 +125,7 @@ namespace Testing.Forms
                 if (mail_add_claim_team != String.Empty)
                     message.Bcc.Add(new MailAddress(mail_add_claim_team));
             }
+
             //End of Update
 
             //Update 16-Aug-19 (Attach File)
