@@ -54,9 +54,11 @@ namespace Testing
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                Application.Exit();
+            Environment.Exit(0);
+
+            //try
+            //{
+                //Application.Exit();
                 //if (systemShutdown)
                 //    e.Cancel = false;
                 //else
@@ -65,11 +67,11 @@ namespace Testing
                 //    WindowState = FormWindowState.Minimized;
                 //    ShowInTaskbar = false;
                 //}
-            }
-            catch (Exception ex)
-            {
-                Msgbox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+                //Msgbox.Show(ex.Message);
+            //}
         }
 
         private void btnRiskSearch_Click(object sender, EventArgs e)
@@ -755,20 +757,20 @@ namespace Testing
 
         private void niIMSTool_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ShowInTaskbar = true;
-            niIMSTool.Visible = false;
-            WindowState = FormWindowState.Maximized;
+            //ShowInTaskbar = true;
+            //niIMSTool.Visible = false;
+            //WindowState = FormWindowState.Maximized;
         }
 
         private void frmMain_Resize(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
-            {
-                ShowInTaskbar = true;
-                niIMSTool.Visible = true;
-            }
-            if (WindowState == FormWindowState.Maximized)
-                ShowInTaskbar = true;
+            //if (WindowState == FormWindowState.Minimized)
+            //{
+            //    ShowInTaskbar = true;
+            //    niIMSTool.Visible = true;
+            //}
+            //if (WindowState == FormWindowState.Maximized)
+            //    ShowInTaskbar = true;
         }
 
         private void quitToolStripMenuItem_Click_1(object sender, EventArgs e)
