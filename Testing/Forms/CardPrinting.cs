@@ -1162,8 +1162,8 @@ namespace Testing.Forms
                         Reports.CPAE_card rpt1 = new Reports.CPAE_card();
                         //Reports.EngineeringLettereMAIL rpt = new Reports.EngineeringLettereMAIL();
                         rpt1.SetDataSource(dt1);
-                        rpt1.SetParameterValue("EFFECTTIVED", Convert.ToDateTime(row["RISK_VALID_FROM"].ToString()).ToString("dd-MMMM-yyyy").Replace('-', ' ').ToUpper());
-                        rpt1.SetParameterValue("EXPIRYD", Convert.ToDateTime(row["RISK_VALID_TO"].ToString()).ToString("dd-MMMM-yyyy").Replace('-', ' ').ToUpper());
+                        rpt1.SetParameterValue("EFFECTTIVED", Common.strToDate(row["RISK_VALID_FROM"].ToString()).ToString("dd MMMM yyyy").ToUpper());
+                        rpt1.SetParameterValue("EXPIRYD", Common.strToDate(row["RISK_VALID_TO"].ToString()).ToString("dd MMMM yyyy").ToUpper());
 
                         CrystalDecisions.Shared.ExportOptions CrExportOptions;
                         CrystalDecisions.Shared.DiskFileDestinationOptions CrDiskFileDestinationOptions = new CrystalDecisions.Shared.DiskFileDestinationOptions();
@@ -1333,7 +1333,9 @@ public class Common
         {
             dates = date.Split('-');
         }
-        return (Convert.ToDateTime(dates[2] + "/" + dates[1] + "/" + dates[0]));
+        //return (Convert.ToDateTime(dates[2] + "/" + dates[1] + "/" + dates[0]));
+        return new DateTime(Convert.ToInt32(dates[2]), Convert.ToInt32(dates[1]), Convert.ToInt32(dates[0]));
+
     }
     //date to string
     public static string DateToStr(DateTime date)
