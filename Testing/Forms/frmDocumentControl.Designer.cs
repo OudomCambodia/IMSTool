@@ -45,6 +45,7 @@
             this.pReject = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.lblNotiCount = new System.Windows.Forms.Label();
+            this.btnNotification = new System.Windows.Forms.PictureBox();
             this.btnPendingAtDP = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -75,26 +76,25 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbFilterdgvDoc = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblTot = new System.Windows.Forms.Label();
-            this.lblSel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.timerNoti = new System.Windows.Forms.Timer(this.components);
             this.btnReturn = new Testing.cus_button();
             this.btnReassignDP = new Testing.cus_button();
             this.btnChangeStatus = new Testing.cus_button();
             this.btnCloseReopen = new Testing.cus_button();
             this.btnAddDoc = new Testing.cus_button();
-            this.btnNotification = new System.Windows.Forms.PictureBox();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
+            this.lblTot = new System.Windows.Forms.Label();
+            this.lblSel = new System.Windows.Forms.Label();
             this.btnExportRecord = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnDPPendingRemark = new System.Windows.Forms.Button();
             this.btnManageCrono = new System.Windows.Forms.Button();
             this.btnReverse = new System.Windows.Forms.Button();
             this.btnRefreshdgv = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.timerNoti = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pDoc.SuspendLayout();
@@ -103,10 +103,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).BeginInit();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).BeginInit();
             this.panel3.SuspendLayout();
             this.gbAllRecordOption.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -330,6 +330,19 @@
             this.lblNotiCount.Text = "99";
             this.lblNotiCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblNotiCount.TextChanged += new System.EventHandler(this.lblNotiCount_TextChanged);
+            // 
+            // btnNotification
+            // 
+            this.btnNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotification.Image = global::Testing.Properties.Resources.notification_unscreen;
+            this.btnNotification.Location = new System.Drawing.Point(1033, 6);
+            this.btnNotification.Name = "btnNotification";
+            this.btnNotification.Size = new System.Drawing.Size(32, 32);
+            this.btnNotification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNotification.TabIndex = 12;
+            this.btnNotification.TabStop = false;
+            this.btnNotification.Click += new System.EventHandler(this.btnNotification_Click);
             // 
             // btnPendingAtDP
             // 
@@ -694,68 +707,6 @@
             this.panel2.Size = new System.Drawing.Size(1087, 41);
             this.panel2.TabIndex = 44;
             // 
-            // lblTot
-            // 
-            this.lblTot.AutoSize = true;
-            this.lblTot.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTot.ForeColor = System.Drawing.Color.White;
-            this.lblTot.Location = new System.Drawing.Point(832, 20);
-            this.lblTot.Name = "lblTot";
-            this.lblTot.Size = new System.Drawing.Size(0, 18);
-            this.lblTot.TabIndex = 0;
-            // 
-            // lblSel
-            // 
-            this.lblSel.AutoSize = true;
-            this.lblSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSel.ForeColor = System.Drawing.Color.White;
-            this.lblSel.Location = new System.Drawing.Point(832, 3);
-            this.lblSel.Name = "lblSel";
-            this.lblSel.Size = new System.Drawing.Size(0, 18);
-            this.lblSel.TabIndex = 0;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(763, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(45, 18);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Total:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(763, 3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 18);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Selected:";
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1087, 46);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Document Control Tracking";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // timerNoti
-            // 
-            this.timerNoti.Interval = 600000;
-            this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
-            // 
             // btnReturn
             // 
             this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
@@ -821,19 +772,6 @@
             this.btnAddDoc.Text = "Add Document";
             this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
-            // btnNotification
-            // 
-            this.btnNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNotification.Image = global::Testing.Properties.Resources.notification_unscreen;
-            this.btnNotification.Location = new System.Drawing.Point(1033, 6);
-            this.btnNotification.Name = "btnNotification";
-            this.btnNotification.Size = new System.Drawing.Size(32, 32);
-            this.btnNotification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnNotification.TabIndex = 12;
-            this.btnNotification.TabStop = false;
-            this.btnNotification.Click += new System.EventHandler(this.btnNotification_Click);
-            // 
             // btnPrint
             // 
             this.btnPrint.BackgroundImage = global::Testing.Properties.Resources.print;
@@ -858,6 +796,26 @@
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
+            // lblTot
+            // 
+            this.lblTot.AutoSize = true;
+            this.lblTot.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTot.ForeColor = System.Drawing.Color.White;
+            this.lblTot.Location = new System.Drawing.Point(832, 20);
+            this.lblTot.Name = "lblTot";
+            this.lblTot.Size = new System.Drawing.Size(0, 18);
+            this.lblTot.TabIndex = 0;
+            // 
+            // lblSel
+            // 
+            this.lblSel.AutoSize = true;
+            this.lblSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSel.ForeColor = System.Drawing.Color.White;
+            this.lblSel.Location = new System.Drawing.Point(832, 3);
+            this.lblSel.Name = "lblSel";
+            this.lblSel.Size = new System.Drawing.Size(0, 18);
+            this.lblSel.TabIndex = 0;
+            // 
             // btnExportRecord
             // 
             this.btnExportRecord.BackgroundImage = global::Testing.Properties.Resources.export;
@@ -869,6 +827,28 @@
             this.tooltip.SetToolTip(this.btnExportRecord, "Export All Records");
             this.btnExportRecord.UseVisualStyleBackColor = true;
             this.btnExportRecord.Click += new System.EventHandler(this.btnExportRecord_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(763, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(45, 18);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Total:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(763, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 18);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Selected:";
             // 
             // btnDPPendingRemark
             // 
@@ -918,6 +898,26 @@
             this.btnRefreshdgv.UseVisualStyleBackColor = true;
             this.btnRefreshdgv.Click += new System.EventHandler(this.btnRefreshOpendgv_Click);
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(1087, 46);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Document Control Tracking";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // timerNoti
+            // 
+            this.timerNoti.Interval = 90000;
+            this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
+            // 
             // frmDocumentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -942,13 +942,13 @@
             this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.gbAllRecordOption.ResumeLayout(false);
             this.gbAllRecordOption.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNotification)).EndInit();
             this.ResumeLayout(false);
 
         }
