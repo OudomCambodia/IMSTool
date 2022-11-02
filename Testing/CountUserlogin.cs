@@ -113,7 +113,7 @@ namespace Testing
                                 }
                                 catch (Exception ex)
                                 {
-                                    continue;
+                                    break;
                                 }
                             }
                         }
