@@ -34,37 +34,84 @@ namespace Testing
            
            return false;
         }
-        private void butQuery_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                label3.Text = "";
-                if (txtCusCode.Text.Trim().ToString() == "")
-                {
-                    Msgbox.Show("Customer Code must be input before seaching.");
-                    return;
-                }
+       private void butQuery_Click(object sender, EventArgs e)
+       {
+           
+           
 
-                if (CboGroupCustomer.SelectedIndex != 0)
-                {
-                    if (CheckGroupCustomerExist() == false)
-                    {
-                        Msgbox.Show("There is no data for the selected Group Customer " +CboGroupCustomer.Text+ ".");
-                        return;
-                    }
-                }
-                System.Diagnostics.Stopwatch watch = new Stopwatch();
-                watch.Start();
-                string sql = "INSERT INTO user_print_history (user_name, print_datetime, filter2, type) VALUES ('" + UserName + "', TO_DATE('" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "','YYYY/MM/DD HH24:MI:SS'), '" + txtCusCode.Text + ";;;" + txtCusName.Text + "', '3')";
-                crud.ExecNonQuery(sql);
-                query();
-                watch.Stop();
-                label3.Text = watch.Elapsed.ToString();
-            }
-            catch (Exception ex) {
-                Msgbox.Show(ex.Message);
-            }
-        }
+               try
+               {
+                   label3.Text = "";
+                   if (txtCusCode.Text.Trim().ToString() == "")
+                   {
+                       Msgbox.Show("Customer Code must be input before seaching.");
+                       return;
+                   }
+
+                   if (CboGroupCustomer.SelectedIndex != 0)
+                   {
+                       if (CheckGroupCustomerExist() == false)
+                       {
+                           Msgbox.Show("There is no data for the selected Group Customer " + CboGroupCustomer.Text + ".");
+                           return;
+                       }
+                   }
+                   if (chCusV2.Checked == false || cbMainClass.SelectedIndex == -1)
+                   {
+                   System.Diagnostics.Stopwatch watch = new Stopwatch();
+                   watch.Start();
+                   string sql = "INSERT INTO user_print_history (user_name, print_datetime, filter2, type) VALUES ('" + UserName + "', TO_DATE('" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "','YYYY/MM/DD HH24:MI:SS'), '" + txtCusCode.Text + ";;;" + txtCusName.Text + "', '3')";
+                   crud.ExecNonQuery(sql);
+                   query();
+                   watch.Stop();
+                   label3.Text = watch.Elapsed.ToString();
+                   }
+                   else
+                   {
+                       try
+                       {
+                           Cursor.Current = Cursors.WaitCursor;
+                           string chkCus = "";
+                           if (txtCusCode.Text != "")
+                           {
+                               chkCus = txtCusCode.Text;
+                               string[] Keys = new string[] { "chkCus", "Customer_Code", "Customer_Name" };
+                               //string[] Values = new string[] { sp_type, dtpFrom.Value.ToString("yyyy/MM/dd"), dtpTo.Value.ToString("yyyy/MM/dd") };
+                               string[] Values = new string[] { chkCus, txtCusCode.Text.ToUpper(), "" };
+                               dt = crud.ExecSP_OutPara("USER_CUSPROFITV2", Keys, Values);
+                           }
+                           else if (txtCusName.Text != "")
+                           {
+                               chkCus = txtCusName.Text;
+                               string[] Keys = new string[] { "chkCus", "Customer_Code", "Customer_Name" };
+                               //string[] Values = new string[] { sp_type, dtpFrom.Value.ToString("yyyy/MM/dd"), dtpTo.Value.ToString("yyyy/MM/dd") };
+                               string[] Values = new string[] { chkCus, "", txtCusName.Text };
+                               dt = crud.ExecSP_OutPara("USER_CUSPROFITV2", Keys, Values);
+                           }
+                           if (dt.Rows.Count == 0)
+                           {
+                               Msgbox.Show("No data found!");
+                           }
+                           else
+                           {
+                               Msgbox.Show("data exist");
+                           }
+                       }
+                       catch (Exception ex)
+                       {
+                           Msgbox.Show(ex.Message);
+                       }
+
+                   }
+               
+               }catch (Exception ex)
+               {
+                   Msgbox.Show(ex.Message);
+               }
+           
+           
+           
+       }
         private void query()
         {
             try
@@ -144,6 +191,17 @@ namespace Testing
             CboGroupCustomer.ValueMember = "GRP_CODE";
             CboGroupCustomer.DisplayMember = "GRP_DESCRIPTION";
             CboGroupCustomer.DataSource = dtCombox;
+            //Bind Combobox for MainClasss
+
+            DataTable dtMainClass = crud.ExecQuery("select CLA_DESCRIPTION from uw_r_classes order by CLA_DESCRIPTION asc");
+            cbMainClass.Items.Insert(0,"Default");
+            if (dtMainClass.Rows.Count > 0)
+            {
+                for (int i = 0; i < dtMainClass.Rows.Count; i++)
+                {
+                    cbMainClass.Items.Insert(i+1, dtMainClass.Rows[i][0].ToString());
+                }
+            }
         }     
         private void btnExcel_Click(object sender, EventArgs e)
         {
@@ -163,6 +221,24 @@ namespace Testing
         {
             txtCusCode.Focus();
         }
+
+        
+
+        private void chCusV2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chCusV2.Checked)
+            {
+                cbMainClass.Visible = true;
+                MainClass.Visible = true;
+            }
+            else
+            {
+                cbMainClass.Visible = false;
+                MainClass.Visible = false;
+            }
+        }
+
+       
     
     }
 }

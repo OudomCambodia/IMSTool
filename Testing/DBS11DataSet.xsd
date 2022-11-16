@@ -629,6 +629,7 @@
               <xs:element name="MEMBER_ID" msprop:Generator_ColumnVarNameInTable="columnMEMBER_ID" msprop:Generator_ColumnPropNameInRow="MEMBER_ID" msprop:Generator_ColumnPropNameInTable="MEMBER_IDColumn" msprop:Generator_UserColumnName="MEMBER_ID" type="xs:string" minOccurs="0" />
               <xs:element name="RISK_VALID_FROM" msprop:Generator_ColumnVarNameInTable="columnRISK_VALID_FROM" msprop:Generator_ColumnPropNameInRow="RISK_VALID_FROM" msprop:Generator_ColumnPropNameInTable="RISK_VALID_FROMColumn" msprop:Generator_UserColumnName="RISK_VALID_FROM" type="xs:string" minOccurs="0" />
               <xs:element name="RISK_VALID_TO" msprop:Generator_ColumnVarNameInTable="columnRISK_VALID_TO" msprop:Generator_ColumnPropNameInRow="RISK_VALID_TO" msprop:Generator_ColumnPropNameInTable="RISK_VALID_TOColumn" msprop:Generator_UserColumnName="RISK_VALID_TO" type="xs:string" minOccurs="0" />
+              <xs:element name="OPTIONAL_CARE" msprop:Generator_ColumnVarNameInTable="columnOPTIONAL_CARE" msprop:Generator_ColumnPropNameInRow="OPTIONAL_CARE" msprop:Generator_ColumnPropNameInTable="OPTIONAL_CAREColumn" msprop:Generator_UserColumnName="OPTIONAL_CARE" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -647,6 +648,25 @@
               <xs:element name="MEMBER_ID" msprop:Generator_ColumnVarNameInTable="columnMEMBER_ID" msprop:Generator_ColumnPropNameInRow="MEMBER_ID" msprop:Generator_ColumnPropNameInTable="MEMBER_IDColumn" msprop:Generator_UserColumnName="MEMBER_ID" type="xs:string" minOccurs="0" />
               <xs:element name="RISK_VALID_FROM" msprop:Generator_ColumnVarNameInTable="columnRISK_VALID_FROM" msprop:Generator_ColumnPropNameInRow="RISK_VALID_FROM" msprop:Generator_ColumnPropNameInTable="RISK_VALID_FROMColumn" msprop:Generator_UserColumnName="RISK_VALID_FROM" type="xs:string" minOccurs="0" />
               <xs:element name="RISK_VALID_TO" msprop:Generator_ColumnVarNameInTable="columnRISK_VALID_TO" msprop:Generator_ColumnPropNameInRow="RISK_VALID_TO" msprop:Generator_ColumnPropNameInTable="RISK_VALID_TOColumn" msprop:Generator_UserColumnName="RISK_VALID_TO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CUSPROFITV2" msprop:Generator_TableClassName="CUSPROFITV2DataTable" msprop:Generator_TableVarName="tableCUSPROFITV2" msprop:Generator_RowChangedName="CUSPROFITV2RowChanged" msprop:Generator_TablePropName="CUSPROFITV2" msprop:Generator_RowDeletingName="CUSPROFITV2RowDeleting" msprop:Generator_RowChangingName="CUSPROFITV2RowChanging" msprop:Generator_RowEvHandlerName="CUSPROFITV2RowChangeEventHandler" msprop:Generator_RowDeletedName="CUSPROFITV2RowDeleted" msprop:Generator_RowClassName="CUSPROFITV2Row" msprop:Generator_UserTableName="CUSPROFITV2" msprop:Generator_RowEvArgName="CUSPROFITV2RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INSUREDCODE" msprop:Generator_ColumnVarNameInTable="columnINSUREDCODE" msprop:Generator_ColumnPropNameInRow="INSUREDCODE" msprop:Generator_ColumnPropNameInTable="INSUREDCODEColumn" msprop:Generator_UserColumnName="INSUREDCODE" type="xs:string" minOccurs="0" />
+              <xs:element name="INSUREDNAME" msprop:Generator_ColumnVarNameInTable="columnINSUREDNAME" msprop:Generator_ColumnPropNameInRow="INSUREDNAME" msprop:Generator_ColumnPropNameInTable="INSUREDNAMEColumn" msprop:Generator_UserColumnName="INSUREDNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PRODUCT" msprop:Generator_ColumnVarNameInTable="columnPRODUCT" msprop:Generator_ColumnPropNameInRow="PRODUCT" msprop:Generator_ColumnPropNameInTable="PRODUCTColumn" msprop:Generator_UserColumnName="PRODUCT" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_013" msprop:Generator_ColumnVarNameInTable="column2013" msprop:Generator_ColumnPropNameInRow="_2013" msprop:Generator_ColumnPropNameInTable="_2013Column" msprop:Generator_UserColumnName="2013" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_014" msprop:Generator_ColumnVarNameInTable="column2014" msprop:Generator_ColumnPropNameInRow="_2014" msprop:Generator_ColumnPropNameInTable="_2014Column" msprop:Generator_UserColumnName="2014" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_015" msprop:Generator_ColumnVarNameInTable="column2015" msprop:Generator_ColumnPropNameInRow="_2015" msprop:Generator_ColumnPropNameInTable="_2015Column" msprop:Generator_UserColumnName="2015" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_016" msprop:Generator_ColumnVarNameInTable="column2016" msprop:Generator_ColumnPropNameInRow="_2016" msprop:Generator_ColumnPropNameInTable="_2016Column" msprop:Generator_UserColumnName="2016" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_017" msprop:Generator_ColumnVarNameInTable="column2017" msprop:Generator_ColumnPropNameInRow="_2017" msprop:Generator_ColumnPropNameInTable="_2017Column" msprop:Generator_UserColumnName="2017" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_018" msprop:Generator_ColumnVarNameInTable="column2018" msprop:Generator_ColumnPropNameInRow="_2018" msprop:Generator_ColumnPropNameInTable="_2018Column" msprop:Generator_UserColumnName="2018" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_019" msprop:Generator_ColumnVarNameInTable="column2019" msprop:Generator_ColumnPropNameInRow="_2019" msprop:Generator_ColumnPropNameInTable="_2019Column" msprop:Generator_UserColumnName="2019" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_020" msprop:Generator_ColumnVarNameInTable="column2020" msprop:Generator_ColumnPropNameInRow="_2020" msprop:Generator_ColumnPropNameInTable="_2020Column" msprop:Generator_UserColumnName="2020" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_021" msprop:Generator_ColumnVarNameInTable="column2021" msprop:Generator_ColumnPropNameInRow="_2021" msprop:Generator_ColumnPropNameInTable="_2021Column" msprop:Generator_UserColumnName="2021" type="xs:string" minOccurs="0" />
+              <xs:element name="_x0032_022" msprop:Generator_ColumnVarNameInTable="column2022" msprop:Generator_ColumnPropNameInRow="_2022" msprop:Generator_ColumnPropNameInTable="_2022Column" msprop:Generator_UserColumnName="2022" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
