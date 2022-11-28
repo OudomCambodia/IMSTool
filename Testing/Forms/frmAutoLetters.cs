@@ -1053,7 +1053,7 @@ namespace Testing.Forms
                                 message.CC.Add(new MailAddress(s.Trim()));
                         }
                     }
-                    
+
 
                     if (tbClReCC.Text.Trim() != "")
                     {

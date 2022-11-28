@@ -21,6 +21,7 @@ namespace Testing.Forms
 {
     public partial class frmSendEmailClaimDet : Form
     {
+        //DataTable dt_insured;
         public string UserName = "Default";
         public string sp_type = "Ack";
         public string remind = "";
@@ -75,7 +76,7 @@ namespace Testing.Forms
             using (StreamReader reader = new StreamReader("Html/2020Email.html"))//Update mail signature 2020
             {
                 body = reader.ReadToEnd();
-            }
+           }
             body = body.Replace("{text}", content);
             body = body.Replace("{department}", "A&H Claims Unit | Underwriting Department");
             //Update 08-Jul-19
@@ -91,6 +92,7 @@ namespace Testing.Forms
             else
             {
                 body = body.Replace("{username}", UserFullName);
+         
                 body = body.Replace("{user_email}", mail_add);
             }
             //SmtpClient client = new SmtpClient(smtpSer);
@@ -125,6 +127,7 @@ namespace Testing.Forms
                 if (mail_add_claim_team != String.Empty)
                     message.Bcc.Add(new MailAddress(mail_add_claim_team));
             }
+
 
             //End of Update
 
@@ -360,6 +363,7 @@ namespace Testing.Forms
         private void frmSendEmailClaimDet_Load(object sender, EventArgs e)
         {
             attachfile.Clear();
+           
 
             //setting username
             UserName = sec.UserName;
@@ -800,8 +804,21 @@ namespace Testing.Forms
                     if (res == System.Windows.Forms.DialogResult.No)
                         return;
 
+
+                    //Update sending with insured name for ACLEDA employee dependant - Claim Team - Southeane 28-11-2022
+                    //Update on insured name for Acleda Employee Dependant with Name - Theane
+
+                    DataTable dt_insured = crud.ExecQuery("select trim(regexp_substr(ADD_INSURED, '[^/]+$', 1, 1)) as insured_name from (" +
+                                 "select * from (" +
+                                 "select PK_MONTHLY_REPORTS.FN_GET_POLICY_COMMON_INFO(INT_POLICY_SEQ,'ADDITIONAL INSURED') as ADD_INSURED " +
+                                 "from cl_t_intimation " +
+                                 "where INT_CLAIM_NO =  '" + lbClaimNo.Text + "') " +
+                                 "where ADD_INSURED like '%ACLEDA%DEPENDANT%') "
+                                );
+
+                    //////
                     //get the title
-                    string subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, UserFullName }).ToString();
+                    string subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, dt_insured.Rows[0][0].ToString().ToUpper() }).ToString();
 
                     Cursor.Current = Cursors.WaitCursor;
 
@@ -816,7 +833,7 @@ namespace Testing.Forms
 
                     //call stored procedure to keep history
                     crud.ExecSP_NoOutPara("sp_user_claim_input", new string[] { "cl_input_type", "cl_e_claim", "cl_e_type", "cl_e_rec", "cl_e_cont", "cl_e_doc", "cl_e_req", "cl_e_rem", "cl_e_non", "cl_e_re", "cl_e_dr", "cl_e_cc", "cl_e_rec_date", "cl_e_user" },
-                        new string[] { "Insert", lbClaimNo.Text, sp_type, tbReceiver.Text, content, tickedDoc, req_no, remind, tbNonPaid.Text, resend ? "Y" : "N", doc_rec ? "Y" : "N", tbCC.Text, dpNoti.Value.ToString("dd-MMM-yyyy"), UserName });
+                        new string[] { "Insert", lbClaimNo.Text, sp_type, tbReceiver.Text, content, tickedDoc, req_no, remind, tbNonPaid.Text, resend ? "Y" : "N", doc_rec ? "Y" : "N", tbCC.Text, dpNoti.Value.ToString("dd-MMM-yyyy"), dt_insured.Rows[0][0].ToString().ToUpper() });
                     //call stored procedure to update Doc Received
                     if (sp_type == "Rem")
                     {

@@ -265,7 +265,8 @@ namespace Testing.Forms
                                     }
                                     foreach (DataRow rw in newrisk.Rows)
                                     {
-                                        Mydb.ExecuteMySql("sp_hns_insert_excess_docctrl", "insured_member", rw[1], "policy_holder", rw[3], "policy_no", rw[4], "valid_from", Common.strToDate(rw[6].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[2], "plan_type", rw[5], "excess", rw[10], "created_by", username, "print_number", maxnum, "insured_id", rw[0], "doc_code", RefID);
+                                        Mydb.ExecuteMySql("sp_hns_insert_excess_docctrl", "insured_member", rw[1], "policy_holder", rw[3], "policy_no", rw[4], "valid_from", Common.strToDate(rw[6].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[2], "plan_type", rw[5], "excess", rw[10], "created_by", username, "print_number", maxnum, "insured_id", rw[0], "doc_code", RefID, "optional_care", rw[11]);
+                                        //Mydb.ExecuteMySql("sp_hns_insert_excess", "insured_member", rw[2], "policy_holder", rw[4], "policy_no", rw[5], "valid_from", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[8].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[3], "plan_type", rw[6], "excess", Excess ? rw[11] : "", "created_by", username, "print_number", maxnum, "insured_id", rw[1], "optional_care", rw[12]);
                                     }
                                 }
 

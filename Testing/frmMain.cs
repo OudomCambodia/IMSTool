@@ -230,7 +230,7 @@ namespace Testing
 
             //object O = Resources.ResourceManager.GetObject("Logo_Red");
             //this.BackgroundImage = (Image)(O);
-            object O = Resources.ResourceManager.GetObject("saveearthh");
+            object O = Resources.ResourceManager.GetObject("ko");
             this.BackgroundImage = (Image)(O);
             //object O = Resources.ResourceManager.GetObject("Logo_Red");
             //this.BackgroundImage = (Image)(O);

@@ -67,7 +67,7 @@ namespace Testing.Forms
 
             if (policyno != "BHP" && policyno != "CYC" && policyno != "VCM" && policyno != "VPC" && policyno != "HNS" && policyno != "GPA" && policyno != "MCW" && policyno != "PAC" && policyno != "PAE")
             {
-                Msgbox.Show("This Policy No is not available for printing in this system. Please contact System Admin or Mr. Soeung Tola (Ext. 488) for more details.");
+                Msgbox.Show("This Policy No is not available for printing in this system. Please contact System Admin or IMS Team (Ext. 493) for more details.");
                 txtPolicyNo.Focus();
                 return false;
             }
@@ -336,7 +336,7 @@ namespace Testing.Forms
 
             return dt;
         }
-
+       
         private void btnPreview_Click(object sender, EventArgs e)
         {
             try
@@ -527,7 +527,7 @@ namespace Testing.Forms
                 }
                 foreach (DataRow rw in dtChecked.Rows)
                 {
-                    Mydb.ExecuteMySql("sp_hns_insert_excess", "insured_member", rw[2], "policy_holder", rw[4], "policy_no", rw[5], "valid_from", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[8].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[3], "plan_type", rw[6], "excess", Excess ? rw[11] : "", "created_by", username, "print_number", maxnum, "insured_id", rw[1]);
+                    Mydb.ExecuteMySql("sp_hns_insert_excess", "insured_member", rw[2], "policy_holder", rw[4], "policy_no", rw[5], "valid_from", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[8].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[3], "plan_type", rw[6], "excess", Excess ? rw[11] : "", "created_by", username, "print_number", maxnum, "insured_id", rw[1],"optional_care", rw[12]);
                 }
                 MSG();
             }

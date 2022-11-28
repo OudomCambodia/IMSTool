@@ -500,6 +500,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmRemindLetterEng";
             this.Text = "Reminding Letter-Engineering";
             this.Load += new System.EventHandler(this.frmRemindLetterEng_Load);

@@ -250,7 +250,7 @@ namespace Testing.Forms
             dt1.Columns.Add("PATH");
             DataTable dTemp = new DataTable();
             dTemp = dt1.Clone();
-
+            //int i = 0;
             foreach (DataGridViewRow row in dgvResult.Rows)
             {
                 if (row.Cells[0].Value != null)
@@ -265,7 +265,8 @@ namespace Testing.Forms
                         }
                         else
                         {
-                            
+                            //if (i == 74) Msgbox.Show("hellow");
+                            //i++;
                             if (filep == "")
                             {
                                 filep = directchoosedlg.SelectedPath;
@@ -391,13 +392,13 @@ namespace Testing.Forms
                             body = body.Replace("{username}", UserFullName);
                             body = body.Replace("{user_email}", mail_add);
                             }
-                            else
-                            {
-                                body = body.Replace("{text}", content);
-                                //body = body.Replace("{department}", d1.Rows[0][0].ToString());
-                                body = body.Replace("{username}", UserFullName);
-                                body = body.Replace("{user_email}", mail_add);
-                            }
+                            //else
+                            //{
+                            //    body = body.Replace("{text}", content);
+                            //    //body = body.Replace("{department}", d1.Rows[0][0].ToString());
+                            //    body = body.Replace("{username}", UserFullName);
+                            //    body = body.Replace("{user_email}", mail_add);
+                            //}
                             //SmtpClient client = new SmtpClient(smtpSer);
 
                             MailMessage message = new MailMessage();
@@ -413,18 +414,22 @@ namespace Testing.Forms
                             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
                             //get Account Handler email, CC
+
+
                             string agentcode = r["INTERME_CODE"].ToString(), ahcode = r["ACC_HANDLER"].ToString(), selectedcode;
                             if (agentcode[0] == '0' || ahcode == "U-BNK") //001,002,003 => no agent/broker          //U-BNK => bank 
                                 selectedcode = ahcode;
                             else //agent/broker...
                                 selectedcode = agentcode;
-                            
-                            DataTable  dtuser = crud.ExecQuery("SELECT MAIL_TO,MAIL_CC FROM USER_PE_EMAIL_ENGLETTER WHERE CODE = '" + selectedcode + "'");
+
+                            DataTable dtuser = crud.ExecQuery("SELECT MAIL_TO,MAIL_CC FROM USER_PE_EMAIL_ENGLETTER WHERE CODE = '" + selectedcode + "'");
                             if (dtuser.Rows.Count > 0)
                             {
                                 tbTo.Text = dtuser.Rows[0]["MAIL_TO"].ToString();
                                 tbCC.Text = dtuser.Rows[0]["MAIL_CC"].ToString();
                             }
+
+
                             //
 
                             if (tbTo.Text.Trim() != "")
@@ -442,6 +447,8 @@ namespace Testing.Forms
                             message.Subject = message.Subject.Replace("%PolPeriodTo%", r["POL_PERIOD_TO"].ToString());
 
                             ////default CC auto PE team
+
+
                             DataTable dtTemp = new DataTable();
                             dtTemp = crud.ExecQuery("SELECT MAIL_CC FROM USER_PE_EMAIL WHERE TEAM = 'Default'");
                             if (dtTemp.Rows.Count > 0)
@@ -453,6 +460,8 @@ namespace Testing.Forms
                                         message.CC.Add(new MailAddress(s.Trim()));
                                 }
                             }
+
+
                             ////
 
                             if (tbCC.Text.Trim() != "")
