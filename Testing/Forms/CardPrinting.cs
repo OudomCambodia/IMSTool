@@ -1327,6 +1327,11 @@ public class Common
     /// </sumamry>
     public static DateTime strToDate(string date)
     {
+        if (string.IsNullOrEmpty(date))
+        {
+            return Convert.ToDateTime("1900-01-01 00:00:00");
+        }
+
         // convert dd/MM/YYYY to YYYY/MM/dd
         string[] dates = date.Split('/');
         if (dates.Length == 1)
