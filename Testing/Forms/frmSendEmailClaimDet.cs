@@ -817,8 +817,17 @@ namespace Testing.Forms
                                 );
 
                     //////
+                    string subject;
+                    if (dt_insured.Rows.Count <= 0)
+                    {
+                        subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, "" }).ToString();
+                    }
+                    else
+                    {
+                         subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, dt_insured.Rows[0][0].ToString().ToUpper() }).ToString();
+                    }
                     //get the title
-                    string subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, dt_insured.Rows[0][0].ToString().ToUpper() }).ToString();
+                    
 
                     Cursor.Current = Cursors.WaitCursor;
 
@@ -832,8 +841,17 @@ namespace Testing.Forms
                     tickedDoc = (tickedDoc != "") ? tickedDoc.Remove(tickedDoc.Length - 1) : "";
 
                     //call stored procedure to keep history
-                    crud.ExecSP_NoOutPara("sp_user_claim_input", new string[] { "cl_input_type", "cl_e_claim", "cl_e_type", "cl_e_rec", "cl_e_cont", "cl_e_doc", "cl_e_req", "cl_e_rem", "cl_e_non", "cl_e_re", "cl_e_dr", "cl_e_cc", "cl_e_rec_date", "cl_e_user" },
-                        new string[] { "Insert", lbClaimNo.Text, sp_type, tbReceiver.Text, content, tickedDoc, req_no, remind, tbNonPaid.Text, resend ? "Y" : "N", doc_rec ? "Y" : "N", tbCC.Text, dpNoti.Value.ToString("dd-MMM-yyyy"), dt_insured.Rows[0][0].ToString().ToUpper() });
+                    if (dt_insured.Rows.Count <= 0)
+                    {
+                        crud.ExecSP_NoOutPara("sp_user_claim_input", new string[] { "cl_input_type", "cl_e_claim", "cl_e_type", "cl_e_rec", "cl_e_cont", "cl_e_doc", "cl_e_req", "cl_e_rem", "cl_e_non", "cl_e_re", "cl_e_dr", "cl_e_cc", "cl_e_rec_date", "cl_e_user" },
+                   new string[] { "Insert", lbClaimNo.Text, sp_type, tbReceiver.Text, content, tickedDoc, req_no, remind, tbNonPaid.Text, resend ? "Y" : "N", doc_rec ? "Y" : "N", tbCC.Text, dpNoti.Value.ToString("dd-MMM-yyyy"), " " });
+                    }
+                    else
+                    {
+                        crud.ExecSP_NoOutPara("sp_user_claim_input", new string[] { "cl_input_type", "cl_e_claim", "cl_e_type", "cl_e_rec", "cl_e_cont", "cl_e_doc", "cl_e_req", "cl_e_rem", "cl_e_non", "cl_e_re", "cl_e_dr", "cl_e_cc", "cl_e_rec_date", "cl_e_user" },
+                       new string[] { "Insert", lbClaimNo.Text, sp_type, tbReceiver.Text, content, tickedDoc, req_no, remind, tbNonPaid.Text, resend ? "Y" : "N", doc_rec ? "Y" : "N", tbCC.Text, dpNoti.Value.ToString("dd-MMM-yyyy"), dt_insured.Rows[0][0].ToString().ToUpper() });
+                    }
+                   
                     //call stored procedure to update Doc Received
                     if (sp_type == "Rem")
                     {

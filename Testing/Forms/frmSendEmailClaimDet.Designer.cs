@@ -53,7 +53,6 @@
             this.btnEditReceiver = new System.Windows.Forms.Button();
             this.tbReceiver = new CustomControls.TextBoxEmailAutocomplete();
             this.tbCC = new CustomControls.TextBoxEmailAutocomplete();
-            this.txtAddName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lvDoc
@@ -340,19 +339,11 @@
             this.tbCC.TabIndex = 36;
             this.tbCC.TextColor = System.Drawing.SystemColors.WindowText;
             // 
-            // txtAddName
-            // 
-            this.txtAddName.Location = new System.Drawing.Point(585, 243);
-            this.txtAddName.Name = "txtAddName";
-            this.txtAddName.Size = new System.Drawing.Size(192, 23);
-            this.txtAddName.TabIndex = 37;
-            // 
             // frmSendEmailClaimDet
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.ClientSize = new System.Drawing.Size(998, 704);
-            this.Controls.Add(this.txtAddName);
             this.Controls.Add(this.tbReceiver);
             this.Controls.Add(this.tbCC);
             this.Controls.Add(this.btnEditReceiver);
@@ -414,6 +405,5 @@
         private System.Windows.Forms.Button btnEditReceiver;
         private CustomControls.TextBoxEmailAutocomplete tbReceiver;
         private CustomControls.TextBoxEmailAutocomplete tbCC;
-        private System.Windows.Forms.TextBox txtAddName;
     }
 }
