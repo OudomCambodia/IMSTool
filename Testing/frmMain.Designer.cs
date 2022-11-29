@@ -1159,7 +1159,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.BackgroundImage = global::Testing.Properties.Resources.ko;
+            this.BackgroundImage = global::Testing.Properties.Resources.Kl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
             this.Controls.Add(this.pnInvoice);
