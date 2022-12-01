@@ -1209,7 +1209,7 @@ namespace Testing.Forms
                         CrystalDecisions.Shared.PdfRtfWordFormatOptions CrFormatTypeOptions = new CrystalDecisions.Shared.PdfRtfWordFormatOptions();
 
 
-                        CrDiskFileDestinationOptions.DiskFileName = filep;
+                        CrDiskFileDestinationOptions.DiskFileName = filep.Replace("\t", "");
                         filep = folderPath;
 
                         CrExportOptions = rpt1.ExportOptions;
