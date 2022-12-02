@@ -79,7 +79,7 @@ namespace Testing.Forms
         private string otherExclusion = frmSendEmailClaim.OtherExclusion;
         private string HistClaimNo;
         private const string NA = "--- N/A ---";
-        private const string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
+        private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
         
         private bool IsViewHistory;
 
@@ -149,8 +149,12 @@ namespace Testing.Forms
                         .Append("values(USER_MEDICAL_REJECTION_SEQ.NEXTVAL, '" + claimNoToSave + "', TO_DATE('" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "','YYYY/MM/DD HH24:MI:SS'), '" + referenceDoc + "')");
                     crud.ExecNonQuery(insertBuilder.ToString());
 
-                    khDoc.SaveAs2(path + claimNo + "-KH.docx");
-                    engDoc.SaveAs2(path + claimNo + "-ENG.docx");
+                    System.IO.Directory.CreateDirectory(path + claimNo);
+
+                    path = path + claimNo;
+
+                    khDoc.SaveAs2(path + @"\" + claimNo + "-KH.docx");
+                    engDoc.SaveAs2(path + @"\" + claimNo + "-ENG.docx");
 
                     Cursor = Cursors.Arrow;
 
@@ -195,7 +199,7 @@ namespace Testing.Forms
         {
             try
             {
-                var fileInfo = new FileInfo(path + khEngDoc);
+                var fileInfo = new FileInfo(path + HistClaimNo.Replace(@"/", "-") + @"\" + khEngDoc);
 
                 if (!fileInfo.Exists)
                     return;
@@ -475,6 +479,17 @@ namespace Testing.Forms
                     khDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+
+                    if (otherExclusion.Equals("HNS MATERNITY"))
+                    {
+                        khDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                    }
+                    if (otherExclusion.Equals("HNS CABINET") || otherExclusion.Equals("HNS MEDICAL CHECK-UP REACH LIMIT")
+                        || otherExclusion.Equals("HNS OUTPATIENT") || otherExclusion.Equals("HNS OUTPATIENT REACH LIMIT"))
+                    {
+                        khDoc.Paragraphs.LineSpacing = InchesToPoints(0.17f);
+                    }
+                    
                 }
                 else
                 {
@@ -491,6 +506,18 @@ namespace Testing.Forms
                     engDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+                    engDoc.Range().Font.Size = 11.0f;
+
+                    if (otherExclusion.Equals("HNS MATERNITY"))
+                    {
+                        engDoc.Paragraphs.LineSpacing = InchesToPoints(0.123f);
+                        engDoc.Range().Font.Size = 10.5f;
+                    }
+                    if (otherExclusion.Equals("HNS CABINET") || otherExclusion.Equals("HNS MEDICAL CHECK-UP REACH LIMIT")
+                        || otherExclusion.Equals("HNS OUTPATIENT") || otherExclusion.Equals("HNS OUTPATIENT REACH LIMIT"))
+                    {
+                        engDoc.Paragraphs.LineSpacing = InchesToPoints(0.17f);
+                    }
                 }
 
                 oWord.Visible = true;

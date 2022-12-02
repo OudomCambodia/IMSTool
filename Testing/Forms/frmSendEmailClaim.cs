@@ -2528,5 +2528,10 @@ namespace Testing.Forms
             frmMedicalRejectionHistory frmMedicalRejectionHistory = new frmMedicalRejectionHistory();
             frmMedicalRejectionHistory.ShowDialog();
         }
+
+        private void btnViewFolder_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\");
+        }
     }
 }

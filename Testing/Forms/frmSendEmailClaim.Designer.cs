@@ -207,6 +207,7 @@
             this.dgvClaimInfo = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.btnViewFolder = new Testing.cus_button();
             this.btnViewHistory = new Testing.cus_button();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.cboOtherExclusions = new System.Windows.Forms.ComboBox();
@@ -381,7 +382,7 @@
             this.pnQuery.Controls.Add(this.lbClaimNo);
             this.pnQuery.Location = new System.Drawing.Point(3, 51);
             this.pnQuery.Name = "pnQuery";
-            this.pnQuery.Size = new System.Drawing.Size(1357, 483);
+            this.pnQuery.Size = new System.Drawing.Size(1357, 481);
             this.pnQuery.TabIndex = 5;
             this.pnQuery.Visible = false;
             // 
@@ -544,7 +545,7 @@
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dgvHisClaim.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHisClaim.RowTemplate.Height = 27;
-            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 213);
+            this.dgvHisClaim.Size = new System.Drawing.Size(1344, 211);
             this.dgvHisClaim.TabIndex = 28;
             // 
             // label11
@@ -2424,14 +2425,30 @@
             // 
             // groupBox16
             // 
+            this.groupBox16.Controls.Add(this.btnViewFolder);
             this.groupBox16.Controls.Add(this.btnViewHistory);
             this.groupBox16.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox16.Location = new System.Drawing.Point(1021, 3);
+            this.groupBox16.Location = new System.Drawing.Point(1055, 3);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(257, 63);
+            this.groupBox16.Size = new System.Drawing.Size(263, 63);
             this.groupBox16.TabIndex = 14;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Claim Rejection History";
+            // 
+            // btnViewFolder
+            // 
+            this.btnViewFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnViewFolder.FlatAppearance.BorderSize = 2;
+            this.btnViewFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewFolder.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.btnViewFolder.ForeColor = System.Drawing.Color.White;
+            this.btnViewFolder.Location = new System.Drawing.Point(139, 20);
+            this.btnViewFolder.Name = "btnViewFolder";
+            this.btnViewFolder.Size = new System.Drawing.Size(104, 29);
+            this.btnViewFolder.TabIndex = 15;
+            this.btnViewFolder.Text = "View Folder";
+            this.btnViewFolder.UseVisualStyleBackColor = false;
+            this.btnViewFolder.Click += new System.EventHandler(this.btnViewFolder_Click);
             // 
             // btnViewHistory
             // 
@@ -2440,11 +2457,11 @@
             this.btnViewHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViewHistory.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.btnViewHistory.ForeColor = System.Drawing.Color.White;
-            this.btnViewHistory.Location = new System.Drawing.Point(19, 21);
+            this.btnViewHistory.Location = new System.Drawing.Point(20, 21);
             this.btnViewHistory.Name = "btnViewHistory";
-            this.btnViewHistory.Size = new System.Drawing.Size(218, 29);
+            this.btnViewHistory.Size = new System.Drawing.Size(113, 29);
             this.btnViewHistory.TabIndex = 14;
-            this.btnViewHistory.Text = "View Claim Rejection History";
+            this.btnViewHistory.Text = "View History";
             this.btnViewHistory.UseVisualStyleBackColor = false;
             this.btnViewHistory.Click += new System.EventHandler(this.btnViewHistory_Click);
             // 
@@ -2452,7 +2469,7 @@
             // 
             this.groupBox15.Controls.Add(this.cboOtherExclusions);
             this.groupBox15.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox15.Location = new System.Drawing.Point(550, 3);
+            this.groupBox15.Location = new System.Drawing.Point(569, 3);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(270, 63);
             this.groupBox15.TabIndex = 13;
@@ -2475,7 +2492,7 @@
             this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
             this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaim.Location = new System.Drawing.Point(826, 24);
+            this.btnGenerateClaim.Location = new System.Drawing.Point(845, 24);
             this.btnGenerateClaim.Name = "btnGenerateClaim";
             this.btnGenerateClaim.Size = new System.Drawing.Size(129, 29);
             this.btnGenerateClaim.TabIndex = 6;
@@ -2814,5 +2831,6 @@
         private System.Windows.Forms.ComboBox cboOtherExclusions;
         private cus_button btnViewHistory;
         private System.Windows.Forms.GroupBox groupBox16;
+        private cus_button btnViewFolder;
     }
 }
