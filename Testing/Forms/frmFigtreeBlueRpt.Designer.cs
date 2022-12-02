@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFigtreeBlueRpt));
             this.cboprdcode = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -233,6 +234,7 @@
             this.Controls.Add(this.lbPolicyNo);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bnSearch);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmFigtreeBlueRpt";
             this.Text = "frmFigtreeBlueRpt";
             this.Load += new System.EventHandler(this.frmFigtreeBlueRpt_Load);

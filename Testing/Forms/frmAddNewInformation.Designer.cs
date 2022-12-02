@@ -37,9 +37,9 @@
             this.txtPolicyNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtRemark = new System.Windows.Forms.TextBox();
-            this.btnSave = new cus_button();
-            this.btnClear = new cus_button();
-            this.btnClose = new cus_button();
+            this.btnSave = new Testing.cus_button();
+            this.btnClear = new Testing.cus_button();
+            this.btnClose = new Testing.cus_button();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -129,7 +129,10 @@
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Location = new System.Drawing.Point(267, 277);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
@@ -141,7 +144,10 @@
             // 
             // btnClear
             // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.White;
             this.btnClear.Location = new System.Drawing.Point(347, 277);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
@@ -153,7 +159,10 @@
             // 
             // btnClose
             // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
             this.btnClose.Location = new System.Drawing.Point(427, 277);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
@@ -220,9 +229,9 @@
         private System.Windows.Forms.TextBox txtPolicyNo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtRemark;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label5;
+        private cus_button btnSave;
+        private cus_button btnClear;
+        private cus_button btnClose;
     }
 }

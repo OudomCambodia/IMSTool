@@ -102,6 +102,7 @@ namespace Testing.Forms
                         txtRemark.Clear();
                         txtEmail.Clear();
                         txtEmailPassword.Clear();
+                        dtpCreatedDate.Value = DateTime.Now;
                     }
                 }
 

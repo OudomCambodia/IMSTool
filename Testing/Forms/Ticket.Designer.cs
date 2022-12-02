@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ticket));
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -91,6 +92,7 @@
             this.ClientSize = new System.Drawing.Size(866, 504);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.crystalReportViewer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Ticket";
             this.Text = "Ticket";
             this.Load += new System.EventHandler(this.Ticket_Load);

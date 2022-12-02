@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonthlyReportAdmin));
             this.bnQuery = new System.Windows.Forms.Button();
             this.tbCONTENT = new System.Windows.Forms.TextBox();
             this.tbSubject = new System.Windows.Forms.TextBox();
@@ -352,6 +353,7 @@
             this.Controls.Add(this.gbPeriod);
             this.Controls.Add(this.bnClear);
             this.Controls.Add(this.bnSend);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MonthlyReportAdmin";
             this.Text = "MonthlyReportAdmin";
             this.Load += new System.EventHandler(this.MonthlyReportAdmin_Load);

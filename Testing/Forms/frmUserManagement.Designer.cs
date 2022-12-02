@@ -60,13 +60,13 @@
             this.chkCreateDocUser = new System.Windows.Forms.CheckBox();
             this.cboRole = new PresentationControls.CheckBoxComboBox();
             this.gbDocumentControl = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblSpecialCodeInfo = new System.Windows.Forms.Label();
             this.cboSpecialCode = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.cboTeam = new PresentationControls.CheckBoxComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.lblSpecialCodeInfo = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -353,6 +353,27 @@
             this.gbDocumentControl.TabStop = false;
             this.gbDocumentControl.Text = "Document Control account Information";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label13.ForeColor = System.Drawing.Color.DarkRed;
+            this.label13.Location = new System.Drawing.Point(106, 117);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(48, 19);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "*Note:";
+            // 
+            // lblSpecialCodeInfo
+            // 
+            this.lblSpecialCodeInfo.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblSpecialCodeInfo.Location = new System.Drawing.Point(151, 117);
+            this.lblSpecialCodeInfo.Name = "lblSpecialCodeInfo";
+            this.lblSpecialCodeInfo.Size = new System.Drawing.Size(486, 47);
+            this.lblSpecialCodeInfo.TabIndex = 19;
+            this.lblSpecialCodeInfo.Text = "N/A";
+            // 
             // cboSpecialCode
             // 
             this.cboSpecialCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -401,27 +422,6 @@
             this.label10.Size = new System.Drawing.Size(34, 18);
             this.label10.TabIndex = 14;
             this.label10.Text = "Role:";
-            // 
-            // lblSpecialCodeInfo
-            // 
-            this.lblSpecialCodeInfo.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblSpecialCodeInfo.Location = new System.Drawing.Point(151, 117);
-            this.lblSpecialCodeInfo.Name = "lblSpecialCodeInfo";
-            this.lblSpecialCodeInfo.Size = new System.Drawing.Size(486, 47);
-            this.lblSpecialCodeInfo.TabIndex = 19;
-            this.lblSpecialCodeInfo.Text = "N/A";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label13.ForeColor = System.Drawing.Color.DarkRed;
-            this.label13.Location = new System.Drawing.Point(106, 117);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(48, 19);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "*Note:";
             // 
             // frmUserManagement
             // 

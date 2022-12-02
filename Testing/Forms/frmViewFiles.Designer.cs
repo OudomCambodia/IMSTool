@@ -41,13 +41,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtRemark = new System.Windows.Forms.TextBox();
             this.dgvFile = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnClose = new cus_button();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.File_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.File_Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Open = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Download = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnClose = new Testing.cus_button();
             this.fbdDownload = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFile)).BeginInit();
             this.SuspendLayout();
@@ -192,27 +192,6 @@
             this.dgvFile.TabIndex = 48;
             this.dgvFile.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFile_CellClick);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(66, 205);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 16);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "Files";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(469, 366);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(85, 35);
-            this.btnClose.TabIndex = 49;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // No
             // 
             this.No.HeaderText = "No";
@@ -252,6 +231,30 @@
             this.Download.ReadOnly = true;
             this.Download.Text = "Download";
             this.Download.UseColumnTextForButtonValue = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(66, 205);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 16);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "Files";
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(469, 366);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(85, 35);
+            this.btnClose.TabIndex = 49;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmViewFiles
             // 
@@ -298,7 +301,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgvFile;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnClose;
         public System.Windows.Forms.TextBox txtEndoNo;
         public System.Windows.Forms.TextBox txtPolicyNo;
         public System.Windows.Forms.DateTimePicker dtpEffTo;
@@ -310,5 +312,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn Open;
         private System.Windows.Forms.DataGridViewButtonColumn Download;
         private System.Windows.Forms.FolderBrowserDialog fbdDownload;
+        private cus_button btnClose;
     }
 }

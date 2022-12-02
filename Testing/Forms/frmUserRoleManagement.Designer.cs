@@ -39,15 +39,15 @@
             this.rbEnabledFalse = new System.Windows.Forms.RadioButton();
             this.rbEnabledTrue = new System.Windows.Forms.RadioButton();
             this.lstCode = new System.Windows.Forms.ListBox();
-            this.tvUserRole = new System.Windows.Forms.TreeView();
-            this.ctmsDeleteControl = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmsCopyRole = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tvUserRole = new System.Windows.Forms.TreeView();
+            this.ctmsDeleteControl = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbEnabled.SuspendLayout();
-            this.ctmsDeleteControl.SuspendLayout();
             this.ctmsCopyRole.SuspendLayout();
+            this.ctmsDeleteControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnUpdateControl
@@ -155,6 +155,33 @@
             this.lstCode.SelectedIndexChanged += new System.EventHandler(this.lstCode_SelectedIndexChanged);
             this.lstCode.DoubleClick += new System.EventHandler(this.lstCode_DoubleClick);
             // 
+            // ctmsCopyRole
+            // 
+            this.ctmsCopyRole.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyRoleToolStripMenuItem,
+            this.deleteRoleToolStripMenuItem});
+            this.ctmsCopyRole.Name = "ctmsCopyRole";
+            this.ctmsCopyRole.Size = new System.Drawing.Size(134, 48);
+            this.ctmsCopyRole.Opening += new System.ComponentModel.CancelEventHandler(this.ctmsCopyRole_Opening);
+            // 
+            // copyRoleToolStripMenuItem
+            // 
+            this.copyRoleToolStripMenuItem.Font = new System.Drawing.Font("Hanuman", 9F);
+            this.copyRoleToolStripMenuItem.Image = global::Testing.Properties.Resources.printer_96;
+            this.copyRoleToolStripMenuItem.Name = "copyRoleToolStripMenuItem";
+            this.copyRoleToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.copyRoleToolStripMenuItem.Text = "Copy Role";
+            this.copyRoleToolStripMenuItem.Click += new System.EventHandler(this.copyRoleToolStripMenuItem_Click);
+            // 
+            // deleteRoleToolStripMenuItem
+            // 
+            this.deleteRoleToolStripMenuItem.Font = new System.Drawing.Font("Hanuman", 9F);
+            this.deleteRoleToolStripMenuItem.Image = global::Testing.Properties.Resources.cross_mark_96;
+            this.deleteRoleToolStripMenuItem.Name = "deleteRoleToolStripMenuItem";
+            this.deleteRoleToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.deleteRoleToolStripMenuItem.Text = "Delete Role";
+            this.deleteRoleToolStripMenuItem.Click += new System.EventHandler(this.deleteRoleToolStripMenuItem_Click);
+            // 
             // tvUserRole
             // 
             this.tvUserRole.ContextMenuStrip = this.ctmsDeleteControl;
@@ -184,33 +211,6 @@
             this.deleteControlToolStripMenuItem.Text = "Delete Control";
             this.deleteControlToolStripMenuItem.Click += new System.EventHandler(this.deleteControlToolStripMenuItem_Click);
             // 
-            // ctmsCopyRole
-            // 
-            this.ctmsCopyRole.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyRoleToolStripMenuItem,
-            this.deleteRoleToolStripMenuItem});
-            this.ctmsCopyRole.Name = "ctmsCopyRole";
-            this.ctmsCopyRole.Size = new System.Drawing.Size(134, 48);
-            this.ctmsCopyRole.Opening += new System.ComponentModel.CancelEventHandler(this.ctmsCopyRole_Opening);
-            // 
-            // copyRoleToolStripMenuItem
-            // 
-            this.copyRoleToolStripMenuItem.Font = new System.Drawing.Font("Hanuman", 9F);
-            this.copyRoleToolStripMenuItem.Image = global::Testing.Properties.Resources.printer_96;
-            this.copyRoleToolStripMenuItem.Name = "copyRoleToolStripMenuItem";
-            this.copyRoleToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.copyRoleToolStripMenuItem.Text = "Copy Role";
-            this.copyRoleToolStripMenuItem.Click += new System.EventHandler(this.copyRoleToolStripMenuItem_Click);
-            // 
-            // deleteRoleToolStripMenuItem
-            // 
-            this.deleteRoleToolStripMenuItem.Font = new System.Drawing.Font("Hanuman", 9F);
-            this.deleteRoleToolStripMenuItem.Image = global::Testing.Properties.Resources.cross_mark_96;
-            this.deleteRoleToolStripMenuItem.Name = "deleteRoleToolStripMenuItem";
-            this.deleteRoleToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.deleteRoleToolStripMenuItem.Text = "Delete Role";
-            this.deleteRoleToolStripMenuItem.Click += new System.EventHandler(this.deleteRoleToolStripMenuItem_Click);
-            // 
             // frmUserRoleManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,8 +234,8 @@
             this.Load += new System.EventHandler(this.frmUserRoleManagement_Load);
             this.gbEnabled.ResumeLayout(false);
             this.gbEnabled.PerformLayout();
-            this.ctmsDeleteControl.ResumeLayout(false);
             this.ctmsCopyRole.ResumeLayout(false);
+            this.ctmsDeleteControl.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

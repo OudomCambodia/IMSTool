@@ -425,7 +425,7 @@
             this.monthlyReportToolStripMenuItem1.Enabled = false;
             this.monthlyReportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.monthlyReportToolStripMenuItem1.Name = "monthlyReportToolStripMenuItem1";
-            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
             this.monthlyReportToolStripMenuItem1.Text = "Monthly Report";
             this.monthlyReportToolStripMenuItem1.Click += new System.EventHandler(this.monthlyReportToolStripMenuItem1_Click);
             // 
@@ -435,7 +435,7 @@
             this.aCPREMIUMREPORTToolStripMenuItem.Enabled = false;
             this.aCPREMIUMREPORTToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aCPREMIUMREPORTToolStripMenuItem.Name = "aCPREMIUMREPORTToolStripMenuItem";
-            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.aCPREMIUMREPORTToolStripMenuItem.Text = "AC_PREMIUM REPORT";
             this.aCPREMIUMREPORTToolStripMenuItem.Click += new System.EventHandler(this.aCPREMIUMREPORTToolStripMenuItem_Click);
             // 
@@ -445,7 +445,7 @@
             this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
             this.toolStripMenuItem1.Text = "IEMA Report";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click_1);
             // 
@@ -458,7 +458,7 @@
             this.tsPremiumRegister.Enabled = false;
             this.tsPremiumRegister.ForeColor = System.Drawing.Color.White;
             this.tsPremiumRegister.Name = "tsPremiumRegister";
-            this.tsPremiumRegister.Size = new System.Drawing.Size(194, 22);
+            this.tsPremiumRegister.Size = new System.Drawing.Size(192, 22);
             this.tsPremiumRegister.Text = "Premium Register";
             // 
             // tsPMAllDept
@@ -487,7 +487,7 @@
             this.CusProfitV2.Enabled = false;
             this.CusProfitV2.ForeColor = System.Drawing.Color.White;
             this.CusProfitV2.Name = "CusProfitV2";
-            this.CusProfitV2.Size = new System.Drawing.Size(194, 22);
+            this.CusProfitV2.Size = new System.Drawing.Size(192, 22);
             this.CusProfitV2.Text = "Customer Profitability";
             // 
             // autoMonthlyReportToolStripMenuItem
@@ -618,7 +618,7 @@
             // 
             this.CreateTicket.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.CreateTicket.Name = "CreateTicket";
-            this.CreateTicket.Size = new System.Drawing.Size(51, 20);
+            this.CreateTicket.Size = new System.Drawing.Size(50, 20);
             this.CreateTicket.Text = "Ticket";
             this.CreateTicket.Click += new System.EventHandler(this.CreateTicket_Click);
             // 
