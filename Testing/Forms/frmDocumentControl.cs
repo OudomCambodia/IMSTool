@@ -88,6 +88,7 @@ namespace Testing.Forms
                 colors.Add("51,204,255"); // black
                 colors.Add("51,102,153"); // white
                 colors.Add("128,128,128"); // white
+                colors.Add("0, 38, 58");
 
                 for (int i = 0; i < colors.Count; i++)
                     cboColor.Items.Add(colors[i].ToString());

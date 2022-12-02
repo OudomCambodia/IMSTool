@@ -76,11 +76,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbFilterdgvDoc = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnReturn = new Testing.cus_button();
-            this.btnReassignDP = new Testing.cus_button();
-            this.btnChangeStatus = new Testing.cus_button();
-            this.btnCloseReopen = new Testing.cus_button();
-            this.btnAddDoc = new Testing.cus_button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.lblTot = new System.Windows.Forms.Label();
@@ -95,6 +90,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
+            this.btnReturn = new Testing.cus_button();
+            this.btnReassignDP = new Testing.cus_button();
+            this.btnChangeStatus = new Testing.cus_button();
+            this.btnCloseReopen = new Testing.cus_button();
+            this.btnAddDoc = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pDoc.SuspendLayout();
@@ -145,7 +145,7 @@
             this.dgvDoc.AllowUserToAddRows = false;
             this.dgvDoc.AllowUserToDeleteRows = false;
             this.dgvDoc.AllowUserToResizeRows = false;
-            this.dgvDoc.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dgvDoc.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.dgvDoc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDoc.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,7 +181,7 @@
             this.dgvNoti.AllowUserToResizeRows = false;
             this.dgvNoti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNoti.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvNoti.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dgvNoti.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.dgvNoti.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvNoti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNoti.ColumnHeadersVisible = false;
@@ -349,6 +349,7 @@
             this.btnPendingAtDP.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPendingAtDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPendingAtDP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPendingAtDP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPendingAtDP.Location = new System.Drawing.Point(693, 6);
             this.btnPendingAtDP.Name = "btnPendingAtDP";
             this.btnPendingAtDP.Size = new System.Drawing.Size(88, 36);
@@ -361,6 +362,7 @@
             // 
             this.btnAll.BackColor = System.Drawing.Color.Gainsboro;
             this.btnAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnAll.Location = new System.Drawing.Point(625, 6);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(68, 36);
@@ -373,6 +375,7 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Gainsboro;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnCancel.Location = new System.Drawing.Point(557, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(68, 36);
@@ -385,6 +388,7 @@
             // 
             this.btnDone.BackColor = System.Drawing.Color.Gainsboro;
             this.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnDone.Location = new System.Drawing.Point(489, 6);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(68, 36);
@@ -397,6 +401,7 @@
             // 
             this.btnPackaged.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPackaged.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPackaged.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPackaged.Location = new System.Drawing.Point(421, 6);
             this.btnPackaged.Name = "btnPackaged";
             this.btnPackaged.Size = new System.Drawing.Size(68, 36);
@@ -409,6 +414,7 @@
             // 
             this.btnPackaging.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPackaging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPackaging.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPackaging.Location = new System.Drawing.Point(353, 6);
             this.btnPackaging.Name = "btnPackaging";
             this.btnPackaging.Size = new System.Drawing.Size(68, 36);
@@ -421,6 +427,7 @@
             // 
             this.btnPendingforSign.BackColor = System.Drawing.Color.Gainsboro;
             this.btnPendingforSign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPendingforSign.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPendingforSign.Location = new System.Drawing.Point(274, 6);
             this.btnPendingforSign.Name = "btnPendingforSign";
             this.btnPendingforSign.Size = new System.Drawing.Size(79, 36);
@@ -433,6 +440,7 @@
             // 
             this.btnDPProcessed.BackColor = System.Drawing.Color.Gainsboro;
             this.btnDPProcessed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDPProcessed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnDPProcessed.Location = new System.Drawing.Point(206, 6);
             this.btnDPProcessed.Name = "btnDPProcessed";
             this.btnDPProcessed.Size = new System.Drawing.Size(68, 36);
@@ -445,6 +453,7 @@
             // 
             this.btnDPProcessing.BackColor = System.Drawing.Color.Gainsboro;
             this.btnDPProcessing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDPProcessing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnDPProcessing.Location = new System.Drawing.Point(136, 6);
             this.btnDPProcessing.Name = "btnDPProcessing";
             this.btnDPProcessing.Size = new System.Drawing.Size(70, 36);
@@ -457,6 +466,7 @@
             // 
             this.btnControllerAccepted.BackColor = System.Drawing.Color.Gainsboro;
             this.btnControllerAccepted.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnControllerAccepted.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnControllerAccepted.Location = new System.Drawing.Point(68, 6);
             this.btnControllerAccepted.Name = "btnControllerAccepted";
             this.btnControllerAccepted.Size = new System.Drawing.Size(68, 36);
@@ -469,6 +479,7 @@
             // 
             this.btnSubmittedtoUW.BackColor = System.Drawing.Color.Gainsboro;
             this.btnSubmittedtoUW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubmittedtoUW.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnSubmittedtoUW.Location = new System.Drawing.Point(0, 6);
             this.btnSubmittedtoUW.Name = "btnSubmittedtoUW";
             this.btnSubmittedtoUW.Size = new System.Drawing.Size(68, 36);
@@ -479,9 +490,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.gbAllRecordOption);
             this.panel3.Controls.Add(this.cboColor);
             this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.gbAllRecordOption);
             this.panel3.Controls.Add(this.rbCustomer);
             this.panel3.Controls.Add(this.rbRefID);
             this.panel3.Controls.Add(this.label6);
@@ -501,6 +512,7 @@
             // 
             this.cboColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboColor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cboColor.FormattingEnabled = true;
             this.cboColor.Location = new System.Drawing.Point(583, 11);
             this.cboColor.Name = "cboColor";
@@ -513,7 +525,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label9.Location = new System.Drawing.Point(503, 14);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 13);
@@ -527,7 +539,7 @@
             this.gbAllRecordOption.Controls.Add(this.dtpSpecificDateFr);
             this.gbAllRecordOption.Controls.Add(this.rbSpecificDate);
             this.gbAllRecordOption.Controls.Add(this.rbAll);
-            this.gbAllRecordOption.ForeColor = System.Drawing.Color.White;
+            this.gbAllRecordOption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.gbAllRecordOption.Location = new System.Drawing.Point(643, 5);
             this.gbAllRecordOption.Name = "gbAllRecordOption";
             this.gbAllRecordOption.Size = new System.Drawing.Size(340, 34);
@@ -548,6 +560,8 @@
             // 
             // dtpSpecificDateTo
             // 
+            this.dtpSpecificDateTo.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.dtpSpecificDateTo.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.dtpSpecificDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpSpecificDateTo.Location = new System.Drawing.Point(251, 10);
             this.dtpSpecificDateTo.Name = "dtpSpecificDateTo";
@@ -556,6 +570,8 @@
             // 
             // dtpSpecificDateFr
             // 
+            this.dtpSpecificDateFr.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.dtpSpecificDateFr.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.dtpSpecificDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpSpecificDateFr.Location = new System.Drawing.Point(155, 10);
             this.dtpSpecificDateFr.Name = "dtpSpecificDateFr";
@@ -590,7 +606,7 @@
             // rbCustomer
             // 
             this.rbCustomer.AutoSize = true;
-            this.rbCustomer.ForeColor = System.Drawing.Color.White;
+            this.rbCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rbCustomer.Location = new System.Drawing.Point(210, 5);
             this.rbCustomer.Name = "rbCustomer";
             this.rbCustomer.Size = new System.Drawing.Size(86, 17);
@@ -603,7 +619,7 @@
             // rbRefID
             // 
             this.rbRefID.AutoSize = true;
-            this.rbRefID.ForeColor = System.Drawing.Color.White;
+            this.rbRefID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rbRefID.Location = new System.Drawing.Point(210, 22);
             this.rbRefID.Name = "rbRefID";
             this.rbRefID.Size = new System.Drawing.Size(63, 17);
@@ -616,7 +632,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label6.Location = new System.Drawing.Point(308, 14);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 13);
@@ -627,7 +643,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label5.Location = new System.Drawing.Point(404, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 13);
@@ -638,7 +654,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label4.Location = new System.Drawing.Point(404, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
@@ -666,7 +682,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label3.Location = new System.Drawing.Point(7, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
@@ -675,6 +691,7 @@
             // 
             // tbFilterdgvDoc
             // 
+            this.tbFilterdgvDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.tbFilterdgvDoc.Location = new System.Drawing.Point(53, 11);
             this.tbFilterdgvDoc.Multiline = true;
             this.tbFilterdgvDoc.Name = "tbFilterdgvDoc";
@@ -706,71 +723,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1087, 41);
             this.panel2.TabIndex = 44;
-            // 
-            // btnReturn
-            // 
-            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReturn.FlatAppearance.BorderSize = 2;
-            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReturn.ForeColor = System.Drawing.Color.White;
-            this.btnReturn.Location = new System.Drawing.Point(344, 6);
-            this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(100, 27);
-            this.btnReturn.TabIndex = 17;
-            this.btnReturn.Text = "Return";
-            this.btnReturn.UseVisualStyleBackColor = false;
-            // 
-            // btnReassignDP
-            // 
-            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReassignDP.FlatAppearance.BorderSize = 2;
-            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
-            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
-            this.btnReassignDP.Name = "btnReassignDP";
-            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
-            this.btnReassignDP.TabIndex = 16;
-            this.btnReassignDP.Text = "Re-assign DP";
-            this.btnReassignDP.UseVisualStyleBackColor = false;
-            // 
-            // btnChangeStatus
-            // 
-            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
-            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
-            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
-            this.btnChangeStatus.Name = "btnChangeStatus";
-            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
-            this.btnChangeStatus.TabIndex = 18;
-            this.btnChangeStatus.Text = "Change Status";
-            this.btnChangeStatus.UseVisualStyleBackColor = false;
-            // 
-            // btnCloseReopen
-            // 
-            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
-            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
-            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
-            this.btnCloseReopen.Name = "btnCloseReopen";
-            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
-            this.btnCloseReopen.TabIndex = 15;
-            this.btnCloseReopen.Text = "Cancel/Re-open";
-            this.btnCloseReopen.UseVisualStyleBackColor = false;
-            // 
-            // btnAddDoc
-            // 
-            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnAddDoc.FlatAppearance.BorderSize = 2;
-            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
-            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
-            this.btnAddDoc.Name = "btnAddDoc";
-            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
-            this.btnAddDoc.TabIndex = 14;
-            this.btnAddDoc.Text = "Add Document";
-            this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
             // btnPrint
             // 
@@ -900,7 +852,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
@@ -918,11 +870,76 @@
             this.timerNoti.Interval = 90000;
             this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
             // 
+            // btnReturn
+            // 
+            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReturn.FlatAppearance.BorderSize = 2;
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturn.ForeColor = System.Drawing.Color.White;
+            this.btnReturn.Location = new System.Drawing.Point(344, 6);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(100, 27);
+            this.btnReturn.TabIndex = 17;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = false;
+            // 
+            // btnReassignDP
+            // 
+            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReassignDP.FlatAppearance.BorderSize = 2;
+            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
+            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
+            this.btnReassignDP.Name = "btnReassignDP";
+            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
+            this.btnReassignDP.TabIndex = 16;
+            this.btnReassignDP.Text = "Re-assign DP";
+            this.btnReassignDP.UseVisualStyleBackColor = false;
+            // 
+            // btnChangeStatus
+            // 
+            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
+            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
+            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
+            this.btnChangeStatus.TabIndex = 18;
+            this.btnChangeStatus.Text = "Change Status";
+            this.btnChangeStatus.UseVisualStyleBackColor = false;
+            // 
+            // btnCloseReopen
+            // 
+            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
+            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
+            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
+            this.btnCloseReopen.Name = "btnCloseReopen";
+            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
+            this.btnCloseReopen.TabIndex = 15;
+            this.btnCloseReopen.Text = "Cancel/Re-open";
+            this.btnCloseReopen.UseVisualStyleBackColor = false;
+            // 
+            // btnAddDoc
+            // 
+            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAddDoc.FlatAppearance.BorderSize = 2;
+            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
+            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
+            this.btnAddDoc.Name = "btnAddDoc";
+            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
+            this.btnAddDoc.TabIndex = 14;
+            this.btnAddDoc.Text = "Add Document";
+            this.btnAddDoc.UseVisualStyleBackColor = false;
+            // 
             // frmDocumentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1087, 677);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);

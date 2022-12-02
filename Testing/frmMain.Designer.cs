@@ -121,7 +121,7 @@
             // 
             // bnFLRep
             // 
-            this.bnFLRep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnFLRep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnFLRep.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnFLRep.Enabled = false;
             this.bnFLRep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -140,7 +140,7 @@
             // 
             // bnClaimRep
             // 
-            this.bnClaimRep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnClaimRep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnClaimRep.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnClaimRep.Enabled = false;
             this.bnClaimRep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -159,7 +159,7 @@
             // 
             // btnPrintInvoice
             // 
-            this.btnPrintInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnPrintInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPrintInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPrintInvoice.Enabled = false;
             this.btnPrintInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -178,7 +178,7 @@
             // 
             // btnListCurrent
             // 
-            this.btnListCurrent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnListCurrent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnListCurrent.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnListCurrent.Enabled = false;
             this.btnListCurrent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -195,7 +195,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPrint.Enabled = false;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -212,7 +212,7 @@
             // 
             // btnFile
             // 
-            this.btnFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnFile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFile.Enabled = false;
             this.btnFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -229,7 +229,7 @@
             // 
             // btnCustomer
             // 
-            this.btnCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCustomer.Enabled = false;
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -246,7 +246,7 @@
             // 
             // btnClaimCheck
             // 
-            this.btnClaimCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnClaimCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnClaimCheck.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClaimCheck.Enabled = false;
             this.btnClaimCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -263,7 +263,7 @@
             // 
             // btnRiskSearch
             // 
-            this.btnRiskSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnRiskSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnRiskSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRiskSearch.Enabled = false;
             this.btnRiskSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -296,7 +296,7 @@
             // 
             // btnClaimRequisitionReport
             // 
-            this.btnClaimRequisitionReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnClaimRequisitionReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnClaimRequisitionReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClaimRequisitionReport.Enabled = false;
             this.btnClaimRequisitionReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -312,7 +312,7 @@
             // 
             // btnClaimPaidPayee
             // 
-            this.btnClaimPaidPayee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnClaimPaidPayee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnClaimPaidPayee.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClaimPaidPayee.Enabled = false;
             this.btnClaimPaidPayee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -339,7 +339,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingToolStripMenuItem,
             this.relogToolStripMenuItem,
@@ -639,7 +639,7 @@
             // 
             // bnClaimOSRI
             // 
-            this.bnClaimOSRI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnClaimOSRI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnClaimOSRI.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnClaimOSRI.Enabled = false;
             this.bnClaimOSRI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -682,7 +682,7 @@
             // 
             // bnPreClaimFL
             // 
-            this.bnPreClaimFL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnPreClaimFL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnPreClaimFL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnPreClaimFL.Enabled = false;
             this.bnPreClaimFL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -698,7 +698,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.panel1.Controls.Add(this.btnRiskSearch);
             this.panel1.Controls.Add(this.btnClaimCheck);
             this.panel1.Controls.Add(this.btnCustomer);
@@ -727,7 +727,7 @@
             // 
             // bnPolRem
             // 
-            this.bnPolRem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnPolRem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnPolRem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnPolRem.Enabled = false;
             this.bnPolRem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -744,7 +744,7 @@
             // 
             // bnClEmail
             // 
-            this.bnClEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnClEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnClEmail.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnClEmail.Enabled = false;
             this.bnClEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -761,7 +761,7 @@
             // 
             // btnTravelRp
             // 
-            this.btnTravelRp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnTravelRp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnTravelRp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTravelRp.Enabled = false;
             this.btnTravelRp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -778,7 +778,7 @@
             // 
             // bnDocCtrl
             // 
-            this.bnDocCtrl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnDocCtrl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnDocCtrl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnDocCtrl.Enabled = false;
             this.bnDocCtrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -795,7 +795,7 @@
             // 
             // bnAutoClaim
             // 
-            this.bnAutoClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnAutoClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnAutoClaim.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnAutoClaim.Enabled = false;
             this.bnAutoClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -814,7 +814,7 @@
             // 
             // btnSettleCreditNote
             // 
-            this.btnSettleCreditNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnSettleCreditNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnSettleCreditNote.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettleCreditNote.Enabled = false;
             this.btnSettleCreditNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -831,7 +831,7 @@
             // 
             // bnAcceptanceFormCDV
             // 
-            this.bnAcceptanceFormCDV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnAcceptanceFormCDV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnAcceptanceFormCDV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnAcceptanceFormCDV.Enabled = false;
             this.bnAcceptanceFormCDV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -848,7 +848,7 @@
             // 
             // btnBenifitScheme
             // 
-            this.btnBenifitScheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnBenifitScheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnBenifitScheme.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBenifitScheme.Enabled = false;
             this.btnBenifitScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -867,7 +867,7 @@
             // 
             // btnProducerClaim
             // 
-            this.btnProducerClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnProducerClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnProducerClaim.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProducerClaim.Enabled = false;
             this.btnProducerClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -884,7 +884,7 @@
             // 
             // btnEngineering
             // 
-            this.btnEngineering.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnEngineering.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnEngineering.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEngineering.Enabled = false;
             this.btnEngineering.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -906,7 +906,7 @@
             // 
             // pnSubAutoClaim
             // 
-            this.pnSubAutoClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnSubAutoClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pnSubAutoClaim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnSubAutoClaim.Controls.Add(this.bnLetter);
             this.pnSubAutoClaim.Controls.Add(this.bnDeductible);
@@ -920,7 +920,7 @@
             // 
             // bnLetter
             // 
-            this.bnLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnLetter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnLetter.Enabled = false;
             this.bnLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -936,7 +936,7 @@
             // 
             // bnDeductible
             // 
-            this.bnDeductible.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnDeductible.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnDeductible.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnDeductible.Enabled = false;
             this.bnDeductible.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -952,7 +952,7 @@
             // 
             // bnWindscreen
             // 
-            this.bnWindscreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnWindscreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnWindscreen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnWindscreen.Enabled = false;
             this.bnWindscreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -968,7 +968,7 @@
             // 
             // bnReports
             // 
-            this.bnReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnReports.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnReports.Enabled = false;
             this.bnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1000,7 +1000,7 @@
             // 
             // btnHNSScheme
             // 
-            this.btnHNSScheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnHNSScheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnHNSScheme.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHNSScheme.Enabled = false;
             this.btnHNSScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1016,7 +1016,7 @@
             // 
             // pnBenifit
             // 
-            this.pnBenifit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnBenifit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pnBenifit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnBenifit.Controls.Add(this.btnBHPScheme);
             this.pnBenifit.Controls.Add(this.btnHNSScheme);
@@ -1028,7 +1028,7 @@
             // 
             // pnEngUW
             // 
-            this.pnEngUW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnEngUW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pnEngUW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnEngUW.Controls.Add(this.btnRemindLetter);
             this.pnEngUW.Controls.Add(this.btnCertificateInsurance);
@@ -1041,7 +1041,7 @@
             // 
             // btnRemindLetter
             // 
-            this.btnRemindLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnRemindLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnRemindLetter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemindLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemindLetter.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1056,7 +1056,7 @@
             // 
             // btnCertificateInsurance
             // 
-            this.btnCertificateInsurance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnCertificateInsurance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnCertificateInsurance.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCertificateInsurance.Enabled = false;
             this.btnCertificateInsurance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1071,7 +1071,7 @@
             // 
             // btnCustomizeSchedule
             // 
-            this.btnCustomizeSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnCustomizeSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnCustomizeSchedule.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCustomizeSchedule.Enabled = false;
             this.btnCustomizeSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1091,6 +1091,7 @@
             // 
             // pnInvoice
             // 
+            this.pnInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.pnInvoice.Controls.Add(this.btnSubBreakdownInvoice);
             this.pnInvoice.Controls.Add(this.btnSubPrintInvoice);
             this.pnInvoice.Location = new System.Drawing.Point(191, 223);
@@ -1101,7 +1102,7 @@
             // 
             // btnSubBreakdownInvoice
             // 
-            this.btnSubBreakdownInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnSubBreakdownInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnSubBreakdownInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubBreakdownInvoice.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSubBreakdownInvoice.Enabled = false;
@@ -1118,7 +1119,7 @@
             // 
             // btnSubPrintInvoice
             // 
-            this.btnSubPrintInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnSubPrintInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnSubPrintInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubPrintInvoice.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSubPrintInvoice.Enabled = false;
@@ -1158,7 +1159,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Testing.Properties.Resources.Kl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);

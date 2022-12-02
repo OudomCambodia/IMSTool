@@ -129,7 +129,7 @@ namespace Testing
             {
                 if (panel1.Controls[i] is Button)
                 {
-                    panel1.Controls[i].BackColor = Color.FromArgb(35, 35, 35);
+                    panel1.Controls[i].BackColor = Color.FromArgb(0, 38, 58);
                     panel1.Controls[i].ForeColor = Color.White;
                 }
             }
@@ -138,7 +138,7 @@ namespace Testing
             {
                 if (pnSubClaim.Controls[i] is Button)
                 {
-                    pnSubClaim.Controls[i].BackColor = Color.FromArgb(35, 35, 35);
+                    pnSubClaim.Controls[i].BackColor = Color.FromArgb(0, 38, 58);
                     pnSubClaim.Controls[i].ForeColor = Color.White;
                 }
             }
@@ -147,7 +147,7 @@ namespace Testing
             {
                 if (pnSubAutoClaim.Controls[i] is Button)
                 {
-                    pnSubAutoClaim.Controls[i].BackColor = Color.FromArgb(35, 35, 35);
+                    pnSubAutoClaim.Controls[i].BackColor = Color.FromArgb(0, 38, 58);
                     pnSubAutoClaim.Controls[i].ForeColor = Color.White;
                 }
             }
@@ -156,7 +156,7 @@ namespace Testing
             {
                 if (pnSubAutoClaim.Controls[i] is Button)
                 {
-                    pnSubAutoClaim.Controls[i].BackColor = Color.FromArgb(35, 35, 35);
+                    pnSubAutoClaim.Controls[i].BackColor = Color.FromArgb(0, 38, 58);
                     pnSubAutoClaim.Controls[i].ForeColor = Color.White;
                 }
             }
@@ -165,7 +165,7 @@ namespace Testing
             {
                 if (pnBenifit.Controls[i] is Button)
                 {
-                    pnBenifit.Controls[i].BackColor = Color.FromArgb(35, 35, 35);
+                    pnBenifit.Controls[i].BackColor = Color.FromArgb(0, 38, 58);
                     pnBenifit.Controls[i].ForeColor = Color.White;
                 }
             }
@@ -174,13 +174,13 @@ namespace Testing
             {
                 if (pnEngUW.Controls[i] is Button)
                 {
-                    pnEngUW.Controls[i].BackColor = Color.FromArgb(35, 35, 35);
+                    pnEngUW.Controls[i].BackColor = Color.FromArgb(0, 38, 58);
                     pnEngUW.Controls[i].ForeColor = Color.White;
                 }
             }
 
             btn.BackColor = Color.White;
-            btn.ForeColor = Color.FromArgb(35, 35, 35);
+            btn.ForeColor = Color.FromArgb(0, 38, 58);
         }
 
         private void tmCheckMaint_Tick(object sender, EventArgs e)

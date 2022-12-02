@@ -43,8 +43,9 @@
             // 
             // btnOk
             // 
-            this.btnOk.BackColor = System.Drawing.Color.Black;
-            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnOk.FlatAppearance.BorderSize = 0;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.ForeColor = System.Drawing.SystemColors.MenuBar;
             this.btnOk.Location = new System.Drawing.Point(299, 2);
             this.btnOk.Name = "btnOk";
@@ -56,19 +57,22 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.MenuBar;
             this.btnCancel.Location = new System.Drawing.Point(389, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(84, 28);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(0)))), ((int)(((byte)(69)))));
             this.lblTitle.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(4, 6);
             this.lblTitle.Name = "lblTitle";
@@ -78,8 +82,9 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(0)))), ((int)(((byte)(69)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.MenuBar;
             this.button1.Location = new System.Drawing.Point(456, 3);
             this.button1.Name = "button1";
@@ -91,6 +96,7 @@
             // 
             // pnTop
             // 
+            this.pnTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(0)))), ((int)(((byte)(69)))));
             this.pnTop.Controls.Add(this.button1);
             this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnTop.Location = new System.Drawing.Point(0, 0);
@@ -116,9 +122,10 @@
             // pBackground
             // 
             this.pBackground.AutoSize = true;
-            this.pBackground.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pBackground.BackColor = System.Drawing.Color.White;
             this.pBackground.Controls.Add(this.lblMessage);
             this.pBackground.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pBackground.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pBackground.Location = new System.Drawing.Point(0, 31);
             this.pBackground.MaximumSize = new System.Drawing.Size(0, 720);
             this.pBackground.MinimumSize = new System.Drawing.Size(0, 100);
@@ -130,6 +137,7 @@
             // 
             // pnBottom
             // 
+            this.pnBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pnBottom.Controls.Add(this.btnOk);
             this.pnBottom.Controls.Add(this.btnCancel);
             this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;

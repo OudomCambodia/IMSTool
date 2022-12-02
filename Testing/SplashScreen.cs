@@ -23,6 +23,7 @@ namespace Testing
         public SplashScreen()
         {
             InitializeComponent();
+            btnClose.ForeColor = Color.FromArgb(0, 38, 58);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -11,6 +11,7 @@ using Oracle.ManagedDataAccess.Client;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Testing
 {
@@ -28,6 +29,10 @@ namespace Testing
         public frmLogIn()
         {
             InitializeComponent();
+            lbUsercode.ForeColor = Color.FromArgb(0, 38, 58);
+            lblPassword.ForeColor = Color.FromArgb(0, 38, 58);
+            tbUser.ForeColor = Color.FromArgb(0, 38, 58);
+            tbPassword.ForeColor = Color.FromArgb(0, 38, 58);
         }
 
         private void btClose_Click(object sender, EventArgs e)
@@ -288,6 +293,31 @@ namespace Testing
         {
             showMaint();
         }
+
+        //Drag form
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void frmLogIn_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
 
         //private void LoadSplashScreen()
         //{
