@@ -17,7 +17,7 @@
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
+    <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
@@ -29,9 +29,9 @@
     <ProductName>IMS Tool</ProductName>
     <PublisherName>pichponleur</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ApplicationRevision>32</ApplicationRevision>
     <ApplicationVersion>3.4.5.%2a</ApplicationVersion>
-    <UseApplicationTrust>true</UseApplicationTrust>
+    <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -46,7 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -80,15 +80,11 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup />
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup />
-  <PropertyGroup />
-  <PropertyGroup />
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -221,12 +217,10 @@
       <HintPath>..\packages\Cquential.Microsoft.ReportViewer.DataVisualization.10.0.40219.1\lib\net35\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Cquential.Microsoft.ReportViewer.ProcessingObjectModel.10.0.40219.1\lib\net35\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.SharePoint.Client, Version=16.1.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SharePointOnline.CSOM.16.1.22315.12000\lib\net45\Microsoft.SharePoint.Client.dll</HintPath>
       <Private>True</Private>
@@ -968,6 +962,12 @@
       <DependentUpon>CreditNoteEnd.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\CustomerProfitV2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerProfitV2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\CYC Card.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1088,6 +1088,12 @@
       <DependentUpon>InstructionNotePNE.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\NewInvoiceBI2.cs">
+      <DependentUpon>NewInvoiceBI2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\NewInvoiceBI.cs">
       <DependentUpon>NewInvoiceBI.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1100,8 +1106,11 @@
       <DependentUpon>NewInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\NewInvoiceBI2.cs">
+    <Compile Include="Reports\NewInvoiceEndoBI2.cs">
+      <DependentUpon>NewInvoiceEndoBI2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\NewInvoiceEndoBI1.cs">
       <DependentUpon>NewInvoiceEndoBI.rpt</DependentUpon>
@@ -1113,9 +1122,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewInvoiceEndo.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\NewInvoiceEndoBI2.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\NewInvoiceNABI2.cs">
@@ -1136,6 +1142,12 @@
       <DependentUpon>NewInvoiceNA.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\NewInvoiceNAEndoBI2.cs">
+      <DependentUpon>NewInvoiceNAEndoBI2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\NewInvoiceNAEndoBI.cs">
       <DependentUpon>NewInvoiceNAEndoBI.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1146,9 +1158,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NewInvoiceNAEndo.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\NewInvoiceNAEndoBI2.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\NonPayLetter.cs">
@@ -1169,6 +1178,12 @@
       <DependentUpon>OPSchemeRP.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\PrintInvoiceEndListAllBI2.cs">
+      <DependentUpon>PrintInvoiceEndListAllBI2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\PrintInvoiceEndListAllBI.cs">
       <DependentUpon>PrintInvoiceEndListAllBI.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1181,8 +1196,11 @@
       <DependentUpon>PrintInvoiceEndListAll.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\PrintInvoiceEndListAllBI2.cs">
+    <Compile Include="Reports\PrintInvoiceListAllBI2.cs">
+      <DependentUpon>PrintInvoiceListAllBI2.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Reports\PrintInvoiceListAllBI.cs">
       <DependentUpon>PrintInvoiceListAllBI.rpt</DependentUpon>
@@ -1194,9 +1212,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PrintInvoiceListAll.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\PrintInvoiceListAllBI2.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\RejectionLetter.cs">
@@ -1793,6 +1808,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CreditNoteEnd.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CustomerProfitV2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CustomerProfitV2.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CYC Card.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CYC Card.cs</LastGenOutput>
@@ -1893,6 +1912,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LabelBlank1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceBI2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceBI2.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoiceBI.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NewInvoiceBI.cs</LastGenOutput>
@@ -1900,6 +1923,10 @@
     <EmbeddedResource Include="Reports\NewInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NewInvoice.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceEndoBI2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceEndoBI2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoiceEndoBI.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1920,6 +1947,10 @@
     <EmbeddedResource Include="Reports\NewInvoiceNA.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>NewInvoiceNA.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\NewInvoiceNAEndoBI2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>NewInvoiceNAEndoBI2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\NewInvoiceNAEndoBI.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1953,6 +1984,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrintInvoice.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintInvoiceEndListAllBI2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintInvoiceEndListAllBI2.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PrintInvoiceEndListAllBI.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrintInvoiceEndListAllBI.cs</LastGenOutput>
@@ -1960,6 +1995,10 @@
     <EmbeddedResource Include="Reports\PrintInvoiceEndListAll.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrintInvoiceEndListAll.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrintInvoiceListAllBI2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintInvoiceListAllBI2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\PrintInvoiceListAllBI.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2074,6 +2113,17 @@
     <Content Include="Html\mail.png" />
     <Content Include="Html\Standard_Forte.png" />
     <Content Include="Html\yt.png" />
+    <None Include="Resources\insuranceexcellent.jpg" />
+    <None Include="Resources\ForeCover.jpg" />
+    <None Include="Resources\ForeCoverre.jpg" />
+    <None Include="Resources\maxresdefault.jpg" />
+    <None Include="Resources\ko.jpg" />
+    <None Include="Resources\Kl.jpg" />
+    <None Include="Resources\new-logo-image-2.png" />
+    <None Include="Resources\new-logo-image-3.png" />
+    <None Include="Resources\new-logo-image-4.png" />
+    <None Include="Resources\new-logo-image-5.png" />
+    <Content Include="Resources\waterfestival.png" />
     <None Include="Resources\zerowaste.jpg" />
     <None Include="Resources\abc.jpg" />
     <None Include="Resources\bellicon.jpg" />
@@ -2081,6 +2131,8 @@
     <None Include="Resources\bell 1.png" />
     <None Include="Resources\4Tlt-unscreen.gif" />
     <None Include="Resources\4Tlt-unscreen.png" />
+    <Content Include="Resources\0001.jpg" />
+    <Content Include="Resources\attention.png" />
     <Content Include="Resources\business-management.png" />
     <None Include="Resources\cv.png" />
     <None Include="Resources\cvv.jpg" />
@@ -2092,8 +2144,7 @@
     <None Include="Resources\eye.png" />
     <None Include="Resources\eye1.png" />
     <None Include="Resources\cross-mark-96.png" />
-    <Content Include="Resources\Kl.jpg" />
-    <Content Include="Resources\ko.jpg" />
+    <None Include="Resources\earth.jpg" />
     <Content Include="Resources\loader.gif" />
     <Content Include="Resources\Logo_white_no_background.png" />
     <None Include="Resources\NY2022.jpg" />
@@ -2108,10 +2159,11 @@
     <None Include="Resources\notification_unscreen-1.png" />
     <Content Include="Resources\PCBen.jpg" />
     <None Include="Resources\Pcc_Ben.jpg" />
-    <Content Include="Resources\pchumbenwork.jpg" />
+    <None Include="Resources\pchumbenwork.jpg" />
     <Content Include="Resources\Pchum_Ben.png" />
     <None Include="Resources\Pchum_Ben1.png" />
     <None Include="Resources\printer-96.png" />
+    <Content Include="Resources\saveearthh.jpg" />
     <Content Include="Resources\Standard_Forte.png" />
     <Content Include="Resources\tahoma.ttf" />
     <None Include="Resources\tahomabd.ttf" />
@@ -2290,6 +2342,16 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="Microsoft.MSXML">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="Microsoft.ReportViewer.Common">
       <Visible>False</Visible>
       <Group>
@@ -2360,7 +2422,37 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.ProjectAggregator">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.Shell">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="Microsoft.VisualStudio.Shell.Interop">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.Shell.Interop.8.0">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -2390,7 +2482,27 @@
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.TextManager.Interop.8.0">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="Microsoft.VisualStudio.Tools.Applications.Runtime.v9.0">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.VisualStudio.VSHelp">
       <Visible>False</Visible>
       <Group>
       </Group>
