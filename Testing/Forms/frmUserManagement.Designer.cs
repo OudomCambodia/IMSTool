@@ -361,7 +361,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label13.ForeColor = System.Drawing.Color.Brown;
+            this.label13.ForeColor = System.Drawing.Color.Tomato;
             this.label13.Location = new System.Drawing.Point(106, 117);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 19);
@@ -371,7 +371,7 @@
             // lblSpecialCodeInfo
             // 
             this.lblSpecialCodeInfo.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.Brown;
+            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.Tomato;
             this.lblSpecialCodeInfo.Location = new System.Drawing.Point(151, 117);
             this.lblSpecialCodeInfo.Name = "lblSpecialCodeInfo";
             this.lblSpecialCodeInfo.Size = new System.Drawing.Size(486, 47);

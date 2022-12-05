@@ -89,6 +89,7 @@
             this.gbPeriod.Controls.Add(this.cbMonth);
             this.gbPeriod.Controls.Add(this.rbCustom);
             this.gbPeriod.Controls.Add(this.rbMonth);
+            this.gbPeriod.ForeColor = System.Drawing.Color.White;
             this.gbPeriod.Location = new System.Drawing.Point(17, 460);
             this.gbPeriod.Name = "gbPeriod";
             this.gbPeriod.Size = new System.Drawing.Size(705, 103);
@@ -212,6 +213,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(248, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(231, 24);
@@ -221,6 +223,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(39, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 13);
@@ -230,6 +233,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(16, 207);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
@@ -239,6 +243,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(17, 181);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
@@ -282,6 +287,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(39, 45);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(23, 13);
@@ -300,6 +306,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(734, 612);
             this.Controls.Add(this.bnQuery);
             this.Controls.Add(this.tbCONTENT);

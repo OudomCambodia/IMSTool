@@ -108,6 +108,7 @@
             this.dataGridViewByDept.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridViewByDept.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewByDept.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Yellow;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -173,7 +174,7 @@
             // lblDep
             // 
             this.lblDep.AutoSize = true;
-            this.lblDep.ForeColor = System.Drawing.Color.Red;
+            this.lblDep.ForeColor = System.Drawing.Color.Tomato;
             this.lblDep.Location = new System.Drawing.Point(524, 20);
             this.lblDep.Name = "lblDep";
             this.lblDep.Size = new System.Drawing.Size(127, 13);
@@ -183,6 +184,7 @@
             // lblCount
             // 
             this.lblCount.AutoSize = true;
+            this.lblCount.ForeColor = System.Drawing.Color.White;
             this.lblCount.Location = new System.Drawing.Point(657, 20);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(13, 13);
@@ -225,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.ForeColor = System.Drawing.Color.Tomato;
             this.label2.Location = new System.Drawing.Point(805, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 13);
@@ -279,6 +281,7 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.Yellow;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -350,6 +353,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1182, 514);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.btnReport);
