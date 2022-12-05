@@ -41,10 +41,10 @@
             // 
             // lblGroupName
             // 
-            this.lblGroupName.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.lblGroupName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.lblGroupName.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblGroupName.Font = new System.Drawing.Font("Hanuman", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblGroupName.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblGroupName.ForeColor = System.Drawing.Color.White;
             this.lblGroupName.Location = new System.Drawing.Point(0, 0);
             this.lblGroupName.Name = "lblGroupName";
             this.lblGroupName.Size = new System.Drawing.Size(489, 58);
@@ -54,10 +54,10 @@
             // 
             // lblTotalUser
             // 
-            this.lblTotalUser.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.lblTotalUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.lblTotalUser.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblTotalUser.Font = new System.Drawing.Font("Hanuman", 15F, System.Drawing.FontStyle.Italic);
-            this.lblTotalUser.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblTotalUser.ForeColor = System.Drawing.Color.White;
             this.lblTotalUser.Location = new System.Drawing.Point(0, 372);
             this.lblTotalUser.Name = "lblTotalUser";
             this.lblTotalUser.Size = new System.Drawing.Size(489, 37);

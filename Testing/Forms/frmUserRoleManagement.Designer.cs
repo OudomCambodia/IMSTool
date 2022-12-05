@@ -111,6 +111,7 @@
             this.gbEnabled.Controls.Add(this.rbEnabledFalse);
             this.gbEnabled.Controls.Add(this.rbEnabledTrue);
             this.gbEnabled.Font = new System.Drawing.Font("Hanuman", 8.5F);
+            this.gbEnabled.ForeColor = System.Drawing.Color.White;
             this.gbEnabled.Location = new System.Drawing.Point(609, 11);
             this.gbEnabled.Name = "gbEnabled";
             this.gbEnabled.Size = new System.Drawing.Size(135, 51);
@@ -144,8 +145,10 @@
             // 
             // lstCode
             // 
+            this.lstCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.lstCode.ContextMenuStrip = this.ctmsCopyRole;
             this.lstCode.Font = new System.Drawing.Font("Hanuman", 9F);
+            this.lstCode.ForeColor = System.Drawing.Color.White;
             this.lstCode.FormattingEnabled = true;
             this.lstCode.ItemHeight = 18;
             this.lstCode.Location = new System.Drawing.Point(12, 49);
@@ -184,9 +187,11 @@
             // 
             // tvUserRole
             // 
+            this.tvUserRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tvUserRole.ContextMenuStrip = this.ctmsDeleteControl;
             this.tvUserRole.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvUserRole.Font = new System.Drawing.Font("Hanuman", 9F);
+            this.tvUserRole.ForeColor = System.Drawing.Color.White;
             this.tvUserRole.HideSelection = false;
             this.tvUserRole.Location = new System.Drawing.Point(256, 13);
             this.tvUserRole.Name = "tvUserRole";
@@ -215,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(756, 654);
             this.Controls.Add(this.btnUpdateControl);
             this.Controls.Add(this.btnAddNewControl);

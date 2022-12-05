@@ -468,7 +468,7 @@ namespace Testing.Forms
                         if (tvUserRole.Nodes[index].Nodes.ContainsKey(childKey))
                         {
                             if (childNoteKeys.Rows[l]["VISIBLE"].ToString() == "Y" && childNoteKeys.Rows[l]["ENABLED"].ToString() == "Y")
-                                tvUserRole.Nodes[index].Nodes[childIndex].ForeColor = Color.Black;
+                                tvUserRole.Nodes[index].Nodes[childIndex].ForeColor = Color.White;
                             else
                             {
                                 tvUserRole.Nodes[index].Nodes[childIndex].ForeColor = Color.Gray;
@@ -480,7 +480,7 @@ namespace Testing.Forms
                     if (childKeyCount == childNoteKeys.Rows.Count)
                         tvUserRole.Nodes[index].ForeColor = Color.Gray;
                     else
-                        tvUserRole.Nodes[index].ForeColor = Color.Black;
+                        tvUserRole.Nodes[index].ForeColor = Color.White;
                 }
             }
 
@@ -490,7 +490,7 @@ namespace Testing.Forms
                 var index = tvUserRole.Nodes.IndexOfKey(key);
 
                 if (tvUserRole.Nodes.ContainsKey(key))
-                    tvUserRole.Nodes[index].ForeColor = Color.Black;
+                    tvUserRole.Nodes[index].ForeColor = Color.White;
 
                 var childNoteKeys = crud.ExecQuery("select upc.CONTROL_ID, upa.VISIBLE, upa.ENABLED from USER_PRINT_CONTROL upc inner join USER_PRINT_CONTROL_ACCESS upa on upa.CONTROL_ID = upc.CONTROL_ID where SUBMENU_OF = '" + key + "' and CODE = '" + code + "'");
                 bool hasChildNote = childNoteKeys.Rows.Count > 0;
@@ -511,14 +511,14 @@ namespace Testing.Forms
                                 childKeyCount = childKeyCount + 1;
                             }
                             else
-                                tvUserRole.Nodes[index].Nodes[childIndex].ForeColor = Color.Black;
+                                tvUserRole.Nodes[index].Nodes[childIndex].ForeColor = Color.White;
                         }
 
                     }
                     if (childKeyCount == childNoteKeys.Rows.Count)
                         tvUserRole.Nodes[index].ForeColor = Color.Gray;
                     else
-                        tvUserRole.Nodes[index].ForeColor = Color.Black;
+                        tvUserRole.Nodes[index].ForeColor = Color.White;
                 }
             }
         }

@@ -236,7 +236,7 @@
             // 
             // tabQuery
             // 
-            this.tabQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.tabQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tabQuery.Controls.Add(this.panel1);
             this.tabQuery.Controls.Add(this.panel2);
             this.tabQuery.Font = new System.Drawing.Font("Cambria", 9.75F);
@@ -1927,7 +1927,7 @@
             // frmAutoLetters
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1171, 727);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.label1);

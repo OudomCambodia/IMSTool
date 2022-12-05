@@ -33,14 +33,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvInvoiceDetails = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tbInvoiceNo = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnIssue = new Testing.cus_button();
             this.btnRowMinus = new Testing.cus_button();
             this.cus_button1 = new Testing.cus_button();
+            this.tbInvoiceNo = new System.Windows.Forms.TextBox();
             this.btnOptionII = new Testing.cus_button();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnOptionI = new Testing.cus_button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnIssue = new Testing.cus_button();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceDetails)).BeginInit();
@@ -50,7 +50,7 @@
             // 
             // lbTitle
             // 
-            this.lbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.lbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.lbTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbTitle.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.ForeColor = System.Drawing.Color.White;
@@ -115,51 +115,6 @@
             this.panel1.Size = new System.Drawing.Size(733, 64);
             this.panel1.TabIndex = 171;
             // 
-            // tbInvoiceNo
-            // 
-            this.tbInvoiceNo.Location = new System.Drawing.Point(60, 15);
-            this.tbInvoiceNo.MaxLength = 16;
-            this.tbInvoiceNo.Name = "tbInvoiceNo";
-            this.tbInvoiceNo.Size = new System.Drawing.Size(199, 20);
-            this.tbInvoiceNo.TabIndex = 84;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(10, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 85;
-            this.label2.Text = "DN/CN";
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.btnIssue);
-            this.panel3.Location = new System.Drawing.Point(2, 317);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(733, 42);
-            this.panel3.TabIndex = 172;
-            // 
-            // btnIssue
-            // 
-            this.btnIssue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnIssue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIssue.ForeColor = System.Drawing.Color.White;
-            this.btnIssue.Location = new System.Drawing.Point(516, 5);
-            this.btnIssue.Name = "btnIssue";
-            this.btnIssue.Size = new System.Drawing.Size(209, 30);
-            this.btnIssue.TabIndex = 170;
-            this.btnIssue.Text = "ISSUE";
-            this.btnIssue.UseVisualStyleBackColor = true;
-            this.btnIssue.Click += new System.EventHandler(this.btnIssue_Click);
-            // 
             // btnRowMinus
             // 
             this.btnRowMinus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
@@ -188,6 +143,14 @@
             this.cus_button1.UseVisualStyleBackColor = true;
             this.cus_button1.Click += new System.EventHandler(this.cus_button1_Click_1);
             // 
+            // tbInvoiceNo
+            // 
+            this.tbInvoiceNo.Location = new System.Drawing.Point(60, 15);
+            this.tbInvoiceNo.MaxLength = 16;
+            this.tbInvoiceNo.Name = "tbInvoiceNo";
+            this.tbInvoiceNo.Size = new System.Drawing.Size(199, 20);
+            this.tbInvoiceNo.TabIndex = 84;
+            // 
             // btnOptionII
             // 
             this.btnOptionII.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
@@ -201,6 +164,16 @@
             this.btnOptionII.Text = "Option II";
             this.btnOptionII.UseVisualStyleBackColor = true;
             this.btnOptionII.Click += new System.EventHandler(this.btnOptionII_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(10, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 85;
+            this.label2.Text = "DN/CN";
             // 
             // btnOptionI
             // 
@@ -216,11 +189,38 @@
             this.btnOptionI.UseVisualStyleBackColor = true;
             this.btnOptionI.Click += new System.EventHandler(this.btnOptionI_Click);
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.btnIssue);
+            this.panel3.Location = new System.Drawing.Point(2, 317);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(733, 42);
+            this.panel3.TabIndex = 172;
+            // 
+            // btnIssue
+            // 
+            this.btnIssue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnIssue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnIssue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIssue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIssue.ForeColor = System.Drawing.Color.White;
+            this.btnIssue.Location = new System.Drawing.Point(516, 5);
+            this.btnIssue.Name = "btnIssue";
+            this.btnIssue.Size = new System.Drawing.Size(209, 30);
+            this.btnIssue.TabIndex = 170;
+            this.btnIssue.Text = "ISSUE";
+            this.btnIssue.UseVisualStyleBackColor = true;
+            this.btnIssue.Click += new System.EventHandler(this.btnIssue_Click);
+            // 
             // BreakdownInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(739, 362);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.groupBox1);

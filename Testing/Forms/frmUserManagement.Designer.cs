@@ -75,7 +75,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.groupBox1.Controls.Add(this.cboType);
             this.groupBox1.Controls.Add(this.dtpExpiryDate);
             this.groupBox1.Controls.Add(this.dtpCreatedDate);
@@ -91,6 +91,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtUserCode);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(667, 219);
@@ -230,12 +231,13 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.groupBox2.Controls.Add(this.btnViewEmailPassword);
             this.groupBox2.Controls.Add(this.txtEmailPassword);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtEmail);
             this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(12, 246);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(667, 67);
@@ -315,6 +317,7 @@
             this.chkCreateDocUser.AutoSize = true;
             this.chkCreateDocUser.Checked = true;
             this.chkCreateDocUser.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCreateDocUser.ForeColor = System.Drawing.Color.White;
             this.chkCreateDocUser.Location = new System.Drawing.Point(12, 319);
             this.chkCreateDocUser.Name = "chkCreateDocUser";
             this.chkCreateDocUser.Size = new System.Drawing.Size(275, 22);
@@ -337,7 +340,7 @@
             // 
             // gbDocumentControl
             // 
-            this.gbDocumentControl.BackColor = System.Drawing.Color.Gainsboro;
+            this.gbDocumentControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.gbDocumentControl.Controls.Add(this.label13);
             this.gbDocumentControl.Controls.Add(this.lblSpecialCodeInfo);
             this.gbDocumentControl.Controls.Add(this.cboSpecialCode);
@@ -346,6 +349,7 @@
             this.gbDocumentControl.Controls.Add(this.cboTeam);
             this.gbDocumentControl.Controls.Add(this.label10);
             this.gbDocumentControl.Controls.Add(this.cboRole);
+            this.gbDocumentControl.ForeColor = System.Drawing.Color.White;
             this.gbDocumentControl.Location = new System.Drawing.Point(12, 348);
             this.gbDocumentControl.Name = "gbDocumentControl";
             this.gbDocumentControl.Size = new System.Drawing.Size(667, 173);
@@ -357,7 +361,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label13.ForeColor = System.Drawing.Color.DarkRed;
+            this.label13.ForeColor = System.Drawing.Color.Brown;
             this.label13.Location = new System.Drawing.Point(106, 117);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 19);
@@ -367,7 +371,7 @@
             // lblSpecialCodeInfo
             // 
             this.lblSpecialCodeInfo.Font = new System.Drawing.Font("Hanuman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblSpecialCodeInfo.ForeColor = System.Drawing.Color.Brown;
             this.lblSpecialCodeInfo.Location = new System.Drawing.Point(151, 117);
             this.lblSpecialCodeInfo.Name = "lblSpecialCodeInfo";
             this.lblSpecialCodeInfo.Size = new System.Drawing.Size(486, 47);
@@ -427,7 +431,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightGray;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(692, 563);
             this.Controls.Add(this.gbDocumentControl);
             this.Controls.Add(this.chkCreateDocUser);

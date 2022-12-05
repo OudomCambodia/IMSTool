@@ -31,34 +31,34 @@
             this.lbTitle = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtLossDate = new System.Windows.Forms.TextBox();
+            this.txtPlan = new System.Windows.Forms.TextBox();
+            this.txtAge = new System.Windows.Forms.TextBox();
+            this.txtGender = new System.Windows.Forms.TextBox();
+            this.txtMemberStatus = new System.Windows.Forms.TextBox();
+            this.txtMember = new System.Windows.Forms.TextBox();
+            this.txtPremiumStatus = new System.Windows.Forms.TextBox();
+            this.txtExpiryDate = new System.Windows.Forms.TextBox();
+            this.txtEffectiveDate = new System.Windows.Forms.TextBox();
+            this.txtPolicyNumber = new System.Windows.Forms.TextBox();
+            this.txtPolicyHolder = new System.Windows.Forms.TextBox();
             this.btnSchemeLite = new Testing.cus_button();
             this.btnSchemeOld = new Testing.cus_button();
             this.txtClaimNo = new System.Windows.Forms.TextBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
-            this.txtLossDate = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
-            this.txtPlan = new System.Windows.Forms.TextBox();
             this.textBox20 = new System.Windows.Forms.TextBox();
-            this.txtAge = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
-            this.txtGender = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
-            this.txtMemberStatus = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
-            this.txtMember = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
-            this.txtPremiumStatus = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.txtExpiryDate = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.txtEffectiveDate = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.txtPolicyNumber = new System.Windows.Forms.TextBox();
             this.textBox24 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnSearch = new Testing.cus_button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtPolicyHolder = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -67,7 +67,7 @@
             // 
             // lbTitle
             // 
-            this.lbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.lbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.lbTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbTitle.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.ForeColor = System.Drawing.Color.White;
@@ -81,7 +81,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.groupBox1.Controls.Add(this.splitContainer1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -101,6 +101,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.splitContainer1.Panel1.Controls.Add(this.txtLossDate);
             this.splitContainer1.Panel1.Controls.Add(this.txtPlan);
             this.splitContainer1.Panel1.Controls.Add(this.txtAge);
@@ -137,6 +138,139 @@
             this.splitContainer1.Size = new System.Drawing.Size(1226, 760);
             this.splitContainer1.SplitterDistance = 475;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // txtLossDate
+            // 
+            this.txtLossDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLossDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLossDate.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtLossDate.Location = new System.Drawing.Point(206, 457);
+            this.txtLossDate.Multiline = true;
+            this.txtLossDate.Name = "txtLossDate";
+            this.txtLossDate.ReadOnly = true;
+            this.txtLossDate.Size = new System.Drawing.Size(218, 20);
+            this.txtLossDate.TabIndex = 102;
+            // 
+            // txtPlan
+            // 
+            this.txtPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPlan.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtPlan.Location = new System.Drawing.Point(206, 438);
+            this.txtPlan.Multiline = true;
+            this.txtPlan.Name = "txtPlan";
+            this.txtPlan.ReadOnly = true;
+            this.txtPlan.Size = new System.Drawing.Size(218, 20);
+            this.txtPlan.TabIndex = 100;
+            // 
+            // txtAge
+            // 
+            this.txtAge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAge.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtAge.Location = new System.Drawing.Point(206, 420);
+            this.txtAge.Multiline = true;
+            this.txtAge.Name = "txtAge";
+            this.txtAge.ReadOnly = true;
+            this.txtAge.Size = new System.Drawing.Size(218, 20);
+            this.txtAge.TabIndex = 98;
+            // 
+            // txtGender
+            // 
+            this.txtGender.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtGender.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtGender.Location = new System.Drawing.Point(206, 402);
+            this.txtGender.Multiline = true;
+            this.txtGender.Name = "txtGender";
+            this.txtGender.ReadOnly = true;
+            this.txtGender.Size = new System.Drawing.Size(218, 20);
+            this.txtGender.TabIndex = 96;
+            // 
+            // txtMemberStatus
+            // 
+            this.txtMemberStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMemberStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMemberStatus.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtMemberStatus.Location = new System.Drawing.Point(206, 384);
+            this.txtMemberStatus.Multiline = true;
+            this.txtMemberStatus.Name = "txtMemberStatus";
+            this.txtMemberStatus.ReadOnly = true;
+            this.txtMemberStatus.Size = new System.Drawing.Size(218, 20);
+            this.txtMemberStatus.TabIndex = 94;
+            // 
+            // txtMember
+            // 
+            this.txtMember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMember.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMember.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtMember.Location = new System.Drawing.Point(206, 366);
+            this.txtMember.Multiline = true;
+            this.txtMember.Name = "txtMember";
+            this.txtMember.ReadOnly = true;
+            this.txtMember.Size = new System.Drawing.Size(218, 20);
+            this.txtMember.TabIndex = 92;
+            // 
+            // txtPremiumStatus
+            // 
+            this.txtPremiumStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPremiumStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPremiumStatus.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtPremiumStatus.Location = new System.Drawing.Point(206, 348);
+            this.txtPremiumStatus.Multiline = true;
+            this.txtPremiumStatus.Name = "txtPremiumStatus";
+            this.txtPremiumStatus.ReadOnly = true;
+            this.txtPremiumStatus.Size = new System.Drawing.Size(218, 20);
+            this.txtPremiumStatus.TabIndex = 90;
+            // 
+            // txtExpiryDate
+            // 
+            this.txtExpiryDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtExpiryDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtExpiryDate.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtExpiryDate.Location = new System.Drawing.Point(206, 329);
+            this.txtExpiryDate.Multiline = true;
+            this.txtExpiryDate.Name = "txtExpiryDate";
+            this.txtExpiryDate.ReadOnly = true;
+            this.txtExpiryDate.Size = new System.Drawing.Size(218, 20);
+            this.txtExpiryDate.TabIndex = 88;
+            // 
+            // txtEffectiveDate
+            // 
+            this.txtEffectiveDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEffectiveDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtEffectiveDate.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtEffectiveDate.Location = new System.Drawing.Point(206, 311);
+            this.txtEffectiveDate.Multiline = true;
+            this.txtEffectiveDate.Name = "txtEffectiveDate";
+            this.txtEffectiveDate.ReadOnly = true;
+            this.txtEffectiveDate.Size = new System.Drawing.Size(218, 20);
+            this.txtEffectiveDate.TabIndex = 86;
+            // 
+            // txtPolicyNumber
+            // 
+            this.txtPolicyNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPolicyNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPolicyNumber.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtPolicyNumber.Location = new System.Drawing.Point(206, 293);
+            this.txtPolicyNumber.Multiline = true;
+            this.txtPolicyNumber.Name = "txtPolicyNumber";
+            this.txtPolicyNumber.ReadOnly = true;
+            this.txtPolicyNumber.Size = new System.Drawing.Size(218, 20);
+            this.txtPolicyNumber.TabIndex = 84;
+            // 
+            // txtPolicyHolder
+            // 
+            this.txtPolicyHolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPolicyHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPolicyHolder.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtPolicyHolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPolicyHolder.Location = new System.Drawing.Point(206, 259);
+            this.txtPolicyHolder.Multiline = true;
+            this.txtPolicyHolder.Name = "txtPolicyHolder";
+            this.txtPolicyHolder.ReadOnly = true;
+            this.txtPolicyHolder.Size = new System.Drawing.Size(218, 35);
+            this.txtPolicyHolder.TabIndex = 71;
             // 
             // btnSchemeLite
             // 
@@ -199,18 +333,6 @@
             this.textBox22.TabIndex = 103;
             this.textBox22.Text = "Loss Date";
             // 
-            // txtLossDate
-            // 
-            this.txtLossDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLossDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtLossDate.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtLossDate.Location = new System.Drawing.Point(206, 457);
-            this.txtLossDate.Multiline = true;
-            this.txtLossDate.Name = "txtLossDate";
-            this.txtLossDate.ReadOnly = true;
-            this.txtLossDate.Size = new System.Drawing.Size(218, 20);
-            this.txtLossDate.TabIndex = 102;
-            // 
             // textBox18
             // 
             this.textBox18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -225,18 +347,6 @@
             this.textBox18.Size = new System.Drawing.Size(148, 20);
             this.textBox18.TabIndex = 101;
             this.textBox18.Text = "Plan";
-            // 
-            // txtPlan
-            // 
-            this.txtPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPlan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPlan.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtPlan.Location = new System.Drawing.Point(206, 438);
-            this.txtPlan.Multiline = true;
-            this.txtPlan.Name = "txtPlan";
-            this.txtPlan.ReadOnly = true;
-            this.txtPlan.Size = new System.Drawing.Size(218, 20);
-            this.txtPlan.TabIndex = 100;
             // 
             // textBox20
             // 
@@ -253,18 +363,6 @@
             this.textBox20.TabIndex = 99;
             this.textBox20.Text = "Age";
             // 
-            // txtAge
-            // 
-            this.txtAge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAge.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtAge.Location = new System.Drawing.Point(206, 420);
-            this.txtAge.Multiline = true;
-            this.txtAge.Name = "txtAge";
-            this.txtAge.ReadOnly = true;
-            this.txtAge.Size = new System.Drawing.Size(218, 20);
-            this.txtAge.TabIndex = 98;
-            // 
             // textBox14
             // 
             this.textBox14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -279,18 +377,6 @@
             this.textBox14.Size = new System.Drawing.Size(148, 20);
             this.textBox14.TabIndex = 97;
             this.textBox14.Text = "Gender";
-            // 
-            // txtGender
-            // 
-            this.txtGender.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtGender.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtGender.Location = new System.Drawing.Point(206, 402);
-            this.txtGender.Multiline = true;
-            this.txtGender.Name = "txtGender";
-            this.txtGender.ReadOnly = true;
-            this.txtGender.Size = new System.Drawing.Size(218, 20);
-            this.txtGender.TabIndex = 96;
             // 
             // textBox16
             // 
@@ -307,18 +393,6 @@
             this.textBox16.TabIndex = 95;
             this.textBox16.Text = "Member Status";
             // 
-            // txtMemberStatus
-            // 
-            this.txtMemberStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMemberStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMemberStatus.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtMemberStatus.Location = new System.Drawing.Point(206, 384);
-            this.txtMemberStatus.Multiline = true;
-            this.txtMemberStatus.Name = "txtMemberStatus";
-            this.txtMemberStatus.ReadOnly = true;
-            this.txtMemberStatus.Size = new System.Drawing.Size(218, 20);
-            this.txtMemberStatus.TabIndex = 94;
-            // 
             // textBox10
             // 
             this.textBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -333,18 +407,6 @@
             this.textBox10.Size = new System.Drawing.Size(148, 20);
             this.textBox10.TabIndex = 93;
             this.textBox10.Text = "Member";
-            // 
-            // txtMember
-            // 
-            this.txtMember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMember.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMember.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtMember.Location = new System.Drawing.Point(206, 366);
-            this.txtMember.Multiline = true;
-            this.txtMember.Name = "txtMember";
-            this.txtMember.ReadOnly = true;
-            this.txtMember.Size = new System.Drawing.Size(218, 20);
-            this.txtMember.TabIndex = 92;
             // 
             // textBox12
             // 
@@ -361,18 +423,6 @@
             this.textBox12.TabIndex = 91;
             this.textBox12.Text = "Premium Status";
             // 
-            // txtPremiumStatus
-            // 
-            this.txtPremiumStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPremiumStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPremiumStatus.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtPremiumStatus.Location = new System.Drawing.Point(206, 348);
-            this.txtPremiumStatus.Multiline = true;
-            this.txtPremiumStatus.Name = "txtPremiumStatus";
-            this.txtPremiumStatus.ReadOnly = true;
-            this.txtPremiumStatus.Size = new System.Drawing.Size(218, 20);
-            this.txtPremiumStatus.TabIndex = 90;
-            // 
             // textBox6
             // 
             this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -387,18 +437,6 @@
             this.textBox6.Size = new System.Drawing.Size(148, 20);
             this.textBox6.TabIndex = 89;
             this.textBox6.Text = "Expiry Date";
-            // 
-            // txtExpiryDate
-            // 
-            this.txtExpiryDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtExpiryDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtExpiryDate.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtExpiryDate.Location = new System.Drawing.Point(206, 329);
-            this.txtExpiryDate.Multiline = true;
-            this.txtExpiryDate.Name = "txtExpiryDate";
-            this.txtExpiryDate.ReadOnly = true;
-            this.txtExpiryDate.Size = new System.Drawing.Size(218, 20);
-            this.txtExpiryDate.TabIndex = 88;
             // 
             // textBox8
             // 
@@ -415,18 +453,6 @@
             this.textBox8.TabIndex = 87;
             this.textBox8.Text = "Start Date";
             // 
-            // txtEffectiveDate
-            // 
-            this.txtEffectiveDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEffectiveDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEffectiveDate.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtEffectiveDate.Location = new System.Drawing.Point(206, 311);
-            this.txtEffectiveDate.Multiline = true;
-            this.txtEffectiveDate.Name = "txtEffectiveDate";
-            this.txtEffectiveDate.ReadOnly = true;
-            this.txtEffectiveDate.Size = new System.Drawing.Size(218, 20);
-            this.txtEffectiveDate.TabIndex = 86;
-            // 
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -441,18 +467,6 @@
             this.textBox4.Size = new System.Drawing.Size(148, 20);
             this.textBox4.TabIndex = 85;
             this.textBox4.Text = "Policy No";
-            // 
-            // txtPolicyNumber
-            // 
-            this.txtPolicyNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolicyNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPolicyNumber.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtPolicyNumber.Location = new System.Drawing.Point(206, 293);
-            this.txtPolicyNumber.Multiline = true;
-            this.txtPolicyNumber.Name = "txtPolicyNumber";
-            this.txtPolicyNumber.ReadOnly = true;
-            this.txtPolicyNumber.Size = new System.Drawing.Size(218, 20);
-            this.txtPolicyNumber.TabIndex = 84;
             // 
             // textBox24
             // 
@@ -515,24 +529,11 @@
             this.textBox1.TabIndex = 75;
             this.textBox1.Text = "Claim No.:";
             // 
-            // txtPolicyHolder
-            // 
-            this.txtPolicyHolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPolicyHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPolicyHolder.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtPolicyHolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPolicyHolder.Location = new System.Drawing.Point(206, 259);
-            this.txtPolicyHolder.Multiline = true;
-            this.txtPolicyHolder.Name = "txtPolicyHolder";
-            this.txtPolicyHolder.ReadOnly = true;
-            this.txtPolicyHolder.Size = new System.Drawing.Size(218, 35);
-            this.txtPolicyHolder.TabIndex = 71;
-            // 
             // FigtreeBlueScheme
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1232, 841);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbTitle);

@@ -561,7 +561,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.tbRemarkRate);
             this.tabPage1.Controls.Add(this.label17);
@@ -780,7 +780,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tabPage2.Controls.Add(this.btnRemove);
             this.tabPage2.Controls.Add(this.btnOpen);
             this.tabPage2.Controls.Add(this.btnBrowse);
@@ -903,7 +903,7 @@
             // frmAddDocument1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(759, 559);
             this.ControlBox = false;

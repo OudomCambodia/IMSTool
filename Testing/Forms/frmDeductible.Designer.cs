@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabQuery = new System.Windows.Forms.TabPage();
             this.panelQueryClaim = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.tbNote = new System.Windows.Forms.RichTextBox();
             this.btnGetDCLetter = new System.Windows.Forms.Button();
             this.btnRemove = new Testing.cus_button();
             this.btnOpen = new Testing.cus_button();
@@ -138,9 +141,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.fdbSelectPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.tbNote = new System.Windows.Forms.RichTextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabQuery.SuspendLayout();
             this.panelQueryClaim.SuspendLayout();
@@ -163,7 +163,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
@@ -189,7 +189,7 @@
             // 
             // tabQuery
             // 
-            this.tabQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.tabQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tabQuery.Controls.Add(this.panelQueryClaim);
             this.tabQuery.Controls.Add(this.panel2);
             this.tabQuery.Font = new System.Drawing.Font("Cambria", 9.75F);
@@ -244,6 +244,35 @@
             this.panelQueryClaim.Name = "panelQueryClaim";
             this.panelQueryClaim.Size = new System.Drawing.Size(1299, 646);
             this.panelQueryClaim.TabIndex = 40;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Enabled = false;
+            this.btnUpdate.ForeColor = System.Drawing.Color.Black;
+            this.btnUpdate.Location = new System.Drawing.Point(406, 567);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(110, 23);
+            this.btnUpdate.TabIndex = 60;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(12, 570);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(36, 15);
+            this.label38.TabIndex = 59;
+            this.label38.Text = "Note:";
+            // 
+            // tbNote
+            // 
+            this.tbNote.Location = new System.Drawing.Point(54, 567);
+            this.tbNote.Name = "tbNote";
+            this.tbNote.Size = new System.Drawing.Size(346, 62);
+            this.tbNote.TabIndex = 58;
+            this.tbNote.Text = "";
             // 
             // btnGetDCLetter
             // 
@@ -1158,7 +1187,7 @@
             this.tabReport.Location = new System.Drawing.Point(4, 27);
             this.tabReport.Name = "tabReport";
             this.tabReport.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReport.Size = new System.Drawing.Size(1305, 600);
+            this.tabReport.Size = new System.Drawing.Size(1305, 698);
             this.tabReport.TabIndex = 1;
             this.tabReport.Text = "Report";
             // 
@@ -1169,7 +1198,7 @@
             this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(3, 110);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1299, 487);
+            this.groupBox5.Size = new System.Drawing.Size(1299, 585);
             this.groupBox5.TabIndex = 34;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Details of Deductible / Coinsurance OS";
@@ -1181,10 +1210,10 @@
             this.dgvReport.AllowUserToResizeRows = false;
             this.dgvReport.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.dgvReport.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Cambria", 9.75F);
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 9.75F);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReport.Location = new System.Drawing.Point(3, 19);
@@ -1194,7 +1223,7 @@
             this.dgvReport.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvReport.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dgvReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReport.Size = new System.Drawing.Size(1293, 465);
+            this.dgvReport.Size = new System.Drawing.Size(1293, 563);
             this.dgvReport.TabIndex = 0;
             this.dgvReport.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvReport_DataBindingComplete);
             // 
@@ -1384,6 +1413,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.panel1.Controls.Add(this.tabControlMain);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 46);
@@ -1394,35 +1424,6 @@
             // fdbSelectPath
             // 
             this.fdbSelectPath.Description = "Select location to store exported PDF file.";
-            // 
-            // tbNote
-            // 
-            this.tbNote.Location = new System.Drawing.Point(54, 567);
-            this.tbNote.Name = "tbNote";
-            this.tbNote.Size = new System.Drawing.Size(346, 62);
-            this.tbNote.TabIndex = 58;
-            this.tbNote.Text = "";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(12, 570);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(36, 15);
-            this.label38.TabIndex = 59;
-            this.label38.Text = "Note:";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Enabled = false;
-            this.btnUpdate.ForeColor = System.Drawing.Color.Black;
-            this.btnUpdate.Location = new System.Drawing.Point(406, 567);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(110, 23);
-            this.btnUpdate.TabIndex = 60;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // frmDeductible
             // 

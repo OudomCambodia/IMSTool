@@ -282,7 +282,7 @@
             // frmInvoiceSetting
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(584, 318);
             this.Controls.Add(this.groupBox2);

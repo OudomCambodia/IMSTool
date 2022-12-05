@@ -54,6 +54,7 @@
             this.tbPolNo = new System.Windows.Forms.TextBox();
             this.bnSearchPolicy = new Testing.cus_button();
             this.tabQueryClaim = new System.Windows.Forms.TabPage();
+            this.bnGetLetter = new Testing.cus_button();
             this.lblTotalOSCl = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblReSentDate = new System.Windows.Forms.Label();
@@ -90,7 +91,6 @@
             this.bnSearchReport = new Testing.cus_button();
             this.label18 = new System.Windows.Forms.Label();
             this.fdbSelectPath = new System.Windows.Forms.FolderBrowserDialog();
-            this.bnGetLetter = new Testing.cus_button();
             this.tabControlMain.SuspendLayout();
             this.tabQueryPolicy.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -137,7 +137,7 @@
             // 
             // tabQueryPolicy
             // 
-            this.tabQueryPolicy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.tabQueryPolicy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tabQueryPolicy.Controls.Add(this.groupBox2);
             this.tabQueryPolicy.Controls.Add(this.groupBox6);
             this.tabQueryPolicy.Controls.Add(this.panel1);
@@ -420,6 +420,20 @@
             this.tabQueryClaim.Size = new System.Drawing.Size(1079, 600);
             this.tabQueryClaim.TabIndex = 1;
             this.tabQueryClaim.Text = "Query - Claim";
+            // 
+            // bnGetLetter
+            // 
+            this.bnGetLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnGetLetter.FlatAppearance.BorderSize = 2;
+            this.bnGetLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnGetLetter.ForeColor = System.Drawing.Color.White;
+            this.bnGetLetter.Location = new System.Drawing.Point(26, 412);
+            this.bnGetLetter.Name = "bnGetLetter";
+            this.bnGetLetter.Size = new System.Drawing.Size(111, 25);
+            this.bnGetLetter.TabIndex = 64;
+            this.bnGetLetter.Text = "Get Letter";
+            this.bnGetLetter.UseVisualStyleBackColor = false;
+            this.bnGetLetter.Click += new System.EventHandler(this.bnGetLetter_Click);
             // 
             // lblTotalOSCl
             // 
@@ -814,25 +828,11 @@
             this.label18.TabIndex = 18;
             this.label18.Text = "To:";
             // 
-            // bnGetLetter
-            // 
-            this.bnGetLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnGetLetter.FlatAppearance.BorderSize = 2;
-            this.bnGetLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnGetLetter.ForeColor = System.Drawing.Color.White;
-            this.bnGetLetter.Location = new System.Drawing.Point(26, 412);
-            this.bnGetLetter.Name = "bnGetLetter";
-            this.bnGetLetter.Size = new System.Drawing.Size(111, 25);
-            this.bnGetLetter.TabIndex = 64;
-            this.bnGetLetter.Text = "Get Letter";
-            this.bnGetLetter.UseVisualStyleBackColor = false;
-            this.bnGetLetter.Click += new System.EventHandler(this.bnGetLetter_Click);
-            // 
             // frmWindscreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1087, 677);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.label1);

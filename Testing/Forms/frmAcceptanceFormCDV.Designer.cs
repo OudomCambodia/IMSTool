@@ -49,6 +49,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.gbLetters = new System.Windows.Forms.GroupBox();
+            this.bnGenerate = new Testing.cus_button();
             this.rbLetter5 = new System.Windows.Forms.RadioButton();
             this.rbLetter4 = new System.Windows.Forms.RadioButton();
             this.rbLetter3 = new System.Windows.Forms.RadioButton();
@@ -104,9 +105,8 @@
             this.tbRiskName = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbClaimNo = new System.Windows.Forms.TextBox();
-            this.bnGenerate = new Testing.cus_button();
             this.bnClear = new Testing.cus_button();
+            this.tbClaimNo = new System.Windows.Forms.TextBox();
             this.bnClaimSearch = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.panelQueryClaim.SuspendLayout();
@@ -350,6 +350,20 @@
             this.gbLetters.TabIndex = 53;
             this.gbLetters.TabStop = false;
             this.gbLetters.Text = "Letters";
+            // 
+            // bnGenerate
+            // 
+            this.bnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnGenerate.FlatAppearance.BorderSize = 2;
+            this.bnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnGenerate.ForeColor = System.Drawing.Color.White;
+            this.bnGenerate.Location = new System.Drawing.Point(15, 160);
+            this.bnGenerate.Name = "bnGenerate";
+            this.bnGenerate.Size = new System.Drawing.Size(412, 26);
+            this.bnGenerate.TabIndex = 16;
+            this.bnGenerate.Text = "Generate";
+            this.bnGenerate.UseVisualStyleBackColor = false;
+            this.bnGenerate.Click += new System.EventHandler(this.bnGenerate_Click);
             // 
             // rbLetter5
             // 
@@ -936,28 +950,6 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Claim No:";
             // 
-            // tbClaimNo
-            // 
-            this.tbClaimNo.Location = new System.Drawing.Point(76, 11);
-            this.tbClaimNo.MaxLength = 20;
-            this.tbClaimNo.Name = "tbClaimNo";
-            this.tbClaimNo.Size = new System.Drawing.Size(209, 23);
-            this.tbClaimNo.TabIndex = 16;
-            // 
-            // bnGenerate
-            // 
-            this.bnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnGenerate.FlatAppearance.BorderSize = 2;
-            this.bnGenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnGenerate.ForeColor = System.Drawing.Color.White;
-            this.bnGenerate.Location = new System.Drawing.Point(15, 160);
-            this.bnGenerate.Name = "bnGenerate";
-            this.bnGenerate.Size = new System.Drawing.Size(412, 26);
-            this.bnGenerate.TabIndex = 16;
-            this.bnGenerate.Text = "Generate";
-            this.bnGenerate.UseVisualStyleBackColor = false;
-            this.bnGenerate.Click += new System.EventHandler(this.bnGenerate_Click);
-            // 
             // bnClear
             // 
             this.bnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
@@ -971,6 +963,14 @@
             this.bnClear.Text = "Clear";
             this.bnClear.UseVisualStyleBackColor = false;
             this.bnClear.Click += new System.EventHandler(this.bnClear_Click);
+            // 
+            // tbClaimNo
+            // 
+            this.tbClaimNo.Location = new System.Drawing.Point(76, 11);
+            this.tbClaimNo.MaxLength = 20;
+            this.tbClaimNo.Name = "tbClaimNo";
+            this.tbClaimNo.Size = new System.Drawing.Size(209, 23);
+            this.tbClaimNo.TabIndex = 16;
             // 
             // bnClaimSearch
             // 
@@ -990,7 +990,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1313, 775);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);

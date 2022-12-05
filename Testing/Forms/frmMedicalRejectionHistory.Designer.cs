@@ -45,6 +45,7 @@
             // 
             // groupBox14
             // 
+            this.groupBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.groupBox14.Controls.Add(this.dgvClaimRejectionHist);
             this.groupBox14.Controls.Add(this.panel1);
             this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;

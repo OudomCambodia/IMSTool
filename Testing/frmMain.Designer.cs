@@ -533,7 +533,7 @@
             // 
             // pendingRIToolStripMenuItem
             // 
-            this.pendingRIToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.pendingRIToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pendingRIToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.pendingRIToolStripMenuItem.Name = "pendingRIToolStripMenuItem";
             this.pendingRIToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -542,7 +542,7 @@
             // 
             // premiumRegisterToolStripMenuItem
             // 
-            this.premiumRegisterToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.premiumRegisterToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.premiumRegisterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.premiumRegisterToolStripMenuItem.Name = "premiumRegisterToolStripMenuItem";
             this.premiumRegisterToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -551,7 +551,7 @@
             // 
             // userLoginCountToolStripMenuItem
             // 
-            this.userLoginCountToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.userLoginCountToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.userLoginCountToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.userLoginCountToolStripMenuItem.Name = "userLoginCountToolStripMenuItem";
             this.userLoginCountToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -560,7 +560,7 @@
             // 
             // addCharactersToolStripMenuItem
             // 
-            this.addCharactersToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.addCharactersToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.addCharactersToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.addCharactersToolStripMenuItem.Name = "addCharactersToolStripMenuItem";
             this.addCharactersToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -569,7 +569,7 @@
             // 
             // userManagementToolStripMenuItem
             // 
-            this.userManagementToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.userManagementToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.userManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createNewUserToolStripMenuItem,
             this.manageUserRoleToolStripMenuItem});
@@ -580,7 +580,7 @@
             // 
             // createNewUserToolStripMenuItem
             // 
-            this.createNewUserToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.createNewUserToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.createNewUserToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.createNewUserToolStripMenuItem.Name = "createNewUserToolStripMenuItem";
             this.createNewUserToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
@@ -589,7 +589,7 @@
             // 
             // manageUserRoleToolStripMenuItem
             // 
-            this.manageUserRoleToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.manageUserRoleToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.manageUserRoleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.manageUserRoleToolStripMenuItem.Name = "manageUserRoleToolStripMenuItem";
             this.manageUserRoleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
