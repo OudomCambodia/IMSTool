@@ -58,11 +58,11 @@ namespace Testing {
         
         private GPAECARDDataTable tableGPAECARD;
         
-        private HNS_CARDDataTable tableHNS_CARD;
-        
         private BHP_CARDDataTable tableBHP_CARD;
         
         private CUSPROFITV2DataTable tableCUSPROFITV2;
+        
+        private HNS_CARDDataTable tableHNS_CARD;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -143,14 +143,14 @@ namespace Testing {
                 if ((ds.Tables["GPAECARD"] != null)) {
                     base.Tables.Add(new GPAECARDDataTable(ds.Tables["GPAECARD"]));
                 }
-                if ((ds.Tables["HNS_CARD"] != null)) {
-                    base.Tables.Add(new HNS_CARDDataTable(ds.Tables["HNS_CARD"]));
-                }
                 if ((ds.Tables["BHP_CARD"] != null)) {
                     base.Tables.Add(new BHP_CARDDataTable(ds.Tables["BHP_CARD"]));
                 }
                 if ((ds.Tables["CUSPROFITV2"] != null)) {
                     base.Tables.Add(new CUSPROFITV2DataTable(ds.Tables["CUSPROFITV2"]));
+                }
+                if ((ds.Tables["HNS_CARD"] != null)) {
+                    base.Tables.Add(new HNS_CARDDataTable(ds.Tables["HNS_CARD"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -344,16 +344,6 @@ namespace Testing {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public HNS_CARDDataTable HNS_CARD {
-            get {
-                return this.tableHNS_CARD;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public BHP_CARDDataTable BHP_CARD {
             get {
                 return this.tableBHP_CARD;
@@ -367,6 +357,16 @@ namespace Testing {
         public CUSPROFITV2DataTable CUSPROFITV2 {
             get {
                 return this.tableCUSPROFITV2;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public HNS_CARDDataTable HNS_CARD {
+            get {
+                return this.tableHNS_CARD;
             }
         }
         
@@ -488,14 +488,14 @@ namespace Testing {
                 if ((ds.Tables["GPAECARD"] != null)) {
                     base.Tables.Add(new GPAECARDDataTable(ds.Tables["GPAECARD"]));
                 }
-                if ((ds.Tables["HNS_CARD"] != null)) {
-                    base.Tables.Add(new HNS_CARDDataTable(ds.Tables["HNS_CARD"]));
-                }
                 if ((ds.Tables["BHP_CARD"] != null)) {
                     base.Tables.Add(new BHP_CARDDataTable(ds.Tables["BHP_CARD"]));
                 }
                 if ((ds.Tables["CUSPROFITV2"] != null)) {
                     base.Tables.Add(new CUSPROFITV2DataTable(ds.Tables["CUSPROFITV2"]));
+                }
+                if ((ds.Tables["HNS_CARD"] != null)) {
+                    base.Tables.Add(new HNS_CARDDataTable(ds.Tables["HNS_CARD"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -632,12 +632,6 @@ namespace Testing {
                     this.tableGPAECARD.InitVars();
                 }
             }
-            this.tableHNS_CARD = ((HNS_CARDDataTable)(base.Tables["HNS_CARD"]));
-            if ((initTable == true)) {
-                if ((this.tableHNS_CARD != null)) {
-                    this.tableHNS_CARD.InitVars();
-                }
-            }
             this.tableBHP_CARD = ((BHP_CARDDataTable)(base.Tables["BHP_CARD"]));
             if ((initTable == true)) {
                 if ((this.tableBHP_CARD != null)) {
@@ -648,6 +642,12 @@ namespace Testing {
             if ((initTable == true)) {
                 if ((this.tableCUSPROFITV2 != null)) {
                     this.tableCUSPROFITV2.InitVars();
+                }
+            }
+            this.tableHNS_CARD = ((HNS_CARDDataTable)(base.Tables["HNS_CARD"]));
+            if ((initTable == true)) {
+                if ((this.tableHNS_CARD != null)) {
+                    this.tableHNS_CARD.InitVars();
                 }
             }
         }
@@ -694,12 +694,12 @@ namespace Testing {
             base.Tables.Add(this.tableCPAE_CARD);
             this.tableGPAECARD = new GPAECARDDataTable();
             base.Tables.Add(this.tableGPAECARD);
-            this.tableHNS_CARD = new HNS_CARDDataTable();
-            base.Tables.Add(this.tableHNS_CARD);
             this.tableBHP_CARD = new BHP_CARDDataTable();
             base.Tables.Add(this.tableBHP_CARD);
             this.tableCUSPROFITV2 = new CUSPROFITV2DataTable();
             base.Tables.Add(this.tableCUSPROFITV2);
+            this.tableHNS_CARD = new HNS_CARDDataTable();
+            base.Tables.Add(this.tableHNS_CARD);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -806,12 +806,6 @@ namespace Testing {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeHNS_CARD() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeBHP_CARD() {
             return false;
         }
@@ -819,6 +813,12 @@ namespace Testing {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeCUSPROFITV2() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeHNS_CARD() {
             return false;
         }
         
@@ -929,13 +929,13 @@ namespace Testing {
         public delegate void GPAECARDRowChangeEventHandler(object sender, GPAECARDRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void HNS_CARDRowChangeEventHandler(object sender, HNS_CARDRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void BHP_CARDRowChangeEventHandler(object sender, BHP_CARDRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void CUSPROFITV2RowChangeEventHandler(object sender, CUSPROFITV2RowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void HNS_CARDRowChangeEventHandler(object sender, HNS_CARDRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -9351,393 +9351,6 @@ namespace Testing {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class HNS_CARDDataTable : global::System.Data.TypedTableBase<HNS_CARDRow> {
-            
-            private global::System.Data.DataColumn columnINSURED_MEMBER;
-            
-            private global::System.Data.DataColumn columnPOLICY_HOLDER;
-            
-            private global::System.Data.DataColumn columnPOLICY_NO;
-            
-            private global::System.Data.DataColumn columnPOLICY_PERIOD_FROM;
-            
-            private global::System.Data.DataColumn columnPOLICY_PERIOD_TO;
-            
-            private global::System.Data.DataColumn columnPLAN;
-            
-            private global::System.Data.DataColumn columnDEPENDENT;
-            
-            private global::System.Data.DataColumn columnMEMBER_ID;
-            
-            private global::System.Data.DataColumn columnRISK_VALID_FROM;
-            
-            private global::System.Data.DataColumn columnRISK_VALID_TO;
-            
-            private global::System.Data.DataColumn columnOPTIONAL_CARE;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HNS_CARDDataTable() {
-                this.TableName = "HNS_CARD";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal HNS_CARDDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected HNS_CARDDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn INSURED_MEMBERColumn {
-                get {
-                    return this.columnINSURED_MEMBER;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn POLICY_HOLDERColumn {
-                get {
-                    return this.columnPOLICY_HOLDER;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn POLICY_NOColumn {
-                get {
-                    return this.columnPOLICY_NO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn POLICY_PERIOD_FROMColumn {
-                get {
-                    return this.columnPOLICY_PERIOD_FROM;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn POLICY_PERIOD_TOColumn {
-                get {
-                    return this.columnPOLICY_PERIOD_TO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PLANColumn {
-                get {
-                    return this.columnPLAN;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DEPENDENTColumn {
-                get {
-                    return this.columnDEPENDENT;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MEMBER_IDColumn {
-                get {
-                    return this.columnMEMBER_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RISK_VALID_FROMColumn {
-                get {
-                    return this.columnRISK_VALID_FROM;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RISK_VALID_TOColumn {
-                get {
-                    return this.columnRISK_VALID_TO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn OPTIONAL_CAREColumn {
-                get {
-                    return this.columnOPTIONAL_CARE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HNS_CARDRow this[int index] {
-                get {
-                    return ((HNS_CARDRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event HNS_CARDRowChangeEventHandler HNS_CARDRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event HNS_CARDRowChangeEventHandler HNS_CARDRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event HNS_CARDRowChangeEventHandler HNS_CARDRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event HNS_CARDRowChangeEventHandler HNS_CARDRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddHNS_CARDRow(HNS_CARDRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HNS_CARDRow AddHNS_CARDRow(string INSURED_MEMBER, string POLICY_HOLDER, string POLICY_NO, string POLICY_PERIOD_FROM, string POLICY_PERIOD_TO, string PLAN, string DEPENDENT, string MEMBER_ID, string RISK_VALID_FROM, string RISK_VALID_TO, string OPTIONAL_CARE) {
-                HNS_CARDRow rowHNS_CARDRow = ((HNS_CARDRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        INSURED_MEMBER,
-                        POLICY_HOLDER,
-                        POLICY_NO,
-                        POLICY_PERIOD_FROM,
-                        POLICY_PERIOD_TO,
-                        PLAN,
-                        DEPENDENT,
-                        MEMBER_ID,
-                        RISK_VALID_FROM,
-                        RISK_VALID_TO,
-                        OPTIONAL_CARE};
-                rowHNS_CARDRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowHNS_CARDRow);
-                return rowHNS_CARDRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                HNS_CARDDataTable cln = ((HNS_CARDDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new HNS_CARDDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnINSURED_MEMBER = base.Columns["INSURED_MEMBER"];
-                this.columnPOLICY_HOLDER = base.Columns["POLICY_HOLDER"];
-                this.columnPOLICY_NO = base.Columns["POLICY_NO"];
-                this.columnPOLICY_PERIOD_FROM = base.Columns["POLICY_PERIOD_FROM"];
-                this.columnPOLICY_PERIOD_TO = base.Columns["POLICY_PERIOD_TO"];
-                this.columnPLAN = base.Columns["PLAN"];
-                this.columnDEPENDENT = base.Columns["DEPENDENT"];
-                this.columnMEMBER_ID = base.Columns["MEMBER_ID"];
-                this.columnRISK_VALID_FROM = base.Columns["RISK_VALID_FROM"];
-                this.columnRISK_VALID_TO = base.Columns["RISK_VALID_TO"];
-                this.columnOPTIONAL_CARE = base.Columns["OPTIONAL_CARE"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnINSURED_MEMBER = new global::System.Data.DataColumn("INSURED_MEMBER", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnINSURED_MEMBER);
-                this.columnPOLICY_HOLDER = new global::System.Data.DataColumn("POLICY_HOLDER", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPOLICY_HOLDER);
-                this.columnPOLICY_NO = new global::System.Data.DataColumn("POLICY_NO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPOLICY_NO);
-                this.columnPOLICY_PERIOD_FROM = new global::System.Data.DataColumn("POLICY_PERIOD_FROM", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPOLICY_PERIOD_FROM);
-                this.columnPOLICY_PERIOD_TO = new global::System.Data.DataColumn("POLICY_PERIOD_TO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPOLICY_PERIOD_TO);
-                this.columnPLAN = new global::System.Data.DataColumn("PLAN", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPLAN);
-                this.columnDEPENDENT = new global::System.Data.DataColumn("DEPENDENT", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDEPENDENT);
-                this.columnMEMBER_ID = new global::System.Data.DataColumn("MEMBER_ID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMEMBER_ID);
-                this.columnRISK_VALID_FROM = new global::System.Data.DataColumn("RISK_VALID_FROM", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRISK_VALID_FROM);
-                this.columnRISK_VALID_TO = new global::System.Data.DataColumn("RISK_VALID_TO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRISK_VALID_TO);
-                this.columnOPTIONAL_CARE = new global::System.Data.DataColumn("OPTIONAL_CARE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOPTIONAL_CARE);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HNS_CARDRow NewHNS_CARDRow() {
-                return ((HNS_CARDRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new HNS_CARDRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(HNS_CARDRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.HNS_CARDRowChanged != null)) {
-                    this.HNS_CARDRowChanged(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.HNS_CARDRowChanging != null)) {
-                    this.HNS_CARDRowChanging(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.HNS_CARDRowDeleted != null)) {
-                    this.HNS_CARDRowDeleted(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.HNS_CARDRowDeleting != null)) {
-                    this.HNS_CARDRowDeleting(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveHNS_CARDRow(HNS_CARDRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DBS11DataSet ds = new DBS11DataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "HNS_CARDDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class BHP_CARDDataTable : global::System.Data.TypedTableBase<BHP_CARDRow> {
             
             private global::System.Data.DataColumn columnINSURED_MEMBER;
@@ -10529,6 +10142,421 @@ namespace Testing {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CUSPROFITV2DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class HNS_CARDDataTable : global::System.Data.TypedTableBase<HNS_CARDRow> {
+            
+            private global::System.Data.DataColumn columnColumn1;
+            
+            private global::System.Data.DataColumn columnMEMBER_ID;
+            
+            private global::System.Data.DataColumn columnINSURED_MEMBER;
+            
+            private global::System.Data.DataColumn columnDEPENDENT;
+            
+            private global::System.Data.DataColumn columnPOLICY_HOLDER;
+            
+            private global::System.Data.DataColumn columnPOLICY_NO;
+            
+            private global::System.Data.DataColumn columnPLAN;
+            
+            private global::System.Data.DataColumn columnRISK_VALID_FROM;
+            
+            private global::System.Data.DataColumn columnRISK_VALID_TO;
+            
+            private global::System.Data.DataColumn columnPOLICY_PERIOD_FROM;
+            
+            private global::System.Data.DataColumn columnPOLICY_PERIOD_TO;
+            
+            private global::System.Data.DataColumn columnRECENTLY_ADD;
+            
+            private global::System.Data.DataColumn columnOPTIONAL_CARE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HNS_CARDDataTable() {
+                this.TableName = "HNS_CARD";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal HNS_CARDDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected HNS_CARDDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Column1Column {
+                get {
+                    return this.columnColumn1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MEMBER_IDColumn {
+                get {
+                    return this.columnMEMBER_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn INSURED_MEMBERColumn {
+                get {
+                    return this.columnINSURED_MEMBER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DEPENDENTColumn {
+                get {
+                    return this.columnDEPENDENT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICY_HOLDERColumn {
+                get {
+                    return this.columnPOLICY_HOLDER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICY_NOColumn {
+                get {
+                    return this.columnPOLICY_NO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PLANColumn {
+                get {
+                    return this.columnPLAN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RISK_VALID_FROMColumn {
+                get {
+                    return this.columnRISK_VALID_FROM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RISK_VALID_TOColumn {
+                get {
+                    return this.columnRISK_VALID_TO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICY_PERIOD_FROMColumn {
+                get {
+                    return this.columnPOLICY_PERIOD_FROM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICY_PERIOD_TOColumn {
+                get {
+                    return this.columnPOLICY_PERIOD_TO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RECENTLY_ADDColumn {
+                get {
+                    return this.columnRECENTLY_ADD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OPTIONAL_CAREColumn {
+                get {
+                    return this.columnOPTIONAL_CARE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HNS_CARDRow this[int index] {
+                get {
+                    return ((HNS_CARDRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HNS_CARDRowChangeEventHandler HNS_CARDRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HNS_CARDRowChangeEventHandler HNS_CARDRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HNS_CARDRowChangeEventHandler HNS_CARDRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HNS_CARDRowChangeEventHandler HNS_CARDRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddHNS_CARDRow(HNS_CARDRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HNS_CARDRow AddHNS_CARDRow(string Column1, string MEMBER_ID, string INSURED_MEMBER, string DEPENDENT, string POLICY_HOLDER, string POLICY_NO, string PLAN, string RISK_VALID_FROM, string RISK_VALID_TO, string POLICY_PERIOD_FROM, string POLICY_PERIOD_TO, string RECENTLY_ADD, string OPTIONAL_CARE) {
+                HNS_CARDRow rowHNS_CARDRow = ((HNS_CARDRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        Column1,
+                        MEMBER_ID,
+                        INSURED_MEMBER,
+                        DEPENDENT,
+                        POLICY_HOLDER,
+                        POLICY_NO,
+                        PLAN,
+                        RISK_VALID_FROM,
+                        RISK_VALID_TO,
+                        POLICY_PERIOD_FROM,
+                        POLICY_PERIOD_TO,
+                        RECENTLY_ADD,
+                        OPTIONAL_CARE};
+                rowHNS_CARDRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowHNS_CARDRow);
+                return rowHNS_CARDRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                HNS_CARDDataTable cln = ((HNS_CARDDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new HNS_CARDDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnColumn1 = base.Columns["Column1"];
+                this.columnMEMBER_ID = base.Columns["MEMBER_ID"];
+                this.columnINSURED_MEMBER = base.Columns["INSURED_MEMBER"];
+                this.columnDEPENDENT = base.Columns["DEPENDENT"];
+                this.columnPOLICY_HOLDER = base.Columns["POLICY_HOLDER"];
+                this.columnPOLICY_NO = base.Columns["POLICY_NO"];
+                this.columnPLAN = base.Columns["PLAN"];
+                this.columnRISK_VALID_FROM = base.Columns["RISK_VALID_FROM"];
+                this.columnRISK_VALID_TO = base.Columns["RISK_VALID_TO"];
+                this.columnPOLICY_PERIOD_FROM = base.Columns["POLICY_PERIOD_FROM"];
+                this.columnPOLICY_PERIOD_TO = base.Columns["POLICY_PERIOD_TO"];
+                this.columnRECENTLY_ADD = base.Columns["RECENTLY_ADD"];
+                this.columnOPTIONAL_CARE = base.Columns["OPTIONAL_CARE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnColumn1 = new global::System.Data.DataColumn("Column1", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnColumn1);
+                this.columnMEMBER_ID = new global::System.Data.DataColumn("MEMBER_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMEMBER_ID);
+                this.columnINSURED_MEMBER = new global::System.Data.DataColumn("INSURED_MEMBER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnINSURED_MEMBER);
+                this.columnDEPENDENT = new global::System.Data.DataColumn("DEPENDENT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDEPENDENT);
+                this.columnPOLICY_HOLDER = new global::System.Data.DataColumn("POLICY_HOLDER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY_HOLDER);
+                this.columnPOLICY_NO = new global::System.Data.DataColumn("POLICY_NO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY_NO);
+                this.columnPLAN = new global::System.Data.DataColumn("PLAN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPLAN);
+                this.columnRISK_VALID_FROM = new global::System.Data.DataColumn("RISK_VALID_FROM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRISK_VALID_FROM);
+                this.columnRISK_VALID_TO = new global::System.Data.DataColumn("RISK_VALID_TO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRISK_VALID_TO);
+                this.columnPOLICY_PERIOD_FROM = new global::System.Data.DataColumn("POLICY_PERIOD_FROM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY_PERIOD_FROM);
+                this.columnPOLICY_PERIOD_TO = new global::System.Data.DataColumn("POLICY_PERIOD_TO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY_PERIOD_TO);
+                this.columnRECENTLY_ADD = new global::System.Data.DataColumn("RECENTLY_ADD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRECENTLY_ADD);
+                this.columnOPTIONAL_CARE = new global::System.Data.DataColumn("OPTIONAL_CARE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOPTIONAL_CARE);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HNS_CARDRow NewHNS_CARDRow() {
+                return ((HNS_CARDRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new HNS_CARDRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(HNS_CARDRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.HNS_CARDRowChanged != null)) {
+                    this.HNS_CARDRowChanged(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.HNS_CARDRowChanging != null)) {
+                    this.HNS_CARDRowChanging(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.HNS_CARDRowDeleted != null)) {
+                    this.HNS_CARDRowDeleted(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.HNS_CARDRowDeleting != null)) {
+                    this.HNS_CARDRowDeleting(this, new HNS_CARDRowChangeEvent(((HNS_CARDRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveHNS_CARDRow(HNS_CARDRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DBS11DataSet ds = new DBS11DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "HNS_CARDDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -19168,329 +19196,6 @@ namespace Testing {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class HNS_CARDRow : global::System.Data.DataRow {
-            
-            private HNS_CARDDataTable tableHNS_CARD;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal HNS_CARDRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableHNS_CARD = ((HNS_CARDDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string INSURED_MEMBER {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.INSURED_MEMBERColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'INSURED_MEMBER\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.INSURED_MEMBERColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string POLICY_HOLDER {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.POLICY_HOLDERColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_HOLDER\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.POLICY_HOLDERColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string POLICY_NO {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.POLICY_NOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_NO\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.POLICY_NOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string POLICY_PERIOD_FROM {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.POLICY_PERIOD_FROMColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_PERIOD_FROM\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.POLICY_PERIOD_FROMColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string POLICY_PERIOD_TO {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.POLICY_PERIOD_TOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_PERIOD_TO\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.POLICY_PERIOD_TOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PLAN {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.PLANColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PLAN\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.PLANColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DEPENDENT {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.DEPENDENTColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DEPENDENT\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.DEPENDENTColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string MEMBER_ID {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.MEMBER_IDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MEMBER_ID\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.MEMBER_IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string RISK_VALID_FROM {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.RISK_VALID_FROMColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RISK_VALID_FROM\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.RISK_VALID_FROMColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string RISK_VALID_TO {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.RISK_VALID_TOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RISK_VALID_TO\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.RISK_VALID_TOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string OPTIONAL_CARE {
-                get {
-                    try {
-                        return ((string)(this[this.tableHNS_CARD.OPTIONAL_CAREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'OPTIONAL_CARE\' in table \'HNS_CARD\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableHNS_CARD.OPTIONAL_CAREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsINSURED_MEMBERNull() {
-                return this.IsNull(this.tableHNS_CARD.INSURED_MEMBERColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetINSURED_MEMBERNull() {
-                this[this.tableHNS_CARD.INSURED_MEMBERColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPOLICY_HOLDERNull() {
-                return this.IsNull(this.tableHNS_CARD.POLICY_HOLDERColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPOLICY_HOLDERNull() {
-                this[this.tableHNS_CARD.POLICY_HOLDERColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPOLICY_NONull() {
-                return this.IsNull(this.tableHNS_CARD.POLICY_NOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPOLICY_NONull() {
-                this[this.tableHNS_CARD.POLICY_NOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPOLICY_PERIOD_FROMNull() {
-                return this.IsNull(this.tableHNS_CARD.POLICY_PERIOD_FROMColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPOLICY_PERIOD_FROMNull() {
-                this[this.tableHNS_CARD.POLICY_PERIOD_FROMColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPOLICY_PERIOD_TONull() {
-                return this.IsNull(this.tableHNS_CARD.POLICY_PERIOD_TOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPOLICY_PERIOD_TONull() {
-                this[this.tableHNS_CARD.POLICY_PERIOD_TOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPLANNull() {
-                return this.IsNull(this.tableHNS_CARD.PLANColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPLANNull() {
-                this[this.tableHNS_CARD.PLANColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDEPENDENTNull() {
-                return this.IsNull(this.tableHNS_CARD.DEPENDENTColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDEPENDENTNull() {
-                this[this.tableHNS_CARD.DEPENDENTColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMEMBER_IDNull() {
-                return this.IsNull(this.tableHNS_CARD.MEMBER_IDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMEMBER_IDNull() {
-                this[this.tableHNS_CARD.MEMBER_IDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRISK_VALID_FROMNull() {
-                return this.IsNull(this.tableHNS_CARD.RISK_VALID_FROMColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRISK_VALID_FROMNull() {
-                this[this.tableHNS_CARD.RISK_VALID_FROMColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRISK_VALID_TONull() {
-                return this.IsNull(this.tableHNS_CARD.RISK_VALID_TOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRISK_VALID_TONull() {
-                this[this.tableHNS_CARD.RISK_VALID_TOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsOPTIONAL_CARENull() {
-                return this.IsNull(this.tableHNS_CARD.OPTIONAL_CAREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetOPTIONAL_CARENull() {
-                this[this.tableHNS_CARD.OPTIONAL_CAREColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class BHP_CARDRow : global::System.Data.DataRow {
             
             private BHP_CARDDataTable tableBHP_CARD;
@@ -20219,6 +19924,385 @@ namespace Testing {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class HNS_CARDRow : global::System.Data.DataRow {
+            
+            private HNS_CARDDataTable tableHNS_CARD;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal HNS_CARDRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableHNS_CARD = ((HNS_CARDDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Column1 {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.Column1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Column1\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.Column1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MEMBER_ID {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.MEMBER_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MEMBER_ID\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.MEMBER_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string INSURED_MEMBER {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.INSURED_MEMBERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'INSURED_MEMBER\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.INSURED_MEMBERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DEPENDENT {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.DEPENDENTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DEPENDENT\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.DEPENDENTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY_HOLDER {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.POLICY_HOLDERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_HOLDER\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.POLICY_HOLDERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY_NO {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.POLICY_NOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_NO\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.POLICY_NOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PLAN {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.PLANColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PLAN\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.PLANColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string RISK_VALID_FROM {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.RISK_VALID_FROMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RISK_VALID_FROM\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.RISK_VALID_FROMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string RISK_VALID_TO {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.RISK_VALID_TOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RISK_VALID_TO\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.RISK_VALID_TOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY_PERIOD_FROM {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.POLICY_PERIOD_FROMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_PERIOD_FROM\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.POLICY_PERIOD_FROMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY_PERIOD_TO {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.POLICY_PERIOD_TOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_PERIOD_TO\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.POLICY_PERIOD_TOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string RECENTLY_ADD {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.RECENTLY_ADDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RECENTLY_ADD\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.RECENTLY_ADDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OPTIONAL_CARE {
+                get {
+                    try {
+                        return ((string)(this[this.tableHNS_CARD.OPTIONAL_CAREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OPTIONAL_CARE\' in table \'HNS_CARD\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHNS_CARD.OPTIONAL_CAREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsColumn1Null() {
+                return this.IsNull(this.tableHNS_CARD.Column1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetColumn1Null() {
+                this[this.tableHNS_CARD.Column1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMEMBER_IDNull() {
+                return this.IsNull(this.tableHNS_CARD.MEMBER_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMEMBER_IDNull() {
+                this[this.tableHNS_CARD.MEMBER_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsINSURED_MEMBERNull() {
+                return this.IsNull(this.tableHNS_CARD.INSURED_MEMBERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetINSURED_MEMBERNull() {
+                this[this.tableHNS_CARD.INSURED_MEMBERColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDEPENDENTNull() {
+                return this.IsNull(this.tableHNS_CARD.DEPENDENTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDEPENDENTNull() {
+                this[this.tableHNS_CARD.DEPENDENTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICY_HOLDERNull() {
+                return this.IsNull(this.tableHNS_CARD.POLICY_HOLDERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICY_HOLDERNull() {
+                this[this.tableHNS_CARD.POLICY_HOLDERColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICY_NONull() {
+                return this.IsNull(this.tableHNS_CARD.POLICY_NOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICY_NONull() {
+                this[this.tableHNS_CARD.POLICY_NOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPLANNull() {
+                return this.IsNull(this.tableHNS_CARD.PLANColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPLANNull() {
+                this[this.tableHNS_CARD.PLANColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRISK_VALID_FROMNull() {
+                return this.IsNull(this.tableHNS_CARD.RISK_VALID_FROMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRISK_VALID_FROMNull() {
+                this[this.tableHNS_CARD.RISK_VALID_FROMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRISK_VALID_TONull() {
+                return this.IsNull(this.tableHNS_CARD.RISK_VALID_TOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRISK_VALID_TONull() {
+                this[this.tableHNS_CARD.RISK_VALID_TOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICY_PERIOD_FROMNull() {
+                return this.IsNull(this.tableHNS_CARD.POLICY_PERIOD_FROMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICY_PERIOD_FROMNull() {
+                this[this.tableHNS_CARD.POLICY_PERIOD_FROMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICY_PERIOD_TONull() {
+                return this.IsNull(this.tableHNS_CARD.POLICY_PERIOD_TOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICY_PERIOD_TONull() {
+                this[this.tableHNS_CARD.POLICY_PERIOD_TOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRECENTLY_ADDNull() {
+                return this.IsNull(this.tableHNS_CARD.RECENTLY_ADDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRECENTLY_ADDNull() {
+                this[this.tableHNS_CARD.RECENTLY_ADDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOPTIONAL_CARENull() {
+                return this.IsNull(this.tableHNS_CARD.OPTIONAL_CAREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOPTIONAL_CARENull() {
+                this[this.tableHNS_CARD.OPTIONAL_CAREColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -20800,40 +20884,6 @@ namespace Testing {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class HNS_CARDRowChangeEvent : global::System.EventArgs {
-            
-            private HNS_CARDRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HNS_CARDRowChangeEvent(HNS_CARDRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HNS_CARDRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public class BHP_CARDRowChangeEvent : global::System.EventArgs {
             
             private BHP_CARDRow eventRow;
@@ -20884,6 +20934,40 @@ namespace Testing {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public CUSPROFITV2Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class HNS_CARDRowChangeEvent : global::System.EventArgs {
+            
+            private HNS_CARDRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HNS_CARDRowChangeEvent(HNS_CARDRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HNS_CARDRow Row {
                 get {
                     return this.eventRow;
                 }
