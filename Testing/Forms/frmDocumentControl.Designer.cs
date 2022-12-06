@@ -58,14 +58,14 @@
             this.btnControllerAccepted = new System.Windows.Forms.Button();
             this.btnSubmittedtoUW = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.cboColor = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.gbAllRecordOption = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpSpecificDateTo = new System.Windows.Forms.DateTimePicker();
             this.dtpSpecificDateFr = new System.Windows.Forms.DateTimePicker();
             this.rbSpecificDate = new System.Windows.Forms.RadioButton();
             this.rbAll = new System.Windows.Forms.RadioButton();
+            this.cboColor = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.rbCustomer = new System.Windows.Forms.RadioButton();
             this.rbRefID = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
@@ -76,6 +76,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbFilterdgvDoc = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnReturn = new Testing.cus_button();
+            this.btnReassignDP = new Testing.cus_button();
+            this.btnChangeStatus = new Testing.cus_button();
+            this.btnCloseReopen = new Testing.cus_button();
+            this.btnAddDoc = new Testing.cus_button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.lblTot = new System.Windows.Forms.Label();
@@ -90,11 +95,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
-            this.btnReturn = new Testing.cus_button();
-            this.btnReassignDP = new Testing.cus_button();
-            this.btnChangeStatus = new Testing.cus_button();
-            this.btnCloseReopen = new Testing.cus_button();
-            this.btnAddDoc = new Testing.cus_button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pDoc.SuspendLayout();
@@ -508,30 +508,6 @@
             this.panel3.Size = new System.Drawing.Size(1087, 42);
             this.panel3.TabIndex = 45;
             // 
-            // cboColor
-            // 
-            this.cboColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboColor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.cboColor.FormattingEnabled = true;
-            this.cboColor.Location = new System.Drawing.Point(583, 11);
-            this.cboColor.Name = "cboColor";
-            this.cboColor.Size = new System.Drawing.Size(34, 21);
-            this.cboColor.TabIndex = 47;
-            this.cboColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cboColor_DrawItem);
-            this.cboColor.SelectedIndexChanged += new System.EventHandler(this.cboColor_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.label9.Location = new System.Drawing.Point(503, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(81, 13);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "Selection Color:";
-            // 
             // gbAllRecordOption
             // 
             this.gbAllRecordOption.Controls.Add(this.label2);
@@ -602,6 +578,30 @@
             this.rbAll.Text = "All";
             this.rbAll.UseVisualStyleBackColor = true;
             this.rbAll.CheckedChanged += new System.EventHandler(this.rbAll_CheckedChanged);
+            // 
+            // cboColor
+            // 
+            this.cboColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboColor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.cboColor.FormattingEnabled = true;
+            this.cboColor.Location = new System.Drawing.Point(583, 11);
+            this.cboColor.Name = "cboColor";
+            this.cboColor.Size = new System.Drawing.Size(34, 21);
+            this.cboColor.TabIndex = 47;
+            this.cboColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cboColor_DrawItem);
+            this.cboColor.SelectedIndexChanged += new System.EventHandler(this.cboColor_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label9.Location = new System.Drawing.Point(503, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 46;
+            this.label9.Text = "Selection Color:";
             // 
             // rbCustomer
             // 
@@ -691,7 +691,7 @@
             // 
             // tbFilterdgvDoc
             // 
-            this.tbFilterdgvDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tbFilterdgvDoc.ForeColor = System.Drawing.Color.Black;
             this.tbFilterdgvDoc.Location = new System.Drawing.Point(53, 11);
             this.tbFilterdgvDoc.Multiline = true;
             this.tbFilterdgvDoc.Name = "tbFilterdgvDoc";
@@ -723,6 +723,71 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1087, 41);
             this.panel2.TabIndex = 44;
+            // 
+            // btnReturn
+            // 
+            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReturn.FlatAppearance.BorderSize = 2;
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReturn.ForeColor = System.Drawing.Color.White;
+            this.btnReturn.Location = new System.Drawing.Point(344, 6);
+            this.btnReturn.Name = "btnReturn";
+            this.btnReturn.Size = new System.Drawing.Size(100, 27);
+            this.btnReturn.TabIndex = 17;
+            this.btnReturn.Text = "Return";
+            this.btnReturn.UseVisualStyleBackColor = false;
+            // 
+            // btnReassignDP
+            // 
+            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnReassignDP.FlatAppearance.BorderSize = 2;
+            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
+            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
+            this.btnReassignDP.Name = "btnReassignDP";
+            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
+            this.btnReassignDP.TabIndex = 16;
+            this.btnReassignDP.Text = "Re-assign DP";
+            this.btnReassignDP.UseVisualStyleBackColor = false;
+            // 
+            // btnChangeStatus
+            // 
+            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
+            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
+            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
+            this.btnChangeStatus.TabIndex = 18;
+            this.btnChangeStatus.Text = "Change Status";
+            this.btnChangeStatus.UseVisualStyleBackColor = false;
+            // 
+            // btnCloseReopen
+            // 
+            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
+            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
+            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
+            this.btnCloseReopen.Name = "btnCloseReopen";
+            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
+            this.btnCloseReopen.TabIndex = 15;
+            this.btnCloseReopen.Text = "Cancel/Re-open";
+            this.btnCloseReopen.UseVisualStyleBackColor = false;
+            // 
+            // btnAddDoc
+            // 
+            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAddDoc.FlatAppearance.BorderSize = 2;
+            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
+            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
+            this.btnAddDoc.Name = "btnAddDoc";
+            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
+            this.btnAddDoc.TabIndex = 14;
+            this.btnAddDoc.Text = "Add Document";
+            this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
             // btnPrint
             // 
@@ -869,71 +934,6 @@
             // 
             this.timerNoti.Interval = 90000;
             this.timerNoti.Tick += new System.EventHandler(this.timerNoti_Tick);
-            // 
-            // btnReturn
-            // 
-            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReturn.FlatAppearance.BorderSize = 2;
-            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReturn.ForeColor = System.Drawing.Color.White;
-            this.btnReturn.Location = new System.Drawing.Point(344, 6);
-            this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(100, 27);
-            this.btnReturn.TabIndex = 17;
-            this.btnReturn.Text = "Return";
-            this.btnReturn.UseVisualStyleBackColor = false;
-            // 
-            // btnReassignDP
-            // 
-            this.btnReassignDP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnReassignDP.FlatAppearance.BorderSize = 2;
-            this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReassignDP.ForeColor = System.Drawing.Color.White;
-            this.btnReassignDP.Location = new System.Drawing.Point(238, 6);
-            this.btnReassignDP.Name = "btnReassignDP";
-            this.btnReassignDP.Size = new System.Drawing.Size(100, 27);
-            this.btnReassignDP.TabIndex = 16;
-            this.btnReassignDP.Text = "Re-assign DP";
-            this.btnReassignDP.UseVisualStyleBackColor = false;
-            // 
-            // btnChangeStatus
-            // 
-            this.btnChangeStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnChangeStatus.FlatAppearance.BorderSize = 2;
-            this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
-            this.btnChangeStatus.Location = new System.Drawing.Point(467, 6);
-            this.btnChangeStatus.Name = "btnChangeStatus";
-            this.btnChangeStatus.Size = new System.Drawing.Size(100, 27);
-            this.btnChangeStatus.TabIndex = 18;
-            this.btnChangeStatus.Text = "Change Status";
-            this.btnChangeStatus.UseVisualStyleBackColor = false;
-            // 
-            // btnCloseReopen
-            // 
-            this.btnCloseReopen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnCloseReopen.FlatAppearance.BorderSize = 2;
-            this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
-            this.btnCloseReopen.Location = new System.Drawing.Point(116, 6);
-            this.btnCloseReopen.Name = "btnCloseReopen";
-            this.btnCloseReopen.Size = new System.Drawing.Size(100, 27);
-            this.btnCloseReopen.TabIndex = 15;
-            this.btnCloseReopen.Text = "Cancel/Re-open";
-            this.btnCloseReopen.UseVisualStyleBackColor = false;
-            // 
-            // btnAddDoc
-            // 
-            this.btnAddDoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnAddDoc.FlatAppearance.BorderSize = 2;
-            this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddDoc.ForeColor = System.Drawing.Color.White;
-            this.btnAddDoc.Location = new System.Drawing.Point(10, 6);
-            this.btnAddDoc.Name = "btnAddDoc";
-            this.btnAddDoc.Size = new System.Drawing.Size(100, 27);
-            this.btnAddDoc.TabIndex = 14;
-            this.btnAddDoc.Text = "Add Document";
-            this.btnAddDoc.UseVisualStyleBackColor = false;
             // 
             // frmDocumentControl
             // 
