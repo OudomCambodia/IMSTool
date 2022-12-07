@@ -297,16 +297,16 @@ namespace Testing.Forms
             var dt = new DataTable();
             foreach (DataGridViewColumn column in dgv.Columns)
             {
-                if (column.Index != 1)
+                if (column.Index != 1 )
                 {
-                    if (column.Visible || column.Name == "MEMBER_ID")
-                    {
+                    
+                        if (column.Visible || column.Name == "MEMBER_ID")
                         dt.Columns.Add(column.HeaderText);
-                    }
+                    
                 }
             }
 
-            object[] cellValues = new object[dgv.Columns.Count - 1];
+            object[] cellValues = new object[dgv.Columns.Count-1];
             if (policyno == "HNS" || policyno == "PAE" && !Excess)
                 cellValues = cellValues.Take(cellValues.Count() - 1).ToArray();
 
@@ -322,10 +322,14 @@ namespace Testing.Forms
                         {
                             if (i != 1)
                             {
-                                if (i > 1)
-                                    cellValues[i - 1] = row.Cells[i].Value.ToString();
-                                else
-                                    cellValues[i] = row.Cells[i].Value.ToString();
+                                
+                                
+                                    if (i > 1)
+                                        cellValues[i - 1] = row.Cells[i].Value.ToString();
+                                    else
+                                        cellValues[i] = row.Cells[i].Value.ToString();
+                                
+                                
                             }
                         }
 
@@ -336,7 +340,9 @@ namespace Testing.Forms
 
             return dt;
         }
-       
+
+      
+
         private void btnPreview_Click(object sender, EventArgs e)
         {
             try
@@ -528,6 +534,8 @@ namespace Testing.Forms
                 foreach (DataRow rw in dtChecked.Rows)
                 {
                     Mydb.ExecuteMySql("sp_hns_insert_excess", "insured_member", rw[2], "policy_holder", rw[4], "policy_no", rw[5], "valid_from", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[8].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[3], "plan_type", rw[6], "excess", Excess ? rw[11] : "", "created_by", username, "print_number", maxnum, "insured_id", rw[1],"optional_care", rw[12]);
+                    //Mydb.ExecuteMySql("sp_hns_insert_excess", "insured_member", rw[2], "policy_holder", rw[4], "policy_no", rw[5], "valid_from", Common.strToDate(rw[7].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[8].ToString()).ToString("yyyy-MM-dd"), "optional_benefit", " ", "dependent", rw[3], "plan_type", rw[6], "excess", Excess ? rw[11] : "", "created_by", username, "print_number", maxnum, "insured_id", rw[1], "optional_care", rw[13]);
+                    
                 }
                 MSG();
             }
@@ -551,6 +559,7 @@ namespace Testing.Forms
 
                 Cursor.Current = Cursors.WaitCursor;
                 dtChecked = GetDataTableFromDGV(dtPolicy);
+                
                 Cursor.Current = Cursors.AppStarting;
 
                 if (dtChecked.Rows.Count > 0)
@@ -764,6 +773,7 @@ namespace Testing.Forms
 
                 Cursor.Current = Cursors.WaitCursor;
                 dtChecked = GetDataTableFromDGV(dtPolicy);
+                
                 Cursor.Current = Cursors.AppStarting;
 
                 if (dtChecked.Rows.Count > 0)
@@ -809,6 +819,7 @@ namespace Testing.Forms
             }
             else if (policyno == "PAE")
             {
+
                 rpt = new Reports.CPAE_card();
                 frm.Text = "PAE CARD";
             }
@@ -820,6 +831,7 @@ namespace Testing.Forms
             }
             else if (policyno == "HNS")
             {
+              
                 rpt = new Reports.ECardHNS();
                 frm.Text = "HNS CARD";
             }
@@ -984,6 +996,10 @@ namespace Testing.Forms
             #region HNS
             if (policyno == "HNS")
             {
+                
+            //     foreach (DataColumn column in dtChecked.Columns)
+            //{
+               
                 Reports.ECardHNS rpt2 = new Reports.ECardHNS();
                 DialogResult msg = Msgbox.Show("Do you want to save ECard to pdf file?", "Confirmation", "Process", "Abort");
                 if (msg == System.Windows.Forms.DialogResult.Yes)
