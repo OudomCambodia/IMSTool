@@ -2141,7 +2141,7 @@ namespace Testing.Forms
                 "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
                 "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
                 "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
-                "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1), INT_INITIMATE_DT) TREATMENT_DATE, " +
                 "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + txtClaimNo.Text.ToUpper() + "'");
 
                 if (dtClaimDt.Rows.Count != 0)

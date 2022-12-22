@@ -181,7 +181,7 @@
             this.dgvNoti.AllowUserToResizeRows = false;
             this.dgvNoti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNoti.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvNoti.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.dgvNoti.BackgroundColor = System.Drawing.Color.White;
             this.dgvNoti.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvNoti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNoti.ColumnHeadersVisible = false;

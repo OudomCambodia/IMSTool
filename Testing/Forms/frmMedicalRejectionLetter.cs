@@ -274,7 +274,7 @@ namespace Testing.Forms
                     var claimCause = dtClaims.Rows[0]["CAUSE"].ToString();
                     var hospital = dtClaims.Rows[0]["HOSPITAL"].ToString();
 
-                    string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy" };
+                    string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy", "dd-MMM-yy" };
                     string treatmentDateString = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
                     string treatmentDate = string.Empty;
 
@@ -392,7 +392,7 @@ namespace Testing.Forms
                     var claimCause = dtClaims.Rows[0]["CAUSE"].ToString();
                     var hospital = dtClaims.Rows[0]["HOSPITAL"].ToString();
 
-                    string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy" };
+                    string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy", "dd-MMM-yy" };
                     string treatmentDateString = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
                     string treatmentDate = string.Empty;
 
@@ -475,7 +475,7 @@ namespace Testing.Forms
                     khDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                     khDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
                     khDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
-                    khDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 0.6f : 0.85f);
+                    khDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 1.1f : 1.25f);
                     khDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
@@ -502,7 +502,7 @@ namespace Testing.Forms
                     engDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                     engDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
                     engDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
-                    engDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 0.6f : 0.85f);
+                    engDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 1.1f : 1.25f);
                     engDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
