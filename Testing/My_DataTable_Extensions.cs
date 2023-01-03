@@ -131,7 +131,7 @@ namespace Testing
                 IXLWorksheet ws = wb.Worksheets.Add("Export Sheet");
                 ws.DataType = XLDataType.Text; //Set all cells datatype as Text
 
-              
+
                 int RowsCount = dt.Rows.Count, ColumnsCount = dt.Columns.Count;
 
                 //Set Header with DataTable dt Column Name
@@ -193,10 +193,10 @@ namespace Testing
                 Msgbox.Show("Export Excel XML: " + ex.Message);
             }
         }
-        
-        
-        
-        public static void ExportToExcelXMLSharepoint(this System.Data.DataTable dt,string fname, string ExcelFilePath = null)
+
+
+
+        public static void ExportToExcelXMLSharepoint(this System.Data.DataTable dt, string fname, string ExcelFilePath = null)
         {
 
             try
@@ -240,51 +240,51 @@ namespace Testing
                 {
                     wb.SaveAs(ms);
 
-                    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\"+ fname + ".xlsx";
-                    
+                    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + fname + ".xlsx";
+
                     //tempfile = new System.CodeDom.Compiler.TempFileCollection(); //this will create Temporary File, re-initailized it will create new file everytime 
                     //tempfile.KeepFiles = false; //will be used when dispose tempfile
                     //filePath = tempfile.AddExtension("xlsx"); //add extension to the created Temporary File
-                    
-  
+
+
 
                     using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.OpenOrCreate))
                     {
                         fs.Write(ms.ToArray(), 0, ms.ToArray().Length);
                     }
-                    
+
                     System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                    
+
                     using (var ctx = new ClientContext("https://forteinsurancegroup.sharepoint.com/sites/forteinsurance"))
                     {
                         SecureString passWord = new SecureString();
-                        
+
                         foreach (char c in "Akira#123".ToCharArray()) passWord.AppendChar(c);
-                        
+
                         ctx.Credentials = new SharePointOnlineCredentials("pichponleur@forteinsurance.com", passWord);
-                        
-                       CommonFunctions.UploadFile(ctx, ExcelFilePath, filePath);
-                        
+
+                        CommonFunctions.UploadFile(ctx, ExcelFilePath, filePath);
+
                     }
                     if (string.IsNullOrEmpty(ExcelFilePath))
                         System.Diagnostics.Process.Start(filePath); //Open that File
                     else
-                    Msgbox.Show("Excel file saved!");
-                    
+                        Msgbox.Show("Excel file saved!");
+
                 }
-                
+
                 Cursor.Current = Cursors.AppStarting;
-               
+
             }
             catch (Exception ex)
             {
                 Msgbox.Show("Export Excel XML: " + ex.Message);
             }
-           
+
         }
 
-        
-        
+
+
         public static void ExportToExcelXML(this System.Data.DataSet ds, string ExcelFilePath = null)
         {
 
@@ -326,7 +326,7 @@ namespace Testing
                     }
                     //
                 }
-              
+
                 using (System.IO.MemoryStream ms = new System.IO.MemoryStream()) //create stream to store workbook data
                 {
                     wb.SaveAs(ms);
@@ -415,6 +415,116 @@ namespace Testing
                 objConn.Close();
                 return dtResult; //Returning Datatable  
             }
+        }
+
+        public static System.Data.DataSet ConvertExcelToDataSetXML(string path, string[] columnToText = null)
+        {
+            if (path.EndsWith(".xls"))
+            {
+                var wb = new Aspose.Cells.Workbook(path);
+                var newpath = path.Replace(".xls", ".xlsx");
+                wb.Save(newpath);
+                path = newpath;
+            }
+
+
+
+            System.Data.DataSet ds = new System.Data.DataSet();
+            System.Data.DataTable dt = new System.Data.DataTable();
+            //Open the Excel file using ClosedXML.
+            using (XLWorkbook workBook = new XLWorkbook(path))
+            {
+                foreach (var workSheet in workBook.Worksheets)
+                {
+                    if (workSheet.Name == "Evaluation Warning")
+                        continue;
+
+
+
+                    dt = new System.Data.DataTable();
+                    bool firstRow = true;
+                    foreach (IXLRow row in workSheet.Rows())
+                    {
+                        //check worksheet for info row (merge) then remove
+                        if (row.IsMerged())
+                        {
+                            continue;
+                        }
+                        //var range = row.Cell(1).MergedRange().RangeAddress;
+                        //if (range.ColumnSpan > 1 || range.RowSpan > 1)
+                        //{
+                        //    continue;
+                        //}
+                        //
+
+
+
+                        //Use the first row to add columns to DataTable.
+                        if (firstRow)
+                        {
+                            foreach (IXLCell cell in row.Cells())
+                            {
+                                if (!string.IsNullOrEmpty(cell.Value.ToString()))
+                                {
+                                    dt.Columns.Add(cell.Value.ToString());
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            firstRow = false;
+                        }
+                        else
+                        {
+                            int i = 0;
+                            DataRow toInsert = dt.NewRow();
+                            foreach (IXLCell cell in row.Cells(1, dt.Columns.Count))
+                            {
+                                try
+                                {
+                                    var cellName = cell.Address.ToString();
+                                    if (columnToText.Count() > 0)
+                                    {
+                                        for (int j = 0; j < columnToText.Count(); j++)
+                                        {
+                                            string cellText = columnToText[j];
+
+                                            if (cellName.StartsWith(cellText))
+                                            {
+                                                toInsert[i] = cell.RichText.ToString();
+                                            }
+                                            else
+                                            {
+                                                toInsert[i] = cell.Value.ToString();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        toInsert[i] = cell.Value.ToString();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+
+
+
+                                }
+                                i++;
+                            }
+                            dt.Rows.Add(toInsert);
+                        }
+                    }
+
+
+
+                    dt.TableName = workSheet.Name;
+
+                    ds.Tables.Add(dt.Copy());
+                }
+            }
+            return ds;
         }
     }
 }

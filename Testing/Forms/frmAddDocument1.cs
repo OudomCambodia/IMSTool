@@ -622,7 +622,10 @@ namespace Testing.Forms
 
                 try
                 {
-                    DataTable uploaddt = My_DataTable_Extensions.ConvertExcelToDataTable(Filename, true);
+                    string[] columnToText = { "K" }; // Commission column
+                    DataTable tmpUploaddt = My_DataTable_Extensions.ConvertExcelToDataSetXML(Filename, columnToText).Tables[0];
+                    DataTable uploaddt = tmpUploaddt.Rows.Cast<DataRow>().Where(row => !row.ItemArray.All(f => string.IsNullOrEmpty(f.ToString()))).CopyToDataTable();
+
                     uploaddt.AcceptChanges();
                     if (uploaddt.Rows.Count > 0)
                     {
