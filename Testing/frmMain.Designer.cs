@@ -108,6 +108,9 @@
             this.niIMSTool = new System.Windows.Forms.NotifyIcon(this.components);
             this.ctmsQuitApp = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnCustomerProfit = new System.Windows.Forms.Panel();
+            this.btnCustomerProfit = new System.Windows.Forms.Button();
+            this.btnCustomerProfitSummary = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -117,6 +120,7 @@
             this.pnEngUW.SuspendLayout();
             this.pnInvoice.SuspendLayout();
             this.ctmsQuitApp.SuspendLayout();
+            this.pnCustomerProfit.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnFLRep
@@ -235,12 +239,14 @@
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomer.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
+            this.btnCustomer.Image = global::Testing.Properties.Resources.arrow1;
+            this.btnCustomer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCustomer.Location = new System.Drawing.Point(0, 80);
             this.btnCustomer.Margin = new System.Windows.Forms.Padding(0);
             this.btnCustomer.Name = "btnCustomer";
             this.btnCustomer.Size = new System.Drawing.Size(192, 40);
             this.btnCustomer.TabIndex = 2;
-            this.btnCustomer.Text = "Customer Profitability Report";
+            this.btnCustomer.Text = "Customer Profitability";
             this.btnCustomer.UseVisualStyleBackColor = false;
             this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
@@ -1155,6 +1161,48 @@
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click_1);
             // 
+            // pnCustomerProfit
+            // 
+            this.pnCustomerProfit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnCustomerProfit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnCustomerProfit.Controls.Add(this.btnCustomerProfit);
+            this.pnCustomerProfit.Controls.Add(this.btnCustomerProfitSummary);
+            this.pnCustomerProfit.Location = new System.Drawing.Point(190, 67);
+            this.pnCustomerProfit.Name = "pnCustomerProfit";
+            this.pnCustomerProfit.Size = new System.Drawing.Size(180, 82);
+            this.pnCustomerProfit.TabIndex = 12;
+            this.pnCustomerProfit.Visible = false;
+            // 
+            // btnCustomerProfit
+            // 
+            this.btnCustomerProfit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnCustomerProfit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCustomerProfit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomerProfit.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomerProfit.ForeColor = System.Drawing.Color.White;
+            this.btnCustomerProfit.Location = new System.Drawing.Point(-6, 0);
+            this.btnCustomerProfit.Name = "btnCustomerProfit";
+            this.btnCustomerProfit.Size = new System.Drawing.Size(187, 40);
+            this.btnCustomerProfit.TabIndex = 5;
+            this.btnCustomerProfit.Text = "Customer Profitability Report";
+            this.btnCustomerProfit.UseVisualStyleBackColor = false;
+            this.btnCustomerProfit.Click += new System.EventHandler(this.btnCustomerProfit_Click);
+            // 
+            // btnCustomerProfitSummary
+            // 
+            this.btnCustomerProfitSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnCustomerProfitSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCustomerProfitSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomerProfitSummary.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomerProfitSummary.ForeColor = System.Drawing.Color.White;
+            this.btnCustomerProfitSummary.Location = new System.Drawing.Point(-6, 39);
+            this.btnCustomerProfitSummary.Name = "btnCustomerProfitSummary";
+            this.btnCustomerProfitSummary.Size = new System.Drawing.Size(187, 40);
+            this.btnCustomerProfitSummary.TabIndex = 7;
+            this.btnCustomerProfitSummary.Text = "Customer Profitability Report Summary";
+            this.btnCustomerProfitSummary.UseVisualStyleBackColor = false;
+            this.btnCustomerProfitSummary.Click += new System.EventHandler(this.btnCustomerProfitSummary_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1163,6 +1211,7 @@
             this.BackgroundImage = global::Testing.Properties.Resources.Kl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
+            this.Controls.Add(this.pnCustomerProfit);
             this.Controls.Add(this.pnInvoice);
             this.Controls.Add(this.pnEngUW);
             this.Controls.Add(this.panel1);
@@ -1194,6 +1243,7 @@
             this.pnEngUW.ResumeLayout(false);
             this.pnInvoice.ResumeLayout(false);
             this.ctmsQuitApp.ResumeLayout(false);
+            this.pnCustomerProfit.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1279,5 +1329,8 @@
         private System.Windows.Forms.ContextMenuStrip ctmsQuitApp;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CusProfitV2;
+        private System.Windows.Forms.Panel pnCustomerProfit;
+        public System.Windows.Forms.Button btnCustomerProfit;
+        public System.Windows.Forms.Button btnCustomerProfitSummary;
     }
 }

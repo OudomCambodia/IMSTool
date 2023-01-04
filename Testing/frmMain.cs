@@ -98,9 +98,10 @@ namespace Testing
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
-            CustomerProfitability cp = new CustomerProfitability();
-            cp.UserName = this.UserName;
-            openForm(cp, (Button)sender);
+            //CustomerProfitability cp = new CustomerProfitability();
+            //cp.UserName = this.UserName;
+            //openForm(cp, (Button)sender);
+            SubPan(pnCustomerProfit);
         }
 
         private void btnFile_Click(object sender, EventArgs e)
@@ -460,6 +461,7 @@ namespace Testing
             pnBenifit.Visible = false;
             pnEngUW.Visible = false;
             pnInvoice.Visible = false;
+            pnCustomerProfit.Visible = false;
         }
 
         private void bnPolRem_Click(object sender, EventArgs e)
@@ -776,6 +778,21 @@ namespace Testing
         private void quitToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnCustomerProfit_Click(object sender, EventArgs e)
+        {
+            CustomerProfitability cp = new CustomerProfitability();
+            cp.UserName = this.UserName;
+            openForm(cp, (Button)sender);
+        }
+
+        private void btnCustomerProfitSummary_Click(object sender, EventArgs e)
+        {
+            pnCustomerProfit.Visible = false;
+
+            var cusProfitSummary = new Forms.frmGenerateCustomerProfitSummary();
+            cusProfitSummary.ShowDialog();
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)
