@@ -29,8 +29,8 @@
     <ProductName>IMS Tool</ProductName>
     <PublisherName>pichponleur</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
-    <ApplicationRevision>32</ApplicationRevision>
-    <ApplicationVersion>3.4.5.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>3.4.6.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -87,6 +87,9 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\packages\Aspose.Cells.22.12.0\lib\net40\Aspose.Cells.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
@@ -600,6 +603,12 @@
     </Compile>
     <Compile Include="Forms\frmFileUpload.Designer.cs">
       <DependentUpon>frmFileUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmGenerateCustomerProfitSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmGenerateCustomerProfitSummary.Designer.cs">
+      <DependentUpon>frmGenerateCustomerProfitSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInvoiceSetting.cs">
       <SubType>Form</SubType>
@@ -1562,6 +1571,9 @@
       <DependentUpon>frmFileUpload.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmGenerateCustomerProfitSummary.resx">
+      <DependentUpon>frmGenerateCustomerProfitSummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInvoiceSetting.resx">
       <DependentUpon>frmInvoiceSetting.cs</DependentUpon>
     </EmbeddedResource>
@@ -2079,6 +2091,10 @@
     </None>
     <None Include="Html\debug.log" />
     <Content Include="favicon.ico" />
+    <Content Include="Html\2022AutoClaimEmail.html" />
+    <Content Include="Html\2022Email.html" />
+    <Content Include="Html\forte-general-logo-red.png" />
+    <Content Include="Html\linkedin.png" />
     <Content Include="Html\tahoma.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
