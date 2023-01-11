@@ -827,7 +827,8 @@ namespace Testing.Forms
                          subject = crud.ExecFunc_String("USER_GET_EMAIL_SUBJECT_FN", new string[] { "claim_no", "doc_type", "remind", "User_fullname" }, new string[] { lbClaimNo.Text, sp_type, remind, dt_insured.Rows[0][0].ToString().ToUpper() }).ToString();
                     }
                     //get the title
-                    
+
+                    subject = subject.Replace('\r', ' ').Replace('\n', ' ');
 
                     Cursor.Current = Cursors.WaitCursor;
 
