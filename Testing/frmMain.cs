@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using Testing.Properties;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Testing
 {
@@ -209,6 +210,12 @@ namespace Testing
         //        Environment.Exit(0);
         //    }
         //}
+
+        private bool IsFontInstalled(string fontName)
+        {
+            using (var testFont = new System.Drawing.Font(fontName, 8))
+                return 0 == string.Compare(fontName, testFont.Name, StringComparison.InvariantCultureIgnoreCase);
+        }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
@@ -793,6 +800,27 @@ namespace Testing
 
             var cusProfitSummary = new Forms.frmGenerateCustomerProfitSummary();
             cusProfitSummary.ShowDialog();
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            List<string> fonts = new List<string>();
+            fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-Regular.ttf");
+            fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-Bold.ttf");
+            fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-SemiBold.ttf");
+
+            if (!IsFontInstalled("Niradei"))
+            {
+                foreach (var k in fonts)
+                {
+                    var shellAppType = Type.GetTypeFromProgID("Shell.Application");
+                    var shell = Activator.CreateInstance(shellAppType);
+                    var fontFolder = (Shell32.Folder)shellAppType.InvokeMember("NameSpace", System.Reflection.BindingFlags.InvokeMethod, null, shell, new object[] { Environment.GetFolderPath(Environment.SpecialFolder.Fonts) });
+                    if (File.Exists(k))
+                        fontFolder.CopyHere(k);
+                }
+                Environment.Exit(0);
+            }
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)

@@ -270,6 +270,23 @@ namespace Testing.Forms
 
                     DataRow dr = dt.Rows[0];
 
+                    var polNo = dr[8].ToString().Split('/');
+                    var po = string.Concat(polNo[0], " ", "/", polNo[1], " ", "/", polNo[2], " ", "/", polNo[3], " ", "/", polNo[4]);
+                    dr[8] = po;
+
+                    var dncnNo = dr[4].ToString().Split('/');
+                    var d = string.Concat(dncnNo[0], " ", "/", dncnNo[1], " ", "/", dncnNo[2], " ", "/", dncnNo[3]);
+                    dr[4] = d;
+
+                    var accountCode = dr[6].ToString().Split('/');
+                    var ac = string.Concat(accountCode[0], " ", "/", accountCode[1], " ", "/", accountCode[2]);
+                    dr[6] = ac;
+
+                    var accYear = dr[7].ToString().Split('/');
+                    dt.Columns[7].MaxLength = 50;
+                    var ay = string.Concat(accYear[0], " ", "/", accYear[1]);
+                    dr[7] = ay;
+
                     if (dnNumber[0] == 'D') //Debit Note
                     {
                         string accountcode = dr["ACCOUNT_CODE"].ToString();
