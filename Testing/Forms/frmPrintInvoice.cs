@@ -290,12 +290,14 @@ namespace Testing.Forms
                     if (dnNumber[0] == 'D') //Debit Note
                     {
                         string accountcode = dr["ACCOUNT_CODE"].ToString();
-                        string producer = accountcode.Split('/')[1], cuscode = accountcode.Split('/')[2];
+                        string producer = accountcode.Split('/')[1].Trim(), cuscode = accountcode.Split('/')[2].Trim();
                         //update add condition for US Embasssy only as requested from J Cheata - update Southeane Email 28-09-2022
                         if (dt.Rows[0]["CHK_USEMBASSY"].ToString() != "US_EMBASSY")
                         dtTemp = crud.ExecQuery("SELECT DISTINCT BANK_NAME,TRANFER_TO,ACCOUNT_NO,SWIFT_CODE FROM VIEW_PAYMENT_INSTRUCTION WHERE CODE = '" + producer + "' OR CODE = '" + cuscode + "'");
                         else
                             dtTemp = crud.ExecQuery("SELECT DISTINCT BANK_NAME,TRANFER_TO,ACCOUNT_NO,SWIFT_CODE FROM VIEW_PAYMENT_INSTRUCTION WHERE CODE = 'C000040017'");
+
+   
                         if (dtTemp.Rows.Count > 0) //has payment instruction set
                         {
 
@@ -309,6 +311,7 @@ namespace Testing.Forms
 
                             if (dtTemp.Rows.Count == 0) //that's mean has only N/A record => use NewInvoice for NA
                             {
+
                                 if (dr["ENDORSEMENT_NO"].ToString() != "")
                                 {
                                     Reports.NewInvoiceNAEndo myDataReport = new Reports.NewInvoiceNAEndo();
@@ -334,7 +337,7 @@ namespace Testing.Forms
                                 dtTemp.TableName = "PAYMENT_INSTRUCTION";
                                 ds.Tables.Add(dt);
                                 ds.Tables.Add(dtTemp);
-
+                                
                                 if (dr["ENDORSEMENT_NO"].ToString() != "")
                                 {
                                     Reports.NewInvoiceEndo myDataReport = new Reports.NewInvoiceEndo();
