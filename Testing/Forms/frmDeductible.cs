@@ -142,8 +142,8 @@ namespace Testing.Forms
 
             //Add Forte Logo
             PdfContentByte cb = writer.DirectContent;
-            iTextSharp.text.Image imgSoc = iTextSharp.text.Image.GetInstance("Html/Forte_Logo_bak.png");
-            imgSoc.ScalePercent(80f);
+            iTextSharp.text.Image imgSoc = iTextSharp.text.Image.GetInstance("Html/forte-general-logo-red.png");
+            imgSoc.ScalePercent(40f);
             imgSoc.SetAbsolutePosition(25, 780);
             cb.AddImage(imgSoc);
             //
