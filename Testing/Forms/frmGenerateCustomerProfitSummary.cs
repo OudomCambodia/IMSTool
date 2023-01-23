@@ -25,19 +25,59 @@ namespace Testing.Forms
             InitializeComponent();
         }
 
+        private void frmGenerateCustomerProfitSummary_Load(object sender, EventArgs e)
+        {
+            BindComboBox();
+        }
+
+        private void BindComboBox()
+        {
+            DataRow dr;
+            string SQLcombox = "select GRP_CODE,GRP_DESCRIPTION from uw_r_groups order by GRP_CODE,GRP_DESCRIPTION";
+            DataTable dtCombox = new DataTable();
+            dtCombox = crud.ExecQuery(SQLcombox);
+            dr = dtCombox.NewRow();
+            dr.ItemArray = new object[] { 0, "Select ALL" };
+            dtCombox.Rows.InsertAt(dr, 0);
+            cboGroupCustomer.ValueMember = "GRP_CODE";
+            cboGroupCustomer.DisplayMember = "GRP_DESCRIPTION";
+            cboGroupCustomer.DataSource = dtCombox;
+        }
+
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             try
             {
                 Cursor = Cursors.WaitCursor;
 
-                string[] Key = new string[] { "p_cus_code" };
-                string[] Values = new string[] { txtCusCode.Text.Trim().ToUpper() }; //C000028640
+                var grpCode = string.Empty;
+
+                if (cboGroupCustomer.SelectedIndex == 0)
+                {
+                    var dtGrpCode = crud.ExecQuery("select cus_grp_code from uw_m_customers where cus_code = '" + txtCusCode.Text.Trim() + "'");
+                    if (dtGrpCode.Rows.Count > 0)
+                    {
+                        grpCode = dtGrpCode.Rows[0][0].ToString();
+                        if (string.IsNullOrEmpty(grpCode))
+                            grpCode = "N/A";
+                    }
+                }
+                else
+                {
+                    grpCode = cboGroupCustomer.SelectedValue.ToString();
+                }
+
+                string cusCode = string.IsNullOrEmpty(txtCusCode.Text.Trim()) ? null : txtCusCode.Text.Trim().ToUpper();
+
+                string[] Key = new string[] { "p_cus_code", "p_grp_code" };
+                string[] Values = new string[] { cusCode, grpCode }; //C000028640
+
                 var dtCustomerProfit = crud.ExecSP_OutPara("SP_CUSTOMER_PROFITABILITY", Key, Values);
 
-                if (dtCustomerProfit == null && dtCustomerProfit.Rows.Count < 0)
+                if (dtCustomerProfit == null || dtCustomerProfit.Rows.Count <= 0)
                 {
                     Msgbox.Show("No data found");
+                    Cursor = Cursors.Arrow;
                     return;
                 }
 
@@ -278,18 +318,32 @@ namespace Testing.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
 
+                var cus = string.Empty;
+                var byCusGroup = false;
+                
+                if (!string.IsNullOrEmpty(txtCusCode.Text.Trim()))
+                {
+                    cus = crud.ExecQuery("select nvl(cus_indv_surname, cus_corp_name) CUSNAME from uw_m_customers where cus_code = '"+ txtCusCode.Text.Trim().ToUpper() +"'").Rows[0][0].ToString();
+                }
+
+                if (string.IsNullOrEmpty(txtCusCode.Text.Trim()) && cboGroupCustomer.SelectedIndex != 0)
+                {
+                    byCusGroup = true;
+                    cus = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '"+ cboGroupCustomer.SelectedValue.ToString() +"'").Rows[0][0].ToString();
+                }
+
                 IXLWorkbook wb = new XLWorkbook();
                 IXLWorksheet ws = wb.Worksheets.Add("Summary Report");
                 ws.DataType = XLDataType.Text; //Set all cells datatype as Text
 
                 int RowsCount = dt.Rows.Count, ColumnsCount = dt.Columns.Count;
 
-                ws.Cell(1, 2).SetValue("INSURED");
+                ws.Cell(1, 2).SetValue(byCusGroup ? "CUSTOMER GROUP" : "CUSTOMER");
                 ws.Cell(1, 2).Style.Font.FontSize = 9f;
                 ws.Cell(1, 2).Style.Font.FontName = "Century Gothic";
                 ws.Cell(1, 2).Style.Font.Bold = true;
 
-                ws.Cell(1, ColumnsCount).SetValue(frmLogIn.Usert);
+                ws.Cell(1, ColumnsCount).SetValue(cus);
                 ws.Cell(1, ColumnsCount).Style.Font.FontSize = 9f;
                 ws.Cell(1, ColumnsCount).Style.Font.FontName = "Century Gothic";
                 ws.Cell(1, ColumnsCount).Style.Font.Bold = true;
