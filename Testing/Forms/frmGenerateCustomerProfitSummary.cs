@@ -54,7 +54,7 @@ namespace Testing.Forms
 
                 if (cboGroupCustomer.SelectedIndex == 0)
                 {
-                    var dtGrpCode = crud.ExecQuery("select cus_grp_code from uw_m_customers where cus_code = '" + txtCusCode.Text.Trim() + "'");
+                    var dtGrpCode = crud.ExecQuery("select cus_grp_code from uw_m_customers where cus_code = '" + txtCusCode.Text.Trim().ToUpper() + "'");
                     if (dtGrpCode.Rows.Count > 0)
                     {
                         grpCode = dtGrpCode.Rows[0][0].ToString();
@@ -486,6 +486,8 @@ namespace Testing.Forms
                     }
                     formatRowCount++;
                 }
+                ws.PageSetup.SetPageOrientation(XLPageOrientation.Landscape);
+
                 using (System.IO.MemoryStream ms = new System.IO.MemoryStream()) //create stream to store workbook data
                 {
                     wb.SaveAs(ms);
