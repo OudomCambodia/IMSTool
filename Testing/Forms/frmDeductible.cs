@@ -100,6 +100,8 @@ namespace Testing.Forms
             //else
             //    PaidtblBlank = false;
 
+            //TotalClmAmt = Convert.ToDouble(clpolinfo.Rows[0]["INCURRED_AMT"]);
+
             foreach (DataRow dr in deducttbl.Rows)
             {
                 //if (dr["DEDU_PAY_STATUS"].ToString() == "O/S")
@@ -116,9 +118,11 @@ namespace Testing.Forms
                 //else
                 //    TotalClmAmt += Convert.ToDouble(GetPaidAmt(dr["PERILS"].ToString()));
 
-                double tmp = Convert.ToDouble(GetPaidAmt(dr["PERILS"].ToString()));
-                if(tmp == 0)
-                    tmp = Convert.ToDouble(GetClAmt(dr["PERILS"].ToString()));
+                //double tmp = Convert.ToDouble(GetPaidAmt(dr["PERILS"].ToString()));
+                //if (tmp == 0)
+                //    tmp = Convert.ToDouble(GetClAmt(dr["PERILS"].ToString()));
+
+                double tmp = Convert.ToDouble(GetClAmt(dr["PERILS"].ToString()));
 
                 TotalClmAmt += tmp;
 
@@ -321,7 +325,7 @@ namespace Testing.Forms
             cell.HorizontalAlignment = 1;
             coveragetbl.AddCell(cell);
             //cell = new PdfPCell(new Phrase((PaidtblBlank) ? "CLAIMED AMOUNT (USD)" : "PAID AMOUNT (USD)", new iFont(bf, 9, iTextSharp.text.Font.BOLD)));
-            cell = new PdfPCell(new Phrase("CLAIMED/PAID AMOUNT (USD)", new iFont(bf, 9, iTextSharp.text.Font.BOLD)));
+            cell = new PdfPCell(new Phrase("CLAIMED AMOUNT (USD)", new iFont(bf, 9, iTextSharp.text.Font.BOLD)));
             cell.VerticalAlignment = 1;
             cell.HorizontalAlignment = 1;
             coveragetbl.AddCell(cell);
@@ -345,9 +349,13 @@ namespace Testing.Forms
                 //    cell = new PdfPCell(new Phrase(String.Format("{0:N}", Convert.ToDecimal(GetClAmt(Peril))), new iFont(bf, 9)));
                 //else
                 //    cell = new PdfPCell(new Phrase(String.Format("{0:N}", Convert.ToDecimal(GetPaidAmt(Peril))), new iFont(bf, 9)));
-                decimal tmp = Convert.ToDecimal(GetPaidAmt(Peril));
-                if(tmp == 0)
-                    tmp = Convert.ToDecimal(GetClAmt(Peril));
+
+                //decimal tmp = Convert.ToDecimal(GetPaidAmt(Peril));
+                //if(tmp == 0)
+                //    tmp = Convert.ToDecimal(GetClAmt(Peril));
+
+                decimal tmp = Convert.ToDecimal(GetClAmt(Peril));
+
                 cell = new PdfPCell(new Phrase(String.Format("{0:N}", tmp), new iFont(bf, 9)));
 
 
