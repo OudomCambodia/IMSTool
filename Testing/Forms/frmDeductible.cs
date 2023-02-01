@@ -1137,12 +1137,12 @@ namespace Testing.Forms
                     tbPolicyNo.Text,tbClaimNo.Text,tbRiskName.Text,Convert.ToDateTime(tbDateofLoss.Text).ToString("dd MMMM yyyy"),
                     tbPlaceofAcc.Text, OSday, SecondNote, SentHistory}).ToString();
                     string body = string.Empty;
-                    using (StreamReader reader = new StreamReader("Html/2020Email.html"))
+                    using (StreamReader reader = new StreamReader("Html/2022AutoClaimEmail.html"))
                     {
                         body = reader.ReadToEnd();
                     }
                     body = body.Replace("{text}", content);
-                    body = body.Replace("{department}", "Claims Department");
+                    body = body.Replace("{department}", "Auto Department");
                     body = body.Replace("{username}", UserFullName);
                     body = body.Replace("{user_email}", mail_add);
 
@@ -1210,14 +1210,14 @@ namespace Testing.Forms
 
                     //embeded pictures
                     AlternateView avHtml = AlternateView.CreateAlternateViewFromString(body, null, MediaTypeNames.Text.Html);
-                    LinkedResource img1 = new LinkedResource(@"Html\Standard_Forte.png", "image/png");
-                    img1.ContentId = "Forte_Logo";
+                    LinkedResource img1 = new LinkedResource(@"Html\forte-general-logo-red.png", "image/png");
+                    img1.ContentId = "forte-general-logo-red";
                     LinkedResource img2 = new LinkedResource(@"Html\fb.png", "image/png");
                     img2.ContentId = "FB_logo";
                     LinkedResource img3 = new LinkedResource(@"Html\yt.png", "image/png");
                     img3.ContentId = "YT_logo";
-                    LinkedResource img4 = new LinkedResource(@"Html\mail.png", "image/png");
-                    img4.ContentId = "Mail_logo";
+                    LinkedResource img4 = new LinkedResource(@"Html\linkedin.png", "image/png");
+                    img4.ContentId = "linkedin";
 
                     avHtml.LinkedResources.Add(img1);
                     avHtml.LinkedResources.Add(img2);

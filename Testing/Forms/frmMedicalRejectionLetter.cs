@@ -14,6 +14,7 @@ using Application = Microsoft.Office.Interop.Word.Application;
 using Document = Microsoft.Office.Interop.Word.Document;
 using System.CodeDom.Compiler;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Testing.Forms
 {
@@ -69,6 +70,7 @@ namespace Testing.Forms
         #endregion
 
         private CRUD crud = new CRUD();
+        private DBS11SqlCrud sqlCrud = new DBS11SqlCrud();
 
         private DataTable dtClaims = frmSendEmailClaim.dtClaimDt;
         private DataTable dtSelectedRows = frmSendEmailClaim.selectedDoc;
@@ -80,21 +82,23 @@ namespace Testing.Forms
         private string HistClaimNo;
         private const string NA = "--- N/A ---";
         private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
-        
+        private string ClaimNo = string.Empty;
+
         private bool IsViewHistory;
 
         private TempFileCollection tempfile = new TempFileCollection();
-        
+
         private Microsoft.Office.Interop.Word._Document khDoc;
         private Microsoft.Office.Interop.Word._Document engDoc;
-        
-        
-            
-        public frmMedicalRejectionLetter(bool isViewHistory, string histClaimNo = null)
+
+
+
+        public frmMedicalRejectionLetter(bool isViewHistory, string histClaimNo = null, string claimNo = null)
         {
             InitializeComponent();
             IsViewHistory = isViewHistory;
             HistClaimNo = histClaimNo;
+            ClaimNo = claimNo;
         }
 
         private void frmMedicalRejectionLetter_Load(object sender, EventArgs e)
@@ -110,7 +114,7 @@ namespace Testing.Forms
                     LoadReferenceDocumentHistory();
                 else
                     LoadReferenceDocument();
-                
+
                 Cursor = Cursors.Arrow;
             }
             catch (Exception ex)
@@ -382,6 +386,35 @@ namespace Testing.Forms
                     engBody = dtClaimTemplate.AsEnumerable().Where(dr => dr.Field<string>("LANGUAGE").Equals("ENG")).FirstOrDefault()[0].ToString();
                     khBody = dtClaimTemplate.AsEnumerable().Where(dr => dr.Field<string>("LANGUAGE").Equals("KH")).FirstOrDefault()[0].ToString();
 
+                    var beniAmt = string.Empty;
+
+                    if (otherExclusion == "HNS OUTPATIENT REACH LIMIT")
+                    {
+                        var qBuilder = new StringBuilder();
+                        qBuilder.Append("select pci_char_value ")
+                            .Append("from uw_t_pol_common_information ")
+                            .Append("where pci_pol_seq_no = (select pol_seq_no from uw_t_policies ")
+                            .AppendFormat("where pol_policy_no = (select int_policy_no from cl_t_intimation where int_claim_no = '{0}') and pol_status in (4, 5, 6, 10) and rownum = 1)", ClaimNo.ToUpper())
+                            .Append("and pci_description = 'MEMORANDUM'");
+
+                        var dtText = crud.ExecQuery(qBuilder.ToString());
+
+                        if (dtText != null && dtText.Rows.Count > 0)
+                        {
+                            var text = dtText.Rows[0][0].ToString();
+                            var oIndex = text.IndexOf("OPTIONAL OUT- PATIENT CARE");
+                            var uIndex = text.IndexOf("USD");
+                            var strBeni = text.Substring(uIndex, 15);
+                            var strBeniAmt = strBeni.Split('.')[0];
+                            beniAmt = strBeniAmt.Substring(strBeniAmt.IndexOf("D") + 1).Trim();
+
+                            decimal num = 0;
+                            var isNum = decimal.TryParse(beniAmt, out num);
+
+                            beniAmt = isNum ? beniAmt : Regex.Match(beniAmt, @"(\d+(\.\d+)?)|(\.\d+)").Value;
+                        }
+                    }
+
                     var currentDate = DateTime.Now.ToString("dd MMMM yyyy");
                     var policyHolder = dtClaims.Rows[0]["POLICY_HOLDER"].ToString();
                     var situationOfRisk = dtClaims.Rows[0]["ADDRESS"].ToString();
@@ -391,6 +424,22 @@ namespace Testing.Forms
                     var claimAmount = dtClaims.Rows[0]["CLAIMED_AMOUNT"].ToString();
                     var claimCause = dtClaims.Rows[0]["CAUSE"].ToString();
                     var hospital = dtClaims.Rows[0]["HOSPITAL"].ToString();
+
+                    if (!string.IsNullOrEmpty(hospital))
+                    {
+                        var hIndex = hospital.IndexOf("H:");
+                        if (hIndex == -1)
+                            hIndex = hospital.IndexOf("H :");
+
+                        var strHospital = hospital.Substring(hIndex + 2);
+
+                        var dIndex = strHospital.IndexOf(":");
+                        var tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
+
+                        var bHospital = tmpHospital.IndexOf("(");
+                        
+                        hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
+                    }
 
                     string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy", "dd-MMM-yy" };
                     string treatmentDateString = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
@@ -415,6 +464,10 @@ namespace Testing.Forms
                     engBody = engBody.Replace("%Hospital%", hospital);
                     engBody = engBody.Replace("%Dateloss%", treatmentDate);
                     engBody = engBody.Replace("%AccountHandler%", accountHandler);
+                    if (otherExclusion == "HNS OUTPATIENT REACH LIMIT")
+                    {
+                        engBody = engBody.Replace("%BeniAmt%", beniAmt);
+                    }
 
                     khBody = khBody.Replace("%DateTimeN%", CommonFunctions.KhDate(DateTime.Now));
                     khBody = khBody.Replace("%PolicyHolder%", policyHolder);
@@ -425,6 +478,10 @@ namespace Testing.Forms
                     khBody = khBody.Replace("%ClaimAmount%", CommonFunctions.KhNum(Convert.ToDouble(claimAmount)));
                     khBody = khBody.Replace("%ClaimCause%", claimCause);
                     khBody = khBody.Replace("%Hospital%", hospital);
+                    if (otherExclusion == "HNS OUTPATIENT REACH LIMIT")
+                    {
+                        khBody = khBody.Replace("%BeniAmt%", CommonFunctions.KhNum(Convert.ToDouble(beniAmt)));
+                    }
 
                     if (DateTime.TryParseExact(treatmentDateString, dateTimeformats, new CultureInfo("en-US"), DateTimeStyles.None, out dtTreatmentDate))
                         treatmentDate = CommonFunctions.KhDate(Convert.ToDateTime(treatmentDate));
@@ -489,7 +546,7 @@ namespace Testing.Forms
                     {
                         khDoc.Paragraphs.LineSpacing = InchesToPoints(0.17f);
                     }
-                    
+
                 }
                 else
                 {

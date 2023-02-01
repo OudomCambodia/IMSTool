@@ -15,6 +15,7 @@ namespace Testing.Forms
         CRUD crud = new CRUD();
         string[] Keys = new string[] { "sp_type", "sp_policy" };
         DataTable dt;
+        DataTable dtRiskRemark;
 
         public PolicyRemark()
         {
@@ -70,13 +71,23 @@ namespace Testing.Forms
 
         private void bnExcel_Click(object sender, EventArgs e)
         {
-            if (dt == null || dt.Rows.Count <= 0)
+            if (dtRiskRemark == null || dtRiskRemark.Rows.Count <= 0)
             {
-                Msgbox.Show("No Data found in the table!");
-                return;
+                if (dt == null || dt.Rows.Count <= 0)
+                {
+                    Msgbox.Show("No Data found in the table!");
+                    return;
+                }
+                My_DataTable_Extensions.ExportToExcelXML(dt);
             }
+            else
+            {
+                var ds = new DataSet();
+                ds.Tables.Add(dt);
+                ds.Tables.Add(dtRiskRemark);
 
-            My_DataTable_Extensions.ExportToExcel(dt, "");
+                My_DataTable_Extensions.ExportToExcelXMLDataSet(ds);
+            }
         }
 
         private void dgvPolRem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -104,7 +115,7 @@ namespace Testing.Forms
                     .Append("where prs_policy_no = upper('" + policyNo + "') ")
                     .Append(") where PPR_REMARKS is not null ");
 
-                var dtRiskRemark = crud.ExecQuery(queryBuilder.ToString());
+                dtRiskRemark = crud.ExecQuery(queryBuilder.ToString());
                 dgvDetailPolRem.DataSource = dtRiskRemark;
             }
         }

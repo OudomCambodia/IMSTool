@@ -2140,7 +2140,7 @@ namespace Testing.Forms
                 "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
                 "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
                 "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
-                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                "INT_COMMENTS HOSPITAL, " +
                 "TO_CHAR(INT_DATE_LOSS) TREATMENT_DATE, " +
                 "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + txtClaimNo.Text.ToUpper() + "'");
 
@@ -2271,7 +2271,7 @@ namespace Testing.Forms
                     Msgbox.Show("No claim information to preview");
                     return;
                 }
-                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false);
+                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false, null, txtClaimNo.Text.ToUpper());
                 frmMedicalRejectionLetter.ShowDialog();
             }
             else
@@ -2281,7 +2281,7 @@ namespace Testing.Forms
                     Msgbox.Show("No claim information to preview");
                     return;
                 }
-                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false);
+                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false, null, txtClaimNo.Text.ToUpper());
                 frmMedicalRejectionLetter.ShowDialog();
             }
         }

@@ -374,7 +374,7 @@ namespace Testing.Forms
                         body = reader.ReadToEnd();
                     }
                     body = body.Replace("{text}", content);
-                    body = body.Replace("{department}", "Claims Department");
+                    body = body.Replace("{department}", "Auto Department");
                     body = body.Replace("{username}", UserFullName);
                     body = body.Replace("{user_email}", mail_add);
 

@@ -19,10 +19,13 @@ namespace Testing.Forms
         private DataTable finalDatatable = new DataTable();
         private DataTable finalColTotalPremium = new DataTable();
         private DataTable finalColTotalClaim = new DataTable();
+        private string cusCode = string.Empty;
+        private string grpCode = string.Empty; 
 
         public frmGenerateCustomerProfitSummary()
         {
             InitializeComponent();
+            txtCusCode.CharacterCasing = CharacterCasing.Upper;
         }
 
         private void frmGenerateCustomerProfitSummary_Load(object sender, EventArgs e)
@@ -44,30 +47,43 @@ namespace Testing.Forms
             cboGroupCustomer.DataSource = dtCombox;
         }
 
+        private void txtCusCode_Leave(object sender, EventArgs e)
+        {
+            cusCode = string.IsNullOrEmpty(txtCusCode.Text.Trim()) ? null : txtCusCode.Text.Trim();
+            if (!string.IsNullOrEmpty(cusCode))
+            {
+                var dtGrpCode = crud.ExecQuery("select cus_grp_code from uw_m_customers where cus_code = '" + cusCode + "'");
+                if (dtGrpCode.Rows.Count > 0)
+                {
+                    grpCode = dtGrpCode.Rows[0][0].ToString();
+                    if (string.IsNullOrEmpty(grpCode))
+                    {
+                        grpCode = "N/A";
+                        cboGroupCustomer.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        var dtGrpName = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '" + grpCode.ToUpper() + "'").Rows[0][0].ToString();
+                        cboGroupCustomer.SelectedIndex = cboGroupCustomer.FindStringExact(dtGrpName);
+                    }
+                }
+                else
+                    cboGroupCustomer.SelectedIndex = 0;
+            }
+            else
+                grpCode = cboGroupCustomer.SelectedValue.ToString();
+        }
+
+        private void cboGroupCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grpCode = cboGroupCustomer.SelectedValue.ToString() == "0" ? "N/A" : cboGroupCustomer.SelectedValue.ToString();
+        }
+
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             try
             {
                 Cursor = Cursors.WaitCursor;
-
-                var grpCode = string.Empty;
-
-                if (cboGroupCustomer.SelectedIndex == 0)
-                {
-                    var dtGrpCode = crud.ExecQuery("select cus_grp_code from uw_m_customers where cus_code = '" + txtCusCode.Text.Trim().ToUpper() + "'");
-                    if (dtGrpCode.Rows.Count > 0)
-                    {
-                        grpCode = dtGrpCode.Rows[0][0].ToString();
-                        if (string.IsNullOrEmpty(grpCode))
-                            grpCode = "N/A";
-                    }
-                }
-                else
-                {
-                    grpCode = cboGroupCustomer.SelectedValue.ToString();
-                }
-
-                string cusCode = string.IsNullOrEmpty(txtCusCode.Text.Trim()) ? null : txtCusCode.Text.Trim().ToUpper();
 
                 string[] Key = new string[] { "p_cus_code", "p_grp_code" };
                 string[] Values = new string[] { cusCode, grpCode }; //C000028640
@@ -156,7 +172,7 @@ namespace Testing.Forms
                         // add Ratio row to dtEachProClass
                         var ratioRow = dtEachProClass.NewRow();
                         ratioRow["PRODUCT"] = string.Empty;
-                        ratioRow["UWY"] = "RATIO%";
+                        ratioRow["UWY"] = "RATIO %";
 
                         // add Ratio value to each column (2015, 2016, 2017, ...)
                         for (var m = 0; m < columnNames.Count; m++)
@@ -192,7 +208,7 @@ namespace Testing.Forms
                         {
                             var row = dtEachProClass.NewRow();
                             row["PRODUCT"] = dProduct[i] + (k == 0 ? "_CLAIM" : "_RATIO");
-                            row["UWY"] = k == 0 ? "CLAIM" : "RATIO%";
+                            row["UWY"] = k == 0 ? "CLAIM" : "RATIO %";
                             foreach (var columnName in columnNames)
                             {
                                 if (columnName.ToString().Equals("PRODUCT") || columnName.ToString().Equals("UWY"))
@@ -255,7 +271,7 @@ namespace Testing.Forms
 
                 DataRow drTotalRatio = finalDatatable.NewRow();
                 drTotalRatio["PRODUCT"] = string.Empty;
-                drTotalRatio["UWY"] = "RATIO%";
+                drTotalRatio["UWY"] = "RATIO %";
                 var dt = finalDatatable.Clone();
                 dt.ImportRow(drTotalPremium);
                 dt.ImportRow(drTotalClaim);
@@ -320,16 +336,16 @@ namespace Testing.Forms
 
                 var cus = string.Empty;
                 var byCusGroup = false;
-                
+
                 if (!string.IsNullOrEmpty(txtCusCode.Text.Trim()))
                 {
-                    cus = crud.ExecQuery("select nvl(cus_indv_surname, cus_corp_name) CUSNAME from uw_m_customers where cus_code = '"+ txtCusCode.Text.Trim().ToUpper() +"'").Rows[0][0].ToString();
+                    cus = crud.ExecQuery("select nvl(cus_indv_surname, cus_corp_name) CUSNAME from uw_m_customers where cus_code = '" + txtCusCode.Text.Trim().ToUpper() + "'").Rows[0][0].ToString();
                 }
 
                 if (string.IsNullOrEmpty(txtCusCode.Text.Trim()) && cboGroupCustomer.SelectedIndex != 0)
                 {
                     byCusGroup = true;
-                    cus = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '"+ cboGroupCustomer.SelectedValue.ToString() +"'").Rows[0][0].ToString();
+                    cus = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '" + cboGroupCustomer.SelectedValue.ToString() + "'").Rows[0][0].ToString();
                 }
 
                 IXLWorkbook wb = new XLWorkbook();
@@ -345,6 +361,7 @@ namespace Testing.Forms
 
                 ws.Cell(1, ColumnsCount).SetValue(cus);
                 ws.Cell(1, ColumnsCount).Style.Font.FontSize = 9f;
+                ws.Cell(1, ColumnsCount).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                 ws.Cell(1, ColumnsCount).Style.Font.FontName = "Century Gothic";
                 ws.Cell(1, ColumnsCount).Style.Font.Bold = true;
 
@@ -356,7 +373,7 @@ namespace Testing.Forms
                 ws.Cell(2, ColumnsCount).SetValue(DateTime.Now.ToString());
                 ws.Cell(2, ColumnsCount).DataType = XLDataType.DateTime;
                 ws.Cell(2, ColumnsCount).Style.DateFormat.Format = "dd-MMM-yy";
-                ws.Cell(2, ColumnsCount).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(2, ColumnsCount).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                 ws.Cell(2, ColumnsCount).Style.Font.FontSize = 9f;
                 ws.Cell(2, ColumnsCount).Style.Font.FontName = "Century Gothic";
                 ws.Cell(2, ColumnsCount).Style.Font.Bold = true;
@@ -373,6 +390,8 @@ namespace Testing.Forms
                 for (int i = 0; i < ColumnsCount; i++)
                 {
                     var cell = ws.Cell(5, i + 1); //5 means start adding from row 5, +1 cuz it starts from column 1
+                    cell.Style.Font.FontName = "Century Gothic";
+                    cell.Style.Font.FontSize = 8f;
                     cell.Value = dt.Columns[i].ColumnName;
 
                     //Style Format on Header
@@ -399,15 +418,27 @@ namespace Testing.Forms
 
                 int formatRowCount = 0; // count each 3 rows to add orange background color
                 bool isSet = false;
+                bool isRatio = false;
+                int totalCol = 0;
 
                 //Set Table Data After Header
                 for (int r = 0; r < RowsCount; r++)
                 {
                     DataRow dr = dt.Rows[r];
+                    totalCol = dr.ItemArray.Count() - 1;
+                    isRatio = dr[1].ToString().Equals("RATIO %");
+
                     for (int c = 0; c < ColumnsCount; c++)
                     {
+                        ws.Cell(r + 6, c + 1).Style.Font.FontName = "Century Gothic";
+                        ws.Cell(r + 6, c + 1).Style.Font.FontSize = 8f;
+
                         ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString()); //+6 cuz it starts from sixth row after Summary Report text
-                        ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0.00";
+
+                        if (isRatio)
+                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "0.0%";
+                        else
+                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0";
 
                         if (c > 1)
                         {
@@ -417,10 +448,24 @@ namespace Testing.Forms
                             {
                                 ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
                                 ws.Cell(r + 6, c + 1).DataType = XLDataType.Number;
-                                ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0.00";
+                                if (isRatio)
+                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "0.0%";
+                                else
+                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0";
                             }
                             else
-                                ws.Cell(r + 6, c + 1).SetValue("-");
+                            {
+                                if (isRatio)
+                                {
+                                    ws.Cell(r + 6, c + 1).SetValue(0.000);
+                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "0.0%";
+                                }
+                                else
+                                {
+                                    ws.Cell(r + 6, c + 1).SetValue(0);
+                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0";
+                                }   
+                            }
                         }
                         if (c == 0)
                             ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
@@ -438,13 +483,19 @@ namespace Testing.Forms
                             {
                                 for (int i = 0; i < ColumnsCount; i++)
                                 {
+                                    ws.Cell(r + 6, i + 1).Style.Font.FontName = "Century Gothic";
+                                    ws.Cell(r + 6, i + 1).Style.Font.FontSize = 8f;
+
                                     decimal numericValue = 0;
                                     bool isNumber = decimal.TryParse(dr[i].ToString(), out numericValue);
                                     if (isNumber && numericValue > 0)
                                     {
                                         ws.Cell(r + 6, i + 1).SetValue(dr[i].ToString());
                                         ws.Cell(r + 6, i + 1).DataType = XLDataType.Number;
-                                        ws.Cell(r + 6, i + 1).Style.NumberFormat.Format = "#,##0.00";
+                                        if (isRatio)
+                                            ws.Cell(r + 6, i + 1).Style.NumberFormat.Format = "0.0%";
+                                        else
+                                            ws.Cell(r + 6, i + 1).Style.NumberFormat.Format = "#,##0";
                                         ws.Cell(r + 6, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                                     }
                                     else if (i == 0 || i == 1)
@@ -455,7 +506,7 @@ namespace Testing.Forms
                                     }
                                     else
                                     {
-                                        ws.Cell(r + 6, i + 1).SetValue("-");
+                                        ws.Cell(r + 6, i + 1).SetValue(0);
                                         ws.Cell(r + 6, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                                     }
 
@@ -482,6 +533,10 @@ namespace Testing.Forms
 
                         // format Total Ratio Column
                         if (r == RowsCount - 2)
+                            ws.Cell(r + 6, c + 1).Style.Font.Bold = true;
+
+                        // set bold to total column
+                        if (c == totalCol)
                             ws.Cell(r + 6, c + 1).Style.Font.Bold = true;
                     }
                     formatRowCount++;
