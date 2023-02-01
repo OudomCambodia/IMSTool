@@ -194,6 +194,86 @@ namespace Testing
             }
         }
 
+        public static void ExportToExcelXMLDataSet(this System.Data.DataSet ds, string ExcelFilePath = null)
+        {
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                var k = 0;
+                IXLWorkbook wb = new XLWorkbook();
+
+                foreach (System.Data.DataTable dt in ds.Tables)
+                {
+                    k++;
+                    ////using ClosedXML package
+                    IXLWorksheet ws = wb.Worksheets.Add("Export Sheet" + k.ToString());
+                    ws.DataType = XLDataType.Text; //Set all cells datatype as Text
+
+
+                    int RowsCount = dt.Rows.Count, ColumnsCount = dt.Columns.Count;
+
+                    //Set Header with DataTable dt Column Name
+                    for (int i = 0; i < ColumnsCount; i++)
+                    {
+                        var cell = ws.Cell(1, i + 1);      //+1 cuz it start from 1
+                        cell.Value = dt.Columns[i].ColumnName;
+                        //Style Format on Header
+                        cell.Style.Fill.SetBackgroundColor(XLColor.Yellow);
+                        cell.Style.Font.Bold = true;
+                        //
+                    }
+                    //
+
+                    //Set Table Data After Header
+                    for (int r = 0; r < RowsCount; r++)
+                    {
+                        DataRow dr = dt.Rows[r];
+                        for (int c = 0; c < ColumnsCount; c++)
+                        {
+                            //ws.Cell(r + 2, c + 1).Value = dr[c].ToString();    //+2 cuz it start from second row after header row
+                            ws.Cell(r + 2, c + 1).SetValue(dr[c].ToString());    //+2 cuz it start from second row after header row
+                        }
+                    }
+                    //
+                }
+
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream()) //create stream to store workbook data
+                {
+                    wb.SaveAs(ms);
+
+                    string filePath = "";
+
+                    if (string.IsNullOrEmpty(ExcelFilePath))
+                    {
+                        tempfile = new System.CodeDom.Compiler.TempFileCollection(); //this will create Temporary File, re-initailized it will create new file everytime 
+                        tempfile.KeepFiles = false; //will be used when dispose tempfile
+                        filePath = tempfile.AddExtension("xlsx"); //add extension to the created Temporary File
+                    }
+                    else
+                    {
+                        filePath = ExcelFilePath;
+                    }
+
+                    using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.OpenOrCreate))
+                    {
+                        fs.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                    }
+
+                    if (string.IsNullOrEmpty(ExcelFilePath))
+                        System.Diagnostics.Process.Start(filePath); //Open that File
+                    else
+                        Msgbox.Show("Excel file saved!");
+                }
+
+                Cursor.Current = Cursors.AppStarting;
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show("Export Excel XML: " + ex.Message);
+            }
+        }
 
 
         public static void ExportToExcelXMLSharepoint(this System.Data.DataTable dt, string fname, string ExcelFilePath = null)
