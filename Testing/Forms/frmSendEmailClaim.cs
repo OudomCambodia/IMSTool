@@ -2281,7 +2281,14 @@ namespace Testing.Forms
                     Msgbox.Show("No claim information to preview");
                     return;
                 }
-                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false, null, txtClaimNo.Text.ToUpper());
+                var overPeriod = string.Empty;
+
+                if (cboOtherExclusions.Text == "HNS ACCIDENT OVER PERIOD")
+                {
+                    overPeriod = rdbOver24Hours.Checked ? "24" : (rdbOver48Hours.Checked ? "48" : "72");
+                }
+
+                frmMedicalRejectionLetter frmMedicalRejectionLetter = new frmMedicalRejectionLetter(false, null, txtClaimNo.Text.ToUpper(), overPeriod);
                 frmMedicalRejectionLetter.ShowDialog();
             }
         }
@@ -2518,6 +2525,7 @@ namespace Testing.Forms
 
         private void cboOtherExclusions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            gbOverPeriod.Enabled = cboOtherExclusions.Text.Equals("HNS ACCIDENT OVER PERIOD");
             dgvDefinition.Enabled = cboOtherExclusions.SelectedIndex == 0;
             dgvDefinition.DefaultCellStyle.ForeColor = cboOtherExclusions.SelectedIndex == 0 ? Color.Black : Color.Gray;
             OtherExclusion = cboOtherExclusions.Text;

@@ -210,6 +210,10 @@
             this.btnViewFolder = new Testing.cus_button();
             this.btnViewHistory = new Testing.cus_button();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.gbOverPeriod = new System.Windows.Forms.GroupBox();
+            this.rdbOver72Hours = new System.Windows.Forms.RadioButton();
+            this.rdbOver48Hours = new System.Windows.Forms.RadioButton();
+            this.rdbOver24Hours = new System.Windows.Forms.RadioButton();
             this.cboOtherExclusions = new System.Windows.Forms.ComboBox();
             this.btnGenerateClaim = new Testing.cus_button();
             this.btnExcluDefin = new Testing.cus_button();
@@ -271,6 +275,7 @@
             this.panel9.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
+            this.gbOverPeriod.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -2295,9 +2300,9 @@
             // 
             this.panel11.Controls.Add(this.groupBox13);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(0, 167);
+            this.panel11.Location = new System.Drawing.Point(0, 215);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(1357, 490);
+            this.panel11.Size = new System.Drawing.Size(1357, 442);
             this.panel11.TabIndex = 9;
             // 
             // groupBox13
@@ -2309,7 +2314,7 @@
             this.groupBox13.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox13.Location = new System.Drawing.Point(0, 0);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(1357, 490);
+            this.groupBox13.Size = new System.Drawing.Size(1357, 442);
             this.groupBox13.TabIndex = 2;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Definition/Exclusion";
@@ -2320,7 +2325,7 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel13.Location = new System.Drawing.Point(3, 44);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(1351, 443);
+            this.panel13.Size = new System.Drawing.Size(1351, 395);
             this.panel13.TabIndex = 2;
             // 
             // dgvDefinition
@@ -2334,7 +2339,7 @@
             this.dgvDefinition.Location = new System.Drawing.Point(0, 0);
             this.dgvDefinition.Name = "dgvDefinition";
             this.dgvDefinition.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvDefinition.Size = new System.Drawing.Size(1351, 443);
+            this.dgvDefinition.Size = new System.Drawing.Size(1351, 395);
             this.dgvDefinition.TabIndex = 0;
             this.dgvDefinition.DataSourceChanged += new System.EventHandler(this.dgvDefinition_DataSourceChanged_1);
             this.dgvDefinition.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDefinition_CellContentClick);
@@ -2368,7 +2373,7 @@
             // 
             this.panel10.Controls.Add(this.groupBox14);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 74);
+            this.panel10.Location = new System.Drawing.Point(0, 122);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(1357, 93);
             this.panel10.TabIndex = 8;
@@ -2422,7 +2427,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1357, 74);
+            this.panel9.Size = new System.Drawing.Size(1357, 122);
             this.panel9.TabIndex = 7;
             // 
             // groupBox16
@@ -2430,7 +2435,7 @@
             this.groupBox16.Controls.Add(this.btnViewFolder);
             this.groupBox16.Controls.Add(this.btnViewHistory);
             this.groupBox16.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox16.Location = new System.Drawing.Point(1055, 3);
+            this.groupBox16.Location = new System.Drawing.Point(1078, 31);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(263, 63);
             this.groupBox16.TabIndex = 14;
@@ -2469,22 +2474,69 @@
             // 
             // groupBox15
             // 
+            this.groupBox15.Controls.Add(this.gbOverPeriod);
             this.groupBox15.Controls.Add(this.cboOtherExclusions);
             this.groupBox15.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox15.Location = new System.Drawing.Point(569, 3);
+            this.groupBox15.Location = new System.Drawing.Point(520, 1);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(270, 63);
+            this.groupBox15.Size = new System.Drawing.Size(418, 115);
             this.groupBox15.TabIndex = 13;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "Other Exclusions";
+            // 
+            // gbOverPeriod
+            // 
+            this.gbOverPeriod.Controls.Add(this.rdbOver72Hours);
+            this.gbOverPeriod.Controls.Add(this.rdbOver48Hours);
+            this.gbOverPeriod.Controls.Add(this.rdbOver24Hours);
+            this.gbOverPeriod.ForeColor = System.Drawing.Color.White;
+            this.gbOverPeriod.Location = new System.Drawing.Point(297, 10);
+            this.gbOverPeriod.Name = "gbOverPeriod";
+            this.gbOverPeriod.Size = new System.Drawing.Size(114, 99);
+            this.gbOverPeriod.TabIndex = 1;
+            this.gbOverPeriod.TabStop = false;
+            this.gbOverPeriod.Text = "Period";
+            // 
+            // rdbOver72Hours
+            // 
+            this.rdbOver72Hours.AutoSize = true;
+            this.rdbOver72Hours.Location = new System.Drawing.Point(6, 70);
+            this.rdbOver72Hours.Name = "rdbOver72Hours";
+            this.rdbOver72Hours.Size = new System.Drawing.Size(106, 19);
+            this.rdbOver72Hours.TabIndex = 2;
+            this.rdbOver72Hours.TabStop = true;
+            this.rdbOver72Hours.Text = "Over 72 Hours";
+            this.rdbOver72Hours.UseVisualStyleBackColor = true;
+            // 
+            // rdbOver48Hours
+            // 
+            this.rdbOver48Hours.AutoSize = true;
+            this.rdbOver48Hours.Location = new System.Drawing.Point(6, 45);
+            this.rdbOver48Hours.Name = "rdbOver48Hours";
+            this.rdbOver48Hours.Size = new System.Drawing.Size(106, 19);
+            this.rdbOver48Hours.TabIndex = 1;
+            this.rdbOver48Hours.TabStop = true;
+            this.rdbOver48Hours.Text = "Over 48 Hours";
+            this.rdbOver48Hours.UseVisualStyleBackColor = true;
+            // 
+            // rdbOver24Hours
+            // 
+            this.rdbOver24Hours.AutoSize = true;
+            this.rdbOver24Hours.Location = new System.Drawing.Point(6, 20);
+            this.rdbOver24Hours.Name = "rdbOver24Hours";
+            this.rdbOver24Hours.Size = new System.Drawing.Size(106, 19);
+            this.rdbOver24Hours.TabIndex = 0;
+            this.rdbOver24Hours.TabStop = true;
+            this.rdbOver24Hours.Text = "Over 24 Hours";
+            this.rdbOver24Hours.UseVisualStyleBackColor = true;
             // 
             // cboOtherExclusions
             // 
             this.cboOtherExclusions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboOtherExclusions.FormattingEnabled = true;
-            this.cboOtherExclusions.Location = new System.Drawing.Point(10, 24);
+            this.cboOtherExclusions.Location = new System.Drawing.Point(10, 52);
             this.cboOtherExclusions.Name = "cboOtherExclusions";
-            this.cboOtherExclusions.Size = new System.Drawing.Size(252, 23);
+            this.cboOtherExclusions.Size = new System.Drawing.Size(269, 23);
             this.cboOtherExclusions.TabIndex = 0;
             this.cboOtherExclusions.SelectedIndexChanged += new System.EventHandler(this.cboOtherExclusions_SelectedIndexChanged);
             // 
@@ -2494,9 +2546,9 @@
             this.btnGenerateClaim.FlatAppearance.BorderSize = 2;
             this.btnGenerateClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateClaim.ForeColor = System.Drawing.Color.White;
-            this.btnGenerateClaim.Location = new System.Drawing.Point(845, 24);
+            this.btnGenerateClaim.Location = new System.Drawing.Point(944, 52);
             this.btnGenerateClaim.Name = "btnGenerateClaim";
-            this.btnGenerateClaim.Size = new System.Drawing.Size(129, 29);
+            this.btnGenerateClaim.Size = new System.Drawing.Size(110, 29);
             this.btnGenerateClaim.TabIndex = 6;
             this.btnGenerateClaim.Text = "Preview Letter";
             this.btnGenerateClaim.UseVisualStyleBackColor = false;
@@ -2508,7 +2560,7 @@
             this.btnExcluDefin.FlatAppearance.BorderSize = 2;
             this.btnExcluDefin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcluDefin.ForeColor = System.Drawing.Color.White;
-            this.btnExcluDefin.Location = new System.Drawing.Point(386, 24);
+            this.btnExcluDefin.Location = new System.Drawing.Point(388, 52);
             this.btnExcluDefin.Name = "btnExcluDefin";
             this.btnExcluDefin.Size = new System.Drawing.Size(97, 29);
             this.btnExcluDefin.TabIndex = 12;
@@ -2522,7 +2574,7 @@
             this.groupBox12.Controls.Add(this.label41);
             this.groupBox12.Controls.Add(this.txtClaimNo);
             this.groupBox12.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox12.Location = new System.Drawing.Point(3, 3);
+            this.groupBox12.Location = new System.Drawing.Point(5, 31);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(377, 63);
             this.groupBox12.TabIndex = 0;
@@ -2636,6 +2688,8 @@
             this.panel9.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
+            this.gbOverPeriod.ResumeLayout(false);
+            this.gbOverPeriod.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
@@ -2834,5 +2888,9 @@
         private cus_button btnViewHistory;
         private System.Windows.Forms.GroupBox groupBox16;
         private cus_button btnViewFolder;
+        private System.Windows.Forms.GroupBox gbOverPeriod;
+        private System.Windows.Forms.RadioButton rdbOver72Hours;
+        private System.Windows.Forms.RadioButton rdbOver48Hours;
+        private System.Windows.Forms.RadioButton rdbOver24Hours;
     }
 }

@@ -83,6 +83,7 @@ namespace Testing.Forms
         private const string NA = "--- N/A ---";
         private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
         private string ClaimNo = string.Empty;
+        private string OverPeriod = string.Empty;
 
         private bool IsViewHistory;
 
@@ -93,12 +94,13 @@ namespace Testing.Forms
 
 
 
-        public frmMedicalRejectionLetter(bool isViewHistory, string histClaimNo = null, string claimNo = null)
+        public frmMedicalRejectionLetter(bool isViewHistory, string histClaimNo = null, string claimNo = null, string overPeriod = null)
         {
             InitializeComponent();
             IsViewHistory = isViewHistory;
             HistClaimNo = histClaimNo;
             ClaimNo = claimNo;
+            OverPeriod = overPeriod;
         }
 
         private void frmMedicalRejectionLetter_Load(object sender, EventArgs e)
@@ -403,10 +405,29 @@ namespace Testing.Forms
                         {
                             var text = dtText.Rows[0][0].ToString();
                             var oIndex = text.IndexOf("OPTIONAL OUT- PATIENT CARE");
+                            if (oIndex == -1)
+                            {
+                                Msgbox.Show("There is an error while generating HNS OUTPATIENT REACH LIMIT");
+                                return;
+
+                            } 
                             var uIndex = text.IndexOf("USD");
+                            if (uIndex == -1)
+                            {
+                                Msgbox.Show("There is an error while generating HNS OUTPATIENT REACH LIMIT");
+                                return;
+                            }
                             var strBeni = text.Substring(uIndex, 15);
                             var strBeniAmt = strBeni.Split('.')[0];
-                            beniAmt = strBeniAmt.Substring(strBeniAmt.IndexOf("D") + 1).Trim();
+
+                            var dIndex = strBeniAmt.IndexOf("D");
+                            if (dIndex == -1)
+                            {
+                                Msgbox.Show("There is an error while generating HNS OUTPATIENT REACH LIMIT");
+                                return;
+                            }
+
+                            beniAmt = strBeniAmt.Substring(dIndex + 1).Trim();
 
                             decimal num = 0;
                             var isNum = decimal.TryParse(beniAmt, out num);
@@ -464,6 +485,7 @@ namespace Testing.Forms
                     engBody = engBody.Replace("%Hospital%", hospital);
                     engBody = engBody.Replace("%Dateloss%", treatmentDate);
                     engBody = engBody.Replace("%AccountHandler%", accountHandler);
+
                     if (otherExclusion == "HNS OUTPATIENT REACH LIMIT")
                     {
                         engBody = engBody.Replace("%BeniAmt%", beniAmt);
@@ -478,7 +500,48 @@ namespace Testing.Forms
                     khBody = khBody.Replace("%ClaimAmount%", CommonFunctions.KhNum(Convert.ToDouble(claimAmount)));
                     khBody = khBody.Replace("%ClaimCause%", claimCause);
                     khBody = khBody.Replace("%Hospital%", hospital);
-                    if (otherExclusion == "HNS OUTPATIENT REACH LIMIT")
+
+                    if (otherExclusion.Equals("HNS ACCIDENT OVER PERIOD"))
+                    {
+                        engBody = engBody.Replace("%Period%", OverPeriod.Equals("24") ? "24" : (OverPeriod.Equals("48") ? "48" : "72"));
+                        khBody = khBody.Replace("%Period%", OverPeriod.Equals("24") ? CommonFunctions.KhNum(Convert.ToDouble("24")).Split('.')[0]
+                            : (OverPeriod.Equals("48") ? CommonFunctions.KhNum(Convert.ToDouble("48")).Split('.')[0] : CommonFunctions.KhNum(Convert.ToDouble("72")).Split('.')[0]));
+                    }
+
+                    if (otherExclusion.Equals("HNS POST-HOSPITALIZATION REACH LIMIT") || otherExclusion.Equals("HNS PRE-HOSPITALIZATION REACH LIMIT"))
+                    {
+                        var option = otherExclusion.Equals("HNS POST-HOSPITALIZATION REACH LIMIT") ? "POST-HOSPITALIZATION" : "PRE-HOSPITALIZATION";
+
+                        var qBuilder = new StringBuilder();
+                        qBuilder.Append("select b.pln_description, a.pmp_event_limit, c.clm_mem_type ")
+                            .Append("from uw_t_plan_master_perils a, uw_t_plans b, cl_t_clm_members c, cl_t_intimation d, uw_r_perils e ")
+                            .Append("where a.pmp_pln_seq_no = b.pln_seq_no ")
+                            .Append("and a.pmp_per_prl_code = e.prl_code ")
+                            .Append("and b.pln_code = c.clm_plan_code ")
+                            .Append("and c.clm_int_seq = d.int_seq_no ")
+                            .AppendFormat("and d.int_claim_no = '{0}' ", ClaimNo)
+                            .AppendFormat("and e.prl_description = '{0}'", option);
+
+                        var dtPlan = crud.ExecQuery(qBuilder.ToString());
+
+                        if (dtPlan.Rows.Count > 0)
+                        {
+                            var plan = dtPlan.Rows[0][0].ToString();
+                            var amount = dtPlan.Rows[0][1].ToString();
+                            var gender = string.IsNullOrEmpty(dtPlan.Rows[0][2].ToString()) ? "his/her" : (dtPlan.Rows[0][2].ToString().Equals("M") ? "his" : "her");
+
+
+                            engBody = engBody.Replace("%Amount%", amount);
+                            engBody = engBody.Replace("%Plan%", plan);
+                            engBody = engBody.Replace("%Gender%", gender);
+
+                            khBody = khBody.Replace("%Amount%", amount);
+                            khBody = khBody.Replace("%Plan%", plan);
+                            khBody = khBody.Replace("%Gender%", gender);
+                        }
+                    }
+
+                    if (otherExclusion.Equals("HNS OUTPATIENT REACH LIMIT"))
                     {
                         khBody = khBody.Replace("%BeniAmt%", CommonFunctions.KhNum(Convert.ToDouble(beniAmt)));
                     }

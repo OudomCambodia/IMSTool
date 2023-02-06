@@ -286,7 +286,7 @@
             // 
             // bnClaimRI
             // 
-            this.bnClaimRI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnClaimRI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnClaimRI.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnClaimRI.Enabled = false;
             this.bnClaimRI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -661,7 +661,7 @@
             // 
             // bnClaimPaidRI
             // 
-            this.bnClaimPaidRI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.bnClaimPaidRI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.bnClaimPaidRI.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bnClaimPaidRI.Enabled = false;
             this.bnClaimPaidRI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -990,7 +990,7 @@
             // 
             // btnBHPScheme
             // 
-            this.btnBHPScheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.btnBHPScheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnBHPScheme.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBHPScheme.Enabled = false;
             this.btnBHPScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1100,9 +1100,9 @@
             this.pnInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.pnInvoice.Controls.Add(this.btnSubBreakdownInvoice);
             this.pnInvoice.Controls.Add(this.btnSubPrintInvoice);
-            this.pnInvoice.Location = new System.Drawing.Point(191, 223);
+            this.pnInvoice.Location = new System.Drawing.Point(190, 223);
             this.pnInvoice.Name = "pnInvoice";
-            this.pnInvoice.Size = new System.Drawing.Size(187, 81);
+            this.pnInvoice.Size = new System.Drawing.Size(180, 81);
             this.pnInvoice.TabIndex = 14;
             this.pnInvoice.Visible = false;
             // 
@@ -1117,7 +1117,7 @@
             this.btnSubBreakdownInvoice.ForeColor = System.Drawing.Color.White;
             this.btnSubBreakdownInvoice.Location = new System.Drawing.Point(0, 40);
             this.btnSubBreakdownInvoice.Name = "btnSubBreakdownInvoice";
-            this.btnSubBreakdownInvoice.Size = new System.Drawing.Size(187, 41);
+            this.btnSubBreakdownInvoice.Size = new System.Drawing.Size(180, 41);
             this.btnSubBreakdownInvoice.TabIndex = 7;
             this.btnSubBreakdownInvoice.Text = "Issue Breakdown Invoice";
             this.btnSubBreakdownInvoice.UseVisualStyleBackColor = false;
@@ -1134,7 +1134,7 @@
             this.btnSubPrintInvoice.ForeColor = System.Drawing.Color.White;
             this.btnSubPrintInvoice.Location = new System.Drawing.Point(0, 0);
             this.btnSubPrintInvoice.Name = "btnSubPrintInvoice";
-            this.btnSubPrintInvoice.Size = new System.Drawing.Size(187, 40);
+            this.btnSubPrintInvoice.Size = new System.Drawing.Size(180, 40);
             this.btnSubPrintInvoice.TabIndex = 6;
             this.btnSubPrintInvoice.Text = "Print Invoice";
             this.btnSubPrintInvoice.UseVisualStyleBackColor = false;
@@ -1192,6 +1192,7 @@
             // 
             this.btnCustomerProfitSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnCustomerProfitSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCustomerProfitSummary.Enabled = false;
             this.btnCustomerProfitSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomerProfitSummary.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomerProfitSummary.ForeColor = System.Drawing.Color.White;

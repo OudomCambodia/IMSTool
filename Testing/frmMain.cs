@@ -457,6 +457,7 @@ namespace Testing
             {
                 ClearPanel();
                 pn.Visible = true;
+                pn.BringToFront();
             }
         }
 
@@ -804,6 +805,11 @@ namespace Testing
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
+            if (frmLogIn.Usert.ToLower() == "c-hrm" || frmLogIn.Usert.ToLower() == "admin")
+                btnCustomerProfitSummary.Enabled = true;
+            else
+                btnCustomerProfitSummary.Enabled = false;
+
             List<string> fonts = new List<string>();
             fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-Regular.ttf");
             fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-Bold.ttf");
