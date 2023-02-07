@@ -335,7 +335,6 @@ namespace Testing.Forms
                 Cursor.Current = Cursors.WaitCursor;
 
                 var cus = string.Empty;
-                var byCusGroup = false;
 
                 if (!string.IsNullOrEmpty(txtCusCode.Text.Trim()))
                 {
@@ -344,7 +343,6 @@ namespace Testing.Forms
 
                 if (string.IsNullOrEmpty(txtCusCode.Text.Trim()) && cboGroupCustomer.SelectedIndex != 0)
                 {
-                    byCusGroup = true;
                     cus = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '" + cboGroupCustomer.SelectedValue.ToString() + "'").Rows[0][0].ToString();
                 }
 
@@ -354,42 +352,74 @@ namespace Testing.Forms
 
                 int RowsCount = dt.Rows.Count, ColumnsCount = dt.Columns.Count;
 
-                ws.Cell(1, 2).SetValue(byCusGroup ? "CUSTOMER GROUP" : "CUSTOMER");
-                ws.Cell(1, 2).Style.Font.FontSize = 9f;
-                ws.Cell(1, 2).Style.Font.FontName = "Century Gothic";
-                ws.Cell(1, 2).Style.Font.Bold = true;
+                #region --- SUMMARY REPORT TEXT ---
+                ws.Cell(1, 1).SetValue("SUMMARY PROFITABILITY REPORT");
+                ws.Cell(1, 1).Style.Font.FontSize = 20f;
+                ws.Cell(1, 1).Style.Font.FontName = "Century Gothic";
+                ws.Cell(1, 1).Style.Font.Bold = true;
+                ws.Cell(1, 1).Style.Font.FontColor = XLColor.Green;
+                #endregion
 
-                ws.Cell(1, ColumnsCount).SetValue(cus);
-                ws.Cell(1, ColumnsCount).Style.Font.FontSize = 9f;
-                ws.Cell(1, ColumnsCount).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-                ws.Cell(1, ColumnsCount).Style.Font.FontName = "Century Gothic";
-                ws.Cell(1, ColumnsCount).Style.Font.Bold = true;
+                // add empty row
+                ws.Cell(2, 1).SetValue("");
 
-                ws.Cell(2, 2).SetValue("REPORT DATE");
-                ws.Cell(2, 2).Style.Font.FontSize = 9f;
-                ws.Cell(2, 2).Style.Font.FontName = "Century Gothic";
-                ws.Cell(2, 2).Style.Font.Bold = true;
+                #region --- CUSTOMER CODE ---
+                //ws.Cell(3, 1).SetValue("CUSTOMER CODE");
+                //ws.Cell(3, 1).Style.Font.FontSize = 9f;
+                //ws.Cell(3, 1).Style.Font.FontName = "Century Gothic";
+                //ws.Cell(3, 1).Style.Font.Bold = true;
 
-                ws.Cell(2, ColumnsCount).SetValue(DateTime.Now.ToString());
-                ws.Cell(2, ColumnsCount).DataType = XLDataType.DateTime;
-                ws.Cell(2, ColumnsCount).Style.DateFormat.Format = "dd-MMM-yy";
-                ws.Cell(2, ColumnsCount).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-                ws.Cell(2, ColumnsCount).Style.Font.FontSize = 9f;
-                ws.Cell(2, ColumnsCount).Style.Font.FontName = "Century Gothic";
-                ws.Cell(2, ColumnsCount).Style.Font.Bold = true;
+                //ws.Cell(3, ColumnsCount - 12).SetValue(":");
+                //ws.Cell(3, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                //ws.Cell(3, ColumnsCount - 11).SetValue(cus);
+                //ws.Cell(3, ColumnsCount - 11).Style.Font.FontSize = 9f;
+                //ws.Cell(3, ColumnsCount - 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                //ws.Cell(3, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
+                //ws.Cell(3, ColumnsCount - 11).Style.Font.Bold = true;
+                //ws.Range(3, ColumnsCount - 11, 3, ColumnsCount - 9).Merge();
+                #endregion
 
-                ws.Cell(3, 2).SetValue("SUMMARY REPORT");
-                ws.Cell(3, 2).Style.Font.FontSize = 20f;
-                ws.Cell(3, 2).Style.Font.FontName = "Century Gothic";
-                ws.Cell(3, 2).Style.Font.Bold = true;
-                ws.Cell(3, 2).Style.Font.FontColor = XLColor.Green;
+                #region --- CUSTOMER GROUP ---
+                ws.Cell(4, 1).SetValue("CUSTOMER GROUP");
+                ws.Cell(4, 1).Style.Font.FontSize = 9f;
+                ws.Cell(4, 1).Style.Font.FontName = "Century Gothic";
+                ws.Cell(4, 1).Style.Font.Bold = true;
 
-                ws.Cell(4, 2).SetValue("");
+                ws.Cell(4, ColumnsCount - 12).SetValue(":");
+                ws.Cell(4, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                ws.Cell(4, ColumnsCount - 11).SetValue(cus);
+                ws.Cell(4, ColumnsCount - 11).Style.Font.FontSize = 9f;
+                ws.Cell(4, ColumnsCount - 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(4, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
+                ws.Cell(4, ColumnsCount - 11).Style.Font.Bold = true;
+                ws.Range(4, ColumnsCount - 11, 4, ColumnsCount - 9).Merge();
+                #endregion
+
+                #region --- REPORT DATE ---
+                ws.Cell(5, 1).SetValue("REPORT DATE");
+                ws.Cell(5, 1).Style.Font.FontSize = 9f;
+                ws.Cell(5, 1).Style.Font.FontName = "Century Gothic";
+                ws.Cell(5, 1).Style.Font.Bold = true;
+
+                ws.Cell(5, ColumnsCount - 12).SetValue(":");
+                ws.Cell(5, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                ws.Cell(5, ColumnsCount - 11).SetValue(DateTime.Now.ToString());
+                ws.Cell(5, ColumnsCount - 11).DataType = XLDataType.DateTime;
+                ws.Cell(5, ColumnsCount - 11).Style.DateFormat.Format = "dd-MM-yyyy hh:mm:ss AM/PM";
+                ws.Cell(5, ColumnsCount - 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(5, ColumnsCount - 11).Style.Font.FontSize = 9f;
+                ws.Cell(5, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
+                ws.Cell(5, ColumnsCount - 11).Style.Font.Bold = true;
+                ws.Range(5, ColumnsCount - 11, 5, ColumnsCount - 9).Merge();
+                #endregion
+
+                // add empty row
+                ws.Cell(6, 2).SetValue("");
 
                 //Set Header with DataTable dt Column Name
                 for (int i = 0; i < ColumnsCount; i++)
                 {
-                    var cell = ws.Cell(5, i + 1); //5 means start adding from row 5, +1 cuz it starts from column 1
+                    var cell = ws.Cell(7, i + 1); //7 means start adding from row 5, +1 cuz it starts from column 1
                     cell.Style.Font.FontName = "Century Gothic";
                     cell.Style.Font.FontSize = 8f;
                     cell.Value = dt.Columns[i].ColumnName;
@@ -430,15 +460,15 @@ namespace Testing.Forms
 
                     for (int c = 0; c < ColumnsCount; c++)
                     {
-                        ws.Cell(r + 6, c + 1).Style.Font.FontName = "Century Gothic";
-                        ws.Cell(r + 6, c + 1).Style.Font.FontSize = 8f;
+                        ws.Cell(r + 8, c + 1).Style.Font.FontName = "Century Gothic";
+                        ws.Cell(r + 8, c + 1).Style.Font.FontSize = 8f;
 
-                        ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString()); //+6 cuz it starts from sixth row after Summary Report text
+                        ws.Cell(r + 8, c + 1).SetValue(dr[c].ToString()); //+6 cuz it starts from sixth row after Summary Report text
 
                         if (isRatio)
-                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "0.0%";
+                            ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0.0%";
                         else
-                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0";
+                            ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "#,##0";
 
                         if (c > 1)
                         {
@@ -446,77 +476,81 @@ namespace Testing.Forms
                             bool isNumber = decimal.TryParse(dr[c].ToString(), out numericValue);
                             if (isNumber && numericValue > 0)
                             {
-                                ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
-                                ws.Cell(r + 6, c + 1).DataType = XLDataType.Number;
+                                ws.Cell(r + 8, c + 1).SetValue(dr[c].ToString());
+                                ws.Cell(r + 8, c + 1).DataType = XLDataType.Number;
                                 if (isRatio)
-                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "0.0%";
+                                    ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0.0%";
                                 else
-                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0";
+                                    ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "#,##0";
                             }
                             else
                             {
-                                if (isRatio)
-                                {
-                                    ws.Cell(r + 6, c + 1).SetValue(0.000);
-                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "0.0%";
-                                }
-                                else
-                                {
-                                    ws.Cell(r + 6, c + 1).SetValue(0);
-                                    ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "#,##0";
-                                }   
+                                ws.Cell(r + 8, c + 1).SetValue("-");
+
+                                #region --- ADD 0 and 0.00% format ---
+                                //if (isRatio)
+                                //{
+                                //    ws.Cell(r + 8, c + 1).SetValue(0.000);
+                                //    ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0.0%";
+                                //}
+                                //else
+                                //{
+                                //    ws.Cell(r + 8, c + 1).SetValue(0);
+                                //    ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "#,##0";
+                                //}  
+                                #endregion
                             }
                         }
                         if (c == 0)
-                            ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                            ws.Cell(r + 8, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                         else if (c == 1)
-                            ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                            ws.Cell(r + 8, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                         else
-                            ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            ws.Cell(r + 8, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
                         //(!isSet && formatRowCount == 0) => first row after row header, formatRowCount == 3 => add bg color to each 3 rows
                         if ((!isSet && formatRowCount == 0) || formatRowCount == 3)
                         {
-                            var colName = ws.Cell(r + 6, c + 1).CachedValue.ToString();
+                            var colName = ws.Cell(r + 8, c + 1).CachedValue.ToString();
 
                             if (colName.Equals("TOTAL"))
                             {
                                 for (int i = 0; i < ColumnsCount; i++)
                                 {
-                                    ws.Cell(r + 6, i + 1).Style.Font.FontName = "Century Gothic";
-                                    ws.Cell(r + 6, i + 1).Style.Font.FontSize = 8f;
+                                    ws.Cell(r + 8, i + 1).Style.Font.FontName = "Century Gothic";
+                                    ws.Cell(r + 8, i + 1).Style.Font.FontSize = 8f;
 
                                     decimal numericValue = 0;
                                     bool isNumber = decimal.TryParse(dr[i].ToString(), out numericValue);
                                     if (isNumber && numericValue > 0)
                                     {
-                                        ws.Cell(r + 6, i + 1).SetValue(dr[i].ToString());
-                                        ws.Cell(r + 6, i + 1).DataType = XLDataType.Number;
+                                        ws.Cell(r + 8, i + 1).SetValue(dr[i].ToString());
+                                        ws.Cell(r + 8, i + 1).DataType = XLDataType.Number;
                                         if (isRatio)
-                                            ws.Cell(r + 6, i + 1).Style.NumberFormat.Format = "0.0%";
+                                            ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "0.0%";
                                         else
-                                            ws.Cell(r + 6, i + 1).Style.NumberFormat.Format = "#,##0";
-                                        ws.Cell(r + 6, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                                            ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "#,##0";
+                                        ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                                     }
                                     else if (i == 0 || i == 1)
                                     {
-                                        ws.Cell(r + 6, i + 1).SetValue(i == 0 ? "TOTAL" : "PREMIUM");
+                                        ws.Cell(r + 8, i + 1).SetValue(i == 0 ? "TOTAL" : "PREMIUM");
                                         if (i == 1)
-                                            ws.Cell(r + 6, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+                                            ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                                     }
                                     else
                                     {
-                                        ws.Cell(r + 6, i + 1).SetValue(0);
-                                        ws.Cell(r + 6, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                                        ws.Cell(r + 8, i + 1).SetValue("-");
+                                        ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                                     }
 
-                                    ws.Cell(r + 6, i + 1).Style.Fill.SetBackgroundColor(XLColor.Yellow);
-                                    ws.Cell(r + 6, i + 1).Style.Font.Bold = true;
+                                    ws.Cell(r + 8, i + 1).Style.Fill.SetBackgroundColor(XLColor.Yellow);
+                                    ws.Cell(r + 8, i + 1).Style.Font.Bold = true;
                                 }
                                 break;
                             }
                             else
-                                ws.Cell(r + 6, c + 1).Style.Fill.SetBackgroundColor(XLColor.FromHtml("#fed8b1"));
+                                ws.Cell(r + 8, c + 1).Style.Fill.SetBackgroundColor(XLColor.FromHtml("#fed8b1"));
 
                             formatRowCount = 0;
                             isSet = false;
@@ -527,17 +561,17 @@ namespace Testing.Forms
                         // format Total CLaim Column
                         if (r == RowsCount - 1)
                         {
-                            ws.Cell(r + 6, c + 1).Style.Font.FontColor = XLColor.Blue;
-                            ws.Cell(r + 6, c + 1).Style.Font.Bold = true;
+                            ws.Cell(r + 8, c + 1).Style.Font.FontColor = XLColor.Blue;
+                            ws.Cell(r + 8, c + 1).Style.Font.Bold = true;
                         }
 
                         // format Total Ratio Column
                         if (r == RowsCount - 2)
-                            ws.Cell(r + 6, c + 1).Style.Font.Bold = true;
+                            ws.Cell(r + 8, c + 1).Style.Font.Bold = true;
 
                         // set bold to total column
                         if (c == totalCol)
-                            ws.Cell(r + 6, c + 1).Style.Font.Bold = true;
+                            ws.Cell(r + 8, c + 1).Style.Font.Bold = true;
                     }
                     formatRowCount++;
                 }
