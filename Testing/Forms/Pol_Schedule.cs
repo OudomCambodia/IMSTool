@@ -15,7 +15,7 @@ namespace Testing.Forms
         public string filename = "";
         public string Pro_code = "";
         public DataSet dataReport = new DataSet();
-        public Reports.CanCkoReport myDataReportCan = new Reports.CanCkoReport();
+        //public Reports.CanCkoReport myDataReportCan = new Reports.CanCkoReport();
         public Reports.Pol_Schedule myDataReportPol = new Reports.Pol_Schedule();
         public Pol_Schedule()
         {
@@ -111,18 +111,18 @@ namespace Testing.Forms
                         dtTempt = dtpayid.Copy();
                         dataReport.Tables.Add(dtTempt);
 
-                        if (dtcan.Rows.Count <= 1)
-                        {
-                            myDataReportCan.SetDataSource(dataReport);
-                            crystalReportViewer1.ReportSource = myDataReportCan;
-                            Cursor.Current = Cursors.AppStarting;
-                        }
-                        else
-                        {
-                            Msgbox.Show("it is invalid!!!");
-                            clear();
-                            return;
-                        }
+                        //if (dtcan.Rows.Count <= 1)
+                        //{
+                        //    myDataReportCan.SetDataSource(dataReport);
+                        //    crystalReportViewer1.ReportSource = myDataReportCan;
+                        //    Cursor.Current = Cursors.AppStarting;
+                        //}
+                        //else
+                        //{
+                        //    Msgbox.Show("it is invalid!!!");
+                        //    clear();
+                        //    return;
+                        //}
                         
 
                     }
@@ -152,7 +152,7 @@ namespace Testing.Forms
 
                 if (Pro_code == "CAN")
                 {
-                    myDataReportCan.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, @"\\fipnhdbs11\Infoins_IMS_Upload_doc$\Pipay File\" + filename + ".pdf");
+                    //myDataReportCan.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, @"\\fipnhdbs11\Infoins_IMS_Upload_doc$\Pipay File\" + filename + ".pdf");
                 }
                 else if (Pro_code == "PAC")
                 {

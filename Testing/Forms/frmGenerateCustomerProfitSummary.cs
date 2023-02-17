@@ -19,13 +19,17 @@ namespace Testing.Forms
         private DataTable finalDatatable = new DataTable();
         private DataTable finalColTotalPremium = new DataTable();
         private DataTable finalColTotalClaim = new DataTable();
+        private DataTable dtGrpCustomer = new DataTable();
+        private string producerCode = string.Empty;
         private string cusCode = string.Empty;
-        private string grpCode = string.Empty; 
+        private string grpCode = string.Empty;
+        private string grpCusCodeName = string.Empty;
 
         public frmGenerateCustomerProfitSummary()
         {
             InitializeComponent();
             txtCusCode.CharacterCasing = CharacterCasing.Upper;
+            txtSearch.CharacterCasing = CharacterCasing.Upper;
         }
 
         private void frmGenerateCustomerProfitSummary_Load(object sender, EventArgs e)
@@ -36,7 +40,7 @@ namespace Testing.Forms
         private void BindComboBox()
         {
             DataRow dr;
-            string SQLcombox = "select GRP_CODE,GRP_DESCRIPTION from uw_r_groups order by GRP_CODE,GRP_DESCRIPTION";
+            string SQLcombox = "select GRP_CODE,GRP_DESCRIPTION from uw_r_groups where grp_code <> 'AC' order by GRP_CODE,GRP_DESCRIPTION";
             DataTable dtCombox = new DataTable();
             dtCombox = crud.ExecQuery(SQLcombox);
             dr = dtCombox.NewRow();
@@ -49,7 +53,7 @@ namespace Testing.Forms
 
         private void txtCusCode_Leave(object sender, EventArgs e)
         {
-            cusCode = string.IsNullOrEmpty(txtCusCode.Text.Trim()) ? null : txtCusCode.Text.Trim();
+            cusCode = txtCusCode.Text.Trim();
             if (!string.IsNullOrEmpty(cusCode))
             {
                 var dtGrpCode = crud.ExecQuery("select cus_grp_code from uw_m_customers where cus_code = '" + cusCode + "'");
@@ -76,7 +80,90 @@ namespace Testing.Forms
 
         private void cboGroupCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
+
+            chkSelectAll.Checked = false;
+
             grpCode = cboGroupCustomer.SelectedValue.ToString() == "0" ? "N/A" : cboGroupCustomer.SelectedValue.ToString();
+
+
+            if (cboGroupCustomer.SelectedIndex != 0)
+            {
+                txtCusCode.Clear();
+                cusCode = string.Empty;
+            }
+            txtCusCode.Enabled = cboGroupCustomer.SelectedValue.ToString() == "0";
+
+            dtGrpCustomer = crud.ExecQuery("select cus_code, cus_corp_name from uw_m_customers where cus_grp_code = '" + grpCode + "'");
+
+            chkSelectAll.Enabled = dtGrpCustomer.Rows.Count > 0;
+
+            ((ListBox)chkLstGrpCustomer).DataSource = dtGrpCustomer;
+            ((ListBox)chkLstGrpCustomer).ValueMember = "CUS_CODE";
+            ((ListBox)chkLstGrpCustomer).DisplayMember = "CUS_CORP_NAME";
+
+            txtSearch.Enabled = chkLstGrpCustomer.Items.Count > 0;
+            if (chkLstGrpCustomer.Items.Count <= 0)
+                txtSearch.Clear();
+
+            Cursor = Cursors.Arrow;
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "--- SEARCH CUSTOMER CODE ---")
+                txtSearch.Clear();
+            txtSearch.ForeColor = Color.Black;
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                txtSearch.Text = "--- SEARCH CUSTOMER CODE ---";
+                txtSearch.ForeColor = Color.DarkGray;
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            var index = 0;
+
+            if (!string.IsNullOrEmpty(txtSearch.Text.Trim()))
+            {
+                string cusCorpName = crud.ExecQuery("select cus_corp_name from uw_m_customers where cus_code = '" + txtSearch.Text.Trim() + "'").Rows.Count > 0 ? 
+                    crud.ExecQuery("select cus_corp_name from uw_m_customers where cus_code = '" + txtSearch.Text.Trim() + "'").Rows[0][0].ToString() : string.Empty;
+
+                index = chkLstGrpCustomer.FindStringExact(cusCorpName);
+                chkLstGrpCustomer.SelectedIndex = index;
+
+                if (index != -1)
+                {
+                    if (chkLstGrpCustomer.GetItemCheckState(index) == CheckState.Checked)
+                    {
+                        chkLstGrpCustomer.SetItemChecked(index, false);
+                    }
+                    else
+                    {
+                        chkLstGrpCustomer.SetItemChecked(index, true);
+                    }
+                }
+            }
+            if (index == -1)
+            {
+                chkLstGrpCustomer.SelectedIndex = 0;
+            }
+        }
+
+        private void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < chkLstGrpCustomer.Items.Count; i++)
+            {
+                if (chkSelectAll.Checked)
+                    chkLstGrpCustomer.SetItemChecked(i, true);
+                else
+                    chkLstGrpCustomer.SetItemChecked(i, false);
+            }
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -85,8 +172,53 @@ namespace Testing.Forms
             {
                 Cursor = Cursors.WaitCursor;
 
+                #region --- GET LIST GROUP NAME/CODE ---
+                grpCusCodeName = string.Empty;
+                var grpCusCode = string.Empty;
+                foreach (var chkRow in chkLstGrpCustomer.CheckedItems)
+                {
+                    var drvChkRow = chkRow as DataRowView;
+                    grpCusCode = grpCusCode + drvChkRow.Row[0].ToString() + "|";
+                    grpCusCodeName = grpCusCodeName + "- " + drvChkRow.Row[1].ToString() + ", " + drvChkRow.Row[0].ToString() + Environment.NewLine;
+                }
+                if (!string.IsNullOrEmpty(grpCusCode))
+                {
+                    grpCusCode = grpCusCode.ToString().Remove(grpCusCode.ToString().Length - 1);
+                }
+                #endregion
+
+                #region --- GET PRODUCER CODE ---
+                var pBuilder = new StringBuilder();
+                pBuilder.Append("select nvl(sfc_first_name, sfc_surname) producer ")
+                    .Append("from sm_m_sales_force where sfc_code = ( ")
+                    .Append("select sfc_code from ( ")
+                    .Append("select cus_bparty_code sfc_code, count(cus_bparty_code) ct ")
+                    .Append("from uw_m_customers ");
+                if (!string.IsNullOrEmpty(cusCode))
+                {
+                    pBuilder.AppendFormat("where cus_code = '{0}' ", cusCode);
+                }
+                else
+                {
+                    pBuilder.AppendFormat("where regexp_like(nvl({0}, '*'), '*', 'i') ", "'" + grpCusCode + "'")
+                    .AppendFormat("and cus_grp_code = nvl({0}, cus_grp_code) ", "'" + grpCode + "'");
+                }
+                pBuilder.Append("group by cus_bparty_code ")
+                .Append("order by ct desc) ")
+                .Append("where rownum = 1)");
+
+                producerCode = crud.ExecQuery(pBuilder.ToString()).Rows.Count > 0 ? crud.ExecQuery(pBuilder.ToString()).Rows[0][0].ToString() : string.Empty;
+                #endregion
+
+                if (string.IsNullOrEmpty(grpCusCode) && cboGroupCustomer.SelectedIndex != 0)
+                {
+                    Msgbox.Show("Please check at least one customer");
+                    Cursor = Cursors.Arrow;
+                    return;
+                }
+
                 string[] Key = new string[] { "p_cus_code", "p_grp_code" };
-                string[] Values = new string[] { cusCode, grpCode }; //C000028640
+                string[] Values = new string[] { !string.IsNullOrEmpty(grpCusCode) ? grpCusCode : cusCode, grpCode }; //C000028640
 
                 var dtCustomerProfit = crud.ExecSP_OutPara("SP_CUSTOMER_PROFITABILITY", Key, Values);
 
@@ -150,7 +282,7 @@ namespace Testing.Forms
 
                                 if (claim > 0 && premium > 0)
                                 {
-                                    ratio = claim / premium;
+                                    ratio = Math.Round(claim / premium, 2, MidpointRounding.AwayFromZero);
                                 }
                                 else
                                 {
@@ -165,7 +297,7 @@ namespace Testing.Forms
 
                         // add totalRowPremium and totalRowClaim to column TOTAL in each row
                         dtEachProClass.Rows[0]["TOTAL"] = totalRowPremium.ToString("0.###");
-                        dtEachProClass.Rows[1]["TOTAL"] = totalRowClaim.ToString("0.###"); ;
+                        dtEachProClass.Rows[1]["TOTAL"] = totalRowClaim.ToString("0.###");
 
                         var sRatio = ratios.Split('*');
 
@@ -184,7 +316,7 @@ namespace Testing.Forms
 
                         // calculate totalRatio and add to dtEachProClass
                         if (totalRowClaim > 0 && totalRowPremium > 0)
-                            ratioRow["TOTAL"] = Convert.ToDecimal(totalRowClaim / totalRowPremium).ToString("0.###");
+                            ratioRow["TOTAL"] = Math.Round(Convert.ToDecimal(totalRowClaim / totalRowPremium), 2, MidpointRounding.AwayFromZero).ToString("0.###");
                         else
                             ratioRow["TOTAL"] = "0";
 
@@ -287,7 +419,7 @@ namespace Testing.Forms
 
                         if (claim > 0 && premium > 0)
                         {
-                            ratio = claim / premium;
+                            ratio = Math.Round(claim / premium, 2, MidpointRounding.AwayFromZero);
                         }
                         else
                         {
@@ -334,17 +466,23 @@ namespace Testing.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var cus = string.Empty;
+                #region --- GET CUS CODE AND CUS NAME ---
+                var cusCode = string.Empty;
+                var cusName = string.Empty;
 
                 if (!string.IsNullOrEmpty(txtCusCode.Text.Trim()))
                 {
-                    cus = crud.ExecQuery("select nvl(cus_indv_surname, cus_corp_name) CUSNAME from uw_m_customers where cus_code = '" + txtCusCode.Text.Trim().ToUpper() + "'").Rows[0][0].ToString();
+                    cusCode = txtCusCode.Text.Trim();
+                    cusName = crud.ExecQuery("select nvl(cus_indv_surname, cus_corp_name) from uw_m_customers where cus_code = '" + cusCode + "'").Rows.Count > 0 ?
+                        crud.ExecQuery("select nvl(cus_indv_surname, cus_corp_name) from uw_m_customers where cus_code = '" + cusCode + "'").Rows[0][0].ToString() : string.Empty;
                 }
-
-                if (string.IsNullOrEmpty(txtCusCode.Text.Trim()) && cboGroupCustomer.SelectedIndex != 0)
+                if (cboGroupCustomer.SelectedIndex != 0)
                 {
-                    cus = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '" + cboGroupCustomer.SelectedValue.ToString() + "'").Rows[0][0].ToString();
+                    cusCode = cboGroupCustomer.SelectedValue.ToString();
+                    cusName = crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '" + cusCode + "'").Rows.Count > 0 ?
+                        crud.ExecQuery("select grp_description from uw_r_groups where grp_code = '" + cusCode + "'").Rows[0][0].ToString() : string.Empty;
                 }
+                #endregion
 
                 IXLWorkbook wb = new XLWorkbook();
                 IXLWorksheet ws = wb.Worksheets.Add("Summary Report");
@@ -364,35 +502,77 @@ namespace Testing.Forms
                 ws.Cell(2, 1).SetValue("");
 
                 #region --- CUSTOMER CODE ---
-                //ws.Cell(3, 1).SetValue("CUSTOMER CODE");
-                //ws.Cell(3, 1).Style.Font.FontSize = 9f;
-                //ws.Cell(3, 1).Style.Font.FontName = "Century Gothic";
-                //ws.Cell(3, 1).Style.Font.Bold = true;
+                ws.Cell(3, 1).SetValue("CUSTOMER CODE");
+                ws.Cell(3, 1).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(3, 1).Style.Font.FontSize = 9f;
+                ws.Cell(3, 1).Style.Font.FontName = "Century Gothic";
+                ws.Cell(3, 1).Style.Font.Bold = true;
 
-                //ws.Cell(3, ColumnsCount - 12).SetValue(":");
-                //ws.Cell(3, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-                //ws.Cell(3, ColumnsCount - 11).SetValue(cus);
-                //ws.Cell(3, ColumnsCount - 11).Style.Font.FontSize = 9f;
-                //ws.Cell(3, ColumnsCount - 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
-                //ws.Cell(3, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
-                //ws.Cell(3, ColumnsCount - 11).Style.Font.Bold = true;
+                ws.Cell(3, ColumnsCount - 12).SetValue(":");
+                ws.Cell(3, ColumnsCount - 12).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(3, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+
+                ws.Cell(3, ColumnsCount - 11).SetValue(cusCode);
+                ws.Cell(3, ColumnsCount - 11).Style.Font.FontSize = 9f;
+                ws.Cell(3, ColumnsCount - 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(3, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
+                ws.Cell(3, ColumnsCount - 11).Style.Font.Bold = true;
+                ws.Column(ColumnsCount - 11).AdjustToContents();
                 //ws.Range(3, ColumnsCount - 11, 3, ColumnsCount - 9).Merge();
                 #endregion
 
-                #region --- CUSTOMER GROUP ---
-                ws.Cell(4, 1).SetValue("CUSTOMER GROUP");
+                #region --- PRODUCER CODE ---
+                ws.Cell(3, ColumnsCount - 7).SetValue("PRODUCER CODE");
+                ws.Cell(3, ColumnsCount - 7).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(3, ColumnsCount - 7).Style.Font.FontSize = 9f;
+                ws.Cell(3, ColumnsCount - 7).Style.Font.FontName = "Century Gothic";
+                ws.Cell(3, ColumnsCount - 7).Style.Font.Bold = true;
+
+                ws.Cell(3, ColumnsCount - 4).SetValue(":");
+                ws.Cell(3, ColumnsCount - 4).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(3, ColumnsCount - 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+
+                ws.Cell(3, ColumnsCount - 3).SetValue(producerCode);
+                ws.Cell(3, ColumnsCount - 3).Style.Font.FontSize = 9f;
+                ws.Cell(3, ColumnsCount - 3).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(3, ColumnsCount - 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(3, ColumnsCount - 3).Style.Font.FontName = "Century Gothic";
+                ws.Cell(3, ColumnsCount - 3).Style.Font.Bold = true;
+                ws.Range(3, ColumnsCount - 3, 3, ColumnsCount - 2).Merge();
+                #endregion
+
+                #region --- CUSTOMER NAME ---
+                ws.Cell(4, 1).SetValue("CUSTOMER NAME");
                 ws.Cell(4, 1).Style.Font.FontSize = 9f;
                 ws.Cell(4, 1).Style.Font.FontName = "Century Gothic";
                 ws.Cell(4, 1).Style.Font.Bold = true;
 
                 ws.Cell(4, ColumnsCount - 12).SetValue(":");
                 ws.Cell(4, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-                ws.Cell(4, ColumnsCount - 11).SetValue(cus);
+
+                ws.Cell(4, ColumnsCount - 11).SetValue(cusName);
                 ws.Cell(4, ColumnsCount - 11).Style.Font.FontSize = 9f;
                 ws.Cell(4, ColumnsCount - 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                 ws.Cell(4, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
                 ws.Cell(4, ColumnsCount - 11).Style.Font.Bold = true;
                 ws.Range(4, ColumnsCount - 11, 4, ColumnsCount - 9).Merge();
+                #endregion
+
+                #region --- GROUP CUSTOMER ---
+                ws.Cell(4, ColumnsCount - 7).SetValue("GROUP CUSTOMER");
+                ws.Cell(4, ColumnsCount - 7).Style.Font.FontSize = 9f;
+                ws.Cell(4, ColumnsCount - 7).Style.Font.FontName = "Century Gothic";
+                ws.Cell(4, ColumnsCount - 7).Style.Font.Bold = true;
+
+                ws.Cell(4, ColumnsCount - 4).SetValue(":");
+                ws.Cell(4, ColumnsCount - 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+
+                ws.Cell(4, ColumnsCount - 3).SetValue(cboGroupCustomer.SelectedIndex != 0 ? "YES" : "NO");
+                ws.Cell(4, ColumnsCount - 3).Style.Font.FontSize = 9f;
+                ws.Cell(4, ColumnsCount - 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(4, ColumnsCount - 3).Style.Font.FontName = "Century Gothic";
+                ws.Cell(4, ColumnsCount - 3).Style.Font.Bold = true;
+                //ws.Range(4, ColumnsCount - 3, 4, ColumnsCount - 1).Merge();
                 #endregion
 
                 #region --- REPORT DATE ---
@@ -403,6 +583,7 @@ namespace Testing.Forms
 
                 ws.Cell(5, ColumnsCount - 12).SetValue(":");
                 ws.Cell(5, ColumnsCount - 12).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+
                 ws.Cell(5, ColumnsCount - 11).SetValue(DateTime.Now.ToString());
                 ws.Cell(5, ColumnsCount - 11).DataType = XLDataType.DateTime;
                 ws.Cell(5, ColumnsCount - 11).Style.DateFormat.Format = "dd-MM-yyyy hh:mm:ss AM/PM";
@@ -411,6 +592,27 @@ namespace Testing.Forms
                 ws.Cell(5, ColumnsCount - 11).Style.Font.FontName = "Century Gothic";
                 ws.Cell(5, ColumnsCount - 11).Style.Font.Bold = true;
                 ws.Range(5, ColumnsCount - 11, 5, ColumnsCount - 9).Merge();
+                #endregion
+
+                #region --- LISTED GROUP NAME/CODE ---
+                ws.Cell(5, ColumnsCount - 7).SetValue("LISTED GROUP NAME/CODE");
+                ws.Cell(5, ColumnsCount - 7).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(5, ColumnsCount - 7).Style.Font.FontSize = 9f;
+                ws.Cell(5, ColumnsCount - 7).Style.Font.FontName = "Century Gothic";
+                ws.Cell(5, ColumnsCount - 7).Style.Font.Bold = true;
+
+                ws.Cell(5, ColumnsCount - 4).SetValue(":");
+                ws.Cell(5, ColumnsCount - 4).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(5, ColumnsCount - 4).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
+
+                ws.Cell(5, ColumnsCount - 3).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Cell(5, ColumnsCount - 3).SetValue(grpCusCodeName);
+                ws.Cell(5, ColumnsCount - 3).Style.Font.FontSize = 9f;
+                ws.Cell(5, ColumnsCount - 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                ws.Cell(5, ColumnsCount - 3).Style.Font.FontName = "Century Gothic";
+                ws.Cell(5, ColumnsCount - 3).Style.Font.Bold = true;
+                ws.Rows("5").AdjustToContents();
+                ws.Range(5, ColumnsCount - 3, 5, ColumnsCount + 3).Merge();
                 #endregion
 
                 // add empty row
@@ -423,6 +625,7 @@ namespace Testing.Forms
                     cell.Style.Font.FontName = "Century Gothic";
                     cell.Style.Font.FontSize = 8f;
                     cell.Value = dt.Columns[i].ColumnName;
+                    cell.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
 
                     //Style Format on Header
                     if (i == 0)
@@ -506,7 +709,7 @@ namespace Testing.Forms
                         else if (c == 1)
                             ws.Cell(r + 8, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                         else
-                            ws.Cell(r + 8, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            ws.Cell(r + 8, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
 
                         //(!isSet && formatRowCount == 0) => first row after row header, formatRowCount == 3 => add bg color to each 3 rows
                         if ((!isSet && formatRowCount == 0) || formatRowCount == 3)
@@ -530,7 +733,7 @@ namespace Testing.Forms
                                             ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "0.0%";
                                         else
                                             ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "#,##0";
-                                        ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                                        ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                                     }
                                     else if (i == 0 || i == 1)
                                     {
@@ -541,7 +744,7 @@ namespace Testing.Forms
                                     else
                                     {
                                         ws.Cell(r + 8, i + 1).SetValue("-");
-                                        ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                                        ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
                                     }
 
                                     ws.Cell(r + 8, i + 1).Style.Fill.SetBackgroundColor(XLColor.Yellow);
@@ -550,7 +753,10 @@ namespace Testing.Forms
                                 break;
                             }
                             else
+                            {
+                                ws.Cell(r + 8, 1).Style.Font.Bold = true;
                                 ws.Cell(r + 8, c + 1).Style.Fill.SetBackgroundColor(XLColor.FromHtml("#fed8b1"));
+                            }
 
                             formatRowCount = 0;
                             isSet = false;
