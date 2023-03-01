@@ -229,10 +229,14 @@ namespace Testing.Forms
                     
                 }
                 dt = crud.ExecQuery(sql);
+
                 if (dt.Rows.Count <= 0)
                     Msgbox.Show("This transaction appears to have no content - Special Endorsement");
                 else
                 {
+                    //var cusName = dt.Rows[0]["NAME"].ToString();
+                    //dt.Rows[0]["NAME"] = cusName + "⠀⠀";
+
                     dt.Columns.Add("EXCHANGE_RATE", typeof(System.String));
                     dt.Columns.Add("TOTAL_FUND_KH", typeof(System.String));
                     dt.Columns.Add("KH_NAME", typeof(System.String));
