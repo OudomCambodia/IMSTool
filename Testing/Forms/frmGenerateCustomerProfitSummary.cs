@@ -189,7 +189,7 @@ namespace Testing.Forms
 
                 #region --- GET PRODUCER CODE ---
                 var pBuilder = new StringBuilder();
-                pBuilder.Append("select nvl(sfc_first_name, sfc_surname) producer ")
+                pBuilder.Append("select sfc_code || ' - '  || sfc_surname producer ")
                     .Append("from sm_m_sales_force where sfc_code = ( ")
                     .Append("select sfc_code from ( ")
                     .Append("select cus_bparty_code sfc_code, count(cus_bparty_code) ct ")
