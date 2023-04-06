@@ -15,5 +15,5 @@ namespace Testing.DBS11DataSetTableAdapters {
     
     
     public partial class VIEW_DOC_DETAILTableAdapter {
-    }
 }
+    }

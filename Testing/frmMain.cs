@@ -829,6 +829,13 @@ namespace Testing
             }
         }
 
+        private void btnCoInvoice_Click(object sender, EventArgs e)
+        {
+            Forms.frmCoInvoice frmCo= new Forms.frmCoInvoice();
+            openForm(frmCo, (Button)sender);
+            
+        }
+
         //private List<string> EverythingBetween(string source, string start, string end)
         //{
         //    var results = new List<string>();
