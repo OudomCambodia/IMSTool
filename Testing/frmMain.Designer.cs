@@ -112,6 +112,8 @@
             this.pnCustomerProfit = new System.Windows.Forms.Panel();
             this.btnCustomerProfit = new System.Windows.Forms.Button();
             this.btnCustomerProfitSummary = new System.Windows.Forms.Button();
+            this.renewalListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pRRiskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -432,7 +434,7 @@
             this.monthlyReportToolStripMenuItem1.Enabled = false;
             this.monthlyReportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.monthlyReportToolStripMenuItem1.Name = "monthlyReportToolStripMenuItem1";
-            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
             this.monthlyReportToolStripMenuItem1.Text = "Monthly Report";
             this.monthlyReportToolStripMenuItem1.Click += new System.EventHandler(this.monthlyReportToolStripMenuItem1_Click);
             // 
@@ -442,7 +444,7 @@
             this.aCPREMIUMREPORTToolStripMenuItem.Enabled = false;
             this.aCPREMIUMREPORTToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aCPREMIUMREPORTToolStripMenuItem.Name = "aCPREMIUMREPORTToolStripMenuItem";
-            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.aCPREMIUMREPORTToolStripMenuItem.Text = "AC_PREMIUM REPORT";
             this.aCPREMIUMREPORTToolStripMenuItem.Click += new System.EventHandler(this.aCPREMIUMREPORTToolStripMenuItem_Click);
             // 
@@ -452,7 +454,7 @@
             this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
             this.toolStripMenuItem1.Text = "IEMA Report";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click_1);
             // 
@@ -465,7 +467,7 @@
             this.tsPremiumRegister.Enabled = false;
             this.tsPremiumRegister.ForeColor = System.Drawing.Color.White;
             this.tsPremiumRegister.Name = "tsPremiumRegister";
-            this.tsPremiumRegister.Size = new System.Drawing.Size(194, 22);
+            this.tsPremiumRegister.Size = new System.Drawing.Size(192, 22);
             this.tsPremiumRegister.Text = "Premium Register";
             // 
             // tsPMAllDept
@@ -494,7 +496,7 @@
             this.CusProfitV2.Enabled = false;
             this.CusProfitV2.ForeColor = System.Drawing.Color.White;
             this.CusProfitV2.Name = "CusProfitV2";
-            this.CusProfitV2.Size = new System.Drawing.Size(194, 22);
+            this.CusProfitV2.Size = new System.Drawing.Size(192, 22);
             this.CusProfitV2.Text = "Customer Profitability";
             // 
             // autoMonthlyReportToolStripMenuItem
@@ -517,12 +519,14 @@
             // 
             // renewalListToolStripMenuItem
             // 
+            this.renewalListToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renewalListToolStripMenuItem1,
+            this.pRRiskCountToolStripMenuItem});
             this.renewalListToolStripMenuItem.Enabled = false;
             this.renewalListToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.renewalListToolStripMenuItem.Name = "renewalListToolStripMenuItem";
             this.renewalListToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.renewalListToolStripMenuItem.Text = "Renewal List";
-            this.renewalListToolStripMenuItem.Click += new System.EventHandler(this.renewalListToolStripMenuItem_Click);
             // 
             // adminToolStripMenuItem
             // 
@@ -625,7 +629,7 @@
             // 
             this.CreateTicket.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.CreateTicket.Name = "CreateTicket";
-            this.CreateTicket.Size = new System.Drawing.Size(51, 20);
+            this.CreateTicket.Size = new System.Drawing.Size(50, 20);
             this.CreateTicket.Text = "Ticket";
             this.CreateTicket.Click += new System.EventHandler(this.CreateTicket_Click);
             // 
@@ -1223,6 +1227,25 @@
             this.btnCustomerProfitSummary.UseVisualStyleBackColor = false;
             this.btnCustomerProfitSummary.Click += new System.EventHandler(this.btnCustomerProfitSummary_Click);
             // 
+            // renewalListToolStripMenuItem1
+            // 
+            this.renewalListToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.renewalListToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.renewalListToolStripMenuItem1.Name = "renewalListToolStripMenuItem1";
+            this.renewalListToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.renewalListToolStripMenuItem1.Text = "Renewal List";
+            this.renewalListToolStripMenuItem1.Click += new System.EventHandler(this.renewalListToolStripMenuItem1_Click);
+            // 
+            // pRRiskCountToolStripMenuItem
+            // 
+            this.pRRiskCountToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.pRRiskCountToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.pRRiskCountToolStripMenuItem.Name = "pRRiskCountToolStripMenuItem";
+            this.pRRiskCountToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pRRiskCountToolStripMenuItem.Text = "PR Risk Count";
+            this.pRRiskCountToolStripMenuItem.Visible = false;
+            this.pRRiskCountToolStripMenuItem.Click += new System.EventHandler(this.pRRiskCountToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1354,5 +1377,7 @@
         public System.Windows.Forms.Button btnCustomerProfit;
         public System.Windows.Forms.Button btnCustomerProfitSummary;
         public System.Windows.Forms.Button btnCoInvoice;
+        private System.Windows.Forms.ToolStripMenuItem renewalListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pRRiskCountToolStripMenuItem;
     }
 }

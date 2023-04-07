@@ -582,8 +582,7 @@ namespace Testing
 
         private void renewalListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Forms.frmRenewalList frmRenewalList = new Forms.frmRenewalList();
-            frmRenewalList.Show();
+            
         }
 
         private void bnReports_Click(object sender, EventArgs e)
@@ -834,6 +833,18 @@ namespace Testing
             Forms.frmCoInvoice frmCo= new Forms.frmCoInvoice();
             openForm(frmCo, (Button)sender);
             
+        }
+
+        private void renewalListToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Forms.frmRenewalList frmRenewalList = new Forms.frmRenewalList();
+            frmRenewalList.Show();
+        }
+
+        private void pRRiskCountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmPRRiskCount frmPRRiskCount = new Forms.frmPRRiskCount();
+            frmPRRiskCount.ShowDialog();
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)
