@@ -103,6 +103,7 @@
             this.btnCustomizeSchedule = new System.Windows.Forms.Button();
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
             this.pnInvoice = new System.Windows.Forms.Panel();
+            this.btnCoInvoice = new System.Windows.Forms.Button();
             this.btnSubBreakdownInvoice = new System.Windows.Forms.Button();
             this.btnSubPrintInvoice = new System.Windows.Forms.Button();
             this.niIMSTool = new System.Windows.Forms.NotifyIcon(this.components);
@@ -431,7 +432,7 @@
             this.monthlyReportToolStripMenuItem1.Enabled = false;
             this.monthlyReportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.monthlyReportToolStripMenuItem1.Name = "monthlyReportToolStripMenuItem1";
-            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
+            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
             this.monthlyReportToolStripMenuItem1.Text = "Monthly Report";
             this.monthlyReportToolStripMenuItem1.Click += new System.EventHandler(this.monthlyReportToolStripMenuItem1_Click);
             // 
@@ -441,7 +442,7 @@
             this.aCPREMIUMREPORTToolStripMenuItem.Enabled = false;
             this.aCPREMIUMREPORTToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aCPREMIUMREPORTToolStripMenuItem.Name = "aCPREMIUMREPORTToolStripMenuItem";
-            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.aCPREMIUMREPORTToolStripMenuItem.Text = "AC_PREMIUM REPORT";
             this.aCPREMIUMREPORTToolStripMenuItem.Click += new System.EventHandler(this.aCPREMIUMREPORTToolStripMenuItem_Click);
             // 
@@ -451,7 +452,7 @@
             this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
             this.toolStripMenuItem1.Text = "IEMA Report";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click_1);
             // 
@@ -464,7 +465,7 @@
             this.tsPremiumRegister.Enabled = false;
             this.tsPremiumRegister.ForeColor = System.Drawing.Color.White;
             this.tsPremiumRegister.Name = "tsPremiumRegister";
-            this.tsPremiumRegister.Size = new System.Drawing.Size(192, 22);
+            this.tsPremiumRegister.Size = new System.Drawing.Size(194, 22);
             this.tsPremiumRegister.Text = "Premium Register";
             // 
             // tsPMAllDept
@@ -493,7 +494,7 @@
             this.CusProfitV2.Enabled = false;
             this.CusProfitV2.ForeColor = System.Drawing.Color.White;
             this.CusProfitV2.Name = "CusProfitV2";
-            this.CusProfitV2.Size = new System.Drawing.Size(192, 22);
+            this.CusProfitV2.Size = new System.Drawing.Size(194, 22);
             this.CusProfitV2.Text = "Customer Profitability";
             // 
             // autoMonthlyReportToolStripMenuItem
@@ -624,7 +625,7 @@
             // 
             this.CreateTicket.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.CreateTicket.Name = "CreateTicket";
-            this.CreateTicket.Size = new System.Drawing.Size(50, 20);
+            this.CreateTicket.Size = new System.Drawing.Size(51, 20);
             this.CreateTicket.Text = "Ticket";
             this.CreateTicket.Click += new System.EventHandler(this.CreateTicket_Click);
             // 
@@ -1098,13 +1099,31 @@
             // pnInvoice
             // 
             this.pnInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnInvoice.Controls.Add(this.btnCoInvoice);
             this.pnInvoice.Controls.Add(this.btnSubBreakdownInvoice);
             this.pnInvoice.Controls.Add(this.btnSubPrintInvoice);
-            this.pnInvoice.Location = new System.Drawing.Point(190, 223);
+            this.pnInvoice.Location = new System.Drawing.Point(189, 182);
             this.pnInvoice.Name = "pnInvoice";
-            this.pnInvoice.Size = new System.Drawing.Size(180, 81);
+            this.pnInvoice.Size = new System.Drawing.Size(180, 123);
             this.pnInvoice.TabIndex = 14;
             this.pnInvoice.Visible = false;
+            // 
+            // btnCoInvoice
+            // 
+            this.btnCoInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnCoInvoice.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCoInvoice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCoInvoice.Enabled = false;
+            this.btnCoInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCoInvoice.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCoInvoice.ForeColor = System.Drawing.Color.White;
+            this.btnCoInvoice.Location = new System.Drawing.Point(0, 81);
+            this.btnCoInvoice.Name = "btnCoInvoice";
+            this.btnCoInvoice.Size = new System.Drawing.Size(180, 41);
+            this.btnCoInvoice.TabIndex = 8;
+            this.btnCoInvoice.Text = "Co-Insurance Filing";
+            this.btnCoInvoice.UseVisualStyleBackColor = false;
+            this.btnCoInvoice.Click += new System.EventHandler(this.btnCoInvoice_Click);
             // 
             // btnSubBreakdownInvoice
             // 
@@ -1334,5 +1353,6 @@
         private System.Windows.Forms.Panel pnCustomerProfit;
         public System.Windows.Forms.Button btnCustomerProfit;
         public System.Windows.Forms.Button btnCustomerProfitSummary;
+        public System.Windows.Forms.Button btnCoInvoice;
     }
 }
