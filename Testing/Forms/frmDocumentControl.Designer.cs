@@ -44,6 +44,8 @@
             this.pPending = new System.Windows.Forms.Panel();
             this.pReject = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.btnSentOut = new System.Windows.Forms.Button();
+            this.btnReceived = new System.Windows.Forms.Button();
             this.lblNotiCount = new System.Windows.Forms.Label();
             this.btnNotification = new System.Windows.Forms.PictureBox();
             this.btnPendingAtDP = new System.Windows.Forms.Button();
@@ -297,6 +299,8 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.btnSentOut);
+            this.panel8.Controls.Add(this.btnReceived);
             this.panel8.Controls.Add(this.lblNotiCount);
             this.panel8.Controls.Add(this.btnNotification);
             this.panel8.Controls.Add(this.btnPendingAtDP);
@@ -315,6 +319,32 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1087, 42);
             this.panel8.TabIndex = 45;
+            // 
+            // btnSentOut
+            // 
+            this.btnSentOut.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnSentOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSentOut.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnSentOut.Location = new System.Drawing.Point(625, 6);
+            this.btnSentOut.Name = "btnSentOut";
+            this.btnSentOut.Size = new System.Drawing.Size(68, 36);
+            this.btnSentOut.TabIndex = 15;
+            this.btnSentOut.Text = "Sent Out";
+            this.btnSentOut.UseVisualStyleBackColor = false;
+            this.btnSentOut.Click += new System.EventHandler(this.btnSentOut_Click);
+            // 
+            // btnReceived
+            // 
+            this.btnReceived.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnReceived.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReceived.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnReceived.Location = new System.Drawing.Point(557, 6);
+            this.btnReceived.Name = "btnReceived";
+            this.btnReceived.Size = new System.Drawing.Size(68, 36);
+            this.btnReceived.TabIndex = 14;
+            this.btnReceived.Text = "Received";
+            this.btnReceived.UseVisualStyleBackColor = false;
+            this.btnReceived.Click += new System.EventHandler(this.btnReceived_Click);
             // 
             // lblNotiCount
             // 
@@ -350,7 +380,7 @@
             this.btnPendingAtDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPendingAtDP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPendingAtDP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.btnPendingAtDP.Location = new System.Drawing.Point(693, 6);
+            this.btnPendingAtDP.Location = new System.Drawing.Point(829, 6);
             this.btnPendingAtDP.Name = "btnPendingAtDP";
             this.btnPendingAtDP.Size = new System.Drawing.Size(88, 36);
             this.btnPendingAtDP.TabIndex = 11;
@@ -363,7 +393,7 @@
             this.btnAll.BackColor = System.Drawing.Color.Gainsboro;
             this.btnAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.btnAll.Location = new System.Drawing.Point(625, 6);
+            this.btnAll.Location = new System.Drawing.Point(761, 6);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(68, 36);
             this.btnAll.TabIndex = 1;
@@ -376,7 +406,7 @@
             this.btnCancel.BackColor = System.Drawing.Color.Gainsboro;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.btnCancel.Location = new System.Drawing.Point(557, 6);
+            this.btnCancel.Location = new System.Drawing.Point(693, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(68, 36);
             this.btnCancel.TabIndex = 2;
@@ -1037,6 +1067,8 @@
         private System.Windows.Forms.Panel pReverse;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.DataGridView dgvNoti;
+        private System.Windows.Forms.Button btnSentOut;
+        private System.Windows.Forms.Button btnReceived;
 
     }
 }

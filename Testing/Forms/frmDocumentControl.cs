@@ -61,6 +61,7 @@ namespace Testing.Forms
 
         public static string SelectionColor;
 
+        private bool isClickRefresh;
         private bool isClickReject;
         private bool isClickPending;
         private bool isClickReverse;
@@ -111,9 +112,9 @@ namespace Testing.Forms
                 //Set role,fullname
                 DataTable dtTemp = sqlcrud.LoadData("SELECT ROLE,FULL_NAME,USER_CODE,TEAM FROM dbo.tbDOC_USER WHERE USER_NAME = '" + UserName + "'").Tables[0];
                 Role = dtTemp.Rows[0][0].ToString().Split(',');
-                FullName = dtTemp.Rows[0][1].ToString(); 
+                FullName = dtTemp.Rows[0][1].ToString();
                 UserID = dtTemp.Rows[0][2].ToString();
-                Team = dtTemp.Rows[0][3].ToString(); 
+                Team = dtTemp.Rows[0][3].ToString();
                 //
 
                 pNotification.Visible = false;
@@ -138,11 +139,11 @@ namespace Testing.Forms
                     else
                         btnNotification.Image = Resources.notification_unscreen;
                 }
-                
+
                 NotiSentDuration();
 
                 dgvNoti.DataSource = _dtNoti;
-                 
+
                 //set Status
                 string tmpstatus = "";
                 foreach (string s in Role)
@@ -163,7 +164,7 @@ namespace Testing.Forms
 
                 //requeryDGV();
 
-                if (!Role.Contains("PRODUCER") && !Role.Contains("PCD")) 
+                if (!Role.Contains("PRODUCER") && !Role.Contains("PCD"))
                     disabledButt(btnAddDoc);
                 else
                     enabledButt(btnAddDoc);
@@ -208,7 +209,7 @@ namespace Testing.Forms
                 //rbCustomer.Checked = true;
                 rbRefID.Checked = true;
 
-                gbAllRecordOption.Visible = false;
+                //gbAllRecordOption.Visible = false;
 
 
                 //
@@ -242,13 +243,13 @@ namespace Testing.Forms
             SubFrmChange = true;
             frm.FormClosed += new FormClosedEventHandler(frmClose);
             frm.Show();
-            
+
         }
 
         void frmClose(object sender, FormClosedEventArgs e)
         {
             rbRefID.Checked = true;
-            if(SubFrmChange) requeryDGV();
+            if (SubFrmChange) requeryDGV();
         }
 
         //void frmCloseforDPProcess(object sender, FormClosedEventArgs e)
@@ -292,103 +293,124 @@ namespace Testing.Forms
                 //    (Role.Contains("DP") && UserID == "D01" && status != "4" && status != "5" && status != "6" && status != "7") ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'" :
                 //    (Role.Contains("FILLING")) ? dgvOpensqlstring + " AND PRODUCT_TYPE NOT IN ('EMC','STN','MED','Chinese PA') " : dgvOpensqlstring;
 
-
                 string dgvOpensqlstring = "select * from dbo.VIEW_DOC WHERE " + ((status == "8") ? "(DOC_CUR_STATUS IN (8,9)) "
                     : (status == "99") ? "DOC_CUR_STATUS like '%%'" : (status == "13") ? "DOC_CUR_STATUS IN (13,14,15,16) " : "DOC_CUR_STATUS = " + status);
-                //update check on regional team can see each other doc - 23-08-2022 - request Oum Thavrak - Theane
-                DataTable dtRegional = sqlcrud.LoadData("select * from tbRegional where username like '%" + frmLogIn.Usert.ToUpper() + "%'").Tables[0];
-                if (dtRegional.Rows.Count != 0)
+
+                var isBrokerLeader = false;
+                var dtBrokerTeams = sqlcrud.LoadData("select [GROUP], ALLOW_BROKER_PRINT from [DocumentControlDB].[dbo].tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+
+                if (dtBrokerTeams.Rows.Count > 0)
                 {
-
-                    dgvOpensqlstring += " and CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where USER_NAME in (" + dtRegional.Rows[0][2].ToString().ToUpper() + ")) ";
-                    //dtDoc = sqlcrud.LoadData(dgvOpensqlstring).Tables[0];
-
-                }
-                else { 
-                //Role[0] is primary role
-                #region --- OLD CODING ---
-                //dgvOpensqlstring = (UserID == "S01")
-                //    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
-                //    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
-                //    ? dgvOpensqlstring
-                //    : (Role[0] == "PRODUCER")
-                //        ? (UserID == "P09" || UserID == "P10")
-                //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
-                //        : (UserID == "P70" || UserID == "D44")
-                //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
-                //        : (UserID == "P42")
-                //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
-                //        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
-                //    : (Role[0] == "DP")
-                //        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
-                //        : dgvOpensqlstring;
-                #endregion
-
-                #region --- NEW CODING ---
-                var dsSpecialCode = sqlcrud.LoadData("select * from tbDOC_SPECIAL_CODE where USER_ID = '" + UserID + "'").Tables[0];
-                var specialCode = string.Empty;
-                if (dsSpecialCode.Rows.Count > 0)
-                    specialCode = dsSpecialCode.Rows[0]["SPECIAL_CODE"].ToString().Trim();
-
-                dgvOpensqlstring = (specialCode.Equals(HEAD_FILING))
-                    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
-                    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
-                    ? dgvOpensqlstring
-                    : (Role[0] == "PRODUCER")
-                        ? (specialCode.Equals(ALL_REGIONALS))
-                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
-                        : (specialCode.Equals(ALL_BANKS))
-                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
-                        : (specialCode.Equals(ALL_BROKERS))
-                        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
-                        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
-                    : (Role[0] == "DP")
-                        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
-                        : dgvOpensqlstring;
-                #endregion
-                }
-                if (Role[0] == "FILLING")
-                {
-                    if (Team != "A&H")// Filling For A&H
-                        dgvOpensqlstring += " AND PRODUCT_TYPE NOT IN ('EMC','STN','MED','Chinese PA') ";
-                    //else
-                    //    dgvOpensqlstring += " AND PRODUCT_TYPE IN ('EMC','STN','MED','Chinese PA') ";
+                    isBrokerLeader = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM") && dtBrokerTeams.Rows[0]["ALLOW_BROKER_PRINT"].ToString().Equals("1");
                 }
 
-                string[] TeamSplit = Team.Split(',');
-                if (!String.IsNullOrEmpty(Team) && frmAddDocument1.product.ContainsValue(TeamSplit[0]))
+                if (isBrokerLeader)
                 {
-                    string ProType = "";
-                    bool check = false;
-                    foreach (string t in TeamSplit)
+                    dgvOpensqlstring += "and [USER_NAME] IN (select [USER_NAME] from tbDOC_USER where USER_CODE in (select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "' ";
+                    dgvOpensqlstring += "union all SELECT [USER_CODE] FROM [DocumentControlDB].[dbo].[tbDOC_USER] ";
+                    dgvOpensqlstring += "where [GROUP] = 'BROKERTEAM' and Parent like (select PARENT + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '"+ frmLogIn.Usert.ToUpper() +"') + '%')) ";
+                }
+                else
+                {
+                    if (status == "18" || status == "19")
                     {
-                        foreach (KeyValuePair<string, string> entry in frmAddDocument1.product)
+                        dgvOpensqlstring += " and CREATE_BY = '" + FullName + "' ";
+                    }
+
+                    //update check on regional team can see each other doc - 23-08-2022 - request Oum Thavrak - Theane
+                    DataTable dtRegional = sqlcrud.LoadData("select * from tbRegional where username like '%" + frmLogIn.Usert.ToUpper() + "%'").Tables[0];
+                    if (dtRegional.Rows.Count != 0)
+                    {
+
+                        dgvOpensqlstring += " and CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where USER_NAME in (" + dtRegional.Rows[0][2].ToString().ToUpper() + ")) ";
+                        //dtDoc = sqlcrud.LoadData(dgvOpensqlstring).Tables[0];
+
+                    }
+                    else
+                    {
+                        //Role[0] is primary role
+                        #region --- OLD CODING ---
+                        //dgvOpensqlstring = (UserID == "S01")
+                        //    ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
+                        //    : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
+                        //    ? dgvOpensqlstring
+                        //    : (Role[0] == "PRODUCER")
+                        //        ? (UserID == "P09" || UserID == "P10")
+                        //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%'))"
+                        //        : (UserID == "P70" || UserID == "D44")
+                        //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
+                        //        : (UserID == "P42")
+                        //        ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
+                        //        : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
+                        //    : (Role[0] == "DP")
+                        //        ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
+                        //        : dgvOpensqlstring;
+                        #endregion
+
+                        #region --- NEW CODING ---
+                        var dsSpecialCode = sqlcrud.LoadData("select * from tbDOC_SPECIAL_CODE where USER_ID = '" + UserID + "'").Tables[0];
+                        var specialCode = string.Empty;
+                        if (dsSpecialCode.Rows.Count > 0)
+                            specialCode = dsSpecialCode.Rows[0]["SPECIAL_CODE"].ToString().Trim();
+
+                        dgvOpensqlstring = (specialCode.Equals(HEAD_FILING))
+                            ? dgvOpensqlstring + " AND PRODUCT_LINE IN ('A&H','FL') "
+                            : (Role[0] == "UWHEAD" || Role[0] == "CONTORLLER" || Role[0] == "FILLING" || Role[0] == "UNW")
+                            ? dgvOpensqlstring
+                            : (Role[0] == "PRODUCER")
+                                ? (specialCode.Equals(ALL_REGIONALS))
+                                ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%')  OR CREATE_BY = 'U-BVC')"
+                                : (specialCode.Equals(ALL_BANKS))
+                                ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
+                                : (specialCode.Equals(ALL_BROKERS))
+                                ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'BROKERTEAM'))"
+                                : dgvOpensqlstring + " AND CREATE_BY like '%" + FullName + "%'"
+                            : (Role[0] == "DP")
+                                ? dgvOpensqlstring + " AND DP_NAME = '" + FullName + "'"
+                                : dgvOpensqlstring;
+                        #endregion
+                    }
+                    if (Role[0] == "FILLING")
+                    {
+                        if (Team != "A&H")// Filling For A&H
+                            dgvOpensqlstring += " AND PRODUCT_TYPE NOT IN ('EMC','STN','MED','Chinese PA') ";
+                        //else
+                        //    dgvOpensqlstring += " AND PRODUCT_TYPE IN ('EMC','STN','MED','Chinese PA') ";
+                    }
+
+                    string[] TeamSplit = Team.Split(',');
+                    if (!String.IsNullOrEmpty(Team) && frmAddDocument1.product.ContainsValue(TeamSplit[0]))
+                    {
+                        string ProType = "";
+                        bool check = false;
+                        foreach (string t in TeamSplit)
                         {
-                            if (entry.Value == t)
+                            foreach (KeyValuePair<string, string> entry in frmAddDocument1.product)
                             {
-                                check = true;
-                                ProType += "'" + entry.Key + "',";
+                                if (entry.Value == t)
+                                {
+                                    check = true;
+                                    ProType += "'" + entry.Key + "',";
+                                }
                             }
                         }
-                    }
-                    if (check)
-                    {
-                        ProType = ProType.Remove(ProType.Length - 1);
-                        dgvOpensqlstring += " AND PRODUCT_TYPE IN (" + ProType + ")";
+                        if (check)
+                        {
+                            ProType = ProType.Remove(ProType.Length - 1);
+                            dgvOpensqlstring += " AND PRODUCT_TYPE IN (" + ProType + ")";
+                        }
                     }
                 }
 
                 //All records option
-                if ((status == "99" || status == "7") && rbSpecificDate.Checked)
+                if ((status == "99" || status == "7" || (status == "0" && isClickRefresh) || (status == "18" && isClickRefresh) || (status == "19" && isClickRefresh)) && rbSpecificDate.Checked)
                 {
+                    isClickRefresh = false;
                     dgvOpensqlstring += " AND convert(datetime,CREATE_DATE,103) >= '" + dtpSpecificDateFr.Text + " 00:00:00' AND convert(datetime,CREATE_DATE,103) <= '" + dtpSpecificDateTo.Text + " 23:59:59'";
                 }
-                //
-                
-               
-                
-                dtDoc = sqlcrud.LoadData(dgvOpensqlstring + " order by REF_ID asc, CREATE_DATE asc").Tables[0];
 
+                dtDoc = sqlcrud.LoadData(dgvOpensqlstring + " order by REF_ID asc, CREATE_DATE asc").Tables[0];
+                dtDoc.Columns.Remove("USER_NAME");
 
                 DataColumn dcRowString = dtDoc.Columns.Add("_RowString", typeof(string));
                 DataColumn WorkHrs = dtDoc.Columns.Add("WorkHrs", typeof(string));
@@ -453,7 +475,7 @@ namespace Testing.Forms
                     dgvDoc.Columns["CREATE_DATE"].ValueType = typeof(DateTime);
                     dgvDoc.Columns["LATEST_UPDATE_AT"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
                     dgvDoc.Columns["CREATE_DATE"].DefaultCellStyle.Format = "dd'/'MM'/'yyyy HH:mm:ss";
-                    
+
 
                     for (int i = 1; i < dgvDoc.Columns.Count; i++)
                     {
@@ -561,6 +583,7 @@ namespace Testing.Forms
 
         private void btnRefreshOpendgv_Click(object sender, EventArgs e)
         {
+            isClickRefresh = true;
             requeryDGV();
         }
 
@@ -717,7 +740,7 @@ namespace Testing.Forms
                     Msgbox.Show("You can't change the status of selected document(s).");
                     return;
                 }
-                
+
                 DataTable selectedDoc = GetDataTableFromDGV(dgvDoc);
 
                 if (selectedDoc.Rows.Count <= 0)
@@ -811,12 +834,62 @@ namespace Testing.Forms
                 }
                 else if (status == "6") //Packaged
                 {
-                    DialogResult dr = Msgbox.Show("Is/Are " + selectedDoc.Rows.Count + " selected document(s) now completed all processes?", "Confirmation", "Yes", "No");
+                    // Concat multiple rows to one row
+                    //var dtBrokerTeams = sqlcrud.LoadData("DECLARE @USER_NAME NVARCHAR(MAX) SELECT @USER_NAME = COALESCE(@USER_NAME + ',' + USER_NAME, USER_NAME) FROM tbDOC_USER WHERE [GROUP] = 'BROKERTEAM' SELECT @USER_NAME as USER_NAME").Tables[0];
+
+                    var isBrokerTeam = false;
+                    var dtBrokerTeams = sqlcrud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+                    var dtReceivedUser = sqlcrud.LoadData("SELECT USER_NAME FROM tbRECEIVED_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+
+                    if (dtBrokerTeams.Rows.Count > 0)
+                    {
+                        isBrokerTeam = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM");
+                    }
+
+                    if (isBrokerTeam)
+                    {
+                        var receivedUser = string.Empty;
+                        if (dtReceivedUser.Rows.Count > 0)
+                        {
+                            receivedUser = dtReceivedUser.Rows[0]["USER_NAME"].ToString();
+                        }
+
+                        if (!string.IsNullOrEmpty(receivedUser)) // user who has permisson to change status to Received
+                        {
+                            DialogResult dr = Msgbox.Show("Do you want to change " + selectedDoc.Rows.Count + " selected document(s) status to RECEIVED?", "Confirmation", "Yes", "No");
+                            if (dr == System.Windows.Forms.DialogResult.Yes)
+                            {
+                                addToHist(selectedDocCode);
+                                sqlcrud.Executing("UPDATE dbo.tbDOC SET STATUS = 'O', DOC_CUR_STATUS = 18, DOC_CUR_STATUS_SET_BY = '" + UserID + "', DOC_CUR_STATUS_SET_ON = '" + DateTime.Now + "' WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + selectedDocCode + "',','))");
+                                Msgbox.Show(selectedDoc.Rows.Count + " selected document(s)' status changed to RECEIVED!");
+                                requeryDGV();
+                            }
+                        }
+                        else
+                        {
+                            Msgbox.Show("You don't have permission to change status from PACKAGED to RECEIVED");
+                        }
+                    }
+                    else
+                    {
+                        DialogResult dr = Msgbox.Show("Is/Are " + selectedDoc.Rows.Count + " selected document(s) now completed all processes?", "Confirmation", "Yes", "No");
+                        if (dr == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            addToHist(selectedDocCode);
+                            sqlcrud.Executing("UPDATE dbo.tbDOC SET STATUS = 'C', STATUS_REMARK = 'DONE', DOC_CUR_STATUS = 7, DOC_CUR_STATUS_SET_BY = '" + UserID + "', DOC_CUR_STATUS_SET_ON = '" + DateTime.Now + "' WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + selectedDocCode + "',','))");
+                            Msgbox.Show(selectedDoc.Rows.Count + " selected document(s)' status changed to DONE!");
+                            requeryDGV();
+                        }
+                    }
+                }
+                else if (status == "18")
+                {
+                    DialogResult dr = Msgbox.Show("Is/Are " + selectedDoc.Rows.Count + " selected document(s) SENT OUT?", "Confirmation", "Yes", "No");
                     if (dr == System.Windows.Forms.DialogResult.Yes)
                     {
                         addToHist(selectedDocCode);
-                        sqlcrud.Executing("UPDATE dbo.tbDOC SET STATUS = 'C', STATUS_REMARK = 'DONE', DOC_CUR_STATUS = 7, DOC_CUR_STATUS_SET_BY = '" + UserID + "', DOC_CUR_STATUS_SET_ON = '" + DateTime.Now + "' WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + selectedDocCode + "',','))");
-                        Msgbox.Show(selectedDoc.Rows.Count + " selected document(s)' status changed to DONE!");
+                        sqlcrud.Executing("UPDATE dbo.tbDOC SET STATUS = 'C', STATUS_REMARK = 'SENT OUT', DOC_CUR_STATUS = 19, DOC_CUR_STATUS_SET_BY = '" + UserID + "', DOC_CUR_STATUS_SET_ON = '" + DateTime.Now + "' WHERE DOC_CODE in (SELECT * FROM FNC_SPLIT('" + selectedDocCode + "',','))");
+                        Msgbox.Show(selectedDoc.Rows.Count + " selected document(s)' status changed to SENT OUT!");
                         requeryDGV();
                     }
                 }
@@ -1036,14 +1109,14 @@ namespace Testing.Forms
                     //e.CellStyle.SelectionForeColor = Color.Black;
                     return;
                 }
-                    
+
                 double statusTimeline = getStatusTimeline(docStatus.FirstOrDefault(x => x.Value == dgvDoc.Rows[e.RowIndex].Cells["STATUS"].Value.ToString()).Key);// get Key with Value
 
                 if (statusTimeline > 0) //if = 0 means status with no timeline <=> status 0->6
                 {
                     string ReturnReason = dgvDoc.Rows[e.RowIndex].Cells["RETURN_REASON"].Value.ToString().Trim();
 
-                    if (Convert.ToDouble(dgvDoc.Rows[e.RowIndex].Cells["WorkHrs"].Value) > statusTimeline)  
+                    if (Convert.ToDouble(dgvDoc.Rows[e.RowIndex].Cells["WorkHrs"].Value) > statusTimeline)
                     {
                         //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
                         //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.White;
@@ -1069,50 +1142,55 @@ namespace Testing.Forms
                     }
 
                     //Check Return Doc Over Timeline
-                    
+
                     if (ReturnReason == "DP")
                     {
-                        DateTime ReturnDate = Convert.ToDateTime(dgvDoc.Rows[e.RowIndex].Cells["RETURN_DATE"].Value);
-                        if (ReturnDate.Hour >= 0 && ReturnDate.Hour <= 11) //AM
-                        {
-                            DateTime ReturnDateOn23 = new DateTime(ReturnDate.Year, ReturnDate.Month, ReturnDate.Day, 23, 59, 59);
-                            if (!(DateTime.Compare(DateTime.Now, ReturnDate) >= 0 && DateTime.Compare(DateTime.Now, ReturnDateOn23) <= 0))
-                            {
-                                e.CellStyle.BackColor = Color.Khaki;
-                                e.CellStyle.ForeColor = Color.Black;
-                                //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
-                                //e.CellStyle.SelectionForeColor = Color.White;
-                            }
-                        }
-                        else if (ReturnDate.Hour >= 12 && ReturnDate.Hour <= 23)
-                        {
-                            DateTime ReturnDateisNextDayOn11 = ReturnDate.AddDays(1);
-                            while (true)
-                            {
-                                if ((ReturnDateisNextDayOn11.DayOfWeek != DayOfWeek.Saturday && ReturnDateisNextDayOn11.DayOfWeek != DayOfWeek.Sunday) && (!isHoliday(ReturnDateisNextDayOn11)))
-                                {
-                                    break;
-                                }
-                                else ReturnDateisNextDayOn11 = ReturnDateisNextDayOn11.AddDays(1);
-                            }
 
-                            ReturnDateisNextDayOn11 = new DateTime(ReturnDateisNextDayOn11.Year, ReturnDateisNextDayOn11.Month, ReturnDateisNextDayOn11.Day, 11, 59, 59);
+                        e.CellStyle.BackColor = Color.Khaki;
+                        e.CellStyle.ForeColor = Color.Black;
 
-                            if (!(DateTime.Compare(DateTime.Now, ReturnDate) >= 0 && DateTime.Compare(DateTime.Now, ReturnDateisNextDayOn11) <= 0))
-                            {
-                                //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
-                                //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
-                                e.CellStyle.BackColor = Color.Khaki;
-                                e.CellStyle.ForeColor = Color.Black;
-                                //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
-                                //e.CellStyle.SelectionForeColor = Color.White;
-                            }
-                        }
-                        else
-                        {
-                            //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // White
-                            //e.CellStyle.SelectionForeColor = Color.White; // White
-                        }
+
+                        //DateTime ReturnDate = Convert.ToDateTime(dgvDoc.Rows[e.RowIndex].Cells["RETURN_DATE"].Value);
+                        //if (ReturnDate.Hour >= 0 && ReturnDate.Hour <= 11) //AM
+                        //{
+                        //    DateTime ReturnDateOn23 = new DateTime(ReturnDate.Year, ReturnDate.Month, ReturnDate.Day, 23, 59, 59);
+                        //    if (!(DateTime.Compare(DateTime.Now, ReturnDate) >= 0 && DateTime.Compare(DateTime.Now, ReturnDateOn23) <= 0))
+                        //    {
+                        //        e.CellStyle.BackColor = Color.Khaki;
+                        //        e.CellStyle.ForeColor = Color.Black;
+                        //        //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
+                        //        //e.CellStyle.SelectionForeColor = Color.White;
+                        //    }
+                        //}
+                        //else if (ReturnDate.Hour >= 12 && ReturnDate.Hour <= 23)
+                        //{
+                        //    DateTime ReturnDateisNextDayOn11 = ReturnDate.AddDays(1);
+                        //    while (true)
+                        //    {
+                        //        if ((ReturnDateisNextDayOn11.DayOfWeek != DayOfWeek.Saturday && ReturnDateisNextDayOn11.DayOfWeek != DayOfWeek.Sunday) && (!isHoliday(ReturnDateisNextDayOn11)))
+                        //        {
+                        //            break;
+                        //        }
+                        //        else ReturnDateisNextDayOn11 = ReturnDateisNextDayOn11.AddDays(1);
+                        //    }
+
+                        //    ReturnDateisNextDayOn11 = new DateTime(ReturnDateisNextDayOn11.Year, ReturnDateisNextDayOn11.Month, ReturnDateisNextDayOn11.Day, 11, 59, 59);
+
+                        //    if (!(DateTime.Compare(DateTime.Now, ReturnDate) >= 0 && DateTime.Compare(DateTime.Now, ReturnDateisNextDayOn11) <= 0))
+                        //    {
+                        //        //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                        //        //dgvDoc.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                        //        e.CellStyle.BackColor = Color.Khaki;
+                        //        e.CellStyle.ForeColor = Color.Black;
+                        //        //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // Yellow
+                        //        //e.CellStyle.SelectionForeColor = Color.White;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    //e.CellStyle.SelectionBackColor = Color.FromArgb(0, 153, 153); // White
+                        //    //e.CellStyle.SelectionForeColor = Color.White; // White
+                        //}
                     }
                     //
                 }
@@ -1122,7 +1200,7 @@ namespace Testing.Forms
                 Msgbox.Show(ex.Message);
             }
         }
-        
+
         private void btnReturn_Click(object sender, EventArgs e)
         {
             DataTable selectedDoc = GetDataTableFromDGV(dgvDoc);
@@ -1216,7 +1294,7 @@ namespace Testing.Forms
 
         private void setSelectedStatus(Button selectedBtn)
         {
-            if (status == "99" || status == "7")
+            if (status == "99" || status == "7" || status == "0" || status == "18" || status == "19")
             {
                 gbAllRecordOption.Visible = true;
                 rbSpecificDate.Checked = true;
@@ -1242,6 +1320,8 @@ namespace Testing.Forms
             unselectStatusBtnStyle(btnDone);
             unselectStatusBtnStyle(btnAll);
             unselectStatusBtnStyle(btnPendingAtDP);
+            unselectStatusBtnStyle(btnReceived);
+            unselectStatusBtnStyle(btnSentOut);
 
             selectedStatusBtnStyle(selectedBtn);
             currentSelectedButton = selectedBtn.Name;
@@ -1338,6 +1418,18 @@ namespace Testing.Forms
             setSelectedStatus((Button)sender);
         }
 
+        private void btnReceived_Click(object sender, EventArgs e)
+        {
+            status = "18";
+            setSelectedStatus((Button)sender);
+        }
+
+        private void btnSentOut_Click(object sender, EventArgs e)
+        {
+            status = "19";
+            setSelectedStatus((Button)sender);
+        }
+
         private void enabledisableFuncBtn()
         {
             disabledButt(btnChangeStatus);
@@ -1375,8 +1467,21 @@ namespace Testing.Forms
             if (Role.Contains("UWHEAD"))
                 btnReport.Visible = true;
 
+            var isPrintBrokerTeam = false;
+            var dtBrokerTeams = sqlcrud.LoadData("select * from [DocumentControlDB].[dbo].tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+
+            if (dtBrokerTeams.Rows.Count > 0)
+            {
+                isPrintBrokerTeam = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM") && Convert.ToInt32(dtBrokerTeams.Rows[0]["ALLOW_BROKER_PRINT"].ToString()).Equals(1);
+                if (isPrintBrokerTeam)
+                    btnReport.Visible = true;
+            }
+
             if (Role.Contains("UWHEAD") || Role.Contains("PRODUCER") || Role.Contains("PCD"))
                 btnPrint.Visible = true;
+
+            if (status == "19")
+                disabledButt(btnChangeStatus);
         }
 
         private void btnManageCrono_Click(object sender, EventArgs e)
@@ -1450,7 +1555,7 @@ namespace Testing.Forms
                     {
                         dt.Rows.Add(row["REF_ID"].ToString());
                     }
-                    Question = "Are you sure you want to export "+selectedDoc.Rows.Count+" selected record(s)?";
+                    Question = "Are you sure you want to export " + selectedDoc.Rows.Count + " selected record(s)?";
                 }
                 //                
 
@@ -1473,7 +1578,7 @@ namespace Testing.Forms
                 {
                     if (row["PRINT_CARD"].ToString() == "Yes")
                     {
-                        
+
                         //Check & Get CARD_SENT CARD_PRINTED status
                         string DocId = row["REF_ID"].ToString(), CusName = row["CUSTOMER"].ToString(), PolicyNo = row["POLICY_NO"].ToString();
                         DataTable temp = sqlcrud.LoadData("SELECT DP_CODE FROM dbo.tbDOC WHERE DOC_CODE = '" + DocId + "' and DP_CODE is not null").Tables[0];
@@ -1596,7 +1701,7 @@ namespace Testing.Forms
                     return;
                 }
 
-                string printedDocCodeANH = "", printedDocCodeAuto = "", printedDocCodeFLM = "", printedDocCodePNE = "", printedDocCodeFNL = "", printedDocCodePME = "", printedDocCodeMICR="";
+                string printedDocCodeANH = "", printedDocCodeAuto = "", printedDocCodeFLM = "", printedDocCodePNE = "", printedDocCodeFNL = "", printedDocCodePME = "", printedDocCodeMICR = "";
                 foreach (DataRow dr in selectedDoc.Rows)
                 {
                     switch (frmAddDocument1.product[dr["PRODUCT_TYPE"].ToString()])
@@ -1733,7 +1838,7 @@ namespace Testing.Forms
                 }
 
                 Cursor.Current = Cursors.AppStarting;
-                
+
             }
             catch (Exception ex)
             {
@@ -1858,7 +1963,7 @@ namespace Testing.Forms
                     }
                     else
                         btnNotification.Image = Resources.notification_unscreen;
-                        
+
                 }
 
                 NotiSentDuration();
@@ -1900,7 +2005,7 @@ namespace Testing.Forms
                 {
                     btnName = buttons.Rows[0]["BUTTON_NAME"].ToString();
                     status = cStatus;
-                } 
+                }
             }
             else
             {
@@ -2011,7 +2116,7 @@ namespace Testing.Forms
             {
                 dgvDoc.DefaultCellStyle.SelectionForeColor = Color.Black;
                 dgvNoti.DefaultCellStyle.SelectionForeColor = Color.Black;
-            } 
+            }
             else
             {
                 dgvDoc.DefaultCellStyle.SelectionForeColor = Color.White;

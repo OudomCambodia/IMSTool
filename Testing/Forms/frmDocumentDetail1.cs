@@ -50,6 +50,15 @@ namespace Testing.Forms
                     dgvHist.DefaultCellStyle.SelectionForeColor = Color.White;
                 #endregion
 
+                var dtUserRole = crud.LoadData("select role from tbDOC_USER where user_name = '" + frmLogIn.Usert.ToUpper().Trim() + "'").Tables[0];
+                bool isController = false;
+                if (dtUserRole.Rows.Count > 0)
+                {
+                    isController = dtUserRole.Rows[0][0].ToString().Contains("CONTROLLER");
+                }
+
+                btnEditRemark.Visible = isController;
+
                 tbDocID.Text = DocId;
                 DataTable dt = crud.LoadData("SELECT * FROM VIEW_DOC_DETAIL WHERE DOC_CODE = '" + DocId + "'").Tables[0];
                 tbCreateDate.Text = dt.Rows[0]["CREATE_DATE"].ToString() + " " + dt.Rows[0]["CREATE_TIME"].ToString();
