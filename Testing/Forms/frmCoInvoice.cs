@@ -110,7 +110,7 @@ namespace Testing.Forms
                 string[] Keys = new string[] { "sp_type", "user_dn_cn"};
                 string[] Values = new string[] { sp_type, comBoxDebit.SelectedValue.ToString() };
                 dtCoinvoice = crud.ExecSP_OutPara("SP_CO_FILING", Keys, Values);
-
+               
 
                 if (dtCoinvoice.Rows.Count <= 0)
                 {
@@ -118,17 +118,22 @@ namespace Testing.Forms
                 }
                 else
                 {
-
+                    
                     string a = dtCoinvoice.Rows[0]["ENDORSEMENT_NO"].ToString();
                     if(a != "R") {
                         Reports.CoFilingInvoiceEnd coinv = new Reports.CoFilingInvoiceEnd();
                         coinv.SetDataSource(dtCoinvoice);
+                        if(dgvCoIn.Rows.Count !=0)
+                            coinv.SetParameterValue("CO_SHARE", decimal.Parse(String.Format("{0:N}", Convert.ToDecimal(String.IsNullOrEmpty(dgvCoIn.Rows[0].Cells[1].Value.ToString()) ? 0.00 : Convert.ToDouble(dgvCoIn.Rows[0].Cells[1].Value.ToString())))));
                         crystalReportViewer1.ReportSource = coinv;
                     }
                     else
                     {
                         Reports.CoFilingInvoice coinv = new Reports.CoFilingInvoice();
                         coinv.SetDataSource(dtCoinvoice);
+                        if (dgvCoIn.Rows.Count != 0)
+
+                            coinv.SetParameterValue("CO_SHARE", decimal.Parse(String.Format("{0:N}", Convert.ToDecimal(String.IsNullOrEmpty(dgvCoIn.Rows[0].Cells[1].Value.ToString()) ? 0.00 : Convert.ToDouble(dgvCoIn.Rows[0].Cells[1].Value.ToString())))));
                         crystalReportViewer1.ReportSource = coinv;
                     }
                     
@@ -139,6 +144,81 @@ namespace Testing.Forms
             }catch(Exception ex){
                 Msgbox.Show(ex.Message);
             }
+        }
+
+        private void comBoxDebit_SelectedValueChanged(object sender, EventArgs e)
+        {
+            dgvCoIn.DataSource = null;
+            dgvCoIn.Columns.Clear();
+            
+            //string dnNumber = comBoxDebit.SelectedValue.ToString();
+            ////Set CoIn Info
+            //string cmd = "select (select INC_INSCOM_DESC from SM_R_INSURANCE_COM where INC_INSCOM_CODE = PCI_INS_CODE) CO_PARTY,nvl(SHARE_PER,0) SHARE_PER from ( " +
+            //"select PCI_POL_SEQ_NO,PCI_INS_CODE,sum(PCI_SHARE_PCNTG) SHARE_PER " +
+            //"from UW_T_POL_COINS_INFO  " +
+            //"where PCI_POL_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')  " +
+            //"group by PCI_POL_SEQ_NO,PCI_INS_CODE " +
+            //"union " +
+            //"select ECI_EDT_SEQ_NO,ECI_INS_CODE,sum(ECI_SHARE_PCNTG) SHARE_PER " +
+            //"from UW_T_END_COINS_INFO  " +
+            //"where ECI_EDT_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')   " +
+            //"group by ECI_EDT_SEQ_NO,ECI_INS_CODE " +
+            //"union " +
+            //"select HCI_PHS_SEQ_NO,HCI_INS_CODE, sum(HCI_SHARE_PCNTG) SHARE_PER " +
+            //"from UW_H_HIST_COINS_INFO  " +
+            //"where HCI_PHS_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')   " +
+            //"group by HCI_PHS_SEQ_NO,HCI_INS_CODE " +
+            //"union " +
+            //"select NCI_NDS_SEQ_NO,NCI_INS_CODE,sum(NCI_SHARE_PCNTG) SHARE_PER " +
+            //"from UW_H_EHIST_COINS_INFO  " +
+            //"where NCI_NDS_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')   " +
+            //"group by NCI_NDS_SEQ_NO,NCI_INS_CODE)";
+            //DataTable dtTemp = new DataTable();
+            //dtTemp = crud.ExecQuery(cmd);
+            //if (dtTemp.Rows.Count > 0)
+            //{
+            //    dgvCoIn.DataSource = dtTemp;
+            //}
+            //
+        }
+
+        private void comBoxDebit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvCoIn.DataSource = null;
+            dgvCoIn.Columns.Clear();
+            if (comBoxDebit.SelectedIndex != 0)
+            {
+                string dnNumber = comBoxDebit.SelectedValue.ToString();
+                //Set CoIn Info
+                string cmd = "select (select INC_INSCOM_DESC from SM_R_INSURANCE_COM where INC_INSCOM_CODE = PCI_INS_CODE) CO_PARTY,nvl(SHARE_PER,0) SHARE_PER from ( " +
+                "select PCI_POL_SEQ_NO,PCI_INS_CODE,sum(PCI_SHARE_PCNTG) SHARE_PER " +
+                "from UW_T_POL_COINS_INFO  " +
+                "where PCI_POL_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')  " +
+                "group by PCI_POL_SEQ_NO,PCI_INS_CODE " +
+                "union " +
+                "select ECI_EDT_SEQ_NO,ECI_INS_CODE,sum(ECI_SHARE_PCNTG) SHARE_PER " +
+                "from UW_T_END_COINS_INFO  " +
+                "where ECI_EDT_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')   " +
+                "group by ECI_EDT_SEQ_NO,ECI_INS_CODE " +
+                "union " +
+                "select HCI_PHS_SEQ_NO,HCI_INS_CODE, sum(HCI_SHARE_PCNTG) SHARE_PER " +
+                "from UW_H_HIST_COINS_INFO  " +
+                "where HCI_PHS_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')   " +
+                "group by HCI_PHS_SEQ_NO,HCI_INS_CODE " +
+                "union " +
+                "select NCI_NDS_SEQ_NO,NCI_INS_CODE,sum(NCI_SHARE_PCNTG) SHARE_PER " +
+                "from UW_H_EHIST_COINS_INFO  " +
+                "where NCI_NDS_SEQ_NO = (select DEB_POL_SEQ_NO from RC_T_DEBIT_NOTE where DEB_DEB_NOTE_NO = '" + dnNumber + "' union select CRN_POL_SEQ_NO from RC_T_CREDIT_NOTE where CRN_CREDIT_NOTE_NO = '" + dnNumber + "')   " +
+                "group by NCI_NDS_SEQ_NO,NCI_INS_CODE)";
+                DataTable dtTemp = new DataTable();
+                dtTemp = crud.ExecQuery(cmd);
+                if (dtTemp.Rows.Count > 0)
+                {
+                    dgvCoIn.DataSource = dtTemp;
+                }
+                
+            }
+           
         }
     }
 }

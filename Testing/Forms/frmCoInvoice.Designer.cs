@@ -146,6 +146,8 @@
             this.comBoxDebit.Name = "comBoxDebit";
             this.comBoxDebit.Size = new System.Drawing.Size(154, 21);
             this.comBoxDebit.TabIndex = 56;
+            this.comBoxDebit.SelectedIndexChanged += new System.EventHandler(this.comBoxDebit_SelectedIndexChanged);
+            this.comBoxDebit.SelectedValueChanged += new System.EventHandler(this.comBoxDebit_SelectedValueChanged);
             // 
             // tbPolicyNo
             // 
