@@ -157,6 +157,7 @@ namespace Testing.Forms
                             else if (protype == "VPC") view = "VIEW_MEMBERSHIP_VPC";
                             else if (protype == "MCW") view = "VIEW_MEMBERSHIP_MCW";
                             else if (protype == "PAC") view = "VIEW_MEMBERSHIP_PAC";
+                            else if (protype == "PAE") view = "VIEW_MEMBERSHIP_PAE";
                             else
                             {
                                 //Msgbox.Show("This Policy Type is not available for Card Printing! Please contact administrator.");
@@ -256,7 +257,7 @@ namespace Testing.Forms
                                         Mydb.ExecuteMySql("sp_mcw_insert_docctrl", "insured_member", rw[1], "policy_holder", rw[2], "policy_no", rw[3], "valid_from", Common.strToDate(rw[4].ToString()).ToString("yyyy-MM-dd"), "@valid_to", Common.strToDate(rw[5].ToString()).ToString("yyyy-MM-dd"), "dependent", "", "sum_insured", rw[8], "created_by", username, "print_number", maxnum, "insured_id", rw[0], "doc_code", RefID);
                                     }
                                 }
-                                else if (protype == "HNS")
+                                else if (protype == "HNS" || protype == "PAE") //Update 31-May-23:Add PAE
                                 {
                                     dtmaxNumber = Mydb.getDataTable("sp_hns_max_print_number", "user", username);
                                     if (dtmaxNumber.Rows[0][0] != DBNull.Value)
