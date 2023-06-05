@@ -99,6 +99,19 @@ namespace Testing.Forms
                 SelectionColor = selectionColor;
                 #endregion
 
+                var isBrokerTeam = false;
+                var dtBrokerTeams = sqlcrud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+
+                if (dtBrokerTeams.Rows.Count > 0)
+                {
+                    isBrokerTeam = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM");
+                }
+                if (!isBrokerTeam)
+                {
+                    btnReceived.Enabled = false;
+                    btnSentOut.Enabled = false; 
+                }
+
                 DataTable dt = sqlcrud.LoadData("select * from dbo.Product").Tables[0];
                 frmAddDocument1.product.Clear();
                 foreach (DataRow dr in dt.Rows)
@@ -839,7 +852,7 @@ namespace Testing.Forms
 
                     var isBrokerTeam = false;
                     var dtBrokerTeams = sqlcrud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
-                    var dtReceivedUser = sqlcrud.LoadData("SELECT USER_NAME FROM tbRECEIVED_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+                    var dtReceivedUser = sqlcrud.LoadData("SELECT USER_NAME FROM [DocumentControlDB].[dbo].tbRECEIVED_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
 
                     if (dtBrokerTeams.Rows.Count > 0)
                     {

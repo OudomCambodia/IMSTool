@@ -20,42 +20,77 @@ namespace Testing.Forms
         DBS11SqlCrud crud = new DBS11SqlCrud();
         DataTable dt = new DataTable();
         public string Team="";
+
+
         private void bnSearch_Click(object sender, EventArgs e)
         {
-            //Cursor.Current = Cursors.WaitCursor;
-            //dt = crud.LoadData("SELECT * from dbo.VIEW_MAIN_REPORT " +
-            //    "where convert(datetime,CREATE_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-            //    "and convert(datetime,CREATE_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ").Tables[0];
-            //dgv.DataSource = dt;
-            //Cursor.Current = Cursors.AppStarting;
-            //if (dgv.RowCount <= 0)
-            //    Msgbox.Show("No data found.");
-            string main_rpt = "SELECT * from dbo.VIEW_MAIN_REPORT " +
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                var isBrokerTeam = false;
+                var dtBrokerTeams = crud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+
+                if (dtBrokerTeams.Rows.Count > 0)
+                {
+                    isBrokerTeam = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM");
+                }
+
+                if (isBrokerTeam)
+                {
+                    var queryBuilder = new StringBuilder();
+                    queryBuilder.Append("select * from view_main_report ")
+                        .Append("where USER_CODE in ( ")
+                        .AppendFormat("select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '{0}' ", frmLogIn.Usert.ToUpper())
+                        .Append("union all ")
+                        .Append("SELECT [USER_CODE] ")
+                        .Append("FROM [DocumentControlDB].[dbo].[tbDOC_USER] ")
+                        .Append("where [GROUP] = 'BROKERTEAM' ")
+                        .AppendFormat("and Parent like (select PARENT + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '{0}') + '%') ", frmLogIn.Usert.ToUpper())
+                        .Append("and convert(datetime,CREATE_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') ")
+                        .Append("and convert(datetime,CREATE_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ")
+                        .Append("order by user_code");
+
+                    dt = crud.LoadData(queryBuilder.ToString()).Tables[0];
+                    dgv.DataSource = dt;
+                }
+                else
+                {
+                    string main_rpt = "SELECT * from dbo.VIEW_MAIN_REPORT " +
                         "where convert(datetime,CREATE_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
                         "and convert(datetime,CREATE_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
-            string[] TeamSplit = Team.Split(',');
-            if (!String.IsNullOrEmpty(Team) && frmAddDocument1.product.ContainsValue(TeamSplit[0]))
-            {
-                string ProType = "";
-                bool check = false;
-                foreach (string t in TeamSplit)
-                {
-                    foreach (KeyValuePair<string, string> entry in frmAddDocument1.product)
+                    string[] TeamSplit = Team.Split(',');
+                    if (!String.IsNullOrEmpty(Team) && frmAddDocument1.product.ContainsValue(TeamSplit[0]))
                     {
-                        if (entry.Value == t)
+                        string ProType = "";
+                        bool check = false;
+                        foreach (string t in TeamSplit)
                         {
-                            check = true;
-                            ProType += "'" + entry.Key + "',";
+                            foreach (KeyValuePair<string, string> entry in frmAddDocument1.product)
+                            {
+                                if (entry.Value == t)
+                                {
+                                    check = true;
+                                    ProType += "'" + entry.Key + "',";
+                                }
+                            }
+                        }
+                        if (check)
+                        {
+                            ProType = ProType.Remove(ProType.Length - 1);
+                            main_rpt += " AND PRODUCT_TYPE IN (" + ProType + ")";
+                            dt = crud.LoadData(main_rpt).Tables[0];
+                            dgv.DataSource = dt;
                         }
                     }
                 }
-                if (check)
-                {
-                    ProType = ProType.Remove(ProType.Length - 1);
-                    main_rpt += " AND PRODUCT_TYPE IN (" + ProType + ")";
-                    dt = crud.LoadData(main_rpt).Tables[0];
-                    dgv.DataSource = dt;
-                }
+
+                Cursor = Cursors.Arrow;
+            }
+            catch (Exception ex)
+            {
+                Cursor = Cursors.Arrow;
+                MessageBox.Show(ex.ToString());
             }
         }
 

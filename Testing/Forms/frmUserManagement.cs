@@ -293,8 +293,9 @@ namespace Testing.Forms
                 var username = txtUsername.Text.Trim();
                 var role = cboRole.Text.Replace(" ", string.Empty);
                 var team = cboTeam.Text.Replace(" ", string.Empty);
+                var group = team.Contains("Brokers") ? "BROKERTEAM" : null;
 
-                string sql = "SELECT MAX(USER_CODE) MAX_USER_CODE FROM tbDOC_USER where USER_CODE LIKE '%D%'";
+                string sql = "SELECT TOP 1 USER_CODE AS MAX_USER_CODE FROM tbDOC_USER where USER_CODE LIKE '%D%' ORDER BY CAST(RIGHT(USER_CODE, LEN(USER_CODE) - 1) AS INT) DESC";
                 var dtMaxUserCode = sqlCrud.LoadData(sql).Tables[0];
                 
                 if (dtMaxUserCode.Rows.Count > 0)
@@ -315,8 +316,8 @@ namespace Testing.Forms
                 }
                 
                 StringBuilder queryBuilderSql = new StringBuilder();
-                queryBuilderSql.Append("INSERT INTO tbDOC_USER (USER_CODE, USER_NAME, ROLE, TEAM, FULL_NAME, SELECTION_COLOR) ")
-                    .Append("VALUES ('" + maxUserCode + "', '" + txtUserCode.Text.Trim() + "', '" + role + "', '" + team + "', '" + fullName.Trim() + "', '0,153,153')");
+                queryBuilderSql.Append("INSERT INTO tbDOC_USER (USER_CODE, USER_NAME, ROLE, TEAM, FULL_NAME, [GROUP], SELECTION_COLOR) ")
+                    .Append("VALUES ('" + maxUserCode + "', '" + txtUserCode.Text.Trim() + "', '" + role + "', '" + team + "', '" + fullName.Trim() + "', '" + group + "', '0,153,153')");
 
                 sqlCrud.Executing(queryBuilderSql.ToString());
             }
@@ -349,9 +350,10 @@ namespace Testing.Forms
                 }
                 var role = cboRole.Text.Replace(" ", string.Empty);
                 var team = cboTeam.Text.Replace(" ", string.Empty);
+                var group = team.Contains("Brokers") ? "BROKERTEAM" : null;
 
                 StringBuilder updateSqlBuilder = new StringBuilder();
-                updateSqlBuilder.Append("UPDATE tbDOC_USER SET FULL_NAME = '" + fullName.Trim() + "', ROLE = '" + role + "', TEAM = '" + team + "' ")
+                updateSqlBuilder.Append("UPDATE tbDOC_USER SET FULL_NAME = '" + fullName.Trim() + "', ROLE = '" + role + "', TEAM = '" + team + "', [GROUP] = '" + group + "' ")
                     .Append("WHERE USER_NAME = '" +  txtUserCode.Text.Trim() + "'");
 
                 sqlCrud.Executing(updateSqlBuilder.ToString());
