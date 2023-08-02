@@ -58,9 +58,12 @@
             this.tsPMAllDept = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPMAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.CusProfitV2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.acledaSalesPersonReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoMonthlyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InvoiceSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renewalListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pRRiskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pendingRIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.premiumRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +76,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateTicket = new System.Windows.Forms.ToolStripMenuItem();
             this.pnSubClaim = new System.Windows.Forms.Panel();
+            this.clmPaymentReq = new System.Windows.Forms.Button();
             this.bnClaimOSRI = new System.Windows.Forms.Button();
             this.bnClaimPaidRI = new System.Windows.Forms.Button();
             this.pnSubFL = new System.Windows.Forms.Panel();
@@ -112,8 +116,6 @@
             this.pnCustomerProfit = new System.Windows.Forms.Panel();
             this.btnCustomerProfit = new System.Windows.Forms.Button();
             this.btnCustomerProfitSummary = new System.Windows.Forms.Button();
-            this.renewalListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pRRiskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -420,7 +422,8 @@
             this.aCPREMIUMREPORTToolStripMenuItem,
             this.toolStripMenuItem1,
             this.tsPremiumRegister,
-            this.CusProfitV2});
+            this.CusProfitV2,
+            this.acledaSalesPersonReportToolStripMenuItem});
             this.monthlyReportToolStripMenuItem.Enabled = false;
             this.monthlyReportToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.monthlyReportToolStripMenuItem.Name = "monthlyReportToolStripMenuItem";
@@ -434,7 +437,7 @@
             this.monthlyReportToolStripMenuItem1.Enabled = false;
             this.monthlyReportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.monthlyReportToolStripMenuItem1.Name = "monthlyReportToolStripMenuItem1";
-            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
+            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
             this.monthlyReportToolStripMenuItem1.Text = "Monthly Report";
             this.monthlyReportToolStripMenuItem1.Click += new System.EventHandler(this.monthlyReportToolStripMenuItem1_Click);
             // 
@@ -444,7 +447,7 @@
             this.aCPREMIUMREPORTToolStripMenuItem.Enabled = false;
             this.aCPREMIUMREPORTToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aCPREMIUMREPORTToolStripMenuItem.Name = "aCPREMIUMREPORTToolStripMenuItem";
-            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.aCPREMIUMREPORTToolStripMenuItem.Text = "AC_PREMIUM REPORT";
             this.aCPREMIUMREPORTToolStripMenuItem.Click += new System.EventHandler(this.aCPREMIUMREPORTToolStripMenuItem_Click);
             // 
@@ -454,7 +457,7 @@
             this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
             this.toolStripMenuItem1.Text = "IEMA Report";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click_1);
             // 
@@ -467,7 +470,7 @@
             this.tsPremiumRegister.Enabled = false;
             this.tsPremiumRegister.ForeColor = System.Drawing.Color.White;
             this.tsPremiumRegister.Name = "tsPremiumRegister";
-            this.tsPremiumRegister.Size = new System.Drawing.Size(192, 22);
+            this.tsPremiumRegister.Size = new System.Drawing.Size(216, 22);
             this.tsPremiumRegister.Text = "Premium Register";
             // 
             // tsPMAllDept
@@ -496,8 +499,19 @@
             this.CusProfitV2.Enabled = false;
             this.CusProfitV2.ForeColor = System.Drawing.Color.White;
             this.CusProfitV2.Name = "CusProfitV2";
-            this.CusProfitV2.Size = new System.Drawing.Size(192, 22);
+            this.CusProfitV2.Size = new System.Drawing.Size(216, 22);
             this.CusProfitV2.Text = "Customer Profitability";
+            this.CusProfitV2.Click += new System.EventHandler(this.CusProfitV2_Click);
+            // 
+            // acledaSalesPersonReportToolStripMenuItem
+            // 
+            this.acledaSalesPersonReportToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.acledaSalesPersonReportToolStripMenuItem.Enabled = false;
+            this.acledaSalesPersonReportToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.acledaSalesPersonReportToolStripMenuItem.Name = "acledaSalesPersonReportToolStripMenuItem";
+            this.acledaSalesPersonReportToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.acledaSalesPersonReportToolStripMenuItem.Text = "Acleda Sales Person Report";
+            this.acledaSalesPersonReportToolStripMenuItem.Click += new System.EventHandler(this.acledaSalesPersonReportToolStripMenuItem_Click);
             // 
             // autoMonthlyReportToolStripMenuItem
             // 
@@ -527,6 +541,25 @@
             this.renewalListToolStripMenuItem.Name = "renewalListToolStripMenuItem";
             this.renewalListToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.renewalListToolStripMenuItem.Text = "Renewal List";
+            // 
+            // renewalListToolStripMenuItem1
+            // 
+            this.renewalListToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.renewalListToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.renewalListToolStripMenuItem1.Name = "renewalListToolStripMenuItem1";
+            this.renewalListToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.renewalListToolStripMenuItem1.Text = "Renewal List";
+            this.renewalListToolStripMenuItem1.Click += new System.EventHandler(this.renewalListToolStripMenuItem1_Click);
+            // 
+            // pRRiskCountToolStripMenuItem
+            // 
+            this.pRRiskCountToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.pRRiskCountToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.pRRiskCountToolStripMenuItem.Name = "pRRiskCountToolStripMenuItem";
+            this.pRRiskCountToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.pRRiskCountToolStripMenuItem.Text = "PR Risk Count";
+            this.pRRiskCountToolStripMenuItem.Visible = false;
+            this.pRRiskCountToolStripMenuItem.Click += new System.EventHandler(this.pRRiskCountToolStripMenuItem_Click);
             // 
             // adminToolStripMenuItem
             // 
@@ -629,7 +662,7 @@
             // 
             this.CreateTicket.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.CreateTicket.Name = "CreateTicket";
-            this.CreateTicket.Size = new System.Drawing.Size(50, 20);
+            this.CreateTicket.Size = new System.Drawing.Size(51, 20);
             this.CreateTicket.Text = "Ticket";
             this.CreateTicket.Click += new System.EventHandler(this.CreateTicket_Click);
             // 
@@ -637,16 +670,33 @@
             // 
             this.pnSubClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.pnSubClaim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnSubClaim.Controls.Add(this.clmPaymentReq);
             this.pnSubClaim.Controls.Add(this.bnClaimOSRI);
             this.pnSubClaim.Controls.Add(this.bnClaimPaidRI);
             this.pnSubClaim.Controls.Add(this.bnClaimRI);
             this.pnSubClaim.Controls.Add(this.btnClaimPaidPayee);
             this.pnSubClaim.Controls.Add(this.btnClaimRequisitionReport);
-            this.pnSubClaim.Location = new System.Drawing.Point(190, 147);
+            this.pnSubClaim.Location = new System.Drawing.Point(189, 107);
             this.pnSubClaim.Name = "pnSubClaim";
-            this.pnSubClaim.Size = new System.Drawing.Size(180, 198);
+            this.pnSubClaim.Size = new System.Drawing.Size(180, 238);
             this.pnSubClaim.TabIndex = 4;
             this.pnSubClaim.Visible = false;
+            // 
+            // clmPaymentReq
+            // 
+            this.clmPaymentReq.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.clmPaymentReq.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clmPaymentReq.Enabled = false;
+            this.clmPaymentReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clmPaymentReq.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clmPaymentReq.ForeColor = System.Drawing.Color.White;
+            this.clmPaymentReq.Location = new System.Drawing.Point(-4, 195);
+            this.clmPaymentReq.Name = "clmPaymentReq";
+            this.clmPaymentReq.Size = new System.Drawing.Size(187, 40);
+            this.clmPaymentReq.TabIndex = 12;
+            this.clmPaymentReq.Text = "Claim Payment Request List";
+            this.clmPaymentReq.UseVisualStyleBackColor = false;
+            this.clmPaymentReq.Click += new System.EventHandler(this.clmPaymentReq_Click);
             // 
             // bnClaimOSRI
             // 
@@ -1227,25 +1277,6 @@
             this.btnCustomerProfitSummary.UseVisualStyleBackColor = false;
             this.btnCustomerProfitSummary.Click += new System.EventHandler(this.btnCustomerProfitSummary_Click);
             // 
-            // renewalListToolStripMenuItem1
-            // 
-            this.renewalListToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.renewalListToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.renewalListToolStripMenuItem1.Name = "renewalListToolStripMenuItem1";
-            this.renewalListToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.renewalListToolStripMenuItem1.Text = "Renewal List";
-            this.renewalListToolStripMenuItem1.Click += new System.EventHandler(this.renewalListToolStripMenuItem1_Click);
-            // 
-            // pRRiskCountToolStripMenuItem
-            // 
-            this.pRRiskCountToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.pRRiskCountToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.pRRiskCountToolStripMenuItem.Name = "pRRiskCountToolStripMenuItem";
-            this.pRRiskCountToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pRRiskCountToolStripMenuItem.Text = "PR Risk Count";
-            this.pRRiskCountToolStripMenuItem.Visible = false;
-            this.pRRiskCountToolStripMenuItem.Click += new System.EventHandler(this.pRRiskCountToolStripMenuItem_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1379,5 +1410,7 @@
         public System.Windows.Forms.Button btnCoInvoice;
         private System.Windows.Forms.ToolStripMenuItem renewalListToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pRRiskCountToolStripMenuItem;
+        public System.Windows.Forms.Button clmPaymentReq;
+        private System.Windows.Forms.ToolStripMenuItem acledaSalesPersonReportToolStripMenuItem;
     }
 }

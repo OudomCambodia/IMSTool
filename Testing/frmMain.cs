@@ -847,6 +847,23 @@ namespace Testing
             frmPRRiskCount.ShowDialog();
         }
 
+        private void clmPaymentReq_Click(object sender, EventArgs e)
+        {
+            Forms.ClPaymentReq claimRQList = new Forms.ClPaymentReq();
+            openForm(claimRQList, (Button)sender);
+        }
+
+        private void acledaSalesPersonReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.AcledaSalePerson AcledaSP = new Forms.AcledaSalePerson();
+            AcledaSP.Show();
+        }
+
+        private void CusProfitV2_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //private List<string> EverythingBetween(string source, string start, string end)
         //{
         //    var results = new List<string>();
