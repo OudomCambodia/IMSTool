@@ -1143,7 +1143,7 @@ namespace Testing.Forms
                 if (row != null)
                 {
 
-
+                    var index = dtChecked.Rows.IndexOf(row) + 1;
 
                     //status = row.Cells[0].Value.ToString();
 
@@ -1171,9 +1171,9 @@ namespace Testing.Forms
                     if (option == 1)
                     {
                         if (row["DEPENDENT"].ToString() == "")
-                            filep += "CPAE-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length - 1).ToUpper() + ".pdf";
+                            filep += index.ToString() + "-CPAE-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length - 1).ToUpper() + ".pdf";
                         else
-                            filep += "CPAE-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length - 1).ToUpper() + ".pdf";
+                            filep += index.ToString() + "-CPAE-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length - 1).ToUpper() + ".pdf";
 
                         Reports.CPAE_card rpt1 = new Reports.CPAE_card();
                         //Reports.EngineeringLettereMAIL rpt = new Reports.EngineeringLettereMAIL();
@@ -1209,9 +1209,9 @@ namespace Testing.Forms
                     if (option == 2)
                     {
                         if (row["DEPENDENT"].ToString() == "")
-                            filep += "GPA-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
+                            filep += index.ToString() + "-GPA-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
                         else
-                            filep += "GPA-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length).ToUpper() + ".pdf";
+                            filep += index.ToString() + "-GPA-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length).ToUpper() + ".pdf";
 
                         Reports.GPAECard rpt1 = new Reports.GPAECard();
                         //Reports.EngineeringLettereMAIL rpt = new Reports.EngineeringLettereMAIL();
@@ -1252,9 +1252,9 @@ namespace Testing.Forms
                     if (option == 3)
                     {
                         if (row["DEPENDENT"].ToString() == "")
-                            filep += "HHNS-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
+                            filep += index.ToString() + "-HHNS-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
                         else
-                            filep += "HHNS-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length).ToUpper() + ".pdf";
+                            filep += index.ToString() + "-HHNS-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["DEPENDENT"].ToString().Substring(0, row["DEPENDENT"].ToString().Length).ToUpper() + ".pdf";
 
                         Reports.ECardHNS rpt1 = new Reports.ECardHNS();
                         //Reports.EngineeringLettereMAIL rpt = new Reports.EngineeringLettereMAIL();
@@ -1289,8 +1289,8 @@ namespace Testing.Forms
                     #region BHP Option 4
                     if (option == 4)
                     {
-                       
-                            filep += "HBHP-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
+
+                        filep += index.ToString() + "-HBHP-" + row["POLICY_NO"].ToString().Replace('/', '-').Substring(11).ToUpper() + "-" + row["INSURED_MEMBER"].ToString().Substring(0, row["INSURED_MEMBER"].ToString().Length).ToUpper() + ".pdf";
 
                         Reports.ECardBHP rpt1 = new Reports.ECardBHP();
                         rpt1.SetDataSource(dt1);
