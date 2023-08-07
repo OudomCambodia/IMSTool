@@ -112,7 +112,7 @@ namespace Testing.Forms
                 {
                     case "BHP":
                     case "GPA":
-                    case "PAC"://Update 12-Aug-20:Add PAC
+                    case "PAC"://Update 12-Aug-20:Add PAC 
                     case "PAE"://Update 10-02-22:Add PAE
                     case "HNS":
                     case "MCW"://Update 04-Dec-19:Add MCW
