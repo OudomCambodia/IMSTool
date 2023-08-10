@@ -59,7 +59,7 @@ namespace Testing
                 MailMessage message = new MailMessage();
 
                 //lets set the from field to the from text field
-                message.From = new MailAddress("support.infoins@forteinsurance.com");
+                message.From = new MailAddress("infoins@forteinsurance.com");
 
                 //and the to field
                 //string[] tempt = dt.AsEnumerable().Where(ite => ite.Field<string>("SFC_DPT_CODE") != "UW" && ite.Field<string>("SFC_DPT_CODE") != "RGN").Select(ite => ite.Field<string>("EMAIL")).Distinct().ToArray();
