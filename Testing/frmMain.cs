@@ -850,6 +850,7 @@ namespace Testing
         private void clmPaymentReq_Click(object sender, EventArgs e)
         {
             Forms.ClPaymentReq claimRQList = new Forms.ClPaymentReq();
+            claimRQList.FullName = this.FullName;
             openForm(claimRQList, (Button)sender);
         }
 
