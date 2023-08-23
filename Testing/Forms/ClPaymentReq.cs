@@ -489,7 +489,7 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
-                newRow["Forte_Bank"] = "ABA";
+                newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
@@ -592,7 +592,7 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
-                newRow["Forte_Bank"] = "ABA";
+                newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
 
@@ -696,7 +696,7 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
-                newRow["Forte_Bank"] = "ABA";
+                newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
@@ -799,7 +799,7 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
-                newRow["Forte_Bank"] = "ABA";
+                newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
 
