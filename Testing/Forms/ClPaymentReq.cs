@@ -384,7 +384,7 @@ namespace Testing.Forms
         {
             
             //Worksheet Heading
-            string[] Heading = { "FORTE INSURANCE (CAMBODIA) PLC.", "PAYMENT LIST TO ACCOUNTING", "Date:", "By:" };
+            string[] Heading = { "FORTE INSURANCE (CAMBODIA) PLC.", "PAYMENT LIST TO ACCOUNTING ", "Date:", "By:" };
             wbHeading(Heading,wb,ws,ColumnsCount,RowsCount);
             //Set Header with DataTable dt Column Name
             for (int i = 0; i < ColumnsCount; i++)
@@ -490,7 +490,7 @@ namespace Testing.Forms
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
                 newRow["Forte_Bank"] = "ABA";
-                newRow["TT_No."] = "ABA";
+                newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
                 newRow["Description"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower()) + " - " + "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " To Panel Hospital " + Regex.Match(item["TPA Claim No."].ToString(), @"\(([^)]*)\)").Groups[1].Value;
@@ -508,7 +508,7 @@ namespace Testing.Forms
 
                         row["Date"] = g.Key.Date;
                         row["Forte_Bank"] = g.Key.Forte_Bank;
-                        row["TT_No."] = g.Key.TT_No;
+                        row["TT_No."] = "";
                         row["Beneficiary_Name"] = g.Key.Beneficiary_Name;
                         row["Description"] = g.Key.Description;
                         row["USD"] = g.Sum(usd => Convert.ToDouble(usd.Field<string>("USD")));
@@ -593,7 +593,7 @@ namespace Testing.Forms
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
                 newRow["Forte_Bank"] = "ABA";
-                newRow["TT_No."] = "ABA";
+                newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
 
                 newRow["Description"] = "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " To Panel Hospital " + Regex.Match(item["TPA Claim No."].ToString(), @"\(([^)]*)\)").Groups[1].Value;
@@ -611,7 +611,7 @@ namespace Testing.Forms
 
                     row["Date"] = g.Key.Date;
                     row["Forte_Bank"] = g.Key.Forte_Bank;
-                    row["TT_No."] = g.Key.TT_No;
+                    row["TT_No."] = "";
                     row["Beneficiary_Name"] = g.Key.Beneficiary_Name;
                     row["Description"] = g.Key.Description;
                     row["USD"] = g.Sum(usd => Convert.ToDouble(usd.Field<string>("USD")));
@@ -652,7 +652,7 @@ namespace Testing.Forms
         private void SecondSheetNonDirectBilling(DataTable dtcopy, IXLWorkbook wb, IXLWorksheet ws, int ColumnsCount, int RowsCount, string ExcelFilePath = null)
         {
             //Worksheet Heading
-            string[] Heading = { "FORTE INSURANCE (CAMBODIA) PLC.", "PAYMENT LIST TO ACCOUNTING (Direct Billing)", "Date:", "By:" };
+            string[] Heading = { "FORTE INSURANCE (CAMBODIA) PLC.", "PAYMENT LIST TO ACCOUNTING (Non-Direct Billing)", "Date:", "By:" };
             wbHeading(Heading, wb, ws, ColumnsCount, RowsCount);
             //End of heading 
             DataTable dtMISReport = new DataTable();
@@ -697,7 +697,7 @@ namespace Testing.Forms
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
                 newRow["Forte_Bank"] = "ABA";
-                newRow["TT_No."] = "ABA";
+                newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
                 newRow["Forte_Claim_No"] = item["Forte Claim No"].ToString() ;
@@ -715,7 +715,7 @@ namespace Testing.Forms
 
                     row["Date"] = g.Key.Date;
                     row["Forte_Bank"] = g.Key.Forte_Bank;
-                    row["TT_No."] = g.Key.TT_No;
+                    row["TT_No."] = "";
                     row["Beneficiary_Name"] = g.Key.Beneficiary_Name;
                     row["Forte_Claim_No"] = g.Key.Description;
                     row["USD"] = g.Sum(usd => Convert.ToDouble(usd.Field<string>("USD")));
@@ -755,7 +755,7 @@ namespace Testing.Forms
         private void ThirdSheetNonDirectBilling(DataTable dtcopy, IXLWorkbook wb, IXLWorksheet ws, int ColumnsCount, int RowsCount, string ExcelFilePath = null)
         {
             //Worksheet Heading
-            string[] Heading = { "FORTE INSURANCE (CAMBODIA) PLC.", "PAYMENT LIST TO ACCOUNTING (Direct Billing)", "Date:", "By:" };
+            string[] Heading = { "FORTE INSURANCE (CAMBODIA) PLC.", "PAYMENT LIST TO ACCOUNTING (Non-Direct Billing)", "Date:", "By:" };
             wbHeading(Heading, wb, ws, ColumnsCount, RowsCount);
             //End of heading 
             DataTable dtMISReport = new DataTable();
@@ -800,7 +800,7 @@ namespace Testing.Forms
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today;
                 newRow["Forte_Bank"] = "ABA";
-                newRow["TT_No."] = "ABA";
+                newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
 
                 newRow["Forte_Claim_No"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower()) + " - " + item["Forte Claim No"].ToString();
@@ -818,7 +818,7 @@ namespace Testing.Forms
 
                     row["Date"] = g.Key.Date;
                     row["Forte_Bank"] = g.Key.Forte_Bank;
-                    row["TT_No."] = g.Key.TT_No;
+                    row["TT_No."] = "";
                     row["Beneficiary_Name"] = g.Key.Beneficiary_Name;
                     row["Forte_Claim_No"] = g.Key.Description;
                     row["USD"] = g.Sum(usd => Convert.ToDouble(usd.Field<string>("USD")));
