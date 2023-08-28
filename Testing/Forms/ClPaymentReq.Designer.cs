@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.chkProducts = new System.Windows.Forms.CheckedListBox();
             this.tbRequisitionNo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
@@ -44,8 +46,8 @@
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.dgvResult = new System.Windows.Forms.DataGridView();
-            this.btnDirectBill = new Testing.cus_button();
             this.btnNonDirect = new Testing.cus_button();
+            this.btnDirectBill = new Testing.cus_button();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
@@ -67,6 +69,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.chkProducts);
             this.groupBox1.Controls.Add(this.tbRequisitionNo);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lbTotal);
@@ -84,14 +88,32 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(0, 46);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1082, 124);
+            this.groupBox1.Size = new System.Drawing.Size(1082, 191);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Requisition Information";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(397, 30);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(123, 17);
+            this.label5.TabIndex = 153;
+            this.label5.Text = "Selected Products:";
+            // 
+            // chkProducts
+            // 
+            this.chkProducts.FormattingEnabled = true;
+            this.chkProducts.Location = new System.Drawing.Point(535, 30);
+            this.chkProducts.Name = "chkProducts";
+            this.chkProducts.Size = new System.Drawing.Size(413, 137);
+            this.chkProducts.TabIndex = 152;
+            // 
             // tbRequisitionNo
             // 
-            this.tbRequisitionNo.Location = new System.Drawing.Point(137, 27);
+            this.tbRequisitionNo.Location = new System.Drawing.Point(174, 27);
             this.tbRequisitionNo.Name = "tbRequisitionNo";
             this.tbRequisitionNo.Size = new System.Drawing.Size(199, 24);
             this.tbRequisitionNo.TabIndex = 151;
@@ -102,16 +124,16 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(32, 30);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 17);
+            this.label2.Size = new System.Drawing.Size(136, 17);
             this.label2.TabIndex = 150;
-            this.label2.Text = "Requisition No:";
+            this.label2.Text = "Claim/Requisition No:";
             // 
             // lbTotal
             // 
             this.lbTotal.AutoSize = true;
             this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotal.ForeColor = System.Drawing.Color.White;
-            this.lbTotal.Location = new System.Drawing.Point(1005, 36);
+            this.lbTotal.Location = new System.Drawing.Point(1005, 149);
             this.lbTotal.Name = "lbTotal";
             this.lbTotal.Size = new System.Drawing.Size(12, 18);
             this.lbTotal.TabIndex = 30;
@@ -122,7 +144,7 @@
             this.lblSel.AutoSize = true;
             this.lblSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSel.ForeColor = System.Drawing.Color.White;
-            this.lblSel.Location = new System.Drawing.Point(1005, 19);
+            this.lblSel.Location = new System.Drawing.Point(1029, 130);
             this.lblSel.Name = "lblSel";
             this.lblSel.Size = new System.Drawing.Size(12, 18);
             this.lblSel.TabIndex = 29;
@@ -133,7 +155,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(929, 36);
+            this.label8.Location = new System.Drawing.Point(954, 148);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 18);
             this.label8.TabIndex = 18;
@@ -144,7 +166,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(929, 19);
+            this.label7.Location = new System.Drawing.Point(954, 130);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 18);
             this.label7.TabIndex = 19;
@@ -156,7 +178,7 @@
             this.bnClear.FlatAppearance.BorderSize = 2;
             this.bnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClear.ForeColor = System.Drawing.Color.White;
-            this.bnClear.Location = new System.Drawing.Point(627, 71);
+            this.bnClear.Location = new System.Drawing.Point(277, 122);
             this.bnClear.Name = "bnClear";
             this.bnClear.Size = new System.Drawing.Size(98, 26);
             this.bnClear.TabIndex = 27;
@@ -170,7 +192,7 @@
             this.bnView.FlatAppearance.BorderSize = 2;
             this.bnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnView.ForeColor = System.Drawing.Color.White;
-            this.bnView.Location = new System.Drawing.Point(514, 71);
+            this.bnView.Location = new System.Drawing.Point(164, 122);
             this.bnView.Name = "bnView";
             this.bnView.Size = new System.Drawing.Size(98, 26);
             this.bnView.TabIndex = 26;
@@ -181,7 +203,7 @@
             // dtpDateTo
             // 
             this.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDateTo.Location = new System.Drawing.Point(350, 73);
+            this.dtpDateTo.Location = new System.Drawing.Point(252, 73);
             this.dtpDateTo.Name = "dtpDateTo";
             this.dtpDateTo.Size = new System.Drawing.Size(122, 24);
             this.dtpDateTo.TabIndex = 25;
@@ -189,7 +211,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(278, 73);
+            this.label4.Location = new System.Drawing.Point(213, 73);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 17);
             this.label4.TabIndex = 24;
@@ -207,7 +229,7 @@
             // dtpDateFrom
             // 
             this.dtpDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDateFrom.Location = new System.Drawing.Point(112, 73);
+            this.dtpDateFrom.Location = new System.Drawing.Point(84, 73);
             this.dtpDateFrom.Name = "dtpDateFrom";
             this.dtpDateFrom.Size = new System.Drawing.Size(122, 24);
             this.dtpDateFrom.TabIndex = 22;
@@ -220,9 +242,9 @@
             this.groupBox6.Controls.Add(this.dgvResult);
             this.groupBox6.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox6.Location = new System.Drawing.Point(0, 170);
+            this.groupBox6.Location = new System.Drawing.Point(0, 243);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1082, 397);
+            this.groupBox6.Size = new System.Drawing.Size(1082, 393);
             this.groupBox6.TabIndex = 37;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = " ";
@@ -242,24 +264,9 @@
             this.dgvResult.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvResult.RowTemplate.Height = 30;
             this.dgvResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResult.Size = new System.Drawing.Size(1076, 374);
+            this.dgvResult.Size = new System.Drawing.Size(1076, 370);
             this.dgvResult.TabIndex = 17;
             this.dgvResult.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResult_CellContentClick);
-            // 
-            // btnDirectBill
-            // 
-            this.btnDirectBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDirectBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnDirectBill.FlatAppearance.BorderSize = 2;
-            this.btnDirectBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDirectBill.ForeColor = System.Drawing.Color.White;
-            this.btnDirectBill.Location = new System.Drawing.Point(835, 573);
-            this.btnDirectBill.Name = "btnDirectBill";
-            this.btnDirectBill.Size = new System.Drawing.Size(98, 26);
-            this.btnDirectBill.TabIndex = 16;
-            this.btnDirectBill.Text = "Direct Building";
-            this.btnDirectBill.UseVisualStyleBackColor = false;
-            this.btnDirectBill.Click += new System.EventHandler(this.btnDirectBill_Click);
             // 
             // btnNonDirect
             // 
@@ -268,7 +275,7 @@
             this.btnNonDirect.FlatAppearance.BorderSize = 2;
             this.btnNonDirect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNonDirect.ForeColor = System.Drawing.Color.White;
-            this.btnNonDirect.Location = new System.Drawing.Point(950, 573);
+            this.btnNonDirect.Location = new System.Drawing.Point(950, 642);
             this.btnNonDirect.Name = "btnNonDirect";
             this.btnNonDirect.Size = new System.Drawing.Size(120, 26);
             this.btnNonDirect.TabIndex = 38;
@@ -276,12 +283,27 @@
             this.btnNonDirect.UseVisualStyleBackColor = false;
             this.btnNonDirect.Click += new System.EventHandler(this.btnNonDirect_Click);
             // 
+            // btnDirectBill
+            // 
+            this.btnDirectBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDirectBill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnDirectBill.FlatAppearance.BorderSize = 2;
+            this.btnDirectBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDirectBill.ForeColor = System.Drawing.Color.White;
+            this.btnDirectBill.Location = new System.Drawing.Point(835, 642);
+            this.btnDirectBill.Name = "btnDirectBill";
+            this.btnDirectBill.Size = new System.Drawing.Size(98, 26);
+            this.btnDirectBill.TabIndex = 16;
+            this.btnDirectBill.Text = "Direct Building";
+            this.btnDirectBill.UseVisualStyleBackColor = false;
+            this.btnDirectBill.Click += new System.EventHandler(this.btnDirectBill_Click);
+            // 
             // ClPaymentReq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(1082, 611);
+            this.ClientSize = new System.Drawing.Size(1082, 680);
             this.Controls.Add(this.btnNonDirect);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.btnDirectBill);
@@ -320,6 +342,8 @@
         private System.Windows.Forms.DataGridView dgvResult;
         private cus_button btnDirectBill;
         private cus_button btnNonDirect;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckedListBox chkProducts;
 
     }
 }
