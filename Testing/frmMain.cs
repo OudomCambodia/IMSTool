@@ -804,7 +804,7 @@ namespace Testing
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            if (frmLogIn.Usert.ToLower() == "c-hrm" || frmLogIn.Usert.ToLower() == "admin")
+            if (frmLogIn.Usert.ToLower() == "c-hrm" || frmLogIn.Usert.ToLower() == "admin" || frmLogIn.Usert.ToLower() == "s-brs")
                 btnCustomerProfitSummary.Enabled = true;
             else
                 btnCustomerProfitSummary.Enabled = false;

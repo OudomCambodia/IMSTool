@@ -391,14 +391,13 @@ namespace Testing.Forms
                     }
                     else
                         Condition = cause;
-                    //
 
                     foreach (DataRow dr in rptdata.Rows)
                     {
                         if (proclass == "AUTOMOBILE")
                             dr["CLAIMANT"] = "VEHICLE NUMBER";
                         else if (product == "GPA" || product == "PAC" || product == "TRI" || product == "TRV" || product == "TRA" || product == "TRP" || product == "PAE" || product == "PAP")
-                            dr["CLAIMANT"] = "CLAIMANT";
+                            dr["CLAIMANT"] = "CLAIMANT"; 
                         else
                             dr["CLAIMANT"] = "";
 
