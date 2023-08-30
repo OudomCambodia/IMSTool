@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.chkProducts = new System.Windows.Forms.CheckedListBox();
+            this.lblFilterPrd = new System.Windows.Forms.Label();
             this.tbRequisitionNo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
@@ -69,8 +69,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.chkProducts);
+            this.groupBox1.Controls.Add(this.lblFilterPrd);
             this.groupBox1.Controls.Add(this.tbRequisitionNo);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lbTotal);
@@ -93,23 +93,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Requisition Information";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(397, 30);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 17);
-            this.label5.TabIndex = 153;
-            this.label5.Text = "Selected Products:";
-            // 
             // chkProducts
             // 
             this.chkProducts.FormattingEnabled = true;
-            this.chkProducts.Location = new System.Drawing.Point(535, 30);
+            this.chkProducts.Location = new System.Drawing.Point(526, 27);
             this.chkProducts.Name = "chkProducts";
-            this.chkProducts.Size = new System.Drawing.Size(413, 137);
-            this.chkProducts.TabIndex = 152;
+            this.chkProducts.Size = new System.Drawing.Size(324, 156);
+            this.chkProducts.TabIndex = 154;
+            this.chkProducts.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chkProducts_ItemCheck);
+            // 
+            // lblFilterPrd
+            // 
+            this.lblFilterPrd.AutoSize = true;
+            this.lblFilterPrd.ForeColor = System.Drawing.Color.White;
+            this.lblFilterPrd.Location = new System.Drawing.Point(397, 30);
+            this.lblFilterPrd.Name = "lblFilterPrd";
+            this.lblFilterPrd.Size = new System.Drawing.Size(123, 17);
+            this.lblFilterPrd.TabIndex = 153;
+            this.lblFilterPrd.Text = "Selected Products:";
             // 
             // tbRequisitionNo
             // 
@@ -342,7 +343,7 @@
         private System.Windows.Forms.DataGridView dgvResult;
         private cus_button btnDirectBill;
         private cus_button btnNonDirect;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblFilterPrd;
         private System.Windows.Forms.CheckedListBox chkProducts;
 
     }
