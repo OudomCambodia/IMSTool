@@ -366,7 +366,7 @@ namespace Testing.Forms
                     //else
                     if(c==8){
                         ws.Cell(r + 7, c + 1).SetValue(decimal.Parse(dr[c].ToString()));
-                        ws.Cell(r + 7, c + 1).Style.NumberFormat.Format = "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"_);_(@)";
+                        ws.Cell(r + 7, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
                     }
                         
                     else
@@ -406,7 +406,7 @@ namespace Testing.Forms
                 {
                     ws.Row(r + 7).InsertRowsBelow(2);
                     ws.Cell(r + 8, 9).SetValue(decimal.Parse(countr.ToString("#,##0.00")));
-                    ws.Cell(r + 8, 9).Style.NumberFormat.Format = "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"_);_(@)";
+                    ws.Cell(r + 8, 9).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
                     //ws.Cell(r + 8, 8).Style.Fill.SetBackgroundColor(XLColor.CoolGrey);
                     ws.Cell(r + 8, 9).Style.Font.Bold = true;
                     ws.Cell(r + 8, 9).Style.Font.FontSize = 12f;
@@ -501,7 +501,9 @@ namespace Testing.Forms
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
-                newRow["Description"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower()) + " - " + "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " To Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
+                //newRow["Description"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower()) + " - " + "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " to Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
+                newRow["Description"] = "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " to Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
+                
                 newRow["USD"] = Convert.ToDouble(item["USD"].ToString(), new NumberFormatInfo() { NumberGroupSeparator = "," });
                 newRow["Bank"] = item["Bank"];
                 newRow["BankAcc_No"] = item["Bank_AccNo."];
@@ -547,7 +549,7 @@ namespace Testing.Forms
                         if (c == 5)
                         {
                             ws.Cell(r + 6, c + 1).SetValue(decimal.Parse(dr[c].ToString()));
-                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"_);_(@)";
+                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_(* \"-\"_);_(@)";
                         }
                         else
                         ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
@@ -630,8 +632,9 @@ namespace Testing.Forms
                 newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
+                newRow["Description"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower()) + " - " + "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " to Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
 
-                newRow["Description"] = "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " To Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
+                //newRow["Description"] = "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " to Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
                 newRow["USD"] = Convert.ToDouble(item["USD"].ToString() ,new NumberFormatInfo() { NumberGroupSeparator = "," });
                 newRow["Bank"] = item["Bank"];
                 newRow["BankAcc_No"] = item["Bank_AccNo."];
@@ -676,7 +679,7 @@ namespace Testing.Forms
                         if (c == 5)
                         {
                             ws.Cell(r + 6, c + 1).SetValue(decimal.Parse(dr[c].ToString()));
-                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"_);_(@)";
+                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_(* \"-\"_);_(@)";
                         }
                         else
                             ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
@@ -808,7 +811,7 @@ namespace Testing.Forms
                         if (c == 5)
                         {
                             ws.Cell(r + 6, c + 1).SetValue(decimal.Parse(dr[c].ToString()));
-                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"_);_(@)";
+                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
                         }
                         else
                             ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
@@ -937,7 +940,7 @@ namespace Testing.Forms
                         if (c == 5)
                         {
                             ws.Cell(r + 6, c + 1).SetValue(decimal.Parse(dr[c].ToString()));
-                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_($* #,##0.00_);_($* (#,##0.00);_($* \"-\"_);_(@)";
+                            ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
                         }
                         else
                             ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
