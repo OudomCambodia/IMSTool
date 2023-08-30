@@ -397,7 +397,7 @@ namespace Testing.Forms
                     {
                         if (proclass == "AUTOMOBILE")
                             dr["CLAIMANT"] = "VEHICLE NUMBER";
-                        else if (product == "GPA" || product == "PAC" || product == "TRI" || product == "TRV" || product == "PAE" || product == "PAP")
+                        else if (product == "GPA" || product == "PAC" || product == "TRI" || product == "TRV" || product == "TRA" || product == "TRP" || product == "PAE" || product == "PAP")
                             dr["CLAIMANT"] = "CLAIMANT";
                         else
                             dr["CLAIMANT"] = "";
