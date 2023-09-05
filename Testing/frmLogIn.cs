@@ -72,11 +72,11 @@ namespace Testing
         K: //Update 19-Jul-19 (Solve Connection Pool Problem)
             try
             {
-                string sql = "SELECT password, expiry_date, user_name, type FROM USER_PRINT_SYSTEM WHERE USER_CODE = '" + tbUser.Text.Trim().ToUpper() + "'";
+                string sql = "SELECT password, expiry_date, user_name, type,USER_STATUS FROM USER_PRINT_SYSTEM WHERE USER_CODE = '" + tbUser.Text.Trim().ToUpper() + "'";
 
                 DataTable dt = new DataTable();
                 dt = crud.ExecQuery(sql);
-                if (dt.Rows.Count == 0 || tbUser.Text.Trim().ToUpper() == "MAINT" || tbUser.Text.Trim().ToUpper() == "SICL")
+                if (dt.Rows.Count == 0 || tbUser.Text.Trim().ToUpper() == "MAINT" || tbUser.Text.Trim().ToUpper() == "SICL" )
                 {
                     Msgbox.Show("You have input incorrect user code.");
                     return;
@@ -85,86 +85,96 @@ namespace Testing
                 DataRow dr = dt.Rows[0];
                 string password = dr[0].ToString();
                 string username = dr[2].ToString();
-                fullusername = username;
-                DateTime expDate = (DateTime)dr[1];
-               
-                if (Cipher.Encrypt(tbPassword.Text, HashPass) != password)
+                if (dr[4].ToString() == "A")
                 {
-                    Msgbox.Show("You have input incorrect password");
-                    return;
-                }
 
-                if (DateTime.Now > expDate)
-                {
-                    Msgbox.Show("Your account is expired. Please contact system admin.");
-                    return;
-                }
 
-                #region --- USER ROLE MANAGEMENT OLD CODING ---
-                //sql = "SELECT allow FROM USER_PRINT_TYPE WHERE TYPE = '" + dr[3].ToString() + "'";
-                //string allow = crud.ExecQuery(sql).Rows[0].ItemArray[0].ToString();
-                //string[] splitAllow = allow.Split(',').ToArray();
-                //sql = "select * from USER_PRINT_ALLOW_REFERENCE Where REFERENCE_NO in (";
-                //foreach (string eachAllow in splitAllow)
-                //    sql += "'" + eachAllow + "',";
-                //sql = sql.Remove(sql.Length - 1, 1);
-                //sql += ")";
-                //DataTable allowRef = crud.ExecQuery(sql);
+                    fullusername = username;
+                    DateTime expDate = (DateTime)dr[1];
 
-                //frmMain fm = new frmMain();
-                //fm.UserName = tbUser.Text.ToUpper();
-                //fm.FullName = dr[2].ToString();
-                //fm.frmLog = this;
-
-                //foreach (DataRow drRef in allowRef.Rows)
-                //{
-                //    if (fm.Controls.Find(drRef[2].ToString(), true).Length > 0)
-                //    {
-                //        ((Button)fm.Controls.Find(drRef[2].ToString(), true)[0]).Enabled = true;
-                //        continue;
-                //    }
-
-                //    if (fm.menuStrip1.Items.Find(drRef[2].ToString(), true).Length > 0)
-                //    {
-                //        ((ToolStripMenuItem)fm.menuStrip1.Items.Find(drRef[2].ToString(), true)[0]).Enabled = true;
-                //    }
-                //}
-                //Usert = tbUser.Text;
-                //fm.Show();
-                //this.Hide();
-                #endregion
-
-                #region --- USER ROLE MANAGEMENT NEW CODING ---
-                var userCode = tbUser.Text.Trim().ToUpper();
-                var userControlAccess = crud.ExecQuery("select upc.CONTROL_NAME, uca.VISIBLE, uca.ENABLED from USER_PRINT_CONTROL_ACCESS uca inner join USER_PRINT_CONTROL upc on upc.CONTROL_ID = uca.CONTROL_ID where uca.CODE = (select TYPE from USER_PRINT_SYSTEM where USER_CODE = '" + userCode + "')");
-
-                frmMain fm = new frmMain();
-                fm.UserName = tbUser.Text.ToUpper();
-                fm.FullName = dr[2].ToString();
-                fm.frmLog = this;
-
-                if (userControlAccess.Rows.Count > 0)
-                {
-                    for (int i = 0; i < userControlAccess.Rows.Count; i++)
+                    if (Cipher.Encrypt(tbPassword.Text, HashPass) != password)
                     {
-                        var controlName = userControlAccess.Rows[i]["CONTROL_NAME"].ToString();
-                        var isEnabled = userControlAccess.Rows[i]["VISIBLE"].ToString().Equals("Y") && userControlAccess.Rows[i]["ENABLED"].ToString().Equals("Y");
-                        if (fm.Controls.Find(controlName, true).Length > 0)
+                        Msgbox.Show("You have input incorrect password");
+                        return;
+                    }
+
+                    if (DateTime.Now > expDate)
+                    {
+                        Msgbox.Show("Your account is expired. Please contact system admin.");
+                        return;
+                    }
+
+                    #region --- USER ROLE MANAGEMENT OLD CODING ---
+                    //sql = "SELECT allow FROM USER_PRINT_TYPE WHERE TYPE = '" + dr[3].ToString() + "'";
+                    //string allow = crud.ExecQuery(sql).Rows[0].ItemArray[0].ToString();
+                    //string[] splitAllow = allow.Split(',').ToArray();
+                    //sql = "select * from USER_PRINT_ALLOW_REFERENCE Where REFERENCE_NO in (";
+                    //foreach (string eachAllow in splitAllow)
+                    //    sql += "'" + eachAllow + "',";
+                    //sql = sql.Remove(sql.Length - 1, 1);
+                    //sql += ")";
+                    //DataTable allowRef = crud.ExecQuery(sql);
+
+                    //frmMain fm = new frmMain();
+                    //fm.UserName = tbUser.Text.ToUpper();
+                    //fm.FullName = dr[2].ToString();
+                    //fm.frmLog = this;
+
+                    //foreach (DataRow drRef in allowRef.Rows)
+                    //{
+                    //    if (fm.Controls.Find(drRef[2].ToString(), true).Length > 0)
+                    //    {
+                    //        ((Button)fm.Controls.Find(drRef[2].ToString(), true)[0]).Enabled = true;
+                    //        continue;
+                    //    }
+
+                    //    if (fm.menuStrip1.Items.Find(drRef[2].ToString(), true).Length > 0)
+                    //    {
+                    //        ((ToolStripMenuItem)fm.menuStrip1.Items.Find(drRef[2].ToString(), true)[0]).Enabled = true;
+                    //    }
+                    //}
+                    //Usert = tbUser.Text;
+                    //fm.Show();
+                    //this.Hide();
+                    #endregion
+
+                    #region --- USER ROLE MANAGEMENT NEW CODING ---
+                    var userCode = tbUser.Text.Trim().ToUpper();
+                    var userControlAccess = crud.ExecQuery("select upc.CONTROL_NAME, uca.VISIBLE, uca.ENABLED from USER_PRINT_CONTROL_ACCESS uca inner join USER_PRINT_CONTROL upc on upc.CONTROL_ID = uca.CONTROL_ID where uca.CODE = (select TYPE from USER_PRINT_SYSTEM where USER_CODE = '" + userCode + "')");
+
+                    frmMain fm = new frmMain();
+                    fm.UserName = tbUser.Text.ToUpper();
+                    fm.FullName = dr[2].ToString();
+                    fm.frmLog = this;
+
+                    if (userControlAccess.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < userControlAccess.Rows.Count; i++)
                         {
-                            ((Button)fm.Controls.Find(controlName, true)[0]).Enabled = isEnabled;
-                            continue;
-                        }
-                        if (fm.menuStrip1.Items.Find(controlName, true).Length > 0)
-                        {
-                            ((ToolStripMenuItem)fm.menuStrip1.Items.Find(controlName, true)[0]).Enabled = isEnabled;
+                            var controlName = userControlAccess.Rows[i]["CONTROL_NAME"].ToString();
+                            var isEnabled = userControlAccess.Rows[i]["VISIBLE"].ToString().Equals("Y") && userControlAccess.Rows[i]["ENABLED"].ToString().Equals("Y");
+                            if (fm.Controls.Find(controlName, true).Length > 0)
+                            {
+                                ((Button)fm.Controls.Find(controlName, true)[0]).Enabled = isEnabled;
+                                continue;
+                            }
+                            if (fm.menuStrip1.Items.Find(controlName, true).Length > 0)
+                            {
+                                ((ToolStripMenuItem)fm.menuStrip1.Items.Find(controlName, true)[0]).Enabled = isEnabled;
+                            }
                         }
                     }
-                }
 
-                Usert = tbUser.Text;
-                fm.Show();
-                this.Hide();
-                #endregion
+                    Usert = tbUser.Text;
+                    fm.Show();
+                    this.Hide();
+                    #endregion
+                }
+                else
+                {
+                    Msgbox.Show("Your user is inactive please contact administrator!");
+                    return;
+                }
             }
             catch (Exception e)
             {
