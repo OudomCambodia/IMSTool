@@ -46,7 +46,7 @@ namespace Testing.Forms
                         .Append("SELECT [USER_CODE] ")
                         .Append("FROM [DocumentControlDB].[dbo].[tbDOC_USER] ")
                         .Append("where [GROUP] = 'BROKERTEAM' ")
-                        .AppendFormat("and Parent like (select PARENT + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '{0}') + '%') ", frmLogIn.Usert.ToUpper())
+                        .AppendFormat("and Parent like (select isnull (PARENT, '') + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '{0}') + '%') ", frmLogIn.Usert.ToUpper())
                         .Append("and convert(datetime,CREATE_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') ")
                         .Append("and convert(datetime,CREATE_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ")
                         .Append("order by user_code");

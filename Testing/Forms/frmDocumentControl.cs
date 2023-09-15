@@ -319,9 +319,9 @@ namespace Testing.Forms
 
                 if (isBrokerLeader)
                 {
-                    dgvOpensqlstring += "and [USER_NAME] IN (select [USER_NAME] from tbDOC_USER where USER_CODE in (select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "' ";
+                    dgvOpensqlstring += " and [USER_NAME] IN (select [USER_NAME] from tbDOC_USER where USER_CODE in (select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "' ";
                     dgvOpensqlstring += "union all SELECT [USER_CODE] FROM [DocumentControlDB].[dbo].[tbDOC_USER] ";
-                    dgvOpensqlstring += "where [GROUP] = 'BROKERTEAM' and Parent like (select PARENT + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '"+ frmLogIn.Usert.ToUpper() +"') + '%')) ";
+                    dgvOpensqlstring += "where [GROUP] = 'BROKERTEAM' and Parent like (select isnull (PARENT, '') + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "') + '%')) ";
                 }
                 else
                 {
