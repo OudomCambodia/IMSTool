@@ -158,7 +158,7 @@ namespace Testing.Forms
                 dgvNoti.DataSource = _dtNoti;
 
                 //set Status
-                string tmpstatus = "";
+                string tmpstatus = ""; 
                 foreach (string s in Role)
                 {
                     tmpstatus += sqlcrud.LoadData("SELECT STATUS FROM dbo.tbChangeStatus_Allow WHERE ROLE = '" + s.Trim() + "'").Tables[0].Rows[0][0].ToString() + ",";
@@ -208,7 +208,6 @@ namespace Testing.Forms
                     enabledButt(btnAddDoc);
                     btnManageCrono.Enabled = true;
                 }
-
 
                 //Noti
                 if (notiTriggered)

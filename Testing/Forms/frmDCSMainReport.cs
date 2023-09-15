@@ -43,7 +43,7 @@ namespace Testing.Forms
                         .Append("where USER_CODE in ( ")
                         .AppendFormat("select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '{0}' ", frmLogIn.Usert.ToUpper())
                         .Append("union all ")
-                        .Append("SELECT [USER_CODE] ")
+                        .Append("SELECT [USER_CODE] ") 
                         .Append("FROM [DocumentControlDB].[dbo].[tbDOC_USER] ")
                         .Append("where [GROUP] = 'BROKERTEAM' ")
                         .AppendFormat("and Parent like (select isnull (PARENT, '') + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '{0}') + '%') ", frmLogIn.Usert.ToUpper())
@@ -109,6 +109,7 @@ namespace Testing.Forms
                 Cursor.Current = Cursors.WaitCursor;
                 //My_DataTable_Extensions.ExportToExcel(dt, "");
                 My_DataTable_Extensions.ExportToExcelXML(dt, "");
+
                 Cursor.Current = Cursors.AppStarting;
             }
             else
