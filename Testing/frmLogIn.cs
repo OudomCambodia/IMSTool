@@ -85,8 +85,8 @@ namespace Testing
                 DataRow dr = dt.Rows[0];
                 string password = dr[0].ToString();
                 string username = dr[2].ToString();
-                if (dr[4].ToString() == "A")
-                {
+                //if (dr[4].ToString() == "A")
+                //{
 
 
                     fullusername = username;
@@ -169,12 +169,12 @@ namespace Testing
                     fm.Show();
                     this.Hide();
                     #endregion
-                }
-                else
-                {
-                    Msgbox.Show("Your user is inactive please contact administrator!");
-                    return;
-                }
+                //}
+                //else
+                //{
+                //    Msgbox.Show("Your user is inactive please contact administrator!");
+                //    return;
+                //}
             }
             catch (Exception e)
             {
