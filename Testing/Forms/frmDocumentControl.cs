@@ -158,7 +158,7 @@ namespace Testing.Forms
                 dgvNoti.DataSource = _dtNoti;
 
                 //set Status
-                string tmpstatus = "";
+                string tmpstatus = ""; 
                 foreach (string s in Role)
                 {
                     tmpstatus += sqlcrud.LoadData("SELECT STATUS FROM dbo.tbChangeStatus_Allow WHERE ROLE = '" + s.Trim() + "'").Tables[0].Rows[0][0].ToString() + ",";
@@ -208,7 +208,6 @@ namespace Testing.Forms
                     enabledButt(btnAddDoc);
                     btnManageCrono.Enabled = true;
                 }
-
 
                 //Noti
                 if (notiTriggered)
@@ -319,9 +318,9 @@ namespace Testing.Forms
 
                 if (isBrokerLeader)
                 {
-                    dgvOpensqlstring += "and [USER_NAME] IN (select [USER_NAME] from tbDOC_USER where USER_CODE in (select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "' ";
+                    dgvOpensqlstring += " and [USER_NAME] IN (select [USER_NAME] from tbDOC_USER where USER_CODE in (select [USER_CODE] from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "' ";
                     dgvOpensqlstring += "union all SELECT [USER_CODE] FROM [DocumentControlDB].[dbo].[tbDOC_USER] ";
-                    dgvOpensqlstring += "where [GROUP] = 'BROKERTEAM' and Parent like (select PARENT + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '"+ frmLogIn.Usert.ToUpper() +"') + '%')) ";
+                    dgvOpensqlstring += "where [GROUP] = 'BROKERTEAM' and Parent like (select isnull (PARENT, '') + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "') + '%')) ";
                 }
                 else
                 {
