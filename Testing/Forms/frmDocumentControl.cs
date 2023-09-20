@@ -58,7 +58,8 @@ namespace Testing.Forms
         private readonly string ALL_REGIONALS = "ALL_REGIONALS";
         private readonly string ALL_BANKS = "ALL_BANKS";
         private readonly string ALL_BROKERS = "ALL_BROKERS";
-
+        private readonly string HEAD_CHINESE = "HEAD_CHINESE";
+        private readonly string SPECIAL_HEAD = "SPECIAL_HEAD";
         public static string SelectionColor;
 
         private bool isClickRefresh;
@@ -322,8 +323,11 @@ namespace Testing.Forms
                     dgvOpensqlstring += "union all SELECT [USER_CODE] FROM [DocumentControlDB].[dbo].[tbDOC_USER] ";
                     dgvOpensqlstring += "where [GROUP] = 'BROKERTEAM' and Parent like (select isnull (PARENT, '') + USER_CODE + '.' as PARENT from [DocumentControlDB].[dbo].tbDOC_USER where [USER_NAME] = '" + frmLogIn.Usert.ToUpper() + "') + '%')) ";
                 }
+                
+               
                 else
                 {
+                    
                     if (status == "18" || status == "19")
                     {
                         dgvOpensqlstring += " and CREATE_BY = '" + FullName + "' ";
@@ -372,6 +376,8 @@ namespace Testing.Forms
                             : (Role[0] == "PRODUCER")
                                 ? (specialCode.Equals(ALL_REGIONALS))
                                 ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%')  OR CREATE_BY = 'U-BVC')"
+                                : (specialCode.Equals(HEAD_CHINESE))
+                                ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'CHINESETEAM'))"
                                 : (specialCode.Equals(ALL_BANKS))
                                 ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
                                 : (specialCode.Equals(ALL_BROKERS))
@@ -415,6 +421,9 @@ namespace Testing.Forms
                 }
 
                 //All records option
+                //add code for HOD of each dept to view doc under their control
+               
+                //20-09-2023 Southeane - Request by Paul
                 if ((status == "99" || status == "7" || (status == "0" && isClickRefresh) || (status == "18" && isClickRefresh) || (status == "19" && isClickRefresh)) && rbSpecificDate.Checked)
                 {
                     isClickRefresh = false;
