@@ -295,7 +295,7 @@
             this.btnDirectBill.Name = "btnDirectBill";
             this.btnDirectBill.Size = new System.Drawing.Size(98, 26);
             this.btnDirectBill.TabIndex = 16;
-            this.btnDirectBill.Text = "Direct Building";
+            this.btnDirectBill.Text = "Direct Billing";
             this.btnDirectBill.UseVisualStyleBackColor = false;
             this.btnDirectBill.Click += new System.EventHandler(this.btnDirectBill_Click);
             // 

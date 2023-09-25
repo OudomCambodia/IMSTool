@@ -353,7 +353,7 @@ namespace Testing.Forms
                 //
             }
             //
-
+            
             //Set Table Data After Header
             for (int r = 0; r < RowsCount; r++)
             {
@@ -368,8 +368,14 @@ namespace Testing.Forms
                         ws.Cell(r + 7, c + 1).SetValue(decimal.Parse(dr[c].ToString()));
                         ws.Cell(r + 7, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
                     }
-                        
-                    else
+
+                    else if (c == 0)
+                    {
+                        ws.Cell(r + 7, c + 1).SetValue(int.Parse(dr[c].ToString()));
+                        ws.Cell(r + 7, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    }
+
+                    else  
                         ws.Cell(r + 7, c + 1).SetValue(dr[c].ToString());
 
 
@@ -393,47 +399,96 @@ namespace Testing.Forms
                     
                 }
 
+                
+                    if (ws.Cell(r + 7, 6).Value.ToString() == ws.Cell(r + 8, 6).Value.ToString())
+                    {
 
-                if (ws.Cell(r + 7, 6).Value.ToString() == ws.Cell(r + 8, 6).Value.ToString())
-                {
-                    countr += Convert.ToDouble(ws.Cell(r + 8, 9).Value.ToString());
-                }  
-               
-                    
+                        if (ws.Cell(r + 7, 5).Value.ToString().Contains('(') && ws.Cell(r + 8, 5).Value.ToString().Contains('('))
+                            {
+                                if (Regex.Match(ws.Cell(r + 7, 5).Value.ToString(), @"\(([^)]*)\)").Groups[1].Value != Regex.Match(ws.Cell(r + 8, 5).Value.ToString(), @"\(([^)]*)\)").Groups[1].Value)
+                                {
+                                    ws.Row(r + 7).InsertRowsBelow(2);
+                                    ws.Cell(r + 8, 9).SetValue(decimal.Parse(countr.ToString("#,##0.00")));
+                                    ws.Cell(r + 8, 9).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
+                                    //ws.Cell(r + 8, 8).Style.Fill.SetBackgroundColor(XLColor.CoolGrey);
+                                    ws.Cell(r + 8, 9).Style.Font.Bold = true;
+                                    ws.Cell(r + 8, 9).Style.Font.FontSize = 12f;
+
+                                    countr = 0;
+                                    r += 2;
+                                    RowsCount += 2; //need to add two rows as increase by two rows
+
+
+                                    for (int c = 0; c < 11; c++)
+                                    {
+
+
+                                        ws.Cell(r + 6, c + 1).Style.Border.TopBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 6, c + 1).Style.Border.BottomBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 6, c + 1).Style.Border.LeftBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 6, c + 1).Style.Border.RightBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 7, c + 1).Style.Border.TopBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 7, c + 1).Style.Border.BottomBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 7, c + 1).Style.Border.LeftBorder = XLBorderStyleValues.None;
+                                        ws.Cell(r + 7, c + 1).Style.Border.RightBorder = XLBorderStyleValues.None;
+
+                                    }
+                                }
+                                else
+                                {
+                                    countr += Convert.ToDouble(ws.Cell(r + 8, 9).Value.ToString());
+                                    
+                                }
+                                    
+                            }
+                        else
+                        {
+                            
+
+                                countr += Convert.ToDouble(ws.Cell(r + 8, 9).Value.ToString());
+                                
+                        }
+                        
+                    }
 
                 //need to check to insert one row group by beneficiary name
-                if (ws.Cell(r + 7, 6).Value.ToString() != ws.Cell(r + 8, 6).Value.ToString())
+
+               // if (ws.Cell(r + 7, 6).Value.ToString() != ws.Cell(r + 8, 6).Value.ToString())
+               else if (ws.Cell(r + 7, 6).Value.ToString() != ws.Cell(r + 8, 6).Value.ToString())
                 {
+
                     ws.Row(r + 7).InsertRowsBelow(2);
                     ws.Cell(r + 8, 9).SetValue(decimal.Parse(countr.ToString("#,##0.00")));
                     ws.Cell(r + 8, 9).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_($* \"-\"_);_(@)";
                     //ws.Cell(r + 8, 8).Style.Fill.SetBackgroundColor(XLColor.CoolGrey);
                     ws.Cell(r + 8, 9).Style.Font.Bold = true;
                     ws.Cell(r + 8, 9).Style.Font.FontSize = 12f;
-                    
+
                     countr = 0;
                     r += 2;
                     RowsCount += 2; //need to add two rows as increase by two rows
-                    
-                    
-                        for (int c = 0; c <11 ;c++)
-                        {
+
+                   
+                    for (int c = 0; c < 11; c++)
+                    {
 
 
-                            ws.Cell(r + 6, c + 1).Style.Border.TopBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 6, c + 1).Style.Border.BottomBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 6, c + 1).Style.Border.LeftBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 6, c + 1).Style.Border.RightBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 7, c + 1).Style.Border.TopBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 7, c + 1).Style.Border.BottomBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 7, c + 1).Style.Border.LeftBorder = XLBorderStyleValues.None;
-                            ws.Cell(r + 7, c + 1).Style.Border.RightBorder = XLBorderStyleValues.None;
-
-                        }
-                       
+                        ws.Cell(r + 6, c + 1).Style.Border.TopBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 6, c + 1).Style.Border.BottomBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 6, c + 1).Style.Border.LeftBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 6, c + 1).Style.Border.RightBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 7, c + 1).Style.Border.TopBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 7, c + 1).Style.Border.BottomBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 7, c + 1).Style.Border.LeftBorder = XLBorderStyleValues.None;
+                        ws.Cell(r + 7, c + 1).Style.Border.RightBorder = XLBorderStyleValues.None;
                         
+
+                    }
+                    
                 }
-            }
+                    
+                }
+            
 
             ws.Columns(2, 11).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
@@ -446,6 +501,9 @@ namespace Testing.Forms
             ws.PageSetup.PrintAreas.Clear();
             ws.PageSetup.Margins.Left = 0.5;
             ws.PageSetup.Margins.Right = 0.5;
+
+            ws.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
+
         }
         private void SecondSheetDirectBilling(DataTable dtcopy, IXLWorkbook wb, IXLWorksheet ws, int ColumnsCount, int RowsCount, string ExcelFilePath = null)
         {
@@ -512,6 +570,7 @@ namespace Testing.Forms
 
             DataTable dt2 = dtMISReport.AsEnumerable()
                 .GroupBy(r => new { Date = r["Date"], Forte_Bank = r["Forte_Bank"], TT_No = r["TT_No."], Beneficiary_Name = r["Beneficiary_Name"], Description = r["Description"], Bank = r["Bank"], BankAcc_No = r["BankAcc_No"] })
+                
                 .Select(g =>
                     {
                         var row = dtMISReport.NewRow();
@@ -524,11 +583,11 @@ namespace Testing.Forms
                         row["USD"] = g.Sum(usd => Convert.ToDouble(usd.Field<string>("USD"), new NumberFormatInfo() { NumberGroupSeparator = "," })).ToString("#,##0.00");
                         row["Bank"] = g.Key.Bank;
                         row["BankAcc_No"] = g.Key.BankAcc_No;
-                        
 
-                    return row;
 
-            }).CopyToDataTable();
+                        return row;
+
+                    }).CopyToDataTable();
             
             
 
@@ -544,6 +603,11 @@ namespace Testing.Forms
                         
                         
                     }
+                    else if (c ==0)
+                    {
+                        ws.Cell(r + 6, c + 1).SetValue(DateTime.Parse(dr[c].ToString()));
+                        ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    }
                     else
                     {
                         if (c == 5)
@@ -552,7 +616,14 @@ namespace Testing.Forms
                             ws.Cell(r + 6, c + 1).Style.NumberFormat.Format = "_(* #,##0.00_);_(* (#,##0.00);_(* \"-\"_);_(@)";
                         }
                         else
-                        ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
+                        {
+                            //ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
+                            if (c == 1 && dr[c].ToString() != "ABA")
+                                ws.Cell(r + 6, c + 1).SetValue("Bred");
+                            else
+                                ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
+                        }
+                       
                          
                     }
                     
@@ -578,6 +649,8 @@ namespace Testing.Forms
             }
             ws.Columns(2, 15).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
+
+            ws.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
         }
         private void ThirdSheetDirectBilling(DataTable dtcopy, IXLWorkbook wb, IXLWorksheet ws, int ColumnsCount, int RowsCount, string ExcelFilePath = null)
         {
@@ -674,6 +747,11 @@ namespace Testing.Forms
                         ws.Cell(r + 6, c + 4).SetValue(dr[c].ToString());
 
                     }
+                    else if (c == 0)
+                    {
+                        ws.Cell(r + 6, c + 1).SetValue(DateTime.Parse(dr[c].ToString()));
+                        ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    }
                     else
                     {
                         if (c == 5)
@@ -705,6 +783,8 @@ namespace Testing.Forms
             ws.PageSetup.PrintAreas.Clear();
             ws.PageSetup.Margins.Left = 0.5;
             ws.PageSetup.Margins.Right = 0.5;
+
+            ws.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
         }
         private void SecondSheetNonDirectBilling(DataTable dtcopy, IXLWorkbook wb, IXLWorksheet ws, int ColumnsCount, int RowsCount, string ExcelFilePath = null)
         {
@@ -806,6 +886,11 @@ namespace Testing.Forms
                         
 
                     }
+                    else if (c == 0)
+                    {
+                        ws.Cell(r + 6, c + 1).SetValue(DateTime.Parse(dr[c].ToString()));
+                        ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    }
                     else
                     {
                         if (c == 5)
@@ -838,6 +923,8 @@ namespace Testing.Forms
             ws.PageSetup.PrintAreas.Clear();
             ws.PageSetup.Margins.Left = 0.5;
             ws.PageSetup.Margins.Right = 0.5;
+
+            ws.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
         }
         private void ThirdSheetNonDirectBilling(DataTable dtcopy, IXLWorkbook wb, IXLWorksheet ws, int ColumnsCount, int RowsCount, string ExcelFilePath = null)
         {
@@ -935,6 +1022,11 @@ namespace Testing.Forms
                         
 
                     }
+                    else if (c == 0)
+                    {
+                        ws.Cell(r + 6, c + 1).SetValue(DateTime.Parse(dr[c].ToString()));
+                        ws.Cell(r + 6, c + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    }
                     else
                     {
                         if (c == 5)
@@ -967,6 +1059,8 @@ namespace Testing.Forms
             ws.PageSetup.PrintAreas.Clear();
             ws.PageSetup.Margins.Left = 0.5;
             ws.PageSetup.Margins.Right = 0.5;
+
+            ws.Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
         }
         private void requeryDGV(string product)
         {
