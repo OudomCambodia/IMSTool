@@ -59,7 +59,8 @@ namespace Testing.Forms
         private readonly string ALL_BANKS = "ALL_BANKS";
         private readonly string ALL_BROKERS = "ALL_BROKERS";
         private readonly string HEAD_CHINESE = "HEAD_CHINESE";
-        private readonly string SPECIAL_HEAD = "SPECIAL_HEAD";
+        private readonly string ALL_PRODCERS = "ALL_PRODCERS";
+        
         public static string SelectionColor;
 
         private bool isClickRefresh;
@@ -378,6 +379,8 @@ namespace Testing.Forms
                                 ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (SELECT FULL_NAME FROM dbo.tbDOC_USER WHERE USER_NAME like 'R-%')  OR CREATE_BY = 'U-BVC')"
                                 : (specialCode.Equals(HEAD_CHINESE))
                                 ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'CHINESETEAM'))"
+                                : (specialCode.Equals(ALL_PRODCERS))
+                                ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t))"
                                 : (specialCode.Equals(ALL_BANKS))
                                 ? dgvOpensqlstring + " AND (CREATE_BY like '%" + FullName + "%' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where [GROUP] = 'AGENTTEAM' OR CREATE_BY in (select FULL_NAME from dbo.tbDOC_USER t where t.USER_CODE in (select USER_CODE from dbo.tbExceptionalRole where USER_CODE = t.USER_CODE and EXCEPTION_CODE = 'U-BNK'))))"
                                 : (specialCode.Equals(ALL_BROKERS))
