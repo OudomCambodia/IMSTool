@@ -537,6 +537,7 @@ namespace Testing.Forms
                     }
                     else
                     {
+                        
                         cell = ws.Cell(5, i + 1);
                         cell.Value = dtMISReport.Columns[i].ColumnName;
                         
@@ -551,11 +552,15 @@ namespace Testing.Forms
             }
             //
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+           
             foreach (DataRow item in dtcopy.Rows)
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today.ToShortDateString();
-                newRow["Forte_Bank"] = item["Bank"];
+                if (item["Bank"].ToString() != "ABA")
+                    newRow["Forte_Bank"] = "Bred";
+                else
+                    newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
@@ -570,7 +575,7 @@ namespace Testing.Forms
 
             DataTable dt2 = dtMISReport.AsEnumerable()
                 .GroupBy(r => new { Date = r["Date"], Forte_Bank = r["Forte_Bank"], TT_No = r["TT_No."], Beneficiary_Name = r["Beneficiary_Name"], Description = r["Description"], Bank = r["Bank"], BankAcc_No = r["BankAcc_No"] })
-                
+                .OrderBy(r => r.Key.Forte_Bank)
                 .Select(g =>
                     {
                         var row = dtMISReport.NewRow();
@@ -592,11 +597,15 @@ namespace Testing.Forms
             
 
             //Set Table Data After Header
+            
             for (int r = 0; r < dt2.Rows.Count; r++)
             {
                 DataRow dr = dt2.Rows[r];
+                
                 for (int c = 0; c < dt2.Columns.Count; c++)
                 {
+                    
+
                     if (c >= 6 && c <= 8)
                     {
                         ws.Cell(r + 6, c + 4).SetValue(dr[c].ToString());
@@ -617,10 +626,7 @@ namespace Testing.Forms
                         }
                         else
                         {
-                            //ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
-                            if (c == 1 && dr[c].ToString() != "ABA")
-                                ws.Cell(r + 6, c + 1).SetValue("Bred");
-                            else
+                            
                                 ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
                         }
                        
@@ -644,9 +650,22 @@ namespace Testing.Forms
                     ws.PageSetup.Margins.Right = 0.5;
                    
                 }
-                
-
             }
+            
+            //Insert Row after check bank if it is in the same Bank
+            for (int r = 0; r < dt2.Rows.Count; r++)
+            {
+                for (int c = 0; c < dt2.Columns.Count; c++)
+                {
+                    if (ws.Cell(r + 6, 2).Value.ToString() != ws.Cell(r + 7, 2).Value.ToString())
+                    {
+                        ws.Row(r + 6).InsertRowsBelow(1);
+                        r++;
+                        break;
+                    }
+                }
+            }
+
             ws.Columns(2, 15).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
 
@@ -702,7 +721,10 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today.ToShortDateString();
-                newRow["Forte_Bank"] = item["Bank"];
+                if (item["Bank"].ToString() != "ABA")
+                    newRow["Forte_Bank"] = "Bred";
+                else
+                    newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 newRow["Description"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower()) + " - " + "Medical " + item["Forte Claim No"].ToString().Substring(7, 3) + " to Panel Hospital " + Regex.Match(item["Requisition_Narration"].ToString(), @"\(([^)]*)\)").Groups[1].Value;
@@ -716,6 +738,7 @@ namespace Testing.Forms
 
             DataTable dt2 = dtMISReport.AsEnumerable()
                 .GroupBy(r => new { Date = r["Date"], Forte_Bank = r["Forte_Bank"], TT_No = r["TT_No."], Beneficiary_Name = r["Beneficiary_Name"], Description = r["Description"], Bank = r["Bank"], BankAcc_No = r["BankAcc_No"] })
+                .OrderBy(r => r.Key.Forte_Bank)
                 .Select(g =>
                 {
                     var row = dtMISReport.NewRow();
@@ -773,6 +796,22 @@ namespace Testing.Forms
                 }
 
             }
+
+            //Insert Row after check bank if it is in the same Bank
+            for (int r = 0; r < dt2.Rows.Count; r++)
+            {
+                for (int c = 0; c < dt2.Columns.Count; c++)
+                {
+                    if (ws.Cell(r + 6, 2).Value.ToString() != ws.Cell(r + 7, 2).Value.ToString())
+                    {
+                        ws.Row(r + 6).InsertRowsBelow(1);
+                        r++;
+                        break;
+                    }
+                }
+            }
+
+
             ws.Columns(2, 15).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
 
@@ -836,7 +875,10 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today.ToShortDateString();
-                newRow["Forte_Bank"] = item["Bank"];
+                if (item["Bank"].ToString() != "ABA")
+                    newRow["Forte_Bank"] = "Bred";
+                else
+                    newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
                 //string a = item["TPA Claim No."].ToString().Split('(', ')')[1] == "" ? "" : item["TPA Claim No."].ToString().Split('(', ')')[1];
@@ -851,7 +893,8 @@ namespace Testing.Forms
             DataTable dt2 = dtMISReport.AsEnumerable()
                 //.GroupBy(r => new { Date = r["Date"], Forte_Bank = r["Forte_Bank"], TT_No = r["TT_No."], Beneficiary_Name = r["Beneficiary_Name"], Description = r["Forte_Claim_No"], Bank = r["Bank"], BankAcc_No = r["BankAcc_No"] })
                .GroupBy(r => new { Date = r["Date"], Forte_Bank = r["Forte_Bank"], TT_No = r["TT_No."], Beneficiary_Name = r["Beneficiary_Name"], Bank = r["Bank"], BankAcc_No = r["BankAcc_No"] })
-                .Select(g =>
+               .OrderBy(r => r.Key.Forte_Bank)
+               .Select(g =>
                 {
                     var row = dtMISReport.NewRow();
                     
@@ -906,6 +949,19 @@ namespace Testing.Forms
                     //ws.Cell(r + 6, c + 1).SetValue(dr[c].ToString());
                 }
 
+            }
+            //Insert Row after check bank if it is in the same Bank
+            for (int r = 0; r < dt2.Rows.Count; r++)
+            {
+                for (int c = 0; c < dt2.Columns.Count; c++)
+                {
+                    if (ws.Cell(r + 6, 2).Value.ToString() != ws.Cell(r + 7, 2).Value.ToString())
+                    {
+                        ws.Row(r + 6).InsertRowsBelow(1);
+                        r++;
+                        break;
+                    }
+                }
             }
             IXLRange range = ws.Range(5, 1, 6 + dt2.Rows.Count, 3 + dt2.Columns.Count);
             range.Style.Border.TopBorder = XLBorderStyleValues.Thin;
@@ -976,7 +1032,10 @@ namespace Testing.Forms
             {
                 DataRow newRow = dtMISReport.NewRow();
                 newRow["Date"] = DateTime.Today.ToShortDateString();
-                newRow["Forte_Bank"] = item["Bank"];
+                if (item["Bank"].ToString() != "ABA")
+                    newRow["Forte_Bank"] = "Bred";
+                else
+                    newRow["Forte_Bank"] = item["Bank"];
                 newRow["TT_No."] = "";
                 newRow["Beneficiary_Name"] = textInfo.ToTitleCase(item["Beneficiary_Name"].ToString().ToLower());
 
@@ -989,6 +1048,7 @@ namespace Testing.Forms
 
             DataTable dt2 = dtMISReport.AsEnumerable()
                 .GroupBy(r => new { Date = r["Date"], Forte_Bank = r["Forte_Bank"], TT_No = r["TT_No."], Beneficiary_Name = r["Beneficiary_Name"], Bank = r["Bank"], BankAcc_No = r["BankAcc_No"] })
+                .OrderBy(r => r.Key.Forte_Bank)
                 .Select(g =>
                 {
                     var row = dtMISReport.NewRow();
@@ -1043,6 +1103,21 @@ namespace Testing.Forms
                 }
 
             }
+
+            //Insert Row after check bank if it is in the same Bank
+            for (int r = 0; r < dt2.Rows.Count; r++)
+            {
+                for (int c = 0; c < dt2.Columns.Count; c++)
+                {
+                    if (ws.Cell(r + 6, 2).Value.ToString() != ws.Cell(r + 7, 2).Value.ToString())
+                    {
+                        ws.Row(r + 6).InsertRowsBelow(1);
+                        r++;
+                        break;
+                    }
+                }
+            }
+
             IXLRange range = ws.Range(5, 1, 6 + dt2.Rows.Count, 3 + dt2.Columns.Count);
             range.Style.Border.TopBorder = XLBorderStyleValues.Thin;
             range.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
