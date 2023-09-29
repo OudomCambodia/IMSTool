@@ -493,6 +493,8 @@ namespace Testing.Forms
             ws.Columns(2, 11).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
 
+            ws.Column("D").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Column("I").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
             ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
             ws.PageSetup.FitToPages(1, 1);
@@ -640,6 +642,9 @@ namespace Testing.Forms
                     range.Style.Border.LeftBorder = XLBorderStyleValues.Thin;
                     range.Style.Border.RightBorder = XLBorderStyleValues.Thin;
                     range.Style.Font.FontName = "Arial Narrow";
+
+                    
+                    ws.Column("F").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
                     ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
                     ws.PageSetup.FitToPages(1, 1);
@@ -815,6 +820,10 @@ namespace Testing.Forms
             ws.Columns(2, 15).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
 
+
+            ws.Column("F").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            
+
             ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
             ws.PageSetup.FitToPages(1, 1);
             ws.PageSetup.PagesTall = 1;
@@ -972,6 +981,9 @@ namespace Testing.Forms
             ws.Columns(2, 15).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
 
+           
+            ws.Column("F").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
             ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
             ws.PageSetup.FitToPages(1, 1);
             ws.PageSetup.PagesTall = 1;
@@ -1126,6 +1138,8 @@ namespace Testing.Forms
             range.Style.Font.FontName = "Arial Narrow";
             ws.Columns(2, 15).AdjustToContents();
             ws.SheetView.ZoomScale = 90;
+
+            ws.Column("F").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
             ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
             ws.PageSetup.FitToPages(1, 1);
