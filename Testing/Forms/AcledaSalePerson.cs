@@ -34,6 +34,9 @@ namespace Testing.Forms
                 string[] Values = new string[] { "AcledaSale", dtpFrom.Value.ToString("yyyy/MM/dd") + " 00:00:00", dtpTo.Value.ToString("yyyy/MM/dd") + " 23:59:59" };
                 dt = crud.ExecSP_OutPara("SP_USERACLEDA_SALES", Keys, Values);
 
+
+
+
                 if (dt.Rows.Count <= 0)
                 {
                     Msgbox.Show("No Record Found!");
@@ -41,7 +44,13 @@ namespace Testing.Forms
                 }
                 else
                 {
-                    My_DataTable_Extensions.ExportToExcelXML(dt, "");
+                    var filterdata = from row in dt.AsEnumerable()
+                                     where row.Field<DateTime>("PAID_DATE") >= DateTime.Parse(dtpFrom.Value.ToString("yyyy/MM/dd") + " 00:00:00") && row.Field<DateTime>("PAID_DATE") <= DateTime.Parse(dtpTo.Value.ToString("yyyy/MM/dd") + " 23:59:59")
+                                           
+                                     select row;
+
+                    DataTable filteredDataTable = filterdata.CopyToDataTable();
+                    My_DataTable_Extensions.ExportToExcelXML(filteredDataTable, "");
                 }
             }
             catch (Exception ex)
