@@ -18,9 +18,12 @@ namespace Testing.Forms
         }
 
         DBS11SqlCrud crud = new DBS11SqlCrud();
+        CRUD crud_oracle = new CRUD();
         DataTable dt = new DataTable();
+        DataTable dtOracle = new DataTable();
+        DataTable dtInvoice = new DataTable();
         public string Team="";
-
+        DataTable dtTemp = new DataTable();
 
         private void bnSearch_Click(object sender, EventArgs e)
         {
@@ -78,9 +81,192 @@ namespace Testing.Forms
                         if (check)
                         {
                             ProType = ProType.Remove(ProType.Length - 1);
-                            main_rpt += " AND PRODUCT_TYPE IN (" + ProType + ")";
-                            dt = crud.LoadData(main_rpt).Tables[0];
-                            dgv.DataSource = dt;
+                           
+                            if (dtBrokerTeams.Rows[0]["GROUP"].ToString().ToUpper() == "V-AGENCY")
+                            {
+                                main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
+                        "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
+
+                 string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
+                 string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, "+
+                                "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME,DEB_TOTAL_AMOUNT FROM( " +
+                                "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,DEB_ME_CODE,DEB_TOTAL_AMOUNT " +
+                                    "from rc_t_debit_note WHERE DEB_BPARTY_CODE LIKE 'V-%' " +
+                                    "union  " +
+                                    "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,CRN_ME_CODE,CRN_TOTAL_AMOUNT*(-1) " +
+                                    "from rc_t_credit_note WHERE CRN_BPARTY_CODE LIKE 'V-%')";            
+                                
+                             dt = crud.LoadData(main_rpt).Tables[0];
+                             dtOracle = crud_oracle.ExecQuery(second_rpt);
+                             dtInvoice = crud_oracle.ExecQuery(third_rpt);
+
+                             var query = from row1 in dt.AsEnumerable()
+                                         join row2 in dtOracle.AsEnumerable()
+                                         on row1["CUSTOMER_CODE"] equals row2["CUS_CODE"] into gj
+                                         from subitem2 in gj.DefaultIfEmpty()
+                                         join row3 in dtInvoice.AsEnumerable()
+                                         on row1["DN_CN"] equals row3["DEB_DEB_NOTE_NO"] into gj1
+                                         from subitem3 in gj1.DefaultIfEmpty()
+                                         select new
+                                         {
+                                             SUBMISSION_DATE = row1["SUBMISSION_DATE"],
+                                             DP_ISSUED_DATE = row1["DP_ISSUED_DATE"],
+                                             POLICY_NO = row1["POLICY_NO"],
+                                             CUSTOMER_NAME = row1["CUSTOMER_NAME"],
+                                             //CUSTOMER_PHONE = row2["CUSTOMER_PHONE"],
+                                             CUSTOMER_PHONE = subitem2 == null ? null :subitem2.Field<string>("CUSTOMER_PHONE"),
+                                             PREMIUM = subitem3 == null ? 0 : subitem3.Field<decimal>("DEB_TOTAL_AMOUNT"),
+                                             //SALE_AGENT_CODE = row3["DEB_BPARTY_CODE"],
+                                             SALE_AGENT_CODE = subitem3 == null ? null : subitem3.Field<string>("DEB_ME_CODE"),
+                                             SALE_AGENT_NAME = subitem3 == null ? null : subitem3.Field<string>("AGENT_NAME"),
+                                             //CUS_TYPE = row2["CUS_TYPE"],
+                                             CUS_TYPE =  subitem2 == null ? null : subitem2.Field<string>("CUS_TYPE"),
+                                             DOC_TYPE = row1["DOC_TYPE"],
+                                             PRODUCT_LINE = row1["PRODUCT_LINE"],
+                                             PRODUCT_TYPE = row1["PRODUCT_TYPE"],
+                                             DN_CN = row1["DN_CN"],
+                                             REF_ID = row1["REF_ID"],
+                                             POLICY_EFFECT_DATE = row1["POLICY_EFFECT_DATE"],
+                                             CREATE_BY = row1["CREATE_BY"],
+                                             POLICY_STATUS = row1["POLICY_STATUS"],
+                                             PRODUCER_CODE = row1["PRODUCER_CODE"],
+                                             PRODUCER_NAME = row1["PRODUCER_NAME"],
+                                             DP_NAME = row1["DP_NAME"],
+                                             FILLING_NAME = row1["FILLING_NAME"],
+                                             LATEST_UPDATE_AT = row1["LATEST_UPDATE_AT"],
+                                             STATUS = row1["STATUS"],
+                                             STATUS_BY = row1["STATUS_BY"],
+                                             PRIORITY_TYPE = row1["PRIORITY_TYPE"],
+                                             NOTE = row1["NOTE"],
+                                             DP_REMARK = row1["DP_REMARK"],
+                                             DOCUMENT_REMARK = row1["DOCUMENT_REMARK"],
+                                             SUBMIT_VIA = row1["SUBMIT_VIA"],
+                                             SUBMITTED_TO_UW = row1["SUBMITTED_TO_UW"],
+                                             CONTROLLER_ACCEPTED = row1["CONTROLLER_ACCEPTED"],
+                                             DP_PROCESSING = row1["DP_PROCESSING"],
+                                             PENDING_FOR_SIGNATURE = row1["PENDING_FOR_SIGNATURE"],
+                                             PACKAGING = row1["PACKAGING"],
+                                             PACKAGED = row1["PACKAGED"],
+                                             DONE = row1["DONE"],
+                                             CANCEL_BY_PRODUCER = row1["CANCEL_BY_PRODUCER"],
+                                             CANCEL_BY_CONTROLLER = row1["CANCEL_BY_CONTROLLER"],
+                                             RETURN_DP_MISTAKE = row1["RETURN_DP_MISTAKE"],
+                                             RETURN_PRODUCER_MISTAKE = row1["RETURN_PRODUCER_MISTAKE"],
+                                             PENDING = row1["PENDING"],
+                                             RECEIVED = row1["RECEIVED"],
+                                             SENT_OUT = row1["SENT_OUT"],
+                                             CUR_STATUS = row1["CUR_STATUS"]
+                                             
+                                         };
+                             
+                             dtTemp.Columns.Add("SUBMISSION_DATE", typeof(string));
+                             dtTemp.Columns.Add("DP_ISSUED_DATE", typeof(string));
+                             dtTemp.Columns.Add("POLICY_NO", typeof(string));
+                             dtTemp.Columns.Add("CUSTOMER_NAME", typeof(string));
+                             dtTemp.Columns.Add("CUSTOMER_PHONE", typeof(string));
+                             dtTemp.Columns.Add("PREMIUM", typeof(decimal));
+                             dtTemp.Columns.Add("SALE_AGENT_CODE", typeof(string));
+                             dtTemp.Columns.Add("SALE_AGENT_NAME", typeof(string));
+                             dtTemp.Columns.Add("CUS_TYPE", typeof(string));
+                             dtTemp.Columns.Add("DOC_TYPE", typeof(string));
+                             dtTemp.Columns.Add("PRODUCT_LINE", typeof(string));
+                             dtTemp.Columns.Add("PRODUCT_TYPE", typeof(string));
+                             dtTemp.Columns.Add("DN_CN", typeof(string));
+                             dtTemp.Columns.Add("REF_ID", typeof(string));
+                             dtTemp.Columns.Add("POLICY_EFFECT_DATE", typeof(string));
+                             dtTemp.Columns.Add("CREATE_BY", typeof(string));
+                             dtTemp.Columns.Add("POLICY_STATUS", typeof(string));
+                             dtTemp.Columns.Add("PRODUCER_CODE", typeof(string));
+                             dtTemp.Columns.Add("PRODUCER_NAME", typeof(string));
+                             dtTemp.Columns.Add("DP_NAME", typeof(string));
+                             dtTemp.Columns.Add("FILLING_NAME", typeof(string));
+                             dtTemp.Columns.Add("LATEST_UPDATE_AT", typeof(string));
+                             dtTemp.Columns.Add("STATUS", typeof(string));
+                             dtTemp.Columns.Add("STATUS_BY", typeof(string));
+                             dtTemp.Columns.Add("PRIORITY_TYPE", typeof(string));
+                             dtTemp.Columns.Add("NOTE", typeof(string));
+                             dtTemp.Columns.Add("DP_REMARK", typeof(string));
+                             dtTemp.Columns.Add("DOCUMENT_REMARK", typeof(string));
+                             dtTemp.Columns.Add("SUBMIT_VIA", typeof(string));
+                             dtTemp.Columns.Add("SUBMITTED_TO_UW", typeof(string));
+                             dtTemp.Columns.Add("CONTROLLER_ACCEPTED", typeof(string));
+                             dtTemp.Columns.Add("DP_PROCESSING", typeof(string));
+                             dtTemp.Columns.Add("PENDING_FOR_SIGNATURE", typeof(string));
+                             dtTemp.Columns.Add("PACKAGING", typeof(string));
+                             dtTemp.Columns.Add("PACKAGED", typeof(string));
+                             dtTemp.Columns.Add("DONE", typeof(string));
+                             dtTemp.Columns.Add("CANCEL_BY_PRODUCER", typeof(string));
+                             dtTemp.Columns.Add("CANCEL_BY_CONTROLLER", typeof(string));
+                             dtTemp.Columns.Add("RETURN_DP_MISTAKE", typeof(string));
+                             dtTemp.Columns.Add("RETURN_PRODUCER_MISTAKE", typeof(string));
+                             dtTemp.Columns.Add("PENDING", typeof(string));
+                             dtTemp.Columns.Add("RECEIVED", typeof(string));
+                             dtTemp.Columns.Add("SENT_OUT", typeof(string));
+                             dtTemp.Columns.Add("CUR_STATUS", typeof(string));
+
+                             foreach (var item in query)
+                             {
+                                 DataRow dr = dtTemp.NewRow();
+                                 dr["SUBMISSION_DATE"] = item.SUBMISSION_DATE;
+                                 dr["DP_ISSUED_DATE"] = item.DP_ISSUED_DATE;
+                                 dr["POLICY_NO"] = item.POLICY_NO;
+                                 dr["CUSTOMER_NAME"] = item.CUSTOMER_NAME;
+                                 dr["CUSTOMER_PHONE"] = item.CUSTOMER_PHONE;
+                                 dr["PREMIUM"] = item.PREMIUM;
+                                 dr["SALE_AGENT_CODE"] = item.SALE_AGENT_CODE;
+                                 dr["SALE_AGENT_NAME"] = item.SALE_AGENT_NAME;
+                                 dr["CUS_TYPE"] = item.CUS_TYPE;
+                                 dr["DOC_TYPE"] = item.DOC_TYPE;
+                                 dr["PRODUCT_LINE"] = item.PRODUCT_LINE;
+                                 dr["PRODUCT_TYPE"] = item.PRODUCT_TYPE;
+                                 dr["DN_CN"] = item.DN_CN;
+                                 dr["REF_ID"] = item.REF_ID;
+                                 dr["POLICY_EFFECT_DATE"] = item.POLICY_EFFECT_DATE;
+                                 dr["CREATE_BY"] = item.CREATE_BY;
+                                 dr["POLICY_STATUS"] = item.POLICY_STATUS;
+                                 dr["PRODUCER_CODE"] = item.PRODUCER_CODE;
+                                 dr["PRODUCER_NAME"] = item.PRODUCER_NAME;
+                                 dr["DP_NAME"] = item.DP_NAME;
+                                 dr["FILLING_NAME"] = item.FILLING_NAME;
+                                 dr["LATEST_UPDATE_AT"] = item.LATEST_UPDATE_AT;
+                                 dr["STATUS"] = item.STATUS;
+                                 dr["STATUS_BY"] = item.STATUS_BY;
+                                 dr["PRIORITY_TYPE"] = item.PRIORITY_TYPE;
+                                 dr["NOTE"] = item.NOTE;
+                                 dr["DP_REMARK"] = item.DP_REMARK;
+                                 dr["DOCUMENT_REMARK"] = item.DOCUMENT_REMARK;
+                                 dr["SUBMIT_VIA"] = item.SUBMIT_VIA;
+                                 dr["SUBMITTED_TO_UW"] = item.SUBMITTED_TO_UW;
+                                 dr["CONTROLLER_ACCEPTED"] = item.CONTROLLER_ACCEPTED;
+                                 dr["DP_PROCESSING"] = item.DP_PROCESSING;
+                                 dr["PENDING_FOR_SIGNATURE"] = item.PENDING_FOR_SIGNATURE;
+                                 dr["PACKAGING"] = item.PACKAGING;
+                                 dr["PACKAGED"] = item.PACKAGED;
+                                 dr["DONE"] = item.DONE;
+                                 dr["CANCEL_BY_PRODUCER"] = item.CANCEL_BY_PRODUCER;
+                                 dr["CANCEL_BY_CONTROLLER"] = item.CANCEL_BY_CONTROLLER;
+                                 dr["RETURN_DP_MISTAKE"] = item.RETURN_DP_MISTAKE;
+                                 dr["PENDING_FOR_SIGNATURE"] = item.PENDING_FOR_SIGNATURE;
+                                 dr["PENDING"] = item.PACKAGING;
+                                 dr["RECEIVED"] = item.PACKAGED;
+                                 dr["SENT_OUT"] = item.DONE;
+                                 dr["CUR_STATUS"] = item.CANCEL_BY_PRODUCER;
+                                
+                                 dtTemp.Rows.Add(dr);
+                             }
+
+
+                             dgv.DataSource = dtTemp;
+                            }
+
+                            else
+                            {
+                                main_rpt += " AND PRODUCT_TYPE IN (" + ProType + ")";
+                                dt = crud.LoadData(main_rpt).Tables[0];
+                                dgv.DataSource = dt;
+                            }
+                                
                         }
                     }
                 }
@@ -108,6 +294,9 @@ namespace Testing.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
                 //My_DataTable_Extensions.ExportToExcel(dt, "");
+                if (frmLogIn.Usert.ToUpper() == "U-BVC")
+                    My_DataTable_Extensions.ExportToExcelXML(dtTemp, "");
+                else
                 My_DataTable_Extensions.ExportToExcelXML(dt, "");
 
                 Cursor.Current = Cursors.AppStarting;
