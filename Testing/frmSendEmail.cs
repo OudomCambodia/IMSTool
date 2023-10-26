@@ -65,7 +65,7 @@ namespace Testing
                 //string[] tempt = dt.AsEnumerable().Where(ite => ite.Field<string>("SFC_DPT_CODE") != "UW" && ite.Field<string>("SFC_DPT_CODE") != "RGN").Select(ite => ite.Field<string>("EMAIL")).Distinct().ToArray();
                 string[] tempt = tbTO.Text.ToString().Split(';');
                 foreach (string str in tempt)
-                    message.To.Add(str);
+                    message.To.Add(str.Replace("\r", string.Empty).Replace("\n", string.Empty).Trim());
 
                 //cc field
                 string[] ccList = tbCC.Text.ToString().Split(';');
@@ -82,34 +82,38 @@ namespace Testing
 
                 // the subject
                 message.Subject = tbSubject.Text;
+
                 //send email update 10-12-2021
                 client.Host = tmptb.Rows[0][0].ToString();
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = true;
                 DataTable dtUserEmail = crud.ExecQuery("select MAIL_ADDRESS,MAIL_PASSWORD from user_claim_email_info where SMTP_CLIENT = 'smtp.office365.com'");
                
-                client.Credentials = new System.Net.NetworkCredential
-                {
-                    //UserName = "no-reply@forteinsurance.com",
-                    //Password = "Forte@12345"
-                    //UserName = "support.infoins@forteinsurance.com",
-                    //Password = "pw-IBU@321"
-                    UserName = dtUserEmail.Rows[0][0].ToString(),
-                    Password = Cipher.Decrypt(dtUserEmail.Rows[0][1].ToString(), HashPass).ToString()
-                };
+                //client.Credentials = new System.Net.NetworkCredential
+                //{
+                //    //UserName = "no-reply@forteinsurance.com",
+                //    //Password = "Forte@12345"
+                //    //UserName = "support.infoins@forteinsurance.com",
+                //    //Password = "pw-IBU@321"
+                //    UserName = dtUserEmail.Rows[0][0].ToString(),
+                //    Password = Cipher.Decrypt(dtUserEmail.Rows[0][1].ToString(), HashPass).ToString()
+                //};
+
+                var Credential = new System.Net.NetworkCredential(dtUserEmail.Rows[0][0].ToString(), Cipher.Decrypt(dtUserEmail.Rows[0][1].ToString(), HashPass).ToString());
+                CommonFunctions.SendEmail(Credential, message);
 
                 ///////
 
-                System.Net.ServicePointManager.Expect100Continue = true;
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-                ///
+                //System.Net.ServicePointManager.Expect100Continue = true;
+                //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+                /////
 
-                client.EnableSsl = true;
-                port = Convert.ToInt32(tmptb.Rows[0][1]);
-                client.Port = port;
-                client.Send(message);
-                message.Dispose();
-                client.Dispose();
+                //client.EnableSsl = true;
+                //port = Convert.ToInt32(tmptb.Rows[0][1]);
+                //client.Port = port;
+                //client.Send(message);
+                //message.Dispose();
+                //client.Dispose();
                 ////now we create a networkcredential and pass our username and password for the smtp server
                 //client.Credentials = new System.Net.NetworkCredential("support.infoins@forteinsurance.com", "IBU@321");
 
@@ -125,7 +129,7 @@ namespace Testing
                 Cursor.Current = Cursors.AppStarting;
                 MessageBox.Show("Email Sent!");
                 
-                File.Delete(SavedPath);
+                //File.Delete(SavedPath);
                
             }
 
@@ -208,7 +212,7 @@ namespace Testing
                 sql += "TRUNC(CREATED_DATE) >= '" + dtpFrom.Value.ToString("dd-MMM-yyyy") + "' and TRUNC(CREATED_DATE) <= '" + dtpTo.Value.ToString("dd-MMM-yyyy") + "'";
             }
             dt = new DataTable();
-            Msgbox.Show(sql);
+            //Msgbox.Show(sql);
             dt = crud.ExecQuery(sql);
             if (dt.Rows.Count <= 0)
             {
