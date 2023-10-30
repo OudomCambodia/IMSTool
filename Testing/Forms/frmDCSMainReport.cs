@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -86,16 +87,21 @@ namespace Testing.Forms
                             {
                                 main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
                         "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
+                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like 'ACLEDA%'";
 
                  string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
-                 string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, "+
-                                "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME,DEB_TOTAL_AMOUNT FROM( " +
-                                "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,DEB_ME_CODE,DEB_TOTAL_AMOUNT " +
-                                    "from rc_t_debit_note WHERE DEB_BPARTY_CODE LIKE 'V-%' " +
-                                    "union  " +
-                                    "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,CRN_ME_CODE,CRN_TOTAL_AMOUNT*(-1) " +
-                                    "from rc_t_credit_note WHERE CRN_BPARTY_CODE LIKE 'V-%')";            
+                 string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, "+
+                                "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
+                                "FROM(  "+
+                                    "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, "+
+                                    "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME, DEB_TOTAL_AMOUNT  "+
+                                "from rc_t_debit_note  "+
+                                    "WHERE DEB_ME_CODE LIKE 'F%'  "+
+                                    "union   "+
+                                    "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, "+
+                                    "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  "+
+                                    "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') "+
+                                    "WHERE AGENT_NAME LIKE 'ACLEDA%' ";            
                                 
                              dt = crud.LoadData(main_rpt).Tables[0];
                              dtOracle = crud_oracle.ExecQuery(second_rpt);
@@ -117,9 +123,15 @@ namespace Testing.Forms
                                              //CUSTOMER_PHONE = row2["CUSTOMER_PHONE"],
                                              CUSTOMER_PHONE = subitem2 == null ? null :subitem2.Field<string>("CUSTOMER_PHONE"),
                                              PREMIUM = subitem3 == null ? 0 : subitem3.Field<decimal>("DEB_TOTAL_AMOUNT"),
-                                             //SALE_AGENT_CODE = row3["DEB_BPARTY_CODE"],
-                                             SALE_AGENT_CODE = subitem3 == null ? null : subitem3.Field<string>("DEB_ME_CODE"),
-                                             SALE_AGENT_NAME = subitem3 == null ? null : subitem3.Field<string>("AGENT_NAME"),
+                                             //PREMIUM = row1["PREMIUM"],
+                                             PAID_DATE =  subitem3 == null ? null : subitem3.Field<string>("PAID_DATE"),
+                                             //PAID_MONTH = subitem3 == null ? null : subitem3.Field<string>("PAID_MONTH"),
+                                             //SALE_AGENT_CODE = row1["SALE_AGENT_CODE"],
+                                             //SALE_AGENT_NAME = row1["SALE_AGENT_NAME"],
+                                             SALE_AGENT_CODE = subitem3 == null ? row1["SALE_AGENT_CODE"] : subitem3.Field<string>("DEB_ME_CODE"),
+                                             SALE_AGENT_NAME = subitem3 == null ? row1["SALE_AGENT_NAME"] : subitem3.Field<string>("AGENT_NAME"),
+                                             
+    
                                              //CUS_TYPE = row2["CUS_TYPE"],
                                              CUS_TYPE =  subitem2 == null ? null : subitem2.Field<string>("CUS_TYPE"),
                                              DOC_TYPE = row1["DOC_TYPE"],
@@ -130,8 +142,8 @@ namespace Testing.Forms
                                              POLICY_EFFECT_DATE = row1["POLICY_EFFECT_DATE"],
                                              CREATE_BY = row1["CREATE_BY"],
                                              POLICY_STATUS = row1["POLICY_STATUS"],
-                                             PRODUCER_CODE = row1["PRODUCER_CODE"],
-                                             PRODUCER_NAME = row1["PRODUCER_NAME"],
+                                             //PRODUCER_CODE = row1["PRODUCER_CODE"],
+                                             //PRODUCER_NAME = row1["PRODUCER_NAME"],
                                              DP_NAME = row1["DP_NAME"],
                                              FILLING_NAME = row1["FILLING_NAME"],
                                              LATEST_UPDATE_AT = row1["LATEST_UPDATE_AT"],
@@ -141,21 +153,6 @@ namespace Testing.Forms
                                              NOTE = row1["NOTE"],
                                              DP_REMARK = row1["DP_REMARK"],
                                              DOCUMENT_REMARK = row1["DOCUMENT_REMARK"],
-                                             SUBMIT_VIA = row1["SUBMIT_VIA"],
-                                             SUBMITTED_TO_UW = row1["SUBMITTED_TO_UW"],
-                                             CONTROLLER_ACCEPTED = row1["CONTROLLER_ACCEPTED"],
-                                             DP_PROCESSING = row1["DP_PROCESSING"],
-                                             PENDING_FOR_SIGNATURE = row1["PENDING_FOR_SIGNATURE"],
-                                             PACKAGING = row1["PACKAGING"],
-                                             PACKAGED = row1["PACKAGED"],
-                                             DONE = row1["DONE"],
-                                             CANCEL_BY_PRODUCER = row1["CANCEL_BY_PRODUCER"],
-                                             CANCEL_BY_CONTROLLER = row1["CANCEL_BY_CONTROLLER"],
-                                             RETURN_DP_MISTAKE = row1["RETURN_DP_MISTAKE"],
-                                             RETURN_PRODUCER_MISTAKE = row1["RETURN_PRODUCER_MISTAKE"],
-                                             PENDING = row1["PENDING"],
-                                             RECEIVED = row1["RECEIVED"],
-                                             SENT_OUT = row1["SENT_OUT"],
                                              CUR_STATUS = row1["CUR_STATUS"]
                                              
                                          };
@@ -166,8 +163,11 @@ namespace Testing.Forms
                              dtTemp.Columns.Add("CUSTOMER_NAME", typeof(string));
                              dtTemp.Columns.Add("CUSTOMER_PHONE", typeof(string));
                              dtTemp.Columns.Add("PREMIUM", typeof(decimal));
+                             dtTemp.Columns.Add("PAID_DATE", typeof(string));
                              dtTemp.Columns.Add("SALE_AGENT_CODE", typeof(string));
                              dtTemp.Columns.Add("SALE_AGENT_NAME", typeof(string));
+                             dtTemp.Columns.Add("BANK_BRANCH_NAME", typeof(string));
+                             dtTemp.Columns.Add("BANK_BRANCH_CODE", typeof(string));
                              dtTemp.Columns.Add("CUS_TYPE", typeof(string));
                              dtTemp.Columns.Add("DOC_TYPE", typeof(string));
                              dtTemp.Columns.Add("PRODUCT_LINE", typeof(string));
@@ -177,8 +177,8 @@ namespace Testing.Forms
                              dtTemp.Columns.Add("POLICY_EFFECT_DATE", typeof(string));
                              dtTemp.Columns.Add("CREATE_BY", typeof(string));
                              dtTemp.Columns.Add("POLICY_STATUS", typeof(string));
-                             dtTemp.Columns.Add("PRODUCER_CODE", typeof(string));
-                             dtTemp.Columns.Add("PRODUCER_NAME", typeof(string));
+                             //dtTemp.Columns.Add("PRODUCER_CODE", typeof(string));
+                             //dtTemp.Columns.Add("PRODUCER_NAME", typeof(string));
                              dtTemp.Columns.Add("DP_NAME", typeof(string));
                              dtTemp.Columns.Add("FILLING_NAME", typeof(string));
                              dtTemp.Columns.Add("LATEST_UPDATE_AT", typeof(string));
@@ -188,22 +188,7 @@ namespace Testing.Forms
                              dtTemp.Columns.Add("NOTE", typeof(string));
                              dtTemp.Columns.Add("DP_REMARK", typeof(string));
                              dtTemp.Columns.Add("DOCUMENT_REMARK", typeof(string));
-                             dtTemp.Columns.Add("SUBMIT_VIA", typeof(string));
-                             dtTemp.Columns.Add("SUBMITTED_TO_UW", typeof(string));
-                             dtTemp.Columns.Add("CONTROLLER_ACCEPTED", typeof(string));
-                             dtTemp.Columns.Add("DP_PROCESSING", typeof(string));
-                             dtTemp.Columns.Add("PENDING_FOR_SIGNATURE", typeof(string));
-                             dtTemp.Columns.Add("PACKAGING", typeof(string));
-                             dtTemp.Columns.Add("PACKAGED", typeof(string));
-                             dtTemp.Columns.Add("DONE", typeof(string));
-                             dtTemp.Columns.Add("CANCEL_BY_PRODUCER", typeof(string));
-                             dtTemp.Columns.Add("CANCEL_BY_CONTROLLER", typeof(string));
-                             dtTemp.Columns.Add("RETURN_DP_MISTAKE", typeof(string));
-                             dtTemp.Columns.Add("RETURN_PRODUCER_MISTAKE", typeof(string));
-                             dtTemp.Columns.Add("PENDING", typeof(string));
-                             dtTemp.Columns.Add("RECEIVED", typeof(string));
-                             dtTemp.Columns.Add("SENT_OUT", typeof(string));
-                             dtTemp.Columns.Add("CUR_STATUS", typeof(string));
+                            
 
                              foreach (var item in query)
                              {
@@ -214,8 +199,12 @@ namespace Testing.Forms
                                  dr["CUSTOMER_NAME"] = item.CUSTOMER_NAME;
                                  dr["CUSTOMER_PHONE"] = item.CUSTOMER_PHONE;
                                  dr["PREMIUM"] = item.PREMIUM;
+                                 dr["PAID_DATE"] = (item.PAID_DATE == null) ? "" : item.PAID_DATE.ToString();
+                                 //dr["PAID_MONTH"] = item.PAID_MONTH;
                                  dr["SALE_AGENT_CODE"] = item.SALE_AGENT_CODE;
                                  dr["SALE_AGENT_NAME"] = item.SALE_AGENT_NAME;
+                                 dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString().Substring((item.SALE_AGENT_NAME.ToString().IndexOf("(") + "(".Length), (item.SALE_AGENT_NAME.ToString().IndexOf(")") - item.SALE_AGENT_NAME.ToString().IndexOf("(") - "(".Length));
+                                 dr["BANK_BRANCH_CODE"] = dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim();
                                  dr["CUS_TYPE"] = item.CUS_TYPE;
                                  dr["DOC_TYPE"] = item.DOC_TYPE;
                                  dr["PRODUCT_LINE"] = item.PRODUCT_LINE;
@@ -225,8 +214,8 @@ namespace Testing.Forms
                                  dr["POLICY_EFFECT_DATE"] = item.POLICY_EFFECT_DATE;
                                  dr["CREATE_BY"] = item.CREATE_BY;
                                  dr["POLICY_STATUS"] = item.POLICY_STATUS;
-                                 dr["PRODUCER_CODE"] = item.PRODUCER_CODE;
-                                 dr["PRODUCER_NAME"] = item.PRODUCER_NAME;
+                                 //dr["PRODUCER_CODE"] = item.PRODUCER_CODE;
+                                 //dr["PRODUCER_NAME"] = item.PRODUCER_NAME;
                                  dr["DP_NAME"] = item.DP_NAME;
                                  dr["FILLING_NAME"] = item.FILLING_NAME;
                                  dr["LATEST_UPDATE_AT"] = item.LATEST_UPDATE_AT;
@@ -236,22 +225,7 @@ namespace Testing.Forms
                                  dr["NOTE"] = item.NOTE;
                                  dr["DP_REMARK"] = item.DP_REMARK;
                                  dr["DOCUMENT_REMARK"] = item.DOCUMENT_REMARK;
-                                 dr["SUBMIT_VIA"] = item.SUBMIT_VIA;
-                                 dr["SUBMITTED_TO_UW"] = item.SUBMITTED_TO_UW;
-                                 dr["CONTROLLER_ACCEPTED"] = item.CONTROLLER_ACCEPTED;
-                                 dr["DP_PROCESSING"] = item.DP_PROCESSING;
-                                 dr["PENDING_FOR_SIGNATURE"] = item.PENDING_FOR_SIGNATURE;
-                                 dr["PACKAGING"] = item.PACKAGING;
-                                 dr["PACKAGED"] = item.PACKAGED;
-                                 dr["DONE"] = item.DONE;
-                                 dr["CANCEL_BY_PRODUCER"] = item.CANCEL_BY_PRODUCER;
-                                 dr["CANCEL_BY_CONTROLLER"] = item.CANCEL_BY_CONTROLLER;
-                                 dr["RETURN_DP_MISTAKE"] = item.RETURN_DP_MISTAKE;
-                                 dr["PENDING_FOR_SIGNATURE"] = item.PENDING_FOR_SIGNATURE;
-                                 dr["PENDING"] = item.PACKAGING;
-                                 dr["RECEIVED"] = item.PACKAGED;
-                                 dr["SENT_OUT"] = item.DONE;
-                                 dr["CUR_STATUS"] = item.CANCEL_BY_PRODUCER;
+                                 
                                 
                                  dtTemp.Rows.Add(dr);
                              }
