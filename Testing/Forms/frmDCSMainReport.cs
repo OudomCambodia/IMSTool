@@ -164,8 +164,8 @@ namespace Testing.Forms
                              dtTemp.Columns.Add("CUSTOMER_PHONE", typeof(string));
                              dtTemp.Columns.Add("PREMIUM", typeof(decimal));
                              dtTemp.Columns.Add("PAID_DATE", typeof(string));
-                             dtTemp.Columns.Add("SALE_AGENT_CODE", typeof(string));
-                             dtTemp.Columns.Add("SALE_AGENT_NAME", typeof(string));
+                             
+                             
                              dtTemp.Columns.Add("BANK_BRANCH_NAME", typeof(string));
                              dtTemp.Columns.Add("BANK_BRANCH_CODE", typeof(string));
                              dtTemp.Columns.Add("CUS_TYPE", typeof(string));
@@ -173,6 +173,7 @@ namespace Testing.Forms
                              dtTemp.Columns.Add("PRODUCT_LINE", typeof(string));
                              dtTemp.Columns.Add("PRODUCT_TYPE", typeof(string));
                              dtTemp.Columns.Add("DN_CN", typeof(string));
+                             dtTemp.Columns.Add("SALE_AGENT_CODE", typeof(string));
                              dtTemp.Columns.Add("REF_ID", typeof(string));
                              dtTemp.Columns.Add("POLICY_EFFECT_DATE", typeof(string));
                              dtTemp.Columns.Add("CREATE_BY", typeof(string));
@@ -201,8 +202,6 @@ namespace Testing.Forms
                                  dr["PREMIUM"] = item.PREMIUM;
                                  dr["PAID_DATE"] = (item.PAID_DATE == null) ? "" : item.PAID_DATE.ToString();
                                  //dr["PAID_MONTH"] = item.PAID_MONTH;
-                                 dr["SALE_AGENT_CODE"] = item.SALE_AGENT_CODE;
-                                 dr["SALE_AGENT_NAME"] = item.SALE_AGENT_NAME;
                                  dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString().Substring((item.SALE_AGENT_NAME.ToString().IndexOf("(") + "(".Length), (item.SALE_AGENT_NAME.ToString().IndexOf(")") - item.SALE_AGENT_NAME.ToString().IndexOf("(") - "(".Length));
                                  dr["BANK_BRANCH_CODE"] = dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim();
                                  dr["CUS_TYPE"] = item.CUS_TYPE;
@@ -210,6 +209,7 @@ namespace Testing.Forms
                                  dr["PRODUCT_LINE"] = item.PRODUCT_LINE;
                                  dr["PRODUCT_TYPE"] = item.PRODUCT_TYPE;
                                  dr["DN_CN"] = item.DN_CN;
+                                 dr["SALE_AGENT_CODE"] = item.SALE_AGENT_CODE;
                                  dr["REF_ID"] = item.REF_ID;
                                  dr["POLICY_EFFECT_DATE"] = item.POLICY_EFFECT_DATE;
                                  dr["CREATE_BY"] = item.CREATE_BY;
