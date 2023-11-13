@@ -17,7 +17,8 @@ namespace Testing.Forms
     {
         private DataSet dsReport = new DataSet();
 
-        private string path = @"D:\Settlement_Notice\";
+        private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Settlement_Notice";
+        //private string path = @"D:\Settlement_Notice\";
         public static string FPath = string.Empty;
         string claimNo = string.Empty;
 
