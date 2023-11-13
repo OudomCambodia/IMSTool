@@ -64,6 +64,12 @@ namespace Testing {
         
         private HNS_CARDDataTable tableHNS_CARD;
         
+        private ANH_SL_CLAIM_INFODataTable tableANH_SL_CLAIM_INFO;
+        
+        private ANH_SL_EXPL_BENIDataTable tableANH_SL_EXPL_BENI;
+        
+        private ANH_SL_NOTESDataTable tableANH_SL_NOTES;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -151,6 +157,15 @@ namespace Testing {
                 }
                 if ((ds.Tables["HNS_CARD"] != null)) {
                     base.Tables.Add(new HNS_CARDDataTable(ds.Tables["HNS_CARD"]));
+                }
+                if ((ds.Tables["ANH_SL_CLAIM_INFO"] != null)) {
+                    base.Tables.Add(new ANH_SL_CLAIM_INFODataTable(ds.Tables["ANH_SL_CLAIM_INFO"]));
+                }
+                if ((ds.Tables["ANH_SL_EXPL_BENI"] != null)) {
+                    base.Tables.Add(new ANH_SL_EXPL_BENIDataTable(ds.Tables["ANH_SL_EXPL_BENI"]));
+                }
+                if ((ds.Tables["ANH_SL_NOTES"] != null)) {
+                    base.Tables.Add(new ANH_SL_NOTESDataTable(ds.Tables["ANH_SL_NOTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -372,6 +387,36 @@ namespace Testing {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ANH_SL_CLAIM_INFODataTable ANH_SL_CLAIM_INFO {
+            get {
+                return this.tableANH_SL_CLAIM_INFO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ANH_SL_EXPL_BENIDataTable ANH_SL_EXPL_BENI {
+            get {
+                return this.tableANH_SL_EXPL_BENI;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ANH_SL_NOTESDataTable ANH_SL_NOTES {
+            get {
+                return this.tableANH_SL_NOTES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -496,6 +541,15 @@ namespace Testing {
                 }
                 if ((ds.Tables["HNS_CARD"] != null)) {
                     base.Tables.Add(new HNS_CARDDataTable(ds.Tables["HNS_CARD"]));
+                }
+                if ((ds.Tables["ANH_SL_CLAIM_INFO"] != null)) {
+                    base.Tables.Add(new ANH_SL_CLAIM_INFODataTable(ds.Tables["ANH_SL_CLAIM_INFO"]));
+                }
+                if ((ds.Tables["ANH_SL_EXPL_BENI"] != null)) {
+                    base.Tables.Add(new ANH_SL_EXPL_BENIDataTable(ds.Tables["ANH_SL_EXPL_BENI"]));
+                }
+                if ((ds.Tables["ANH_SL_NOTES"] != null)) {
+                    base.Tables.Add(new ANH_SL_NOTESDataTable(ds.Tables["ANH_SL_NOTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -650,6 +704,24 @@ namespace Testing {
                     this.tableHNS_CARD.InitVars();
                 }
             }
+            this.tableANH_SL_CLAIM_INFO = ((ANH_SL_CLAIM_INFODataTable)(base.Tables["ANH_SL_CLAIM_INFO"]));
+            if ((initTable == true)) {
+                if ((this.tableANH_SL_CLAIM_INFO != null)) {
+                    this.tableANH_SL_CLAIM_INFO.InitVars();
+                }
+            }
+            this.tableANH_SL_EXPL_BENI = ((ANH_SL_EXPL_BENIDataTable)(base.Tables["ANH_SL_EXPL_BENI"]));
+            if ((initTable == true)) {
+                if ((this.tableANH_SL_EXPL_BENI != null)) {
+                    this.tableANH_SL_EXPL_BENI.InitVars();
+                }
+            }
+            this.tableANH_SL_NOTES = ((ANH_SL_NOTESDataTable)(base.Tables["ANH_SL_NOTES"]));
+            if ((initTable == true)) {
+                if ((this.tableANH_SL_NOTES != null)) {
+                    this.tableANH_SL_NOTES.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -700,6 +772,12 @@ namespace Testing {
             base.Tables.Add(this.tableCUSPROFITV2);
             this.tableHNS_CARD = new HNS_CARDDataTable();
             base.Tables.Add(this.tableHNS_CARD);
+            this.tableANH_SL_CLAIM_INFO = new ANH_SL_CLAIM_INFODataTable();
+            base.Tables.Add(this.tableANH_SL_CLAIM_INFO);
+            this.tableANH_SL_EXPL_BENI = new ANH_SL_EXPL_BENIDataTable();
+            base.Tables.Add(this.tableANH_SL_EXPL_BENI);
+            this.tableANH_SL_NOTES = new ANH_SL_NOTESDataTable();
+            base.Tables.Add(this.tableANH_SL_NOTES);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -824,6 +902,24 @@ namespace Testing {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeANH_SL_CLAIM_INFO() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeANH_SL_EXPL_BENI() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeANH_SL_NOTES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -936,6 +1032,15 @@ namespace Testing {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void HNS_CARDRowChangeEventHandler(object sender, HNS_CARDRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void ANH_SL_CLAIM_INFORowChangeEventHandler(object sender, ANH_SL_CLAIM_INFORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void ANH_SL_EXPL_BENIRowChangeEventHandler(object sender, ANH_SL_EXPL_BENIRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void ANH_SL_NOTESRowChangeEventHandler(object sender, ANH_SL_NOTESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -10587,6 +10692,1131 @@ namespace Testing {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "HNS_CARDDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ANH_SL_CLAIM_INFODataTable : global::System.Data.TypedTableBase<ANH_SL_CLAIM_INFORow> {
+            
+            private global::System.Data.DataColumn columnATTN;
+            
+            private global::System.Data.DataColumn columnPAYMENT_BENE;
+            
+            private global::System.Data.DataColumn columnCC;
+            
+            private global::System.Data.DataColumn columnPOLICY_HOLDER;
+            
+            private global::System.Data.DataColumn columnADDRESS;
+            
+            private global::System.Data.DataColumn columnMEMBER_NAME;
+            
+            private global::System.Data.DataColumn columnPOLICY;
+            
+            private global::System.Data.DataColumn columnPOLICY_NO;
+            
+            private global::System.Data.DataColumn columnADMISSION_DATE;
+            
+            private global::System.Data.DataColumn columnCLAIM_NO;
+            
+            private global::System.Data.DataColumn columnDISCHARGE_DATE;
+            
+            private global::System.Data.DataColumn columnPLAN;
+            
+            private global::System.Data.DataColumn columnLENGTH_OF_STAY;
+            
+            private global::System.Data.DataColumn columnREGISTRATION_DATE;
+            
+            private global::System.Data.DataColumn columnICU_STAY;
+            
+            private global::System.Data.DataColumn columnPANEL_HOSPITAL;
+            
+            private global::System.Data.DataColumn columnOTHER_HOSPITAL;
+            
+            private global::System.Data.DataColumn columnDIAGNOSIS;
+            
+            private global::System.Data.DataColumn columnEMAIL;
+            
+            private global::System.Data.DataColumn columnEXCHANGE_RATE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_CLAIM_INFODataTable() {
+                this.TableName = "ANH_SL_CLAIM_INFO";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ANH_SL_CLAIM_INFODataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected ANH_SL_CLAIM_INFODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ATTNColumn {
+                get {
+                    return this.columnATTN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PAYMENT_BENEColumn {
+                get {
+                    return this.columnPAYMENT_BENE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CCColumn {
+                get {
+                    return this.columnCC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICY_HOLDERColumn {
+                get {
+                    return this.columnPOLICY_HOLDER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ADDRESSColumn {
+                get {
+                    return this.columnADDRESS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MEMBER_NAMEColumn {
+                get {
+                    return this.columnMEMBER_NAME;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICYColumn {
+                get {
+                    return this.columnPOLICY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POLICY_NOColumn {
+                get {
+                    return this.columnPOLICY_NO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ADMISSION_DATEColumn {
+                get {
+                    return this.columnADMISSION_DATE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CLAIM_NOColumn {
+                get {
+                    return this.columnCLAIM_NO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DISCHARGE_DATEColumn {
+                get {
+                    return this.columnDISCHARGE_DATE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PLANColumn {
+                get {
+                    return this.columnPLAN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LENGTH_OF_STAYColumn {
+                get {
+                    return this.columnLENGTH_OF_STAY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn REGISTRATION_DATEColumn {
+                get {
+                    return this.columnREGISTRATION_DATE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ICU_STAYColumn {
+                get {
+                    return this.columnICU_STAY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PANEL_HOSPITALColumn {
+                get {
+                    return this.columnPANEL_HOSPITAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OTHER_HOSPITALColumn {
+                get {
+                    return this.columnOTHER_HOSPITAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DIAGNOSISColumn {
+                get {
+                    return this.columnDIAGNOSIS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EMAILColumn {
+                get {
+                    return this.columnEMAIL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EXCHANGE_RATEColumn {
+                get {
+                    return this.columnEXCHANGE_RATE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_CLAIM_INFORow this[int index] {
+                get {
+                    return ((ANH_SL_CLAIM_INFORow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_CLAIM_INFORowChangeEventHandler ANH_SL_CLAIM_INFORowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_CLAIM_INFORowChangeEventHandler ANH_SL_CLAIM_INFORowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_CLAIM_INFORowChangeEventHandler ANH_SL_CLAIM_INFORowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_CLAIM_INFORowChangeEventHandler ANH_SL_CLAIM_INFORowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddANH_SL_CLAIM_INFORow(ANH_SL_CLAIM_INFORow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_CLAIM_INFORow AddANH_SL_CLAIM_INFORow(
+                        string ATTN, 
+                        string PAYMENT_BENE, 
+                        string CC, 
+                        string POLICY_HOLDER, 
+                        string ADDRESS, 
+                        string MEMBER_NAME, 
+                        string POLICY, 
+                        string POLICY_NO, 
+                        string ADMISSION_DATE, 
+                        string CLAIM_NO, 
+                        string DISCHARGE_DATE, 
+                        string PLAN, 
+                        string LENGTH_OF_STAY, 
+                        string REGISTRATION_DATE, 
+                        string ICU_STAY, 
+                        string PANEL_HOSPITAL, 
+                        string OTHER_HOSPITAL, 
+                        string DIAGNOSIS, 
+                        string EMAIL, 
+                        string EXCHANGE_RATE) {
+                ANH_SL_CLAIM_INFORow rowANH_SL_CLAIM_INFORow = ((ANH_SL_CLAIM_INFORow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ATTN,
+                        PAYMENT_BENE,
+                        CC,
+                        POLICY_HOLDER,
+                        ADDRESS,
+                        MEMBER_NAME,
+                        POLICY,
+                        POLICY_NO,
+                        ADMISSION_DATE,
+                        CLAIM_NO,
+                        DISCHARGE_DATE,
+                        PLAN,
+                        LENGTH_OF_STAY,
+                        REGISTRATION_DATE,
+                        ICU_STAY,
+                        PANEL_HOSPITAL,
+                        OTHER_HOSPITAL,
+                        DIAGNOSIS,
+                        EMAIL,
+                        EXCHANGE_RATE};
+                rowANH_SL_CLAIM_INFORow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowANH_SL_CLAIM_INFORow);
+                return rowANH_SL_CLAIM_INFORow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ANH_SL_CLAIM_INFODataTable cln = ((ANH_SL_CLAIM_INFODataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ANH_SL_CLAIM_INFODataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnATTN = base.Columns["ATTN"];
+                this.columnPAYMENT_BENE = base.Columns["PAYMENT_BENE"];
+                this.columnCC = base.Columns["CC"];
+                this.columnPOLICY_HOLDER = base.Columns["POLICY_HOLDER"];
+                this.columnADDRESS = base.Columns["ADDRESS"];
+                this.columnMEMBER_NAME = base.Columns["MEMBER_NAME"];
+                this.columnPOLICY = base.Columns["POLICY"];
+                this.columnPOLICY_NO = base.Columns["POLICY_NO"];
+                this.columnADMISSION_DATE = base.Columns["ADMISSION_DATE"];
+                this.columnCLAIM_NO = base.Columns["CLAIM_NO"];
+                this.columnDISCHARGE_DATE = base.Columns["DISCHARGE_DATE"];
+                this.columnPLAN = base.Columns["PLAN"];
+                this.columnLENGTH_OF_STAY = base.Columns["LENGTH_OF_STAY"];
+                this.columnREGISTRATION_DATE = base.Columns["REGISTRATION_DATE"];
+                this.columnICU_STAY = base.Columns["ICU_STAY"];
+                this.columnPANEL_HOSPITAL = base.Columns["PANEL_HOSPITAL"];
+                this.columnOTHER_HOSPITAL = base.Columns["OTHER_HOSPITAL"];
+                this.columnDIAGNOSIS = base.Columns["DIAGNOSIS"];
+                this.columnEMAIL = base.Columns["EMAIL"];
+                this.columnEXCHANGE_RATE = base.Columns["EXCHANGE_RATE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnATTN = new global::System.Data.DataColumn("ATTN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnATTN);
+                this.columnPAYMENT_BENE = new global::System.Data.DataColumn("PAYMENT_BENE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAYMENT_BENE);
+                this.columnCC = new global::System.Data.DataColumn("CC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCC);
+                this.columnPOLICY_HOLDER = new global::System.Data.DataColumn("POLICY_HOLDER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY_HOLDER);
+                this.columnADDRESS = new global::System.Data.DataColumn("ADDRESS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnADDRESS);
+                this.columnMEMBER_NAME = new global::System.Data.DataColumn("MEMBER_NAME", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMEMBER_NAME);
+                this.columnPOLICY = new global::System.Data.DataColumn("POLICY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY);
+                this.columnPOLICY_NO = new global::System.Data.DataColumn("POLICY_NO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOLICY_NO);
+                this.columnADMISSION_DATE = new global::System.Data.DataColumn("ADMISSION_DATE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnADMISSION_DATE);
+                this.columnCLAIM_NO = new global::System.Data.DataColumn("CLAIM_NO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCLAIM_NO);
+                this.columnDISCHARGE_DATE = new global::System.Data.DataColumn("DISCHARGE_DATE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDISCHARGE_DATE);
+                this.columnPLAN = new global::System.Data.DataColumn("PLAN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPLAN);
+                this.columnLENGTH_OF_STAY = new global::System.Data.DataColumn("LENGTH_OF_STAY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLENGTH_OF_STAY);
+                this.columnREGISTRATION_DATE = new global::System.Data.DataColumn("REGISTRATION_DATE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnREGISTRATION_DATE);
+                this.columnICU_STAY = new global::System.Data.DataColumn("ICU_STAY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnICU_STAY);
+                this.columnPANEL_HOSPITAL = new global::System.Data.DataColumn("PANEL_HOSPITAL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPANEL_HOSPITAL);
+                this.columnOTHER_HOSPITAL = new global::System.Data.DataColumn("OTHER_HOSPITAL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOTHER_HOSPITAL);
+                this.columnDIAGNOSIS = new global::System.Data.DataColumn("DIAGNOSIS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDIAGNOSIS);
+                this.columnEMAIL = new global::System.Data.DataColumn("EMAIL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEMAIL);
+                this.columnEXCHANGE_RATE = new global::System.Data.DataColumn("EXCHANGE_RATE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEXCHANGE_RATE);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_CLAIM_INFORow NewANH_SL_CLAIM_INFORow() {
+                return ((ANH_SL_CLAIM_INFORow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ANH_SL_CLAIM_INFORow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ANH_SL_CLAIM_INFORow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ANH_SL_CLAIM_INFORowChanged != null)) {
+                    this.ANH_SL_CLAIM_INFORowChanged(this, new ANH_SL_CLAIM_INFORowChangeEvent(((ANH_SL_CLAIM_INFORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ANH_SL_CLAIM_INFORowChanging != null)) {
+                    this.ANH_SL_CLAIM_INFORowChanging(this, new ANH_SL_CLAIM_INFORowChangeEvent(((ANH_SL_CLAIM_INFORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ANH_SL_CLAIM_INFORowDeleted != null)) {
+                    this.ANH_SL_CLAIM_INFORowDeleted(this, new ANH_SL_CLAIM_INFORowChangeEvent(((ANH_SL_CLAIM_INFORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ANH_SL_CLAIM_INFORowDeleting != null)) {
+                    this.ANH_SL_CLAIM_INFORowDeleting(this, new ANH_SL_CLAIM_INFORowChangeEvent(((ANH_SL_CLAIM_INFORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveANH_SL_CLAIM_INFORow(ANH_SL_CLAIM_INFORow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DBS11DataSet ds = new DBS11DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ANH_SL_CLAIM_INFODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ANH_SL_EXPL_BENIDataTable : global::System.Data.TypedTableBase<ANH_SL_EXPL_BENIRow> {
+            
+            private global::System.Data.DataColumn columnORIGINAL_CURRENCY;
+            
+            private global::System.Data.DataColumn columnCURRENCY_IN_USD;
+            
+            private global::System.Data.DataColumn columnEXPENSES_NOT_COVERED;
+            
+            private global::System.Data.DataColumn columnDEDUCTIBLE_OR_COPLAY;
+            
+            private global::System.Data.DataColumn columnOVER_LIMIT;
+            
+            private global::System.Data.DataColumn columnTOTAL_AMT_COVERED;
+            
+            private global::System.Data.DataColumn columnSERVICE_PROVIDED;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_EXPL_BENIDataTable() {
+                this.TableName = "ANH_SL_EXPL_BENI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ANH_SL_EXPL_BENIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected ANH_SL_EXPL_BENIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ORIGINAL_CURRENCYColumn {
+                get {
+                    return this.columnORIGINAL_CURRENCY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CURRENCY_IN_USDColumn {
+                get {
+                    return this.columnCURRENCY_IN_USD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EXPENSES_NOT_COVEREDColumn {
+                get {
+                    return this.columnEXPENSES_NOT_COVERED;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DEDUCTIBLE_OR_COPLAYColumn {
+                get {
+                    return this.columnDEDUCTIBLE_OR_COPLAY;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OVER_LIMITColumn {
+                get {
+                    return this.columnOVER_LIMIT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TOTAL_AMT_COVEREDColumn {
+                get {
+                    return this.columnTOTAL_AMT_COVERED;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SERVICE_PROVIDEDColumn {
+                get {
+                    return this.columnSERVICE_PROVIDED;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_EXPL_BENIRow this[int index] {
+                get {
+                    return ((ANH_SL_EXPL_BENIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_EXPL_BENIRowChangeEventHandler ANH_SL_EXPL_BENIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_EXPL_BENIRowChangeEventHandler ANH_SL_EXPL_BENIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_EXPL_BENIRowChangeEventHandler ANH_SL_EXPL_BENIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_EXPL_BENIRowChangeEventHandler ANH_SL_EXPL_BENIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddANH_SL_EXPL_BENIRow(ANH_SL_EXPL_BENIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_EXPL_BENIRow AddANH_SL_EXPL_BENIRow(string ORIGINAL_CURRENCY, string CURRENCY_IN_USD, string EXPENSES_NOT_COVERED, string DEDUCTIBLE_OR_COPLAY, string OVER_LIMIT, string TOTAL_AMT_COVERED, string SERVICE_PROVIDED) {
+                ANH_SL_EXPL_BENIRow rowANH_SL_EXPL_BENIRow = ((ANH_SL_EXPL_BENIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ORIGINAL_CURRENCY,
+                        CURRENCY_IN_USD,
+                        EXPENSES_NOT_COVERED,
+                        DEDUCTIBLE_OR_COPLAY,
+                        OVER_LIMIT,
+                        TOTAL_AMT_COVERED,
+                        SERVICE_PROVIDED};
+                rowANH_SL_EXPL_BENIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowANH_SL_EXPL_BENIRow);
+                return rowANH_SL_EXPL_BENIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ANH_SL_EXPL_BENIDataTable cln = ((ANH_SL_EXPL_BENIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ANH_SL_EXPL_BENIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnORIGINAL_CURRENCY = base.Columns["ORIGINAL_CURRENCY"];
+                this.columnCURRENCY_IN_USD = base.Columns["CURRENCY_IN_USD"];
+                this.columnEXPENSES_NOT_COVERED = base.Columns["EXPENSES_NOT_COVERED"];
+                this.columnDEDUCTIBLE_OR_COPLAY = base.Columns["DEDUCTIBLE_OR_COPLAY"];
+                this.columnOVER_LIMIT = base.Columns["OVER_LIMIT"];
+                this.columnTOTAL_AMT_COVERED = base.Columns["TOTAL_AMT_COVERED"];
+                this.columnSERVICE_PROVIDED = base.Columns["SERVICE_PROVIDED"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnORIGINAL_CURRENCY = new global::System.Data.DataColumn("ORIGINAL_CURRENCY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORIGINAL_CURRENCY);
+                this.columnCURRENCY_IN_USD = new global::System.Data.DataColumn("CURRENCY_IN_USD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCURRENCY_IN_USD);
+                this.columnEXPENSES_NOT_COVERED = new global::System.Data.DataColumn("EXPENSES_NOT_COVERED", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEXPENSES_NOT_COVERED);
+                this.columnDEDUCTIBLE_OR_COPLAY = new global::System.Data.DataColumn("DEDUCTIBLE_OR_COPLAY", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDEDUCTIBLE_OR_COPLAY);
+                this.columnOVER_LIMIT = new global::System.Data.DataColumn("OVER_LIMIT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOVER_LIMIT);
+                this.columnTOTAL_AMT_COVERED = new global::System.Data.DataColumn("TOTAL_AMT_COVERED", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTOTAL_AMT_COVERED);
+                this.columnSERVICE_PROVIDED = new global::System.Data.DataColumn("SERVICE_PROVIDED", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSERVICE_PROVIDED);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_EXPL_BENIRow NewANH_SL_EXPL_BENIRow() {
+                return ((ANH_SL_EXPL_BENIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ANH_SL_EXPL_BENIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ANH_SL_EXPL_BENIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ANH_SL_EXPL_BENIRowChanged != null)) {
+                    this.ANH_SL_EXPL_BENIRowChanged(this, new ANH_SL_EXPL_BENIRowChangeEvent(((ANH_SL_EXPL_BENIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ANH_SL_EXPL_BENIRowChanging != null)) {
+                    this.ANH_SL_EXPL_BENIRowChanging(this, new ANH_SL_EXPL_BENIRowChangeEvent(((ANH_SL_EXPL_BENIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ANH_SL_EXPL_BENIRowDeleted != null)) {
+                    this.ANH_SL_EXPL_BENIRowDeleted(this, new ANH_SL_EXPL_BENIRowChangeEvent(((ANH_SL_EXPL_BENIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ANH_SL_EXPL_BENIRowDeleting != null)) {
+                    this.ANH_SL_EXPL_BENIRowDeleting(this, new ANH_SL_EXPL_BENIRowChangeEvent(((ANH_SL_EXPL_BENIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveANH_SL_EXPL_BENIRow(ANH_SL_EXPL_BENIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DBS11DataSet ds = new DBS11DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ANH_SL_EXPL_BENIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ANH_SL_NOTESDataTable : global::System.Data.TypedTableBase<ANH_SL_NOTESRow> {
+            
+            private global::System.Data.DataColumn columnAMT;
+            
+            private global::System.Data.DataColumn columnDES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_NOTESDataTable() {
+                this.TableName = "ANH_SL_NOTES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ANH_SL_NOTESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected ANH_SL_NOTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AMTColumn {
+                get {
+                    return this.columnAMT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DESColumn {
+                get {
+                    return this.columnDES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_NOTESRow this[int index] {
+                get {
+                    return ((ANH_SL_NOTESRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_NOTESRowChangeEventHandler ANH_SL_NOTESRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_NOTESRowChangeEventHandler ANH_SL_NOTESRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_NOTESRowChangeEventHandler ANH_SL_NOTESRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event ANH_SL_NOTESRowChangeEventHandler ANH_SL_NOTESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddANH_SL_NOTESRow(ANH_SL_NOTESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_NOTESRow AddANH_SL_NOTESRow(string AMT, string DES) {
+                ANH_SL_NOTESRow rowANH_SL_NOTESRow = ((ANH_SL_NOTESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        AMT,
+                        DES};
+                rowANH_SL_NOTESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowANH_SL_NOTESRow);
+                return rowANH_SL_NOTESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ANH_SL_NOTESDataTable cln = ((ANH_SL_NOTESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ANH_SL_NOTESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnAMT = base.Columns["AMT"];
+                this.columnDES = base.Columns["DES"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnAMT = new global::System.Data.DataColumn("AMT", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAMT);
+                this.columnDES = new global::System.Data.DataColumn("DES", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDES);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_NOTESRow NewANH_SL_NOTESRow() {
+                return ((ANH_SL_NOTESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ANH_SL_NOTESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ANH_SL_NOTESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ANH_SL_NOTESRowChanged != null)) {
+                    this.ANH_SL_NOTESRowChanged(this, new ANH_SL_NOTESRowChangeEvent(((ANH_SL_NOTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ANH_SL_NOTESRowChanging != null)) {
+                    this.ANH_SL_NOTESRowChanging(this, new ANH_SL_NOTESRowChangeEvent(((ANH_SL_NOTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ANH_SL_NOTESRowDeleted != null)) {
+                    this.ANH_SL_NOTESRowDeleted(this, new ANH_SL_NOTESRowChangeEvent(((ANH_SL_NOTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ANH_SL_NOTESRowDeleting != null)) {
+                    this.ANH_SL_NOTESRowDeleting(this, new ANH_SL_NOTESRowChangeEvent(((ANH_SL_NOTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveANH_SL_NOTESRow(ANH_SL_NOTESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DBS11DataSet ds = new DBS11DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ANH_SL_NOTESDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -20389,6 +21619,865 @@ namespace Testing {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ANH_SL_CLAIM_INFORow : global::System.Data.DataRow {
+            
+            private ANH_SL_CLAIM_INFODataTable tableANH_SL_CLAIM_INFO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ANH_SL_CLAIM_INFORow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableANH_SL_CLAIM_INFO = ((ANH_SL_CLAIM_INFODataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ATTN {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.ATTNColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ATTN\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.ATTNColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PAYMENT_BENE {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.PAYMENT_BENEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PAYMENT_BENE\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.PAYMENT_BENEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CC {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.CCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CC\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.CCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY_HOLDER {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.POLICY_HOLDERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_HOLDER\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.POLICY_HOLDERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ADDRESS {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.ADDRESSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ADDRESS\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.ADDRESSColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MEMBER_NAME {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.MEMBER_NAMEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MEMBER_NAME\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.MEMBER_NAMEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.POLICYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.POLICYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POLICY_NO {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.POLICY_NOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POLICY_NO\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.POLICY_NOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ADMISSION_DATE {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.ADMISSION_DATEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ADMISSION_DATE\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.ADMISSION_DATEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CLAIM_NO {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.CLAIM_NOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CLAIM_NO\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.CLAIM_NOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DISCHARGE_DATE {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.DISCHARGE_DATEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DISCHARGE_DATE\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.DISCHARGE_DATEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PLAN {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.PLANColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PLAN\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.PLANColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string LENGTH_OF_STAY {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.LENGTH_OF_STAYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LENGTH_OF_STAY\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.LENGTH_OF_STAYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string REGISTRATION_DATE {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.REGISTRATION_DATEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'REGISTRATION_DATE\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.REGISTRATION_DATEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ICU_STAY {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.ICU_STAYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ICU_STAY\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.ICU_STAYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PANEL_HOSPITAL {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.PANEL_HOSPITALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PANEL_HOSPITAL\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.PANEL_HOSPITALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OTHER_HOSPITAL {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.OTHER_HOSPITALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OTHER_HOSPITAL\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.OTHER_HOSPITALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DIAGNOSIS {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.DIAGNOSISColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DIAGNOSIS\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.DIAGNOSISColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EMAIL {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.EMAILColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EMAIL\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.EMAILColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EXCHANGE_RATE {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_CLAIM_INFO.EXCHANGE_RATEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EXCHANGE_RATE\' in table \'ANH_SL_CLAIM_INFO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_CLAIM_INFO.EXCHANGE_RATEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsATTNNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.ATTNColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetATTNNull() {
+                this[this.tableANH_SL_CLAIM_INFO.ATTNColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPAYMENT_BENENull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.PAYMENT_BENEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPAYMENT_BENENull() {
+                this[this.tableANH_SL_CLAIM_INFO.PAYMENT_BENEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCCNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.CCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCCNull() {
+                this[this.tableANH_SL_CLAIM_INFO.CCColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICY_HOLDERNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.POLICY_HOLDERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICY_HOLDERNull() {
+                this[this.tableANH_SL_CLAIM_INFO.POLICY_HOLDERColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsADDRESSNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.ADDRESSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetADDRESSNull() {
+                this[this.tableANH_SL_CLAIM_INFO.ADDRESSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMEMBER_NAMENull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.MEMBER_NAMEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMEMBER_NAMENull() {
+                this[this.tableANH_SL_CLAIM_INFO.MEMBER_NAMEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICYNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.POLICYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICYNull() {
+                this[this.tableANH_SL_CLAIM_INFO.POLICYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOLICY_NONull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.POLICY_NOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOLICY_NONull() {
+                this[this.tableANH_SL_CLAIM_INFO.POLICY_NOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsADMISSION_DATENull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.ADMISSION_DATEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetADMISSION_DATENull() {
+                this[this.tableANH_SL_CLAIM_INFO.ADMISSION_DATEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCLAIM_NONull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.CLAIM_NOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCLAIM_NONull() {
+                this[this.tableANH_SL_CLAIM_INFO.CLAIM_NOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDISCHARGE_DATENull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.DISCHARGE_DATEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDISCHARGE_DATENull() {
+                this[this.tableANH_SL_CLAIM_INFO.DISCHARGE_DATEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPLANNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.PLANColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPLANNull() {
+                this[this.tableANH_SL_CLAIM_INFO.PLANColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLENGTH_OF_STAYNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.LENGTH_OF_STAYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLENGTH_OF_STAYNull() {
+                this[this.tableANH_SL_CLAIM_INFO.LENGTH_OF_STAYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsREGISTRATION_DATENull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.REGISTRATION_DATEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetREGISTRATION_DATENull() {
+                this[this.tableANH_SL_CLAIM_INFO.REGISTRATION_DATEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsICU_STAYNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.ICU_STAYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetICU_STAYNull() {
+                this[this.tableANH_SL_CLAIM_INFO.ICU_STAYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPANEL_HOSPITALNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.PANEL_HOSPITALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPANEL_HOSPITALNull() {
+                this[this.tableANH_SL_CLAIM_INFO.PANEL_HOSPITALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOTHER_HOSPITALNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.OTHER_HOSPITALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOTHER_HOSPITALNull() {
+                this[this.tableANH_SL_CLAIM_INFO.OTHER_HOSPITALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDIAGNOSISNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.DIAGNOSISColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDIAGNOSISNull() {
+                this[this.tableANH_SL_CLAIM_INFO.DIAGNOSISColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEMAILNull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.EMAILColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEMAILNull() {
+                this[this.tableANH_SL_CLAIM_INFO.EMAILColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEXCHANGE_RATENull() {
+                return this.IsNull(this.tableANH_SL_CLAIM_INFO.EXCHANGE_RATEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEXCHANGE_RATENull() {
+                this[this.tableANH_SL_CLAIM_INFO.EXCHANGE_RATEColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ANH_SL_EXPL_BENIRow : global::System.Data.DataRow {
+            
+            private ANH_SL_EXPL_BENIDataTable tableANH_SL_EXPL_BENI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ANH_SL_EXPL_BENIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableANH_SL_EXPL_BENI = ((ANH_SL_EXPL_BENIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ORIGINAL_CURRENCY {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.ORIGINAL_CURRENCYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ORIGINAL_CURRENCY\' in table \'ANH_SL_EXPL_BENI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.ORIGINAL_CURRENCYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CURRENCY_IN_USD {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.CURRENCY_IN_USDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CURRENCY_IN_USD\' in table \'ANH_SL_EXPL_BENI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.CURRENCY_IN_USDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EXPENSES_NOT_COVERED {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.EXPENSES_NOT_COVEREDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EXPENSES_NOT_COVERED\' in table \'ANH_SL_EXPL_BENI\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.EXPENSES_NOT_COVEREDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DEDUCTIBLE_OR_COPLAY {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.DEDUCTIBLE_OR_COPLAYColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DEDUCTIBLE_OR_COPLAY\' in table \'ANH_SL_EXPL_BENI\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.DEDUCTIBLE_OR_COPLAYColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string OVER_LIMIT {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.OVER_LIMITColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OVER_LIMIT\' in table \'ANH_SL_EXPL_BENI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.OVER_LIMITColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TOTAL_AMT_COVERED {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.TOTAL_AMT_COVEREDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TOTAL_AMT_COVERED\' in table \'ANH_SL_EXPL_BENI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.TOTAL_AMT_COVEREDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SERVICE_PROVIDED {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_EXPL_BENI.SERVICE_PROVIDEDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SERVICE_PROVIDED\' in table \'ANH_SL_EXPL_BENI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_EXPL_BENI.SERVICE_PROVIDEDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsORIGINAL_CURRENCYNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.ORIGINAL_CURRENCYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetORIGINAL_CURRENCYNull() {
+                this[this.tableANH_SL_EXPL_BENI.ORIGINAL_CURRENCYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCURRENCY_IN_USDNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.CURRENCY_IN_USDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCURRENCY_IN_USDNull() {
+                this[this.tableANH_SL_EXPL_BENI.CURRENCY_IN_USDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEXPENSES_NOT_COVEREDNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.EXPENSES_NOT_COVEREDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEXPENSES_NOT_COVEREDNull() {
+                this[this.tableANH_SL_EXPL_BENI.EXPENSES_NOT_COVEREDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDEDUCTIBLE_OR_COPLAYNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.DEDUCTIBLE_OR_COPLAYColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDEDUCTIBLE_OR_COPLAYNull() {
+                this[this.tableANH_SL_EXPL_BENI.DEDUCTIBLE_OR_COPLAYColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOVER_LIMITNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.OVER_LIMITColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOVER_LIMITNull() {
+                this[this.tableANH_SL_EXPL_BENI.OVER_LIMITColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTOTAL_AMT_COVEREDNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.TOTAL_AMT_COVEREDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTOTAL_AMT_COVEREDNull() {
+                this[this.tableANH_SL_EXPL_BENI.TOTAL_AMT_COVEREDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSERVICE_PROVIDEDNull() {
+                return this.IsNull(this.tableANH_SL_EXPL_BENI.SERVICE_PROVIDEDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSERVICE_PROVIDEDNull() {
+                this[this.tableANH_SL_EXPL_BENI.SERVICE_PROVIDEDColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ANH_SL_NOTESRow : global::System.Data.DataRow {
+            
+            private ANH_SL_NOTESDataTable tableANH_SL_NOTES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ANH_SL_NOTESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableANH_SL_NOTES = ((ANH_SL_NOTESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string AMT {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_NOTES.AMTColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AMT\' in table \'ANH_SL_NOTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_NOTES.AMTColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DES {
+                get {
+                    try {
+                        return ((string)(this[this.tableANH_SL_NOTES.DESColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DES\' in table \'ANH_SL_NOTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableANH_SL_NOTES.DESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAMTNull() {
+                return this.IsNull(this.tableANH_SL_NOTES.AMTColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAMTNull() {
+                this[this.tableANH_SL_NOTES.AMTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDESNull() {
+                return this.IsNull(this.tableANH_SL_NOTES.DESColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDESNull() {
+                this[this.tableANH_SL_NOTES.DESColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -21054,6 +23143,108 @@ namespace Testing {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public HNS_CARDRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class ANH_SL_CLAIM_INFORowChangeEvent : global::System.EventArgs {
+            
+            private ANH_SL_CLAIM_INFORow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_CLAIM_INFORowChangeEvent(ANH_SL_CLAIM_INFORow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_CLAIM_INFORow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class ANH_SL_EXPL_BENIRowChangeEvent : global::System.EventArgs {
+            
+            private ANH_SL_EXPL_BENIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_EXPL_BENIRowChangeEvent(ANH_SL_EXPL_BENIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_EXPL_BENIRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class ANH_SL_NOTESRowChangeEvent : global::System.EventArgs {
+            
+            private ANH_SL_NOTESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_NOTESRowChangeEvent(ANH_SL_NOTESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ANH_SL_NOTESRow Row {
                 get {
                     return this.eventRow;
                 }

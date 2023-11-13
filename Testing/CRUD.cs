@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.IO;
 
 namespace Testing
 {
@@ -139,6 +140,32 @@ namespace Testing
                 }
                 cmd.ExecuteNonQuery();
                 result = cmd.Parameters["result"].Value.ToString();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        public string ExecFunc_String_New(string fnName, string[] fnParaKeys, string[] fnParaValues)
+        {
+            string result = string.Empty;
+            using (OracleConnection con = new OracleConnection(connString))
+            {
+                con.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = fnName;
+                //return parameter from oracle function must be first index
+                cmd.Parameters.Add("result", OracleDbType.Clob).Direction = ParameterDirection.ReturnValue;
+                for (int i = 0; i < fnParaKeys.Length; i++)
+                {
+                    cmd.Parameters.Add(fnParaKeys[i], OracleDbType.NVarchar2).Value = fnParaValues[i];
+                }
+                cmd.ExecuteNonQuery();
+
+                var clobValue = (OracleClob)cmd.Parameters["result"].Value;
+                result = clobValue.Value.ToString();
+
                 cmd.Dispose();
             }
             return result;

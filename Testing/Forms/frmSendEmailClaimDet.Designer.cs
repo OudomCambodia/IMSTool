@@ -53,6 +53,9 @@
             this.btnEditReceiver = new System.Windows.Forms.Button();
             this.tbReceiver = new CustomControls.TextBoxEmailAutocomplete();
             this.tbCC = new CustomControls.TextBoxEmailAutocomplete();
+            this.btnAttachClaimRejection = new Testing.cus_button();
+            this.btnGenerateSettlementNotice = new Testing.cus_button();
+            this.cboExclusionSection = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lvDoc
@@ -90,7 +93,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(31, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 15);
+            this.label2.Size = new System.Drawing.Size(80, 20);
             this.label2.TabIndex = 13;
             this.label2.Text = "Claim No:";
             // 
@@ -101,7 +104,7 @@
             this.lbClaimNo.ForeColor = System.Drawing.Color.White;
             this.lbClaimNo.Location = new System.Drawing.Point(98, 38);
             this.lbClaimNo.Name = "lbClaimNo";
-            this.lbClaimNo.Size = new System.Drawing.Size(75, 19);
+            this.lbClaimNo.Size = new System.Drawing.Size(89, 23);
             this.lbClaimNo.TabIndex = 14;
             this.lbClaimNo.Text = "Claim No";
             // 
@@ -111,7 +114,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(284, 209);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 15);
+            this.label1.Size = new System.Drawing.Size(121, 20);
             this.label1.TabIndex = 15;
             this.label1.Text = "Requisition No:";
             // 
@@ -122,7 +125,7 @@
             this.cbReqNo.FormattingEnabled = true;
             this.cbReqNo.Location = new System.Drawing.Point(384, 206);
             this.cbReqNo.Name = "cbReqNo";
-            this.cbReqNo.Size = new System.Drawing.Size(181, 23);
+            this.cbReqNo.Size = new System.Drawing.Size(181, 27);
             this.cbReqNo.TabIndex = 16;
             // 
             // label3
@@ -131,7 +134,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(34, 66);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 15);
+            this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.TabIndex = 17;
             this.label3.Text = "Receiver:";
             // 
@@ -141,7 +144,7 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(582, 209);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 15);
+            this.label4.Size = new System.Drawing.Size(143, 20);
             this.label4.TabIndex = 19;
             this.label4.Text = "Non-Paid Amount:";
             // 
@@ -151,7 +154,7 @@
             this.tbNonPaid.Location = new System.Drawing.Point(696, 206);
             this.tbNonPaid.MaxLength = 50;
             this.tbNonPaid.Name = "tbNonPaid";
-            this.tbNonPaid.Size = new System.Drawing.Size(168, 23);
+            this.tbNonPaid.Size = new System.Drawing.Size(168, 27);
             this.tbNonPaid.TabIndex = 20;
             this.tbNonPaid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNonPaid_KeyPress);
             // 
@@ -161,7 +164,7 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(7, 209);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 15);
+            this.label5.Size = new System.Drawing.Size(109, 20);
             this.label5.TabIndex = 23;
             this.label5.Text = "Notified Date:";
             // 
@@ -170,7 +173,7 @@
             this.dpNoti.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpNoti.Location = new System.Drawing.Point(96, 206);
             this.dpNoti.Name = "dpNoti";
-            this.dpNoti.Size = new System.Drawing.Size(166, 23);
+            this.dpNoti.Size = new System.Drawing.Size(166, 27);
             this.dpNoti.TabIndex = 24;
             // 
             // label6
@@ -179,7 +182,7 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(68, 122);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(24, 15);
+            this.label6.Size = new System.Drawing.Size(33, 20);
             this.label6.TabIndex = 25;
             this.label6.Text = "CC:";
             // 
@@ -189,7 +192,7 @@
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(19, 180);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 15);
+            this.label7.Size = new System.Drawing.Size(92, 20);
             this.label7.TabIndex = 31;
             this.label7.Text = "Attach File:";
             // 
@@ -197,7 +200,7 @@
             // 
             this.tbAttachFile.Location = new System.Drawing.Point(95, 177);
             this.tbAttachFile.Name = "tbAttachFile";
-            this.tbAttachFile.Size = new System.Drawing.Size(897, 23);
+            this.tbAttachFile.Size = new System.Drawing.Size(897, 27);
             this.tbAttachFile.TabIndex = 32;
             // 
             // bnAddDoc
@@ -321,6 +324,7 @@
             this.tbReceiver.EmailAutocompleteSource = null;
             this.tbReceiver.HighlightColor = System.Drawing.SystemColors.ControlLight;
             this.tbReceiver.Location = new System.Drawing.Point(96, 63);
+            this.tbReceiver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbReceiver.MinimumSize = new System.Drawing.Size(120, 284);
             this.tbReceiver.Name = "tbReceiver";
             this.tbReceiver.Size = new System.Drawing.Size(896, 284);
@@ -333,17 +337,62 @@
             this.tbCC.EmailAutocompleteSource = null;
             this.tbCC.HighlightColor = System.Drawing.SystemColors.ControlLight;
             this.tbCC.Location = new System.Drawing.Point(96, 120);
+            this.tbCC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbCC.MinimumSize = new System.Drawing.Size(140, 328);
             this.tbCC.Name = "tbCC";
             this.tbCC.Size = new System.Drawing.Size(896, 328);
             this.tbCC.TabIndex = 36;
             this.tbCC.TextColor = System.Drawing.SystemColors.WindowText;
             // 
+            // btnAttachClaimRejection
+            // 
+            this.btnAttachClaimRejection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAttachClaimRejection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAttachClaimRejection.FlatAppearance.BorderSize = 2;
+            this.btnAttachClaimRejection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAttachClaimRejection.ForeColor = System.Drawing.Color.White;
+            this.btnAttachClaimRejection.Location = new System.Drawing.Point(107, 662);
+            this.btnAttachClaimRejection.Name = "btnAttachClaimRejection";
+            this.btnAttachClaimRejection.Size = new System.Drawing.Size(155, 33);
+            this.btnAttachClaimRejection.TabIndex = 37;
+            this.btnAttachClaimRejection.Text = "Attach Claim";
+            this.btnAttachClaimRejection.UseVisualStyleBackColor = false;
+            this.btnAttachClaimRejection.Click += new System.EventHandler(this.btnAttachClaimRejection_Click);
+            // 
+            // btnGenerateSettlementNotice
+            // 
+            this.btnGenerateSettlementNotice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGenerateSettlementNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnGenerateSettlementNotice.FlatAppearance.BorderSize = 2;
+            this.btnGenerateSettlementNotice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateSettlementNotice.ForeColor = System.Drawing.Color.White;
+            this.btnGenerateSettlementNotice.Location = new System.Drawing.Point(268, 662);
+            this.btnGenerateSettlementNotice.Name = "btnGenerateSettlementNotice";
+            this.btnGenerateSettlementNotice.Size = new System.Drawing.Size(168, 33);
+            this.btnGenerateSettlementNotice.TabIndex = 38;
+            this.btnGenerateSettlementNotice.Text = "Settlement Notice";
+            this.btnGenerateSettlementNotice.UseVisualStyleBackColor = false;
+            this.btnGenerateSettlementNotice.Click += new System.EventHandler(this.btnGenerateSettlementNotice_Click);
+            // 
+            // cboExclusionSection
+            // 
+            this.cboExclusionSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboExclusionSection.FormattingEnabled = true;
+            this.cboExclusionSection.Location = new System.Drawing.Point(542, 665);
+            this.cboExclusionSection.Name = "cboExclusionSection";
+            this.cboExclusionSection.Size = new System.Drawing.Size(245, 27);
+            this.cboExclusionSection.TabIndex = 39;
+            this.cboExclusionSection.Visible = false;
+            this.cboExclusionSection.SelectedIndexChanged += new System.EventHandler(this.cboExclusionSection_SelectedIndexChanged);
+            // 
             // frmSendEmailClaimDet
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(998, 704);
+            this.Controls.Add(this.cboExclusionSection);
+            this.Controls.Add(this.btnGenerateSettlementNotice);
+            this.Controls.Add(this.btnAttachClaimRejection);
             this.Controls.Add(this.tbReceiver);
             this.Controls.Add(this.tbCC);
             this.Controls.Add(this.btnEditReceiver);
@@ -405,5 +454,8 @@
         private System.Windows.Forms.Button btnEditReceiver;
         private CustomControls.TextBoxEmailAutocomplete tbReceiver;
         private CustomControls.TextBoxEmailAutocomplete tbCC;
+        private cus_button btnAttachClaimRejection;
+        private cus_button btnGenerateSettlementNotice;
+        private System.Windows.Forms.ComboBox cboExclusionSection;
     }
 }

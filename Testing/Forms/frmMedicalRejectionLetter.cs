@@ -279,6 +279,23 @@ namespace Testing.Forms
                     var claimAmount = dtClaims.Rows[0]["CLAIMED_AMOUNT"].ToString();
                     var claimCause = dtClaims.Rows[0]["CAUSE"].ToString();
                     var hospital = dtClaims.Rows[0]["HOSPITAL"].ToString();
+                    var isNullOthHospital = dtClaims.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
+
+                    if (isNullOthHospital)
+                    {
+                        var hIndex = hospital.IndexOf("H:");
+                        if (hIndex == -1)
+                            hIndex = hospital.IndexOf("H :");
+
+                        var strHospital = hospital.Substring(hIndex + 2);
+
+                        var dIndex = strHospital.IndexOf(":");
+                        var tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
+
+                        var bHospital = tmpHospital.IndexOf("(");
+
+                        hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
+                    }
 
                     string[] dateTimeformats = { "dd/MM/yy", "dd/MM/yyyy", "dd-MMM-yy" };
                     string treatmentDateString = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
@@ -317,7 +334,17 @@ namespace Testing.Forms
                         }
 
                     }
-                    var accountHandler = dtClaims.Rows[0]["CC"].ToString();
+                    var accountHandler = string.Empty;
+
+                    var dtExeCode = crud.ExecQuery("select POL_MARKETING_EXECUTIVE_CODE from UW_T_POLICIES where POL_POLICY_NO = '" + policyNo.ToUpper().Trim() + "' and rownum = 1");
+                    if (dtExeCode.Rows.Count > 0)
+                    {
+                        var dtSf = crud.ExecQuery("select SFC_SURNAME from SM_M_SALES_FORCE where SFC_CODE = '" + dtExeCode.Rows[0][0].ToString() + "'");
+                        if (dtSf.Rows.Count > 0)
+                        {
+                            accountHandler = dtSf.Rows[0][0].ToString();
+                        }
+                    } 
 
                     engBody = engBody.Replace("%DateTimeN%", currentDate);
                     engBody = engBody.Replace("%PolicyHolder%", policyHolder);
@@ -332,18 +359,18 @@ namespace Testing.Forms
                     engBody = engBody.Replace("%DefExclus%", defExclu);
                     engBody = engBody.Replace("%AccountHandler%", accountHandler);
 
-                    khBody = khBody.Replace("%DateTimeN%", CommonFunctions.KhDate(DateTime.Now));
+                    khBody = khBody.Replace("%DateTimeN%", CommonFunctions.KhDateNew(DateTime.Now));
                     khBody = khBody.Replace("%PolicyHolder%", policyHolder);
                     khBody = khBody.Replace("%SituationOfRisk%", situationOfRisk);
                     khBody = khBody.Replace("%Policy No%", policyNo);
                     khBody = khBody.Replace("%ClaimNo%", claimNo);
                     khBody = khBody.Replace("%InsuredMember%", insuredMember);
-                    khBody = khBody.Replace("%ClaimAmount%", CommonFunctions.KhNum(Convert.ToDouble(claimAmount)));
+                    khBody = khBody.Replace("%ClaimAmount%", claimAmount);//CommonFunctions.KhNum(Convert.ToDouble(claimAmount))
                     khBody = khBody.Replace("%ClaimCause%", claimCause);
                     khBody = khBody.Replace("%Hospital%", hospital);
 
                     if (DateTime.TryParseExact(treatmentDateString, dateTimeformats, new CultureInfo("en-US"), DateTimeStyles.None, out dtTreatmentDate))
-                        treatmentDate = CommonFunctions.KhDate(Convert.ToDateTime(treatmentDate));
+                        treatmentDate = CommonFunctions.KhDateNew(Convert.ToDateTime(treatmentDate));
 
                     khBody = khBody.Replace("%Dateloss%", treatmentDate);
                     khBody = khBody.Replace("%DefExclus%", khDefExclu);
@@ -375,6 +402,22 @@ namespace Testing.Forms
 
                     khBody = khBody.Replace("“", "&ldquo;").Replace("”", "&rdquo;");
                     khBody = khBody.Replace("‘", "&lsquo;").Replace("’", "&rsquo;");
+
+                    if (claimNo.ToLower().Contains("hns"))
+                    {
+                        engBody = engBody.Replace("%ProductType%", "Group Hospital and Surgical Insurance");
+                        khBody = khBody.Replace("%ProductType%", "បណ្ណសន្យារ៉ាប់រងសម្រាកពេទ្យ និងវះកាត់");
+                    }
+                    else if (claimNo.ToLower().Contains("gpa"))
+                    {
+                        engBody = engBody.Replace("%ProductType%", "Group Personal Accident Insurance");
+                        khBody = khBody.Replace("%ProductType%", "បណ្ណសន្យារ៉ាប់រងគ្រោះថ្នាក់បុគ្គល");
+                    }
+                    else
+                    {
+                        engBody = engBody.Replace("%ProductType%", "Figtree Blue Insurance");
+                        khBody = khBody.Replace("%ProductType%", "បណ្ណសន្យារ៉ាប់រងសុខភាពអន្តរជាតិ Figtree Blue");
+                    }
 
                     SetReferenceDocument(khBody, splitContainer1.Panel1, true);
                     SetReferenceDocument(engBody, splitContainer1.Panel2, false);
@@ -445,8 +488,9 @@ namespace Testing.Forms
                     var claimAmount = dtClaims.Rows[0]["CLAIMED_AMOUNT"].ToString();
                     var claimCause = dtClaims.Rows[0]["CAUSE"].ToString();
                     var hospital = dtClaims.Rows[0]["HOSPITAL"].ToString();
+                    var isNullOthHospital = dtClaims.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
 
-                    if (!string.IsNullOrEmpty(hospital))
+                    if (isNullOthHospital)
                     {
                         var hIndex = hospital.IndexOf("H:");
                         if (hIndex == -1)
@@ -472,7 +516,17 @@ namespace Testing.Forms
                     else
                         treatmentDate = dtClaims.Rows[0]["TREATMENT_DATE"].ToString();
 
-                    var accountHandler = dtClaims.Rows[0]["CC"].ToString();
+                    var accountHandler = string.Empty;
+
+                    var dtExeCode = crud.ExecQuery("select POL_MARKETING_EXECUTIVE_CODE from UW_T_POLICIES where POL_POLICY_NO = '" + policyNo.ToUpper().Trim() + "' and rownum = 1");
+                    if (dtExeCode.Rows.Count > 0)
+                    {
+                        var dtSf = crud.ExecQuery("select SFC_SURNAME from SM_M_SALES_FORCE where SFC_CODE = '" + dtExeCode.Rows[0][0].ToString() + "'");
+                        if (dtSf.Rows.Count > 0)
+                        {
+                            accountHandler = dtSf.Rows[0][0].ToString();
+                        }
+                    } 
 
                     engBody = engBody.Replace("%DateTimeN%", currentDate);
                     engBody = engBody.Replace("%PolicyHolder%", policyHolder);
@@ -491,21 +545,20 @@ namespace Testing.Forms
                         engBody = engBody.Replace("%BeniAmt%", beniAmt);
                     }
 
-                    khBody = khBody.Replace("%DateTimeN%", CommonFunctions.KhDate(DateTime.Now));
+                    khBody = khBody.Replace("%DateTimeN%", CommonFunctions.KhDateNew(DateTime.Now));
                     khBody = khBody.Replace("%PolicyHolder%", policyHolder);
                     khBody = khBody.Replace("%SituationOfRisk%", situationOfRisk);
                     khBody = khBody.Replace("%Policy No%", policyNo);
                     khBody = khBody.Replace("%ClaimNo%", claimNo);
                     khBody = khBody.Replace("%InsuredMember%", insuredMember);
-                    khBody = khBody.Replace("%ClaimAmount%", CommonFunctions.KhNum(Convert.ToDouble(claimAmount)));
+                    khBody = khBody.Replace("%ClaimAmount%", claimAmount); //CommonFunctions.KhNum(Convert.ToDouble(claimAmount));
                     khBody = khBody.Replace("%ClaimCause%", claimCause);
                     khBody = khBody.Replace("%Hospital%", hospital);
 
                     if (otherExclusion.Equals("HNS ACCIDENT OVER PERIOD"))
                     {
                         engBody = engBody.Replace("%Period%", OverPeriod.Equals("24") ? "24" : (OverPeriod.Equals("48") ? "48" : "72"));
-                        khBody = khBody.Replace("%Period%", OverPeriod.Equals("24") ? CommonFunctions.KhNum(Convert.ToDouble("24")).Split('.')[0]
-                            : (OverPeriod.Equals("48") ? CommonFunctions.KhNum(Convert.ToDouble("48")).Split('.')[0] : CommonFunctions.KhNum(Convert.ToDouble("72")).Split('.')[0]));
+                        khBody = khBody.Replace("%Period%", OverPeriod.Equals("24") ? "24" : (OverPeriod.Equals("48") ? "48" : "72"));
                     }
 
                     if (otherExclusion.Equals("HNS POST-HOSPITALIZATION REACH LIMIT") || otherExclusion.Equals("HNS PRE-HOSPITALIZATION REACH LIMIT"))
@@ -543,11 +596,11 @@ namespace Testing.Forms
 
                     if (otherExclusion.Equals("HNS OUTPATIENT REACH LIMIT"))
                     {
-                        khBody = khBody.Replace("%BeniAmt%", CommonFunctions.KhNum(Convert.ToDouble(beniAmt)));
+                        khBody = khBody.Replace("%BeniAmt%", beniAmt);
                     }
 
                     if (DateTime.TryParseExact(treatmentDateString, dateTimeformats, new CultureInfo("en-US"), DateTimeStyles.None, out dtTreatmentDate))
-                        treatmentDate = CommonFunctions.KhDate(Convert.ToDateTime(treatmentDate));
+                        treatmentDate = CommonFunctions.KhDateNew(Convert.ToDateTime(treatmentDate));
 
                     khBody = khBody.Replace("%Dateloss%", treatmentDate);
                     khBody = khBody.Replace("%AccountHandler%", accountHandler);
@@ -594,7 +647,7 @@ namespace Testing.Forms
                     khDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
                     khDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                     khDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
-                    khDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                    khDoc.Paragraphs.LineSpacing = InchesToPoints(0.22f);
                     khDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 1.1f : 1.25f);
                     khDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     khDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
@@ -602,14 +655,23 @@ namespace Testing.Forms
 
                     if (otherExclusion.Equals("HNS MATERNITY"))
                     {
-                        khDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                        khDoc.Paragraphs.LineSpacing = InchesToPoints(0.20f);
                     }
                     if (otherExclusion.Equals("HNS CABINET") || otherExclusion.Equals("HNS MEDICAL CHECK-UP REACH LIMIT")
                         || otherExclusion.Equals("HNS OUTPATIENT") || otherExclusion.Equals("HNS OUTPATIENT REACH LIMIT"))
                     {
-                        khDoc.Paragraphs.LineSpacing = InchesToPoints(0.17f);
+                        khDoc.Paragraphs.LineSpacing = InchesToPoints(0.20f);
                     }
 
+                    for (int i = khDoc.Paragraphs.Count; i >= 1; i--)
+                    {
+                        Microsoft.Office.Interop.Word.Paragraph para = khDoc.Paragraphs[i];
+                        if (string.IsNullOrWhiteSpace(para.Range.Text))
+                        {
+                            // Delete the empty paragraph
+                            para.Range.Delete();
+                        }
+                    }
                 }
                 else
                 {
@@ -621,22 +683,32 @@ namespace Testing.Forms
                     engDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
                     engDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
                     engDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
-                    engDoc.Paragraphs.LineSpacing = InchesToPoints(0.13f);
+                    engDoc.Paragraphs.LineSpacing = InchesToPoints(0.16f);
                     engDoc.PageSetup.TopMargin = InchesToPoints(isKhmer ? 1.1f : 1.25f);
                     engDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
                     engDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
-                    engDoc.Range().Font.Size = 11.0f;
+                    //engDoc.Range().Font.Size = 11.0f;
 
                     if (otherExclusion.Equals("HNS MATERNITY"))
                     {
-                        engDoc.Paragraphs.LineSpacing = InchesToPoints(0.123f);
-                        engDoc.Range().Font.Size = 10.5f;
+                        engDoc.Paragraphs.LineSpacing = InchesToPoints(0.15f);
+                        //engDoc.Range().Font.Size = 10.5f;
                     }
                     if (otherExclusion.Equals("HNS CABINET") || otherExclusion.Equals("HNS MEDICAL CHECK-UP REACH LIMIT")
                         || otherExclusion.Equals("HNS OUTPATIENT") || otherExclusion.Equals("HNS OUTPATIENT REACH LIMIT"))
                     {
                         engDoc.Paragraphs.LineSpacing = InchesToPoints(0.17f);
+                    }
+
+                    for (int i = engDoc.Paragraphs.Count; i >= 1; i--)
+                    {
+                        Microsoft.Office.Interop.Word.Paragraph para = engDoc.Paragraphs[i];
+                        if (string.IsNullOrWhiteSpace(para.Range.Text))
+                        {
+                            // Delete the empty paragraph
+                            para.Range.Delete();
+                        }
                     }
                 }
 

@@ -86,7 +86,7 @@ namespace Testing
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             StartApp();
-            //Application.Run(new frmLogIn());
+            //Application.Run(new frmMain());
 
             #region --- OLD CODING ---
             //bool createdNew = true;

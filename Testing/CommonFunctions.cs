@@ -223,6 +223,17 @@ namespace Testing
             return "ថ្ងៃទី" + khd + " ខែ" + khm + " ឆ្នាំ" + khy;
         }
 
+        public static string KhDateNew(DateTime date)
+        {
+            string d = date.ToString("dd"), m = date.ToString("MMMM"), y = date.ToString("yyyy");
+            string khm = "";
+            if (d.Length == 1) d = "0" + d;
+
+            khm = KhMonth[m];
+
+            return "ថ្ងៃទី" + d + " ខែ" + khm + " ឆ្នាំ" + y;
+        }
+
         public static string KhNum(double num)
         {
             string n = String.Format("{0:N}",Convert.ToDecimal(num));
@@ -373,6 +384,53 @@ namespace Testing
             return word;
         }
 
+        public static DataTable Provinces()
+        {
+            List<string> lstProvinces = new List<string>();
+            lstProvinces.Add("Banteay Meanchey");
+            lstProvinces.Add("Battambang");
+            lstProvinces.Add("Kampong Cham");
+            lstProvinces.Add("Kampong Chhnang");
+            lstProvinces.Add("Kampong Speu");
+            lstProvinces.Add("Kampong Thom");
+            lstProvinces.Add("Kampot");
+            lstProvinces.Add("Kandal");
+            lstProvinces.Add("Koh Kong");
+            lstProvinces.Add("Kratié");
+            lstProvinces.Add("Mondulkiri");
+            lstProvinces.Add("Phnom Penh");
+            lstProvinces.Add("Prey Veng");
+            lstProvinces.Add("Pursat");
+            lstProvinces.Add("Ratanakiri");
+            lstProvinces.Add("Siem Reap");
+            lstProvinces.Add("Preah Sihanouk");
+            lstProvinces.Add("Stung Treng");
+            lstProvinces.Add("Svay Rieng");
+            lstProvinces.Add("Takéo");
+            lstProvinces.Add("Oddar Meanchey");
+            lstProvinces.Add("Kep");
+            lstProvinces.Add("Pailin");
+            lstProvinces.Add("Tboung Khmum");
+            lstProvinces.Add("Preah Vihear");
+
+            var dtProvinces = new DataTable();
+            dtProvinces.Columns.Add("Name", typeof(string));
+            dtProvinces.Columns.Add("Value", typeof(string));
+
+            foreach (var province in lstProvinces)
+            {
+                var drProvince = dtProvinces.NewRow();
+                drProvince["Name"] = province;
+                drProvince["Value"] = province;
+                dtProvinces.Rows.Add(province);
+            }
+
+            dtProvinces.DefaultView.Sort = "Name ASC";
+            dtProvinces = dtProvinces.DefaultView.ToTable();
+
+            return dtProvinces;
+        }
+
         /// <summary>
         /// This class is an implementation of the 'IComparer' interface.
         /// </summary>
@@ -479,14 +537,80 @@ namespace Testing
         public static string SendEmail(NetworkCredential credential, MailMessage msg, string sectionName = "default")
         {
             string result = "";
+            List<string> lstAttPath = new List<string>();
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                var smtp = new CustomSmtpClient(credential, sectionName);
-                smtp.Send(msg);
-                msg.Attachments.Dispose();
-                msg.Dispose();
-                result = "";
+                Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
+                Microsoft.Office.Interop.Outlook._MailItem mailItem = (Microsoft.Office.Interop.Outlook._MailItem)outlookApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+                mailItem.To = msg.To.ToString().Replace(",", ";");
+                mailItem.CC = msg.CC.ToString().Replace(",", ";");
+                mailItem.BodyFormat = Microsoft.Office.Interop.Outlook.OlBodyFormat.olFormatHTML;
+                mailItem.Subject = msg.Subject;
+
+                foreach (var attachment in msg.Attachments)
+                {
+                    Stream contentStream = attachment.ContentStream;
+
+                    MemoryStream memoryStream = new MemoryStream();
+                    contentStream.CopyTo(memoryStream);
+
+                    // Reset the position of the MemoryStream object to the beginning
+                    memoryStream.Position = 0;
+
+                    FileInfo fileInfo = new FileInfo(attachment.Name);
+
+                    // Create a new FileStream object using the FileInfo.FullName property and the FileMode.Create enumeration value
+                    using (FileStream fileStream = new FileStream(fileInfo.FullName, FileMode.Create))
+                    {
+                        // Copy the content of the MemoryStream object to the FileStream object
+                        memoryStream.CopyTo(fileStream);
+                        mailItem.Attachments.Add(fileStream.Name, Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue, 1, attachment.Name);
+                        lstAttPath.Add(fileStream.Name);
+                    }
+                }
+
+                string htmlBody = null;
+                foreach (AlternateView view in msg.AlternateViews)
+                {
+                    if (view.ContentType.MediaType == "text/html")
+                    {
+                        using (var reader = new StreamReader(view.ContentStream, Encoding.UTF8))
+                        {
+                            htmlBody = reader.ReadToEnd();
+                        }
+                    }
+                }
+                mailItem.HTMLBody = htmlBody;
+
+                if (string.IsNullOrEmpty(htmlBody))
+                {
+                    mailItem.Body = msg.Body;
+                }
+
+                string currentDir = Directory.GetCurrentDirectory();
+                EmbedImage(mailItem, string.Concat(currentDir, @"\Html\forte-general-logo-red.png"), "forte-general-logo-red");
+                EmbedImage(mailItem, string.Concat(currentDir, @"\Html\fb.png"), "FB_logo");
+                EmbedImage(mailItem, string.Concat(currentDir, @"\Html\yt.png"), "YT_logo");
+                EmbedImage(mailItem, string.Concat(currentDir, @"\Html\mail.png"), "Mail_logo");
+                EmbedImage(mailItem, string.Concat(currentDir, @"\Html\linkedin.png"), "linkedin");
+
+                mailItem.Send();
+
+                if (lstAttPath.Count() > 0)
+                {
+                    foreach (var attPath in lstAttPath)
+                    {
+                        if (System.IO.File.Exists(attPath))
+                            System.IO.File.Delete(attPath);
+                    }
+                }
+
+                //var smtp = new CustomSmtpClient(credential, sectionName);
+                //smtp.Send(msg);
+                //msg.Attachments.Dispose();
+                //msg.Dispose();
+                //result = "";
             }
             catch (Exception ex)
             {
@@ -514,9 +638,13 @@ namespace Testing
             }
             Cursor.Current = Cursors.AppStarting;
 
-
-
             return result;
+        }
+
+        public static void EmbedImage(Microsoft.Office.Interop.Outlook._MailItem mailItem, string imgPath, string cid)
+        {
+            Microsoft.Office.Interop.Outlook.Attachment image = mailItem.Attachments.Add(imgPath, Microsoft.Office.Interop.Outlook.OlAttachmentType.olEmbeddeditem, null, string.Empty);
+            image.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", cid);
         }
 
         public class NotiType

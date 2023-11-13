@@ -10,7 +10,6 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SautinSoft;
 using System.Text.RegularExpressions;
 
 namespace Testing.Forms
@@ -32,11 +31,12 @@ namespace Testing.Forms
         string HashPass = "Forte@2017";
         public static DataTable dtClaimDt;
         public static string OtherExclusion;
+        public static string PolNo;
         private DataTable dtExcDef;
         int[] row_id;
         DataTable dtTemp1 = null;
-        
-      
+
+
         public frmSendEmailClaim()
         {
             InitializeComponent();
@@ -90,10 +90,32 @@ namespace Testing.Forms
             dgvNonPayClaimNo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             CommonFunctions.HighLightGrid(dgvDefinition);
 
-            var dsOtherExclusions = crud.ExecQuery("select distinct PRODUCTS from USER_REJECTLETTER_TEMP where PRODUCTS != 'HNS' order by PRODUCTS");
+            var dsOtherExclusions = crud.ExecQuery("select distinct PRODUCTS from USER_REJECTLETTER_TEMP where PRODUCTS not in ('HNS', 'HNS EMAIL NOTICE') order by PRODUCTS");
             cboOtherExclusions.ValueMember = "PRODUCTS";
             cboOtherExclusions.DisplayMember = "PRODUCTS";
             cboOtherExclusions.DataSource = dsOtherExclusions;
+
+            // add discount to Settlement to Hospital
+            var dtDiscount = new DataTable();
+            dtDiscount.Columns.Add("Name", typeof(string));
+            dtDiscount.Columns.Add("Value", typeof(string));
+
+            for (int i = 0; i <= 10; i++)
+            {
+                var drDiscount = dtDiscount.NewRow();
+                drDiscount["Name"] = i.ToString();
+                drDiscount["Value"] = i.ToString();
+                dtDiscount.Rows.Add(drDiscount);
+            }
+
+            cboDiscount.ValueMember = "Value";
+            cboDiscount.DisplayMember = "Name";
+            cboDiscount.DataSource = dtDiscount;
+
+            // add Province to Settlement to Hospital
+            cboAddress.ValueMember = "Value";
+            cboAddress.DisplayMember = "Name";
+            cboAddress.DataSource = CommonFunctions.Provinces();
         }
         //private void Combobox_Load()
         //{
@@ -127,10 +149,12 @@ namespace Testing.Forms
         private void refreshGrid()
         {
             //load all history information
-            tbHisSearch.Text = "";
-            dgvAllHis.DefaultCellStyle.ForeColor = Color.Black;
-            dgvAllHis.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", "" });
-            dgvAllHis.Columns[0].Visible = false;
+
+            //oudom
+            //tbHisSearch.Text = "";
+            //dgvAllHis.DefaultCellStyle.ForeColor = Color.Black;
+            //dgvAllHis.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", "" });
+            //dgvAllHis.Columns[0].Visible = false;
         }
 
         private void PendingGrid()
@@ -140,7 +164,8 @@ namespace Testing.Forms
 
             //bind data source
             dgvPending.DefaultCellStyle.ForeColor = Color.Black;
-            dgvPending.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "Pending", "" });
+            //oudom
+            dgvPending.DataSource = crud.ExecSP_OutPara("sp_user_claim_info_new", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "Pending", "" });
             dgvPending.Columns["REM_NO"].Visible = false;
 
             //add button for Send in grid
@@ -207,6 +232,8 @@ namespace Testing.Forms
             disabledButt(bnRem2Send);
             disabledButt(bnRem3Resend);
             disabledButt(bnRem3Send);
+            disabledButt(btnClaimClosing);
+            disabledButt(btnClaimClosingResend);
             disabledButt(bnDocReqResend); //Update 17-Jul-19 (Document Request)
             enabledButt(bnDocReqSend); //Update 17-Jul-19 (Document Request)
             enabledButt(bnAckSend);
@@ -217,12 +244,14 @@ namespace Testing.Forms
             enabledButt(bnDocRec);
 
             //validating buttons for enabled and not
-            DataTable dtInfo = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", lbClaimNo.Text });
+            //oudom
+            DataTable dtInfo = crud.ExecSP_OutPara("sp_user_claim_info_new", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", lbClaimNo.Text });
             dgvHisClaim.DataSource = dtInfo;
             dgvHisClaim.Columns[0].Visible = false;
 
             //validate the step of reminder emails
-            DataTable dtStep = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "CurRem", "" });
+            //oudom
+            DataTable dtStep = crud.ExecSP_OutPara("sp_user_claim_info_new", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { lbClaimNo.Text, "CurRem", "" });
             for (int i = 0; i < dtStep.Rows.Count; i++)
             {
                 if (dtStep.Rows[0].ItemArray[1].ToString() == "1")
@@ -237,10 +266,18 @@ namespace Testing.Forms
                     disabledButt(bnRem2Send);
                     enabledButt(bnRem3Send);
                 }
+                else if (dtStep.Rows[0].ItemArray[1].ToString() == "3")
+                {
+                    disabledButt(bnRem1Send);
+                    disabledButt(bnRem2Send);
+                    disabledButt(bnRem3Send);
+                    enabledButt(btnClaimClosing);
+                }
             }
 
-            //Update 17-Jul-19 (Document Request) 
-            DataTable dtTemp = crud.ExecQuery("SELECT HIST_SEQ FROM USER_CLAIM_EMAIL_HIST WHERE CLAIM_NO ='" + lbClaimNo.Text + "' AND SEND_TYPE = 'DocReq'");
+            //Update 17-Jul-19 (Document Request)
+            //Oudom
+            DataTable dtTemp = crud.ExecQuery("SELECT HIST_SEQ FROM USER_CLAIM_EMAIL_HIST WHERE CLAIM_NO ='" + lbClaimNo.Text + "' AND SEND_TYPE = 'DocReqNew'");
             if (dtTemp.Rows.Count == 0)
             {
                 enabledButt(bnDocReqSend);
@@ -275,45 +312,51 @@ namespace Testing.Forms
             //disable buttons if emails are sent once before
             for (int i = 0; i < dtInfo.Rows.Count; i++)
             {
-                if (dtInfo.Rows[i].ItemArray[0].ToString() == "Ack")
+                //oudom
+                if (dtInfo.Rows[i].ItemArray[0].ToString() == "AckNew")
                 {
                     disabledButt(bnAckSend);
                     enabledButt(bnAckResend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "Rej")
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RejNew")
                 {
                     disabledButt(bnRejSend);
                     enabledButt(bnRejResend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "Par")
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "ParNew")
                 {
                     disabledButt(bnParSend);
                     enabledButt(bnParResend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "Pay")
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "PayNew")
                 {
                     disabledButt(bnPaySend);
                     enabledButt(bnPayResend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "DocReq") //Update 17-Jul-19 (Document Request)
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "DocReqNew") //Update 17-Jul-19 (Document Request)
                 {
                     disabledButt(bnDocReqSend);
                     enabledButt(bnDocReqResend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemFirst")
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemNewFirst")
                 {
                     disabledButt(bnRem1Send);
                     enabledButt(bnRem1Resend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemSecond")
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemNewSecond")
                 {
                     disabledButt(bnRem2Send);
                     enabledButt(bnRem2Resend);
                 }
-                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemThird")
+                else if (dtInfo.Rows[i].ItemArray[0].ToString() == "RemNewThird")
                 {
                     disabledButt(bnRem3Send);
                     enabledButt(bnRem3Resend);
+                }
+                else if (dtInfo.Rows[i].ItemArray[0].ToString().Contains("ClaimClosing"))
+                {
+                    disabledButt(btnClaimClosing);
+                    enabledButt(btnClaimClosingResend);
                 }
             }
 
@@ -326,6 +369,7 @@ namespace Testing.Forms
             tbRiskName.Text = dttemp.Rows[0][2].ToString();
             tbDOL.Text = dttemp.Rows[0][3].ToString();
             tbPolNo.Text = dttemp.Rows[0][4].ToString();
+            PolNo = tbPolNo.Text;
 
         }
 
@@ -336,72 +380,98 @@ namespace Testing.Forms
 
         private void bnAckSend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Ack");
+            //oudom
+            OpenDetForm(false, "AckNew");
         }
 
         private void bnRejSend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Rej");
+            //oudom
+            OpenDetForm(false, "RejNew");
         }
 
         private void bnParSend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Par");
+            //oudom
+            OpenDetForm(false, "ParNew");
         }
 
         private void bnPaySend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Pay");
+            //oudom
+            OpenDetForm(false, "PayNew");
         }
 
         private void bnRem1Send_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Rem", "First");
+            //oudom
+            OpenDetForm(false, "RemNew", "First");
         }
 
         private void bnRem2Send_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Rem", "Second");
+            //oudom
+            OpenDetForm(false, "RemNew", "Second");
         }
 
         private void bnRem3Send_Click(object sender, EventArgs e)
         {
-            OpenDetForm(false, "Rem", "Third");
+            //oudom
+            OpenDetForm(false, "RemNew", "Third");
+        }
+
+        private void btnClaimClosing_Click(object sender, EventArgs e)
+        {
+            //oudom
+            OpenDetForm(false, "ClaimClosing");
         }
 
         private void bnAckResend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Ack");
+            //oudom
+            OpenDetForm(true, "AckNew");
         }
 
         private void bnRejResend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Rej");
+            //oudom
+            OpenDetForm(true, "RejNew");
         }
 
         private void bnParResend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Par");
+            //oudom
+            OpenDetForm(true, "ParNew");
         }
 
         private void bnPayResend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Pay");
+            //oudom
+            OpenDetForm(true, "PayNew");
         }
 
         private void bnRem1Resend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Rem", "First");
+            //oudom
+            OpenDetForm(true, "RemNew", "First");
         }
 
         private void bnRem2Resend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Rem", "Second");
+            //oudom
+            OpenDetForm(true, "RemNew", "Second");
         }
 
         private void bnRem3Resend_Click(object sender, EventArgs e)
         {
-            OpenDetForm(true, "Rem", "Third");
+            //oudom
+            OpenDetForm(true, "RemNew", "Third");
+        }
+
+        private void btnClaimClosingResend_Click(object sender, EventArgs e)
+        {
+            //oudom
+            OpenDetForm(true, "ClaimClosing");
         }
 
         private void bnClear_Click(object sender, EventArgs e)
@@ -412,8 +482,9 @@ namespace Testing.Forms
 
         private void bnHisSearch_Click(object sender, EventArgs e)
         {
-            dgvAllHis.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", tbHisSearch.Text });
-            dgvAllHis.Columns[0].Visible = false;
+            //oudom
+            //dgvAllHis.DataSource = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "ViewHis", tbHisSearch.Text });
+            //dgvAllHis.Columns[0].Visible = false;
         }
 
         private void bnRefresh_Click(object sender, EventArgs e)
@@ -455,7 +526,7 @@ namespace Testing.Forms
             if (e.ColumnIndex == dgvPending.Columns["bnPeSend"].Index && e.RowIndex >= 0)
             {
                 frmSendEmailClaimDet cl_det = new frmSendEmailClaimDet();
-                cl_det.sp_type = "Rem";
+                cl_det.sp_type = "RemNew"; //oudom
                 cl_det.remind = remSeq == "First" ? "Second" : (remSeq == "Second" ? "Third" : "");
                 cl_det.resend = false;
                 cl_det.lbClaimNo.Text = claimNo;
@@ -483,12 +554,14 @@ namespace Testing.Forms
 
         private void bnDocReqSend_Click(object sender, EventArgs e) //Update 17-Jul-19 (Document Request)
         {
-            OpenDetForm(false, "DocReq");
+            // oudom
+            OpenDetForm(false, "DocReqNew");
         }
 
         private void bnDocReqResend_Click(object sender, EventArgs e) //Update 17-Jul-19 (Document Request)
         {
-            OpenDetForm(true, "DocReq");
+            // oudom
+            OpenDetForm(true, "DocReqNew");
         }
 
         private void tbClaimNo_KeyPress(object sender, KeyPressEventArgs e)
@@ -517,78 +590,79 @@ namespace Testing.Forms
                     Msgbox.Show("Incorrect Claim No");
                     return;
                 }
-                
+
                 string pro = ClNo.Substring(7, 3);
                 if (pro != "GPA" && pro != "PAC" && pro != "HNS")
                 {
                     Msgbox.Show("Only GPA ,PAC and HNS product available in this function.");
                     return;
                 }
-                else if (pro == "GPA" || pro == "PAC") { 
-                Cursor.Current = Cursors.WaitCursor;
-
-                DataTable result = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
-                "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
-                "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
-                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
-                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
-                "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
-                "INT_BPARTY_CODE CC from CL_T_INTIMATION where INT_CLAIM_NO = '" + ClNo + "'");
-
-                if (result.Rows.Count <= 0)
+                else if (pro == "GPA" || pro == "PAC")
                 {
-                    Msgbox.Show("Not record found!");
-                    return;
-                }
+                    Cursor.Current = Cursors.WaitCursor;
 
-                string SecondPara = "By virtue of Personal Accident Policy, the policy will cover medical expenses for bodily injury to the insured Person caused solely and directly by ",
-                    SecondParaKh = "ដោយផ្អែកលើបណ្ណសន្យាគ្រោះថ្នាក់បុគ្គល ";
+                    DataTable result = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+                    "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+                    "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+                    "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
+                    "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, nvl(nullif(instr(INT_COMMENTS, '('),0),instr(INT_COMMENTS, 'D:')) - instr(INT_COMMENTS, 'H:') - 2)), 'N/A') HOSPITAL, " +
+                    "nvl(REGEXP_SUBSTR(nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'H:') + 2, instr(INT_COMMENTS, 'D:') - instr(INT_COMMENTS, 'H:') - 2)), 'N/A'), '\\(([^)]*)\\)', 1, 1, NULL, 1),'N/A') TREATMENT_DATE, " +
+                    "INT_BPARTY_CODE CC from CL_T_INTIMATION where INT_CLAIM_NO = '" + ClNo + "'");
 
-                if (lvDefExclu.CheckedItems.Count > 0)
-                {
-                    foreach (ListViewItem lvi in lvDefExclu.CheckedItems)
+                    if (result.Rows.Count <= 0)
                     {
-                        if (lvDefExclu.CheckedItems.Count == 1)
+                        Msgbox.Show("Not record found!");
+                        return;
+                    }
+
+                    string SecondPara = "By virtue of Personal Accident Policy, the policy will cover medical expenses for bodily injury to the insured Person caused solely and directly by ",
+                        SecondParaKh = "ដោយផ្អែកលើបណ្ណសន្យាគ្រោះថ្នាក់បុគ្គល ";
+
+                    if (lvDefExclu.CheckedItems.Count > 0)
+                    {
+                        foreach (ListViewItem lvi in lvDefExclu.CheckedItems)
                         {
-                            SecondPara += lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
-                            SecondParaKh += KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
-                            break;
-                        }
-                        else
-                        {
-                            SecondPara += Environment.NewLine + Environment.NewLine + "•  " + lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
-                            SecondParaKh += Environment.NewLine + "•  " + KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
+                            if (lvDefExclu.CheckedItems.Count == 1)
+                            {
+                                SecondPara += lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
+                                SecondParaKh += KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
+                                break;
+                            }
+                            else
+                            {
+                                SecondPara += Environment.NewLine + Environment.NewLine + "•  " + lvi.SubItems[0].Text + " " + lvi.SubItems[1].Text;
+                                SecondParaKh += Environment.NewLine + "•  " + KhTranslate(lvi.SubItems[0].Text) + " " + lvi.SubItems[2].Text;
+                            }
                         }
                     }
+
+
+                    result.Columns.Add("SECOND_PARA", typeof(System.String));
+                    foreach (DataRow row in result.Rows)
+                    {
+                        row["SECOND_PARA"] = SecondPara;
+                    }
+
+                    DataTable resultKh = result.Copy();
+                    string clamt = "";
+                    foreach (DataRow row in resultKh.Rows)
+                    {
+                        row["SECOND_PARA"] = SecondParaKh;
+                        clamt = row["CLAIMED_AMOUNT"].ToString();
+                    }
+
+                    Reports.RejectionLetter report = new Reports.RejectionLetter();
+                    report.SetDataSource(result);
+                    crystalReportViewer1.ReportSource = report;
+
+                    Reports.RejectionLetterKH report1 = new Reports.RejectionLetterKH();
+                    report1.SetDataSource(resultKh);
+                    report1.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
+                    report1.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
+                    crystalReportViewer2.ReportSource = report1;
+
+
                 }
-
-
-                result.Columns.Add("SECOND_PARA", typeof(System.String));
-                foreach (DataRow row in result.Rows)
-                {
-                    row["SECOND_PARA"] = SecondPara;
-                }
-
-                DataTable resultKh = result.Copy();
-                string clamt = "";
-                foreach (DataRow row in resultKh.Rows)
-                {
-                    row["SECOND_PARA"] = SecondParaKh;
-                    clamt = row["CLAIMED_AMOUNT"].ToString();
-                }
-
-                Reports.RejectionLetter report = new Reports.RejectionLetter();
-                report.SetDataSource(result);
-                crystalReportViewer1.ReportSource = report;
-
-                Reports.RejectionLetterKH report1 = new Reports.RejectionLetterKH();
-                report1.SetDataSource(resultKh);
-                report1.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
-                report1.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
-                crystalReportViewer2.ReportSource = report1;
-
-                
-            }
                 else if (pro == "HNS")
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -624,8 +698,8 @@ namespace Testing.Forms
                             }
                             else
                             {
-                                SecondPara += Environment.NewLine +Environment.NewLine + "•  " + lvi.SubItems[1].Text ;
-                                SecondParaKh += Environment.NewLine +Environment.NewLine + "•  " + lvi.SubItems[2].Text ;
+                                SecondPara += Environment.NewLine + Environment.NewLine + "•  " + lvi.SubItems[1].Text;
+                                SecondParaKh += Environment.NewLine + Environment.NewLine + "•  " + lvi.SubItems[2].Text;
                             }
                         }
                     }
@@ -646,15 +720,15 @@ namespace Testing.Forms
                     //string clamt = "";
                     //foreach (DataRow row in resultKh.Rows)
                     //{
-                        
+
                     //    clamt = row["CLAIMED_AMOUNT"].ToString();
                     //}
-                    
-                    
+
+
                     report.SetDataSource(result);
                     report.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
                     report.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
-                    
+
                     crystalReportViewer2.ReportSource = report;
                     crystalReportViewer2.Location = new System.Drawing.Point(250, 250);
                     crystalReportViewer1.Visible = false;
@@ -663,7 +737,7 @@ namespace Testing.Forms
                     //report1.SetParameterValue("KhDate", CommonFunctions.KhDate(DateTime.Now));
                     //report1.SetParameterValue("ClAmtKh", CommonFunctions.KhNum(Convert.ToDouble(clamt)));
                     //crystalReportViewer2.ReportSource = report1;
-                    
+
                 }
                 Cursor.Current = Cursors.AppStarting;
             }
@@ -711,56 +785,57 @@ namespace Testing.Forms
                 string clno = dgvNonPayClaimNo.Rows[CurrentRow].Cells["CLAIM_NO"].Value.ToString();
 
                 string pro = clno.Substring(7, 3);
-                if (pro != "GPA" && pro != "PAC")
+                if (pro != "GPA" && pro != "PAC" && pro != "PAE")
                 {
                     Msgbox.Show("Only GPA and PAC product available in this function.");
                     return;
                 }
 
 
-      //          string cmd = " select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE,TOTAL_COST,CC from " +
-      //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
-      //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
-      //"nvl((select SUM(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_INT_SEQ = INT_SEQ_NO),0) PAYABLE, INT_BPARTY_CODE CC, " +
-      //"(select ADR_LOC_DESCRIPTION || ', ' || " +
-      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
-      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
-      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE  " +
-      //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
-      //"from CL_T_INTIMATION  " +
-      //"where INT_CLAIM_NO = '" + clno + "')";
+                //          string cmd = " select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE,TOTAL_COST,CC from " +
+                //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+                //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
+                //"nvl((select SUM(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_INT_SEQ = INT_SEQ_NO),0) PAYABLE, INT_BPARTY_CODE CC, " +
+                //"(select ADR_LOC_DESCRIPTION || ', ' || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE  " +
+                //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+                //"from CL_T_INTIMATION  " +
+                //"where INT_CLAIM_NO = '" + clno + "')";
 
 
-      //          string cmd = " select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE,TOTAL_COST,CC from " +
-      //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
-      //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null and " +
-      //"CREATED_DATE = (select MAX(CREATED_DATE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null)),0) TOTAL_COST, " +
-      //"nvl((select SUM(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_INT_SEQ = INT_SEQ_NO),0) PAYABLE, INT_BPARTY_CODE CC, " +
-      //"(select ADR_LOC_DESCRIPTION || ', ' || " +
-      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
-      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
-      //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE  " +
-      //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
-      //"from CL_T_INTIMATION  " +
-      //"where INT_CLAIM_NO = '" + clno + "')";
+                //          string cmd = " select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE,TOTAL_COST,CC from " +
+                //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+                //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null and " +
+                //"CREATED_DATE = (select MAX(CREATED_DATE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null)),0) TOTAL_COST, " +
+                //"nvl((select SUM(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_INT_SEQ = INT_SEQ_NO),0) PAYABLE, INT_BPARTY_CODE CC, " +
+                //"(select ADR_LOC_DESCRIPTION || ', ' || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE  " +
+                //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+                //"from CL_T_INTIMATION  " +
+                //"where INT_CLAIM_NO = '" + clno + "')";
 
-        //        string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
-        //"(case when PAYABLE = 0 then PAID else PAYABLE end) as PAYABLE,CC from " +
-        //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
-        //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
-        //"nvl((select sum(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 ),0) " +
-        //"- nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAYABLE, " +
-        //"nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAID, INT_BPARTY_CODE CC, " +
-        //"(select ADR_LOC_DESCRIPTION || ', ' || " +
-        //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
-        //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
-        //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " + 
-        //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
-        //"from CL_T_INTIMATION  " +
-        //"where INT_CLAIM_NO = '" + clno + "')";
+                //        string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
+                //"(case when PAYABLE = 0 then PAID else PAYABLE end) as PAYABLE,CC from " +
+                //"(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
+                //"nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
+                //"nvl((select sum(MRD_VALUE) from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 ),0) " +
+                //"- nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAYABLE, " +
+                //"nvl((select sum(RRD_VALUE) from CL_T_PROV_REVISION_DTLS where RRD_CLAIM_NO = '" + clno + "' and RRD_FUNCTION_ID = 'PY' and RRD_VALUE <> 0),0) PAID, INT_BPARTY_CODE CC, " +
+                //"(select ADR_LOC_DESCRIPTION || ', ' || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
+                //"(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " + 
+                //"from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+                //"from CL_T_INTIMATION  " +
+                //"where INT_CLAIM_NO = '" + clno + "')";
 
                 string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
-        "PAYABLE,CC from " +
+        //"PAYABLE,CC from " +
+        "TOTAL_COST,CC from " +
         "(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
         "nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
         "nvl((select * from(select MRD_VALUE from CL_T_PROV_PAYMENT_DTLS where MRD_CLAIM_NO = '" + clno + "' and MRD_FUNCTION_ID = '3.1' and MRD_VALUE <> 0 and rownum = 1 order by CREATED_DATE desc)), 0) PAYABLE, " +
@@ -769,7 +844,7 @@ namespace Testing.Forms
         "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=3 and rownum = 1)) || ', '  || " +
         "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=2 and rownum = 1)) || ', '  || " +
         "(select GPL_DESC from SM_M_GEOAREA_PARAMLN where GPL_CODE = (select SGD_GPL_DET_CODE from SM_M_GEOAREA_DETAILS where SGD_GPL_CODE = ADR_POSTAL_CODE and SGD_SMG_CODE=1 and rownum = 1)) as ADDRESS_LINE " +
-        "from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE) ADDRESS " +
+        "from UW_M_CUST_ADDRESSES where ADR_CUS_CODE = INT_CUS_CODE and rownum = 1) ADDRESS " +
         "from CL_T_INTIMATION  " +
         "where INT_CLAIM_NO = '" + clno + "')";
 
@@ -832,8 +907,8 @@ namespace Testing.Forms
                     HtmlPara += " not covered under the Group Personal Accident insurance policy.";
                 }
 
-                //result.Columns.Add("PAYABLE", typeof(System.String));
-                result.Columns.Add("TOTAL_COST", typeof(System.String));
+                result.Columns.Add("PAYABLE", typeof(System.String));
+                //result.Columns.Add("TOTAL_COST", typeof(System.String));
                 result.Columns.Add("NON_PAYABLE", typeof(System.String));
                 result.Columns.Add("CASH_OR_CHEQUE", typeof(System.String));
                 result.Columns.Add("HTML_PARA", typeof(System.String));
@@ -841,8 +916,8 @@ namespace Testing.Forms
 
                 foreach (DataRow row in result.Rows)
                 {
-                    //row["PAYABLE"] = String.Format("{0:N}", Convert.ToDecimal(Convert.ToDouble(row["TOTAL_COST"]) - NonPay));
-                    row["TOTAL_COST"] = String.Format("{0:N}", Convert.ToDecimal(Convert.ToDouble(row["PAYABLE"]) + NonPay));
+                    row["PAYABLE"] = String.Format("{0:N}", Convert.ToDecimal(Convert.ToDouble(row["TOTAL_COST"]) - NonPay));
+                    //row["TOTAL_COST"] = String.Format("{0:N}", Convert.ToDecimal(Convert.ToDouble(row["PAYABLE"]) + NonPay));
                     row["NON_PAYABLE"] = String.Format("{0:N}", NonPay);
                     row["CASH_OR_CHEQUE"] = PaymentMethod;
                     row["HTML_PARA"] = HtmlPara;
@@ -1100,7 +1175,7 @@ namespace Testing.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                
+
                 DataTable dtTemp = new DataTable();
                 DataTable dtQ_temp = new DataTable();
                 string RefNo = "";
@@ -1119,10 +1194,10 @@ namespace Testing.Forms
                     //update on save record for modification Theane 14-07-2022
                     dtQ_temp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION_TEMP WHERE CHQ_NO = '" + ChequeNo + "'");
                     //-----///
-                        
-                     dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE CHQ_NO = '" + ChequeNo + "'");
 
-                        
+                    dtTemp = crud.ExecQuery("SELECT * FROM VIEW_REQUISITION WHERE CHQ_NO = '" + ChequeNo + "'");
+
+
 
                     if (dtTemp.Rows.Count <= 0)
                     {
@@ -1246,10 +1321,10 @@ namespace Testing.Forms
 
                 }
                 //-----------------------------------//
-                
+
                 dgvClaimDetail.DataSource = dtTemp;
                 //dtTemp1 = dtTemp.Copy();
-                
+
 
                 dgvClaimDetail.Columns["REQUISITION_NO"].Visible = false;
                 dgvClaimDetail.Columns["REQ_AMOUNT"].Visible = false;
@@ -1305,12 +1380,22 @@ namespace Testing.Forms
                     Latest.Columns.Add(col.Name);
                 }
 
+                Latest.Columns.Add("POL_NO", typeof(string));
+                var claimNo = string.Empty;
                 foreach (DataGridViewRow row in dgvClaimDetail.Rows)
                 {
                     DataRow dRow = Latest.NewRow();
+                    bool addPolNo = false;
                     foreach (DataGridViewCell cell in row.Cells)
                     {
                         dRow[cell.ColumnIndex] = cell.Value;
+                        claimNo = dRow["CLAIM_NO"].ToString();
+                        if (!string.IsNullOrEmpty(claimNo) && !addPolNo)
+                        {
+                            var polNo = crud.ExecQuery("select int_policy_no from cl_t_intimation where int_claim_no = '" + claimNo + "'").Rows[0][0].ToString() ?? string.Empty;
+                            dRow["POL_NO"] = polNo;
+                            addPolNo = true;
+                        }
                     }
                     Latest.Rows.Add(dRow);
                 }
@@ -1326,10 +1411,23 @@ namespace Testing.Forms
                 {
                     Latest.Columns.Add("AMT_AFTER_DIS", typeof(string));
                     foreach (DataRow dr in Latest.Rows)
-                        dr["AMT_AFTER_DIS"] = String.Format("{0:N}",
-                            Convert.ToDecimal(Convert.ToDouble(dr["CLAIMED_AMT"]) -
-                            (Convert.ToDouble(dr["CLAIMED_AMT"]) * Convert.ToDouble(dr["DISCOUNT"]) / 100)));
+                    {
+                        dr["INSURED"] = dr["INSURED"].ToString().Trim();
+                        dr["AMT_AFTER_DIS"] = dr["CLAIMED_AMT"];
+                        if (Convert.ToDouble(cboDiscount.Text) > 0)
+                        {
+                            dr["DISCOUNT"] = cboDiscount.Text;
+                            dr["CLAIMED_AMT"] = String.Format("{0:N}", Convert.ToDecimal(dr["CLAIMED_AMT"]) / (1 - (Convert.ToDecimal(cboDiscount.Text) / 100)));
+                        }
+                        else
+                            dr["DISCOUNT"] = 0;
 
+                        dr["HOSPITAL_ADDRESS"] = cboAddress.Text;
+
+                        //dr["AMT_AFTER_DIS"] = String.Format("{0:N}",
+                        //    Convert.ToDecimal(Convert.ToDouble(dr["CLAIMED_AMT"]) -
+                        //    (Convert.ToDouble(dr["CLAIMED_AMT"]) * Convert.ToDouble(dr["DISCOUNT"]) / 100)));
+                    }
                 }
 
                 Latest.Columns.Add("DEAR", typeof(string));
@@ -1345,32 +1443,52 @@ namespace Testing.Forms
                 {
                     dr["DEAR"] = Dear;
                     dr["TEXT"] = tbText.Text.Trim();
-                    dr["EMAIL"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Email"];
-                    dr["SIGNATURE"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Signature"];
+
+                    // oudom
+                    //dr["EMAIL"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Email"];
+                    claimNo = dr["CLAIM_NO"].ToString();
+                    if (claimNo.ToLower().Contains("hns"))
+                    {
+                        dr["EMAIL"] = "hnsclaims@forteinsurance.com";
+                    }
+                    else if (claimNo.ToLower().Contains("gpa"))
+                    {
+                        dr["EMAIL"] = "gpa@forteinsurance.com";
+                    }
+                    else
+                    {
+                        dr["EMAIL"] = "figtree_blue@forteinsurance.com";
+                    }
+
+                    // oudom
+                    //dr["SIGNATURE"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Signature"];
+                    dr["SIGNATURE"] = "Accident and Health Department";
+
                     dr["USER_CC"] = CC;
                 }
+
+                Latest.DefaultView.Sort = "INSURED ASC";
+                Latest = Latest.DefaultView.ToTable();
 
                 //var report = new Reports.SettlementLetterToInsured();
                 CrystalDecisions.CrystalReports.Engine.ReportClass report = new CrystalDecisions.CrystalReports.Engine.ReportClass();
                 if (rbToInsured.Checked)
                     report = new Reports.SettlementLetterToInsured();
                 else if (rbToHospital.Checked)
-                    report = new Reports.SettlementLetterToHospital();
+                    report = new Reports.SettlementLetterToHospitalOld();
                 report.SetDataSource(Latest);
                 var frm = new frmViewInstructionNote();
                 frm.rpt = report;
                 frm.Text = "Settlement Letter";
                 frm.Show();
                 Cursor.Current = Cursors.AppStarting;
-                
-                
             }
             catch (Exception ex)
             {
                 Msgbox.Show(ex.Message);
             }
         }
-        
+
         private void dgvClaimDetail_DataSourceChanged(object sender, EventArgs e)
         {
             if (dgvClaimDetail.Rows.Count > 0)
@@ -1442,6 +1560,7 @@ namespace Testing.Forms
         private void rbToInsured_CheckedChanged(object sender, EventArgs e)
         {
             btnClear.PerformClick();
+            tbCC.Enabled = rbToInsured.Checked;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -1909,12 +2028,12 @@ namespace Testing.Forms
                 }
 
                 string pro = clno.Substring(7, 3);
-                if (pro != "GPA" && pro != "PAC" && pro != "TRI" && pro!= "PAE" && pro!="PAP")
+                if (pro != "GPA" && pro != "PAC" && pro != "TRI" && pro != "PAE" && pro != "PAP")
                 {
                     Msgbox.Show("Only GPA PAC TRI PAE, and PAP product available in this function.");
                     return;
                 }
-
+                
                 string[] Key = new string[] { "p_claim_no" };
                 string[] Value = new string[] { clno };
 
@@ -2070,7 +2189,7 @@ namespace Testing.Forms
                 //    }
                 //    Cursor.Current = Cursors.WaitCursor;
                 //}
-#endregion
+                #endregion
 
             }
             else
@@ -2105,10 +2224,10 @@ namespace Testing.Forms
             }
             else
             {
-                DataTable def_dt = crud.ExecQuery("SELECT * FROM USER_CLAIM_EMAIL_EXCLU_DEF WHERE TYPE = '" + cbProductType.Text + "' and ENG = '" + txtEnglish.Text + "' and PRODUCT = '" + cbProduct.Text + "' and KH = '"+txtKhmer.Text+ "'");
+                DataTable def_dt = crud.ExecQuery("SELECT * FROM USER_CLAIM_EMAIL_EXCLU_DEF WHERE TYPE = '" + cbProductType.Text + "' and ENG = '" + txtEnglish.Text + "' and PRODUCT = '" + cbProduct.Text + "' and KH = '" + txtKhmer.Text + "'");
                 if (def_dt.Rows.Count == 0)
                 {
-                    string a = "INSERT INTO USER_CLAIM_EMAIL_EXCLU_DEF VALUES ( '"+cbProduct.Text+"','"+cbProductType.Text+"','"+txtEnglish.Text+"','"+txtKhmer.Text+"')";
+                    string a = "INSERT INTO USER_CLAIM_EMAIL_EXCLU_DEF VALUES ( '" + cbProduct.Text + "','" + cbProductType.Text + "','" + txtEnglish.Text + "','" + txtKhmer.Text + "')";
                     crud.ExecNonQuery(a);
                     Cursor.Current = Cursors.WaitCursor;
                     Msgbox.Show("Added Successfully - Please regenerate the Exlusion/Definitions to see result");
@@ -2118,7 +2237,6 @@ namespace Testing.Forms
                     Msgbox.Show("Items are already existing");
                 }
             }
-            
         }
 
         #region MedicalRejectionLetter
@@ -2128,89 +2246,100 @@ namespace Testing.Forms
             if (string.IsNullOrEmpty(txtClaimNo.Text.Trim()))
                 return;
 
-            if (txtClaimNo.Text.Substring(6, 4).ToUpper() != "HHNS")
+            Cursor = Cursors.WaitCursor;
+
+            dtClaimDt = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
+            "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
+            "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
+            "nvl(INT_DIAGNOSIS, nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A')) CAUSE, " +
+            "nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL," +
+            "TO_CHAR(INT_DATE_LOSS) TREATMENT_DATE, " +
+            "INT_BPARTY_CODE CC, (SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + txtClaimNo.Text.ToUpper() + "'");
+
+            if (dtClaimDt.Rows.Count != 0)
             {
-                Msgbox.Show("Avaliable only HNS Products");
+                dgvClaimInfo.DataSource = dtClaimDt;
+                dgvClaimInfo.RowsDefaultCellStyle.ForeColor = Color.Black;
+
+                #region DatagridviewData
+                dgvDefinition.Columns.Clear();
+                var plan = Regex.Replace(dtClaimDt.Rows[0]["PLAN_DESCRIPTION"].ToString(), @"[A-Za-z]+", string.Empty).Trim();
+
+                var pro = txtClaimNo.Text.Substring(6, 4).ToLower();
+
+                if (pro.Contains("hns"))
+                {
+                    dtExcDef = plan == "+" ? crud.ExecQuery("select * from user_email_med_excludef where PRODUCTS = 'HNS' order by PARTS, ENG")
+                    : crud.ExecQuery("select * from user_email_med_excludef where PRODUCTS = 'HNS++' order by PARTS, ENG");
+                }
+                else if (pro.Contains("gpa") || pro.Contains("pac"))
+                {
+                    dtExcDef = crud.ExecQuery("select * from user_email_gpa_excludef where PRODUCTS = 'GPA' order by PARTS, ENG");
+                }
+                else if (pro.Contains("pae"))
+                {
+                    dtExcDef = crud.ExecQuery("select * from user_email_gpa_excludef where PRODUCTS = 'PAE' order by PARTS, ENG");
+                }
+                else if (pro.Contains("bhp"))
+                {
+                    dtExcDef = crud.ExecQuery("select * from user_email_bhp_excludef where PRODUCTS = 'BHP' order by PARTS, ENG");
+                }
+                DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
+                //CheckBox chk = new CheckBox();
+                dgvDefinition.Columns.Add(CheckboxColumn);
+                dgvDefinition.DataSource = dtExcDef;
+
+                dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                SetDgvDefinitionColumnWidth();
+                DataGridViewColumn column = dgvDefinition.Columns[0];
+                column.Width = 35;
+                dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
+                dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+                // add checkbox header
+                Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
+                // set checkbox header to center of header cell. +1 pixel to position correctly.
+                rect.X = rect.Location.X + 10;
+                rect.Y = rect.Location.Y + 15;
+                rect.Width = rect.Size.Width;
+                rect.Height = rect.Size.Height;
+
+                checkboxHeader.Checked = false;
+                checkboxHeader.Visible = true;
+                checkboxHeader.Name = "checkboxHeader";
+                checkboxHeader.Size = new Size(15, 15);
+                checkboxHeader.Location = rect.Location;
+                checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
+                dgvDefinition.Controls.Add(checkboxHeader);
+
+                dgvDefinition.Columns[1].Visible = false;
+                dgvDefinition.Columns[6].Visible = false;
+                dgvDefinition.Columns[7].Visible = false;
+
+                dgvDefinition.RowsDefaultCellStyle.Font = new Font("Khmer OS Siemreap", 9.75f, FontStyle.Regular);
+
+                for (int i = 1; i < dgvDefinition.Columns.Count; i++)
+                {
+                    dgvDefinition.Columns[i].ReadOnly = true;
+                }
+                txtSearchDefExclu.Enabled = dgvDefinition.Rows.Count > 0;
+                #endregion
             }
             else
             {
-                Cursor = Cursors.WaitCursor;
-
-                dtClaimDt  = crud.ExecQuery("select pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER, " +
-                "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
-                "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
-                "nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A') CAUSE, " +
-                "INT_COMMENTS HOSPITAL, " +
-                "TO_CHAR(INT_DATE_LOSS) TREATMENT_DATE, " +
-                "INT_BPARTY_CODE CC, ( SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + txtClaimNo.Text.ToUpper() + "'");
-
-                if (dtClaimDt.Rows.Count != 0)
-                {
-                    dgvClaimInfo.DataSource = dtClaimDt;
-                    dgvClaimInfo.RowsDefaultCellStyle.ForeColor = Color.Black;
-
-                    #region DatagridviewData
-                    dgvDefinition.Columns.Clear();
-                    var plan = Regex.Replace(dtClaimDt.Rows[0]["PLAN_DESCRIPTION"].ToString(), @"[A-Za-z]+", string.Empty).Trim();
-                    dtExcDef = plan == "+" ? crud.ExecQuery("select * from user_email_med_excludef where PRODUCTS = 'HNS' order by PARTS, ENG") 
-                        : crud.ExecQuery("select * from user_email_med_excludef where PRODUCTS = 'HNS++' order by PARTS, ENG");
-                    DataGridViewCheckBoxColumn CheckboxColumn = new DataGridViewCheckBoxColumn();
-                    //CheckBox chk = new CheckBox();
-                    dgvDefinition.Columns.Add(CheckboxColumn);
-                    dgvDefinition.DataSource = dtExcDef;
-
-                    dgvDefinition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    SetDgvDefinitionColumnWidth();
-                    DataGridViewColumn column = dgvDefinition.Columns[0];
-                    column.Width = 35;
-                    dgvDefinition.Columns[0].Resizable = DataGridViewTriState.False;
-                    dgvDefinition.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-
-                    // add checkbox header
-                    Rectangle rect = dgvDefinition.GetCellDisplayRectangle(0, -1, true);
-                    // set checkbox header to center of header cell. +1 pixel to position correctly.
-                    rect.X = rect.Location.X + 10;
-                    rect.Y = rect.Location.Y + 15;
-                    rect.Width = rect.Size.Width;
-                    rect.Height = rect.Size.Height;
-
-                    checkboxHeader.Checked = false;
-                    checkboxHeader.Visible = true;
-                    checkboxHeader.Name = "checkboxHeader";
-                    checkboxHeader.Size = new Size(15, 15);
-                    checkboxHeader.Location = rect.Location;
-                    checkboxHeader.CheckedChanged += new EventHandler(checkboxHeader_CheckedChanged);
-                    dgvDefinition.Controls.Add(checkboxHeader);
-
-                    dgvDefinition.Columns[1].Visible = false;
-                    dgvDefinition.Columns[6].Visible = false;
-                    dgvDefinition.Columns[7].Visible = false;
-
-                    dgvDefinition.RowsDefaultCellStyle.Font = new Font("Khmer OS Siemreap", 9.75f, FontStyle.Regular);
-
-                    for (int i = 1; i < dgvDefinition.Columns.Count; i++)
-                    {
-                        dgvDefinition.Columns[i].ReadOnly = true;
-                    }
-                    txtSearchDefExclu.Enabled = dgvDefinition.Rows.Count > 0;
-                    #endregion
-                }
-                else
-                {
-                    Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
-                }
-
-                Cursor = Cursors.Arrow;
+                Msgbox.Show("This transaction appear to have no content- Input Wrong Claim No!");
             }
+
+            Cursor = Cursors.Arrow;
         }
         private void txtClaimNo_Leave(object sender, EventArgs e)
         {
-            //if (txtClaimNo.Text == "" || txtClaimNo.Text.Length != 20)
-            //{
-            //    Msgbox.Show("Claim No must be input with the correct format!");
-            //}
-
-        }  
+            if (!string.IsNullOrEmpty(txtClaimNo.Text.Trim()))
+            {
+                var pro = txtClaimNo.Text.Substring(6, 4).ToLower();
+                cboOtherExclusions.Enabled = pro == "hhns";
+            }
+        }
 
         private void dgvDefinition_DataSourceChanged(object sender, EventArgs e)
         {
@@ -2246,7 +2375,7 @@ namespace Testing.Forms
             if (isChecked)
                 num++;
         }
-        
+
 
         public void btnGenerateClaim_Click(object sender, EventArgs e)
         {
@@ -2328,8 +2457,8 @@ namespace Testing.Forms
             dt1.Columns.Add("TYPE_KH");
             dt1.Columns.Add("ENG");
             dt1.Columns.Add("KH");
-            
-            
+
+
 
             foreach (DataGridViewRow row in dgvDefinition.Rows)
             {
@@ -2341,7 +2470,7 @@ namespace Testing.Forms
                     {
 
                         dt1.Rows.Add(row.Cells["TYPE"].Value.ToString(), row.Cells["PARTS"].Value.ToString(), row.Cells["PARTS_KH"].Value.ToString(), row.Cells["TYPE_KH"].Value.ToString(), row.Cells["ENG"].Value.ToString(), row.Cells["KH"].Value.ToString());
-                        
+
 
                     }
                 }
@@ -2350,7 +2479,7 @@ namespace Testing.Forms
 
             return dt1;
         }
-        
+
         private void dgvDefinition_DataSourceChanged_1(object sender, EventArgs e)
         {
             this.dgvDefinition.ForeColor = System.Drawing.Color.Black;
@@ -2376,9 +2505,9 @@ namespace Testing.Forms
             // draws the string onto the print document
             //Font drawFont = new Font("Arial", 42);
             //e.Graphics.DrawString(webBrowser1.Text,drawFont , Brushes.Black, 100, 100);
-            
+
             //e.Graphics.PageUnit = GraphicsUnit.Inch; 
-        
+
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -2520,7 +2649,7 @@ namespace Testing.Forms
                               UpdateDt.Rows[e.RowIndex][9].ToString(),UpdateDt.Rows[e.RowIndex][10].ToString(),UpdateDt.Rows[e.RowIndex][11].ToString(),UpdateDt.Rows[e.RowIndex][12].ToString(),
                               UpdateDt.Rows[e.RowIndex][13].ToString(),UpdateDt.Rows[e.RowIndex][14].ToString(),UpdateDt.Rows[e.RowIndex][15].ToString(),UpdateDt.Rows[e.RowIndex][16].ToString(),UpdateDt.Rows[e.RowIndex][17].ToString()});
             }
-            
+
         }
 
         private void cboOtherExclusions_SelectedIndexChanged(object sender, EventArgs e)
@@ -2540,6 +2669,32 @@ namespace Testing.Forms
         private void btnViewFolder_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\");
+        }
+
+        private void btnDocReceive_Click(object sender, EventArgs e)
+        {
+            //oudom
+            var dtReqDocHist = crud.ExecQuery("select email_doc_code from user_claim_email_hist where claim_no = '" + lbClaimNo.Text + "' and send_type = 'DocReqNew' and is_resend = 'N' and rownum = 1");
+            var dtReqDoc = crud.ExecQuery("select doc_code, is_send_close_claim from user_claim_anh_auto_rem_email where claim_number = '" + lbClaimNo.Text + "'");
+            if (dtReqDocHist.Rows.Count <= 0)
+            {
+                Msgbox.Show("No Request Doc found.");
+            }
+            else
+            {
+                if (dtReqDoc.Rows.Count <= 0)
+                    return;
+
+                if (dtReqDoc.Rows[0]["IS_SEND_CLOSE_CLAIM"].ToString().Equals("1"))
+                {
+                    Msgbox.Show("This claim is already closed.");
+                }
+                else
+                {
+                    frmRequestDocReceive frmReq = new frmRequestDocReceive(lbClaimNo.Text, dtReqDoc, dtReqDocHist);
+                    frmReq.ShowDialog();
+                }
+            }
         }
     }
 }
