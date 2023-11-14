@@ -1445,24 +1445,25 @@ namespace Testing.Forms
                     dr["TEXT"] = tbText.Text.Trim();
 
                     // oudom
-                    //dr["EMAIL"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Email"];
-                    claimNo = dr["CLAIM_NO"].ToString();
-                    if (claimNo.ToLower().Contains("hns"))
-                    {
-                        dr["EMAIL"] = "hnsclaims@forteinsurance.com";
-                    }
-                    else if (claimNo.ToLower().Contains("gpa"))
-                    {
-                        dr["EMAIL"] = "gpa@forteinsurance.com";
-                    }
-                    else
-                    {
-                        dr["EMAIL"] = "figtree_blue@forteinsurance.com";
-                    }
+                    dr["EMAIL"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Email"];
+
+                    //claimNo = dr["CLAIM_NO"].ToString();
+                    //if (claimNo.ToLower().Contains("hns"))
+                    //{
+                    //    dr["EMAIL"] = "hnsclaims@forteinsurance.com";
+                    //}
+                    //else if (claimNo.ToLower().Contains("gpa"))
+                    //{
+                    //    dr["EMAIL"] = "gpa@forteinsurance.com";
+                    //}
+                    //else
+                    //{
+                    //    dr["EMAIL"] = "figtree_blue@forteinsurance.com";
+                    //}
 
                     // oudom
-                    //dr["SIGNATURE"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Signature"];
-                    dr["SIGNATURE"] = "Accident and Health Department";
+                    dr["SIGNATURE"] = (cbSignature.SelectedItem as ComboboxMultiVal).Value["Signature"];
+                    //dr["SIGNATURE"] = "Accident and Health Department";
 
                     dr["USER_CC"] = CC;
                 }
