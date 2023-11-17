@@ -68,7 +68,7 @@
             this.ClientSize = new System.Drawing.Size(886, 585);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.btnSave);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmEmailNoticeAttachmentEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Email Attachment Edit";
