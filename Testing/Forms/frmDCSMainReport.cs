@@ -25,6 +25,7 @@ namespace Testing.Forms
         DataTable dtInvoice = new DataTable();
         public string Team="";
         DataTable dtTemp = new DataTable();
+        string autoTeam = "u-rnk,u-bnw,u-ksb,u-srn";
 
         private void bnSearch_Click(object sender, EventArgs e)
         {
@@ -61,8 +62,8 @@ namespace Testing.Forms
                 else
                 {
                     string main_rpt = "SELECT * from dbo.VIEW_MAIN_REPORT " +
-                        "where convert(datetime,CREATE_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                        "and convert(datetime,CREATE_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
+                        "where convert(datetime," + (autoTeam.Contains(frmLogIn.Usert.ToLower().Trim()) ? "DP_PROCESSED" : "CREATE_DATE") + ",103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                        "and convert(datetime," + (autoTeam.Contains(frmLogIn.Usert.ToLower().Trim()) ? "DP_PROCESSED" : "CREATE_DATE") + ",103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
                     string[] TeamSplit = Team.Split(',');
                     if (!String.IsNullOrEmpty(Team) && frmAddDocument1.product.ContainsValue(TeamSplit[0]))
                     {
