@@ -267,7 +267,8 @@ namespace Testing.Forms
                     foreach (DataRow row in dt.Rows)
                     {
                         row["EXCHANGE_RATE"] = String.Format("{0:N}", ExchangeRate).Replace(".00", "");
-                        row["TOTAL_FUND_KH"] = String.Format("{0:N}", Convert.ToDouble(row["TOTAL_FUND"]) * ExchangeRate);
+                        //row["TOTAL_FUND_KH"] = String.Format("{0:N}", Convert.ToDouble(row["TOTAL_FUND"]) * ExchangeRate)  ;
+                        row["TOTAL_FUND_KH"] = String.Format("{0:N}", Decimal.Round(Convert.ToDecimal(row["TOTAL_FUND"]) * ExchangeRate, 0));
                         row["KH_NAME"] = KhName;
                         row["KH_ADDR"] = KhAddr;
                     }
