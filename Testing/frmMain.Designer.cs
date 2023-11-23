@@ -98,6 +98,9 @@
             this.bnDeductible = new System.Windows.Forms.Button();
             this.bnWindscreen = new System.Windows.Forms.Button();
             this.bnReports = new System.Windows.Forms.Button();
+            this.pnTravelReport = new System.Windows.Forms.Panel();
+            this.btnTRVExcelUpload = new System.Windows.Forms.Button();
+            this.btnTravelReport = new System.Windows.Forms.Button();
             this.btnBHPScheme = new System.Windows.Forms.Button();
             this.btnHNSScheme = new System.Windows.Forms.Button();
             this.pnBenifit = new System.Windows.Forms.Panel();
@@ -121,6 +124,7 @@
             this.pnSubFL.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnSubAutoClaim.SuspendLayout();
+            this.pnTravelReport.SuspendLayout();
             this.pnBenifit.SuspendLayout();
             this.pnEngUW.SuspendLayout();
             this.pnInvoice.SuspendLayout();
@@ -974,7 +978,7 @@
             this.pnSubAutoClaim.Controls.Add(this.bnDeductible);
             this.pnSubAutoClaim.Controls.Add(this.bnWindscreen);
             this.pnSubAutoClaim.Controls.Add(this.bnReports);
-            this.pnSubAutoClaim.Location = new System.Drawing.Point(190, 427);
+            this.pnSubAutoClaim.Location = new System.Drawing.Point(192, 429);
             this.pnSubAutoClaim.Name = "pnSubAutoClaim";
             this.pnSubAutoClaim.Size = new System.Drawing.Size(180, 158);
             this.pnSubAutoClaim.TabIndex = 10;
@@ -1043,6 +1047,50 @@
             this.bnReports.Text = "Reports";
             this.bnReports.UseVisualStyleBackColor = false;
             this.bnReports.Click += new System.EventHandler(this.bnReports_Click);
+            // 
+            // pnTravelReport
+            // 
+            this.pnTravelReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.pnTravelReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnTravelReport.Controls.Add(this.btnTRVExcelUpload);
+            this.pnTravelReport.Controls.Add(this.btnTravelReport);
+            this.pnTravelReport.Location = new System.Drawing.Point(193, 425);
+            this.pnTravelReport.Name = "pnTravelReport";
+            this.pnTravelReport.Size = new System.Drawing.Size(180, 82);
+            this.pnTravelReport.TabIndex = 12;
+            this.pnTravelReport.Visible = false;
+            // 
+            // btnTRVExcelUpload
+            // 
+            this.btnTRVExcelUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnTRVExcelUpload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTRVExcelUpload.Enabled = false;
+            this.btnTRVExcelUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTRVExcelUpload.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTRVExcelUpload.ForeColor = System.Drawing.Color.White;
+            this.btnTRVExcelUpload.Location = new System.Drawing.Point(-1, 40);
+            this.btnTRVExcelUpload.Name = "btnTRVExcelUpload";
+            this.btnTRVExcelUpload.Size = new System.Drawing.Size(187, 40);
+            this.btnTRVExcelUpload.TabIndex = 8;
+            this.btnTRVExcelUpload.Text = "TRV Excel Upload";
+            this.btnTRVExcelUpload.UseVisualStyleBackColor = false;
+            this.btnTRVExcelUpload.Click += new System.EventHandler(this.btnTRVExcelUpload_Click);
+            // 
+            // btnTravelReport
+            // 
+            this.btnTravelReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnTravelReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTravelReport.Enabled = false;
+            this.btnTravelReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTravelReport.Font = new System.Drawing.Font("Cambria", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnTravelReport.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnTravelReport.Location = new System.Drawing.Point(-1, 1);
+            this.btnTravelReport.Name = "btnTravelReport";
+            this.btnTravelReport.Size = new System.Drawing.Size(187, 40);
+            this.btnTravelReport.TabIndex = 8;
+            this.btnTravelReport.Text = "Travel Report";
+            this.btnTravelReport.UseVisualStyleBackColor = false;
+            this.btnTravelReport.Click += new System.EventHandler(this.btnTravelReport_Click);
             // 
             // btnBHPScheme
             // 
@@ -1287,6 +1335,7 @@
             this.BackgroundImage = global::Testing.Properties.Resources.Kl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1028, 895);
+            this.Controls.Add(this.pnTravelReport);
             this.Controls.Add(this.pnCustomerProfit);
             this.Controls.Add(this.pnInvoice);
             this.Controls.Add(this.pnEngUW);
@@ -1316,6 +1365,7 @@
             this.pnSubFL.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.pnSubAutoClaim.ResumeLayout(false);
+            this.pnTravelReport.ResumeLayout(false);
             this.pnBenifit.ResumeLayout(false);
             this.pnEngUW.ResumeLayout(false);
             this.pnInvoice.ResumeLayout(false);
@@ -1414,5 +1464,8 @@
         private System.Windows.Forms.ToolStripMenuItem pRRiskCountToolStripMenuItem;
         public System.Windows.Forms.Button clmPaymentReq;
         private System.Windows.Forms.ToolStripMenuItem acledaSalesPersonReportToolStripMenuItem;
+        private System.Windows.Forms.Panel pnTravelReport;
+        public System.Windows.Forms.Button btnTRVExcelUpload;
+        public System.Windows.Forms.Button btnTravelReport;
     }
 }

@@ -17,7 +17,7 @@ namespace Testing.Forms
         {
             InitializeComponent();
         }
-
+        
         DBS11SqlCrud crud = new DBS11SqlCrud();
         CRUD crud_oracle = new CRUD();
         DataTable dt = new DataTable();
@@ -26,11 +26,14 @@ namespace Testing.Forms
         public string Team="";
         DataTable dtTemp = new DataTable();
         string autoTeam = "u-rnk,u-bnw,u-ksb,u-srn";
+        
+        
 
         private void bnSearch_Click(object sender, EventArgs e)
         {
             try
             {
+                
                 Cursor = Cursors.WaitCursor;
 
                 var isBrokerTeam = false;
@@ -88,7 +91,7 @@ namespace Testing.Forms
                             {
                                 main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
                         "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like 'ACLEDA%'";
+                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like '"+ cmbBank.SelectedValue.ToString() +"%'";
 
                  string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
                  string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, "+
@@ -102,7 +105,7 @@ namespace Testing.Forms
                                     "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, "+
                                     "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  "+
                                     "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') "+
-                                    "WHERE AGENT_NAME LIKE 'ACLEDA%' ";            
+                                    "WHERE AGENT_NAME LIKE '" + cmbBank.SelectedValue.ToString() + "%'";            
                                 
                              dt = crud.LoadData(main_rpt).Tables[0];
                              dtOracle = crud_oracle.ExecQuery(second_rpt);
@@ -195,37 +198,40 @@ namespace Testing.Forms
                              foreach (var item in query)
                              {
                                  DataRow dr = dtTemp.NewRow();
-                                 dr["SUBMISSION_DATE"] = item.SUBMISSION_DATE;
-                                 dr["DP_ISSUED_DATE"] = item.DP_ISSUED_DATE;
-                                 dr["POLICY_NO"] = item.POLICY_NO;
-                                 dr["CUSTOMER_NAME"] = item.CUSTOMER_NAME;
-                                 dr["CUSTOMER_PHONE"] = item.CUSTOMER_PHONE;
-                                 dr["PREMIUM"] = item.PREMIUM;
-                                 dr["PAID_DATE"] = (item.PAID_DATE == null) ? "" : item.PAID_DATE.ToString();
-                                 //dr["PAID_MONTH"] = item.PAID_MONTH;
-                                 dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString().Substring((item.SALE_AGENT_NAME.ToString().IndexOf("(") + "(".Length), (item.SALE_AGENT_NAME.ToString().IndexOf(")") - item.SALE_AGENT_NAME.ToString().IndexOf("(") - "(".Length));
-                                 dr["BANK_BRANCH_CODE"] = dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim();
-                                 dr["CUS_TYPE"] = item.CUS_TYPE;
-                                 dr["DOC_TYPE"] = item.DOC_TYPE;
-                                 dr["PRODUCT_LINE"] = item.PRODUCT_LINE;
-                                 dr["PRODUCT_TYPE"] = item.PRODUCT_TYPE;
-                                 dr["DN_CN"] = item.DN_CN;
-                                 dr["SALE_AGENT_CODE"] = item.SALE_AGENT_CODE;
-                                 dr["REF_ID"] = item.REF_ID;
-                                 dr["POLICY_EFFECT_DATE"] = item.POLICY_EFFECT_DATE;
-                                 dr["CREATE_BY"] = item.CREATE_BY;
-                                 dr["POLICY_STATUS"] = item.POLICY_STATUS;
-                                 //dr["PRODUCER_CODE"] = item.PRODUCER_CODE;
-                                 //dr["PRODUCER_NAME"] = item.PRODUCER_NAME;
-                                 dr["DP_NAME"] = item.DP_NAME;
-                                 dr["FILLING_NAME"] = item.FILLING_NAME;
-                                 dr["LATEST_UPDATE_AT"] = item.LATEST_UPDATE_AT;
-                                 dr["STATUS"] = item.STATUS;
-                                 dr["STATUS_BY"] = item.STATUS_BY;
-                                 dr["PRIORITY_TYPE"] = item.PRIORITY_TYPE;
-                                 dr["NOTE"] = item.NOTE;
-                                 dr["DP_REMARK"] = item.DP_REMARK;
-                                 dr["DOCUMENT_REMARK"] = item.DOCUMENT_REMARK;
+                                 
+                                 
+                                     dr["SUBMISSION_DATE"] = item.SUBMISSION_DATE;
+                                     dr["DP_ISSUED_DATE"] = item.DP_ISSUED_DATE;
+                                     dr["POLICY_NO"] = item.POLICY_NO;
+                                     dr["CUSTOMER_NAME"] = item.CUSTOMER_NAME;
+                                     dr["CUSTOMER_PHONE"] = item.CUSTOMER_PHONE;
+                                     dr["PREMIUM"] = item.PREMIUM;
+                                     dr["PAID_DATE"] = (item.PAID_DATE == null) ? "" : item.PAID_DATE.ToString();
+                                     //dr["PAID_MONTH"] = item.PAID_MONTH;
+                                     dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? item.SALE_AGENT_NAME.ToString().Substring((item.SALE_AGENT_NAME.ToString().IndexOf("(") + "(".Length), (item.SALE_AGENT_NAME.ToString().IndexOf(")") - item.SALE_AGENT_NAME.ToString().IndexOf("(") - "(".Length)) : item.SALE_AGENT_NAME.ToString();
+                                     dr["BANK_BRANCH_CODE"] = dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim();
+                                     dr["CUS_TYPE"] = item.CUS_TYPE;
+                                     dr["DOC_TYPE"] = item.DOC_TYPE;
+                                     dr["PRODUCT_LINE"] = item.PRODUCT_LINE;
+                                     dr["PRODUCT_TYPE"] = item.PRODUCT_TYPE;
+                                     dr["DN_CN"] = item.DN_CN;
+                                     dr["SALE_AGENT_CODE"] = item.SALE_AGENT_CODE;
+                                     dr["REF_ID"] = item.REF_ID;
+                                     dr["POLICY_EFFECT_DATE"] = item.POLICY_EFFECT_DATE;
+                                     dr["CREATE_BY"] = item.CREATE_BY;
+                                     dr["POLICY_STATUS"] = item.POLICY_STATUS;
+                                     //dr["PRODUCER_CODE"] = item.PRODUCER_CODE;
+                                     //dr["PRODUCER_NAME"] = item.PRODUCER_NAME;
+                                     dr["DP_NAME"] = item.DP_NAME;
+                                     dr["FILLING_NAME"] = item.FILLING_NAME;
+                                     dr["LATEST_UPDATE_AT"] = item.LATEST_UPDATE_AT;
+                                     dr["STATUS"] = item.STATUS;
+                                     dr["STATUS_BY"] = item.STATUS_BY;
+                                     dr["PRIORITY_TYPE"] = item.PRIORITY_TYPE;
+                                     dr["NOTE"] = item.NOTE;
+                                     dr["DP_REMARK"] = item.DP_REMARK;
+                                     dr["DOCUMENT_REMARK"] = item.DOCUMENT_REMARK;
+                                
                                  
                                 
                                  dtTemp.Rows.Add(dr);
@@ -261,6 +267,7 @@ namespace Testing.Forms
             dtpTo.Value = DateTime.Now;
             dgv.DataSource = null;
             dgv.Rows.Clear();
+            dtTemp.Clear();
         }
 
         private void btnExcel_Click(object sender, EventArgs e)
@@ -286,6 +293,23 @@ namespace Testing.Forms
         {
             dtpFrom.Value = DateTime.Now;
             dtpTo.Value = DateTime.Now;
+            
+            if (frmLogIn.Usert.ToUpper() == "U-BVC")
+            {
+                DataTable dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY BANK_NAME");
+                cmbBank.DataSource = dtBank;
+                cmbBank.DisplayMember = "BANK_NAME";
+                cmbBank.ValueMember = "BANK_NAME";
+            }
+            else
+            {
+                lblBank.Visible = false;
+                cmbBank.Visible = false;
+            }
+            
+                
+          
+            
         }
     }
 }

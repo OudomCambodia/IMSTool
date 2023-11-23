@@ -25,7 +25,7 @@ namespace Testing.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string dfrom = dtpFrom.Value.ToString("yyyy/MM/dd");
-                dt = crud.ExecSP_OutPara("PRO_TRAVEL_INFO", new string[] { "date_from", "date_to", "certi" }, new string[] { dtpFrom.Value.ToString("yyyy/MM/dd"), dtpTo.Value.ToString("yyyy/MM/dd"), certificate.Text.Trim() });
+                dt = crud.ExecSP_OutPara("PRO_TRAVEL_INFO", new string[] { "date_from", "date_to", "certi" }, new string[] { dtpFrom.Value.ToString("yyyy/MM/dd"), dtpTo.Value.ToString("yyyy/MM/dd"), txtCertificateNO.Text.Trim() });
                 dgvResult.DataSource = dt;
                 Cursor.Current = Cursors.AppStarting;
                 if (dt.Rows.Count == 0)

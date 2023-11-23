@@ -470,6 +470,7 @@ namespace Testing
             pnEngUW.Visible = false;
             pnInvoice.Visible = false;
             pnCustomerProfit.Visible = false;
+            pnTravelReport.Visible = false;
         }
 
         private void bnPolRem_Click(object sender, EventArgs e)
@@ -531,8 +532,9 @@ namespace Testing
 
         private void btnTravelRp_Click(object sender, EventArgs e)
         {
-            Forms.FrmTravelReport tr = new Forms.FrmTravelReport();
-            openForm(tr, (Button)sender);
+            //Forms.FrmTravelReport tr = new Forms.FrmTravelReport();
+            //openForm(tr, (Button)sender);
+            SubPan(pnTravelReport);
         }
 
         private void monthlyReportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -863,6 +865,18 @@ namespace Testing
         private void CusProfitV2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnTravelReport_Click(object sender, EventArgs e)
+        {
+            Forms.FrmTravelReport tr = new Forms.FrmTravelReport();
+            openForm(tr, (Button)sender);
+        }
+
+        private void btnTRVExcelUpload_Click(object sender, EventArgs e)
+        {
+            Forms.frmTRVExcelUpload tr = new Forms.frmTRVExcelUpload();
+            openForm(tr, (Button)sender);
         }
 
         //private List<string> EverythingBetween(string source, string start, string end)

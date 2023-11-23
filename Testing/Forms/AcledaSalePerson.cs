@@ -46,7 +46,6 @@ namespace Testing.Forms
                 {
                     var filterdata = from row in dt.AsEnumerable()
                                      where row.Field<DateTime>("PAID_DATE") >= DateTime.Parse(dtpFrom.Value.ToString("yyyy/MM/dd") + " 00:00:00") && row.Field<DateTime>("PAID_DATE") <= DateTime.Parse(dtpTo.Value.ToString("yyyy/MM/dd") + " 23:59:59")
-                                           
                                      select row;
 
                     DataTable filteredDataTable = filterdata.CopyToDataTable();

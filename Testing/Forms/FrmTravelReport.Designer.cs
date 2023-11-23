@@ -35,12 +35,12 @@
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dgvResult = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
-            this.certificate = new System.Windows.Forms.TextBox();
             this.bnClear = new Testing.cus_button();
             this.bnExcel = new Testing.cus_button();
             this.bnSearch = new Testing.cus_button();
             this.lbTotalNum = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
+            this.txtCertificateNO = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +63,7 @@
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFrom.Location = new System.Drawing.Point(54, 70);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(176, 23);
+            this.dtpFrom.Size = new System.Drawing.Size(176, 27);
             this.dtpFrom.TabIndex = 11;
             // 
             // label2
@@ -72,7 +72,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(8, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 15);
+            this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 12;
             this.label2.Text = "From:";
             // 
@@ -82,7 +82,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(325, 73);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(24, 15);
+            this.label3.Size = new System.Drawing.Size(31, 20);
             this.label3.TabIndex = 14;
             this.label3.Text = "To:";
             // 
@@ -91,7 +91,7 @@
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTo.Location = new System.Drawing.Point(355, 70);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(176, 23);
+            this.dtpTo.Size = new System.Drawing.Size(176, 27);
             this.dtpTo.TabIndex = 13;
             // 
             // dgvResult
@@ -120,16 +120,9 @@
             this.label4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.label4.Location = new System.Drawing.Point(11, 125);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 15);
+            this.label4.Size = new System.Drawing.Size(160, 20);
             this.label4.TabIndex = 19;
             this.label4.Text = "Certificate Number : ";
-            // 
-            // certificate
-            // 
-            this.certificate.Location = new System.Drawing.Point(137, 122);
-            this.certificate.Name = "certificate";
-            this.certificate.Size = new System.Drawing.Size(140, 23);
-            this.certificate.TabIndex = 20;
             // 
             // bnClear
             // 
@@ -182,7 +175,7 @@
             this.lbTotalNum.ForeColor = System.Drawing.Color.White;
             this.lbTotalNum.Location = new System.Drawing.Point(1175, 122);
             this.lbTotalNum.Name = "lbTotalNum";
-            this.lbTotalNum.Size = new System.Drawing.Size(17, 18);
+            this.lbTotalNum.Size = new System.Drawing.Size(21, 24);
             this.lbTotalNum.TabIndex = 46;
             this.lbTotalNum.Text = "0";
             // 
@@ -195,19 +188,26 @@
             this.lbTotal.ForeColor = System.Drawing.Color.White;
             this.lbTotal.Location = new System.Drawing.Point(1120, 122);
             this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(51, 18);
+            this.lbTotal.Size = new System.Drawing.Size(62, 24);
             this.lbTotal.TabIndex = 45;
             this.lbTotal.Text = "Total:";
             // 
+            // txtCertificateNO
+            // 
+            this.txtCertificateNO.Location = new System.Drawing.Point(178, 125);
+            this.txtCertificateNO.Name = "txtCertificateNO";
+            this.txtCertificateNO.Size = new System.Drawing.Size(198, 27);
+            this.txtCertificateNO.TabIndex = 47;
+            // 
             // FrmTravelReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1282, 709);
+            this.Controls.Add(this.txtCertificateNO);
             this.Controls.Add(this.lbTotalNum);
             this.Controls.Add(this.lbTotal);
-            this.Controls.Add(this.certificate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvResult);
             this.Controls.Add(this.bnClear);
@@ -244,5 +244,6 @@
         private System.Windows.Forms.TextBox certificate;
         private System.Windows.Forms.Label lbTotalNum;
         private System.Windows.Forms.Label lbTotal;
+        private System.Windows.Forms.TextBox txtCertificateNO;
     }
 }

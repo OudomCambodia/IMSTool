@@ -83,6 +83,7 @@ namespace Testing.Forms
         {
             try
             {
+                
                 #region --- SELECTION COLOR ---
                 var colors = new List<string>();
 
