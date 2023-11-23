@@ -30,8 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbTotalNum = new System.Windows.Forms.Label();
-            this.lbTotal = new System.Windows.Forms.Label();
             this.bnClear = new Testing.cus_button();
             this.bnExcel = new Testing.cus_button();
             this.bnSearch = new Testing.cus_button();
@@ -60,8 +58,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lbTotalNum);
-            this.groupBox1.Controls.Add(this.lbTotal);
             this.groupBox1.Controls.Add(this.bnClear);
             this.groupBox1.Controls.Add(this.bnExcel);
             this.groupBox1.Controls.Add(this.bnSearch);
@@ -75,32 +71,6 @@
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Excel Path";
-            // 
-            // lbTotalNum
-            // 
-            this.lbTotalNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbTotalNum.AutoSize = true;
-            this.lbTotalNum.BackColor = System.Drawing.Color.Transparent;
-            this.lbTotalNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalNum.ForeColor = System.Drawing.Color.White;
-            this.lbTotalNum.Location = new System.Drawing.Point(1178, 100);
-            this.lbTotalNum.Name = "lbTotalNum";
-            this.lbTotalNum.Size = new System.Drawing.Size(21, 24);
-            this.lbTotalNum.TabIndex = 54;
-            this.lbTotalNum.Text = "0";
-            // 
-            // lbTotal
-            // 
-            this.lbTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbTotal.AutoSize = true;
-            this.lbTotal.BackColor = System.Drawing.Color.Transparent;
-            this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotal.ForeColor = System.Drawing.Color.White;
-            this.lbTotal.Location = new System.Drawing.Point(1123, 100);
-            this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(62, 24);
-            this.lbTotal.TabIndex = 53;
-            this.lbTotal.Text = "Total:";
             // 
             // bnClear
             // 
@@ -222,8 +192,6 @@
         private cus_button bnClear;
         private cus_button bnExcel;
         private cus_button bnSearch;
-        private System.Windows.Forms.Label lbTotalNum;
-        private System.Windows.Forms.Label lbTotal;
         private System.Windows.Forms.DataGridView dgvView;
     }
 }
