@@ -152,7 +152,7 @@ namespace Testing.Forms
 
             // Export the contents of 2 rows and 2 columns starting from 1st cell to DataTable
             //System.Data.DataTable dataTable = worksheet.Cells.ExportDataTable(0,0,500,500,true);
-            System.Data.DataTable dataTable = worksheet.Cells.ExportDataTableAsString(0, 0, 200, 550, true);
+            System.Data.DataTable dataTable = worksheet.Cells.ExportDataTableAsString(0, 0, 200, 516, true);
 
             // Bind the DataTable with DataGrid
             //dataGridView1.DataSource = dataTable;

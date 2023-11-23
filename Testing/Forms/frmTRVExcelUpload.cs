@@ -43,7 +43,7 @@ namespace Testing.Forms
                     dgvView.ForeColor = System.Drawing.Color.Black;
                     dgvView.DataSource = dt;
 
-                    lbTotalNum.Text = dt.Rows.Count.ToString();
+                   
                 }
                 
             }
