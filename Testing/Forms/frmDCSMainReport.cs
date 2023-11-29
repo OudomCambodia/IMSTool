@@ -38,7 +38,7 @@ namespace Testing.Forms
 
                 var isBrokerTeam = false;
                 var dtBrokerTeams = crud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
-
+                
                 if (dtBrokerTeams.Rows.Count > 0)
                 {
                     isBrokerTeam = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM");
@@ -89,23 +89,42 @@ namespace Testing.Forms
                            
                             if (dtBrokerTeams.Rows[0]["GROUP"].ToString().ToUpper() == "V-AGENCY")
                             {
-                                main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
-                        "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like '"+ cmbBank.SelectedValue.ToString() +"%'";
+                                //string bankname = cmbBank.SelectedValue.ToString().ToUpper();
+                 //               main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
+                 //       "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                 //       "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like '" + bankname + "%'";
 
-                 string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
-                 string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, "+
-                                "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
-                                "FROM(  "+
-                                    "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, "+
-                                    "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME, DEB_TOTAL_AMOUNT  "+
-                                "from rc_t_debit_note  "+
-                                    "WHERE DEB_ME_CODE LIKE 'F%'  "+
-                                    "union   "+
-                                    "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, "+
-                                    "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  "+
-                                    "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') "+
-                                    "WHERE AGENT_NAME LIKE '" + cmbBank.SelectedValue.ToString() + "%'";            
+                 //string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
+                 //string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, "+
+                 //               "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
+                 //               "FROM(  "+
+                 //                   "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, "+
+                 //                   "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME, DEB_TOTAL_AMOUNT  "+
+                 //               "from rc_t_debit_note  "+
+                 //                   "WHERE DEB_ME_CODE LIKE 'F%'  "+
+                 //                   "union   "+
+                 //                   "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, "+
+                 //                   "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  "+
+                 //                   "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') "+
+                 //                   "WHERE AGENT_NAME LIKE '" + bankname + "%'";    
+                                main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
+                                                "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                                                "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like '" + "ACLEDA" + "%'";
+
+                                string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
+                                string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, " +
+                                               "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
+                                               "FROM(  " +
+                                                   "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, " +
+                                                   "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME, DEB_TOTAL_AMOUNT  " +
+                                               "from rc_t_debit_note  " +
+                                                   "WHERE DEB_ME_CODE LIKE 'F%'  " +
+                                                   "union   " +
+                                                   "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, " +
+                                                   "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  " +
+                                                   "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') " +
+                                                   "WHERE AGENT_NAME LIKE '" + "ACLEDA" + "%'";   
+
                                 
                              dt = crud.LoadData(main_rpt).Tables[0];
                              dtOracle = crud_oracle.ExecQuery(second_rpt);
@@ -239,6 +258,7 @@ namespace Testing.Forms
 
 
                              dgv.DataSource = dtTemp;
+                             
                             }
 
                             else
