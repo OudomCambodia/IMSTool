@@ -59,6 +59,7 @@
             this.tsPMAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.CusProfitV2 = new System.Windows.Forms.ToolStripMenuItem();
             this.acledaSalesPersonReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsPolicyUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.autoMonthlyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InvoiceSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -428,7 +429,8 @@
             this.toolStripMenuItem1,
             this.tsPremiumRegister,
             this.CusProfitV2,
-            this.acledaSalesPersonReportToolStripMenuItem});
+            this.acledaSalesPersonReportToolStripMenuItem,
+            this.tsPolicyUpload});
             this.monthlyReportToolStripMenuItem.Enabled = false;
             this.monthlyReportToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.monthlyReportToolStripMenuItem.Name = "monthlyReportToolStripMenuItem";
@@ -517,6 +519,13 @@
             this.acledaSalesPersonReportToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.acledaSalesPersonReportToolStripMenuItem.Text = "Acleda Sales Person Report";
             this.acledaSalesPersonReportToolStripMenuItem.Click += new System.EventHandler(this.acledaSalesPersonReportToolStripMenuItem_Click);
+            // 
+            // tsPolicyUpload
+            // 
+            this.tsPolicyUpload.Name = "tsPolicyUpload";
+            this.tsPolicyUpload.Size = new System.Drawing.Size(264, 26);
+            this.tsPolicyUpload.Text = "Policy Upload Report";
+            this.tsPolicyUpload.Click += new System.EventHandler(this.tsPolicyUpload_Click);
             // 
             // autoMonthlyReportToolStripMenuItem
             // 
@@ -1072,7 +1081,7 @@
             this.btnTRVExcelUpload.Name = "btnTRVExcelUpload";
             this.btnTRVExcelUpload.Size = new System.Drawing.Size(187, 40);
             this.btnTRVExcelUpload.TabIndex = 8;
-            this.btnTRVExcelUpload.Text = "TRV Excel Upload";
+            this.btnTRVExcelUpload.Text = "TRV/AUTO Excel";
             this.btnTRVExcelUpload.UseVisualStyleBackColor = false;
             this.btnTRVExcelUpload.Click += new System.EventHandler(this.btnTRVExcelUpload_Click);
             // 
@@ -1467,5 +1476,6 @@
         private System.Windows.Forms.Panel pnTravelReport;
         public System.Windows.Forms.Button btnTRVExcelUpload;
         public System.Windows.Forms.Button btnTravelReport;
+        private System.Windows.Forms.ToolStripMenuItem tsPolicyUpload;
     }
 }
