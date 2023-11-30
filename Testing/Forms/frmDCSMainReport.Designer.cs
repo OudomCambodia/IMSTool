@@ -31,15 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDCSMainReport));
             this.label1 = new System.Windows.Forms.Label();
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.btnExcel = new Testing.cus_button();
-            this.btnClear = new Testing.cus_button();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.bnSearch = new Testing.cus_button();
             this.lblBank = new System.Windows.Forms.Label();
             this.cmbBank = new System.Windows.Forms.ComboBox();
+            this.btnExcel = new Testing.cus_button();
+            this.btnClear = new Testing.cus_button();
+            this.bnSearch = new Testing.cus_button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +68,7 @@
             this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv.Location = new System.Drawing.Point(12, 111);
-            this.dgv.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.dgv.Margin = new System.Windows.Forms.Padding(5);
             this.dgv.Name = "dgv";
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
@@ -77,42 +77,12 @@
             this.dgv.Size = new System.Drawing.Size(1207, 574);
             this.dgv.TabIndex = 27;
             // 
-            // btnExcel
-            // 
-            this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(1104, 58);
-            this.btnExcel.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(111, 37);
-            this.btnExcel.TabIndex = 37;
-            this.btnExcel.Text = "Excel";
-            this.btnExcel.UseVisualStyleBackColor = true;
-            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
-            // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(983, 58);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(111, 37);
-            this.btnClear.TabIndex = 34;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // dtpTo
             // 
             this.dtpTo.CustomFormat = "";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTo.Location = new System.Drawing.Point(424, 64);
-            this.dtpTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(156, 22);
             this.dtpTo.TabIndex = 32;
@@ -123,7 +93,7 @@
             this.dtpFrom.CustomFormat = "";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFrom.Location = new System.Drawing.Point(148, 65);
-            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(143, 22);
             this.dtpFrom.TabIndex = 31;
@@ -153,21 +123,6 @@
             this.label3.TabIndex = 35;
             this.label3.Text = "Create Date From:";
             // 
-            // bnSearch
-            // 
-            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bnSearch.ForeColor = System.Drawing.Color.White;
-            this.bnSearch.Location = new System.Drawing.Point(861, 58);
-            this.bnSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.bnSearch.Name = "bnSearch";
-            this.bnSearch.Size = new System.Drawing.Size(111, 37);
-            this.bnSearch.TabIndex = 33;
-            this.bnSearch.Text = "Search";
-            this.bnSearch.UseVisualStyleBackColor = true;
-            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
-            // 
             // lblBank
             // 
             this.lblBank.AutoSize = true;
@@ -183,10 +138,56 @@
             // cmbBank
             // 
             this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(653, 66);
+            this.cmbBank.Location = new System.Drawing.Point(653, 65);
             this.cmbBank.Name = "cmbBank";
             this.cmbBank.Size = new System.Drawing.Size(163, 24);
             this.cmbBank.TabIndex = 39;
+           
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.ForeColor = System.Drawing.Color.White;
+            this.btnExcel.Location = new System.Drawing.Point(1104, 58);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(5);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(111, 37);
+            this.btnExcel.TabIndex = 37;
+            this.btnExcel.Text = "Excel";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(983, 58);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(5);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(111, 37);
+            this.btnClear.TabIndex = 34;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // bnSearch
+            // 
+            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bnSearch.ForeColor = System.Drawing.Color.White;
+            this.bnSearch.Location = new System.Drawing.Point(861, 58);
+            this.bnSearch.Margin = new System.Windows.Forms.Padding(5);
+            this.bnSearch.Name = "bnSearch";
+            this.bnSearch.Size = new System.Drawing.Size(111, 37);
+            this.bnSearch.TabIndex = 33;
+            this.bnSearch.Text = "Search";
+            this.bnSearch.UseVisualStyleBackColor = true;
+            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
             // 
             // frmDCSMainReport
             // 
@@ -206,7 +207,7 @@
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmDCSMainReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DC Report";
