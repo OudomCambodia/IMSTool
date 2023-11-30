@@ -214,8 +214,16 @@ namespace Testing.Forms
                                      dr["PREMIUM"] = item.PREMIUM;
                                      dr["PAID_DATE"] = (item.PAID_DATE == null) ? "" : item.PAID_DATE.ToString();
                                      //dr["PAID_MONTH"] = item.PAID_MONTH;
-                                     dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? item.SALE_AGENT_NAME.ToString().Substring((item.SALE_AGENT_NAME.ToString().IndexOf("(") + "(".Length), (item.SALE_AGENT_NAME.ToString().IndexOf(")") - item.SALE_AGENT_NAME.ToString().IndexOf("(") - "(".Length)) : item.SALE_AGENT_NAME.ToString();
-                                 dr["BANK_BRANCH_CODE"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim() : "";
+                                     if (item.SALE_AGENT_NAME.ToString().Contains("ACLEDA")) {
+                                         dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? item.SALE_AGENT_NAME.ToString().Substring((item.SALE_AGENT_NAME.ToString().IndexOf("(") + "(".Length), (item.SALE_AGENT_NAME.ToString().IndexOf(")") - item.SALE_AGENT_NAME.ToString().IndexOf("(") - "(".Length)) : item.SALE_AGENT_NAME.ToString();
+                                         dr["BANK_BRANCH_CODE"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim() : "";
+                                     }
+                                     else
+                                     {
+                                         dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString();
+                                         dr["BANK_BRANCH_CODE"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim() : "";
+                                     }
+                                     
                                      dr["CUS_TYPE"] = item.CUS_TYPE;
                                      dr["DOC_TYPE"] = item.DOC_TYPE;
                                      dr["PRODUCT_LINE"] = item.PRODUCT_LINE;
