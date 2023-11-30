@@ -391,13 +391,15 @@ namespace Testing.Forms
             doc.Add(new Paragraph(" ", new iFont(bf, 9)));
 
             //Last Para
-            Phrase ph1 = new Phrase("Given that the Claimed amount is agreed, please pay your Policy Deductible/Co-insurance of ", new iFont(bf, 9));
-            Phrase ph2 = new Phrase("USD " + String.Format("{0:N}", Convert.ToDecimal(TotalOS)), new iFont(bf, 9, iTextSharp.text.Font.BOLD));
-            Phrase ph3 = new Phrase(" to Forte Insurance (Cambodia) Plc. via the below Payment Methods:", new iFont(bf, 9));
+            Phrase ph1 = new Phrase("Given that the claimed amount is agreed, please pay your policy deductible/co-insurance of ", new iFont(bf, 9));
+            Phrase ph2 = new Phrase(" USD " + String.Format("{0:N}", Convert.ToDecimal(TotalOS)), new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+            Phrase ph3 = new Phrase(" within 7 working days", new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+            Phrase ph4 = new Phrase(" from letter date to Forte Insurance (Cambodia) Plc. via the below payment methods:", new iFont(bf, 9));
             Paragraph lastpara = new Paragraph();
             lastpara.Add(ph1);
             lastpara.Add(ph2);
             lastpara.Add(ph3);
+            lastpara.Add(ph4);
             doc.Add(lastpara);
             //doc.Add(new Paragraph("Given that the Claimed amount is agreed, please pay your Policy Deductible/Co-insurance of USD " + String.Format("{0:N}", Convert.ToDecimal(TotalOS)) +
             //    " to Forte Insurance (Cambodia) Plc. via the below Payment Methods:", new iFont(bf, 9)));
@@ -458,16 +460,61 @@ namespace Testing.Forms
             //
 
             doc.Add(new Paragraph(" ", new iFont(bf, 9)));
+            //add new paragraph
 
+            Phrase ph5 = new Phrase("It is hereby agreed and authorized ", new iFont(bf, 9));
+            Phrase ph6 = new Phrase("[Name:............................] ",new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+            Phrase ph7 = new Phrase(", holding an ", new iFont(bf, 9));
+            Phrase ph8 = new Phrase("identification card No. [............................] ", new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+            Phrase ph9 = new Phrase("to pick-up above mentioned vehicle from Forte's repair garage.", new iFont(bf, 9));
+            Paragraph lastparaterm = new Paragraph();
+            lastparaterm.Add(ph5);
+            lastparaterm.Add(ph6);
+            lastparaterm.Add(ph7);
+            lastparaterm.Add(ph8);
+            lastparaterm.Add(ph9);
+            doc.Add(lastparaterm);
+
+            doc.Add(new Paragraph(" ", new iFont(bf, 9)));
             doc.Add(new Paragraph("We thank you for your cooperation and support.", new iFont(bf, 9)));
             doc.Add(new Paragraph(" ", new iFont(bf, 9)));
             doc.Add(new Paragraph("Yours sincerely,", new iFont(bf, 9)));
             doc.Add(new Paragraph("FORTE Insurance (Cambodia) Plc.", new iFont(bf, 9, iTextSharp.text.Font.BOLD)));
             doc.Add(new Paragraph(" ", new iFont(bf, 9)));
+            
             Paragraph lastremark = new Paragraph("** THIS IS COMPUTER GENERATED AND DOES NOT REQUIRE SIGNATURE. **", new iFont(bf, 9, iTextSharp.text.Font.BOLD));
             lastremark.Alignment = Element.ALIGN_CENTER;
             doc.Add(lastremark);
 
+
+            //Add the Representative Box
+               PdfContentByte bsignRept = writer.DirectContent;
+                //Reminder sign
+                PdfPTable remindersignRept = new PdfPTable(1);
+                remindersignRept.TotalWidth = 200f;
+                remindersignRept.LockedWidth = true;
+                //PdfPCell remindercRept = new PdfPCell(new Phrase("Representative/Policy Holder's Signature", new iFont(bf, 10, iTextSharp.text.Font.BOLD)));
+                PdfPCell remindercRept = new PdfPCell();
+                Paragraph paragraph = new Paragraph("Representative/Policy Holder's Signature", new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+                paragraph.Alignment = Element.ALIGN_CENTER;
+              
+                paragraph.SpacingAfter = 40f;
+                Paragraph paragraph1 = new Paragraph("Full Name:", new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+                Paragraph paragraph2 = new Paragraph("Position:", new iFont(bf, 9, iTextSharp.text.Font.BOLD));
+                remindercRept.AddElement(paragraph);
+                remindercRept.AddElement(paragraph1);
+                remindercRept.AddElement(paragraph2);
+                remindercRept.VerticalAlignment = Element.ALIGN_TOP;
+                remindercRept.HorizontalAlignment = 1;
+                remindercRept.FixedHeight = 90f;
+                remindersignRept.AddCell(remindercRept);
+
+                
+                //
+                remindersignRept.WriteSelectedRows(0, -1, 355, 150, bsignRept);
+            
+            
+            //---------------Update by Southeane Requested Srunmenghak
             writer.CloseStream = false;
             doc.Close();
             mstream.Position = 0;
