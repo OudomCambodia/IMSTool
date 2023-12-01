@@ -81,7 +81,7 @@ namespace Testing.Forms
         private string otherExclusion = frmSendEmailClaim.OtherExclusion;
         private string HistClaimNo;
         private const string NA = "--- N/A ---";
-        private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
+        private string path = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\";
         private string ClaimNo = string.Empty;
         private string OverPeriod = string.Empty;
 

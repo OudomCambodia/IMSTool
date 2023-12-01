@@ -16,7 +16,7 @@ namespace Testing.Forms
     {
         public string username = string.Empty, usercode = string.Empty, team = string.Empty;
         CRUD crud = new CRUD();
-        public static string drivePath = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\";
+        public static string drivePath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\";
         DBS11SqlCrud sqlcrud = new DBS11SqlCrud();
         string VIEW_CUSTOMER = "(select CUS_CODE, nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) CUS_NAME,CUS_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE SFC_CODE = CUS_BPARTY_CODE) BPARTY_NAME from UW_M_CUSTOMERS where CUS_STATUS = 'A')";
         //public static Dictionary<string, string> product = new Dictionary<string, string>() {  
@@ -343,10 +343,10 @@ namespace Testing.Forms
 
                             if (!Directory.Exists(drivePath))
                             {
-                                if (drivePath.Contains("192.168.110.234"))
-                                    drivePath = drivePath.Replace("192.168.110.234", "fipnhdbs11");
-                                else if (drivePath.Contains("fipnhdbs11"))
-                                    drivePath = drivePath.Replace("fipnhdbs11", "192.168.110.234");
+                                if (drivePath.Contains("192.168.110.228"))
+                                    drivePath = drivePath.Replace("192.168.110.228", "AD02");
+                                else if (drivePath.Contains("AD02"))
+                                    drivePath = drivePath.Replace("AD02", "192.168.110.228");
                             }
 
                             if (dgvFile.Rows.Count > 0)
@@ -846,10 +846,10 @@ namespace Testing.Forms
                                 {
                                     if (!Directory.Exists(drivePath))
                                     {
-                                        if (drivePath.Contains("192.168.110.234"))
-                                            drivePath = drivePath.Replace("192.168.110.234", "fipnhdbs11");
-                                        else if (drivePath.Contains("fipnhdbs11"))
-                                            drivePath = drivePath.Replace("fipnhdbs11", "192.168.110.234");
+                                        if (drivePath.Contains("192.168.110.228"))
+                                            drivePath = drivePath.Replace("192.168.110.228", "AD02");
+                                        else if (drivePath.Contains("AD02"))
+                                            drivePath = drivePath.Replace("AD02", "192.168.110.228");
                                     }
 
                                     string DocCodeFolder = DocCode + "\\";

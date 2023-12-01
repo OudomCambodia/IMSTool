@@ -18,7 +18,7 @@ namespace Testing.Forms
         private string sp_type = string.Empty;
         private string claimNo = string.Empty;
         private string cc = string.Empty;
-        private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Settlement_Notice";
+        private string path = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice";
         //private string path = @"D:\Settlement_Notice\";
         public static string FPath = string.Empty;
         public static string Paid = string.Empty;

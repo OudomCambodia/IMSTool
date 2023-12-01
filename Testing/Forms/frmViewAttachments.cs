@@ -66,10 +66,10 @@ namespace Testing.Forms
                     string TempPath = TempFolder + dgvFile.Rows[RowIndex].Cells[1].Value.ToString();
                     if (!File.Exists(path))
                     {
-                        if (path.Contains("192.168.110.234"))
-                            path = path.Replace("192.168.110.234", "fipnhdbs11");
-                        else if (path.Contains("fipnhdbs11"))
-                            path = path.Replace("fipnhdbs11", "192.168.110.234");
+                        if (path.Contains("192.168.110.228"))
+                            path = path.Replace("192.168.110.228", "AD02");
+                        else if (path.Contains("AD02"))
+                            path = path.Replace("AD02", "192.168.110.228");
                     }
                     File.Copy(path, TempPath, true);
                     var attributes = File.GetAttributes(TempPath);
@@ -93,10 +93,10 @@ namespace Testing.Forms
                     string path = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
                     if (!File.Exists(path))
                     {
-                        if (path.Contains("192.168.110.234"))
-                            path = path.Replace("192.168.110.234", "fipnhdbs11");
-                        else if (path.Contains("fipnhdbs11"))
-                            path = path.Replace("fipnhdbs11", "192.168.110.234");
+                        if (path.Contains("192.168.110.228"))
+                            path = path.Replace("192.168.110.228", "AD02");
+                        else if (path.Contains("AD02"))
+                            path = path.Replace("AD02", "192.168.110.228");
                     }
                     File.Copy(path, fbdDownload.SelectedPath + @"\\" + dgvFile.Rows[RowIndex].Cells[1].Value.ToString(), true);
 
@@ -120,10 +120,10 @@ namespace Testing.Forms
 
                 if (!Directory.Exists(drivePath))
                 {
-                    if (drivePath.Contains("192.168.110.234"))
-                        drivePath = drivePath.Replace("192.168.110.234", "fipnhdbs11");
-                    else if (drivePath.Contains("fipnhdbs11"))
-                        drivePath = drivePath.Replace("fipnhdbs11", "192.168.110.234");
+                    if (drivePath.Contains("192.168.110.228"))
+                        drivePath = drivePath.Replace("192.168.110.228", "AD02");
+                    else if (drivePath.Contains("AD02"))
+                        drivePath = drivePath.Replace("AD02", "192.168.110.228");
                 }
 
                 if (!Directory.Exists(drivePath + DocCodeFolder))

@@ -76,7 +76,7 @@ namespace Testing.Forms
         private DataTable dtClaims = frmEmailNoticeAttachment.dtClaimDt;
         private string khBody = string.Empty;
         private string engBody = string.Empty;
-        private string path = @"\\192.168.110.234\Infoins_IMS_Upload_doc$\Email_Claim_Rejection_Notice\";
+        private string path = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Email_Claim_Rejection_Notice\";
         //private string path = @"D:\Email_Claim_Rejection_Notice\";
 
         public static string FolderPath = string.Empty;
