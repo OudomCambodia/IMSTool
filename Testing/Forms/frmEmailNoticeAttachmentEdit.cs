@@ -100,8 +100,8 @@ namespace Testing.Forms
         private void frmEmailNoticeAttachmentEdit_Load(object sender, EventArgs e)
         {
             string path = System.Windows.Forms.Application.StartupPath + @"\";
-            khDoc = khWord.Documents.Open(path + @"Html\A&H-Claim-Rej-Notice-Kh.docx");
-            engDoc = engWord.Documents.Open(path + @"Html\A&H-Claim-Rej-Notice-Eng.docx");
+            khDoc = khWord.Documents.Open(path + @"Html\AH-Claim-Rej-Notice-Kh.docx");
+            engDoc = engWord.Documents.Open(path + @"Html\AH-Claim-Rej-Notice-Eng.docx");
 
             LoadReferenceDocument();
         }
