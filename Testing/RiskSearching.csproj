@@ -13,24 +13,25 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>\\fipnhdcs01\public%24\MIS\Software\IMS Tool\</PublishUrl>
+    <PublishUrl>\\forteinsurancegroup.sharepoint.com\sites\GroupTechnology\Shared%2520Documents\IMT%2520Tool\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Background</UpdateMode>
+    <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>true</UpdateRequired>
+    <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\fipnhdcs01\public%24\MIS\Software\IMS Tool\</InstallUrl>
     <UpdateUrl>\\fipnhdcs01\public%24\MIS\Software\IMS Tool\</UpdateUrl>
     <SupportUrl>\\fipnhdcs01\public%24\MIS\Software\IMS Tool\</SupportUrl>
     <ProductName>IMS Tool</ProductName>
     <PublisherName>pichponleur</PublisherName>
-    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>3.4.6.%2a</ApplicationVersion>
+    <MinimumRequiredVersion>3.4.9.4</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>3.5.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -194,6 +195,11 @@
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\rothoudom\Downloads\Microsoft.Office.Interop.Outlook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -264,6 +270,9 @@
     <Reference Include="MimeKit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKit.2.10.0\lib\net45\MimeKit.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MiniHTMLTextBox">
+      <HintPath>..\packages\DG.MiniHTMLTextBox.1.0.25907.4\lib\net40\MiniHTMLTextBox.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
@@ -346,6 +355,10 @@
     <Compile Include="Forms\Accounting.Designer.cs">
       <DependentUpon>Accounting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AcledaSalePerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AcledaSalePerson.Designer.cs" />
     <Compile Include="Forms\Add Document.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -394,6 +407,10 @@
     <Compile Include="Forms\ClaimPaidReportPayee.Designer.cs">
       <DependentUpon>ClaimPaidReportPayee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ClPaymentReq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ClPaymentReq.Designer.cs" />
     <Compile Include="Forms\DetailedSchemePlus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -466,6 +483,18 @@
     <Compile Include="Forms\frmAddNewInformation.Designer.cs">
       <DependentUpon>frmAddNewInformation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmANHSettlementLetterNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmANHSettlementLetterNew.Designer.cs">
+      <DependentUpon>frmANHSettlementLetterNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmANHSettlementLetterNewRV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmANHSettlementLetterNewRV.Designer.cs">
+      <DependentUpon>frmANHSettlementLetterNewRV.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmAssignDP.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -520,6 +549,10 @@
     <Compile Include="Forms\frmClaimRI.Designer.cs">
       <DependentUpon>frmClaimRI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmCoInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCoInvoice.Designer.cs" />
     <Compile Include="Forms\frmCopyRole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -592,6 +625,18 @@
     <Compile Include="Forms\frmEditReceiver.Designer.cs">
       <DependentUpon>frmEditReceiver.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmEmailNoticeAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEmailNoticeAttachment.Designer.cs">
+      <DependentUpon>frmEmailNoticeAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmEmailNoticeAttachmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEmailNoticeAttachmentEdit.Designer.cs">
+      <DependentUpon>frmEmailNoticeAttachmentEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmFigtreeBlueRpt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -609,6 +654,12 @@
     </Compile>
     <Compile Include="Forms\frmGenerateCustomerProfitSummary.Designer.cs">
       <DependentUpon>frmGenerateCustomerProfitSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmGenerateSettlementLetterNotice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmGenerateSettlementLetterNotice.Designer.cs">
+      <DependentUpon>frmGenerateSettlementLetterNotice.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInvoiceSetting.cs">
       <SubType>Form</SubType>
@@ -664,6 +715,12 @@
     <Compile Include="Forms\frmPrintInvoice.Designer.cs">
       <DependentUpon>frmPrintInvoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmPRRiskCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPRRiskCount.Designer.cs">
+      <DependentUpon>frmPRRiskCount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmRemindLetterEng.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -675,6 +732,12 @@
     </Compile>
     <Compile Include="Forms\frmRenewalList.Designer.cs">
       <DependentUpon>frmRenewalList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRequestDocReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRequestDocReceive.Designer.cs">
+      <DependentUpon>frmRequestDocReceive.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmRoleDetail.cs">
       <SubType>Form</SubType>
@@ -724,6 +787,12 @@
     <Compile Include="Forms\FrmTravelReport.Designer.cs">
       <DependentUpon>FrmTravelReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmTRVExcelUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTRVExcelUpload.Designer.cs">
+      <DependentUpon>frmTRVExcelUpload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmUploadHelp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -759,6 +828,12 @@
     </Compile>
     <Compile Include="Forms\frmViewDetailUploadcs.Designer.cs">
       <DependentUpon>frmViewDetailUploadcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmViewEmailNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmViewEmailNew.Designer.cs">
+      <DependentUpon>frmViewEmailNew.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmViewEmail.cs">
       <SubType>Form</SubType>
@@ -856,6 +931,7 @@
     <Compile Include="Forms\PremiumRegisterHzz.Designer.cs">
       <DependentUpon>PremiumRegisterHzz.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TableExtension.cs" />
     <Compile Include="Forms\TicketRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -951,6 +1027,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClExpVehicleNo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CoFilingInvoice.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CoFilingInvoiceEnd.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\CPAE_card.cs">
@@ -1253,6 +1335,18 @@
       <DependentUpon>SettlementLetterToHospital.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\SettlementLetterNew.cs">
+      <DependentUpon>SettlementLetterNew.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\SettlementLetterToHospitalOld.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettlementLetterToHospitalOld.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\SettlementLetterToInsured.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1318,12 +1412,6 @@
     <Compile Include="My_DataTable_Extensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\CanCkoReport.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CanCkoReport.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\ClaimIncurredReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1496,6 +1584,12 @@
       <DependentUpon>frmAddNewInformation.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmANHSettlementLetterNew.resx">
+      <DependentUpon>frmANHSettlementLetterNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmANHSettlementLetterNewRV.resx">
+      <DependentUpon>frmANHSettlementLetterNewRV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAssignDP.resx">
       <DependentUpon>frmAssignDP.cs</DependentUpon>
     </EmbeddedResource>
@@ -1564,6 +1658,12 @@
     <EmbeddedResource Include="Forms\frmEditReceiver.resx">
       <DependentUpon>frmEditReceiver.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEmailNoticeAttachment.resx">
+      <DependentUpon>frmEmailNoticeAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEmailNoticeAttachmentEdit.resx">
+      <DependentUpon>frmEmailNoticeAttachmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmFigtreeBlueRpt.resx">
       <DependentUpon>frmFigtreeBlueRpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -1573,6 +1673,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmGenerateCustomerProfitSummary.resx">
       <DependentUpon>frmGenerateCustomerProfitSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmGenerateSettlementLetterNotice.resx">
+      <DependentUpon>frmGenerateSettlementLetterNotice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInvoiceSetting.resx">
       <DependentUpon>frmInvoiceSetting.cs</DependentUpon>
@@ -1604,11 +1707,17 @@
       <DependentUpon>frmPrintInvoice.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPRRiskCount.resx">
+      <DependentUpon>frmPRRiskCount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRemindLetterEng.resx">
       <DependentUpon>frmRemindLetterEng.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRenewalList.resx">
       <DependentUpon>frmRenewalList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRequestDocReceive.resx">
+      <DependentUpon>frmRequestDocReceive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRoleDetail.resx">
       <DependentUpon>frmRoleDetail.cs</DependentUpon>
@@ -1654,6 +1763,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmViewDetailUploadcs.resx">
       <DependentUpon>frmViewDetailUploadcs.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmViewEmailNew.resx">
+      <DependentUpon>frmViewEmailNew.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmViewEmail.resx">
@@ -1771,10 +1884,6 @@
     <EmbeddedResource Include="Reports\BHPSchemLite.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BHPSchemLite.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CanCkoReport.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CanCkoReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\CDVForInsured.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2040,6 +2149,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SettlementLetterToHospital.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SettlementLetterNew.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SettlementLetterNew.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\SettlementLetterToHospitalOld.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SettlementLetterToHospitalOld.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\SettlementLetterToInsured.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SettlementLetterToInsured.cs</LastGenOutput>
@@ -2089,6 +2206,8 @@
     <None Include="DBS11DataSet.xss">
       <DependentUpon>DBS11DataSet.xsd</DependentUpon>
     </None>
+    <None Include="Html\A&amp;H-Claim-Rej-Notice-Eng.docx" />
+    <None Include="Html\A&amp;H-Claim-Rej-Notice-Kh.docx" />
     <None Include="Html\debug.log" />
     <Content Include="favicon.ico" />
     <Content Include="Html\2022AutoClaimEmail.html" />
@@ -2245,6 +2364,15 @@
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
   <ItemGroup>
