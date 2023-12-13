@@ -42,7 +42,7 @@ namespace Testing.Forms
                     CommonFunctions.HighLightGrid(dgvView);
                     dgvView.ForeColor = System.Drawing.Color.Black;
                     dgvView.DataSource = dt;
-
+                    lbTotal.Text = dt.Rows.Count.ToString();
                    
                 }
                 
@@ -98,6 +98,7 @@ namespace Testing.Forms
         {
             dgvView.DataSource = null;
             txtExcelPath.Text = "";
+            lbTotal.Text = "";
         }
     }
 }
