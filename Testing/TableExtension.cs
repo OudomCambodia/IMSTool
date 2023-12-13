@@ -138,7 +138,7 @@ namespace Testing.Forms
             }
         }
 
-        public static System.Data.DataTable ConvertExcelToDataTableV2(string FileName, bool trim = false)
+        public static System.Data.DataTable ConvertExcelToDataTableV2(string FileName,bool trim = false)
         {
             // Create a file stream containing the Excel file to be opened
             FileStream fstream = new FileStream(FileName, FileMode.Open);
@@ -152,7 +152,8 @@ namespace Testing.Forms
 
             // Export the contents of 2 rows and 2 columns starting from 1st cell to DataTable
             //System.Data.DataTable dataTable = worksheet.Cells.ExportDataTable(0,0,500,500,true);
-            System.Data.DataTable dataTable = worksheet.Cells.ExportDataTableAsString(0, 0, 200, 516, true);
+            System.Data.DataTable dataTable = worksheet.Cells.ExportDataTableAsString(0, 0, worksheet.Cells.Rows.Count, worksheet.Cells.Columns.Count, true);
+            
 
             // Bind the DataTable with DataGrid
             //dataGridView1.DataSource = dataTable;
