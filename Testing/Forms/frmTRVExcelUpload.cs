@@ -35,7 +35,7 @@ namespace Testing.Forms
                     txtExcelPath.Text = "File: " + ofd.FileName;
 
                     //DataTable temptb = new DataTable();
-                    dt = TableExtension.ConvertExcelToDataTableV2(txtExcelPath.Text.Substring(6), true);
+                    dt = TableExtension.ConvertExcelToDataTableV2(txtExcelPath.Text.Substring(6),true);
                     dt.AcceptChanges();
 
 
@@ -89,6 +89,7 @@ namespace Testing.Forms
                 
                 
             }
+            Cursor.Current = Cursors.WaitCursor;
             My_DataTable_Extensions.ExportToExcel(dtcopy);
 
         }
