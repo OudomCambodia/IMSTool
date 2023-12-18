@@ -196,6 +196,22 @@ namespace Testing.Forms
                 //Update 03-Dec-19 &//Update 04-Dec-19:Add MCW &//Update 12-Aug-20:Add PAC
                 if (policyno == "HNS" || policyno == "GPA" || policyno == "MCW" || policyno == "PAC" || policyno == "BHP" || policyno == "PAE")
                     dtPolicy.Columns["MEMBER_ID"].Visible = false;
+
+                //requester: Yuos Tithya on 18-Dec-2023
+                if (policyno == "BHP")
+                {
+                    for (int i = 0; i < dtPolicy.Rows.Count; i++)
+                    {
+                        // Set Outpation to Yes for this Policy => request from Yuos Tithya on 18-Dec-2023
+                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/23/000739"))
+                            dtPolicy.Rows[i].Cells["OUTPATIENT"].Value = "YES";
+
+                        if (!string.IsNullOrEmpty(dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString()) && !dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString().ToUpper().Equals("NIL"))
+                        {
+                            dtPolicy.Rows[i].Cells["MATERNITY"].Value = "YES";
+                        }
+                    }
+                }
             }
             else
             {
