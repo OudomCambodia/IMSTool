@@ -490,7 +490,7 @@ namespace Testing.Forms
                     dgvDoc.Columns["STATUS_SET_ON"].Visible = false;
                     dgvDoc.Columns["RETURN_REASON"].Visible = false;
                     dgvDoc.Columns["RETURN_DATE"].Visible = false;
-                    dgvDoc.Columns["PRODUCER_TEAM"].Visible = false;
+                    //dgvDoc.Columns["PRODUCER_TEAM"].Visible = false;
                     dgvDoc.Columns["WorkHrs"].Visible = false;
                     dgvDoc.Columns["_RowString"].Visible = false;
                     dgvDoc.Columns["POLICY_NO"].Visible = false;
@@ -2257,6 +2257,11 @@ namespace Testing.Forms
             DataView dvNoti = new DataView(_dtNoti);
             dvNoti.RowFilter = " [NOTI_TYPE] = '" + notiType + "' ";
             dgvNoti.DataSource = dvNoti;
+        }
+
+        private void btnAddDoc_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
