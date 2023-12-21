@@ -35,7 +35,7 @@ namespace Testing.Forms
                     txtExcelPath.Text = "File: " + ofd.FileName;
 
                     //DataTable temptb = new DataTable();
-                    dt = TableExtension.ConvertExcelToDataTableV2(txtExcelPath.Text.Substring(6),true);
+                    dt = TableExtension.ConvertExcelToDataTableV2(txtExcelPath.Text.Substring(6), true);
                     dt.AcceptChanges();
 
 
@@ -56,7 +56,7 @@ namespace Testing.Forms
 
         private void bnExcel_Click(object sender, EventArgs e)
         {
-            
+            Cursor.Current = Cursors.WaitCursor;
             DataTable dtcopy = dt.Copy();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -90,7 +90,7 @@ namespace Testing.Forms
                 
             }
             Cursor.Current = Cursors.WaitCursor;
-            My_DataTable_Extensions.ExportToExcel(dtcopy);
+            My_DataTable_Extensions.ExportToExcelV1(dtcopy);
 
         }
 
