@@ -100,6 +100,7 @@
             this.bnWindscreen = new System.Windows.Forms.Button();
             this.bnReports = new System.Windows.Forms.Button();
             this.pnTravelReport = new System.Windows.Forms.Panel();
+            this.btnAutoUploadRpt = new System.Windows.Forms.Button();
             this.btnTRVExcelUpload = new System.Windows.Forms.Button();
             this.btnTravelReport = new System.Windows.Forms.Button();
             this.btnBHPScheme = new System.Windows.Forms.Button();
@@ -525,7 +526,6 @@
             this.tsPolicyUpload.Name = "tsPolicyUpload";
             this.tsPolicyUpload.Size = new System.Drawing.Size(264, 26);
             this.tsPolicyUpload.Text = "Policy Upload Report";
-            this.tsPolicyUpload.Click += new System.EventHandler(this.tsPolicyUpload_Click);
             // 
             // autoMonthlyReportToolStripMenuItem
             // 
@@ -847,7 +847,7 @@
             this.btnTravelRp.Name = "btnTravelRp";
             this.btnTravelRp.Size = new System.Drawing.Size(192, 40);
             this.btnTravelRp.TabIndex = 13;
-            this.btnTravelRp.Text = "Travel Report";
+            this.btnTravelRp.Text = "Travel/Policy Report";
             this.btnTravelRp.UseVisualStyleBackColor = false;
             this.btnTravelRp.Click += new System.EventHandler(this.btnTravelRp_Click);
             // 
@@ -1061,13 +1061,30 @@
             // 
             this.pnTravelReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.pnTravelReport.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnTravelReport.Controls.Add(this.btnAutoUploadRpt);
             this.pnTravelReport.Controls.Add(this.btnTRVExcelUpload);
             this.pnTravelReport.Controls.Add(this.btnTravelReport);
             this.pnTravelReport.Location = new System.Drawing.Point(193, 425);
             this.pnTravelReport.Name = "pnTravelReport";
-            this.pnTravelReport.Size = new System.Drawing.Size(180, 82);
+            this.pnTravelReport.Size = new System.Drawing.Size(180, 123);
             this.pnTravelReport.TabIndex = 12;
             this.pnTravelReport.Visible = false;
+            // 
+            // btnAutoUploadRpt
+            // 
+            this.btnAutoUploadRpt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnAutoUploadRpt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAutoUploadRpt.Enabled = false;
+            this.btnAutoUploadRpt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAutoUploadRpt.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAutoUploadRpt.ForeColor = System.Drawing.Color.White;
+            this.btnAutoUploadRpt.Location = new System.Drawing.Point(-5, 80);
+            this.btnAutoUploadRpt.Name = "btnAutoUploadRpt";
+            this.btnAutoUploadRpt.Size = new System.Drawing.Size(187, 40);
+            this.btnAutoUploadRpt.TabIndex = 9;
+            this.btnAutoUploadRpt.Text = "Auto Uplaod Excel Report";
+            this.btnAutoUploadRpt.UseVisualStyleBackColor = false;
+            this.btnAutoUploadRpt.Click += new System.EventHandler(this.btnAutoUploadRpt_Click);
             // 
             // btnTRVExcelUpload
             // 
@@ -1081,7 +1098,7 @@
             this.btnTRVExcelUpload.Name = "btnTRVExcelUpload";
             this.btnTRVExcelUpload.Size = new System.Drawing.Size(187, 40);
             this.btnTRVExcelUpload.TabIndex = 8;
-            this.btnTRVExcelUpload.Text = "TRV/AUTO Excel";
+            this.btnTRVExcelUpload.Text = "TRV Policy Upload";
             this.btnTRVExcelUpload.UseVisualStyleBackColor = false;
             this.btnTRVExcelUpload.Click += new System.EventHandler(this.btnTRVExcelUpload_Click);
             // 
@@ -1477,5 +1494,6 @@
         public System.Windows.Forms.Button btnTRVExcelUpload;
         public System.Windows.Forms.Button btnTravelReport;
         private System.Windows.Forms.ToolStripMenuItem tsPolicyUpload;
+        public System.Windows.Forms.Button btnAutoUploadRpt;
     }
 }

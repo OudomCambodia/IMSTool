@@ -879,10 +879,13 @@ namespace Testing
             openForm(tr, (Button)sender);
         }
 
-        private void tsPolicyUpload_Click(object sender, EventArgs e)
+        private void btnAutoUploadRpt_Click(object sender, EventArgs e)
         {
-
+            Forms.frmAutoUploadReport tr = new Forms.frmAutoUploadReport();
+            openForm(tr, (Button)sender);
         }
+
+       
 
         
 

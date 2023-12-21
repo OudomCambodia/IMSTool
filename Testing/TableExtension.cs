@@ -9,6 +9,8 @@ using System.Data.OleDb;
 using System.Data;
 using Aspose.Cells;
 using System.IO;
+using ExcelDataReader;
+
 
 namespace Testing.Forms
 {
@@ -47,7 +49,7 @@ namespace Testing.Forms
 
                 for (int j = 0; j < RowsCount; j++)
                     for (int i = 0; i < ColumnsCount; i++)
-                        Cells[j, i] = DataTable.Rows[j][i];
+                        Cells[j, i] = DataTable.Rows[j][i].ToString() ;
 
                 //format all columns to string
                 Worksheet.Columns.NumberFormat = "@";
@@ -84,83 +86,52 @@ namespace Testing.Forms
             }
         }
 
-        public static System.Data.DataTable ConvertExcelToDataTable(string FileName, bool trim = false)
+        
+
+        public static System.Data.DataTable ConvertExcelToDataTableApose(string FileName,bool trim = false)
         {
-            System.Data.DataTable dtResult = null;
-            int totalSheet = 0; //No of sheets on excel file  
-            using (OleDbConnection objConn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + FileName + ";Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';"))
-            {
-                objConn.Open();
-                OleDbCommand cmd = new OleDbCommand();
-                OleDbDataAdapter oleda = new OleDbDataAdapter();
-                System.Data.DataSet ds = new System.Data.DataSet();
-                System.Data.DataTable dt = dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            // Load the Excel file using the Workbook class
+            Aspose.Cells.Workbook workbook = new Aspose.Cells.Workbook(FileName);
 
-                string sheetName = string.Empty;
-                if (dt != null)
-                {
-                    var tempDataTable = (from dataRow in dt.AsEnumerable()
-                                         where !dataRow["TABLE_NAME"].ToString().Contains("FilterDatabase")
-                                         select dataRow).CopyToDataTable();
-                    dt = tempDataTable;
-                    totalSheet = dt.Rows.Count;
-                    sheetName = dt.Rows[0]["TABLE_NAME"].ToString();
-                }
-                cmd.Connection = objConn;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM [" + sheetName + "]";
-                oleda = new OleDbDataAdapter(cmd);
-                oleda.Fill(ds, "excelData");
-                dtResult = ds.Tables["excelData"];
-                foreach (DataRow dr in dtResult.Rows)
-                {
-                    bool HasSth = false;
-                    foreach (DataColumn dc in dtResult.Columns)
-                    {
-                        if (dr[dc.ColumnName].ToString().Trim() != "")
-                        {
-                            HasSth = true;
-                            if (trim == true)
-                            {
-                                if (dc.DataType == typeof(string))
-                                    dr.SetField<string>(dc, dr.Field<string>(dc).Trim());
-                            }
-                            else
-                                break;
-                        }
-                    }
-
-                    if (HasSth == false)
-                        dr.Delete();
-                }
-                objConn.Close();
-                return dtResult; //Returning Datatable  
-            }
-        }
-
-        public static System.Data.DataTable ConvertExcelToDataTableV2(string FileName,bool trim = false)
-        {
-            // Create a file stream containing the Excel file to be opened
-            FileStream fstream = new FileStream(FileName, FileMode.Open);
-
-            // Instantiate a Workbook object
-            //Opening the Excel file through the file stream
-            Aspose.Cells.Workbook workbook = new Aspose.Cells.Workbook(fstream);
-
-            // Access the first worksheet in the Excel file
+            // Get the worksheet you want to export
             Aspose.Cells.Worksheet worksheet = workbook.Worksheets[0];
 
-            // Export the contents of 2 rows and 2 columns starting from 1st cell to DataTable
-            //System.Data.DataTable dataTable = worksheet.Cells.ExportDataTable(0,0,500,500,true);
-            System.Data.DataTable dataTable = worksheet.Cells.ExportDataTableAsString(0, 0, worksheet.Cells.Rows.Count, worksheet.Cells.Columns.Count, true);
-            
+            // Export data to a DataTable using the Worksheet.Cells.ExportDataTable method
+            System.Data.DataTable dataTable = worksheet.Cells.ExportDataTable(0, 0, worksheet.Cells.MaxDataRow + 1, worksheet.Cells.MaxDataColumn + 1, true);
 
-            // Bind the DataTable with DataGrid
-            //dataGridView1.DataSource = dataTable;
-
-            // Close the file stream to free all resources
-            fstream.Close();
+            // Use the DataTable as the data source
             return dataTable;
         }
+        public static System.Data.DataTable ConvertExcelToDataTableAposeV1(string FileName, bool trim = false)
+        {
+            System.Data.DataTable dataTable = new System.Data.DataTable();
+
+        // Load the Excel file
+            Aspose.Cells.Workbook workbook = new Aspose.Cells.Workbook(FileName);
+        Aspose.Cells.Worksheet worksheet = workbook.Worksheets[0]; // Assuming the data is in the first worksheet
+
+        // Adding columns
+        int columnCount = worksheet.Cells.MaxDataColumn + 1;
+        for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+        {
+            string columnName = worksheet.Cells[0, columnIndex].StringValue;
+            dataTable.Columns.Add(columnName);
+        }
+
+        // Adding data
+        int rowCount = worksheet.Cells.MaxDataRow + 1;
+        for (int rowIndex = 1; rowIndex < rowCount; rowIndex++)
+        {
+            DataRow dataRow = dataTable.NewRow();
+            for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+            {
+                dataRow[columnIndex] = worksheet.Cells[rowIndex, columnIndex].Value;
+            }
+            dataTable.Rows.Add(dataRow);
+        }
+
+        return dataTable;
+    }
+        
     }
 }
