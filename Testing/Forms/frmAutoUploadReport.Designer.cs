@@ -1,6 +1,6 @@
 ﻿namespace Testing.Forms
 {
-    partial class frmTRVExcelUpload
+    partial class frmAutoUploadReport
     {
         /// <summary>
         /// Required designer variable.
@@ -53,9 +53,9 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1264, 53);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Travel Report";
+            this.label1.Size = new System.Drawing.Size(1246, 53);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Policy Upload Report";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
@@ -71,11 +71,10 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Location = new System.Drawing.Point(0, 53);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1264, 138);
-            this.groupBox1.TabIndex = 12;
+            this.groupBox1.Size = new System.Drawing.Size(1246, 138);
+            this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Excel Path";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // lbTotal
             // 
@@ -170,8 +169,8 @@
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox2.Location = new System.Drawing.Point(0, 197);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1264, 465);
-            this.groupBox2.TabIndex = 13;
+            this.groupBox2.Size = new System.Drawing.Size(1246, 416);
+            this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data ";
             // 
@@ -188,21 +187,21 @@
             this.dgvView.Location = new System.Drawing.Point(3, 18);
             this.dgvView.Name = "dgvView";
             this.dgvView.RowTemplate.Height = 24;
-            this.dgvView.Size = new System.Drawing.Size(1258, 444);
+            this.dgvView.Size = new System.Drawing.Size(1240, 395);
             this.dgvView.TabIndex = 0;
             // 
-            // frmTRVExcelUpload
+            // frmAutoUploadReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(1264, 662);
+            this.ClientSize = new System.Drawing.Size(1246, 615);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmTRVExcelUpload";
-            this.Text = "frmTRVExcelUpload";
+            this.Name = "frmAutoUploadReport";
+            this.Text = "frmAutoUploadReport";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -215,14 +214,14 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox txtExcelPath;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbTotal;
+        private System.Windows.Forms.Label label8;
         private cus_button bnClear;
         private cus_button bnExcel;
         private cus_button bnSearch;
+        private System.Windows.Forms.TextBox txtExcelPath;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvView;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lbTotal;
     }
 }

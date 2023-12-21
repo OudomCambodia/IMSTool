@@ -33,9 +33,9 @@ namespace Testing.Forms
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     txtExcelPath.Text = "File: " + ofd.FileName;
-
+                    Cursor.Current = Cursors.WaitCursor;
                     //DataTable temptb = new DataTable();
-                    dt = TableExtension.ConvertExcelToDataTableV2(txtExcelPath.Text.Substring(6), true);
+                    dt = TableExtension.ConvertExcelToDataTableApose(txtExcelPath.Text.Substring(6));
                     dt.AcceptChanges();
 
 
@@ -58,11 +58,13 @@ namespace Testing.Forms
         {
             Cursor.Current = Cursors.WaitCursor;
             DataTable dtcopy = dt.Copy();
+            Random rnd = new Random();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dt.Rows[i][1].ToString() != "AUTO")
                 {
                     DataTable temp = crud.ExecQuery("select CUS_CODE from uw_m_customers where CUS_INDV_NIC_NO = '" + dt.Rows[i][9].ToString() + "'");
+                    DataTable loctemp = crud.ExecQuery("select GPL_CODE from sm_m_geoarea_paramln where TRIM(GPL_DESC) =TRIM(q'[" + dt.Rows[i][10].ToString() + "]')");
                     if (temp.Rows.Count > 0)
                     {
                         dtcopy.Rows[i][3] = temp.Rows[0][0].ToString();
@@ -72,33 +74,45 @@ namespace Testing.Forms
                         dtcopy.Rows[i][7] = "";
                         dtcopy.Rows[i][8] = "";
                         dtcopy.Rows[i][9] = "";
+                        
+                    }
+                    if (loctemp.Rows.Count <= 0)
+                    {
+                        crud.ExecNonQuery("INSERT INTO SM_M_GEOAREA_PARAMLN(GPL_CODE,GPL_DESC,GPL_SMG_CODE,GPL_SMG_LEVEL,GPL_SEQ_NO,GPL_DTL_INSERT) VALUES ('" + "N0" + rnd.Next(10, 99) + rnd.Next(10, 80) + "','" + dt.Rows[i][10].ToString() + "','9','9','000012300'||SEQ_SM_M_GEOAREA_DETAILS.NEXTVAL,'N')");
+                        crud.ExecNonQuery("commit"); 
                     }
                 }
                 else
                 {
-                    DataTable temp = crud.ExecQuery("select pol_policy_no from ( "+
+                    DataTable temp = crud.ExecQuery("select pol_policy_no from ( " +
             "select pol_policy_no ,POL_CUS_CODE,PK_MONTHLY_REPORTS.FN_GET_POLICY_COMMON_INFO(POL_SEQ_NO,'ADDITIONAL INSURED') ADDITIONAL_INSURED " +
             "from uw_t_policies WHERE  POL_PRD_CODE IN ('VPC','CYC','VCM')" +
-            ") where ADDITIONAL_INSURED ='" + dt.Rows[i][25].ToString() + "' AND POL_CUS_CODE ='" + dt.Rows[i][3].ToString() +"'");
+            ") where ADDITIONAL_INSURED ='" + dt.Rows[i][25].ToString() + "' AND POL_CUS_CODE ='" + dt.Rows[i][3].ToString() + "'");
                     if (temp.Rows.Count > 0)
                     {
                         dtcopy.Rows[i][4] = temp.Rows[0][0].ToString();
-                        
+
                     }
                 }
-                
-                
-            }
-            Cursor.Current = Cursors.WaitCursor;
-            My_DataTable_Extensions.ExportToExcelV1(dtcopy);
 
-        }
+
+                }
+                Cursor.Current = Cursors.WaitCursor;
+                TableExtension.ExportToExcel(dtcopy);
+
+            }
+        
 
         private void bnClear_Click(object sender, EventArgs e)
         {
             dgvView.DataSource = null;
             txtExcelPath.Text = "";
             lbTotal.Text = "";
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -206,8 +206,8 @@ namespace Testing.Forms
                                  DataRow dr = dtTemp.NewRow();
                                  
                                  
-                                     dr["SUBMISSION_DATE"] = item.SUBMISSION_DATE;
-                                     dr["DP_ISSUED_DATE"] = item.DP_ISSUED_DATE;
+                                     dr["SUBMISSION_DATE"] = item.SUBMISSION_DATE.ToString();
+                                     dr["DP_ISSUED_DATE"] =String.Format("{0:d}",item.DP_ISSUED_DATE.ToString());
                                      dr["POLICY_NO"] = item.POLICY_NO;
                                      dr["CUSTOMER_NAME"] = item.CUSTOMER_NAME;
                                      dr["CUSTOMER_PHONE"] = item.CUSTOMER_PHONE;
@@ -238,7 +238,7 @@ namespace Testing.Forms
                                      //dr["PRODUCER_NAME"] = item.PRODUCER_NAME;
                                      dr["DP_NAME"] = item.DP_NAME;
                                      dr["FILLING_NAME"] = item.FILLING_NAME;
-                                     dr["LATEST_UPDATE_AT"] = item.LATEST_UPDATE_AT;
+                                     dr["LATEST_UPDATE_AT"] =String.Format("{0:d}",item.LATEST_UPDATE_AT.ToString()) ;
                                      dr["STATUS"] = item.STATUS;
                                      dr["STATUS_BY"] = item.STATUS_BY;
                                      dr["PRIORITY_TYPE"] = item.PRIORITY_TYPE;
