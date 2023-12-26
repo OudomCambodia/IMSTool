@@ -24,25 +24,30 @@ namespace Testing.Forms
         {
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.InitialDirectory = "c:\\";
-                ofd.Filter = "Excel Files(*.XLSX;*.XLS)|*.XLS;*.XLSX|All files (*.*)|*.*";
-                ofd.FilterIndex = 1;
-                ofd.RestoreDirectory = true;
-                if (ofd.ShowDialog() == DialogResult.OK)
+                if (txtExcelPath.Text.ToUpper() == "")
                 {
-                    txtExcelPath.Text = "File: " + ofd.FileName;
-                    Cursor.Current = Cursors.WaitCursor;
-                    //DataTable temptb = new DataTable();
-                    dt = TableExtension.ConvertExcelToDataTableAposeV1(txtExcelPath.Text.Substring(6));
-                    dt.AcceptChanges();
+                    Msgbox.Show("Batch No is required!");
+                }else{
+                    dt = crud.ExecQuery("SELECT PUL_REF_NO BATCH_NUM,PUL_POL_REF_NO REF_NO,POL_POLICY_NO,PK_MONTHLY_REPORTS.FN_GET_POLICY_COMMON_INFO(POL_SEQ_NO,'ADDITIONAL INSURED') ADDITIONAL_INSURED   FROM " +
+"(select PUL_REF_NO, " +
+"TO_NUMBER(PUL_POL_REF_NO) PUL_POL_REF_NO, " +
+"PUL_DESC " +
+"from UW_T_POL_UPLOAD_LOG " +
+"WHERE PUL_REF_NO ='" + txtExcelPath.Text.ToUpper() + "') LEFT OUTER JOIN UW_T_POLICIES ON POL_PROPOSAL_NO = PUL_DESC " +
+"ORDER BY PUL_POL_REF_NO ASC");
+                    if (dt.Rows.Count > 0)
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        CommonFunctions.HighLightGrid(dgvView);
+                        dgvView.ForeColor = System.Drawing.Color.Black;
+                        dgvView.DataSource = dt;
+                        lbTotal.Text = dt.Rows.Count.ToString();
 
-
-                    CommonFunctions.HighLightGrid(dgvView);
-                    dgvView.ForeColor = System.Drawing.Color.Black;
-                    dgvView.DataSource = dt;
-                    lbTotal.Text = dt.Rows.Count.ToString();
-
+                    }
+                    else
+                    {
+                        Msgbox.Show("Batch is not existed!");
+                    }
                 }
 
             }
@@ -63,31 +68,24 @@ namespace Testing.Forms
         private void bnExcel_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            DataTable dtcopy = dt.Copy();
-            Random rnd = new Random();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            DataTable dtcopy = dt.Clone();
+            if (dgvView.Rows.Count <= 0)
             {
-                if (dt.Rows[i][1].ToString() == "AUTO")
-                {
-                    DataTable temp = crud.ExecQuery("select pol_policy_no from ( " +
-             "select pol_policy_no ,POL_CUS_CODE,PK_MONTHLY_REPORTS.FN_GET_POLICY_COMMON_INFO(POL_SEQ_NO,'ADDITIONAL INSURED') ADDITIONAL_INSURED " +
-             "from uw_t_policies WHERE  POL_PRD_CODE IN ('VPC','CYC','VCM')" +
-             ") where ADDITIONAL_INSURED ='" + dt.Rows[i][25].ToString() + "' AND POL_CUS_CODE ='" + dt.Rows[i][3].ToString() + "'");
-                    if (temp.Rows.Count > 0)
-                    {
-                        dtcopy.Rows[i][4] = temp.Rows[0][0].ToString();
-
-                    }
-                }
+                Msgbox.Show("No Data to export!");
                 
-
-
             }
-            Cursor.Current = Cursors.WaitCursor;
-            TableExtension.ExportToExcel(dtcopy);
+            else
+            {
+                foreach (DataGridViewRow row in dgvView.Rows)
+                {
+                    dtcopy.Rows.Add(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString());
+                }
 
+                My_DataTable_Extensions.ExportToExcel(dtcopy);
+            }
+            
+              
+            }
         }
-
-        
     }
-}
+

@@ -34,11 +34,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.bnClear = new Testing.cus_button();
             this.bnExcel = new Testing.cus_button();
-            this.bnSearch = new Testing.cus_button();
             this.txtExcelPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvView = new System.Windows.Forms.DataGridView();
+            this.bnSearch = new Testing.cus_button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvView)).BeginInit();
@@ -106,7 +106,7 @@
             this.bnClear.FlatAppearance.BorderSize = 2;
             this.bnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClear.ForeColor = System.Drawing.Color.White;
-            this.bnClear.Location = new System.Drawing.Point(824, 55);
+            this.bnClear.Location = new System.Drawing.Point(638, 57);
             this.bnClear.Name = "bnClear";
             this.bnClear.Size = new System.Drawing.Size(108, 32);
             this.bnClear.TabIndex = 52;
@@ -120,33 +120,19 @@
             this.bnExcel.FlatAppearance.BorderSize = 2;
             this.bnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnExcel.ForeColor = System.Drawing.Color.White;
-            this.bnExcel.Location = new System.Drawing.Point(695, 55);
+            this.bnExcel.Location = new System.Drawing.Point(503, 57);
             this.bnExcel.Name = "bnExcel";
             this.bnExcel.Size = new System.Drawing.Size(108, 32);
             this.bnExcel.TabIndex = 51;
-            this.bnExcel.Text = "Extract";
+            this.bnExcel.Text = "Extract Excel";
             this.bnExcel.UseVisualStyleBackColor = false;
             this.bnExcel.Click += new System.EventHandler(this.bnExcel_Click);
             // 
-            // bnSearch
-            // 
-            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnSearch.FlatAppearance.BorderSize = 2;
-            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnSearch.ForeColor = System.Drawing.Color.White;
-            this.bnSearch.Location = new System.Drawing.Point(564, 55);
-            this.bnSearch.Name = "bnSearch";
-            this.bnSearch.Size = new System.Drawing.Size(108, 32);
-            this.bnSearch.TabIndex = 50;
-            this.bnSearch.Text = "Upload ";
-            this.bnSearch.UseVisualStyleBackColor = false;
-            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
-            // 
             // txtExcelPath
             // 
-            this.txtExcelPath.Location = new System.Drawing.Point(114, 60);
+            this.txtExcelPath.Location = new System.Drawing.Point(174, 62);
             this.txtExcelPath.Name = "txtExcelPath";
-            this.txtExcelPath.Size = new System.Drawing.Size(422, 22);
+            this.txtExcelPath.Size = new System.Drawing.Size(154, 22);
             this.txtExcelPath.TabIndex = 49;
             // 
             // label4
@@ -156,9 +142,9 @@
             this.label4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.label4.Location = new System.Drawing.Point(22, 63);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 17);
+            this.label4.Size = new System.Drawing.Size(146, 17);
             this.label4.TabIndex = 48;
-            this.label4.Text = "Excel Path : ";
+            this.label4.Text = "Policy Upload Batch : ";
             // 
             // groupBox2
             // 
@@ -181,7 +167,7 @@
             this.dgvView.AllowUserToOrderColumns = true;
             this.dgvView.AllowUserToResizeColumns = false;
             this.dgvView.AllowUserToResizeRows = false;
-            this.dgvView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvView.Location = new System.Drawing.Point(3, 18);
@@ -189,6 +175,20 @@
             this.dgvView.RowTemplate.Height = 24;
             this.dgvView.Size = new System.Drawing.Size(1240, 395);
             this.dgvView.TabIndex = 0;
+            // 
+            // bnSearch
+            // 
+            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnSearch.FlatAppearance.BorderSize = 2;
+            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnSearch.ForeColor = System.Drawing.Color.White;
+            this.bnSearch.Location = new System.Drawing.Point(365, 57);
+            this.bnSearch.Name = "bnSearch";
+            this.bnSearch.Size = new System.Drawing.Size(108, 32);
+            this.bnSearch.TabIndex = 50;
+            this.bnSearch.Text = "Generate";
+            this.bnSearch.UseVisualStyleBackColor = false;
+            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
             // 
             // frmAutoUploadReport
             // 
@@ -218,10 +218,10 @@
         private System.Windows.Forms.Label label8;
         private cus_button bnClear;
         private cus_button bnExcel;
-        private cus_button bnSearch;
         private System.Windows.Forms.TextBox txtExcelPath;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvView;
+        private cus_button bnSearch;
     }
 }
