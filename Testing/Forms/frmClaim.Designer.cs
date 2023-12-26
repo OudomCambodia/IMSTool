@@ -53,14 +53,15 @@
             this.dtpIntTo = new System.Windows.Forms.DateTimePicker();
             this.rbInt = new System.Windows.Forms.RadioButton();
             this.rbLoss = new System.Windows.Forms.RadioButton();
+            this.tbRiskName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnClaimExp = new Testing.cus_button();
             this.btnExcel = new Testing.cus_button();
             this.btnPrint = new Testing.cus_button();
             this.btnClear = new Testing.cus_button();
             this.bnSearch = new Testing.cus_button();
             this.btnLookInExcel = new Testing.cus_button();
-            this.tbRiskName = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.pnFind.SuspendLayout();
             this.SuspendLayout();
@@ -72,10 +73,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(408, 4);
+            this.label1.Location = new System.Drawing.Point(459, 4);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 32);
+            this.label1.Size = new System.Drawing.Size(199, 40);
             this.label1.TabIndex = 8;
             this.label1.Text = "Claim Search";
             // 
@@ -84,7 +85,7 @@
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTo.Location = new System.Drawing.Point(459, 73);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(161, 22);
+            this.dtpTo.Size = new System.Drawing.Size(161, 26);
             this.dtpTo.TabIndex = 5;
             // 
             // dtpFrom
@@ -92,7 +93,7 @@
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFrom.Location = new System.Drawing.Point(165, 73);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(161, 22);
+            this.dtpFrom.Size = new System.Drawing.Size(161, 26);
             this.dtpFrom.TabIndex = 4;
             // 
             // label4
@@ -103,7 +104,7 @@
             this.label4.Location = new System.Drawing.Point(360, 78);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 16);
+            this.label4.Size = new System.Drawing.Size(116, 20);
             this.label4.TabIndex = 29;
             this.label4.Text = "Loss Date To:";
             // 
@@ -115,7 +116,7 @@
             this.label3.Location = new System.Drawing.Point(52, 78);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 16);
+            this.label3.Size = new System.Drawing.Size(136, 20);
             this.label3.TabIndex = 28;
             this.label3.Text = "Loss Date From:";
             // 
@@ -125,7 +126,7 @@
             this.tbInsured.Margin = new System.Windows.Forms.Padding(4);
             this.tbInsured.MaxLength = 70;
             this.tbInsured.Name = "tbInsured";
-            this.tbInsured.Size = new System.Drawing.Size(161, 22);
+            this.tbInsured.Size = new System.Drawing.Size(161, 26);
             this.tbInsured.TabIndex = 2;
             // 
             // label2
@@ -136,7 +137,7 @@
             this.label2.Location = new System.Drawing.Point(262, 44);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 16);
+            this.label2.Size = new System.Drawing.Size(136, 20);
             this.label2.TabIndex = 27;
             this.label2.Text = "Customer Name:";
             // 
@@ -147,9 +148,9 @@
             this.lbTotNumber.BackColor = System.Drawing.Color.Transparent;
             this.lbTotNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotNumber.ForeColor = System.Drawing.Color.White;
-            this.lbTotNumber.Location = new System.Drawing.Point(901, 620);
+            this.lbTotNumber.Location = new System.Drawing.Point(1004, 620);
             this.lbTotNumber.Name = "lbTotNumber";
-            this.lbTotNumber.Size = new System.Drawing.Size(17, 18);
+            this.lbTotNumber.Size = new System.Drawing.Size(21, 24);
             this.lbTotNumber.TabIndex = 26;
             this.lbTotNumber.Text = "0";
             // 
@@ -160,9 +161,9 @@
             this.lbTotal.BackColor = System.Drawing.Color.Transparent;
             this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotal.ForeColor = System.Drawing.Color.White;
-            this.lbTotal.Location = new System.Drawing.Point(846, 620);
+            this.lbTotal.Location = new System.Drawing.Point(949, 620);
             this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(51, 18);
+            this.lbTotal.Size = new System.Drawing.Size(62, 24);
             this.lbTotal.TabIndex = 25;
             this.lbTotal.Text = "Total:";
             // 
@@ -172,7 +173,7 @@
             this.tbClaimNo.Margin = new System.Windows.Forms.Padding(4);
             this.tbClaimNo.MaxLength = 20;
             this.tbClaimNo.Name = "tbClaimNo";
-            this.tbClaimNo.Size = new System.Drawing.Size(189, 22);
+            this.tbClaimNo.Size = new System.Drawing.Size(320, 26);
             this.tbClaimNo.TabIndex = 3;
             // 
             // tbPolicyNo
@@ -181,7 +182,7 @@
             this.tbPolicyNo.Margin = new System.Windows.Forms.Padding(4);
             this.tbPolicyNo.MaxLength = 20;
             this.tbPolicyNo.Name = "tbPolicyNo";
-            this.tbPolicyNo.Size = new System.Drawing.Size(161, 22);
+            this.tbPolicyNo.Size = new System.Drawing.Size(161, 26);
             this.tbPolicyNo.TabIndex = 1;
             this.tbPolicyNo.Leave += new System.EventHandler(this.tbPolicyNo_Leave);
             // 
@@ -193,7 +194,7 @@
             this.lbClaim.Location = new System.Drawing.Point(641, 78);
             this.lbClaim.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbClaim.Name = "lbClaim";
-            this.lbClaim.Size = new System.Drawing.Size(66, 16);
+            this.lbClaim.Size = new System.Drawing.Size(83, 20);
             this.lbClaim.TabIndex = 20;
             this.lbClaim.Text = "Claim No:";
             // 
@@ -205,7 +206,7 @@
             this.lbPolicyNo.Location = new System.Drawing.Point(16, 44);
             this.lbPolicyNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPolicyNo.Name = "lbPolicyNo";
-            this.lbPolicyNo.Size = new System.Drawing.Size(69, 16);
+            this.lbPolicyNo.Size = new System.Drawing.Size(85, 20);
             this.lbPolicyNo.TabIndex = 18;
             this.lbPolicyNo.Text = "Policy No:";
             // 
@@ -225,7 +226,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.Size = new System.Drawing.Size(964, 472);
+            this.dataGridView1.Size = new System.Drawing.Size(1067, 472);
             this.dataGridView1.TabIndex = 24;
             this.dataGridView1.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
@@ -266,7 +267,7 @@
             // 
             this.tbFind.Location = new System.Drawing.Point(6, 5);
             this.tbFind.Name = "tbFind";
-            this.tbFind.Size = new System.Drawing.Size(172, 22);
+            this.tbFind.Size = new System.Drawing.Size(172, 26);
             this.tbFind.TabIndex = 0;
             this.tbFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFind_KeyDown);
             this.tbFind.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFind_KeyUp);
@@ -279,7 +280,7 @@
             this.label5.Location = new System.Drawing.Point(35, 111);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 16);
+            this.label5.Size = new System.Drawing.Size(158, 20);
             this.label5.TabIndex = 34;
             this.label5.Text = "Intimate Date From:";
             // 
@@ -291,7 +292,7 @@
             this.label6.Location = new System.Drawing.Point(342, 111);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 16);
+            this.label6.Size = new System.Drawing.Size(138, 20);
             this.label6.TabIndex = 35;
             this.label6.Text = "Intimate Date To:";
             // 
@@ -300,7 +301,7 @@
             this.dtpIntFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpIntFrom.Location = new System.Drawing.Point(165, 106);
             this.dtpIntFrom.Name = "dtpIntFrom";
-            this.dtpIntFrom.Size = new System.Drawing.Size(161, 22);
+            this.dtpIntFrom.Size = new System.Drawing.Size(161, 26);
             this.dtpIntFrom.TabIndex = 6;
             // 
             // dtpIntTo
@@ -308,7 +309,7 @@
             this.dtpIntTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpIntTo.Location = new System.Drawing.Point(459, 106);
             this.dtpIntTo.Name = "dtpIntTo";
-            this.dtpIntTo.Size = new System.Drawing.Size(161, 22);
+            this.dtpIntTo.Size = new System.Drawing.Size(161, 26);
             this.dtpIntTo.TabIndex = 7;
             // 
             // rbInt
@@ -316,7 +317,7 @@
             this.rbInt.AutoSize = true;
             this.rbInt.Location = new System.Drawing.Point(19, 112);
             this.rbInt.Name = "rbInt";
-            this.rbInt.Size = new System.Drawing.Size(14, 13);
+            this.rbInt.Size = new System.Drawing.Size(17, 16);
             this.rbInt.TabIndex = 36;
             this.rbInt.UseVisualStyleBackColor = true;
             this.rbInt.CheckedChanged += new System.EventHandler(this.rbInt_CheckedChanged);
@@ -327,11 +328,49 @@
             this.rbLoss.Checked = true;
             this.rbLoss.Location = new System.Drawing.Point(19, 80);
             this.rbLoss.Name = "rbLoss";
-            this.rbLoss.Size = new System.Drawing.Size(14, 13);
+            this.rbLoss.Size = new System.Drawing.Size(17, 16);
             this.rbLoss.TabIndex = 37;
             this.rbLoss.TabStop = true;
             this.rbLoss.UseVisualStyleBackColor = true;
             this.rbLoss.CheckedChanged += new System.EventHandler(this.rbInt_CheckedChanged);
+            // 
+            // tbRiskName
+            // 
+            this.tbRiskName.Location = new System.Drawing.Point(633, 41);
+            this.tbRiskName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbRiskName.MaxLength = 70;
+            this.tbRiskName.Name = "tbRiskName";
+            this.tbRiskName.Size = new System.Drawing.Size(403, 26);
+            this.tbRiskName.TabIndex = 38;
+            this.tbRiskName.MouseHover += new System.EventHandler(this.tbRiskName_MouseHover);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(547, 44);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(96, 20);
+            this.label7.TabIndex = 39;
+            this.label7.Text = "Risk Name:";
+            // 
+            // btnClaimExp
+            // 
+            this.btnClaimExp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClaimExp.Enabled = false;
+            this.btnClaimExp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClaimExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClaimExp.ForeColor = System.Drawing.Color.White;
+            this.btnClaimExp.Location = new System.Drawing.Point(913, 103);
+            this.btnClaimExp.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClaimExp.Name = "btnClaimExp";
+            this.btnClaimExp.Size = new System.Drawing.Size(123, 30);
+            this.btnClaimExp.TabIndex = 40;
+            this.btnClaimExp.Text = "Claim Exp.";
+            this.btnClaimExp.UseVisualStyleBackColor = true;
+            this.btnClaimExp.Click += new System.EventHandler(this.btnClaimExp_Click);
             // 
             // btnExcel
             // 
@@ -410,34 +449,13 @@
             this.btnLookInExcel.Visible = false;
             this.btnLookInExcel.Click += new System.EventHandler(this.btnLookInExcel_Click);
             // 
-            // tbRiskName
-            // 
-            this.tbRiskName.Location = new System.Drawing.Point(633, 41);
-            this.tbRiskName.Margin = new System.Windows.Forms.Padding(4);
-            this.tbRiskName.MaxLength = 70;
-            this.tbRiskName.Name = "tbRiskName";
-            this.tbRiskName.Size = new System.Drawing.Size(272, 22);
-            this.tbRiskName.TabIndex = 38;
-            this.tbRiskName.MouseHover += new System.EventHandler(this.tbRiskName_MouseHover);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(547, 44);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(78, 16);
-            this.label7.TabIndex = 39;
-            this.label7.Text = "Risk Name:";
-            // 
             // frmClaim
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(990, 650);
+            this.ClientSize = new System.Drawing.Size(1093, 650);
+            this.Controls.Add(this.btnClaimExp);
             this.Controls.Add(this.tbRiskName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.rbLoss);
@@ -517,5 +535,6 @@
         private System.Windows.Forms.TextBox tbRiskName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolTip toolTip1;
+        private cus_button btnClaimExp;
     }
 }
