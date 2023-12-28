@@ -370,7 +370,7 @@ namespace Testing.Forms
                 var insuredName = dt.Rows[0]["Insured Name"].ToString();
                 var policyNo = dt.Rows[0]["Policy No"].ToString();
                 var fromDate = rbLoss.Checked ? dtpFrom.Value.ToString("dd/MM/yyyy") : dtpIntFrom.Value.ToString("dd/MM/yyyy");
-                var toDate = rbLoss.Checked ? dtpTo.Value.ToString("dd/MM/yyyy") : dtpIntTo.Value.ToString("DD/MM/yyyy");
+                var toDate = rbLoss.Checked ? dtpTo.Value.ToString("dd/MM/yyyy") : dtpIntTo.Value.ToString("dd/MM/yyyy");
                 var reportDate = DateTime.Now.ToString("dd/MM/yyyy");
                 var byUser = frmLogIn.Usert.ToUpper();
 
@@ -454,7 +454,7 @@ namespace Testing.Forms
                 ws.Cell(8, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                 #endregion
 
-                #region --- Report Date ---
+                #region --- By ---
                 ws.Cell(8, 5).SetValue(string.Concat("BY: ", byUser));
                 ws.Cell(8, 5).Style.Font.FontSize = 9f;
                 ws.Cell(8, 5).Style.Font.Bold = true;

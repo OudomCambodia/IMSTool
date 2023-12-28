@@ -145,27 +145,36 @@ namespace Testing.Forms
             //}
 
             //oudom
-            DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+            //DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+            //if (dtHospital.Rows.Count > 0)
+            //{
+            //    var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
+            //    hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
+
+            //    if (isNullOthHospital)
+            //    {
+            //        var hIndex = hospital.IndexOf("H:");
+            //        if (hIndex == -1)
+            //            hIndex = hospital.IndexOf("H :");
+
+            //        var strHospital = hospital.Substring(hIndex + 2);
+
+            //        var dIndex = strHospital.IndexOf(":");
+            //        var tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
+
+            //        var bHospital = tmpHospital.IndexOf("(");
+
+            //        hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
+            //    }
+
+            //    body = body.Replace("%Place%", hospital);
+            //    content = content.Replace("%Place%", hospital);
+            //}
+
+            DataTable dtHospital = crud.ExecQuery("select (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL from CL_T_INTIMATION where INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
             if (dtHospital.Rows.Count > 0)
             {
-                var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
-                hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
-
-                if (isNullOthHospital)
-                {
-                    var hIndex = hospital.IndexOf("H:");
-                    if (hIndex == -1)
-                        hIndex = hospital.IndexOf("H :");
-
-                    var strHospital = hospital.Substring(hIndex + 2);
-
-                    var dIndex = strHospital.IndexOf(":");
-                    var tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
-
-                    var bHospital = tmpHospital.IndexOf("(");
-
-                    hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
-                }
+                hospital = dtHospital.Rows[0]["PANEL_HOSPITAL"].ToString();
 
                 body = body.Replace("%Place%", hospital);
                 content = content.Replace("%Place%", hospital);
@@ -513,31 +522,46 @@ namespace Testing.Forms
         {
             attachfile.Clear();
 
+            //var qBuilder = new StringBuilder();
+            //qBuilder.Append("select int_comments ")
+            //    .Append("from cl_t_intimation  ")
+            //    .AppendFormat("where int_claim_no = '{0}'", lbClaimNo.Text.ToUpper());
+
+            //var dtRemark = crud.ExecQuery(qBuilder.ToString());
+            //if (dtRemark.Rows.Count > 0)
+            //{
+            //    var remark = dtRemark.Rows[0][0].ToString();
+            //    var hIndex = remark.IndexOf("H:");
+            //    var dIndex = remark.IndexOf("D:");
+
+            //    if (hIndex != -1 && dIndex != -1)
+            //    {
+            //        admissionDate = remark.Substring(hIndex, dIndex - hIndex).Trim();
+            //        string pattern = @"\d{2}/\d{2}/\d{4}";
+            //        Match match = Regex.Match(admissionDate, pattern);
+            //        if (string.IsNullOrEmpty(match.Value))
+            //        {
+            //            string pattern1 = @"\d{2}/\d{2}/\d{2}";
+            //            match = Regex.Match(admissionDate, pattern1);
+            //        }
+            //        admissionDate = match.Success ? match.Value : string.Empty;
+            //        dischargeDate = admissionDate;
+            //    }
+            //}
+
             var qBuilder = new StringBuilder();
-            qBuilder.Append("select int_comments ")
+            qBuilder.Append("select int_date_admission, int_date_discharge ")
                 .Append("from cl_t_intimation  ")
                 .AppendFormat("where int_claim_no = '{0}'", lbClaimNo.Text.ToUpper());
 
-            var dtRemark = crud.ExecQuery(qBuilder.ToString());
-            if (dtRemark.Rows.Count > 0)
+            var dtAdDis = crud.ExecQuery(qBuilder.ToString());
+            if (dtAdDis.Rows.Count > 0)
             {
-                var remark = dtRemark.Rows[0][0].ToString();
-                var hIndex = remark.IndexOf("H:");
-                var dIndex = remark.IndexOf("D:");
+                if (!string.IsNullOrEmpty(dtAdDis.Rows[0]["int_date_admission"].ToString()))
+                    admissionDate = Convert.ToDateTime(dtAdDis.Rows[0]["int_date_admission"]).ToString("dd'/'MM'/'yyyy");
 
-                if (hIndex != -1 && dIndex != -1)
-                {
-                    admissionDate = remark.Substring(hIndex, dIndex - hIndex).Trim();
-                    string pattern = @"\d{2}/\d{2}/\d{4}";
-                    Match match = Regex.Match(admissionDate, pattern);
-                    if (string.IsNullOrEmpty(match.Value))
-                    {
-                        string pattern1 = @"\d{2}/\d{2}/\d{2}";
-                        match = Regex.Match(admissionDate, pattern1);
-                    }
-                    admissionDate = match.Success ? match.Value : string.Empty;
-                    dischargeDate = admissionDate;
-                }
+                if (!string.IsNullOrEmpty(dtAdDis.Rows[0]["int_date_discharge"].ToString()))
+                    dischargeDate = Convert.ToDateTime(dtAdDis.Rows[0]["int_date_discharge"]).ToString("dd'/'MM'/'yyyy");
             }
 
             var dtClaimAmount = crud.ExecQuery("select prd_payable_amt from cl_t_provision_dtls where prd_claim_no = '" + lbClaimNo.Text.ToUpper() + "' and rownum = 1");
@@ -1437,31 +1461,38 @@ namespace Testing.Forms
                 if (finalizecontent != "") content = finalizecontent;
 
                 //oudom
-                DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
-                var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
-                hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
+                //DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+                //var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
+                //hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
 
-                if (isNullOthHospital)
+                //if (isNullOthHospital)
+                //{
+                //    var hIndex = hospital.IndexOf("H:");
+                //    if (hIndex == -1)
+                //        hIndex = hospital.IndexOf("H :");
+
+                //    var strHospital = hospital.Substring(hIndex + 2);
+
+                //    var dIndex = strHospital.IndexOf(":");
+
+                //    var tmpHospital = string.Empty;
+
+                //    if (dIndex != -1)
+                //        tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
+
+                //    var bHospital = tmpHospital.IndexOf("(");
+
+                //    hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
+                //}
+
+                //content = content.Replace("%Place%", hospital);
+
+                DataTable dtHospital = crud.ExecQuery("select (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL from CL_T_INTIMATION where INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+                if (dtHospital.Rows.Count > 0)
                 {
-                    var hIndex = hospital.IndexOf("H:");
-                    if (hIndex == -1)
-                        hIndex = hospital.IndexOf("H :");
-
-                    var strHospital = hospital.Substring(hIndex + 2);
-
-                    var dIndex = strHospital.IndexOf(":");
-
-                    var tmpHospital = string.Empty;
-
-                    if (dIndex != -1)
-                        tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
-
-                    var bHospital = tmpHospital.IndexOf("(");
-
-                    hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
+                    hospital = dtHospital.Rows[0]["PANEL_HOSPITAL"].ToString();
+                    content = content.Replace("%Place%", hospital);
                 }
-
-                content = content.Replace("%Place%", hospital);
 
                 if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
                     content = content.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
