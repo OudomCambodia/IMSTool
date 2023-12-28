@@ -94,9 +94,9 @@ namespace Testing.Forms
                 "INT_CONT_ADDRESS ADDRESS, INT_POLICY_NO POLICY_NO,INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME \"MEMBER\", " +
                 "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
                 "nvl(INT_DIAGNOSIS, nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A')) CAUSE, " +
-                "INT_COMMENTS HOSPITAL, INT_OTH_HOSPITAL, " +
+                "INT_COMMENTS HOSPITAL, INT_OTH_HOSPITAL, (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL," +
                 "TO_CHAR(INT_INITIMATE_DT) REGISTERATION_DATE, TO_CHAR(INT_DATE_LOSS) TREATMENT_DATE, " +
-                "(select SFC_SURNAME from SM_M_SALES_FORCE where SFC_CODE = INT_BPARTY_CODE) CC, (SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + claimNo + "'");
+                "(select case when INT_BPARTY_CODE = 'U-BRK' then SFC_FIRST_NAME else SFC_FIRST_NAME || ' ' || SFC_SURNAME end from SM_M_SALES_FORCE where SFC_CODE = INT_BPARTY_CODE) CC, (SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + claimNo + "'");
 
                 if (dtClaimInfo == null || dtClaimInfo.Rows.Count <= 0)
                 {
@@ -121,7 +121,8 @@ namespace Testing.Forms
                     txtClaimNo.Text = dtClaimInfo.Rows[0]["CLAIM_NO"].ToString();
                     txtPlan.Text = GetPlan(proCode, dtClaimInfo.Rows[0]["PLAN_DESCRIPTION"].ToString());
                     dtpRegistrationDate.Value = Convert.ToDateTime(dtClaimInfo.Rows[0]["REGISTERATION_DATE"].ToString());
-                    txtPanelHospital.Text = GetPanelHospital(dtClaimInfo.Rows[0]["HOSPITAL"].ToString());
+                    //txtPanelHospital.Text = GetPanelHospital(dtClaimInfo.Rows[0]["HOSPITAL"].ToString());
+                    txtPanelHospital.Text = dtClaimInfo.Rows[0]["PANEL_HOSPITAL"].ToString();
                     txtOtherHospital.Text = dtClaimInfo.Rows[0]["INT_OTH_HOSPITAL"].ToString();
                     txtDiagnosis.Text = dtClaimInfo.Rows[0]["CAUSE"].ToString();
                     txtEmail.Text = GetEmailByProduct(proCode);
