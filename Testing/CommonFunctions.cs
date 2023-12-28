@@ -594,6 +594,7 @@ namespace Testing
                 EmbedImage(mailItem, string.Concat(currentDir, @"\Html\yt.png"), "YT_logo");
                 EmbedImage(mailItem, string.Concat(currentDir, @"\Html\mail.png"), "Mail_logo");
                 EmbedImage(mailItem, string.Concat(currentDir, @"\Html\linkedin.png"), "linkedin");
+                EmbedImage(mailItem, string.Concat(currentDir, @"\Html\EmailSignature.png"), "EmailSignature");
 
                 mailItem.Send();
 

@@ -100,7 +100,9 @@ namespace Testing.Forms
             {
                 body = body.Replace("{department}", dt.Rows[0]["POSITION"].ToString() + " | " + "Accident and Health Department");
                 body = body.Replace("{username}", dt.Rows[0]["SENDER"].ToString()); //Update 16-Jul-19 (Edit Email Content)
+                body = body.Replace("{phone}", dt.Rows[0]["PHONE_NUMBER"].ToString()); //Update 16-Jul-19 (Edit Email Content)
                 body = body.Replace("{user_email}", dt.Rows[0]["SENDER_EMAIL"].ToString()); //Update 16-Jul-19 (Edit Email Content)
+                
                 senderEmail = dt.Rows[0]["SENDER_EMAIL"].ToString();
 
                 //body = body.Replace("{username}", dt.Rows[0][1].ToString());
@@ -326,7 +328,6 @@ namespace Testing.Forms
                 }
             }
 
-
             //attached file
             // Attachment att = new Attachment("");
             //message.Attachments.Add("");
@@ -451,11 +452,14 @@ namespace Testing.Forms
             img3.ContentId = "YT_logo";
             LinkedResource img4 = new LinkedResource(@"Html\linkedin.png", "image/png");
             img4.ContentId = "linkedin";
+            LinkedResource img5 = new LinkedResource(@"Html\EmailSignature.png", "image/png");
+            img5.ContentId = "EmailSignature";
 
             avHtml.LinkedResources.Add(img1);
             avHtml.LinkedResources.Add(img2);
             avHtml.LinkedResources.Add(img3);
             avHtml.LinkedResources.Add(img4);
+            avHtml.LinkedResources.Add(img5);
             message.AlternateViews.Add(avHtml);
 
             ////now we create a networkcredential and pass our username and password for the smtp server
