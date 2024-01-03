@@ -669,7 +669,7 @@ namespace Testing.Forms
                         ws.Cell(r + 8, c + 1).SetValue(dr[c].ToString()); //+6 cuz it starts from sixth row after Summary Report text
 
                         if (isRatio)
-                            ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0.0%";
+                            ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0%";
                         else
                             ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "#,##0";
 
@@ -682,7 +682,7 @@ namespace Testing.Forms
                                 ws.Cell(r + 8, c + 1).SetValue(dr[c].ToString());
                                 ws.Cell(r + 8, c + 1).DataType = XLDataType.Number;
                                 if (isRatio)
-                                    ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0.0%";
+                                    ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "0%";
                                 else
                                     ws.Cell(r + 8, c + 1).Style.NumberFormat.Format = "#,##0";
                             }
@@ -730,7 +730,7 @@ namespace Testing.Forms
                                         ws.Cell(r + 8, i + 1).SetValue(dr[i].ToString());
                                         ws.Cell(r + 8, i + 1).DataType = XLDataType.Number;
                                         if (isRatio)
-                                            ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "0.0%";
+                                            ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "0%";
                                         else
                                             ws.Cell(r + 8, i + 1).Style.NumberFormat.Format = "#,##0";
                                         ws.Cell(r + 8, i + 1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
