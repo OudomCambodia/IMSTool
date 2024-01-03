@@ -147,40 +147,40 @@ namespace Testing.Forms
             //}
 
             //oudom
-            //DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
-            //if (dtHospital.Rows.Count > 0)
-            //{
-            //    var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
-            //    hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
-
-            //    if (isNullOthHospital)
-            //    {
-            //        var hIndex = hospital.IndexOf("H:");
-            //        if (hIndex == -1)
-            //            hIndex = hospital.IndexOf("H :");
-
-            //        var strHospital = hospital.Substring(hIndex + 2);
-
-            //        var dIndex = strHospital.IndexOf(":");
-            //        var tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
-
-            //        var bHospital = tmpHospital.IndexOf("(");
-
-            //        hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
-            //    }
-
-            //    body = body.Replace("%Place%", hospital);
-            //    content = content.Replace("%Place%", hospital);
-            //}
-
-            DataTable dtHospital = crud.ExecQuery("select (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL from CL_T_INTIMATION where INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+            DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
             if (dtHospital.Rows.Count > 0)
             {
-                hospital = dtHospital.Rows[0]["PANEL_HOSPITAL"].ToString();
+                var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
+                hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
+
+                if (isNullOthHospital)
+                {
+                    var hIndex = hospital.IndexOf("H:");
+                    if (hIndex == -1)
+                        hIndex = hospital.IndexOf("H :");
+
+                    var strHospital = hospital.Substring(hIndex + 2);
+
+                    var dIndex = strHospital.IndexOf(":");
+                    var tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
+
+                    var bHospital = tmpHospital.IndexOf("(");
+
+                    hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
+                }
 
                 body = body.Replace("%Place%", hospital);
                 content = content.Replace("%Place%", hospital);
             }
+
+            //DataTable dtHospital = crud.ExecQuery("select (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL from CL_T_INTIMATION where INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+            //if (dtHospital.Rows.Count > 0)
+            //{
+            //    hospital = dtHospital.Rows[0]["PANEL_HOSPITAL"].ToString();
+
+            //    body = body.Replace("%Place%", hospital);
+            //    content = content.Replace("%Place%", hospital);
+            //}
 
             if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
             {
@@ -1465,38 +1465,38 @@ namespace Testing.Forms
                 if (finalizecontent != "") content = finalizecontent;
 
                 //oudom
-                //DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
-                //var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
-                //hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
+                DataTable dtHospital = crud.ExecQuery("select nvl(INT_OTH_HOSPITAL, INT_COMMENTS) HOSPITAL, nvl(INT_OTH_HOSPITAL, 'true') IS_NULL_OTH_HOSPITAL from CL_T_INTIMATION,CL_T_CLM_MEMBERS where CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+                var isNullOthHospital = dtHospital.Rows[0]["IS_NULL_OTH_HOSPITAL"].ToString() == "true";
+                hospital = dtHospital.Rows[0]["HOSPITAL"].ToString();
 
-                //if (isNullOthHospital)
-                //{
-                //    var hIndex = hospital.IndexOf("H:");
-                //    if (hIndex == -1)
-                //        hIndex = hospital.IndexOf("H :");
-
-                //    var strHospital = hospital.Substring(hIndex + 2);
-
-                //    var dIndex = strHospital.IndexOf(":");
-
-                //    var tmpHospital = string.Empty;
-
-                //    if (dIndex != -1)
-                //        tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
-
-                //    var bHospital = tmpHospital.IndexOf("(");
-
-                //    hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
-                //}
-
-                //content = content.Replace("%Place%", hospital);
-
-                DataTable dtHospital = crud.ExecQuery("select (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL from CL_T_INTIMATION where INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
-                if (dtHospital.Rows.Count > 0)
+                if (isNullOthHospital)
                 {
-                    hospital = dtHospital.Rows[0]["PANEL_HOSPITAL"].ToString();
-                    content = content.Replace("%Place%", hospital);
+                    var hIndex = hospital.IndexOf("H:");
+                    if (hIndex == -1)
+                        hIndex = hospital.IndexOf("H :");
+
+                    var strHospital = hospital.Substring(hIndex + 2);
+
+                    var dIndex = strHospital.IndexOf(":");
+
+                    var tmpHospital = string.Empty;
+
+                    if (dIndex != -1)
+                        tmpHospital = strHospital.Substring(0, dIndex - 1).Trim();
+
+                    var bHospital = tmpHospital.IndexOf("(");
+
+                    hospital = bHospital != -1 ? tmpHospital.Substring(0, bHospital) : tmpHospital;
                 }
+
+                content = content.Replace("%Place%", hospital);
+
+                //DataTable dtHospital = crud.ExecQuery("select (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL from CL_T_INTIMATION where INT_CLAIM_NO = '" + lbClaimNo.Text.ToUpper().Trim() + "'");
+                //if (dtHospital.Rows.Count > 0)
+                //{
+                //    hospital = dtHospital.Rows[0]["PANEL_HOSPITAL"].ToString();
+                //    content = content.Replace("%Place%", hospital);
+                //}
 
                 if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
                     content = content.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
