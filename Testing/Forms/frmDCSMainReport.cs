@@ -90,25 +90,30 @@ namespace Testing.Forms
                             if (dtBrokerTeams.Rows[0]["GROUP"].ToString().ToUpper() == "V-AGENCY")
                             {
                                 string bankname = cmbBank.SelectedValue.ToString().ToUpper();
-                                main_rpt = "SELECT *  from dbo.VIEW_AGENCY_REPORT " +
-                        "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                        "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') and SALE_AGENT_NAME like '" + bankname + "%'";
-
+                                
+                                
+                                main_rpt = "SELECT * from dbo.VIEW_AGENCY_REPORT " +
+                  "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                  "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59')  ";
                                 string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
                                 string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, " +
-                                               "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
-                                               "FROM(  " +
-                                                   "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, " +
-                                                   "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME, DEB_TOTAL_AMOUNT  " +
-                                               "from rc_t_debit_note  " +
-                                                   "WHERE DEB_ME_CODE LIKE 'F%'  " +
-                                                   "union   " +
-                                                   "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, " +
-                                                   "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  " +
-                                                   "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') " +
-                                                   "WHERE AGENT_NAME LIKE '" + bankname + "%'";    
-                               
-
+                                                    "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
+                                                    "FROM(  " +
+                                                        "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE ,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME, " +
+                                                        "DEB_ME_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE DEB_ME_CODE = SFC_CODE) AGENT_NAME, DEB_TOTAL_AMOUNT  " +
+                                                    "from rc_t_debit_note  " +
+                                                        "WHERE DEB_ME_CODE LIKE 'F%'  " +
+                                                        "union   " +
+                                                        "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, " +
+                                                        "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  " +
+                                                        "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') ";
+                                
+                                if (bankname != "ALL BANK")
+                                {
+                                    main_rpt += " and SALE_AGENT_NAME like '" + bankname + "%'";
+                                    third_rpt += " WHERE AGENT_NAME LIKE '" + bankname + "%'"; 
+                                                      
+                                }
                                 
                              dt = crud.LoadData(main_rpt).Tables[0];
                              dtOracle = crud_oracle.ExecQuery(second_rpt);
@@ -221,7 +226,8 @@ namespace Testing.Forms
                                      else
                                      {
                                          dr["BANK_BRANCH_NAME"] = item.SALE_AGENT_NAME.ToString();
-                                         dr["BANK_BRANCH_CODE"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim() : "";
+                                         //dr["BANK_BRANCH_CODE"] = item.SALE_AGENT_NAME.ToString().Contains("(") ? dr["BANK_BRANCH_NAME"].ToString().Substring(dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1, dr["BANK_BRANCH_NAME"].ToString().Length - (dr["BANK_BRANCH_NAME"].ToString().IndexOf('-') + 1)).Trim() : "";
+                                         dr["BANK_BRANCH_CODE"] = "";
                                      }
                                      
                                      dr["CUS_TYPE"] = item.CUS_TYPE;
@@ -312,7 +318,7 @@ namespace Testing.Forms
             
             if (frmLogIn.Usert.ToUpper() == "U-BVC")
             {
-                DataTable dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY BANK_NAME");
+                DataTable dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY ORDER_SEQ ASC");
                 cmbBank.DataSource = dtBank;
                 cmbBank.DisplayMember = "BANK_NAME";
                 cmbBank.ValueMember = "BANK_NAME";

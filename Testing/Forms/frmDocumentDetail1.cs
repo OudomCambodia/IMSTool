@@ -87,7 +87,8 @@ namespace Testing.Forms
                 PrintProdCode = dt.Rows[0]["PRODUCER_CODE"].ToString();
                 tbPrintCard.Text = dt.Rows[0]["PRINT_CARD"].ToString();
                 tbPremium.Text = dt.Rows[0]["PREMIUM"].ToString();
-
+                txtPaymentType.Text = dt.Rows[0]["PREMIUM_TYPE"].ToString();//request to add by Mr. Brom Vichhay modify by Southeane 08-01-24
+                txtClientType.Text = dt.Rows[0]["CLIENT_CATAG"].ToString();
                 if (tbToBeFinish.Text == "01/01/1900") tbToBeFinish.Text = "";
 
                 if (printable)
