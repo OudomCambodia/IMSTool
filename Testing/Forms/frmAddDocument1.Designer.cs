@@ -59,6 +59,7 @@
             this.btnSelectAB = new System.Windows.Forms.Button();
             this.btnUploadHelp = new System.Windows.Forms.Button();
             this.btnSelectCus = new System.Windows.Forms.Button();
+            this.tbClientDetails = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.rbYes = new System.Windows.Forms.RadioButton();
             this.rbNo = new System.Windows.Forms.RadioButton();
@@ -111,6 +112,7 @@
             this.cbPremiumType = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
             this.cbClientType = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -420,6 +422,17 @@
             this.toolTip1.SetToolTip(this.btnSelectCus, "Select Customer");
             this.btnSelectCus.UseVisualStyleBackColor = true;
             this.btnSelectCus.Click += new System.EventHandler(this.btnSelectCus_Click);
+            // 
+            // tbClientDetails
+            // 
+            this.tbClientDetails.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tbClientDetails.Location = new System.Drawing.Point(531, 303);
+            this.tbClientDetails.Name = "tbClientDetails";
+            this.tbClientDetails.ReadOnly = true;
+            this.tbClientDetails.Size = new System.Drawing.Size(175, 22);
+            this.tbClientDetails.TabIndex = 165;
+            this.toolTip1.SetToolTip(this.tbClientDetails, "Ctrl+L to Select Customer");
+            this.tbClientDetails.Visible = false;
             // 
             // label2
             // 
@@ -912,6 +925,7 @@
             this.label29.Size = new System.Drawing.Size(125, 17);
             this.label29.TabIndex = 160;
             this.label29.Text = "Premium Type:  +";
+            this.label29.Visible = false;
             // 
             // cbPremiumType
             // 
@@ -924,6 +938,7 @@
             this.cbPremiumType.Size = new System.Drawing.Size(206, 24);
             this.cbPremiumType.Sorted = true;
             this.cbPremiumType.TabIndex = 161;
+            this.cbPremiumType.Visible = false;
             // 
             // label30
             // 
@@ -933,6 +948,7 @@
             this.label30.Size = new System.Drawing.Size(110, 17);
             this.label30.TabIndex = 162;
             this.label30.Text = "Client Type:  +";
+            this.label30.Visible = false;
             // 
             // cbClientType
             // 
@@ -944,6 +960,17 @@
             this.cbClientType.Name = "cbClientType";
             this.cbClientType.Size = new System.Drawing.Size(174, 24);
             this.cbClientType.TabIndex = 163;
+            this.cbClientType.Visible = false;
+            // 
+            // label31
+            // 
+            this.label31.ForeColor = System.Drawing.Color.White;
+            this.label31.Location = new System.Drawing.Point(414, 302);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(110, 27);
+            this.label31.TabIndex = 164;
+            this.label31.Text = "Client Deatils: + ";
+            this.label31.Visible = false;
             // 
             // frmAddDocument1
             // 
@@ -952,6 +979,8 @@
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(759, 607);
             this.ControlBox = false;
+            this.Controls.Add(this.tbClientDetails);
+            this.Controls.Add(this.label31);
             this.Controls.Add(this.cbClientType);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.cbPremiumType);
@@ -1106,5 +1135,7 @@
         private System.Windows.Forms.ComboBox cbPremiumType;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox cbClientType;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox tbClientDetails;
     }
 }
