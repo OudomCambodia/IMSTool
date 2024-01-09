@@ -107,6 +107,10 @@
             this.File_Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label15 = new System.Windows.Forms.Label();
             this.tbPremium = new System.Windows.Forms.NumericUpDown();
+            this.label29 = new System.Windows.Forms.Label();
+            this.cbPremiumType = new System.Windows.Forms.ComboBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.cbClientType = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -245,7 +249,7 @@
             this.cbDocType.FormattingEnabled = true;
             this.cbDocType.Location = new System.Drawing.Point(170, 43);
             this.cbDocType.Name = "cbDocType";
-            this.cbDocType.Size = new System.Drawing.Size(206, 21);
+            this.cbDocType.Size = new System.Drawing.Size(206, 24);
             this.cbDocType.TabIndex = 0;
             this.cbDocType.SelectedIndexChanged += new System.EventHandler(this.cbDocType_SelectedIndexChanged);
             // 
@@ -257,7 +261,7 @@
             this.cbPriority.FormattingEnabled = true;
             this.cbPriority.Location = new System.Drawing.Point(529, 43);
             this.cbPriority.Name = "cbPriority";
-            this.cbPriority.Size = new System.Drawing.Size(174, 21);
+            this.cbPriority.Size = new System.Drawing.Size(174, 24);
             this.cbPriority.TabIndex = 11;
             this.cbPriority.SelectedIndexChanged += new System.EventHandler(this.cbPriority_SelectedIndexChanged);
             // 
@@ -268,7 +272,7 @@
             this.dtpToBeFinish.Location = new System.Drawing.Point(529, 68);
             this.dtpToBeFinish.MinDate = new System.DateTime(2020, 7, 20, 0, 0, 0, 0);
             this.dtpToBeFinish.Name = "dtpToBeFinish";
-            this.dtpToBeFinish.Size = new System.Drawing.Size(174, 20);
+            this.dtpToBeFinish.Size = new System.Drawing.Size(174, 22);
             this.dtpToBeFinish.TabIndex = 12;
             // 
             // cbSubmitVia
@@ -279,21 +283,21 @@
             this.cbSubmitVia.FormattingEnabled = true;
             this.cbSubmitVia.Location = new System.Drawing.Point(529, 145);
             this.cbSubmitVia.Name = "cbSubmitVia";
-            this.cbSubmitVia.Size = new System.Drawing.Size(174, 21);
+            this.cbSubmitVia.Size = new System.Drawing.Size(174, 24);
             this.cbSubmitVia.TabIndex = 16;
             // 
             // tbPolicyNo
             // 
             this.tbPolicyNo.Location = new System.Drawing.Point(529, 171);
             this.tbPolicyNo.Name = "tbPolicyNo";
-            this.tbPolicyNo.Size = new System.Drawing.Size(174, 20);
+            this.tbPolicyNo.Size = new System.Drawing.Size(174, 22);
             this.tbPolicyNo.TabIndex = 17;
             // 
             // tbQuotNo
             // 
             this.tbQuotNo.Location = new System.Drawing.Point(529, 196);
             this.tbQuotNo.Name = "tbQuotNo";
-            this.tbQuotNo.Size = new System.Drawing.Size(174, 20);
+            this.tbQuotNo.Size = new System.Drawing.Size(174, 22);
             this.tbQuotNo.TabIndex = 18;
             // 
             // cbProType
@@ -304,7 +308,7 @@
             this.cbProType.FormattingEnabled = true;
             this.cbProType.Location = new System.Drawing.Point(170, 144);
             this.cbProType.Name = "cbProType";
-            this.cbProType.Size = new System.Drawing.Size(206, 21);
+            this.cbProType.Size = new System.Drawing.Size(206, 24);
             this.cbProType.Sorted = true;
             this.cbProType.TabIndex = 5;
             this.cbProType.SelectedIndexChanged += new System.EventHandler(this.cbProType_SelectedIndexChanged);
@@ -315,7 +319,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(519, 502);
+            this.btnAdd.Location = new System.Drawing.Point(519, 546);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(85, 35);
             this.btnAdd.TabIndex = 42;
@@ -330,7 +334,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(618, 502);
+            this.btnClose.Location = new System.Drawing.Point(618, 546);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(85, 35);
             this.btnClose.TabIndex = 43;
@@ -346,7 +350,7 @@
             this.cbProLine.FormattingEnabled = true;
             this.cbProLine.Location = new System.Drawing.Point(170, 119);
             this.cbProLine.Name = "cbProLine";
-            this.cbProLine.Size = new System.Drawing.Size(206, 21);
+            this.cbProLine.Size = new System.Drawing.Size(206, 24);
             this.cbProLine.Sorted = true;
             this.cbProLine.TabIndex = 4;
             this.cbProLine.SelectedIndexChanged += new System.EventHandler(this.cbProLine_SelectedIndexChanged);
@@ -357,14 +361,14 @@
             this.tbProducerName.Location = new System.Drawing.Point(239, 171);
             this.tbProducerName.Name = "tbProducerName";
             this.tbProducerName.ReadOnly = true;
-            this.tbProducerName.Size = new System.Drawing.Size(137, 20);
+            this.tbProducerName.Size = new System.Drawing.Size(137, 22);
             this.tbProducerName.TabIndex = 7;
             // 
             // tbCusCode
             // 
             this.tbCusCode.Location = new System.Drawing.Point(170, 68);
             this.tbCusCode.Name = "tbCusCode";
-            this.tbCusCode.Size = new System.Drawing.Size(206, 20);
+            this.tbCusCode.Size = new System.Drawing.Size(206, 22);
             this.tbCusCode.TabIndex = 1;
             this.toolTip1.SetToolTip(this.tbCusCode, "Ctrl+L to Select Customer");
             this.tbCusCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCusCode_KeyDown);
@@ -376,7 +380,7 @@
             this.tbCusName.Location = new System.Drawing.Point(170, 93);
             this.tbCusName.Name = "tbCusName";
             this.tbCusName.ReadOnly = true;
-            this.tbCusName.Size = new System.Drawing.Size(231, 20);
+            this.tbCusName.Size = new System.Drawing.Size(231, 22);
             this.tbCusName.TabIndex = 3;
             this.toolTip1.SetToolTip(this.tbCusName, "Ctrl+L to Select Customer");
             this.tbCusName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCusName_KeyDown);
@@ -397,7 +401,7 @@
             // 
             this.btnUploadHelp.BackgroundImage = global::Testing.Properties.Resources.Help;
             this.btnUploadHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnUploadHelp.Location = new System.Drawing.Point(239, 502);
+            this.btnUploadHelp.Location = new System.Drawing.Point(239, 546);
             this.btnUploadHelp.Name = "btnUploadHelp";
             this.btnUploadHelp.Size = new System.Drawing.Size(24, 24);
             this.btnUploadHelp.TabIndex = 41;
@@ -432,7 +436,7 @@
             this.rbYes.ForeColor = System.Drawing.Color.White;
             this.rbYes.Location = new System.Drawing.Point(530, 120);
             this.rbYes.Name = "rbYes";
-            this.rbYes.Size = new System.Drawing.Size(43, 17);
+            this.rbYes.Size = new System.Drawing.Size(53, 21);
             this.rbYes.TabIndex = 14;
             this.rbYes.TabStop = true;
             this.rbYes.Text = "Yes";
@@ -444,7 +448,7 @@
             this.rbNo.ForeColor = System.Drawing.Color.White;
             this.rbNo.Location = new System.Drawing.Point(592, 120);
             this.rbNo.Name = "rbNo";
-            this.rbNo.Size = new System.Drawing.Size(39, 17);
+            this.rbNo.Size = new System.Drawing.Size(47, 21);
             this.rbNo.TabIndex = 15;
             this.rbNo.TabStop = true;
             this.rbNo.Text = "No";
@@ -456,7 +460,7 @@
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpload.ForeColor = System.Drawing.Color.White;
-            this.btnUpload.Location = new System.Drawing.Point(39, 502);
+            this.btnUpload.Location = new System.Drawing.Point(39, 546);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(193, 35);
             this.btnUpload.TabIndex = 40;
@@ -468,7 +472,7 @@
             // 
             this.tbABName.Location = new System.Drawing.Point(239, 197);
             this.tbABName.Name = "tbABName";
-            this.tbABName.Size = new System.Drawing.Size(137, 20);
+            this.tbABName.Size = new System.Drawing.Size(137, 22);
             this.tbABName.TabIndex = 9;
             this.tbABName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbABName_KeyDown);
             // 
@@ -476,7 +480,7 @@
             // 
             this.tbABCode.Location = new System.Drawing.Point(170, 197);
             this.tbABCode.Name = "tbABCode";
-            this.tbABCode.Size = new System.Drawing.Size(63, 20);
+            this.tbABCode.Size = new System.Drawing.Size(63, 22);
             this.tbABCode.TabIndex = 8;
             this.tbABCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbABCode_KeyDown);
             this.tbABCode.Leave += new System.EventHandler(this.tbABCode_Leave);
@@ -487,7 +491,7 @@
             this.tbProducerCode.Location = new System.Drawing.Point(170, 171);
             this.tbProducerCode.Name = "tbProducerCode";
             this.tbProducerCode.ReadOnly = true;
-            this.tbProducerCode.Size = new System.Drawing.Size(63, 20);
+            this.tbProducerCode.Size = new System.Drawing.Size(63, 22);
             this.tbProducerCode.TabIndex = 6;
             // 
             // label11
@@ -495,9 +499,9 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(341, 513);
+            this.label11.Location = new System.Drawing.Point(341, 557);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 13);
+            this.label11.Size = new System.Drawing.Size(115, 17);
             this.label11.TabIndex = 124;
             this.label11.Text = "( + : Optional )";
             // 
@@ -505,7 +509,7 @@
             // 
             this.tbEffectiveDate.Location = new System.Drawing.Point(170, 222);
             this.tbEffectiveDate.Name = "tbEffectiveDate";
-            this.tbEffectiveDate.Size = new System.Drawing.Size(206, 20);
+            this.tbEffectiveDate.Size = new System.Drawing.Size(206, 22);
             this.tbEffectiveDate.TabIndex = 19;
             // 
             // label12
@@ -521,7 +525,7 @@
             // 
             this.tbCommission.Location = new System.Drawing.Point(530, 222);
             this.tbCommission.Name = "tbCommission";
-            this.tbCommission.Size = new System.Drawing.Size(174, 20);
+            this.tbCommission.Size = new System.Drawing.Size(174, 22);
             this.tbCommission.TabIndex = 20;
             // 
             // label13
@@ -537,7 +541,7 @@
             // 
             this.tbOtherInstruction.Location = new System.Drawing.Point(170, 248);
             this.tbOtherInstruction.Name = "tbOtherInstruction";
-            this.tbOtherInstruction.Size = new System.Drawing.Size(533, 20);
+            this.tbOtherInstruction.Size = new System.Drawing.Size(533, 22);
             this.tbOtherInstruction.TabIndex = 21;
             // 
             // label16
@@ -553,7 +557,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(39, 274);
+            this.tabControl1.Location = new System.Drawing.Point(39, 318);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(664, 203);
@@ -567,10 +571,10 @@
             this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.tbRemarkNote);
             this.tabPage1.Controls.Add(this.lbRemarkNote);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(656, 177);
+            this.tabPage1.Size = new System.Drawing.Size(656, 174);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Remarks +";
             // 
@@ -606,7 +610,7 @@
             // 
             this.tbFinalPremium.Location = new System.Drawing.Point(519, 70);
             this.tbFinalPremium.Name = "tbFinalPremium";
-            this.tbFinalPremium.Size = new System.Drawing.Size(99, 20);
+            this.tbFinalPremium.Size = new System.Drawing.Size(99, 22);
             this.tbFinalPremium.TabIndex = 31;
             // 
             // label26
@@ -622,7 +626,7 @@
             // 
             this.tbLoading.Location = new System.Drawing.Point(299, 70);
             this.tbLoading.Name = "tbLoading";
-            this.tbLoading.Size = new System.Drawing.Size(99, 20);
+            this.tbLoading.Size = new System.Drawing.Size(99, 22);
             this.tbLoading.TabIndex = 30;
             // 
             // label27
@@ -638,7 +642,7 @@
             // 
             this.tbDiscount.Location = new System.Drawing.Point(93, 70);
             this.tbDiscount.Name = "tbDiscount";
-            this.tbDiscount.Size = new System.Drawing.Size(99, 20);
+            this.tbDiscount.Size = new System.Drawing.Size(99, 22);
             this.tbDiscount.TabIndex = 29;
             // 
             // label28
@@ -654,7 +658,7 @@
             // 
             this.tbFleetSizeDiscount.Location = new System.Drawing.Point(519, 45);
             this.tbFleetSizeDiscount.Name = "tbFleetSizeDiscount";
-            this.tbFleetSizeDiscount.Size = new System.Drawing.Size(99, 20);
+            this.tbFleetSizeDiscount.Size = new System.Drawing.Size(99, 22);
             this.tbFleetSizeDiscount.TabIndex = 28;
             // 
             // label23
@@ -670,7 +674,7 @@
             // 
             this.tbSpecialDiscount.Location = new System.Drawing.Point(299, 45);
             this.tbSpecialDiscount.Name = "tbSpecialDiscount";
-            this.tbSpecialDiscount.Size = new System.Drawing.Size(99, 20);
+            this.tbSpecialDiscount.Size = new System.Drawing.Size(99, 22);
             this.tbSpecialDiscount.TabIndex = 27;
             // 
             // label24
@@ -686,7 +690,7 @@
             // 
             this.tbNCD.Location = new System.Drawing.Point(93, 45);
             this.tbNCD.Name = "tbNCD";
-            this.tbNCD.Size = new System.Drawing.Size(99, 20);
+            this.tbNCD.Size = new System.Drawing.Size(99, 22);
             this.tbNCD.TabIndex = 26;
             // 
             // label25
@@ -702,7 +706,7 @@
             // 
             this.tbLoyaltyDiscount.Location = new System.Drawing.Point(519, 19);
             this.tbLoyaltyDiscount.Name = "tbLoyaltyDiscount";
-            this.tbLoyaltyDiscount.Size = new System.Drawing.Size(99, 20);
+            this.tbLoyaltyDiscount.Size = new System.Drawing.Size(99, 22);
             this.tbLoyaltyDiscount.TabIndex = 25;
             // 
             // label22
@@ -718,7 +722,7 @@
             // 
             this.tbGroupDiscount.Location = new System.Drawing.Point(299, 19);
             this.tbGroupDiscount.Name = "tbGroupDiscount";
-            this.tbGroupDiscount.Size = new System.Drawing.Size(99, 20);
+            this.tbGroupDiscount.Size = new System.Drawing.Size(99, 22);
             this.tbGroupDiscount.TabIndex = 24;
             // 
             // label21
@@ -734,7 +738,7 @@
             // 
             this.tbOriginalRate.Location = new System.Drawing.Point(93, 19);
             this.tbOriginalRate.Name = "tbOriginalRate";
-            this.tbOriginalRate.Size = new System.Drawing.Size(99, 20);
+            this.tbOriginalRate.Size = new System.Drawing.Size(99, 22);
             this.tbOriginalRate.TabIndex = 23;
             // 
             // label18
@@ -750,7 +754,7 @@
             // 
             this.tbRemarkRate.Location = new System.Drawing.Point(126, 37);
             this.tbRemarkRate.Name = "tbRemarkRate";
-            this.tbRemarkRate.Size = new System.Drawing.Size(518, 20);
+            this.tbRemarkRate.Size = new System.Drawing.Size(518, 22);
             this.tbRemarkRate.TabIndex = 159;
             // 
             // label17
@@ -766,7 +770,7 @@
             // 
             this.tbRemarkNote.Location = new System.Drawing.Point(126, 11);
             this.tbRemarkNote.Name = "tbRemarkNote";
-            this.tbRemarkNote.Size = new System.Drawing.Size(518, 20);
+            this.tbRemarkNote.Size = new System.Drawing.Size(518, 22);
             this.tbRemarkNote.TabIndex = 158;
             // 
             // lbRemarkNote
@@ -785,10 +789,10 @@
             this.tabPage2.Controls.Add(this.btnOpen);
             this.tabPage2.Controls.Add(this.btnBrowse);
             this.tabPage2.Controls.Add(this.dgvFile);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(656, 177);
+            this.tabPage2.Size = new System.Drawing.Size(656, 174);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Attachments +";
             // 
@@ -896,17 +900,62 @@
             0,
             -2147483648});
             this.tbPremium.Name = "tbPremium";
-            this.tbPremium.Size = new System.Drawing.Size(174, 20);
+            this.tbPremium.Size = new System.Drawing.Size(174, 22);
             this.tbPremium.TabIndex = 13;
             this.tbPremium.ThousandsSeparator = true;
+            // 
+            // label29
+            // 
+            this.label29.ForeColor = System.Drawing.Color.White;
+            this.label29.Location = new System.Drawing.Point(37, 276);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(125, 17);
+            this.label29.TabIndex = 160;
+            this.label29.Text = "Premium Type:  +";
+            // 
+            // cbPremiumType
+            // 
+            this.cbPremiumType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbPremiumType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbPremiumType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPremiumType.FormattingEnabled = true;
+            this.cbPremiumType.Location = new System.Drawing.Point(170, 273);
+            this.cbPremiumType.Name = "cbPremiumType";
+            this.cbPremiumType.Size = new System.Drawing.Size(206, 24);
+            this.cbPremiumType.Sorted = true;
+            this.cbPremiumType.TabIndex = 161;
+            // 
+            // label30
+            // 
+            this.label30.ForeColor = System.Drawing.Color.White;
+            this.label30.Location = new System.Drawing.Point(414, 276);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(110, 17);
+            this.label30.TabIndex = 162;
+            this.label30.Text = "Client Type:  +";
+            // 
+            // cbClientType
+            // 
+            this.cbClientType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbClientType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbClientType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClientType.FormattingEnabled = true;
+            this.cbClientType.Location = new System.Drawing.Point(531, 274);
+            this.cbClientType.Name = "cbClientType";
+            this.cbClientType.Size = new System.Drawing.Size(174, 24);
+            this.cbClientType.TabIndex = 163;
             // 
             // frmAddDocument1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(759, 559);
+            this.ClientSize = new System.Drawing.Size(759, 607);
             this.ControlBox = false;
+            this.Controls.Add(this.cbClientType);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.cbPremiumType);
+            this.Controls.Add(this.label29);
             this.Controls.Add(this.tbPremium);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.tabControl1);
@@ -1053,5 +1102,9 @@
         private cus_button btnBrowse;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown tbPremium;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.ComboBox cbPremiumType;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ComboBox cbClientType;
     }
 }

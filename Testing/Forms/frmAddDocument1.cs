@@ -99,6 +99,17 @@ namespace Testing.Forms
             cbSubmitVia.Items.Add(new ComboboxItem("Email", "E"));
             cbSubmitVia.SelectedIndex = -1;
 
+            cbPremiumType.Items.Add(new ComboboxItem("Paid", "PP"));
+            cbPremiumType.Items.Add(new ComboboxItem("Unpaid", "UP"));
+            cbPremiumType.SelectedIndex = -1;
+
+
+            cbClientType.Items.Add(new ComboboxItem("Dep. Pro", "DP"));
+            cbClientType.Items.Add(new ComboboxItem("Loan Client", "LC"));
+            cbClientType.Items.Add(new ComboboxItem("REF", "RE"));
+            cbClientType.Items.Add(new ComboboxItem("Other", "OT"));
+            cbClientType.SelectedIndex = -1;
+
             Cursor.Current = Cursors.WaitCursor;
 
 
@@ -332,7 +343,8 @@ namespace Testing.Forms
                         "@p_OTHER_INSTRUCTION", tbOtherInstruction.Text, "@p_REMARK_NOTE", tbRemarkNote.Text, "@p_REMARK_RATE", tbRemarkRate.Text,
                         "@p_ORIGINAL_RATE", tbOriginalRate.Text, "@p_GROUP_DISCOUNT", tbGroupDiscount.Text, "@p_LOYALTY_DISCOUNT", tbLoyaltyDiscount.Text,
                         "@p_NCD", tbNCD.Text, "@p_SPECIAL_DISCOUNT", tbSpecialDiscount.Text, "@p_FLEET_SIZE_DISCOUNT", tbFleetSizeDiscount.Text,
-                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text,"@p_PREMIUM",tbPremium.Value);
+                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value, "@p_PRREMIUM_TYPE", (cbPremiumType.SelectedItem as ComboboxItem).Value.ToString(),
+                        "@p_CLIENT_CATAG", (cbClientType.SelectedItem as ComboboxItem).Value.ToString());
 
                         string DocCode = "";
 
