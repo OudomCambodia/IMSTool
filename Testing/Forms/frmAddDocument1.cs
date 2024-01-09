@@ -101,6 +101,7 @@ namespace Testing.Forms
 
             cbPremiumType.Items.Add(new ComboboxItem("Paid", "PP"));
             cbPremiumType.Items.Add(new ComboboxItem("Unpaid", "UP"));
+            cbPremiumType.Items.Add(new ComboboxItem("Others", "OP"));
             cbPremiumType.SelectedIndex = -1;
 
 
@@ -330,6 +331,26 @@ namespace Testing.Forms
                         //    "@p_QUOT_NO", tbQuotNo.Text, "@p_DOC_CUR_STATUS", 0, "@p_DOC_CUR_STATUS_SET_BY", usercode,
                         //    "@p_DOC_CUR_STATUS_SET_ON", DateTime.Now, "@p_STATUS", "O", "@p_STATUS_REMARK", "", "@p_PRINT_CARD", PrintCard,
                         //    "@p_CREATE_BY", usercode, "@p_AGENT_BROKER_CODE", tbABCode.Text.Trim());
+                        string clienttype, premiumtype;
+                        if (cbClientType.SelectedItem == null)
+                        {
+                            clienttype = "OT";
+                        }
+                        else
+                        {
+                            clienttype = (cbClientType.SelectedItem as ComboboxItem).Value.ToString();
+                        }
+                        if (cbPremiumType.SelectedItem == null)
+                        {
+                            premiumtype = "OP";
+                        }
+                        else
+                        {
+                            premiumtype = (cbPremiumType.SelectedItem as ComboboxItem).Value.ToString();
+                        }
+
+
+
 
                         DataTable dtTemp = sqlcrud.ExecuteMySqlOutPara("dbo.sp_insert_doc", "@p_DOC_TYPE", (cbDocType.SelectedItem as ComboboxItem).Value.ToString(),
                         "@p_CUS_CODE", tbCusCode.Text, "@p_CUS_NAME", tbCusName.Text, "@p_PRODUCT_TYPE", cbProType.Text,
@@ -343,8 +364,8 @@ namespace Testing.Forms
                         "@p_OTHER_INSTRUCTION", tbOtherInstruction.Text, "@p_REMARK_NOTE", tbRemarkNote.Text, "@p_REMARK_RATE", tbRemarkRate.Text,
                         "@p_ORIGINAL_RATE", tbOriginalRate.Text, "@p_GROUP_DISCOUNT", tbGroupDiscount.Text, "@p_LOYALTY_DISCOUNT", tbLoyaltyDiscount.Text,
                         "@p_NCD", tbNCD.Text, "@p_SPECIAL_DISCOUNT", tbSpecialDiscount.Text, "@p_FLEET_SIZE_DISCOUNT", tbFleetSizeDiscount.Text,
-                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value, "@p_PRREMIUM_TYPE", (cbPremiumType.SelectedItem as ComboboxItem).Value.ToString(),
-                        "@p_CLIENT_CATAG", (cbClientType.SelectedItem as ComboboxItem).Value.ToString());
+                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value, "@p_PRREMIUM_TYPE", premiumtype,
+                        "@p_CLIENT_CATAG", clienttype);
 
                         string DocCode = "";
 
