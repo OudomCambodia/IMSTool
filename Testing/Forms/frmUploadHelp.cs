@@ -101,7 +101,16 @@ namespace Testing.Forms
             dataColumn = new DataColumn();
             dataColumn.ColumnName = "Premium";
             uploadtb.Columns.Add(dataColumn);
-
+            //Update by adding format to Acleda Sale Person - to do project for Acelda Request Brom Vichhay - Updated Southeane 09-01-24
+            dataColumn = new DataColumn();
+            dataColumn.ColumnName = "PremiumType";
+            uploadtb.Columns.Add(dataColumn);
+            dataColumn = new DataColumn();
+            dataColumn.ColumnName = "ClientCatag";
+            uploadtb.Columns.Add(dataColumn);
+            dataColumn = new DataColumn();
+            dataColumn.ColumnName = "ClientDetails";
+            uploadtb.Columns.Add(dataColumn);
 
             uploadtb.Columns["To Be Finished On"].DataType = typeof(DateTime);
 

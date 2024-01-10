@@ -89,6 +89,8 @@ namespace Testing.Forms
                 tbPremium.Text = dt.Rows[0]["PREMIUM"].ToString();
                 txtPaymentType.Text = dt.Rows[0]["PREMIUM_TYPE"].ToString();//request to add by Mr. Brom Vichhay modify by Southeane 08-01-24
                 txtClientType.Text = dt.Rows[0]["CLIENT_CATAG"].ToString();
+                //Update for acleda instruction note
+                tbClientDetails.Text = dt.Rows[0]["CLIENT_DETAILS"].ToString();
                 if (tbToBeFinish.Text == "01/01/1900") tbToBeFinish.Text = "";
 
                 if (printable)
