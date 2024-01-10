@@ -333,23 +333,23 @@ namespace Testing.Forms
                         //    "@p_CREATE_BY", usercode, "@p_AGENT_BROKER_CODE", tbABCode.Text.Trim());
 
 
-                        //string clienttype, premiumtype;
-                        //if (cbClientType.SelectedItem == null)
-                        //{
-                        //    clienttype = "OT";
-                        //}
-                        //else
-                        //{
-                        //    clienttype = (cbClientType.SelectedItem as ComboboxItem).Value.ToString();
-                        //}
-                        //if (cbPremiumType.SelectedItem == null)
-                        //{
-                        //    premiumtype = "OP";
-                        //}
-                        //else
-                        //{
-                        //    premiumtype = (cbPremiumType.SelectedItem as ComboboxItem).Value.ToString();
-                        //}
+                        string clienttype, premiumtype;
+                        if (cbClientType.SelectedItem == null)
+                        {
+                            clienttype = "OT";
+                        }
+                        else
+                        {
+                            clienttype = (cbClientType.SelectedItem as ComboboxItem).Value.ToString();
+                        }
+                        if (cbPremiumType.SelectedItem == null)
+                        {
+                            premiumtype = "OP";
+                        }
+                        else
+                        {
+                            premiumtype = (cbPremiumType.SelectedItem as ComboboxItem).Value.ToString();
+                        }
 
 
 
@@ -366,8 +366,8 @@ namespace Testing.Forms
                         "@p_OTHER_INSTRUCTION", tbOtherInstruction.Text, "@p_REMARK_NOTE", tbRemarkNote.Text, "@p_REMARK_RATE", tbRemarkRate.Text,
                         "@p_ORIGINAL_RATE", tbOriginalRate.Text, "@p_GROUP_DISCOUNT", tbGroupDiscount.Text, "@p_LOYALTY_DISCOUNT", tbLoyaltyDiscount.Text,
                         "@p_NCD", tbNCD.Text, "@p_SPECIAL_DISCOUNT", tbSpecialDiscount.Text, "@p_FLEET_SIZE_DISCOUNT", tbFleetSizeDiscount.Text,
-                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value);
-                        //, "@p_PRREMIUM_TYPE", premiumtype,"@p_CLIENT_CATAG", clienttype, "p_ClientDetails",tbClientDetails.Text);
+                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value
+                        , "@p_PRREMIUM_TYPE", premiumtype,"@p_CLIENT_CATAG", clienttype, "p_ClientDetails",tbClientDetails.Text);
 
                         string DocCode = "";
 
@@ -664,14 +664,14 @@ namespace Testing.Forms
                     uploaddt.AcceptChanges();
                     if (uploaddt.Rows.Count > 0)
                     {
-                        if (uploaddt.Columns.Count > 26) //Upload file has 26 columns
+                        if (uploaddt.Columns.Count > 29) //Upload file has 26 columns - updated to 29 Southeane 09-01-24 Request for acleda 
                         {
                             int col = uploaddt.Columns.Count;
-                            for (int i = col - 1; i > 25; i--)
+                            for (int i = col - 1; i > 28; i--)
                                 uploaddt.Columns.RemoveAt(i);
                         }
 
-                        if (uploaddt.Columns.Count != 26)
+                        if (uploaddt.Columns.Count != 29)
                         {
                             Cursor.Current = Cursors.AppStarting;
                             Msgbox.Show("Wrong excel format! (Get the latest format from \"Help\")");
@@ -681,7 +681,7 @@ namespace Testing.Forms
                         string DocType = "", CusCode = "", ProType = "", ABCode = "", Priority = "", PrintCard = "", SubmitVia = "", PolicyNo = "", QuotNo = "";
                         string Commission = "", EffectiveDate = "", OtherInstruction = "", RemarkNote = "", RemarkRate = "", OriginalRate = "", GroupDiscount = "",
                             LoyaltyDiscount = "", NCD = "", SpecialDiscount = "", FleetSizeDiscount = "", Discount = "", Loading = "", FinalPremium = "", Attachment = "",
-                            Premium = "";
+                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails="";
                         DateTime ToBeFinish = new DateTime();
 
                         //DataTable 
@@ -703,6 +703,10 @@ namespace Testing.Forms
                             QuotNo = row[9].ToString().Trim();
                             Attachment = row[24].ToString().Trim().Replace("\"","");
                             Premium = row[25].ToString().Trim();
+                            //Update purposes for Acleda Bank
+                            PremiumType = row[26].ToString().Trim();
+                            ClientCatag = row[27].ToString().Trim();
+                            ClientDetails = row[28].ToString().Trim();
 
                             string temp = "";
                             if (!(frmDocumentControl.docType.TryGetValue(DocType, out temp)))
@@ -833,6 +837,10 @@ namespace Testing.Forms
                             FinalPremium = row[23].ToString().Trim();
                             Attachment = row[24].ToString().Trim().Replace("\"","");
                             Premium = row[25].ToString().Trim();
+                            //Update for Acleda Purposes add more field
+                            PremiumType = row[26].ToString().Trim();
+                            ClientCatag = row[27].ToString().Trim();
+                            ClientDetails = row[28].ToString().Trim();
                             //Fix Premium String
                             System.Text.RegularExpressions.Regex charsToDestroy = new System.Text.RegularExpressions.Regex(@"[^\d|\.\-]");
                             Premium = charsToDestroy.Replace(Premium, "");
@@ -865,7 +873,9 @@ namespace Testing.Forms
                                 "@p_OTHER_INSTRUCTION", OtherInstruction, "@p_REMARK_NOTE", RemarkNote, "@p_REMARK_RATE", RemarkRate,
                                 "@p_ORIGINAL_RATE", OriginalRate, "@p_GROUP_DISCOUNT", GroupDiscount, "@p_LOYALTY_DISCOUNT", LoyaltyDiscount,
                                 "@p_NCD", NCD, "@p_SPECIAL_DISCOUNT", SpecialDiscount, "@p_FLEET_SIZE_DISCOUNT", FleetSizeDiscount,
-                                "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium);
+                                "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium
+                                , "@p_PRREMIUM_TYPE", PremiumType,"@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails",ClientDetails);
+                                
 
                             if (dtTemp.Rows.Count <= 0)
                             {
