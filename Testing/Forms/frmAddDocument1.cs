@@ -254,11 +254,11 @@ namespace Testing.Forms
                                             }
                                         }
                                     }
-                                    else
-                                    {
-                                        Msgbox.Show("You can't add document for the selected Customer!");
-                                        return;
-                                    }
+                                    //else
+                                    //{
+                                    //    Msgbox.Show("You can't add document for the selected Customer!");
+                                    //    return;
+                                    //}
                                 }
                             }
                             else
