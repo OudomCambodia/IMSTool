@@ -26,8 +26,8 @@ namespace Testing.Forms
         public string Team="";
         DataTable dtTemp = new DataTable();
         string autoTeam = "u-rnk,u-bnw,u-ksb,u-srn";
-        
-        
+
+        DataTable dtBank;
 
         private void bnSearch_Click(object sender, EventArgs e)
         {
@@ -107,12 +107,49 @@ namespace Testing.Forms
                                                         "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, " +
                                                         "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  " +
                                                         "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') ";
+
                                 
                                 if (bankname != "ALL BANK")
                                 {
+
                                     main_rpt += " and SALE_AGENT_NAME like '" + bankname + "%'";
                                     third_rpt += " WHERE AGENT_NAME LIKE '" + bankname + "%'"; 
                                                       
+                                }
+                                else
+                                {
+                                    bankname ="";
+                                    for (int i = 0; i < dtBank.Rows.Count; i++)
+                                    {
+                                        bankname += dtBank.Rows[i][1].ToString() + "|";
+                                    }
+                                    bankname = bankname.Remove(bankname.Length - 1, 1);
+                                        main_rpt += " and (SALE_AGENT_NAME like 'PRINCE BANK%' " +
+                                                    " or SALE_AGENT_NAME like 'ACLEDA%' " +
+                                                    " or SALE_AGENT_NAME like 'CIMB%' " +
+                                                    " or SALE_AGENT_NAME like 'SATHAPANA%' " +
+                                                    " or SALE_AGENT_NAME like 'BRED%' " +
+                                                    " or SALE_AGENT_NAME like 'RHB%' " +
+                                                    " or SALE_AGENT_NAME like 'ADVANCE%' " +
+                                                    " or SALE_AGENT_NAME like 'VATTANAC%' " +
+                                                    " or SALE_AGENT_NAME like 'J TRUST%' " +
+                                                    " or SALE_AGENT_NAME like 'BANK OF CHINA%' " +
+                                                    " or SALE_AGENT_NAME like 'ARDB%' " +
+                                                    " or SALE_AGENT_NAME like 'CANADIA%' " +
+                                                    " or SALE_AGENT_NAME like 'CHIP MONG%'" +
+                                                    " or SALE_AGENT_NAME like 'ORIENTAL%' " +
+                                                    " or SALE_AGENT_NAME like 'MEGA LEASING%' " +
+                                                    " or SALE_AGENT_NAME like 'CATHAY UNITED%' " +
+                                                    " or SALE_AGENT_NAME like 'MB BANK%' " +
+                                                    " or SALE_AGENT_NAME like 'CHIEF%' " +
+                                                    " or SALE_AGENT_NAME like 'CAM CAPITAL%' " +
+                                                    " or SALE_AGENT_NAME like 'CAMBODIA POST%' " +
+                                                    " or SALE_AGENT_NAME like 'KASIKORN%' " +
+                                                    " or SALE_AGENT_NAME like 'FTB%' " +
+                                                    " or SALE_AGENT_NAME like 'SHINHAN%' " +
+                                                    " or SALE_AGENT_NAME like 'AMK%' ) ";
+                                    third_rpt += " WHERE regexp_like(nvl(AGENT_NAME, '*'), '" + bankname + "' ,'i')";
+
                                 }
                                 
                              dt = crud.LoadData(main_rpt).Tables[0];
@@ -133,9 +170,12 @@ namespace Testing.Forms
                                              POLICY_NO = row1["POLICY_NO"],
                                              CUSTOMER_NAME = row1["CUSTOMER_NAME"],
                                              //CUSTOMER_PHONE = row2["CUSTOMER_PHONE"],
+                                             CLIENT_CATAG = row1["CLIENT_CATAG"],
+                                             CLIENT_DETAILS = row1["CLIENT_DETAILS"],
                                              CUSTOMER_PHONE = subitem2 == null ? null :subitem2.Field<string>("CUSTOMER_PHONE"),
                                              //PREMIUM = subitem3 == null ? 0 : subitem3.Field<decimal>("DEB_TOTAL_AMOUNT"),
                                              PREMIUM = row1["PREMIUM"],
+                                             PREMIUM_TYPE = row1["PREMIUM_TYPE"],
                                              PAID_DATE =  subitem3 == null ? null : subitem3.Field<string>("PAID_DATE"),
                                              //PAID_MONTH = subitem3 == null ? null : subitem3.Field<string>("PAID_MONTH"),
                                              //SALE_AGENT_CODE = row1["SALE_AGENT_CODE"],
@@ -173,9 +213,12 @@ namespace Testing.Forms
                              dtTemp.Columns.Add("DP_ISSUED_DATE", typeof(string));
                              dtTemp.Columns.Add("POLICY_NO", typeof(string));
                              dtTemp.Columns.Add("CUSTOMER_NAME", typeof(string));
+                             dtTemp.Columns.Add("CLIENT_CATAG", typeof(string));
+                             dtTemp.Columns.Add("CLIENT_DETAILS", typeof(string));
                              dtTemp.Columns.Add("CUSTOMER_PHONE", typeof(string));
                              dtTemp.Columns.Add("PREMIUM", typeof(decimal));
                              dtTemp.Columns.Add("PAID_DATE", typeof(string));
+                             dtTemp.Columns.Add("PREMIUM_TYPE", typeof(string));
                              
                              
                              dtTemp.Columns.Add("BANK_BRANCH_NAME", typeof(string));
@@ -215,8 +258,11 @@ namespace Testing.Forms
                                      dr["DP_ISSUED_DATE"] =String.Format("{0:d}",item.DP_ISSUED_DATE.ToString());
                                      dr["POLICY_NO"] = item.POLICY_NO;
                                      dr["CUSTOMER_NAME"] = item.CUSTOMER_NAME;
+                                     dr["CLIENT_CATAG"] = item.CLIENT_CATAG;
+                                     dr["CLIENT_DETAILS"] = item.CLIENT_DETAILS;
                                      dr["CUSTOMER_PHONE"] = item.CUSTOMER_PHONE;
                                      dr["PREMIUM"] = item.PREMIUM;
+                                     dr["PRODUCT_TYPE"] = item.PREMIUM_TYPE;
                                      dr["PAID_DATE"] = (item.PAID_DATE == null) ? "" : item.PAID_DATE.ToString();
                                      //dr["PAID_MONTH"] = item.PAID_MONTH;
                                      if (item.SALE_AGENT_NAME.ToString().Contains("ACLEDA")) {
@@ -318,7 +364,7 @@ namespace Testing.Forms
             
             if (frmLogIn.Usert.ToUpper() == "U-BVC")
             {
-                DataTable dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY ORDER_SEQ ASC");
+                 dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY ORDER_SEQ ASC");
                 cmbBank.DataSource = dtBank;
                 cmbBank.DisplayMember = "BANK_NAME";
                 cmbBank.ValueMember = "BANK_NAME";
