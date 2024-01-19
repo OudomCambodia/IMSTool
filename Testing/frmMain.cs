@@ -811,23 +811,23 @@ namespace Testing
             //else
             //    btnCustomerProfitSummary.Enabled = false;
 
-            //List<string> fonts = new List<string>();
-            //fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-Regular.ttf");
-            //fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-Bold.ttf");
-            //fonts.Add(@"\\192.168.110.250\public$\MIS\Software\IMS Tool\Niradei Font\Niradei-SemiBold.ttf");
+            List<string> fonts = new List<string>();
+            fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei-Regular.ttf");
+            fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei Font\Niradei-Bold.ttf");
+            fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei-SemiBold.ttf");
 
-            //if (!IsFontInstalled("Niradei"))
-            //{
-            //    foreach (var k in fonts)
-            //    {
-            //        var shellAppType = Type.GetTypeFromProgID("Shell.Application");
-            //        var shell = Activator.CreateInstance(shellAppType);
-            //        var fontFolder = (Shell32.Folder)shellAppType.InvokeMember("NameSpace", System.Reflection.BindingFlags.InvokeMethod, null, shell, new object[] { Environment.GetFolderPath(Environment.SpecialFolder.Fonts) });
-            //        if (File.Exists(k))
-            //            fontFolder.CopyHere(k);
-            //    }
-            //    Environment.Exit(0);
-            //}
+            if (!IsFontInstalled("Niradei"))
+            {
+                foreach (var k in fonts)
+                {
+                    var shellAppType = Type.GetTypeFromProgID("Shell.Application");
+                    var shell = Activator.CreateInstance(shellAppType);
+                    var fontFolder = (Shell32.Folder)shellAppType.InvokeMember("NameSpace", System.Reflection.BindingFlags.InvokeMethod, null, shell, new object[] { Environment.GetFolderPath(Environment.SpecialFolder.Fonts) });
+                    if (File.Exists(k))
+                        fontFolder.CopyHere(k);
+                }
+                Environment.Exit(0);
+            }
         }
 
         private void btnCoInvoice_Click(object sender, EventArgs e)
