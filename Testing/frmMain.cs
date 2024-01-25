@@ -813,7 +813,7 @@ namespace Testing
 
             List<string> fonts = new List<string>();
             fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei-Regular.ttf");
-            fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei Font\Niradei-Bold.ttf");
+            fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei-Bold.ttf");
             fonts.Add(@"\\192.168.110.250\ims$\Niradei Font\Niradei-SemiBold.ttf");
 
             if (!IsFontInstalled("Niradei"))
