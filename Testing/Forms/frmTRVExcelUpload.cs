@@ -80,7 +80,7 @@ namespace Testing.Forms
                     {
                         Oracle.ManagedDataAccess.Client.OracleCommand cmd = new Oracle.ManagedDataAccess.Client.OracleCommand();
                         cmd.CommandText = "INSERT INTO SM_M_GEOAREA_PARAMLN(GPL_CODE, GPL_DESC, GPL_SMG_CODE, GPL_SMG_LEVEL, GPL_SEQ_NO, GPL_DTL_INSERT) VALUES(:gpl_code, :gpl_desc, :gpl_smg_code, :gpl_smg_level, :gpl_seq_no, :gpl_dtl_insert)";
-                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_code", string.Concat("NO", rnd.Next(10, 99) + rnd.Next(10, 80))));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_code", string.Concat("N0", rnd.Next(10, 99) + rnd.Next(10, 80))));
                         cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_desc", dt.Rows[i][10].ToString()));
                         cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_smg_code", "9"));
                         cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_smg_level", "9"));
