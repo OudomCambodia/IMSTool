@@ -78,8 +78,18 @@ namespace Testing.Forms
                     }
                     if (loctemp.Rows.Count <= 0)
                     {
-                        crud.ExecNonQuery("INSERT INTO SM_M_GEOAREA_PARAMLN(GPL_CODE,GPL_DESC,GPL_SMG_CODE,GPL_SMG_LEVEL,GPL_SEQ_NO,GPL_DTL_INSERT) VALUES ('" + "N0" + rnd.Next(10, 99) + rnd.Next(10, 80) + "','" + dt.Rows[i][10].ToString() + "','9','9','000012300'||SEQ_SM_M_GEOAREA_DETAILS.NEXTVAL,'N')");
-                        crud.ExecNonQuery("commit"); 
+                        Oracle.ManagedDataAccess.Client.OracleCommand cmd = new Oracle.ManagedDataAccess.Client.OracleCommand();
+                        cmd.CommandText = "INSERT INTO SM_M_GEOAREA_PARAMLN(GPL_CODE, GPL_DESC, GPL_SMG_CODE, GPL_SMG_LEVEL, GPL_SEQ_NO, GPL_DTL_INSERT) VALUES(:gpl_code, :gpl_desc, :gpl_smg_code, :gpl_smg_level, :gpl_seq_no, :gpl_dtl_insert)";
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_code", string.Concat("NO", rnd.Next(10, 99) + rnd.Next(10, 80))));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_desc", dt.Rows[i][10].ToString()));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_smg_code", "9"));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_smg_level", "9"));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_seq_no", string.Concat("000012300", crud.ExecQuery("select SEQ_SM_M_GEOAREA_DETAILS.NEXTVAL from dual").Rows[0][0].ToString())));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_dtl_insert", "N"));
+                        crud.ExecNonQuery(cmd);
+
+                        //crud.ExecNonQuery("INSERT INTO SM_M_GEOAREA_PARAMLN(GPL_CODE,GPL_DESC,GPL_SMG_CODE,GPL_SMG_LEVEL,GPL_SEQ_NO,GPL_DTL_INSERT) VALUES ('" + "N0" + rnd.Next(10, 99) + rnd.Next(10, 80) + "','" + dt.Rows[i][10].ToString().Replace("'", "''") + "','9','9','000012300'||SEQ_SM_M_GEOAREA_DETAILS.NEXTVAL,'N')");
+                        //crud.ExecNonQuery("commit"); 
                     }
                 }
                 else
