@@ -147,7 +147,7 @@ namespace Testing.Forms
                                                 " or SALE_AGENT_NAME like 'KASIKORN%' " +
                                                 " or SALE_AGENT_NAME like 'FTB%' " +
                                                 " or SALE_AGENT_NAME like 'SHINHAN%' " +
-                                                " or SALE_AGENT_NAME like 'AMK%' ) ";
+                                                " or SALE_AGENT_NAME like 'AMK%' or SALE_AGENT_NAME like 'HONG LEONG%' ) ";
                                     third_rpt += " WHERE regexp_like(nvl(AGENT_NAME, '*'), '" + bankname + "' ,'i')";
 
                                 }
