@@ -75,6 +75,10 @@ namespace Testing
                 dataGridView1.Columns[11].HeaderText = "Insured Name";
                 dataGridView1.Columns[12].HeaderText = "Issue Date";
                 dataGridView1.Columns[12].DefaultCellStyle.Format = "dd/MMM/yyyy";
+                dataGridView1.Columns[13].HeaderText = "Plan";
+                dataGridView1.Columns[14].HeaderText = "Gender";
+                dataGridView1.Columns[15].HeaderText = "Date of Birth";
+                dataGridView1.Columns[16].HeaderText = "Relationship";
 
                 for (int i = 0; i < dataGridView1.Columns.Count; i++)
                     dataGridView1.Columns[i].Width = 170;
