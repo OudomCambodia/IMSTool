@@ -366,8 +366,9 @@ namespace Testing.Forms
                         "@p_OTHER_INSTRUCTION", tbOtherInstruction.Text, "@p_REMARK_NOTE", tbRemarkNote.Text, "@p_REMARK_RATE", tbRemarkRate.Text,
                         "@p_ORIGINAL_RATE", tbOriginalRate.Text, "@p_GROUP_DISCOUNT", tbGroupDiscount.Text, "@p_LOYALTY_DISCOUNT", tbLoyaltyDiscount.Text,
                         "@p_NCD", tbNCD.Text, "@p_SPECIAL_DISCOUNT", tbSpecialDiscount.Text, "@p_FLEET_SIZE_DISCOUNT", tbFleetSizeDiscount.Text,
-                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value
-                        , "@p_PRREMIUM_TYPE", premiumtype,"@p_CLIENT_CATAG", clienttype, "p_ClientDetails",tbClientDetails.Text);
+                        "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value,
+                        "@p_PRREMIUM_TYPE", premiumtype,"@p_CLIENT_CATAG", clienttype, "p_ClientDetails",tbClientDetails.Text, 
+                        "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text);
 
                         string DocCode = "";
 
@@ -681,7 +682,7 @@ namespace Testing.Forms
                         string DocType = "", CusCode = "", ProType = "", ABCode = "", Priority = "", PrintCard = "", SubmitVia = "", PolicyNo = "", QuotNo = "";
                         string Commission = "", EffectiveDate = "", OtherInstruction = "", RemarkNote = "", RemarkRate = "", OriginalRate = "", GroupDiscount = "",
                             LoyaltyDiscount = "", NCD = "", SpecialDiscount = "", FleetSizeDiscount = "", Discount = "", Loading = "", FinalPremium = "", Attachment = "",
-                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails="";
+                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails="", SalePerson="", StaffID="";
                         DateTime ToBeFinish = new DateTime();
 
                         //DataTable 
@@ -707,6 +708,8 @@ namespace Testing.Forms
                             PremiumType = row[26].ToString().Trim();
                             ClientCatag = row[27].ToString().Trim();
                             ClientDetails = row[28].ToString().Trim();
+                            StaffID = row[29].ToString().Trim();
+                            SalePerson = row[30].ToString().Trim();
 
                             string temp = "";
                             if (!(frmDocumentControl.docType.TryGetValue(DocType, out temp)))
@@ -841,6 +844,8 @@ namespace Testing.Forms
                             PremiumType = row[26].ToString().Trim();
                             ClientCatag = row[27].ToString().Trim();
                             ClientDetails = row[28].ToString().Trim();
+                            StaffID = row[29].ToString().Trim();
+                            SalePerson = row[30].ToString().Trim();
                             //Fix Premium String
                             System.Text.RegularExpressions.Regex charsToDestroy = new System.Text.RegularExpressions.Regex(@"[^\d|\.\-]");
                             Premium = charsToDestroy.Replace(Premium, "");
@@ -873,8 +878,9 @@ namespace Testing.Forms
                                 "@p_OTHER_INSTRUCTION", OtherInstruction, "@p_REMARK_NOTE", RemarkNote, "@p_REMARK_RATE", RemarkRate,
                                 "@p_ORIGINAL_RATE", OriginalRate, "@p_GROUP_DISCOUNT", GroupDiscount, "@p_LOYALTY_DISCOUNT", LoyaltyDiscount,
                                 "@p_NCD", NCD, "@p_SPECIAL_DISCOUNT", SpecialDiscount, "@p_FLEET_SIZE_DISCOUNT", FleetSizeDiscount,
-                                "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium
-                                , "@p_PRREMIUM_TYPE", PremiumType,"@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails",ClientDetails);
+                                "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium,
+                                "@p_PRREMIUM_TYPE", PremiumType,"@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails",ClientDetails,
+                                "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text);
                                 
 
                             if (dtTemp.Rows.Count <= 0)

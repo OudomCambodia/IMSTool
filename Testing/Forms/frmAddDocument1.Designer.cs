@@ -60,6 +60,8 @@
             this.btnUploadHelp = new System.Windows.Forms.Button();
             this.btnSelectCus = new System.Windows.Forms.Button();
             this.tbClientDetails = new System.Windows.Forms.TextBox();
+            this.txtStaffID = new System.Windows.Forms.TextBox();
+            this.txtSalePerson = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.rbYes = new System.Windows.Forms.RadioButton();
             this.rbNo = new System.Windows.Forms.RadioButton();
@@ -113,12 +115,16 @@
             this.label30 = new System.Windows.Forms.Label();
             this.cbClientType = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPremium)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -321,7 +327,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(519, 546);
+            this.btnAdd.Location = new System.Drawing.Point(519, 645);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(85, 35);
             this.btnAdd.TabIndex = 42;
@@ -336,7 +342,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(618, 546);
+            this.btnClose.Location = new System.Drawing.Point(618, 645);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(85, 35);
             this.btnClose.TabIndex = 43;
@@ -403,7 +409,7 @@
             // 
             this.btnUploadHelp.BackgroundImage = global::Testing.Properties.Resources.Help;
             this.btnUploadHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnUploadHelp.Location = new System.Drawing.Point(239, 546);
+            this.btnUploadHelp.Location = new System.Drawing.Point(239, 645);
             this.btnUploadHelp.Name = "btnUploadHelp";
             this.btnUploadHelp.Size = new System.Drawing.Size(24, 24);
             this.btnUploadHelp.TabIndex = 41;
@@ -431,6 +437,24 @@
             this.tbClientDetails.Size = new System.Drawing.Size(175, 22);
             this.tbClientDetails.TabIndex = 165;
             this.toolTip1.SetToolTip(this.tbClientDetails, "Ctrl+L to Select Customer");
+            // 
+            // txtStaffID
+            // 
+            this.txtStaffID.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtStaffID.Location = new System.Drawing.Point(107, 28);
+            this.txtStaffID.Name = "txtStaffID";
+            this.txtStaffID.Size = new System.Drawing.Size(191, 22);
+            this.txtStaffID.TabIndex = 167;
+            this.toolTip1.SetToolTip(this.txtStaffID, "Ctrl+L to Select Customer");
+            // 
+            // txtSalePerson
+            // 
+            this.txtSalePerson.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtSalePerson.Location = new System.Drawing.Point(107, 56);
+            this.txtSalePerson.Name = "txtSalePerson";
+            this.txtSalePerson.Size = new System.Drawing.Size(249, 22);
+            this.txtSalePerson.TabIndex = 169;
+            this.toolTip1.SetToolTip(this.txtSalePerson, "Ctrl+L to Select Customer");
             // 
             // label2
             // 
@@ -471,7 +495,7 @@
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpload.ForeColor = System.Drawing.Color.White;
-            this.btnUpload.Location = new System.Drawing.Point(39, 546);
+            this.btnUpload.Location = new System.Drawing.Point(39, 645);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(193, 35);
             this.btnUpload.TabIndex = 40;
@@ -510,7 +534,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(341, 557);
+            this.label11.Location = new System.Drawing.Point(341, 656);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(115, 17);
             this.label11.TabIndex = 124;
@@ -568,7 +592,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(39, 318);
+            this.tabControl1.Location = new System.Drawing.Point(39, 417);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(664, 203);
@@ -965,13 +989,46 @@
             this.label31.TabIndex = 164;
             this.label31.Text = "Client Deatils: + ";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtSalePerson);
+            this.groupBox1.Controls.Add(this.label33);
+            this.groupBox1.Controls.Add(this.txtStaffID);
+            this.groupBox1.Controls.Add(this.label32);
+            this.groupBox1.ForeColor = System.Drawing.Color.Red;
+            this.groupBox1.Location = new System.Drawing.Point(39, 303);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(362, 95);
+            this.groupBox1.TabIndex = 166;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "For Bancassurance department only";
+            // 
+            // label33
+            // 
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(6, 55);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(110, 27);
+            this.label33.TabIndex = 168;
+            this.label33.Text = "Sale Person:";
+            // 
+            // label32
+            // 
+            this.label32.ForeColor = System.Drawing.Color.White;
+            this.label32.Location = new System.Drawing.Point(6, 27);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(110, 27);
+            this.label32.TabIndex = 166;
+            this.label32.Text = "Staff ID:";
+            // 
             // frmAddDocument1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(759, 607);
+            this.ClientSize = new System.Drawing.Size(759, 701);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tbClientDetails);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.cbClientType);
@@ -1039,6 +1096,8 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPremium)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1130,5 +1189,10 @@
         private System.Windows.Forms.ComboBox cbClientType;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox tbClientDetails;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtSalePerson;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox txtStaffID;
+        private System.Windows.Forms.Label label32;
     }
 }

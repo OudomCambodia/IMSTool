@@ -91,6 +91,9 @@ namespace Testing.Forms
                 txtClientType.Text = dt.Rows[0]["CLIENT_CATAG"].ToString();
                 //Update for acleda instruction note
                 tbClientDetails.Text = dt.Rows[0]["CLIENT_DETAILS"].ToString();
+                txtStaffID.Text = dt.Rows[0]["STAFF_ID"].ToString();
+                txtSalePerson.Text = dt.Rows[0]["SALE_PERSON_NAME"].ToString();
+
                 if (tbToBeFinish.Text == "01/01/1900") tbToBeFinish.Text = "";
 
                 if (printable)

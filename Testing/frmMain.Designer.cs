@@ -842,6 +842,8 @@
             this.btnTravelRp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTravelRp.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTravelRp.ForeColor = System.Drawing.Color.White;
+            this.btnTravelRp.Image = global::Testing.Properties.Resources.arrow1;
+            this.btnTravelRp.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTravelRp.Location = new System.Drawing.Point(0, 440);
             this.btnTravelRp.Margin = new System.Windows.Forms.Padding(0);
             this.btnTravelRp.Name = "btnTravelRp";

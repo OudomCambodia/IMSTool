@@ -99,7 +99,13 @@
             this.txtPaymentType = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.tbClientDetails = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtSalePerson = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txtStaffID = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHist)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label20
@@ -522,7 +528,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(47, 530);
+            this.label21.Location = new System.Drawing.Point(47, 593);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(145, 17);
@@ -532,7 +538,7 @@
             // tbRemark
             // 
             this.tbRemark.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRemark.Location = new System.Drawing.Point(51, 551);
+            this.tbRemark.Location = new System.Drawing.Point(51, 614);
             this.tbRemark.Margin = new System.Windows.Forms.Padding(4);
             this.tbRemark.MaxLength = 100000;
             this.tbRemark.Multiline = true;
@@ -558,7 +564,7 @@
             this.dgvHist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHist.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvHist.Location = new System.Drawing.Point(0, 663);
+            this.dgvHist.Location = new System.Drawing.Point(0, 724);
             this.dgvHist.Margin = new System.Windows.Forms.Padding(4);
             this.dgvHist.Name = "dgvHist";
             this.dgvHist.ReadOnly = true;
@@ -572,7 +578,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(3, 632);
+            this.label22.Location = new System.Drawing.Point(3, 695);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(70, 20);
@@ -669,7 +675,7 @@
             // 
             // btnAttachment
             // 
-            this.btnAttachment.Location = new System.Drawing.Point(788, 551);
+            this.btnAttachment.Location = new System.Drawing.Point(788, 614);
             this.btnAttachment.Margin = new System.Windows.Forms.Padding(4);
             this.btnAttachment.Name = "btnAttachment";
             this.btnAttachment.Size = new System.Drawing.Size(100, 28);
@@ -680,7 +686,7 @@
             // 
             // btnRemark
             // 
-            this.btnRemark.Location = new System.Drawing.Point(680, 551);
+            this.btnRemark.Location = new System.Drawing.Point(680, 614);
             this.btnRemark.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemark.Name = "btnRemark";
             this.btnRemark.Size = new System.Drawing.Size(100, 28);
@@ -693,7 +699,7 @@
             // 
             this.btnSave.BackgroundImage = global::Testing.Properties.Resources.save;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSave.Location = new System.Drawing.Point(364, 551);
+            this.btnSave.Location = new System.Drawing.Point(364, 614);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(31, 28);
@@ -707,7 +713,7 @@
             // 
             this.btnCancel.BackgroundImage = global::Testing.Properties.Resources.wrong;
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancel.Location = new System.Drawing.Point(364, 586);
+            this.btnCancel.Location = new System.Drawing.Point(364, 649);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(31, 28);
@@ -721,7 +727,7 @@
             // 
             this.btnEditRemark.BackgroundImage = global::Testing.Properties.Resources.remark;
             this.btnEditRemark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnEditRemark.Location = new System.Drawing.Point(364, 551);
+            this.btnEditRemark.Location = new System.Drawing.Point(364, 614);
             this.btnEditRemark.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditRemark.Name = "btnEditRemark";
             this.btnEditRemark.Size = new System.Drawing.Size(31, 28);
@@ -736,7 +742,7 @@
             this.btnAttLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAttLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAttLbl.ForeColor = System.Drawing.Color.White;
-            this.btnAttLbl.Location = new System.Drawing.Point(430, 586);
+            this.btnAttLbl.Location = new System.Drawing.Point(430, 649);
             this.btnAttLbl.Margin = new System.Windows.Forms.Padding(4);
             this.btnAttLbl.Name = "btnAttLbl";
             this.btnAttLbl.Size = new System.Drawing.Size(168, 43);
@@ -751,7 +757,7 @@
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(606, 586);
+            this.btnPrint.Location = new System.Drawing.Point(606, 649);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(175, 43);
@@ -766,7 +772,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(788, 586);
+            this.btnClose.Location = new System.Drawing.Point(788, 649);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(100, 43);
@@ -859,12 +865,65 @@
             this.tbClientDetails.Size = new System.Drawing.Size(248, 22);
             this.tbClientDetails.TabIndex = 113;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtSalePerson);
+            this.groupBox1.Controls.Add(this.label33);
+            this.groupBox1.Controls.Add(this.txtStaffID);
+            this.groupBox1.Controls.Add(this.label32);
+            this.groupBox1.ForeColor = System.Drawing.Color.Red;
+            this.groupBox1.Location = new System.Drawing.Point(51, 479);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(362, 95);
+            this.groupBox1.TabIndex = 167;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "For Bancassurance department only";
+            // 
+            // txtSalePerson
+            // 
+            this.txtSalePerson.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtSalePerson.Location = new System.Drawing.Point(107, 56);
+            this.txtSalePerson.Name = "txtSalePerson";
+            this.txtSalePerson.ReadOnly = true;
+            this.txtSalePerson.Size = new System.Drawing.Size(249, 22);
+            this.txtSalePerson.TabIndex = 169;
+            this.toolTip1.SetToolTip(this.txtSalePerson, "Ctrl+L to Select Customer");
+            // 
+            // label33
+            // 
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(6, 55);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(110, 27);
+            this.label33.TabIndex = 168;
+            this.label33.Text = "Sale Person:";
+            // 
+            // txtStaffID
+            // 
+            this.txtStaffID.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtStaffID.Location = new System.Drawing.Point(107, 28);
+            this.txtStaffID.Name = "txtStaffID";
+            this.txtStaffID.ReadOnly = true;
+            this.txtStaffID.Size = new System.Drawing.Size(191, 22);
+            this.txtStaffID.TabIndex = 167;
+            this.toolTip1.SetToolTip(this.txtStaffID, "Ctrl+L to Select Customer");
+            // 
+            // label32
+            // 
+            this.label32.ForeColor = System.Drawing.Color.White;
+            this.label32.Location = new System.Drawing.Point(6, 27);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(110, 27);
+            this.label32.TabIndex = 166;
+            this.label32.Text = "Staff ID:";
+            // 
             // frmDocumentDetail1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(943, 835);
+            this.ClientSize = new System.Drawing.Size(943, 896);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tbClientDetails);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.txtPaymentType);
@@ -940,6 +999,8 @@
             this.Text = "Document Detail";
             this.Load += new System.EventHandler(this.frmDocumentDetail1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHist)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1015,5 +1076,10 @@
         private System.Windows.Forms.TextBox txtPaymentType;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox tbClientDetails;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtSalePerson;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox txtStaffID;
+        private System.Windows.Forms.Label label32;
     }
 }
