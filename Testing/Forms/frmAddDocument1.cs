@@ -665,14 +665,14 @@ namespace Testing.Forms
                     uploaddt.AcceptChanges();
                     if (uploaddt.Rows.Count > 0)
                     {
-                        if (uploaddt.Columns.Count > 29) //Upload file has 26 columns - updated to 29 Southeane 09-01-24 Request for acleda 
+                        if (uploaddt.Columns.Count > 31) //Upload file has 26 columns - updated to 31 Oudom 09-01-24 Request for Bancaassurance 
                         {
                             int col = uploaddt.Columns.Count;
-                            for (int i = col - 1; i > 28; i--)
+                            for (int i = col - 1; i > 30; i--)
                                 uploaddt.Columns.RemoveAt(i);
                         }
 
-                        if (uploaddt.Columns.Count != 29)
+                        if (uploaddt.Columns.Count != 31)
                         {
                             Cursor.Current = Cursors.AppStarting;
                             Msgbox.Show("Wrong excel format! (Get the latest format from \"Help\")");
