@@ -212,6 +212,18 @@ namespace Testing.Forms
                         }
                     }
                 }
+
+                //requester: Voeun Vichea on 28-Feb-2024
+                if (policyno == "GPA")
+                {
+                    for (int i = 0; i < dtPolicy.Rows.Count; i++)
+                    {
+                        // Set Outpation to Yes for this Policy => request from Yuos Tithya on 18-Dec-2023
+                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/20/000126")
+                               || dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/23/000667"))
+                            dtPolicy.Rows[i].Cells["SUM_INSURED"].Value = "18 MONTHS SALARY";
+                    }
+                }
             }
             else
             {
