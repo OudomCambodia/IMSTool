@@ -26,7 +26,7 @@ namespace Testing.Forms
         BindingSource bsReceiver = new BindingSource();
         BindingSource bsCC = new BindingSource();
 
-        string connString = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
+        //string connString = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
 
 
         public frmEditReceiver()
@@ -39,7 +39,7 @@ namespace Testing.Forms
             string receivercmd = "SELECT * FROM USER_EMAIL_SENDER_HIST", cccmd = "SELECT * FROM USER_EMAIL_CC_HIST";
 
             OracleConnection conn = new OracleConnection();
-            conn.ConnectionString = connString;
+            conn.ConnectionString = frmLogIn.OracleConnectionString;
             conn.Open();
 
             daReceiver = new OracleDataAdapter(receivercmd, conn);

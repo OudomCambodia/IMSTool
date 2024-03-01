@@ -24,8 +24,8 @@ namespace Testing.Forms
         private void bnSearch_Click(object sender, EventArgs e)
         {
             dt = new DataTable();
-            string cs = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
-            using (OracleConnection con = new OracleConnection(cs))
+            //string cs = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 Cursor.Current = Cursors.WaitCursor;
                 con.Open();

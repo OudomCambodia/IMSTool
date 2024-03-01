@@ -18,10 +18,13 @@ namespace Testing
     public partial class frmLogIn : Form
     {
         CRUD crud = new CRUD();
+        DBS11SqlCrud sqlCrud = new DBS11SqlCrud();
+
         public static string Usert = "";
         string HashPass = "Forte@2017";
         bool Maint = false;
         public string fullusername;
+        public static string OracleConnectionString = string.Empty;
 
         //SplashScreen SplashScreen = new SplashScreen();
         //int minimumDisplayTime = 1000;
@@ -204,6 +207,9 @@ namespace Testing
             {
                 //LoadSplashScreen();
                 Cursor.Current = Cursors.WaitCursor;
+
+                OracleConnectionString = sqlCrud.LoadData("select * from tbConnectionString where ID = 0").Tables[0].Rows[0]["ConnectionString"].ToString();
+
                 CheckMaint();
                 //Thread.Sleep(3000);
                 tbUser.Focus();

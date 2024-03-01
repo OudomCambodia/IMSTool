@@ -118,8 +118,8 @@ namespace Testing.Forms
 
             else
             {
-                string cs = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
-                using (OracleConnection con = new OracleConnection(cs))
+                //string cs = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
+                using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
                 {
                     Cursor.Current = Cursors.WaitCursor;
                     con.Open();

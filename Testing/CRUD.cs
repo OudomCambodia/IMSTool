@@ -13,12 +13,12 @@ namespace Testing
 {
     public class CRUD
     {
-        string connString = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
-
+        //string frmLogIn.OracleConnectionString = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
+        
         public DataTable ExecQuery(string sql)
         {
             DataTable dt = new DataTable();
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 OracleCommand cmd = new OracleCommand();
@@ -34,7 +34,7 @@ namespace Testing
         public DataTable ExecQuery(OracleCommand cmd)
         {
             DataTable dt = new DataTable();
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 cmd.Connection = con;
@@ -48,7 +48,7 @@ namespace Testing
 
         public void ExecNonQuery(string sql)
         {
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 OracleCommand cmd = new OracleCommand();
@@ -62,7 +62,7 @@ namespace Testing
 
         public void ExecNonQuery(OracleCommand cmd)
         {
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 cmd.Connection = con;
@@ -80,7 +80,7 @@ namespace Testing
                 Msgbox.Show("Error Parameters in Function to call Stored Procedures!");
                 return;
             }
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 OracleCommand cmd = new OracleCommand();
@@ -104,7 +104,7 @@ namespace Testing
                 return null;
             }
             DataTable dt = new DataTable();
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 OracleCommand cmd = new OracleCommand();
@@ -125,7 +125,7 @@ namespace Testing
         public string ExecFunc_String(string fnName, string[] fnParaKeys, string[] fnParaValues)
         {
             string result = string.Empty;
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 OracleCommand cmd = new OracleCommand();
@@ -148,7 +148,7 @@ namespace Testing
         public string ExecFunc_String_New(string fnName, string[] fnParaKeys, string[] fnParaValues)
         {
             string result = string.Empty;
-            using (OracleConnection con = new OracleConnection(connString))
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
             {
                 con.Open();
                 OracleCommand cmd = new OracleCommand();
@@ -174,16 +174,16 @@ namespace Testing
 
     //class CRUD
     //{
-    //    //string connString = "User Id=sicl;Password=sicl;Data Source=192.168.110.241:1521/infolive";
-    //    //string connString = "User Id=sicl;Password=sficlive19;Data Source=192.168.110.241:1521/infolive";
-    //    string connString = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
+    //    //string frmLogIn.OracleConnectionString = "User Id=sicl;Password=sicl;Data Source=192.168.110.241:1521/infolive";
+    //    //string frmLogIn.OracleConnectionString = "User Id=sicl;Password=sficlive19;Data Source=192.168.110.241:1521/infolive";
+    //    string frmLogIn.OracleConnectionString = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
       
-    //    //con.ConnectionString = connString;
+    //    //con.ConnectionString = frmLogIn.OracleConnectionString;
             
 
     //    public DataTable ExecQuery(string sql)
     //    {
-    //        OracleConnection con = new OracleConnection(connString);
+    //        OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //        con.Open();
     //        OracleCommand cmd = new OracleCommand();
     //        cmd.Connection = con;
@@ -202,7 +202,7 @@ namespace Testing
 
     //    public DataTable ExecQuery(OracleCommand cmd)
     //    {
-    //        OracleConnection con = new OracleConnection(connString);
+    //        OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //        con.Open();
     //        cmd.Connection = con;
     //        cmd.CommandType = CommandType.Text;
@@ -220,8 +220,8 @@ namespace Testing
     //    public void ExecNonQuery(string sql)
     //    {
     //        //OracleConnection con = new OracleConnection();
-    //        //con.ConnectionString = connString;
-    //        OracleConnection con = new OracleConnection(connString);
+    //        //con.ConnectionString = frmLogIn.OracleConnectionString;
+    //        OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //        con.Open();
     //        OracleCommand cmd = new OracleCommand();
     //        cmd.Connection = con;
@@ -237,7 +237,7 @@ namespace Testing
 
     //    public void ExecNonQuery(OracleCommand cmd)
     //    {
-    //        OracleConnection con = new OracleConnection(connString);
+    //        OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //        con.Open();
     //        cmd.Connection = con;
     //        cmd.CommandType = CommandType.Text;
@@ -258,8 +258,8 @@ namespace Testing
     //        }
 
     //        //OracleConnection con = new OracleConnection();
-    //        //con.ConnectionString = connString;
-    //        OracleConnection con = new OracleConnection(connString);
+    //        //con.ConnectionString = frmLogIn.OracleConnectionString;
+    //        OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //        con.Open();
     //        OracleCommand cmd = new OracleCommand();
     //        cmd.Connection = con;
@@ -289,8 +289,8 @@ namespace Testing
     //            }
 
     //            //OracleConnection con = new OracleConnection();
-    //            //con.ConnectionString = connString;
-    //            OracleConnection con = new OracleConnection(connString);
+    //            //con.ConnectionString = frmLogIn.OracleConnectionString;
+    //            OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //            con.Open();
     //            OracleCommand cmd = new OracleCommand();
     //            cmd.Connection = con;
@@ -326,8 +326,8 @@ namespace Testing
     //    public string ExecFunc_String(string fnName, string[] fnParaKeys, string[] fnParaValues)
     //    {
     //        //OracleConnection con = new OracleConnection();
-    //        //con.ConnectionString = connString;
-    //        OracleConnection con = new OracleConnection(connString);
+    //        //con.ConnectionString = frmLogIn.OracleConnectionString;
+    //        OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString);
     //        con.Open();
     //        OracleCommand cmd = new OracleCommand();
     //        cmd.Connection = con;
