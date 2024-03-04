@@ -885,6 +885,12 @@ namespace Testing
             openForm(tr, (Button)sender);
         }
 
+        private void tsmiPrintAutoLabel_Click(object sender, EventArgs e)
+        {
+            Forms.frmPrintAutoLabel frm = new Forms.frmPrintAutoLabel();
+            frm.ShowDialog();
+        }
+
        
 
         

@@ -121,6 +121,7 @@
             this.pnCustomerProfit = new System.Windows.Forms.Panel();
             this.btnCustomerProfit = new System.Windows.Forms.Button();
             this.btnCustomerProfitSummary = new System.Windows.Forms.Button();
+            this.tsmiPrintAutoLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -369,10 +370,11 @@
             this.adminToolStripMenuItem,
             this.quitToolStripMenuItem1,
             this.aboutToolStripMenuItem,
-            this.CreateTicket});
+            this.CreateTicket,
+            this.tsmiPrintAutoLabel});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1028, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1090, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1355,6 +1357,14 @@
             this.btnCustomerProfitSummary.UseVisualStyleBackColor = false;
             this.btnCustomerProfitSummary.Click += new System.EventHandler(this.btnCustomerProfitSummary_Click);
             // 
+            // tsmiPrintAutoLabel
+            // 
+            this.tsmiPrintAutoLabel.ForeColor = System.Drawing.Color.White;
+            this.tsmiPrintAutoLabel.Name = "tsmiPrintAutoLabel";
+            this.tsmiPrintAutoLabel.Size = new System.Drawing.Size(127, 24);
+            this.tsmiPrintAutoLabel.Text = "Print Auto Label";
+            this.tsmiPrintAutoLabel.Click += new System.EventHandler(this.tsmiPrintAutoLabel_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1362,7 +1372,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Testing.Properties.Resources.Kl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1028, 895);
+            this.ClientSize = new System.Drawing.Size(1090, 895);
             this.Controls.Add(this.pnTravelReport);
             this.Controls.Add(this.pnCustomerProfit);
             this.Controls.Add(this.pnInvoice);
@@ -1497,5 +1507,6 @@
         public System.Windows.Forms.Button btnTravelReport;
         private System.Windows.Forms.ToolStripMenuItem tsPolicyUpload;
         public System.Windows.Forms.Button btnAutoUploadRpt;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPrintAutoLabel;
     }
 }

@@ -70,6 +70,8 @@ namespace Testing {
         
         private ANH_SL_NOTESDataTable tableANH_SL_NOTES;
         
+        private VIEW_PRINT_AUTO_LABELDataTable tableVIEW_PRINT_AUTO_LABEL;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -166,6 +168,9 @@ namespace Testing {
                 }
                 if ((ds.Tables["ANH_SL_NOTES"] != null)) {
                     base.Tables.Add(new ANH_SL_NOTESDataTable(ds.Tables["ANH_SL_NOTES"]));
+                }
+                if ((ds.Tables["VIEW_PRINT_AUTO_LABEL"] != null)) {
+                    base.Tables.Add(new VIEW_PRINT_AUTO_LABELDataTable(ds.Tables["VIEW_PRINT_AUTO_LABEL"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -417,6 +422,16 @@ namespace Testing {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public VIEW_PRINT_AUTO_LABELDataTable VIEW_PRINT_AUTO_LABEL {
+            get {
+                return this.tableVIEW_PRINT_AUTO_LABEL;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -550,6 +565,9 @@ namespace Testing {
                 }
                 if ((ds.Tables["ANH_SL_NOTES"] != null)) {
                     base.Tables.Add(new ANH_SL_NOTESDataTable(ds.Tables["ANH_SL_NOTES"]));
+                }
+                if ((ds.Tables["VIEW_PRINT_AUTO_LABEL"] != null)) {
+                    base.Tables.Add(new VIEW_PRINT_AUTO_LABELDataTable(ds.Tables["VIEW_PRINT_AUTO_LABEL"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -722,6 +740,12 @@ namespace Testing {
                     this.tableANH_SL_NOTES.InitVars();
                 }
             }
+            this.tableVIEW_PRINT_AUTO_LABEL = ((VIEW_PRINT_AUTO_LABELDataTable)(base.Tables["VIEW_PRINT_AUTO_LABEL"]));
+            if ((initTable == true)) {
+                if ((this.tableVIEW_PRINT_AUTO_LABEL != null)) {
+                    this.tableVIEW_PRINT_AUTO_LABEL.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -778,6 +802,8 @@ namespace Testing {
             base.Tables.Add(this.tableANH_SL_EXPL_BENI);
             this.tableANH_SL_NOTES = new ANH_SL_NOTESDataTable();
             base.Tables.Add(this.tableANH_SL_NOTES);
+            this.tableVIEW_PRINT_AUTO_LABEL = new VIEW_PRINT_AUTO_LABELDataTable();
+            base.Tables.Add(this.tableVIEW_PRINT_AUTO_LABEL);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -920,6 +946,12 @@ namespace Testing {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeVIEW_PRINT_AUTO_LABEL() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1041,6 +1073,9 @@ namespace Testing {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ANH_SL_NOTESRowChangeEventHandler(object sender, ANH_SL_NOTESRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void VIEW_PRINT_AUTO_LABELRowChangeEventHandler(object sender, VIEW_PRINT_AUTO_LABELRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -11858,6 +11893,323 @@ namespace Testing {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class VIEW_PRINT_AUTO_LABELDataTable : global::System.Data.TypedTableBase<VIEW_PRINT_AUTO_LABELRow> {
+            
+            private global::System.Data.DataColumn columnPOL_POLICY_NO;
+            
+            private global::System.Data.DataColumn columnPRS_NAME;
+            
+            private global::System.Data.DataColumn columnCHASSIS_ENGINE;
+            
+            private global::System.Data.DataColumn columnEFF_DATE;
+            
+            private global::System.Data.DataColumn columnCOVER;
+            
+            private global::System.Data.DataColumn columnGEOGRAPHICAL;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VIEW_PRINT_AUTO_LABELDataTable() {
+                this.TableName = "VIEW_PRINT_AUTO_LABEL";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal VIEW_PRINT_AUTO_LABELDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected VIEW_PRINT_AUTO_LABELDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn POL_POLICY_NOColumn {
+                get {
+                    return this.columnPOL_POLICY_NO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PRS_NAMEColumn {
+                get {
+                    return this.columnPRS_NAME;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CHASSIS_ENGINEColumn {
+                get {
+                    return this.columnCHASSIS_ENGINE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EFF_DATEColumn {
+                get {
+                    return this.columnEFF_DATE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn COVERColumn {
+                get {
+                    return this.columnCOVER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GEOGRAPHICALColumn {
+                get {
+                    return this.columnGEOGRAPHICAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VIEW_PRINT_AUTO_LABELRow this[int index] {
+                get {
+                    return ((VIEW_PRINT_AUTO_LABELRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event VIEW_PRINT_AUTO_LABELRowChangeEventHandler VIEW_PRINT_AUTO_LABELRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event VIEW_PRINT_AUTO_LABELRowChangeEventHandler VIEW_PRINT_AUTO_LABELRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event VIEW_PRINT_AUTO_LABELRowChangeEventHandler VIEW_PRINT_AUTO_LABELRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event VIEW_PRINT_AUTO_LABELRowChangeEventHandler VIEW_PRINT_AUTO_LABELRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddVIEW_PRINT_AUTO_LABELRow(VIEW_PRINT_AUTO_LABELRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VIEW_PRINT_AUTO_LABELRow AddVIEW_PRINT_AUTO_LABELRow(string POL_POLICY_NO, string PRS_NAME, string CHASSIS_ENGINE, string EFF_DATE, string COVER, string GEOGRAPHICAL) {
+                VIEW_PRINT_AUTO_LABELRow rowVIEW_PRINT_AUTO_LABELRow = ((VIEW_PRINT_AUTO_LABELRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        POL_POLICY_NO,
+                        PRS_NAME,
+                        CHASSIS_ENGINE,
+                        EFF_DATE,
+                        COVER,
+                        GEOGRAPHICAL};
+                rowVIEW_PRINT_AUTO_LABELRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowVIEW_PRINT_AUTO_LABELRow);
+                return rowVIEW_PRINT_AUTO_LABELRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                VIEW_PRINT_AUTO_LABELDataTable cln = ((VIEW_PRINT_AUTO_LABELDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new VIEW_PRINT_AUTO_LABELDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnPOL_POLICY_NO = base.Columns["POL_POLICY_NO"];
+                this.columnPRS_NAME = base.Columns["PRS_NAME"];
+                this.columnCHASSIS_ENGINE = base.Columns["CHASSIS_ENGINE"];
+                this.columnEFF_DATE = base.Columns["EFF_DATE"];
+                this.columnCOVER = base.Columns["COVER"];
+                this.columnGEOGRAPHICAL = base.Columns["GEOGRAPHICAL"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnPOL_POLICY_NO = new global::System.Data.DataColumn("POL_POLICY_NO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPOL_POLICY_NO);
+                this.columnPRS_NAME = new global::System.Data.DataColumn("PRS_NAME", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPRS_NAME);
+                this.columnCHASSIS_ENGINE = new global::System.Data.DataColumn("CHASSIS_ENGINE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCHASSIS_ENGINE);
+                this.columnEFF_DATE = new global::System.Data.DataColumn("EFF_DATE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEFF_DATE);
+                this.columnCOVER = new global::System.Data.DataColumn("COVER", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOVER);
+                this.columnGEOGRAPHICAL = new global::System.Data.DataColumn("GEOGRAPHICAL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGEOGRAPHICAL);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VIEW_PRINT_AUTO_LABELRow NewVIEW_PRINT_AUTO_LABELRow() {
+                return ((VIEW_PRINT_AUTO_LABELRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new VIEW_PRINT_AUTO_LABELRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(VIEW_PRINT_AUTO_LABELRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.VIEW_PRINT_AUTO_LABELRowChanged != null)) {
+                    this.VIEW_PRINT_AUTO_LABELRowChanged(this, new VIEW_PRINT_AUTO_LABELRowChangeEvent(((VIEW_PRINT_AUTO_LABELRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.VIEW_PRINT_AUTO_LABELRowChanging != null)) {
+                    this.VIEW_PRINT_AUTO_LABELRowChanging(this, new VIEW_PRINT_AUTO_LABELRowChangeEvent(((VIEW_PRINT_AUTO_LABELRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.VIEW_PRINT_AUTO_LABELRowDeleted != null)) {
+                    this.VIEW_PRINT_AUTO_LABELRowDeleted(this, new VIEW_PRINT_AUTO_LABELRowChangeEvent(((VIEW_PRINT_AUTO_LABELRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.VIEW_PRINT_AUTO_LABELRowDeleting != null)) {
+                    this.VIEW_PRINT_AUTO_LABELRowDeleting(this, new VIEW_PRINT_AUTO_LABELRowChangeEvent(((VIEW_PRINT_AUTO_LABELRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveVIEW_PRINT_AUTO_LABELRow(VIEW_PRINT_AUTO_LABELRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DBS11DataSet ds = new DBS11DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "VIEW_PRINT_AUTO_LABELDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class VIEW_DOC_DETAILRow : global::System.Data.DataRow {
@@ -22478,6 +22830,190 @@ namespace Testing {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class VIEW_PRINT_AUTO_LABELRow : global::System.Data.DataRow {
+            
+            private VIEW_PRINT_AUTO_LABELDataTable tableVIEW_PRINT_AUTO_LABEL;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal VIEW_PRINT_AUTO_LABELRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableVIEW_PRINT_AUTO_LABEL = ((VIEW_PRINT_AUTO_LABELDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string POL_POLICY_NO {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_PRINT_AUTO_LABEL.POL_POLICY_NOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'POL_POLICY_NO\' in table \'VIEW_PRINT_AUTO_LABEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_PRINT_AUTO_LABEL.POL_POLICY_NOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PRS_NAME {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_PRINT_AUTO_LABEL.PRS_NAMEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PRS_NAME\' in table \'VIEW_PRINT_AUTO_LABEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_PRINT_AUTO_LABEL.PRS_NAMEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CHASSIS_ENGINE {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_PRINT_AUTO_LABEL.CHASSIS_ENGINEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CHASSIS_ENGINE\' in table \'VIEW_PRINT_AUTO_LABEL\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_PRINT_AUTO_LABEL.CHASSIS_ENGINEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EFF_DATE {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_PRINT_AUTO_LABEL.EFF_DATEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EFF_DATE\' in table \'VIEW_PRINT_AUTO_LABEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_PRINT_AUTO_LABEL.EFF_DATEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string COVER {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_PRINT_AUTO_LABEL.COVERColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COVER\' in table \'VIEW_PRINT_AUTO_LABEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_PRINT_AUTO_LABEL.COVERColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string GEOGRAPHICAL {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_PRINT_AUTO_LABEL.GEOGRAPHICALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GEOGRAPHICAL\' in table \'VIEW_PRINT_AUTO_LABEL\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_PRINT_AUTO_LABEL.GEOGRAPHICALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPOL_POLICY_NONull() {
+                return this.IsNull(this.tableVIEW_PRINT_AUTO_LABEL.POL_POLICY_NOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPOL_POLICY_NONull() {
+                this[this.tableVIEW_PRINT_AUTO_LABEL.POL_POLICY_NOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPRS_NAMENull() {
+                return this.IsNull(this.tableVIEW_PRINT_AUTO_LABEL.PRS_NAMEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPRS_NAMENull() {
+                this[this.tableVIEW_PRINT_AUTO_LABEL.PRS_NAMEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCHASSIS_ENGINENull() {
+                return this.IsNull(this.tableVIEW_PRINT_AUTO_LABEL.CHASSIS_ENGINEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCHASSIS_ENGINENull() {
+                this[this.tableVIEW_PRINT_AUTO_LABEL.CHASSIS_ENGINEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEFF_DATENull() {
+                return this.IsNull(this.tableVIEW_PRINT_AUTO_LABEL.EFF_DATEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEFF_DATENull() {
+                this[this.tableVIEW_PRINT_AUTO_LABEL.EFF_DATEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCOVERNull() {
+                return this.IsNull(this.tableVIEW_PRINT_AUTO_LABEL.COVERColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCOVERNull() {
+                this[this.tableVIEW_PRINT_AUTO_LABEL.COVERColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsGEOGRAPHICALNull() {
+                return this.IsNull(this.tableVIEW_PRINT_AUTO_LABEL.GEOGRAPHICALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetGEOGRAPHICALNull() {
+                this[this.tableVIEW_PRINT_AUTO_LABEL.GEOGRAPHICALColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -23245,6 +23781,40 @@ namespace Testing {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ANH_SL_NOTESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class VIEW_PRINT_AUTO_LABELRowChangeEvent : global::System.EventArgs {
+            
+            private VIEW_PRINT_AUTO_LABELRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VIEW_PRINT_AUTO_LABELRowChangeEvent(VIEW_PRINT_AUTO_LABELRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public VIEW_PRINT_AUTO_LABELRow Row {
                 get {
                     return this.eventRow;
                 }
