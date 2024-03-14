@@ -112,8 +112,8 @@ namespace Testing.Forms
                                 if (bankname != "ALL BANK")
                                 {
 
-                                    main_rpt += " and SALE_AGENT_NAME like '" + bankname + "%'";
-                                    third_rpt += " WHERE AGENT_NAME LIKE '" + bankname + "%'";
+                                    main_rpt += " and SALE_AGENT_NAME like '" + (bankname == "FTB" ? "FOREIGN TRADE BANK" : bankname) + "%'";
+                                    third_rpt += " WHERE AGENT_NAME LIKE '" + (bankname == "FTB" ? "FOREIGN TRADE BANK" : bankname) + "%'";
 
                                 }
                                 else
@@ -145,7 +145,7 @@ namespace Testing.Forms
                                                 " or SALE_AGENT_NAME like 'CAM CAPITAL%' " +
                                                 " or SALE_AGENT_NAME like 'CAMBODIA POST%' " +
                                                 " or SALE_AGENT_NAME like 'KASIKORN%' " +
-                                                " or SALE_AGENT_NAME like 'FTB%' " +
+                                                " or SALE_AGENT_NAME like 'FOREIGN TRADE BANK%' " +
                                                 " or SALE_AGENT_NAME like 'SHINHAN%' " +
                                                 " or SALE_AGENT_NAME like 'AMK%' or SALE_AGENT_NAME like 'HONG LEONG%' ) ";
                                     third_rpt += " WHERE regexp_like(nvl(AGENT_NAME, '*'), '" + bankname + "' ,'i')";
