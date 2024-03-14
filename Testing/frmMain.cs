@@ -181,8 +181,8 @@ namespace Testing
                 }
             }
 
-            btn.BackColor = Color.White;
-            btn.ForeColor = Color.FromArgb(0, 38, 58);
+            btn.ForeColor = Color.White;
+            btn.BackColor = Color.FromArgb(0, 38, 58);
         }
 
         private void tmCheckMaint_Tick(object sender, EventArgs e)
@@ -471,6 +471,7 @@ namespace Testing
             pnInvoice.Visible = false;
             pnCustomerProfit.Visible = false;
             pnTravelReport.Visible = false;
+            pSendEmailsClaim.Visible = false;
         }
 
         private void bnPolRem_Click(object sender, EventArgs e)
@@ -494,8 +495,19 @@ namespace Testing
 
         private void bnClEmail_Click(object sender, EventArgs e)
         {
+            SubPan(pSendEmailsClaim);
+        }
+
+        private void btnSendClaimEmail_Click(object sender, EventArgs e)
+        {
             Forms.frmSendEmailClaim cl = new Forms.frmSendEmailClaim();
             cl.UserName = UserName;
+            openForm(cl, (Button)sender);
+        }
+
+        private void btnSendClaimEmailReport_Click(object sender, EventArgs e)
+        {
+            Forms.frmANHEmailClaimReport cl = new Forms.frmANHEmailClaimReport();
             openForm(cl, (Button)sender);
         }
 

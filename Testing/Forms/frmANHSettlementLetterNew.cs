@@ -3,26 +3,50 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.CodeDom.Compiler;
+using Application = Microsoft.Office.Interop.Word.Application;
+using Document = Microsoft.Office.Interop.Word.Document;
+using Microsoft.Office.Interop.Word;
 
 namespace Testing.Forms
 {
     public partial class frmANHSettlementLetterNew : Form
     {
         private CRUD crud = new CRUD();
-        private DataTable dtExplBeni = new DataTable();
-        private DataTable dtExplBeniReport = new DataTable();
-        private DataTable dtNote = new DataTable();
-        private DataTable dtNoteReport = new DataTable();
-        private DataTable dtClaimInfoReport = new DataTable();
+        private DBS11SqlCrud sqlcrud = new DBS11SqlCrud();
+        private System.Data.DataTable dtExplBeni = new System.Data.DataTable();
+        private System.Data.DataTable dtExplBeniReport = new System.Data.DataTable();
+        private System.Data.DataTable dtNote = new System.Data.DataTable();
+        private System.Data.DataTable dtNoteReport = new System.Data.DataTable();
+        private System.Data.DataTable dtClaimInfoReport = new System.Data.DataTable();
         private bool stringInput = false;
         private string claimNo = string.Empty;
 
-        public static DataTable DtNote = new DataTable();
-        public static DataTable DtExplainBene = new DataTable();
+        private string template = string.Empty;
+
+        private string path = System.Windows.Forms.Application.StartupPath + @"\";
+        public static string FilePath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice";
+        public static string FClaimNo = string.Empty;
+
+        public static System.Data.DataTable DtNote = new System.Data.DataTable();
+        public static System.Data.DataTable DtExplainBene = new System.Data.DataTable();
+
+        public static string Paid = string.Empty;
+        public static string NonPaid = string.Empty;
+        public static string NonPayableReason = string.Empty;
+
+        private Microsoft.Office.Interop.Word._Application oWord = new Application();
+        private Microsoft.Office.Interop.Word._Document templateDoc = new Document();
+
+        private bool isExist = false;
+        private long existSettlementNoticeId = 0;
+
+        private System.Data.DataTable dtCurrentEob = new System.Data.DataTable();
 
         public frmANHSettlementLetterNew(string ClaimNo)
         {
@@ -32,19 +56,70 @@ namespace Testing.Forms
 
         private void frmANHSettlementLetterNew_Load(object sender, EventArgs e)
         {
-            LoadData();
+            dtNote = new System.Data.DataTable();
+            dtNote.Columns.Add("Amount", typeof(string));
+            dtNote.Columns.Add("Description", typeof(string));
+
+            dgvNote.DataSource = dtNote;
+            dgvNote.Columns["Amount"].Width = 200;
+
+            var dtCurSettlementNotice = sqlcrud.LoadData("select * from tbSETTLEMENT_NOTICE where CLAIM_NO = '" + claimNo.ToUpper().Trim() + "'").Tables[0];
+            if (dtCurSettlementNotice.Rows.Count > 0)
+            {
+                isExist = true;
+
+                var drCurSettlementNotice = dtCurSettlementNotice.Rows[0];
+                existSettlementNoticeId = Convert.ToInt64(drCurSettlementNotice["ID"].ToString());
+
+                txtAttn.Text = drCurSettlementNotice["ATTN"].ToString();
+                txtPolicyholder.Text = drCurSettlementNotice["POLICY_HOLDER"].ToString();
+                txtAddress.Text = drCurSettlementNotice["CUSTOMER_ADDRESS"].ToString();
+                txtMemberName.Text = drCurSettlementNotice["MEMBER_NAME"].ToString();
+                txtPolicy.Text = drCurSettlementNotice["POLICY"].ToString();
+                txtPolicyNo.Text = drCurSettlementNotice["POLICY_NO"].ToString();
+                dtpAdmissonDate.Value = Convert.ToDateTime(drCurSettlementNotice["ADMISSION_DATE"].ToString());
+                txtClaimNo.Text = drCurSettlementNotice["CLAIM_NO"].ToString();
+                dtpDischargeDate.Value = Convert.ToDateTime(drCurSettlementNotice["DISCHARGE_DATE"].ToString());
+                txtPlan.Text = drCurSettlementNotice["POLICY_PLAN"].ToString();
+                txtLengthOfStay.Text = drCurSettlementNotice["LENGTH_OF_STAY"].ToString();
+                dtpRegistrationDate.Value = Convert.ToDateTime(drCurSettlementNotice["REGISTERATION_DATE"].ToString());
+                txtICUStay.Text = drCurSettlementNotice["ICU_STAY"].ToString();
+                txtPanelHospital.Text = drCurSettlementNotice["PANEL_HOSPITAL"].ToString();
+                txtOtherHospital.Text = drCurSettlementNotice["OTHER_HOSPITAL"].ToString();
+                txtDiagnosis.Text = drCurSettlementNotice["DIAGNOSIS"].ToString();
+                txtPaymentBene.Text = drCurSettlementNotice["PAYMENT_BENEFICIARY"].ToString();
+                txtExchangeRate.Text = drCurSettlementNotice["EXCHANGE_RATE"].ToString();
+                txtEmail.Text = drCurSettlementNotice["EMAIL"].ToString();
+                txtCC.Text = drCurSettlementNotice["CC"].ToString();
+
+                var curSettlementNoticeID = Convert.ToInt64(dtCurSettlementNotice.Rows[0]["ID"].ToString());
+
+                dtCurrentEob = sqlcrud.LoadData("select * from tbSETTLEMENT_NOTICE_EOB where SETTLEMENT_NOTICE_ID = " + curSettlementNoticeID + "").Tables[0];
+
+                var dtCurrentNote = sqlcrud.LoadData("select * from tbSETTLEMENT_NOTICE_NOTE where SETTLEMENT_NOTICE_ID = " + curSettlementNoticeID + "").Tables[0];
+                if (dtCurrentNote.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dtCurrentNote.Rows.Count; i++)
+                    {
+                        var drCurrentNote = dtCurrentNote.Rows[i];
+                        string amount = "USD " + Convert.ToDecimal(drCurrentNote["AMOUNT"]).ToString("N2");
+                        string des = drCurrentNote["DESCRIPTION"].ToString();
+
+                        var drNote = dtNote.NewRow();
+                        drNote["Amount"] = amount;
+                        drNote["Description"] = des;
+
+                        dtNote.Rows.Add(drNote);
+                    }
+                }
+            }
 
             dgvExplBeni.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNote.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNote.DefaultCellStyle.ForeColor = Color.Black;
             dgvExplBeni.DefaultCellStyle.ForeColor = Color.Black;
 
-            dtNote = new DataTable();
-            dtNote.Columns.Add("Amount", typeof(string));
-            dtNote.Columns.Add("Description", typeof(string));
-
-            dgvNote.DataSource = dtNote;
-            dgvNote.Columns["Amount"].Width = 200;
+            LoadData();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -53,35 +128,255 @@ namespace Testing.Forms
             {
                 Cursor = Cursors.WaitCursor;
 
-                DtNote = dtNote.Copy();
-                DtExplainBene = dtExplBeni.Copy();
+                SetTemplate();
 
-                GetClaimInfoReport();
-                GetNoteHtmlReport();
-                GetExplBeniReport();
+                string pClaimNo = claimNo;
 
-                dtClaimInfoReport.TableName = "ANH_SL_CLAIM_INFO";
-                dtNoteReport.TableName = "ANH_SL_NOTES";
-                dtExplBeniReport.TableName = "ANH_SL_EXPL_BENI";
+                string filePath = "";
+                TempFileCollection tempfile = new TempFileCollection(); //this will create Temporary File, re-initailized it will create new file everytime 
+                tempfile.KeepFiles = false; //will be used when dispose tempfile
+                filePath = tempfile.AddExtension("txt"); //add extension to the created Temporary File
 
-                DataSet dsReport = new DataSet();
-                dsReport.Tables.Add(dtClaimInfoReport);
-                dsReport.Tables.Add(dtNoteReport);
-                dsReport.Tables.Add(dtExplBeniReport);
+                System.IO.StreamWriter writer = new System.IO.StreamWriter(filePath); //open the file for writing.
+                writer.Write(template); //write text to the file
+                writer.Close(); //remember to close the file again.
+                writer.Dispose();
 
-                frmANHSettlementLetterNewRV frmReport = new frmANHSettlementLetterNewRV(dsReport, txtClaimNo.Text.ToUpper());
-                frmReport.ShowDialog();
+                var fileInfo = new FileInfo(filePath);
+
+                templateDoc = oWord.Documents.Open(path + @"Html\AH-Settlement-Notice-Template.docx");
+                var bookMark = templateDoc.Words.First.Bookmarks.Add("entry");
+
+                object bookmarkObj = bookMark;
+                Range bookmarkRange = templateDoc.Bookmarks.get_Item(ref bookmarkObj).Range;
+
+                bookmarkRange.InsertFile(fileInfo.FullName);
+
+                templateDoc.PageSetup.PaperSize = Microsoft.Office.Interop.Word.WdPaperSize.wdPaperA4;
+                templateDoc.Paragraphs.SpaceBefore = InchesToPoints(0.0f);
+                templateDoc.Paragraphs.SpaceAfter = InchesToPoints(0.0f);
+                templateDoc.Paragraphs.LineSpacing = InchesToPoints(0.18f);
+                templateDoc.PageSetup.LeftMargin = InchesToPoints(0.6f);
+                templateDoc.PageSetup.RightMargin = InchesToPoints(0.6f);
+                templateDoc.PageSetup.BottomMargin = InchesToPoints(0.5f);
+
+                for (int i = templateDoc.Paragraphs.Count; i >= 1; i--)
+                {
+                    Microsoft.Office.Interop.Word.Paragraph para = templateDoc.Paragraphs[i];
+                    if (string.IsNullOrWhiteSpace(para.Range.Text))
+                    {
+                        // Delete the empty paragraph
+                        para.Range.Delete();
+                    }
+                }
+
+                SaveOrUpdateToDatabase();
+
+                templateDoc.SaveAs2(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + ".docx");
+                templateDoc.ExportAsFixedFormat(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + ".pdf", WdExportFormat.wdExportFormatPDF, true);
+
+                templateDoc.Close();
+                oWord.Quit();
+
+                File.Delete(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + ".docx");
+
+                FClaimNo = @"\" + claimNo.Replace('/', '-') + ".pdf";
+
+                FilePath = FilePath + FClaimNo;
+
                 Close();
+
+                //DtNote = dtNote.Copy();
+                //DtExplainBene = dtExplBeni.Copy();
+
+                //dtClaimInfoReport.TableName = "ANH_SL_CLAIM_INFO";
+                //dtNoteReport.TableName = "ANH_SL_NOTES";
+                //dtExplBeniReport.TableName = "ANH_SL_EXPL_BENI";
+
+                //DataSet dsReport = new DataSet();
+                //dsReport.Tables.Add(dtClaimInfoReport);
+                //dsReport.Tables.Add(dtNoteReport);
+                //dsReport.Tables.Add(dtExplBeniReport);
+
+                //frmANHSettlementLetterNewRV frmReport = new frmANHSettlementLetterNewRV(dsReport, txtClaimNo.Text.ToUpper());
+                //frmReport.ShowDialog();
+                //Close();
 
                 Cursor = Cursors.Arrow;
             }
             catch (Exception ex)
             {
+                templateDoc.Close();
+                oWord.Quit();
+
                 Cursor = Cursors.Arrow;
                 Msgbox.Show(ex.ToString());
             }
         }
-        
+
+        private void SetTemplate()
+        {
+            GetClaimInfoReport();
+            GetExplBeniReport();
+            GetNoteHtmlReport();
+
+            template = File.ReadAllText(path + @"Html\Settlement-Notice-Template.txt");
+
+            var drClaimInfoReport = dtClaimInfoReport.Rows[0];
+            template = template.Replace("%DateTimeN%", DateTime.Now.ToString("dd MMMM yyyy"));
+            template = template.Replace("%Attn%", drClaimInfoReport["ATTN"].ToString());
+            template = template.Replace("%PolicyHolder%", drClaimInfoReport["POLICY_HOLDER"].ToString());
+            template = template.Replace("%Address%", drClaimInfoReport["ADDRESS"].ToString());
+            template = template.Replace("%MemberName%", drClaimInfoReport["MEMBER_NAME"].ToString());
+            template = template.Replace("%Policy%", drClaimInfoReport["POLICY"].ToString());
+            template = template.Replace("%PolicyNo%", drClaimInfoReport["POLICY_NO"].ToString());
+            template = template.Replace("%AdmiDate%", drClaimInfoReport["ADMISSION_DATE"].ToString());
+            template = template.Replace("%ClaimNo%", drClaimInfoReport["CLAIM_NO"].ToString());
+            template = template.Replace("%DisDate%", drClaimInfoReport["DISCHARGE_DATE"].ToString());
+            template = template.Replace("%Plan%", drClaimInfoReport["PLAN"].ToString());
+            template = template.Replace("%LStay%", drClaimInfoReport["LENGTH_OF_STAY"].ToString());
+            template = template.Replace("%RegisterationDate%", drClaimInfoReport["REGISTRATION_DATE"].ToString());
+            template = template.Replace("%ICUStay%", drClaimInfoReport["ICU_STAY"].ToString());
+            template = template.Replace("%PanelHospital%", drClaimInfoReport["PANEL_HOSPITAL"].ToString());
+            template = template.Replace("%OtherHospital%", drClaimInfoReport["OTHER_HOSPITAL"].ToString());
+            template = template.Replace("%Diagnosis%", drClaimInfoReport["DIAGNOSIS"].ToString());
+            template = template.Replace("%Beneficiary%", drClaimInfoReport["PAYMENT_BENE"].ToString());
+            template = template.Replace("%ExchangeRate%", drClaimInfoReport["EXCHANGE_RATE"].ToString());
+            template = template.Replace("%Email%", drClaimInfoReport["EMAIL"].ToString());
+            template = template.Replace("%CC%", drClaimInfoReport["CC"].ToString());
+
+            string feob = string.Empty, fnotes = string.Empty;
+            decimal toc = 0.00M, tciusd = 0.00M, tenc = 0.00M, tdc = 0.00M, tol = 0.00M, ttac = 0.00M;
+
+            for (int i = 0; i < dtExplBeniReport.Rows.Count; i++)
+            {
+                var drExplBeniReport = dtExplBeniReport.Rows[i];
+                string eob = File.ReadAllText(path + @"Html\Settlement-Notice-EOB-Template.txt");
+
+                eob = eob.Replace("%Stp%", drExplBeniReport["SERVICE_PROVIDED"].ToString());
+                eob = eob.Replace("%Oc%", drExplBeniReport["ORIGINAL_CURRENCY"].ToString());
+                eob = eob.Replace("%Ciusd%", drExplBeniReport["CURRENCY_IN_USD"].ToString());
+                eob = eob.Replace("%Enc%", drExplBeniReport["EXPENSES_NOT_COVERED"].ToString());
+                eob = eob.Replace("%Dc%", drExplBeniReport["DEDUCTIBLE_OR_COPLAY"].ToString());
+                eob = eob.Replace("%Ol%", drExplBeniReport["OVER_LIMIT"].ToString());
+                eob = eob.Replace("%Tac%", drExplBeniReport["TOTAL_AMT_COVERED"].ToString());
+
+                feob += eob;
+
+                toc += Convert.ToDecimal(drExplBeniReport["ORIGINAL_CURRENCY"].ToString());
+                tciusd += Convert.ToDecimal(drExplBeniReport["CURRENCY_IN_USD"].ToString());
+                tenc += Convert.ToDecimal(drExplBeniReport["EXPENSES_NOT_COVERED"].ToString());
+                tdc += Convert.ToDecimal(drExplBeniReport["DEDUCTIBLE_OR_COPLAY"].ToString());
+                tol += Convert.ToDecimal(drExplBeniReport["OVER_LIMIT"].ToString());
+                ttac += Convert.ToDecimal(drExplBeniReport["TOTAL_AMT_COVERED"].ToString());
+            }
+
+            template = template.Replace("%EOB%", feob);
+            template = template.Replace("%Toc%", toc.ToString("N2"));
+            template = template.Replace("%Tciusd%", tciusd.ToString("N2"));
+            template = template.Replace("%Tenc%", tenc.ToString("N2"));
+            template = template.Replace("%Tdc%", tdc.ToString("N2"));
+            template = template.Replace("%Tol%", tol.ToString("N2"));
+            template = template.Replace("%Ttac%", ttac.ToString("N2"));
+
+            for (int i = 0; i < dtNote.Rows.Count; i++)
+            {
+                var drNote = dtNote.Rows[i];
+                string notes = File.ReadAllText(path + @"Html\Settlement-Notice-Notes-Template.txt");
+
+                notes = notes.Replace("%Amt%", drNote["Amount"].ToString());
+                notes = notes.Replace("%Description%", drNote["Description"].ToString());
+
+                fnotes += notes;
+
+                NonPayableReason += string.Concat("- ", drNote["Amount"].ToString(), " : ", drNote["Description"].ToString(), "<br>");
+            }
+
+            template = template.Replace("%Notes%", fnotes);
+
+            Paid = ttac.ToString("N2");
+            NonPaid = (tenc + tdc + tol).ToString("N2");
+
+            if (!string.IsNullOrEmpty(NonPayableReason))
+                NonPayableReason = NonPayableReason.Remove(NonPayableReason.Length - 4);
+        }
+
+        private void SaveOrUpdateToDatabase()
+        {
+            if (isExist)
+            {
+                sqlcrud.Executing("delete from tbSETTLEMENT_NOTICE where ID = " + existSettlementNoticeId + "");
+                sqlcrud.Executing("delete from tbSETTLEMENT_NOTICE_EOB where SETTLEMENT_NOTICE_ID = " + existSettlementNoticeId + "");
+                sqlcrud.Executing("delete from tbSETTLEMENT_NOTICE_NOTE where SETTLEMENT_NOTICE_ID = " + existSettlementNoticeId + "");
+            }
+
+            System.Data.DataTable dtTemp = sqlcrud.ExecuteMySqlOutPara("dbo.SP_INSERT_SETTLEMENT_NOTICE",
+                "@ATTN", txtAttn.Text.Trim(),
+                "@POLICY_HOLDER", txtPolicyholder.Text.Trim(),
+                "@CUSTOMER_ADDRESS", txtAddress.Text.Trim(),
+                "@MEMBER_NAME", txtMemberName.Text.Trim(),
+                "@POLICY", txtPolicy.Text.Trim(),
+                "@POLICY_NO", txtPolicyNo.Text.Trim(),
+                "@ADMISSION_DATE", dtpAdmissonDate.Value,
+                "@CLAIM_NO", txtClaimNo.Text.Trim(),
+                "@DISCHARGE_DATE", dtpDischargeDate.Value,
+                "@POLICY_PLAN", txtPlan.Text.Trim(),
+                "@LENGTH_OF_STAY", txtLengthOfStay.Text.Trim(),
+                "@REGISTERATION_DATE", dtpRegistrationDate.Value,
+                "@ICU_STAY", txtICUStay.Text.Trim(),
+                "@PANEL_HOSPITAL", txtPanelHospital.Text.Trim(),
+                "@OTHER_HOSPITAL", txtOtherHospital.Text.Trim(),
+                "@DIAGNOSIS", txtDiagnosis.Text.Trim(),
+                "@PAYMENT_BENEFICIARY", txtPaymentBene.Text.Trim(),
+                "@EXCHANGE_RATE", txtExchangeRate.Text.Trim(),
+                "@EMAIL", txtEmail.Text.Trim(),
+                "@CC", txtCC.Text.Trim(),
+                "@CREATED_DATE", DateTime.Now,
+                "@CREATED_USER", frmLogIn.Usert.ToUpper()
+                );
+
+            if (dtTemp.Rows.Count > 0)
+            {
+                long settlementNoticeID = Convert.ToInt64(dtTemp.Rows[0][0].ToString());
+
+
+                for (int i = 0; i < dtExplBeniReport.Rows.Count; i++)
+                {
+                    var drExplBeniReport = dtExplBeniReport.Rows[i];
+                    sqlcrud.ExecuteMySql("dbo.SP_INSERT_SETTLEMENT_NOTICE_EOB",
+                        "@SETTLEMENT_NOTICE_ID", settlementNoticeID,
+                        "@SERVICES_OR_TREATMENT_PROVIDED", drExplBeniReport["SERVICE_PROVIDED"].ToString(),
+                        "@ORIGINAL_CURRENCY", Convert.ToDecimal(drExplBeniReport["ORIGINAL_CURRENCY"].ToString()),
+                        "@CURRENCY_IN_USD", Convert.ToDecimal(drExplBeniReport["CURRENCY_IN_USD"].ToString()),
+                        "@EXPENSES_NOT_COVERED", Convert.ToDecimal(drExplBeniReport["EXPENSES_NOT_COVERED"].ToString()),
+                        "@DEDUCTIBLE_OR_COPAY", Convert.ToDecimal(drExplBeniReport["DEDUCTIBLE_OR_COPLAY"].ToString()),
+                        "@OVER_LIMIT", Convert.ToDecimal(drExplBeniReport["OVER_LIMIT"].ToString()),
+                        "@TOTAL_AMOUNT_COVER", Convert.ToDecimal(drExplBeniReport["TOTAL_AMT_COVERED"].ToString()),
+                        "@CREATED_DATE", DateTime.Now,
+                        "@CREATED_USER", frmLogIn.Usert.ToUpper()
+                        );
+                }
+
+                for (int i = 0; i < dtNote.Rows.Count; i++)
+                {
+                    var drNote = dtNote.Rows[i];
+                    decimal amount = Convert.ToDecimal(drNote["Amount"].ToString().Replace("USD", "").Trim());
+                    sqlcrud.ExecuteMySql("dbo.SP_INSERT_SETTLEMENT_NOTICE_NOTE",
+                        "@SETTLEMENT_NOTICE_ID", settlementNoticeID,
+                        "@AMOUNT", amount,
+                        "@DESCRIPTION", drNote["Description"].ToString(),
+                        "@CREATED_DATE", DateTime.Now,
+                        "@CREATED_USER", frmLogIn.Usert.ToUpper()
+                        );
+                }
+            }
+        }
+
+        private float InchesToPoints(float fInches)
+        {
+            return fInches * 72.0f;
+        }
+
         private void LoadData()
         {
             try
@@ -95,7 +390,7 @@ namespace Testing.Forms
                 "TRIM(TO_CHAR(INT_CLAIMED_AMT,'999,999,999,990.99')) CLAIMED_AMOUNT, " +
                 "nvl(INT_DIAGNOSIS, nvl(trim(substr(INT_COMMENTS, instr(INT_COMMENTS, 'D:') + 2, nvl(nullif(instr(INT_COMMENTS, 'IO:'),0),instr(INT_COMMENTS, 'SC:')) - instr(INT_COMMENTS, 'D:') - 2)), 'N/A')) CAUSE, " +
                 "INT_COMMENTS HOSPITAL, INT_OTH_HOSPITAL, (select COM_NAME from CL_M_ORGANIZATIONS where COM_CODE = INT_HOSPITAL_CODE) PANEL_HOSPITAL," +
-                "TO_CHAR(INT_INITIMATE_DT) REGISTERATION_DATE, TO_CHAR(INT_DATE_LOSS) TREATMENT_DATE, " +
+                "TO_CHAR(INT_INITIMATE_DT) REGISTERATION_DATE, NVL(TO_CHAR(INT_DATE_ADMISSION), TO_CHAR(INT_DATE_LOSS)) TREATMENT_DATE, INT_DATE_DISCHARGE DISCHARGE_DATE," +
                 "(select case when INT_BPARTY_CODE = 'U-BRK' then SFC_FIRST_NAME else SFC_FIRST_NAME || ' ' || SFC_SURNAME end from SM_M_SALES_FORCE where SFC_CODE = INT_BPARTY_CODE) CC, (SELECT PLN_DESCRIPTION FROM UW_T_PLANS WHERE CLM_PLAN_CODE=PLN_CODE AND INT_PROD_CODE = PLN_PRD_CODE) PLAN_DESCRIPTION from CL_T_INTIMATION,CL_T_CLM_MEMBERS where  CLM_INT_SEQ = INT_SEQ_NO and INT_CLAIM_NO = '" + claimNo + "'");
 
                 if (dtClaimInfo == null || dtClaimInfo.Rows.Count <= 0)
@@ -111,21 +406,27 @@ namespace Testing.Forms
                 {
                     var proCode = claimNo.Substring(6, 4).ToLower();
 
-                    txtCC.Text = dtClaimInfo.Rows[0]["CC"].ToString();
-                    txtPolicy.Text = GetPolicyType(proCode);
-                    txtPolicyholder.Text = dtClaimInfo.Rows[0]["POLICY_HOLDER"].ToString();
-                    txtAddress.Text = dtClaimInfo.Rows[0]["ADDRESS"].ToString();
-                    txtMemberName.Text = dtClaimInfo.Rows[0]["MEMBER"].ToString();
-                    txtPolicyNo.Text = dtClaimInfo.Rows[0]["POLICY_NO"].ToString();
-                    dtpAdmissonDate.Value = Convert.ToDateTime(dtClaimInfo.Rows[0]["TREATMENT_DATE"].ToString());
-                    txtClaimNo.Text = dtClaimInfo.Rows[0]["CLAIM_NO"].ToString();
-                    txtPlan.Text = GetPlan(proCode, dtClaimInfo.Rows[0]["PLAN_DESCRIPTION"].ToString());
-                    dtpRegistrationDate.Value = Convert.ToDateTime(dtClaimInfo.Rows[0]["REGISTERATION_DATE"].ToString());
-                    //txtPanelHospital.Text = GetPanelHospital(dtClaimInfo.Rows[0]["HOSPITAL"].ToString());
-                    txtPanelHospital.Text = dtClaimInfo.Rows[0]["PANEL_HOSPITAL"].ToString();
-                    txtOtherHospital.Text = dtClaimInfo.Rows[0]["INT_OTH_HOSPITAL"].ToString();
-                    txtDiagnosis.Text = dtClaimInfo.Rows[0]["CAUSE"].ToString();
-                    txtEmail.Text = GetEmailByProduct(proCode);
+                    if (!isExist)
+                    {
+                        txtCC.Text = dtClaimInfo.Rows[0]["CC"].ToString();
+                        txtPolicy.Text = GetPolicyType(proCode);
+                        txtPolicyholder.Text = dtClaimInfo.Rows[0]["POLICY_HOLDER"].ToString();
+                        txtAddress.Text = dtClaimInfo.Rows[0]["ADDRESS"].ToString();
+                        txtMemberName.Text = dtClaimInfo.Rows[0]["MEMBER"].ToString();
+                        txtPolicyNo.Text = dtClaimInfo.Rows[0]["POLICY_NO"].ToString();
+                        dtpAdmissonDate.Value = Convert.ToDateTime(dtClaimInfo.Rows[0]["TREATMENT_DATE"].ToString());
+                        dtpDischargeDate.Value = (!string.IsNullOrEmpty(dtClaimInfo.Rows[0]["DISCHARGE_DATE"].ToString()) ? Convert.ToDateTime(dtClaimInfo.Rows[0]["DISCHARGE_DATE"].ToString()) : DateTime.Now);
+                        txtClaimNo.Text = dtClaimInfo.Rows[0]["CLAIM_NO"].ToString();
+                        txtPlan.Text = GetPlan(proCode, dtClaimInfo.Rows[0]["PLAN_DESCRIPTION"].ToString());
+                        dtpRegistrationDate.Value = Convert.ToDateTime(dtClaimInfo.Rows[0]["REGISTERATION_DATE"].ToString());
+                        //txtPanelHospital.Text = GetPanelHospital(dtClaimInfo.Rows[0]["HOSPITAL"].ToString());
+                        txtPanelHospital.Text = dtClaimInfo.Rows[0]["PANEL_HOSPITAL"].ToString();
+                        txtOtherHospital.Text = dtClaimInfo.Rows[0]["INT_OTH_HOSPITAL"].ToString();
+                        txtDiagnosis.Text = dtClaimInfo.Rows[0]["CAUSE"].ToString();
+                        txtEmail.Text = GetEmailByProduct(proCode);
+                    }
+                    
+
                     BindToDgvExplBeni(proCode);
                 }
 
@@ -136,7 +437,7 @@ namespace Testing.Forms
                 Cursor = Cursors.Arrow;
                 Msgbox.Show(ex.ToString());
             }
-            
+
         }
 
         private void dgvExplBeni_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -320,7 +621,7 @@ namespace Testing.Forms
             return email;
         }
 
-        private DataTable GetExplBeni(string proCode)
+        private System.Data.DataTable GetExplBeni(string proCode)
         {
             var dtList = crud.ExecQuery("select * from user_settlement_letter_explbeni where product_code = '" + proCode + "'");
             return dtList;
@@ -330,7 +631,43 @@ namespace Testing.Forms
         {
             dtExplBeni = GetExplBeni(proCode.Substring(1).ToUpper());
 
-            dgvExplBeni.DataSource = dtExplBeni;
+            if (isExist)
+            {
+                for (int i = 0; i < dtCurrentEob.Rows.Count; i++)
+                {
+                    var drCurrentEob = dtCurrentEob.Rows[i];
+                    var defaultRows = dtExplBeni.Select("SERVICE_PROVIDED = '" + drCurrentEob["SERVICES_OR_TREATMENT_PROVIDED"] + "'");
+                    if (defaultRows.Count() > 0)
+                    {
+                        DataRow defaultRow = dtExplBeni.Select("SERVICE_PROVIDED = '" + drCurrentEob["SERVICES_OR_TREATMENT_PROVIDED"] + "'")[0];
+                        defaultRow["ORIGINAL_CURRENCY"] = drCurrentEob["ORIGINAL_CURRENCY"];
+                        defaultRow["CURRENCY_IN_USD"] = drCurrentEob["CURRENCY_IN_USD"];
+                        defaultRow["EXPENSES_NOT_COVERED"] = drCurrentEob["EXPENSES_NOT_COVERED"];
+                        defaultRow["DEDUCTIBLE_OR_COPLAY"] = drCurrentEob["DEDUCTIBLE_OR_COPAY"];
+                        defaultRow["OVER_LIMIT"] = drCurrentEob["OVER_LIMIT"];
+                        defaultRow["TOTAL_AMT_COVERED"] = drCurrentEob["TOTAL_AMOUNT_COVER"];
+                    }
+                    else
+                    {
+                        var drExplBeni = dtExplBeni.NewRow();
+                        drExplBeni["SERVICE_PROVIDED"] = drCurrentEob["SERVICES_OR_TREATMENT_PROVIDED"];
+                        drExplBeni["ORIGINAL_CURRENCY"] = drCurrentEob["ORIGINAL_CURRENCY"];
+                        drExplBeni["CURRENCY_IN_USD"] = drCurrentEob["CURRENCY_IN_USD"];
+                        drExplBeni["EXPENSES_NOT_COVERED"] = drCurrentEob["EXPENSES_NOT_COVERED"];
+                        drExplBeni["DEDUCTIBLE_OR_COPLAY"] = drCurrentEob["DEDUCTIBLE_OR_COPAY"];
+                        drExplBeni["OVER_LIMIT"] = drCurrentEob["OVER_LIMIT"];
+                        drExplBeni["TOTAL_AMT_COVERED"] = drCurrentEob["TOTAL_AMOUNT_COVER"];
+
+                        dtExplBeni.Rows.Add(drExplBeni);
+                    }
+
+                }
+                dgvExplBeni.DataSource = dtExplBeni;
+            }
+            else
+                dgvExplBeni.DataSource = dtExplBeni;
+
+
             dgvExplBeni.Columns["PRODUCT_CODE"].Visible = false;
 
             dgvExplBeni.Columns["ORIGINAL_CURRENCY"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -339,14 +676,14 @@ namespace Testing.Forms
             dgvExplBeni.Columns["DEDUCTIBLE_OR_COPLAY"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvExplBeni.Columns["OVER_LIMIT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvExplBeni.Columns["TOTAL_AMT_COVERED"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvExplBeni.Columns["SERVICE_PROVIDED"].Width = 600;
+            dgvExplBeni.Columns["SERVICE_PROVIDED"].Width = 450;
 
             //ClearTotalValue();
         }
 
         private void GetClaimInfoReport()
         {
-            dtClaimInfoReport = new DataTable();
+            dtClaimInfoReport = new System.Data.DataTable();
 
             dtClaimInfoReport.Columns.Add("ATTN", typeof(string));
             dtClaimInfoReport.Columns.Add("PAYMENT_BENE", typeof(string));
@@ -395,7 +732,7 @@ namespace Testing.Forms
 
         private void GetNoteHtmlReport()
         {
-            dtNoteReport = new DataTable();
+            dtNoteReport = new System.Data.DataTable();
             dtNoteReport.Columns.Add("AMT");
             dtNoteReport.Columns.Add("DES");
 

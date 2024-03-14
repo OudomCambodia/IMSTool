@@ -182,17 +182,26 @@ namespace Testing.Forms
             //    content = content.Replace("%Place%", hospital);
             //}
 
-            if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
-            {
-                body = body.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
-                content = content.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
-            }
+            //if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
+            //{
+            //    body = body.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
+            //    content = content.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
+            //}
 
-            if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.NonPaid))
-            {
-                body = body.Replace("%NonPaid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.NonPaid).ToString("0.00"));
-                content = content.Replace("%NonPaid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.NonPaid).ToString("0.00"));
-            }
+            //if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.NonPaid))
+            //{
+            //    body = body.Replace("%NonPaid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.NonPaid).ToString("0.00"));
+            //    content = content.Replace("%NonPaid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.NonPaid).ToString("0.00"));
+            //}
+
+            if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.Paid.Trim()))
+                content = content.Replace("%Paid%", "USD " + frmANHSettlementLetterNew.Paid);
+
+            if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.NonPaid.Trim()))
+                content = content.Replace("%NonPaid%", "USD " + frmANHSettlementLetterNew.NonPaid);
+
+            if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.NonPayableReason.Trim()))
+                content = content.Replace("N/A", frmANHSettlementLetterNew.NonPayableReason);
 
             if (remind == "First")
             {
@@ -1498,11 +1507,20 @@ namespace Testing.Forms
                 //    content = content.Replace("%Place%", hospital);
                 //}
 
-                if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
-                    content = content.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
+                //if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.Paid))
+                //    content = content.Replace("%Paid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.Paid).ToString("0.00"));
 
-                if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.NonPaid))
-                    content = content.Replace("%NonPaid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.NonPaid).ToString("0.00"));
+                //if (!string.IsNullOrEmpty(frmGenerateSettlementLetterNotice.NonPaid))
+                //    content = content.Replace("%NonPaid%", "USD " + Convert.ToDecimal(frmGenerateSettlementLetterNotice.NonPaid).ToString("0.00"));
+
+                if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.Paid.Trim()))
+                    content = content.Replace("%Paid%", "USD " + frmANHSettlementLetterNew.Paid);
+
+                if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.NonPaid.Trim()))
+                    content = content.Replace("%NonPaid%", "USD " + frmANHSettlementLetterNew.NonPaid);
+
+                if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.NonPayableReason.Trim()))
+                    content = content.Replace("N/A", frmANHSettlementLetterNew.NonPayableReason);
 
                 if (remind == "First")
                 {
@@ -1738,10 +1756,17 @@ namespace Testing.Forms
             frmANHSettlementLetterNew frm = new frmANHSettlementLetterNew(lbClaimNo.Text);
             frm.ShowDialog();
 
-            attachfile.Add(frmANHSettlementLetterNewRV.FPath);
+            //attachfile.Add(frmANHSettlementLetterNewRV.FPath);
+           
 
-            if (!string.IsNullOrEmpty(frmANHSettlementLetterNewRV.FPath))
-                tbAttachFile.Text = frmANHSettlementLetterNewRV.FPath + ";";
+            //if (!string.IsNullOrEmpty(frmANHSettlementLetterNewRV.FPath))
+            //    tbAttachFile.Text = frmANHSettlementLetterNewRV.FPath + ";";
+
+            if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.FClaimNo))
+            {
+                attachfile.Add(frmANHSettlementLetterNew.FilePath);
+                tbAttachFile.Text = frmANHSettlementLetterNew.FilePath + ";";
+            }
         }
 
         private void cboExclusionSection_SelectedIndexChanged(object sender, EventArgs e)

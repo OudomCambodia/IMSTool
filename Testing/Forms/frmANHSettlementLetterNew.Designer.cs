@@ -157,7 +157,7 @@
             this.gbClaimIno.ForeColor = System.Drawing.Color.White;
             this.gbClaimIno.Location = new System.Drawing.Point(0, 0);
             this.gbClaimIno.Name = "gbClaimIno";
-            this.gbClaimIno.Size = new System.Drawing.Size(1180, 574);
+            this.gbClaimIno.Size = new System.Drawing.Size(1174, 574);
             this.gbClaimIno.TabIndex = 0;
             this.gbClaimIno.TabStop = false;
             this.gbClaimIno.Text = "Claim Information";
@@ -530,11 +530,10 @@
             // btnGenerate
             // 
             this.btnGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(0)))), ((int)(((byte)(69)))));
-            this.btnGenerate.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnGenerate.ForeColor = System.Drawing.Color.White;
             this.btnGenerate.Location = new System.Drawing.Point(3, 24);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(1174, 28);
+            this.btnGenerate.Size = new System.Drawing.Size(1165, 28);
             this.btnGenerate.TabIndex = 3;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = false;
@@ -546,7 +545,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1180, 574);
+            this.panel1.Size = new System.Drawing.Size(1174, 574);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -555,7 +554,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 824);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1180, 49);
+            this.panel2.Size = new System.Drawing.Size(1174, 49);
             this.panel2.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -583,7 +582,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 49);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1174, 49);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
             // label1
@@ -762,7 +761,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 574);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1180, 250);
+            this.panel3.Size = new System.Drawing.Size(1174, 250);
             this.panel3.TabIndex = 3;
             // 
             // gbExplBeni
@@ -772,7 +771,7 @@
             this.gbExplBeni.ForeColor = System.Drawing.Color.White;
             this.gbExplBeni.Location = new System.Drawing.Point(0, 0);
             this.gbExplBeni.Name = "gbExplBeni";
-            this.gbExplBeni.Size = new System.Drawing.Size(1180, 250);
+            this.gbExplBeni.Size = new System.Drawing.Size(1174, 250);
             this.gbExplBeni.TabIndex = 1;
             this.gbExplBeni.TabStop = false;
             this.gbExplBeni.Text = "EXPLANATION OF BENEFITS (EOB)";
@@ -796,7 +795,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvExplBeni.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvExplBeni.RowHeadersVisible = false;
-            this.dgvExplBeni.Size = new System.Drawing.Size(1174, 223);
+            this.dgvExplBeni.Size = new System.Drawing.Size(1168, 223);
             this.dgvExplBeni.TabIndex = 1;
             this.dgvExplBeni.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExplBeni_CellValueChanged);
             this.dgvExplBeni.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvExplBeni_EditingControlShowing);
@@ -806,7 +805,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(1180, 873);
+            this.ClientSize = new System.Drawing.Size(1174, 873);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

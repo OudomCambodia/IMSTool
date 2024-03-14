@@ -78,6 +78,9 @@ namespace Testing
                     }
                 }
 
+                Worksheet.Application.ActiveWindow.SplitRow = 1;
+                Worksheet.Application.ActiveWindow.FreezePanes = true;
+                Worksheet.Columns.AutoFit();
 
                 //ACC_HANDLER	AGENT	AGENT_NAME	INSUREDCODE	INSUREDNAME	UW_YEAR	POLICY_NO
 
@@ -159,6 +162,12 @@ namespace Testing
                     }
                 }
                 //
+
+                // Freeze top row
+                ws.SheetView.FreezeRows(1);
+
+                ws.Columns().AdjustToContents();
+
 
                 using (System.IO.MemoryStream ms = new System.IO.MemoryStream()) //create stream to store workbook data
                 {

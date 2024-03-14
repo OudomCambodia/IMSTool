@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <p style="font-family: Niradei; font-size:11px;">%DateTimeN%</p>
+  <table style="font-family: Niradei; table-layout: fixed; width: 100%; font-size:11px;">
+    <tr style="font-family: Niradei;">
+      <td style="font-family: Niradei; width: 40px; vertical-align: middle;"><strong>Attn:</strong></td>
+      <td style="font-family: Niradei; vertical-align: middle;"><strong> %Attn%</strong></td>
+    </tr>
+    <tr style="font-family: Niradei;">
+      <td style="font-family: Niradei; width: 40px; vertical-align: middle;"></td>
+      <td style="font-family: Niradei; vertical-align: middle;"><strong> %PolicyHolder%</strong></td>
+    </tr>
+    <tr>
+      <td style="font-family: Niradei; width: 40px; vertical-align: middle;"></td>
+      <td style="font-family: Niradei; vertical-align: middle;">%Address%</td>
+    </tr>
+  </table>
+  <p style="font-family: Niradei; text-align: center; font-size:12px;"><strong>CLAIM SETTLEMENT LETTER</strong></p>
+  <p style="font-family: Niradei; font-size:11px; margin-bottom: 4px;">Please find our settlement details of the claim submitted by the insured member listed below:</p>
+  <table style="font-family: Niradei; width: 100%; border: 1px solid black; font-size:11px; margin-bottom: 20px;">
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+      <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Member Name/ឈ្មោះសមាជិក</strong></td>
+      <td colspan="3" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%MemberName%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+      <td style="font-family: Niradei; width: 200px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Policy/បណ្ណសន្យារ៉ាប់រង</strong></td>
+      <td colspan="3" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%Policy%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+      <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Policy No./លេខបណ្ណសន្យារ៉ាប់រង</strong></td>
+      <td style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%PolicyNo%</td>
+      <td style="font-family: Niradei; width: 210px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;"><strong>Admission/ថ្ងៃចូលពេទ្យ</strong></td>
+      <td style="font-family: Niradei; width: 80px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%AdmiDate%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+      <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Claim No./លេខការទាមទារសំណង</strong></td>
+      <td style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%ClaimNo%</td>
+      <td style="font-family: Niradei; width: 210px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;"><strong>Discharge Date/ថ្ងៃចេញពីពេទ្យ</strong></td>
+      <td style="font-family: Niradei; width: 80px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%DisDate%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Plan/គម្រោង</strong></td>
+        <td style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%Plan%</td>
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;"><strong>Length of Stay/រយៈពេលសម្រាក</strong></td>
+        <td style="font-family: Niradei; width: 80px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%LStay%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Registration Date/ការបរិច្ឆេទចុះបញ្ជី</strong></td>
+        <td style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%RegisterationDate%</td>
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;"><strong>ICU Stay/រយៈពេលសម្រាកក្នុងបន្ទប់ ICU</strong></td>
+        <td style="font-family: Niradei; width: 80px; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%ICUStay%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Panel Hospital/មន្ទីរពេទ្យដៃគូ</strong></td>
+        <td colspan="3" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%PanelHospital%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Other Hospital/មន្ទីរពេទ្យផ្សេង</strong></td>
+        <td colspan="3" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%OtherHospital%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Diagnosis/រោគវិនិច្ឆ័យ</strong></td>
+        <td colspan="3" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%Diagnosis%</td>
+    </tr>
+    <tr style="font-family: Niradei; border: 1px solid black; border-collapse: collapse;">
+        <td style="font-family: Niradei; width: 210px; border: 1px solid black; vertical-align: top; padding-left: 5px;"><strong>Beneficiary/អ្នកទទួលសំណង</strong></td>
+        <td colspan="3" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px;">%Beneficiary%</td>
+    </tr>
+  </table>
+  <b>​</b>
+  <table style="font-family: Niradei; width: 100%; border: 1px solid black; font-size:11px;">
+    <tr>
+        <td colspan="7" style="font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; text-align: center;"><strong>EXPLANATION OF BENEFITS (EOB)</strong></td>
+    </tr>
+    <tr>
+        <td style="width: 15%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; vertical-align: top;"><strong>Services or Treatment Provided</strong></td>
+        <td style="width: 12.5%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; vertical-align: top;"><strong>Original Currency</strong></td>
+        <td style="width: 12.5%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; vertical-align: top;"><strong>Currency in USD</strong></td>
+        <td style="width: 15%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; vertical-align: top;"><strong>Expenses not covered</strong></td>
+        <td style="width: 15%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; vertical-align: top;"><strong>Deductible or Co-pay</strong></td>
+        <td style="width: 10%;font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 2px; vertical-align: top;"><strong>Over Limit</strong></td>
+        <td style="width: 20%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; vertical-align: top;"><strong>Total Amount Covered</strong></td>
+    </tr>
+    %EOB%
+    <tr>
+        <td style="width: 20%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-left: 5px; text-align: left;"><strong>Total</strong></td>
+        <td style="width: 12.5%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-right: 5px; text-align: right;"><strong>%Toc%</strong></td>
+        <td style="width: 12.5%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-right: 5px; text-align: right;"><strong>%Tciusd%</strong></td>
+        <td style="width: 15%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-right: 5px; text-align: right;"><strong>%Tenc%</strong></td>
+        <td style="width: 15%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-right: 5px; text-align: right;"><strong>%Tdc%</strong></td>
+        <td style="width: 10%;font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-right: 5px; text-align: right;"><strong>%Tol%</strong></td>
+        <td style="width: 20%; font-family: Niradei; border: 1px solid black; border-collapse: collapse; padding-right: 5px; text-align: right;"><strong>%Ttac%</strong></td>
+    </tr>
+  </table>
+  <p style="font-family: Niradei; font-size:11px;">Exchange Rate: %ExchangeRate%</p>
+  <table style="font-family: Niradei; width: 100%; border-collapse: collapse; font-size:11px; margin-top: 20px;">
+    <tr>
+        <td colspan="3" style="width: 20%; font-family: Niradei; border-collapse: collapse; vertical-align: top;"><u><strong>Notes:</strong></u></td>
+    </tr>
+    %Notes%
+</table>
+  <p style="font-family: Niradei; font-size:11px;">For further clarification, please contact us at <a href="mailto:%Email%">%Email%</a>.</p>
+  <table style="font-family: Niradei; width: 100%; border-collapse: collapse; font-size:11px; page-break-inside: avoid;">
+    <tr style="page-break-inside: avoid;">
+        <td colspan="6" style="width: 20%; font-family: Niradei; border-collapse: collapse; vertical-align: top; page-break-inside: avoid;">
+            Best regards,<br>
+            <b>ACCIDENT AND HEALTH DEPARTMENT</b><br>
+            This is a computer-generated letter. No signature is required.<br><br>
+            cc: %CC%
+        </td>
+        <td colspan="6" style="width: 20%; font-family: Niradei; border-collapse: collapse; vertical-align: top; padding-left: 5%; page-break-inside: avoid;">
+            <table style="font-family: Niradei; width: 100%; border-collapse: collapse; font-size:11px; page-break-inside: avoid;">
+                <tr style="page-break-inside: avoid;">
+                    <td colspan="2" style="font-family: Niradei; width: 100%; border-collapse: collapse; font-size:11px; page-break-inside: avoid;">
+                        <b><u>Consent of the Claimant or Representative</u></b>
+                    </td>
+                </tr>
+                <tr style="page-break-inside: avoid;">
+                    <td style="width: 10px; font-family: Niradei; border-collapse: collapse; font-size:11px; padding-top: 2%; page-break-inside: avoid;">Date</td>
+                    <td style="width: 50px; font-family: Niraadei; border-collapse: collapse; font-size:11px; padding-top: 2%; page-break-inside: avoid;">:</td>
+                </tr>
+                <tr style="page-break-inside: avoid;">
+                    <td style="width: 10px; font-family: Niradei; border-collapse: collapse; font-size:11px; padding-top: 2%; page-break-inside: avoid;">Signature</td>
+                    <td style="width: 50px; font-family: Niradei; border-collapse: collapse; font-size:11px; padding-top: 2%; page-break-inside: avoid;">:</td>
+                </tr>
+                <tr style="page-break-inside: avoid;">
+                    <td style="width: 10px; font-family: Niradei; border-collapse: collapse; font-size:11px; padding-top: 2%; page-break-inside: avoid;">Name</td>
+                    <td style="width: 50px; font-family: Niradei; border-collapse: collapse; font-size:11px; padding-top: 2%; page-break-inside: avoid;">:</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

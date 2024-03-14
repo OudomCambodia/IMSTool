@@ -76,6 +76,7 @@
             this.quitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateTicket = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPrintAutoLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.pnSubClaim = new System.Windows.Forms.Panel();
             this.clmPaymentReq = new System.Windows.Forms.Button();
             this.bnClaimOSRI = new System.Windows.Forms.Button();
@@ -121,7 +122,9 @@
             this.pnCustomerProfit = new System.Windows.Forms.Panel();
             this.btnCustomerProfit = new System.Windows.Forms.Button();
             this.btnCustomerProfitSummary = new System.Windows.Forms.Button();
-            this.tsmiPrintAutoLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.pSendEmailsClaim = new System.Windows.Forms.Panel();
+            this.btnSendClaimEmailReport = new System.Windows.Forms.Button();
+            this.btnSendClaimEmail = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -133,6 +136,7 @@
             this.pnInvoice.SuspendLayout();
             this.ctmsQuitApp.SuspendLayout();
             this.pnCustomerProfit.SuspendLayout();
+            this.pSendEmailsClaim.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnFLRep
@@ -682,6 +686,14 @@
             this.CreateTicket.Text = "Ticket";
             this.CreateTicket.Click += new System.EventHandler(this.CreateTicket_Click);
             // 
+            // tsmiPrintAutoLabel
+            // 
+            this.tsmiPrintAutoLabel.ForeColor = System.Drawing.Color.White;
+            this.tsmiPrintAutoLabel.Name = "tsmiPrintAutoLabel";
+            this.tsmiPrintAutoLabel.Size = new System.Drawing.Size(127, 24);
+            this.tsmiPrintAutoLabel.Text = "Print Auto Label";
+            this.tsmiPrintAutoLabel.Click += new System.EventHandler(this.tsmiPrintAutoLabel_Click);
+            // 
             // pnSubClaim
             // 
             this.pnSubClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
@@ -827,6 +839,8 @@
             this.bnClEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bnClEmail.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnClEmail.ForeColor = System.Drawing.Color.White;
+            this.bnClEmail.Image = global::Testing.Properties.Resources.arrow1;
+            this.bnClEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bnClEmail.Location = new System.Drawing.Point(0, 400);
             this.bnClEmail.Margin = new System.Windows.Forms.Padding(0);
             this.bnClEmail.Name = "bnClEmail";
@@ -1357,13 +1371,47 @@
             this.btnCustomerProfitSummary.UseVisualStyleBackColor = false;
             this.btnCustomerProfitSummary.Click += new System.EventHandler(this.btnCustomerProfitSummary_Click);
             // 
-            // tsmiPrintAutoLabel
+            // pSendEmailsClaim
             // 
-            this.tsmiPrintAutoLabel.ForeColor = System.Drawing.Color.White;
-            this.tsmiPrintAutoLabel.Name = "tsmiPrintAutoLabel";
-            this.tsmiPrintAutoLabel.Size = new System.Drawing.Size(127, 24);
-            this.tsmiPrintAutoLabel.Text = "Print Auto Label";
-            this.tsmiPrintAutoLabel.Click += new System.EventHandler(this.tsmiPrintAutoLabel_Click);
+            this.pSendEmailsClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.pSendEmailsClaim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pSendEmailsClaim.Controls.Add(this.btnSendClaimEmailReport);
+            this.pSendEmailsClaim.Controls.Add(this.btnSendClaimEmail);
+            this.pSendEmailsClaim.Location = new System.Drawing.Point(191, 392);
+            this.pSendEmailsClaim.Name = "pSendEmailsClaim";
+            this.pSendEmailsClaim.Size = new System.Drawing.Size(180, 78);
+            this.pSendEmailsClaim.TabIndex = 13;
+            this.pSendEmailsClaim.Visible = false;
+            // 
+            // btnSendClaimEmailReport
+            // 
+            this.btnSendClaimEmailReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnSendClaimEmailReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSendClaimEmailReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendClaimEmailReport.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnSendClaimEmailReport.ForeColor = System.Drawing.Color.White;
+            this.btnSendClaimEmailReport.Location = new System.Drawing.Point(-1, 40);
+            this.btnSendClaimEmailReport.Name = "btnSendClaimEmailReport";
+            this.btnSendClaimEmailReport.Size = new System.Drawing.Size(187, 35);
+            this.btnSendClaimEmailReport.TabIndex = 8;
+            this.btnSendClaimEmailReport.Text = "Send Claim Emails Report";
+            this.btnSendClaimEmailReport.UseVisualStyleBackColor = false;
+            this.btnSendClaimEmailReport.Click += new System.EventHandler(this.btnSendClaimEmailReport_Click);
+            // 
+            // btnSendClaimEmail
+            // 
+            this.btnSendClaimEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnSendClaimEmail.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSendClaimEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendClaimEmail.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.btnSendClaimEmail.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnSendClaimEmail.Location = new System.Drawing.Point(-1, 1);
+            this.btnSendClaimEmail.Name = "btnSendClaimEmail";
+            this.btnSendClaimEmail.Size = new System.Drawing.Size(187, 40);
+            this.btnSendClaimEmail.TabIndex = 8;
+            this.btnSendClaimEmail.Text = "Send Claim Emails";
+            this.btnSendClaimEmail.UseVisualStyleBackColor = false;
+            this.btnSendClaimEmail.Click += new System.EventHandler(this.btnSendClaimEmail_Click);
             // 
             // frmMain
             // 
@@ -1373,6 +1421,7 @@
             this.BackgroundImage = global::Testing.Properties.Resources.Kl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1090, 895);
+            this.Controls.Add(this.pSendEmailsClaim);
             this.Controls.Add(this.pnTravelReport);
             this.Controls.Add(this.pnCustomerProfit);
             this.Controls.Add(this.pnInvoice);
@@ -1409,6 +1458,7 @@
             this.pnInvoice.ResumeLayout(false);
             this.ctmsQuitApp.ResumeLayout(false);
             this.pnCustomerProfit.ResumeLayout(false);
+            this.pSendEmailsClaim.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1508,5 +1558,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsPolicyUpload;
         public System.Windows.Forms.Button btnAutoUploadRpt;
         private System.Windows.Forms.ToolStripMenuItem tsmiPrintAutoLabel;
+        private System.Windows.Forms.Panel pSendEmailsClaim;
+        public System.Windows.Forms.Button btnSendClaimEmailReport;
+        public System.Windows.Forms.Button btnSendClaimEmail;
     }
 }

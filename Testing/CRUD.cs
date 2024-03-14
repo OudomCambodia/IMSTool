@@ -122,6 +122,32 @@ namespace Testing
             return dt;
         }
 
+        public DataTable ExecSP_OutPara(string spName, string[] spParaKeys, DateTime[] spParaValues)
+        {
+            if (spParaKeys.Length != spParaValues.Length)
+            {
+                Msgbox.Show("Error Parameters in Function to call Stored Procedures!");
+                return null;
+            }
+            DataTable dt = new DataTable();
+            using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
+            {
+                con.Open();
+                OracleCommand cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = spName;
+                for (int i = 0; i < spParaKeys.Length; i++)
+                {
+                    cmd.Parameters.Add(spParaKeys[i], OracleDbType.Date).Value = spParaValues[i];
+                }
+                cmd.Parameters.Add("sp_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                dt.Load(cmd.ExecuteReader());
+                cmd.Dispose();
+            }
+            return dt;
+        }
+
         public string ExecFunc_String(string fnName, string[] fnParaKeys, string[] fnParaValues)
         {
             string result = string.Empty;
