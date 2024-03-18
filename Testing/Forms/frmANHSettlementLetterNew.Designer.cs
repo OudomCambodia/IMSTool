@@ -797,6 +797,7 @@
             this.dgvExplBeni.RowHeadersVisible = false;
             this.dgvExplBeni.Size = new System.Drawing.Size(1168, 223);
             this.dgvExplBeni.TabIndex = 1;
+            this.dgvExplBeni.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExplBeni_CellEndEdit);
             this.dgvExplBeni.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExplBeni_CellValueChanged);
             this.dgvExplBeni.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvExplBeni_EditingControlShowing);
             // 

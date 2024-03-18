@@ -2697,5 +2697,15 @@ namespace Testing.Forms
                 }
             }
         }
+
+        private void btnSettlementNoticeHist_Click(object sender, EventArgs e)
+        {
+            string folderPath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + tbClaimNo.Text.ToUpper().Replace("/", "-");
+
+            if (!Directory.Exists(folderPath))
+                Msgbox.Show("This claim has no settlement notice history.");
+            else
+                System.Diagnostics.Process.Start(folderPath);
+        }
     }
 }

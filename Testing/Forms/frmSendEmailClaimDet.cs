@@ -58,6 +58,7 @@ namespace Testing.Forms
         private string senderEmail = string.Empty;
 
         DataTable dtExc = new DataTable();
+        DataTable dtRecCCHist = new DataTable();
 
         CRUD crud = new CRUD();
 
@@ -195,13 +196,13 @@ namespace Testing.Forms
             //}
 
             if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.Paid.Trim()))
-                content = content.Replace("%Paid%", "USD " + frmANHSettlementLetterNew.Paid);
+                body = body.Replace("%Paid%", "USD " + frmANHSettlementLetterNew.Paid);
 
             if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.NonPaid.Trim()))
-                content = content.Replace("%NonPaid%", "USD " + frmANHSettlementLetterNew.NonPaid);
+                body = body.Replace("%NonPaid%", "USD " + frmANHSettlementLetterNew.NonPaid);
 
             if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.NonPayableReason.Trim()))
-                content = content.Replace("N/A", frmANHSettlementLetterNew.NonPayableReason);
+                body = body.Replace("N/A", frmANHSettlementLetterNew.NonPayableReason);
 
             if (remind == "First")
             {
@@ -501,6 +502,13 @@ namespace Testing.Forms
             message.Dispose();
 
             ContentToSaveToHist = body;
+
+            // insert receiver and cc to hist, so user no need to add the same receiver and cc again when doing another claim operation.
+
+            if (dtRecCCHist.Rows.Count > 0)
+                crud.ExecNonQuery("update user_claim_anh_receiver_cc_hist set receiver = '" + tbReceiver.Text.Trim() + "', cc = '" + tbCC.Text.Trim() + "' where claim_no = '" + lbClaimNo.Text.Trim().ToUpper() + "'");
+            else
+                crud.ExecNonQuery("insert into user_claim_anh_receiver_cc_hist(claim_no, receiver, cc) values('" + lbClaimNo.Text.Trim().ToUpper() + "', '" + tbReceiver.Text.Trim() + "', '" + tbCC.Text.Trim() + "')");
 
             //client.Dispose();
         }
@@ -1067,6 +1075,13 @@ namespace Testing.Forms
             Init = false;
 
             requeryEmailSuggestion();
+
+            dtRecCCHist = crud.ExecQuery("select * from user_claim_anh_receiver_cc_hist where claim_no = '" + lbClaimNo.Text.Trim().ToUpper() + "'");
+            if (dtRecCCHist.Rows.Count > 0)
+            {
+                tbReceiver.Text = dtRecCCHist.Rows[0]["RECEIVER"].ToString().Trim();
+                tbCC.Text = dtRecCCHist.Rows[0]["CC"].ToString().Trim();
+            }
         }
 
         private void bnSend_Click(object sender, EventArgs e)
@@ -1359,6 +1374,10 @@ namespace Testing.Forms
 
                     frmGenerateSettlementLetterNotice.Paid = string.Empty;
                     frmGenerateSettlementLetterNotice.NonPaid = string.Empty;
+
+                    frmANHSettlementLetterNew.Paid = string.Empty;
+                    frmANHSettlementLetterNew.NonPaid = string.Empty;
+                    frmANHSettlementLetterNew.NonPayableReason = string.Empty;
 
                     //Delete Email Rejection Notice folder
                     //if (!string.IsNullOrEmpty(frmEmailNoticeAttachmentEdit.FolderPath))
@@ -1754,11 +1773,10 @@ namespace Testing.Forms
             //frm.ShowDialog();
 
             frmANHSettlementLetterNew frm = new frmANHSettlementLetterNew(lbClaimNo.Text);
-            frm.ShowDialog();
+            frm.ShowDialog(); 
 
             //attachfile.Add(frmANHSettlementLetterNewRV.FPath);
            
-
             //if (!string.IsNullOrEmpty(frmANHSettlementLetterNewRV.FPath))
             //    tbAttachFile.Text = frmANHSettlementLetterNewRV.FPath + ";";
 

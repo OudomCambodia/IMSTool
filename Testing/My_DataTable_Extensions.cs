@@ -78,10 +78,6 @@ namespace Testing
                     }
                 }
 
-                Worksheet.Application.ActiveWindow.SplitRow = 1;
-                Worksheet.Application.ActiveWindow.FreezePanes = true;
-                Worksheet.Columns.AutoFit();
-
                 //ACC_HANDLER	AGENT	AGENT_NAME	INSUREDCODE	INSUREDNAME	UW_YEAR	POLICY_NO
 
                 //Microsoft.Office.Interop.Excel.Range BodyRange = Worksheet.get_Range((Microsoft.Office.Interop.Excel.Range)(Worksheet.Cells[2, 1]), (Microsoft.Office.Interop.Excel.Range)(Worksheet.Cells[RowsCount+1, ColumnsCount]));

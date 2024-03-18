@@ -106,15 +106,13 @@ namespace Testing.Forms
                                                         "union   " +
                                                         "select CRN_CREDIT_NOTE_NO,CRN_BPARTY_CODE,(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_BPARTY_CODE = SFC_CODE) ACC_HANDLER_NAME,CRN_ME_CODE, " +
                                                         "(SELECT SFC_SURNAME FROM SM_M_SALES_FORCE WHERE CRN_ME_CODE = SFC_CODE) AGENT_NAME,CRN_TOTAL_AMOUNT*(-1)  " +
-                                                        "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') ";
+                                                        "from rc_t_credit_note WHERE CRN_ME_CODE LIKE 'F%') "; 
 
 
                                 if (bankname != "ALL BANK")
                                 {
-
                                     main_rpt += " and SALE_AGENT_NAME like '" + (bankname == "FTB" ? "FOREIGN TRADE BANK" : bankname) + "%'";
                                     third_rpt += " WHERE AGENT_NAME LIKE '" + (bankname == "FTB" ? "FOREIGN TRADE BANK" : bankname) + "%'";
-
                                 }
                                 else
                                 {

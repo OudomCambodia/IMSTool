@@ -13,6 +13,8 @@ using Testing.Properties;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace Testing
 {
@@ -219,6 +221,8 @@ namespace Testing
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            SendANHDocReqEmailReminder();
+
             //System.Timers.Timer runonce = new System.Timers.Timer(20000);
             //runonce.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
             //runonce.AutoReset = false;
@@ -903,27 +907,307 @@ namespace Testing
             frm.ShowDialog();
         }
 
-       
+        private void SendANHDocReqEmailReminder()
+        {
+            string claimNo = string.Empty;
 
-        
+            try
+            {
+                var userToSend = frmLogIn.Usert.ToUpper();
+                var today = Convert.ToDateTime(DateTime.Now.ToString("dd-MMM-yy"));
 
-        //private List<string> EverythingBetween(string source, string start, string end)
-        //{
-        //    var results = new List<string>();
+                var qBuilder = new StringBuilder();
+                qBuilder.AppendFormat("select * from user_claim_anh_auto_rem_email where (first_rem_date <= '{0}' ", today.ToString("dd-MMM-yy"))
+                    .AppendFormat("or second_rem_date <= '{0}' ", today.ToString("dd-MMM-yy"))
+                    .AppendFormat("or third_rem_date <= '{0}') ", today.ToString("dd-MMM-yy"))
+                    //.AppendFormat("or close_claim_date <= '{0}') ", today)
+                    .Append("and (is_send_first_rem = 0 or is_send_second_rem = 0 or is_send_third_rem = 0)")
+                    .AppendFormat("and user_name = '{0}'", userToSend);
 
-        //    string pattern = string.Format(
-        //        "{0}({1}){2}",
-        //        Regex.Escape(start),
-        //        ".+?",
-        //         Regex.Escape(end));
+                var dtClaimToSend = crud.ExecQuery(qBuilder.ToString());
 
-        //    foreach (Match m in Regex.Matches(source, pattern))
-        //    {
-        //        results.Add(m.Groups[1].Value);
-        //    }
+                if (dtClaimToSend.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dtClaimToSend.Rows.Count; i++)
+                    {
+                        var doc = string.Empty;
+                        var docCode = dtClaimToSend.Rows[i]["DOC_CODE"].ToString();
+                        if (string.IsNullOrEmpty(docCode.Trim()))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (docCode.Contains(","))
+                            {
+                                var docCodes = docCode.Split(',');
+                                for (int j = 0; j < docCodes.Count(); j++)
+                                {
+                                    var dtEachDocCode = crud.ExecQuery("select doc_type, doc_content from user_claim_email_doc where doc_code = '" + docCodes[j] + "'");
+                                    if (dtEachDocCode.Rows.Count > 0)
+                                    {
+                                        var docType = dtEachDocCode.Rows[0]["DOC_TYPE"].ToString();
+                                        var docContent = dtEachDocCode.Rows[0]["DOC_CONTENT"].ToString();
 
-        //    return results;
-        //}
-      
+                                        doc += string.Concat("• ", docType, docContent, "<br>");
+                                    }
+                                }
+                                doc = doc.Remove(doc.Length - 4);
+                            }
+                            else
+                            {
+                                var dtEachDocCode = crud.ExecQuery("select doc_type, doc_content from user_claim_email_doc where doc_code = '" + docCode + "'");
+                                if (dtEachDocCode.Rows.Count > 0)
+                                {
+                                    var docType = dtEachDocCode.Rows[0]["DOC_TYPE"].ToString();
+                                    var docContent = dtEachDocCode.Rows[0]["DOC_CONTENT"].ToString();
+
+                                    doc += string.Concat("• ", docType, docContent);
+                                }
+                            }
+                        }
+
+                        var content = string.Empty;
+                        var receiver = string.Empty;
+                        var cc = string.Empty;
+                        var senderEmail = dtClaimToSend.Rows[i]["SENDER"].ToString();
+                        var subject = dtClaimToSend.Rows[i]["SUBJECT"].ToString();
+                        var user = dtClaimToSend.Rows[i]["USER_NAME"].ToString();
+
+                        claimNo = dtClaimToSend.Rows[i]["CLAIM_NUMBER"].ToString();
+
+                        var dtEmailHist = new DataTable();
+
+                        var reHistBuilder = new StringBuilder();
+                        reHistBuilder.Append("select * from ( ")
+                            .Append("select a.receiver, a.cc, a.email_content ")
+                            .Append("from user_claim_email_hist a, user_claim_anh_auto_rem_email b ")
+                            .Append("where a.claim_no = b.claim_number ")
+                            .Append("and a.is_resend = 'Y' ")
+                            .Append("and a.send_type = 'DocReqNew' ")
+                            .AppendFormat("and a.claim_no = '{0}'", claimNo)
+                            .Append("order by a.hist_date desc) where rownum = 1");
+                        dtEmailHist = crud.ExecQuery(reHistBuilder.ToString());
+
+                        if (dtEmailHist.Rows.Count <= 0)
+                        {
+                            var histBuilder = new StringBuilder();
+                            histBuilder.Append("select a.receiver, a.cc, a.email_content ")
+                                .Append("from user_claim_email_hist a, user_claim_anh_auto_rem_email b ")
+                                .Append("where a.claim_no = b.claim_number ")
+                                .Append("and a.is_resend = 'N' ")
+                                .Append("and a.send_type = 'DocReqNew' ")
+                                .AppendFormat("and a.claim_no = '{0}'", claimNo);
+                            dtEmailHist = crud.ExecQuery(histBuilder.ToString());
+                        }
+
+                        if (dtEmailHist.Rows.Count > 0)
+                        {
+                            receiver = dtEmailHist.Rows[0]["RECEIVER"].ToString();
+                            cc = dtEmailHist.Rows[0]["CC"].ToString();
+
+                            content = dtEmailHist.Rows[0]["EMAIL_CONTENT"].ToString();
+                            var ulIndex = content.IndexOf("<ul>");
+                            var culIndex = content.IndexOf("</ul>");
+
+                            if (ulIndex == -1)
+                            {
+                                ulIndex = content.IndexOf("<UL>");
+                            }
+                            if (culIndex == -1)
+                            {
+                                culIndex = content.IndexOf("</UL>");
+                            }
+
+                            if (ulIndex != -1 && culIndex != -1)
+                            {
+                                var ul = content.Substring(ulIndex, (culIndex - ulIndex) + 5);
+                                content = content.Replace(ul, "<ul>%Note%</ul>");
+                            }
+                        }
+
+                        var firstRemDate = Convert.ToDateTime(dtClaimToSend.Rows[i]["FIRST_REM_DATE"].ToString().Split(' ')[0]);
+                        var secondRemDate = Convert.ToDateTime(dtClaimToSend.Rows[i]["SECOND_REM_DATE"].ToString().Split(' ')[0]);
+                        var thirdRemDate = Convert.ToDateTime(dtClaimToSend.Rows[i]["THIRD_REM_DATE"].ToString().Split(' ')[0]);
+
+                        var isSendFirstRem = false;
+                        var isSendSecondRem = false;
+                        var isSendThirdRem = false;
+
+                        if (firstRemDate <= today && dtClaimToSend.Rows[i]["IS_SEND_FIRST_REM"].ToString().Equals("0"))
+                        {
+                            content = ResetDoc(content, false);
+                            content = "<p style=\"font-family:calibri;\"><b>*FIRST REMINDER*</b></p>" + content;
+
+                            var first = new StringBuilder();
+                            first.Append("<li>If the required documents are not fully submitted after the 1st reminder email, we will send the 2nd reminder email within <b>07 calendar days</b> from the 1st reminder email date.</li>")
+                                .Append("<li>If the required documents are not fully submitted after the 2nd reminder email, we will send the last reminder email within <b>07 calendar days</b> from the 2nd reminder email date.</li>")
+                                .Append("<li>If the required documents still cannot be provided within <b>30 calendar days</b> from the last reminder email date, this claim will be settled based on available supporting documents.</li>");
+                            content = content.Replace("%Note%", first.ToString());
+
+                            isSendFirstRem = true;
+                        }
+                        else if (secondRemDate <= today && dtClaimToSend.Rows[i]["IS_SEND_SECOND_REM"].ToString().Equals("0"))
+                        {
+                            content = ResetDoc(content, false);
+                            content = "<p style=\"font-family:calibri;\"><b>*SECOND REMINDER*</b></p>" + content;
+
+                            var second = new StringBuilder();
+                            second.Append("<li>If the required documents are not fully submitted after the 2nd reminder email, we will send the last reminder email within <b>07 calendar days</b> from the 2nd reminder email date.</li>")
+                                .Append("<li>If the required documents still cannot be provided within <b>30 calendar days</b> from the last reminder email date, this claim will be settled based on available supporting documents.</li>");
+                            content = content.Replace("%Note%", second.ToString());
+
+                            isSendSecondRem = true;
+                        }
+                        else if (thirdRemDate <= today && dtClaimToSend.Rows[i]["IS_SEND_THIRD_REM"].ToString().Equals("0"))
+                        {
+                            content = ResetDoc(content, false);
+                            content = "<p style=\"font-family:calibri;\"><b>*LAST REMINDER*</b></p>" + content;
+
+                            var third = new StringBuilder();
+                            third.Append("<li>If the required documents still cannot be provided within <b>30 calendar days</b> from the last reminder email date, this claim will be settled based on available supporting documents.</li>");
+                            content = content.Replace("%Note%", third.ToString());
+
+                            content = content.Replace("<p><b><u>Notes</u></b>:</p>", "<p><b><u>Note</u></b>:</p>");
+
+                            isSendThirdRem = true;
+                        }
+
+                        content = content.Replace("%Doc%", doc);
+
+                        if (!isSendFirstRem && !isSendSecondRem && !isSendThirdRem)
+                        {
+                            continue;
+                        }
+
+                        MailMessage message = new MailMessage();
+
+                        //set formatting email message
+                        message.BodyEncoding = Encoding.UTF8;
+                        message.IsBodyHtml = true;
+                        message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                        System.Net.ServicePointManager.Expect100Continue = true;
+                        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+                        //if (receiver.Trim() != "")
+                        //{
+                        //    string[] tempt = receiver.Split(',');
+                        //    foreach (string str in tempt)
+                        //    {
+                        //        if (str.Trim() != "")
+                        //            message.To.Add(str);
+                        //    }
+                        //}
+
+                        //if (cc.Trim() != "")
+                        //{
+                        //    string[] ccList = cc.Split(',');
+                        //    foreach (string str in ccList)
+                        //    {
+                        //        if (str.Trim() != "")
+                        //            message.CC.Add(str.Trim());
+                        //    }
+                        //}
+
+                        message.To.Add("rothoudom@forteinsurance.com");
+                        message.CC.Add("rothoudom@forteinsurance.com");
+
+                        message.Subject = subject;
+
+                        //embed pictures
+                        AlternateView avHtml = AlternateView.CreateAlternateViewFromString(content, null, MediaTypeNames.Text.Html);
+                        //LinkedResource img1 = new LinkedResource(@"Html\Forte_Logo.png", "image/png");
+                        LinkedResource img1 = new LinkedResource(@"Html\forte-general-logo-red.png", "image/png");
+                        img1.ContentId = "forte-general-logo-red";
+                        //LinkedResource img2 = new LinkedResource(@"Html\FB_logo.png", "image/png");
+                        LinkedResource img2 = new LinkedResource(@"Html\fb.png", "image/png");
+                        img2.ContentId = "FB_logo";
+                        LinkedResource img3 = new LinkedResource(@"Html\yt.png", "image/png");
+                        img3.ContentId = "YT_logo";
+                        LinkedResource img4 = new LinkedResource(@"Html\linkedin.png", "image/png");
+                        img4.ContentId = "linkedin";
+                        LinkedResource img5 = new LinkedResource(@"Html\EmailSignature.png", "image/png");
+                        img5.ContentId = "EmailSignature";
+
+                        avHtml.LinkedResources.Add(img1);
+                        avHtml.LinkedResources.Add(img2);
+                        avHtml.LinkedResources.Add(img3);
+                        avHtml.LinkedResources.Add(img4);
+                        avHtml.LinkedResources.Add(img5);
+                        message.AlternateViews.Add(avHtml);
+
+                        string HashPass = "Forte@2017";
+                        string mail_add = string.Empty;
+                        string mail_pass = string.Empty;
+
+                        DataTable dtEmailIn = crud.ExecSP_OutPara("sp_user_claim_info", new string[] { "cl_no", "cl_type", "cl_cond" }, new string[] { "", "emailInfo", UserName });
+                        string smtpSer = dtEmailIn.Rows[0].ItemArray[0].ToString();
+                        mail_add = dtEmailIn.Rows[0].ItemArray[1].ToString();
+                        if (dtEmailIn.Rows[0].ItemArray[2].ToString() != "")
+                             mail_pass = Cipher.Decrypt(dtEmailIn.Rows[0].ItemArray[2].ToString(), HashPass);
+
+                        var Credential = new System.Net.NetworkCredential(mail_add, mail_pass);
+                        var result = CommonFunctions.SendEmail(Credential, message);
+
+                        message.Dispose();
+
+                        if (isSendFirstRem)
+                        {
+                            crud.ExecNonQuery("update user_claim_anh_auto_rem_email set is_send_first_rem = 1 where claim_number = '" + claimNo + "'");
+                        }
+                        else if (isSendSecondRem)
+                        {
+                            crud.ExecNonQuery("update user_claim_anh_auto_rem_email set is_send_second_rem = 1 where claim_number = '" + claimNo + "'");
+                        }
+                        else if (isSendThirdRem)
+                        {
+                            crud.ExecNonQuery("update user_claim_anh_auto_rem_email set is_send_third_rem = 1 where claim_number = '" + claimNo + "'");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                var qBuilder = new StringBuilder();
+                qBuilder.Append("insert into user_claim_anh_rem_log(claim_no, send_date, log) ")
+                    .AppendFormat("values('{0}','{1}','{2}')", claimNo, DateTime.Now.ToString("dd-MMM-yy"), ex.Message.ToString().Replace("'", "").Replace("\"", ""));
+                crud.ExecNonQuery(qBuilder.ToString());
+                throw;
+            }
+        }
+
+        private string ResetDoc(string content, bool isCloseClaim)
+        {
+            var pText = !isCloseClaim ? "<p>In order to process this claim, please provide us with more required documents as follows:</p>" :
+                "<p>Please be informed that, since we have not received more required documents as listed below, this claim will be settled based on available supporting documents.</p>";
+            var bText = "<b><u>Claim Information</u></b>:";
+
+            var p1Text = !isCloseClaim ? "<P>In order to process this claim, please provide us with more required documents as follows:</P>" :
+                "<P>Please be informed that, since we have not received more required documents as listed below, this claim will be settled based on available supporting documents.</P>";
+            var b1Text = "<B><U>Claim Information</U></B>:";
+
+            var pIndex = content.IndexOf(pText);
+            var bIndex = content.IndexOf(bText);
+
+            if (pIndex == -1)
+            {
+                pIndex = content.IndexOf(p1Text);
+            }
+            if (bIndex == -1)
+            {
+                bIndex = content.IndexOf(b1Text);
+            }
+
+            if (pIndex != -1 && bIndex != -1)
+            {
+                var docs = content.Substring(pIndex + pText.Length, bIndex - pIndex - pText.Length);
+                if (!string.IsNullOrEmpty(docs))
+                {
+                    content = content.Replace(docs, "%Doc% <br><br>");
+                }
+            }
+            return content;
+        }
     }
 }

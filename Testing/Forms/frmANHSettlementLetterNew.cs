@@ -30,7 +30,7 @@ namespace Testing.Forms
         private string template = string.Empty;
 
         private string path = System.Windows.Forms.Application.StartupPath + @"\";
-        public static string FilePath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice";
+        public static string FilePath = string.Empty;
         public static string FClaimNo = string.Empty;
 
         public static System.Data.DataTable DtNote = new System.Data.DataTable();
@@ -128,6 +128,8 @@ namespace Testing.Forms
             {
                 Cursor = Cursors.WaitCursor;
 
+                FilePath = string.Empty;
+
                 SetTemplate();
 
                 string pClaimNo = claimNo;
@@ -172,17 +174,20 @@ namespace Testing.Forms
 
                 SaveOrUpdateToDatabase();
 
-                templateDoc.SaveAs2(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + ".docx");
-                templateDoc.ExportAsFixedFormat(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + ".pdf", WdExportFormat.wdExportFormatPDF, true);
+                string folderPath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-");
+                string fileName = pClaimNo.Replace("/", "-") + " " + DateTime.Now.ToString("dd-MMM-yyyy hh-mm-ss");
+                Directory.CreateDirectory(folderPath);
+
+                templateDoc.SaveAs2(folderPath + @"\" + fileName + ".docx");
+                templateDoc.ExportAsFixedFormat(folderPath + @"\" + fileName + ".pdf", WdExportFormat.wdExportFormatPDF, true);
 
                 templateDoc.Close();
                 oWord.Quit();
 
-                File.Delete(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + ".docx");
+                File.Delete(folderPath + @"\" + fileName + ".docx");
 
-                FClaimNo = @"\" + claimNo.Replace('/', '-') + ".pdf";
-
-                FilePath = FilePath + FClaimNo;
+                FClaimNo = @"\" + fileName + ".pdf";
+                FilePath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + FClaimNo;
 
                 Close();
 
@@ -216,6 +221,10 @@ namespace Testing.Forms
 
         private void SetTemplate()
         {
+            Paid = string.Empty;
+            NonPaid = string.Empty;
+            NonPayableReason = string.Empty;
+
             GetClaimInfoReport();
             GetExplBeniReport();
             GetNoteHtmlReport();
@@ -284,12 +293,15 @@ namespace Testing.Forms
                 var drNote = dtNote.Rows[i];
                 string notes = File.ReadAllText(path + @"Html\Settlement-Notice-Notes-Template.txt");
 
-                notes = notes.Replace("%Amt%", drNote["Amount"].ToString());
-                notes = notes.Replace("%Description%", drNote["Description"].ToString());
+                if (!string.IsNullOrEmpty(drNote["Amount"].ToString()) && !string.IsNullOrEmpty(drNote["Description"].ToString()))
+                {
+                    notes = notes.Replace("%Amt%", drNote["Amount"].ToString());
+                    notes = notes.Replace("%Description%", drNote["Description"].ToString());
 
-                fnotes += notes;
+                    fnotes += notes;
 
-                NonPayableReason += string.Concat("- ", drNote["Amount"].ToString(), " : ", drNote["Description"].ToString(), "<br>");
+                    NonPayableReason += string.Concat("- ", drNote["Amount"].ToString(), " : ", drNote["Description"].ToString(), "<br>");
+                }
             }
 
             template = template.Replace("%Notes%", fnotes);
@@ -360,14 +372,17 @@ namespace Testing.Forms
                 for (int i = 0; i < dtNote.Rows.Count; i++)
                 {
                     var drNote = dtNote.Rows[i];
-                    decimal amount = Convert.ToDecimal(drNote["Amount"].ToString().Replace("USD", "").Trim());
-                    sqlcrud.ExecuteMySql("dbo.SP_INSERT_SETTLEMENT_NOTICE_NOTE",
-                        "@SETTLEMENT_NOTICE_ID", settlementNoticeID,
-                        "@AMOUNT", amount,
-                        "@DESCRIPTION", drNote["Description"].ToString(),
-                        "@CREATED_DATE", DateTime.Now,
-                        "@CREATED_USER", frmLogIn.Usert.ToUpper()
-                        );
+                    if (!string.IsNullOrEmpty(drNote["Amount"].ToString()) && !string.IsNullOrEmpty(drNote["Description"].ToString()))
+                    {
+                        decimal amount = Convert.ToDecimal(drNote["Amount"].ToString().Replace("USD", "").Trim());
+                        sqlcrud.ExecuteMySql("dbo.SP_INSERT_SETTLEMENT_NOTICE_NOTE",
+                            "@SETTLEMENT_NOTICE_ID", settlementNoticeID,
+                            "@AMOUNT", amount,
+                            "@DESCRIPTION", drNote["Description"].ToString(),
+                            "@CREATED_DATE", DateTime.Now,
+                            "@CREATED_USER", frmLogIn.Usert.ToUpper()
+                            );
+                    }
                 }
             }
         }
@@ -544,6 +559,22 @@ namespace Testing.Forms
                 if (textBox != null)
                 {
                     textBox.KeyPress += new KeyPressEventHandler(textBox_KeyPress);
+                }
+            }
+        }
+
+        private void dgvExplBeni_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCell cell = dgvExplBeni.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell.Value != null)
+            {
+                decimal value;
+                if (decimal.TryParse(cell.Value.ToString(), out value))
+                {
+                    // Round to two decimal places
+                    value = Convert.ToDecimal(value.ToString("N2"));
+                    // Set the cell value back to the rounded value
+                    cell.Value = value;
                 }
             }
         }
@@ -825,6 +856,7 @@ namespace Testing.Forms
                 }
             }
         }
+        
 
         //private void ClearTotalValue()
         //{

@@ -36,6 +36,7 @@
             this.tpSend = new System.Windows.Forms.TabPage();
             this.bnClear = new Testing.cus_button();
             this.pnQuery = new System.Windows.Forms.Panel();
+            this.btnSettlementNoticeHist = new Testing.cus_button();
             this.btnDocReceive = new Testing.cus_button();
             this.btnClaimClosingResend = new Testing.cus_button();
             this.btnClaimClosing = new Testing.cus_button();
@@ -362,6 +363,7 @@
             this.pnQuery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnQuery.Controls.Add(this.btnSettlementNoticeHist);
             this.pnQuery.Controls.Add(this.btnDocReceive);
             this.pnQuery.Controls.Add(this.btnClaimClosingResend);
             this.pnQuery.Controls.Add(this.btnClaimClosing);
@@ -402,6 +404,21 @@
             this.pnQuery.Size = new System.Drawing.Size(1357, 582);
             this.pnQuery.TabIndex = 5;
             this.pnQuery.Visible = false;
+            // 
+            // btnSettlementNoticeHist
+            // 
+            this.btnSettlementNoticeHist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettlementNoticeHist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnSettlementNoticeHist.FlatAppearance.BorderSize = 2;
+            this.btnSettlementNoticeHist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettlementNoticeHist.ForeColor = System.Drawing.Color.White;
+            this.btnSettlementNoticeHist.Location = new System.Drawing.Point(963, 360);
+            this.btnSettlementNoticeHist.Name = "btnSettlementNoticeHist";
+            this.btnSettlementNoticeHist.Size = new System.Drawing.Size(244, 30);
+            this.btnSettlementNoticeHist.TabIndex = 40;
+            this.btnSettlementNoticeHist.Text = "Settlement Notice History";
+            this.btnSettlementNoticeHist.UseVisualStyleBackColor = false;
+            this.btnSettlementNoticeHist.Click += new System.EventHandler(this.btnSettlementNoticeHist_Click);
             // 
             // btnDocReceive
             // 
@@ -3010,5 +3027,6 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox cboDiscount;
         private System.Windows.Forms.Label label43;
+        private cus_button btnSettlementNoticeHist;
     }
 }
