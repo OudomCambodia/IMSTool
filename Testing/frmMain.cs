@@ -1090,28 +1090,28 @@ namespace Testing
                         System.Net.ServicePointManager.Expect100Continue = true;
                         System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
-                        //if (receiver.Trim() != "")
-                        //{
-                        //    string[] tempt = receiver.Split(',');
-                        //    foreach (string str in tempt)
-                        //    {
-                        //        if (str.Trim() != "")
-                        //            message.To.Add(str);
-                        //    }
-                        //}
+                        if (receiver.Trim() != "")
+                        {
+                            string[] tempt = receiver.Split(',');
+                            foreach (string str in tempt)
+                            {
+                                if (str.Trim() != "")
+                                    message.To.Add(str);
+                            }
+                        }
 
-                        //if (cc.Trim() != "")
-                        //{
-                        //    string[] ccList = cc.Split(',');
-                        //    foreach (string str in ccList)
-                        //    {
-                        //        if (str.Trim() != "")
-                        //            message.CC.Add(str.Trim());
-                        //    }
-                        //}
+                        if (cc.Trim() != "")
+                        {
+                            string[] ccList = cc.Split(',');
+                            foreach (string str in ccList)
+                            {
+                                if (str.Trim() != "")
+                                    message.CC.Add(str.Trim());
+                            }
+                        }
 
-                        message.To.Add("rothoudom@forteinsurance.com");
-                        message.CC.Add("rothoudom@forteinsurance.com");
+                        //message.To.Add("rothoudom@forteinsurance.com");
+                        //message.CC.Add("rothoudom@forteinsurance.com");
 
                         message.Subject = subject;
 
