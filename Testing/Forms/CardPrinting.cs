@@ -203,7 +203,8 @@ namespace Testing.Forms
                     for (int i = 0; i < dtPolicy.Rows.Count; i++)
                     {
                         // Set Outpation to Yes for this Policy => request from Yuos Tithya on 18-Dec-2023
-                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/23/000739"))
+                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/23/000739") 
+                                || dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/21/000008"))
                             dtPolicy.Rows[i].Cells["OUTPATIENT"].Value = "YES";
 
                         if (!string.IsNullOrEmpty(dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString()) && !dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString().ToUpper().Equals("NIL"))
