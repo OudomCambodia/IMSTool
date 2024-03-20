@@ -16,6 +16,7 @@ namespace Testing.Forms
     public partial class CardPrinting : Form
     {
         CRUD crud = new CRUD();
+        DBS11SqlCrud sqlCrud = new DBS11SqlCrud();
         DataTable dtChecked = new DataTable();
         CheckBox checkboxHeader = new CheckBox();
         MyDB Mydb = new MyDB();
@@ -197,16 +198,12 @@ namespace Testing.Forms
                 if (policyno == "HNS" || policyno == "GPA" || policyno == "MCW" || policyno == "PAC" || policyno == "BHP" || policyno == "PAE")
                     dtPolicy.Columns["MEMBER_ID"].Visible = false;
 
-                //requester: Yuos Tithya on 18-Dec-2023
+                #region --- SPECIAL CASE FOR PRODUCT BHP and GPA ---
                 if (policyno == "BHP")
                 {
                     for (int i = 0; i < dtPolicy.Rows.Count; i++)
                     {
-                        // Set Outpation to Yes for this Policy => request from Yuos Tithya on 18-Dec-2023
-                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/23/000739") 
-                                || dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/21/000008"))
-                            dtPolicy.Rows[i].Cells["OUTPATIENT"].Value = "YES";
-
+                        // Set all BHP Maternity to YES if MATERNITY doesn't equal NIL
                         if (!string.IsNullOrEmpty(dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString()) && !dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString().ToUpper().Equals("NIL"))
                         {
                             dtPolicy.Rows[i].Cells["MATERNITY"].Value = "YES";
@@ -214,21 +211,60 @@ namespace Testing.Forms
                     }
                 }
 
-                //requester: Voeun Vichea
-                if (policyno == "GPA")
+                var dtSpecialCase = sqlCrud.LoadData("select * from tbECARD_SPECIAL_CASE where POLICY_NO = '" + txtPolicyNo.Text.Trim().ToUpper() + "'").Tables[0];
+                if (dtSpecialCase.Rows.Count > 0)
                 {
+                    var sumInsured = dtSpecialCase.Rows[0]["SUM_INSURED"].ToString().Trim().ToUpper();
+                    var outPatient = dtSpecialCase.Rows[0]["OUTPATIENT"].ToString().Trim().ToUpper();
+                    var maternity = dtSpecialCase.Rows[0]["MATERNITY"].ToString().Trim().ToUpper();
+
                     for (int i = 0; i < dtPolicy.Rows.Count; i++)
                     {
-                        //  on 28-Feb-2024
-                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/20/000126")
-                               || dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/23/000667"))
-                            dtPolicy.Rows[i].Cells["SUM_INSURED"].Value = "18 MONTHS SALARY";
+                        if (!string.IsNullOrEmpty(sumInsured))
+                            dtPolicy.Rows[i].Cells["SUM_INSURED"].Value = sumInsured;
 
-                        //  on 18-Mar-2024
-                        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/16/000034"))
-                            dtPolicy.Rows[i].Cells["SUM_INSURED"].Value = "39 MONTHS SALARY";
+                        if (!string.IsNullOrEmpty(outPatient))
+                            dtPolicy.Rows[i].Cells["OUTPATIENT"].Value = outPatient;
+
+                        if (!string.IsNullOrEmpty(maternity))
+                            dtPolicy.Rows[i].Cells["MATERNITY"].Value = maternity;
                     }
                 }
+                #endregion
+
+
+                //requester: Yuos Tithya on 18-Dec-2023
+                //if (policyno == "BHP")
+                //{
+                //    for (int i = 0; i < dtPolicy.Rows.Count; i++)
+                //    {
+                //        // Set Outpation to Yes for this Policy => request from Yuos Tithya on 18-Dec-2023
+                //        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/23/000739") 
+                //                || dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/HBHP/21/000008"))
+                //            dtPolicy.Rows[i].Cells["OUTPATIENT"].Value = "YES";
+
+                //        if (!string.IsNullOrEmpty(dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString()) && !dtPolicy.Rows[i].Cells["MATERNITY"].Value.ToString().ToUpper().Equals("NIL"))
+                //        {
+                //            dtPolicy.Rows[i].Cells["MATERNITY"].Value = "YES";
+                //        }
+                //    }
+                //}
+
+                //requester: Voeun Vichea
+                //if (policyno == "GPA")
+                //{
+                //    for (int i = 0; i < dtPolicy.Rows.Count; i++)
+                //    {
+                //        //  on 28-Feb-2024
+                //        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/20/000126")
+                //               || dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/23/000667"))
+                //            dtPolicy.Rows[i].Cells["SUM_INSURED"].Value = "18 MONTHS SALARY";
+
+                //        //  on 18-Mar-2024
+                //        if (dtPolicy.Rows[i].Cells["POLICY_NO"].Value.ToString().Trim().ToUpper().Contains("D/001/CGPA/16/000034"))
+                //            dtPolicy.Rows[i].Cells["SUM_INSURED"].Value = "39 MONTHS SALARY";
+                //    }
+                //}
             }
             else
             {
