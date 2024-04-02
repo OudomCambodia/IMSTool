@@ -1485,6 +1485,29 @@ namespace Testing.Forms
         {
             if (!rec_form)
             {
+                if (sp_type == "DocReqNew")
+                {
+                    var dt = new DataTable();
+                    dt.Columns.Add("DOC_CODE", typeof(string));
+                    dt.Columns.Add("DOC_TYPE", typeof(string));
+                    dt.Columns.Add("DOC_CONTENT", typeof(string));
+
+                    foreach (ListViewItem lvi in lvDoc.CheckedItems)
+                    {
+                        string code = lvi.Text;
+                        var tmpDocDet = crud.ExecQuery("select DOC_CODE, DOC_TYPE, DOC_CONTENT from USER_CLAIM_EMAIL_DOC where DOC_CODE = '" + code + "'");
+
+                        var dr = dt.NewRow();
+                        dr["DOC_CODE"] = tmpDocDet.Rows[0]["DOC_CODE"].ToString();
+                        dr["DOC_TYPE"] = tmpDocDet.Rows[0]["DOC_TYPE"].ToString();
+                        dr["DOC_CONTENT"] = tmpDocDet.Rows[0]["DOC_CONTENT"].ToString();
+                        dt.Rows.Add(dr);
+                    }
+
+                    frmEditReqDocDetail frmEditReqDocDetail = new frmEditReqDocDetail(lbClaimNo.Text.Trim().ToUpper(), dt);
+                    frmEditReqDocDetail.ShowDialog();
+                }
+
                 string content = getContent();
 
 
@@ -1575,7 +1598,7 @@ namespace Testing.Forms
                 //End of Update
 
                 // oudom
-                frmViewEmailNew vem = new frmViewEmailNew();
+                frmViewEmailNew vem = new frmViewEmailNew(sp_type);
                 frmViewEmailNew.resetcontent = content;
                 frmViewEmailNew.type = "A&H";
                 string body = string.Empty;

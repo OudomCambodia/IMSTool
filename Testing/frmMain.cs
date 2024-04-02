@@ -947,7 +947,7 @@ namespace Testing
                                     var docCodes = docCode.Split(',');
                                     for (int j = 0; j < docCodes.Count(); j++)
                                     {
-                                        var dtEachDocCode = crud.ExecQuery("select doc_type, doc_content from user_claim_email_doc where doc_code = '" + docCodes[j] + "'");
+                                        var dtEachDocCode = crud.ExecQuery("select doc_type, doc_content from user_claim_email_doc_new where doc_code = '" + docCodes[j] + "' and claim_number = '" + claimNo + "'");
                                         if (dtEachDocCode.Rows.Count > 0)
                                         {
                                             var docType = dtEachDocCode.Rows[0]["DOC_TYPE"].ToString();
@@ -960,7 +960,7 @@ namespace Testing
                                 }
                                 else
                                 {
-                                    var dtEachDocCode = crud.ExecQuery("select doc_type, doc_content from user_claim_email_doc where doc_code = '" + docCode + "'");
+                                    var dtEachDocCode = crud.ExecQuery("select doc_type, doc_content from user_claim_email_doc_new where doc_code = '" + docCode + "' and claim_number = '" + claimNo + "'");
                                     if (dtEachDocCode.Rows.Count > 0)
                                     {
                                         var docType = dtEachDocCode.Rows[0]["DOC_TYPE"].ToString();

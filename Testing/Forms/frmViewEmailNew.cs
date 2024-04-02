@@ -14,10 +14,13 @@ namespace Testing.Forms
     public partial class frmViewEmailNew : Form
     {
         private string body;
+        private string spType = string.Empty;
 
-        public frmViewEmailNew()
+        public frmViewEmailNew(string SpType)
         {
             InitializeComponent();
+
+            spType = SpType;
         }
 
         //Update 16-Jul-19 (Edit Email Content)
@@ -33,6 +36,8 @@ namespace Testing.Forms
         private void frmViewEmail_Load(object sender, EventArgs e)
         {
             //Update 16-Jul-19 (Edit Email Content)
+
+            bnEdit.Enabled = !spType.Equals("DocReqNew");
 
             using (StreamReader reader = new StreamReader("Html/EmailContent.html"))
             {

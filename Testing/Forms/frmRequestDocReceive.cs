@@ -50,9 +50,9 @@ namespace Testing.Forms
                 reqDoc = reqDoc.Remove(reqDoc.Length - 1);
 
                 var qBuilder = new StringBuilder();
-                qBuilder.Append("select doc_type, doc_content, product, doc_code ")
-                    .Append("from user_claim_email_doc ")
-                    .AppendFormat("where doc_code in ({0})", reqDoc);
+                qBuilder.Append("select doc_type, doc_content, doc_code ")
+                    .Append("from user_claim_email_doc_new ")
+                    .AppendFormat("where doc_code in ({0}) and claim_number = '{1}'", reqDoc, claimNo);
 
                 DataTable dtDoc = crud.ExecQuery(qBuilder.ToString());
                 SetReqDoc(dtDoc);
@@ -60,9 +60,9 @@ namespace Testing.Forms
             else
             {
                 var qBuilder = new StringBuilder();
-                qBuilder.Append("select doc_type, doc_content, product, doc_code ")
-                    .Append("from user_claim_email_doc ")
-                    .AppendFormat("where doc_code = '{0}'", reqDocCode);
+                qBuilder.Append("select doc_type, doc_content, doc_code ")
+                    .Append("from user_claim_email_doc_new ")
+                    .AppendFormat("where doc_code = '{0}' and claim_number = '{1}'", reqDocCode, claimNo);
 
                 DataTable dtDoc = crud.ExecQuery(qBuilder.ToString());
                 SetReqDoc(dtDoc);
