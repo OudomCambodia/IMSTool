@@ -113,6 +113,7 @@
             this.btnCustomizeSchedule = new System.Windows.Forms.Button();
             this.timerNoti = new System.Windows.Forms.Timer(this.components);
             this.pnInvoice = new System.Windows.Forms.Panel();
+            this.btnPrintInvoiceBatch = new System.Windows.Forms.Button();
             this.btnCoInvoice = new System.Windows.Forms.Button();
             this.btnSubBreakdownInvoice = new System.Windows.Forms.Button();
             this.btnSubPrintInvoice = new System.Windows.Forms.Button();
@@ -1246,14 +1247,32 @@
             // pnInvoice
             // 
             this.pnInvoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.pnInvoice.Controls.Add(this.btnPrintInvoiceBatch);
             this.pnInvoice.Controls.Add(this.btnCoInvoice);
             this.pnInvoice.Controls.Add(this.btnSubBreakdownInvoice);
             this.pnInvoice.Controls.Add(this.btnSubPrintInvoice);
-            this.pnInvoice.Location = new System.Drawing.Point(189, 182);
+            this.pnInvoice.Location = new System.Drawing.Point(190, 139);
             this.pnInvoice.Name = "pnInvoice";
-            this.pnInvoice.Size = new System.Drawing.Size(180, 123);
+            this.pnInvoice.Size = new System.Drawing.Size(180, 164);
             this.pnInvoice.TabIndex = 14;
             this.pnInvoice.Visible = false;
+            // 
+            // btnPrintInvoiceBatch
+            // 
+            this.btnPrintInvoiceBatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnPrintInvoiceBatch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrintInvoiceBatch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPrintInvoiceBatch.Enabled = false;
+            this.btnPrintInvoiceBatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrintInvoiceBatch.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintInvoiceBatch.ForeColor = System.Drawing.Color.White;
+            this.btnPrintInvoiceBatch.Location = new System.Drawing.Point(0, 122);
+            this.btnPrintInvoiceBatch.Name = "btnPrintInvoiceBatch";
+            this.btnPrintInvoiceBatch.Size = new System.Drawing.Size(180, 41);
+            this.btnPrintInvoiceBatch.TabIndex = 9;
+            this.btnPrintInvoiceBatch.Text = "Print Invoice by Batch No";
+            this.btnPrintInvoiceBatch.UseVisualStyleBackColor = false;
+            this.btnPrintInvoiceBatch.Click += new System.EventHandler(this.btnPrintInvoiceBatch_Click);
             // 
             // btnCoInvoice
             // 
@@ -1561,5 +1580,6 @@
         private System.Windows.Forms.Panel pSendEmailsClaim;
         public System.Windows.Forms.Button btnSendClaimEmailReport;
         public System.Windows.Forms.Button btnSendClaimEmail;
+        public System.Windows.Forms.Button btnPrintInvoiceBatch;
     }
 }
