@@ -957,7 +957,7 @@ namespace Testing.Forms
                 if (dr == System.Windows.Forms.DialogResult.Yes)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    My_DataTable_Extensions.ExportToExcel(reportDt, "");
+                    My_DataTable_Extensions.ExportToExcelXML(reportDt, "");
                     Cursor.Current = Cursors.AppStarting;
                     Msgbox.Show("Excel exported!");
                 }

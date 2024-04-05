@@ -3761,6 +3761,10 @@ namespace Testing {
             
             private global::System.Data.DataColumn columnclNUMBER;
             
+            private global::System.Data.DataColumn columnCOI;
+            
+            private global::System.Data.DataColumn columnIS_PRINTED_COI;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public VIEW_INVOICEDataTable() {
@@ -4052,6 +4056,22 @@ namespace Testing {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn COIColumn {
+                get {
+                    return this.columnCOI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IS_PRINTED_COIColumn {
+                get {
+                    return this.columnIS_PRINTED_COI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4119,7 +4139,9 @@ namespace Testing {
                         string clADMINFEE, 
                         string clFULLPREMIUM, 
                         string clADDRESS, 
-                        string clNUMBER) {
+                        string clNUMBER, 
+                        string COI, 
+                        string IS_PRINTED_COI) {
                 VIEW_INVOICERow rowVIEW_INVOICERow = ((VIEW_INVOICERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NAME,
@@ -4153,7 +4175,9 @@ namespace Testing {
                         clADMINFEE,
                         clFULLPREMIUM,
                         clADDRESS,
-                        clNUMBER};
+                        clNUMBER,
+                        COI,
+                        IS_PRINTED_COI};
                 rowVIEW_INVOICERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVIEW_INVOICERow);
                 return rowVIEW_INVOICERow;
@@ -4208,6 +4232,8 @@ namespace Testing {
                 this.columnclFULLPREMIUM = base.Columns["clFULLPREMIUM"];
                 this.columnclADDRESS = base.Columns["clADDRESS"];
                 this.columnclNUMBER = base.Columns["clNUMBER"];
+                this.columnCOI = base.Columns["COI"];
+                this.columnIS_PRINTED_COI = base.Columns["IS_PRINTED_COI"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4277,6 +4303,11 @@ namespace Testing {
                 base.Columns.Add(this.columnclADDRESS);
                 this.columnclNUMBER = new global::System.Data.DataColumn("clNUMBER", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnclNUMBER);
+                this.columnCOI = new global::System.Data.DataColumn("COI", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOI);
+                this.columnIS_PRINTED_COI = new global::System.Data.DataColumn("IS_PRINTED_COI", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIS_PRINTED_COI);
+                this.columnDEBIT_NOTE.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7758,6 +7789,7 @@ namespace Testing {
                 base.Columns.Add(this.columnACCOUNT_NO);
                 this.columnSWIFT_CODE = new global::System.Data.DataColumn("SWIFT_CODE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSWIFT_CODE);
+                this.columnDEBIT_NOTE.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15307,12 +15339,7 @@ namespace Testing {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DEBIT_NOTE {
                 get {
-                    try {
-                        return ((string)(this[this.tableVIEW_INVOICE.DEBIT_NOTEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DEBIT_NOTE\' in table \'VIEW_INVOICE\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableVIEW_INVOICE.DEBIT_NOTEColumn]));
                 }
                 set {
                     this[this.tableVIEW_INVOICE.DEBIT_NOTEColumn] = value;
@@ -15753,6 +15780,38 @@ namespace Testing {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string COI {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.COIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COI\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.COIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string IS_PRINTED_COI {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.IS_PRINTED_COIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IS_PRINTED_COI\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.IS_PRINTED_COIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNAMENull() {
                 return this.IsNull(this.tableVIEW_INVOICE.NAMEColumn);
             }
@@ -15797,18 +15856,6 @@ namespace Testing {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetTELNull() {
                 this[this.tableVIEW_INVOICE.TELColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDEBIT_NOTENull() {
-                return this.IsNull(this.tableVIEW_INVOICE.DEBIT_NOTEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDEBIT_NOTENull() {
-                this[this.tableVIEW_INVOICE.DEBIT_NOTEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16133,6 +16180,30 @@ namespace Testing {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetclNUMBERNull() {
                 this[this.tableVIEW_INVOICE.clNUMBERColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCOINull() {
+                return this.IsNull(this.tableVIEW_INVOICE.COIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCOINull() {
+                this[this.tableVIEW_INVOICE.COIColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIS_PRINTED_COINull() {
+                return this.IsNull(this.tableVIEW_INVOICE.IS_PRINTED_COIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIS_PRINTED_COINull() {
+                this[this.tableVIEW_INVOICE.IS_PRINTED_COIColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -19261,12 +19332,7 @@ namespace Testing {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string DEBIT_NOTE {
                 get {
-                    try {
-                        return ((string)(this[this.tablePAYMENT_INSTRUCTION.DEBIT_NOTEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DEBIT_NOTE\' in table \'PAYMENT_INSTRUCTION\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tablePAYMENT_INSTRUCTION.DEBIT_NOTEColumn]));
                 }
                 set {
                     this[this.tablePAYMENT_INSTRUCTION.DEBIT_NOTEColumn] = value;
@@ -19335,18 +19401,6 @@ namespace Testing {
                 set {
                     this[this.tablePAYMENT_INSTRUCTION.SWIFT_CODEColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDEBIT_NOTENull() {
-                return this.IsNull(this.tablePAYMENT_INSTRUCTION.DEBIT_NOTEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDEBIT_NOTENull() {
-                this[this.tablePAYMENT_INSTRUCTION.DEBIT_NOTEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

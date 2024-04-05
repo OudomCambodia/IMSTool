@@ -49,6 +49,8 @@ namespace Testing.Forms
 
             dgvCoIn.RowsDefaultCellStyle.ForeColor = Color.Black;
             dgvCoIn.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+
+            rdbNo.Checked = true;
         }
 
         private void bnSearch_Click(object sender, EventArgs e)
@@ -196,6 +198,7 @@ namespace Testing.Forms
             //}
             //else
             //{
+
             if (comBoxDebit.SelectedIndex != 0 || cbListAllTran.SelectedIndex != 0)
             {
                 sql = "";
@@ -204,13 +207,15 @@ namespace Testing.Forms
 
                 string note = comBoxDebit.Text;
                 string Trans = cbListAllTran.SelectedValue.ToString();
+
                 //string Trans1 = Trans.Substring(0, 20);
                 //string Trans2 = Trans.Substring(21);
                 //sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + comBoxDebit.SelectedValue + "'";
-                if (comBoxDebit.SelectedIndex != 0) {
+
+                if (comBoxDebit.SelectedIndex != 0) 
+                {
                     sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + note + "'";
-                    sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + note + "'";
-                    
+                    //sql = "SELECT * FROM VIEW_PRINT_INVOICE where DEBIT_NOTE='" + note + "'";
                 }
                     
                 else if (cbListAllTran.SelectedIndex != 0)
@@ -291,6 +296,55 @@ namespace Testing.Forms
                     dt.Columns[7].MaxLength = 50;
                     var ay = string.Concat(accYear[0], " ", "/", accYear[1]);
                     dr[7] = ay;
+
+                    string subClass = dt.Rows[0]["POL_NO"].ToString().Split('/')[2].Trim().Substring(1);
+                    string mainClass = string.Empty;
+                    var dtMainClass = crud.ExecQuery("SELECT PRD_CLA_CODE FROM UW_M_PRODUCTS WHERE PRD_CODE = '" + subClass + "'");
+                    if (dtMainClass.Rows.Count > 0)
+                        mainClass = dtMainClass.Rows[0]["PRD_CLA_CODE"].ToString();
+
+                    dt.Columns.Add("COI", typeof(System.String));
+                    dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
+                    if (rdbYes.Checked && mainClass.Equals("PROP"))
+                    {
+                        var splitDebNote = dt.Rows[0]["DEBIT_NOTE"].ToString().Split('/');
+                        var isDebNote = splitDebNote[0].Trim().Equals("DN");
+                        string debNote = string.Empty;
+                        foreach (var item in splitDebNote)
+                            debNote += item.Trim() + "/";
+
+                        if (!string.IsNullOrEmpty(debNote))
+                            debNote = debNote.Remove(debNote.Length - 1);
+
+                        var qBuilder = new StringBuilder();
+                        qBuilder.Append("SELECT PCI_CHAR_VALUE COI ")
+                            .Append("FROM UW_T_POL_COMMON_INFORMATION utpci ");
+
+                            if (isDebNote)
+                                qBuilder.AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote);
+                            else
+                                qBuilder.AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT CRN_POL_SEQ_NO FROM RC_T_CREDIT_NOTE WHERE CRN_CREDIT_NOTE_NO = '{0}') ", debNote);
+
+                            qBuilder.Append("AND utpci.PCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
+                            .Append("AND ROWNUM = 1");
+
+                        var dtCoi = crud.ExecQuery(qBuilder.ToString());
+                        if (dtCoi.Rows.Count > 0)
+                        {
+                            dt.Rows[0]["COI"] = dtCoi.Rows[0]["COI"].ToString();
+                            dt.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE");
+                        }
+                        else
+                        {
+                            dt.Rows[0]["COI"] = string.Empty;
+                            dt.Rows[0]["IS_PRINTED_COI"] = "FALSE";
+                        }
+                    }
+                    else
+                    {
+                        dt.Rows[0]["COI"] = string.Empty;
+                        dt.Rows[0]["IS_PRINTED_COI"] = "FALSE";
+                    }
 
                     if (dnNumber[0] == 'D') //Debit Note
                     {

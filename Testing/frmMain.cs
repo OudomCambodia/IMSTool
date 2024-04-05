@@ -775,6 +775,13 @@ namespace Testing
             openForm(cr, (Button)sender);
         }
 
+        private void btnPrintInvoiceBatch_Click(object sender, EventArgs e)
+        {
+            Forms.frmPrintInvoiceByBatchNo cr = new Forms.frmPrintInvoiceByBatchNo();
+            cr.UserName = UserName;
+            openForm(cr, (Button)sender);
+        }
+
         private void btnSubBreakdownInvoice_Click(object sender, EventArgs e)
         {
             Forms.BreakdownInvoice bi = new Forms.BreakdownInvoice();
