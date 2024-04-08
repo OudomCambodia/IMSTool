@@ -363,6 +363,9 @@ namespace Testing.Forms
                             dt.Columns.Add("TOTAL_FUND_KH", typeof(System.String));
                             dt.Columns.Add("KH_NAME", typeof(System.String));
                             dt.Columns.Add("KH_ADDR", typeof(System.String));
+
+                            dt.Columns.Add("COI", typeof(System.String));
+                            dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                             //crud.Executing("Update tbDOC set DN_CN= '" + note + "' where DOC_CODE=" + RefID); 
                             //dtTemp = maincrud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + DateTime.Now.ToString("dd-MMM-yyyy") + "'");
                             dtTemp = maincrud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + dt.Rows[0]["TRAN_DATE"].ToString() + "'");
@@ -389,6 +392,9 @@ namespace Testing.Forms
                                 r["TOTAL_FUND_KH"] = String.Format("{0:N}", Convert.ToDouble(r["TOTAL_FUND"]) * ExchangeRate);
                                 r["KH_NAME"] = KhName;
                                 r["KH_ADDR"] = KhAddr;
+
+                                r["COI"] = string.Empty;
+                                r["IS_PRINTED_COI"] = "FALSE";
                             }
 
                             ReportClass rpt = new ReportClass();
