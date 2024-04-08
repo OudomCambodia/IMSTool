@@ -94,7 +94,20 @@ namespace Testing.Forms
                             .Append("FROM UW_T_POL_COMMON_INFORMATION utpci ")
                             .AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote)
                             .Append("AND utpci.PCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
-                            .Append("AND ROWNUM = 1");
+                            .Append("UNION ALL ")
+                            .Append("SELECT ECI_CHAR_VALUE COI ")
+                            .Append("FROM UW_T_END_COMMON_INFORMATION utpci ")
+                            .AppendFormat("WHERE utpci.ECI_EDT_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote)
+                            .Append("AND utpci.ECI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
+                            .Append("UNION ALL ")
+                            .Append("SELECT HCI_CHAR_VALUE COI ")
+                            .Append("FROM UW_H_HIST_COMMON_INFORMATION utpci ")
+                            .AppendFormat("WHERE utpci.HCI_PHS_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote)
+                            .Append("UNION ALL ")
+                            .Append("SELECT NCI_CHAR_VALUE COI ")
+                            .Append("FROM UW_H_EHIST_COMMON_INFORMATION utpci ")
+                            .AppendFormat("WHERE utpci.NCI_NDS_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote)
+                            .Append("AND utpci.NCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ");
 
                         var dtCoi = crud.ExecQuery(qBuilder.ToString());
                         if (dtCoi.Rows.Count > 0)

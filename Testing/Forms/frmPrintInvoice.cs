@@ -320,13 +320,45 @@ namespace Testing.Forms
                         qBuilder.Append("SELECT PCI_CHAR_VALUE COI ")
                             .Append("FROM UW_T_POL_COMMON_INFORMATION utpci ");
 
-                            if (isDebNote)
-                                qBuilder.AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote);
-                            else
-                                qBuilder.AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT CRN_POL_SEQ_NO FROM RC_T_CREDIT_NOTE WHERE CRN_CREDIT_NOTE_NO = '{0}') ", debNote);
+                        if (isDebNote)
+                            qBuilder.AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote);
+                        else
+                            qBuilder.AppendFormat("WHERE utpci.PCI_POL_SEQ_NO = (SELECT CRN_POL_SEQ_NO FROM RC_T_CREDIT_NOTE WHERE CRN_CREDIT_NOTE_NO = '{0}') ", debNote);
 
-                            qBuilder.Append("AND utpci.PCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
-                            .Append("AND ROWNUM = 1");
+                        qBuilder.Append("AND utpci.PCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
+                            .Append("UNION ALL ");
+
+                        qBuilder.Append("SELECT ECI_CHAR_VALUE COI ")
+                            .Append("FROM UW_T_END_COMMON_INFORMATION utpci ");
+
+                        if (isDebNote)
+                            qBuilder.AppendFormat("WHERE utpci.ECI_EDT_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote);
+                        else
+                            qBuilder.AppendFormat("WHERE utpci.ECI_EDT_SEQ_NO = (SELECT CRN_POL_SEQ_NO FROM RC_T_CREDIT_NOTE WHERE CRN_CREDIT_NOTE_NO = '{0}') ", debNote);
+
+                        qBuilder.Append("AND utpci.ECI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
+                            .Append("UNION ALL ");
+
+                        qBuilder.Append("SELECT HCI_CHAR_VALUE COI ")
+                            .Append("FROM UW_H_HIST_COMMON_INFORMATION utpci ");
+
+                        if (isDebNote)
+                            qBuilder.AppendFormat("WHERE utpci.HCI_PHS_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote);
+                        else
+                            qBuilder.AppendFormat("WHERE utpci.HCI_PHS_SEQ_NO = (SELECT CRN_POL_SEQ_NO FROM RC_T_CREDIT_NOTE WHERE CRN_CREDIT_NOTE_NO = '{0}') ", debNote);
+
+                        qBuilder.Append("AND utpci.HCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ")
+                            .Append("UNION ALL ");
+
+                        qBuilder.Append("SELECT NCI_CHAR_VALUE COI ")
+                            .Append("FROM UW_H_EHIST_COMMON_INFORMATION utpci ");
+
+                        if (isDebNote)
+                            qBuilder.AppendFormat("WHERE utpci.NCI_NDS_SEQ_NO = (SELECT DEB_POL_SEQ_NO FROM RC_T_DEBIT_NOTE WHERE DEB_DEB_NOTE_NO = '{0}') ", debNote);
+                        else
+                            qBuilder.AppendFormat("WHERE utpci.NCI_NDS_SEQ_NO = (SELECT CRN_POL_SEQ_NO FROM RC_T_CREDIT_NOTE WHERE CRN_CREDIT_NOTE_NO = '{0}') ", debNote);
+
+                        qBuilder.Append("AND utpci.NCI_DESCRIPTION LIKE '%CERTIFICATE NO%' ");
 
                         var dtCoi = crud.ExecQuery(qBuilder.ToString());
                         if (dtCoi.Rows.Count > 0)
