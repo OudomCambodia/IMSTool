@@ -100,7 +100,7 @@ namespace Testing.Forms
             dtDiscount.Columns.Add("Name", typeof(string));
             dtDiscount.Columns.Add("Value", typeof(string));
 
-            for (int i = 0; i <= 10; i++)
+            for (int i = 0; i <= 20; i++)
             {
                 var drDiscount = dtDiscount.NewRow();
                 drDiscount["Name"] = i.ToString();
