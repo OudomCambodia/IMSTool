@@ -203,8 +203,9 @@ namespace Testing.Forms
                                                 NOTE = row1["NOTE"],
                                                 DP_REMARK = row1["DP_REMARK"],
                                                 DOCUMENT_REMARK = row1["DOCUMENT_REMARK"],
-                                                CUR_STATUS = row1["CUR_STATUS"]
-
+                                                CUR_STATUS = row1["CUR_STATUS"],
+                                                STAFF_ID = row1["STAFF_ID"],
+                                                SALE_PERSON_NAME = row1["SALE_PERSON_NAME"]
                                             };
                                 if (dtTemp.Columns.Count <= 0)
                                 {
@@ -243,6 +244,9 @@ namespace Testing.Forms
                                     dtTemp.Columns.Add("NOTE", typeof(string));
                                     dtTemp.Columns.Add("DP_REMARK", typeof(string));
                                     dtTemp.Columns.Add("DOCUMENT_REMARK", typeof(string));
+
+                                    dtTemp.Columns.Add("STAFF_ID", typeof(string));
+                                    dtTemp.Columns.Add("SALE_PERSON_NAME", typeof(string));
                                 }
                                 else
                                 {
@@ -298,7 +302,8 @@ namespace Testing.Forms
                                     dr["DP_REMARK"] = item.DP_REMARK;
                                     dr["DOCUMENT_REMARK"] = item.DOCUMENT_REMARK;
 
-
+                                    dr["STAFF_ID"] = item.STAFF_ID;
+                                    dr["SALE_PERSON_NAME"] = item.SALE_PERSON_NAME;
 
                                     dtTemp.Rows.Add(dr);
                                 }

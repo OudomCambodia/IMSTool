@@ -88,9 +88,9 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnEditRemark = new System.Windows.Forms.Button();
-            this.btnAttLbl = new Testing.cus_button();
-            this.btnPrint = new Testing.cus_button();
-            this.btnClose = new Testing.cus_button();
+            this.txtSalePerson = new System.Windows.Forms.TextBox();
+            this.txtStaffID = new System.Windows.Forms.TextBox();
+            this.txtDept = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.tbPremium = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -99,13 +99,19 @@
             this.txtPaymentType = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.tbClientDetails = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtSalePerson = new System.Windows.Forms.TextBox();
+            this.gbBanc = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.txtStaffID = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
+            this.pnDocRemark = new System.Windows.Forms.Panel();
+            this.btnClose = new Testing.cus_button();
+            this.btnPrint = new Testing.cus_button();
+            this.btnAttLbl = new Testing.cus_button();
+            this.pnHist = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHist)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbBanc.SuspendLayout();
+            this.pnDocRemark.SuspendLayout();
+            this.pnHist.SuspendLayout();
             this.SuspendLayout();
             // 
             // label20
@@ -528,7 +534,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(47, 593);
+            this.label21.Location = new System.Drawing.Point(-3, 2);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(145, 17);
@@ -538,7 +544,7 @@
             // tbRemark
             // 
             this.tbRemark.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRemark.Location = new System.Drawing.Point(51, 614);
+            this.tbRemark.Location = new System.Drawing.Point(1, 23);
             this.tbRemark.Margin = new System.Windows.Forms.Padding(4);
             this.tbRemark.MaxLength = 100000;
             this.tbRemark.Multiline = true;
@@ -563,14 +569,13 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvHist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHist.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvHist.Location = new System.Drawing.Point(0, 724);
+            this.dgvHist.Location = new System.Drawing.Point(0, 32);
             this.dgvHist.Margin = new System.Windows.Forms.Padding(4);
             this.dgvHist.Name = "dgvHist";
             this.dgvHist.ReadOnly = true;
             this.dgvHist.RowHeadersVisible = false;
             this.dgvHist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHist.Size = new System.Drawing.Size(943, 172);
+            this.dgvHist.Size = new System.Drawing.Size(943, 164);
             this.dgvHist.TabIndex = 99;
             // 
             // label22
@@ -578,7 +583,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(3, 695);
+            this.label22.Location = new System.Drawing.Point(3, 3);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(70, 20);
@@ -675,7 +680,7 @@
             // 
             // btnAttachment
             // 
-            this.btnAttachment.Location = new System.Drawing.Point(788, 614);
+            this.btnAttachment.Location = new System.Drawing.Point(738, 23);
             this.btnAttachment.Margin = new System.Windows.Forms.Padding(4);
             this.btnAttachment.Name = "btnAttachment";
             this.btnAttachment.Size = new System.Drawing.Size(100, 28);
@@ -686,7 +691,7 @@
             // 
             // btnRemark
             // 
-            this.btnRemark.Location = new System.Drawing.Point(680, 614);
+            this.btnRemark.Location = new System.Drawing.Point(630, 23);
             this.btnRemark.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemark.Name = "btnRemark";
             this.btnRemark.Size = new System.Drawing.Size(100, 28);
@@ -699,7 +704,7 @@
             // 
             this.btnSave.BackgroundImage = global::Testing.Properties.Resources.save;
             this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnSave.Location = new System.Drawing.Point(364, 614);
+            this.btnSave.Location = new System.Drawing.Point(314, 23);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(31, 28);
@@ -713,7 +718,7 @@
             // 
             this.btnCancel.BackgroundImage = global::Testing.Properties.Resources.wrong;
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCancel.Location = new System.Drawing.Point(364, 649);
+            this.btnCancel.Location = new System.Drawing.Point(314, 58);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(31, 28);
@@ -727,7 +732,7 @@
             // 
             this.btnEditRemark.BackgroundImage = global::Testing.Properties.Resources.remark;
             this.btnEditRemark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnEditRemark.Location = new System.Drawing.Point(364, 614);
+            this.btnEditRemark.Location = new System.Drawing.Point(314, 23);
             this.btnEditRemark.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditRemark.Name = "btnEditRemark";
             this.btnEditRemark.Size = new System.Drawing.Size(31, 28);
@@ -736,50 +741,35 @@
             this.btnEditRemark.UseVisualStyleBackColor = true;
             this.btnEditRemark.Click += new System.EventHandler(this.btnEditRemark_Click);
             // 
-            // btnAttLbl
+            // txtSalePerson
             // 
-            this.btnAttLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnAttLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAttLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttLbl.ForeColor = System.Drawing.Color.White;
-            this.btnAttLbl.Location = new System.Drawing.Point(430, 649);
-            this.btnAttLbl.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAttLbl.Name = "btnAttLbl";
-            this.btnAttLbl.Size = new System.Drawing.Size(168, 43);
-            this.btnAttLbl.TabIndex = 24;
-            this.btnAttLbl.Text = "Attention Label";
-            this.btnAttLbl.UseVisualStyleBackColor = true;
-            this.btnAttLbl.Click += new System.EventHandler(this.btnAttLbl_Click);
+            this.txtSalePerson.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtSalePerson.Location = new System.Drawing.Point(107, 56);
+            this.txtSalePerson.Name = "txtSalePerson";
+            this.txtSalePerson.ReadOnly = true;
+            this.txtSalePerson.Size = new System.Drawing.Size(249, 22);
+            this.txtSalePerson.TabIndex = 169;
+            this.toolTip1.SetToolTip(this.txtSalePerson, "Ctrl+L to Select Customer");
             // 
-            // btnPrint
+            // txtStaffID
             // 
-            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(606, 649);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(175, 43);
-            this.btnPrint.TabIndex = 25;
-            this.btnPrint.Text = "Instruction Note";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.txtStaffID.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtStaffID.Location = new System.Drawing.Point(107, 28);
+            this.txtStaffID.Name = "txtStaffID";
+            this.txtStaffID.ReadOnly = true;
+            this.txtStaffID.Size = new System.Drawing.Size(61, 22);
+            this.txtStaffID.TabIndex = 167;
+            this.toolTip1.SetToolTip(this.txtStaffID, "Ctrl+L to Select Customer");
             // 
-            // btnClose
+            // txtDept
             // 
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(788, 649);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(100, 43);
-            this.btnClose.TabIndex = 26;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.txtDept.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtDept.Location = new System.Drawing.Point(220, 28);
+            this.txtDept.Name = "txtDept";
+            this.txtDept.ReadOnly = true;
+            this.txtDept.Size = new System.Drawing.Size(136, 22);
+            this.txtDept.TabIndex = 171;
+            this.toolTip1.SetToolTip(this.txtDept, "Ctrl+L to Select Customer");
             // 
             // label27
             // 
@@ -865,29 +855,30 @@
             this.tbClientDetails.Size = new System.Drawing.Size(248, 22);
             this.tbClientDetails.TabIndex = 113;
             // 
-            // groupBox1
+            // gbBanc
             // 
-            this.groupBox1.Controls.Add(this.txtSalePerson);
-            this.groupBox1.Controls.Add(this.label33);
-            this.groupBox1.Controls.Add(this.txtStaffID);
-            this.groupBox1.Controls.Add(this.label32);
-            this.groupBox1.ForeColor = System.Drawing.Color.Red;
-            this.groupBox1.Location = new System.Drawing.Point(51, 479);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(362, 95);
-            this.groupBox1.TabIndex = 167;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "For Bancassurance department only";
+            this.gbBanc.Controls.Add(this.txtDept);
+            this.gbBanc.Controls.Add(this.label31);
+            this.gbBanc.Controls.Add(this.txtSalePerson);
+            this.gbBanc.Controls.Add(this.label33);
+            this.gbBanc.Controls.Add(this.txtStaffID);
+            this.gbBanc.Controls.Add(this.label32);
+            this.gbBanc.ForeColor = System.Drawing.Color.Red;
+            this.gbBanc.Location = new System.Drawing.Point(51, 479);
+            this.gbBanc.Name = "gbBanc";
+            this.gbBanc.Size = new System.Drawing.Size(362, 95);
+            this.gbBanc.TabIndex = 167;
+            this.gbBanc.TabStop = false;
+            this.gbBanc.Text = "For Bancassurance department only";
             // 
-            // txtSalePerson
+            // label31
             // 
-            this.txtSalePerson.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtSalePerson.Location = new System.Drawing.Point(107, 56);
-            this.txtSalePerson.Name = "txtSalePerson";
-            this.txtSalePerson.ReadOnly = true;
-            this.txtSalePerson.Size = new System.Drawing.Size(249, 22);
-            this.txtSalePerson.TabIndex = 169;
-            this.toolTip1.SetToolTip(this.txtSalePerson, "Ctrl+L to Select Customer");
+            this.label31.ForeColor = System.Drawing.Color.White;
+            this.label31.Location = new System.Drawing.Point(174, 27);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(55, 27);
+            this.label31.TabIndex = 170;
+            this.label31.Text = "Dept.:";
             // 
             // label33
             // 
@@ -898,16 +889,6 @@
             this.label33.TabIndex = 168;
             this.label33.Text = "Sale Person:";
             // 
-            // txtStaffID
-            // 
-            this.txtStaffID.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtStaffID.Location = new System.Drawing.Point(107, 28);
-            this.txtStaffID.Name = "txtStaffID";
-            this.txtStaffID.ReadOnly = true;
-            this.txtStaffID.Size = new System.Drawing.Size(191, 22);
-            this.txtStaffID.TabIndex = 167;
-            this.toolTip1.SetToolTip(this.txtStaffID, "Ctrl+L to Select Customer");
-            // 
             // label32
             // 
             this.label32.ForeColor = System.Drawing.Color.White;
@@ -917,13 +898,87 @@
             this.label32.TabIndex = 166;
             this.label32.Text = "Staff ID:";
             // 
+            // pnDocRemark
+            // 
+            this.pnDocRemark.Controls.Add(this.tbRemark);
+            this.pnDocRemark.Controls.Add(this.btnClose);
+            this.pnDocRemark.Controls.Add(this.btnPrint);
+            this.pnDocRemark.Controls.Add(this.label21);
+            this.pnDocRemark.Controls.Add(this.btnAttLbl);
+            this.pnDocRemark.Controls.Add(this.btnAttachment);
+            this.pnDocRemark.Controls.Add(this.btnRemark);
+            this.pnDocRemark.Controls.Add(this.btnEditRemark);
+            this.pnDocRemark.Controls.Add(this.btnCancel);
+            this.pnDocRemark.Controls.Add(this.btnSave);
+            this.pnDocRemark.Location = new System.Drawing.Point(51, 582);
+            this.pnDocRemark.Name = "pnDocRemark";
+            this.pnDocRemark.Size = new System.Drawing.Size(850, 112);
+            this.pnDocRemark.TabIndex = 168;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(738, 58);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(100, 43);
+            this.btnClose.TabIndex = 26;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(556, 58);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(175, 43);
+            this.btnPrint.TabIndex = 25;
+            this.btnPrint.Text = "Instruction Note";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnAttLbl
+            // 
+            this.btnAttLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.btnAttLbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAttLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAttLbl.ForeColor = System.Drawing.Color.White;
+            this.btnAttLbl.Location = new System.Drawing.Point(380, 58);
+            this.btnAttLbl.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAttLbl.Name = "btnAttLbl";
+            this.btnAttLbl.Size = new System.Drawing.Size(168, 43);
+            this.btnAttLbl.TabIndex = 24;
+            this.btnAttLbl.Text = "Attention Label";
+            this.btnAttLbl.UseVisualStyleBackColor = true;
+            this.btnAttLbl.Click += new System.EventHandler(this.btnAttLbl_Click);
+            // 
+            // pnHist
+            // 
+            this.pnHist.Controls.Add(this.dgvHist);
+            this.pnHist.Controls.Add(this.label22);
+            this.pnHist.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnHist.Location = new System.Drawing.Point(0, 700);
+            this.pnHist.Name = "pnHist";
+            this.pnHist.Size = new System.Drawing.Size(943, 196);
+            this.pnHist.TabIndex = 169;
+            // 
             // frmDocumentDetail1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(943, 896);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.pnHist);
+            this.Controls.Add(this.pnDocRemark);
+            this.Controls.Add(this.gbBanc);
             this.Controls.Add(this.tbClientDetails);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.txtPaymentType);
@@ -932,22 +987,10 @@
             this.Controls.Add(this.label28);
             this.Controls.Add(this.tbPremium);
             this.Controls.Add(this.label27);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnEditRemark);
-            this.Controls.Add(this.btnRemark);
-            this.Controls.Add(this.btnAttachment);
-            this.Controls.Add(this.btnAttLbl);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.dgvHist);
-            this.Controls.Add(this.label21);
-            this.Controls.Add(this.tbRemark);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.tbProducerName);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.tbProducerTeam);
-            this.Controls.Add(this.btnPrint);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label18);
@@ -999,8 +1042,12 @@
             this.Text = "Document Detail";
             this.Load += new System.EventHandler(this.frmDocumentDetail1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvHist)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbBanc.ResumeLayout(false);
+            this.gbBanc.PerformLayout();
+            this.pnDocRemark.ResumeLayout(false);
+            this.pnDocRemark.PerformLayout();
+            this.pnHist.ResumeLayout(false);
+            this.pnHist.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1076,10 +1123,14 @@
         private System.Windows.Forms.TextBox txtPaymentType;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox tbClientDetails;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbBanc;
         private System.Windows.Forms.TextBox txtSalePerson;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.TextBox txtStaffID;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox txtDept;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Panel pnDocRemark;
+        private System.Windows.Forms.Panel pnHist;
     }
 }

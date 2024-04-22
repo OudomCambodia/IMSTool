@@ -81,7 +81,6 @@ namespace Testing.Forms
 
         private void frmAddDocument1_Load(object sender, EventArgs e)
         {
-
             //cbDocType.Items.Add(new ComboboxItem("Quotation", "Q"));
             //cbDocType.Items.Add(new ComboboxItem("Renewal Quotation", "RQ"));
             cbDocType.Items.Add(new ComboboxItem("Policy", "P"));
@@ -168,6 +167,13 @@ namespace Testing.Forms
                 cbProLine.Items.Add(a);
             }
             cbProLine.SelectedIndex = 0;
+
+            gbBanc.Visible = false;
+            tabControl1.Location = new Point(39, gbBanc.Location.Y + 10);
+            panel1.Location = new Point(39, tabControl1.Location.Y + 220);
+
+            Size = new System.Drawing.Size(777, (gbBanc.Visible ? (gbBanc.Height + tabControl1.Height + panel1.Height + 400) : (tabControl1.Height + panel1.Height + 400)));
+
             Cursor.Current = Cursors.AppStarting;
         }
 
@@ -368,7 +374,7 @@ namespace Testing.Forms
                         "@p_NCD", tbNCD.Text, "@p_SPECIAL_DISCOUNT", tbSpecialDiscount.Text, "@p_FLEET_SIZE_DISCOUNT", tbFleetSizeDiscount.Text,
                         "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value,
                         "@p_PRREMIUM_TYPE", premiumtype,"@p_CLIENT_CATAG", clienttype, "p_ClientDetails",tbClientDetails.Text, 
-                        "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text);
+                        "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text, "@p_Department", txtDept.Text.Trim());
 
                         string DocCode = "";
 
@@ -665,14 +671,14 @@ namespace Testing.Forms
                     uploaddt.AcceptChanges();
                     if (uploaddt.Rows.Count > 0)
                     {
-                        if (uploaddt.Columns.Count > 31) //Upload file has 26 columns - updated to 31 Oudom 09-01-24 Request for Bancaassurance 
+                        if (uploaddt.Columns.Count > 32) //Upload file has 26 columns - updated to 32 Oudom 22-Apr-24 Request for Bancaassurance 
                         {
                             int col = uploaddt.Columns.Count;
-                            for (int i = col - 1; i > 30; i--)
+                            for (int i = col - 1; i > 31; i--)
                                 uploaddt.Columns.RemoveAt(i);
                         }
 
-                        if (uploaddt.Columns.Count != 31)
+                        if (uploaddt.Columns.Count != 32)
                         {
                             Cursor.Current = Cursors.AppStarting;
                             Msgbox.Show("Wrong excel format! (Get the latest format from \"Help\")");
@@ -682,7 +688,7 @@ namespace Testing.Forms
                         string DocType = "", CusCode = "", ProType = "", ABCode = "", Priority = "", PrintCard = "", SubmitVia = "", PolicyNo = "", QuotNo = "";
                         string Commission = "", EffectiveDate = "", OtherInstruction = "", RemarkNote = "", RemarkRate = "", OriginalRate = "", GroupDiscount = "",
                             LoyaltyDiscount = "", NCD = "", SpecialDiscount = "", FleetSizeDiscount = "", Discount = "", Loading = "", FinalPremium = "", Attachment = "",
-                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails="", SalePerson="", StaffID="";
+                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails="", SalePerson="", StaffID="", Department="";
                         DateTime ToBeFinish = new DateTime();
 
                         //DataTable 
@@ -710,6 +716,7 @@ namespace Testing.Forms
                             ClientDetails = row[28].ToString().Trim();
                             StaffID = row[29].ToString().Trim();
                             SalePerson = row[30].ToString().Trim();
+                            Department = row[31].ToString().Trim();
 
                             string temp = "";
                             if (!(frmDocumentControl.docType.TryGetValue(DocType, out temp)))
@@ -846,6 +853,7 @@ namespace Testing.Forms
                             ClientDetails = row[28].ToString().Trim();
                             StaffID = row[29].ToString().Trim();
                             SalePerson = row[30].ToString().Trim();
+                            Department = row[31].ToString().Trim();
                             //Fix Premium String
                             System.Text.RegularExpressions.Regex charsToDestroy = new System.Text.RegularExpressions.Regex(@"[^\d|\.\-]");
                             Premium = charsToDestroy.Replace(Premium, "");
@@ -880,7 +888,7 @@ namespace Testing.Forms
                                 "@p_NCD", NCD, "@p_SPECIAL_DISCOUNT", SpecialDiscount, "@p_FLEET_SIZE_DISCOUNT", FleetSizeDiscount,
                                 "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium,
                                 "@p_PRREMIUM_TYPE", PremiumType,"@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails",ClientDetails,
-                                "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text);
+                                "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text, "@p_Department", txtDept.Text.Trim());
                                 
 
                             if (dtTemp.Rows.Count <= 0)
@@ -1056,9 +1064,26 @@ namespace Testing.Forms
         void frmClose1(object sender, FormClosedEventArgs e)
         {
             if (selectedABCode != "")
+            {
                 tbABCode.Text = selectedABCode;
+
+                if (selectedABCode.Substring(0, 1).Equals("F"))
+                {
+                    gbBanc.Visible = true;
+                    tabControl1.Location = new Point(39, 417);
+                    panel1.Location = new Point(39, tabControl1.Location.Y + 220);
+                }
+                else
+                {
+                    gbBanc.Visible = false;
+                    tabControl1.Location = new Point(39, gbBanc.Location.Y + 10);
+                    panel1.Location = new Point(39, tabControl1.Location.Y + 220);
+                }
+            } 
             if (selectedABName != "")
                 tbABName.Text = selectedABName;
+
+            Size = new System.Drawing.Size(777, (gbBanc.Visible ? (gbBanc.Height + tabControl1.Height + panel1.Height + 400) : (tabControl1.Height + panel1.Height + 400)));
         }
 
         private void tbABCode_KeyDown(object sender, KeyEventArgs e)

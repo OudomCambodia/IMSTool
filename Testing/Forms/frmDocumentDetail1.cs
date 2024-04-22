@@ -93,6 +93,7 @@ namespace Testing.Forms
                 tbClientDetails.Text = dt.Rows[0]["CLIENT_DETAILS"].ToString();
                 txtStaffID.Text = dt.Rows[0]["STAFF_ID"].ToString();
                 txtSalePerson.Text = dt.Rows[0]["SALE_PERSON_NAME"].ToString();
+                txtDept.Text = dt.Rows[0]["DEPARTMENT"].ToString();
 
                 if (tbToBeFinish.Text == "01/01/1900") tbToBeFinish.Text = "";
 
@@ -108,6 +109,16 @@ namespace Testing.Forms
                     disabledButt(btnAttLbl);
 
                 string polno = dt.Rows[0]["POLICY_NO"].ToString();
+
+                if (!dt.Rows[0]["PRODUCER_CODE"].ToString().Trim().Substring(0, 1).Equals("F"))
+                {
+                    gbBanc.Visible = false;
+                    pnDocRemark.Location = new Point(40, 410);
+                    Size = new Size(720, 710);
+                }
+                else
+                    gbBanc.Visible = true;
+
 
                 /////Print Card History
                 if (tbPrintCard.Text == "Yes" && tbDPName.Text.Trim() != "")

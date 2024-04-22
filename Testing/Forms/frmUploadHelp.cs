@@ -117,6 +117,9 @@ namespace Testing.Forms
             dataColumn = new DataColumn();
             dataColumn.ColumnName = "SalePersonName";
             uploadtb.Columns.Add(dataColumn);
+            dataColumn = new DataColumn();
+            dataColumn.ColumnName = "Department";
+            uploadtb.Columns.Add(dataColumn);
 
             uploadtb.Columns["To Be Finished On"].DataType = typeof(DateTime);
 

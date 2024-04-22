@@ -62,6 +62,7 @@
             this.tbClientDetails = new System.Windows.Forms.TextBox();
             this.txtStaffID = new System.Windows.Forms.TextBox();
             this.txtSalePerson = new System.Windows.Forms.TextBox();
+            this.txtDept = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.rbYes = new System.Windows.Forms.RadioButton();
             this.rbNo = new System.Windows.Forms.RadioButton();
@@ -115,16 +116,19 @@
             this.label30 = new System.Windows.Forms.Label();
             this.cbClientType = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbBanc = new System.Windows.Forms.GroupBox();
+            this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPremium)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbBanc.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -327,7 +331,7 @@
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(519, 645);
+            this.btnAdd.Location = new System.Drawing.Point(479, 3);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(85, 35);
             this.btnAdd.TabIndex = 42;
@@ -342,7 +346,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(618, 645);
+            this.btnClose.Location = new System.Drawing.Point(578, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(85, 35);
             this.btnClose.TabIndex = 43;
@@ -409,7 +413,7 @@
             // 
             this.btnUploadHelp.BackgroundImage = global::Testing.Properties.Resources.Help;
             this.btnUploadHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnUploadHelp.Location = new System.Drawing.Point(239, 645);
+            this.btnUploadHelp.Location = new System.Drawing.Point(200, 3);
             this.btnUploadHelp.Name = "btnUploadHelp";
             this.btnUploadHelp.Size = new System.Drawing.Size(24, 24);
             this.btnUploadHelp.TabIndex = 41;
@@ -441,20 +445,29 @@
             // txtStaffID
             // 
             this.txtStaffID.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtStaffID.Location = new System.Drawing.Point(107, 28);
+            this.txtStaffID.Location = new System.Drawing.Point(108, 28);
             this.txtStaffID.Name = "txtStaffID";
-            this.txtStaffID.Size = new System.Drawing.Size(191, 22);
+            this.txtStaffID.Size = new System.Drawing.Size(61, 22);
             this.txtStaffID.TabIndex = 167;
             this.toolTip1.SetToolTip(this.txtStaffID, "Ctrl+L to Select Customer");
             // 
             // txtSalePerson
             // 
             this.txtSalePerson.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtSalePerson.Location = new System.Drawing.Point(107, 56);
+            this.txtSalePerson.Location = new System.Drawing.Point(108, 56);
             this.txtSalePerson.Name = "txtSalePerson";
-            this.txtSalePerson.Size = new System.Drawing.Size(249, 22);
+            this.txtSalePerson.Size = new System.Drawing.Size(248, 22);
             this.txtSalePerson.TabIndex = 169;
             this.toolTip1.SetToolTip(this.txtSalePerson, "Ctrl+L to Select Customer");
+            // 
+            // txtDept
+            // 
+            this.txtDept.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtDept.Location = new System.Drawing.Point(227, 28);
+            this.txtDept.Name = "txtDept";
+            this.txtDept.Size = new System.Drawing.Size(129, 22);
+            this.txtDept.TabIndex = 171;
+            this.toolTip1.SetToolTip(this.txtDept, "Ctrl+L to Select Customer");
             // 
             // label2
             // 
@@ -495,7 +508,7 @@
             this.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpload.ForeColor = System.Drawing.Color.White;
-            this.btnUpload.Location = new System.Drawing.Point(39, 645);
+            this.btnUpload.Location = new System.Drawing.Point(0, 3);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(193, 35);
             this.btnUpload.TabIndex = 40;
@@ -534,7 +547,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(341, 656);
+            this.label11.Location = new System.Drawing.Point(301, 14);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(115, 17);
             this.label11.TabIndex = 124;
@@ -592,7 +605,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(39, 417);
+            this.tabControl1.Location = new System.Drawing.Point(40, 412);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(664, 203);
@@ -989,24 +1002,35 @@
             this.label31.TabIndex = 164;
             this.label31.Text = "Client Deatils: + ";
             // 
-            // groupBox1
+            // gbBanc
             // 
-            this.groupBox1.Controls.Add(this.txtSalePerson);
-            this.groupBox1.Controls.Add(this.label33);
-            this.groupBox1.Controls.Add(this.txtStaffID);
-            this.groupBox1.Controls.Add(this.label32);
-            this.groupBox1.ForeColor = System.Drawing.Color.Red;
-            this.groupBox1.Location = new System.Drawing.Point(39, 303);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(362, 95);
-            this.groupBox1.TabIndex = 166;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "For Bancassurance department only";
+            this.gbBanc.Controls.Add(this.txtDept);
+            this.gbBanc.Controls.Add(this.label34);
+            this.gbBanc.Controls.Add(this.txtSalePerson);
+            this.gbBanc.Controls.Add(this.label33);
+            this.gbBanc.Controls.Add(this.txtStaffID);
+            this.gbBanc.Controls.Add(this.label32);
+            this.gbBanc.ForeColor = System.Drawing.Color.Red;
+            this.gbBanc.Location = new System.Drawing.Point(39, 303);
+            this.gbBanc.Name = "gbBanc";
+            this.gbBanc.Size = new System.Drawing.Size(369, 92);
+            this.gbBanc.TabIndex = 166;
+            this.gbBanc.TabStop = false;
+            this.gbBanc.Text = "For Bancassurance department only";
+            // 
+            // label34
+            // 
+            this.label34.ForeColor = System.Drawing.Color.White;
+            this.label34.Location = new System.Drawing.Point(181, 28);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(64, 27);
+            this.label34.TabIndex = 170;
+            this.label34.Text = "Dept.:";
             // 
             // label33
             // 
             this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(6, 55);
+            this.label33.Location = new System.Drawing.Point(6, 56);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(110, 27);
             this.label33.TabIndex = 168;
@@ -1015,20 +1039,33 @@
             // label32
             // 
             this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(6, 27);
+            this.label32.Location = new System.Drawing.Point(6, 28);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(110, 27);
             this.label32.TabIndex = 166;
             this.label32.Text = "Staff ID:";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnClose);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.btnAdd);
+            this.panel1.Controls.Add(this.btnUpload);
+            this.panel1.Controls.Add(this.btnUploadHelp);
+            this.panel1.Location = new System.Drawing.Point(40, 645);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(666, 41);
+            this.panel1.TabIndex = 167;
             // 
             // frmAddDocument1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(759, 701);
+            this.ClientSize = new System.Drawing.Size(759, 715);
             this.ControlBox = false;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.gbBanc);
             this.Controls.Add(this.tbClientDetails);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.cbClientType);
@@ -1048,8 +1085,6 @@
             this.Controls.Add(this.tbProducerCode);
             this.Controls.Add(this.tbABCode);
             this.Controls.Add(this.tbABName);
-            this.Controls.Add(this.btnUploadHelp);
-            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.rbNo);
             this.Controls.Add(this.rbYes);
             this.Controls.Add(this.label2);
@@ -1067,9 +1102,6 @@
             this.Controls.Add(this.cbDocType);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.lblPolNo);
             this.Controls.Add(this.label10);
@@ -1096,8 +1128,10 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPremium)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbBanc.ResumeLayout(false);
+            this.gbBanc.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1189,10 +1223,13 @@
         private System.Windows.Forms.ComboBox cbClientType;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox tbClientDetails;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbBanc;
         private System.Windows.Forms.TextBox txtSalePerson;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.TextBox txtStaffID;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtDept;
+        private System.Windows.Forms.Label label34;
     }
 }
