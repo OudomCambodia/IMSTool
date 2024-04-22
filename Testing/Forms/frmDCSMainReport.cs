@@ -205,7 +205,8 @@ namespace Testing.Forms
                                                 DOCUMENT_REMARK = row1["DOCUMENT_REMARK"],
                                                 CUR_STATUS = row1["CUR_STATUS"],
                                                 STAFF_ID = row1["STAFF_ID"],
-                                                SALE_PERSON_NAME = row1["SALE_PERSON_NAME"]
+                                                SALE_PERSON_NAME = row1["SALE_PERSON_NAME"],
+                                                DEPARTMENT = row1["DEPARTMENT"]
                                             };
                                 if (dtTemp.Columns.Count <= 0)
                                 {
@@ -247,6 +248,7 @@ namespace Testing.Forms
 
                                     dtTemp.Columns.Add("STAFF_ID", typeof(string));
                                     dtTemp.Columns.Add("SALE_PERSON_NAME", typeof(string));
+                                    dtTemp.Columns.Add("DEPARTMENT", typeof(string));
                                 }
                                 else
                                 {
@@ -304,6 +306,7 @@ namespace Testing.Forms
 
                                     dr["STAFF_ID"] = item.STAFF_ID;
                                     dr["SALE_PERSON_NAME"] = item.SALE_PERSON_NAME;
+                                    dr["DEPARTMENT"] = item.DEPARTMENT;
 
                                     dtTemp.Rows.Add(dr);
                                 }
