@@ -93,8 +93,8 @@ namespace Testing.Forms
 
 
                                 main_rpt = "SELECT * from dbo.VIEW_AGENCY_REPORT " +
-                  "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                  "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59')  ";
+                                              "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                                              "and convert(datetime,SUBMISSION_DATE,103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59')  ";
                                 string second_rpt = "select CUS_CODE,CUS_TYPE,nvl(CUS_INDV_SURNAME,CUS_CORP_NAME) customer_name,nvl(CUS_PHONE_1,CUS_PHONE_2) CUSTOMER_PHONE from uw_m_customers";
                                 string third_rpt = "select DEB_DEB_NOTE_NO,DEB_BPARTY_CODE,ACC_HANDLER_NAME,DEB_ME_CODE,AGENT_NAME, " +
                                                     "TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO)) PAID_DATE ,TO_CHAR(FN_GETDNCN_PAID_DATE(DEB_DEB_NOTE_NO), 'MON-YY') PAID_MONTH,DEB_TOTAL_AMOUNT " +
@@ -145,7 +145,7 @@ namespace Testing.Forms
                                                 " or SALE_AGENT_NAME like 'KASIKORN%' " +
                                                 " or SALE_AGENT_NAME like 'FOREIGN TRADE BANK%' " + 
                                                 " or SALE_AGENT_NAME like 'SHINHAN%' " +
-                                                " or SALE_AGENT_NAME like 'AMK%' or SALE_AGENT_NAME like 'HONG LEONG%' ) ";
+                                                " or SALE_AGENT_NAME like 'AMK%' or SALE_AGENT_NAME like 'HONG LEONG%' or SALE_AGENT_NAME like 'MAYBANK%') ";
                                     third_rpt += " WHERE regexp_like(nvl(AGENT_NAME, '*'), '" + bankname + "' ,'i')";
 
                                 }
