@@ -543,33 +543,6 @@ namespace Testing.Forms
         {
             attachfile.Clear();
 
-            //var qBuilder = new StringBuilder();
-            //qBuilder.Append("select int_comments ")
-            //    .Append("from cl_t_intimation  ")
-            //    .AppendFormat("where int_claim_no = '{0}'", lbClaimNo.Text.ToUpper());
-
-            //var dtRemark = crud.ExecQuery(qBuilder.ToString());
-            //if (dtRemark.Rows.Count > 0)
-            //{
-            //    var remark = dtRemark.Rows[0][0].ToString();
-            //    var hIndex = remark.IndexOf("H:");
-            //    var dIndex = remark.IndexOf("D:");
-
-            //    if (hIndex != -1 && dIndex != -1)
-            //    {
-            //        admissionDate = remark.Substring(hIndex, dIndex - hIndex).Trim();
-            //        string pattern = @"\d{2}/\d{2}/\d{4}";
-            //        Match match = Regex.Match(admissionDate, pattern);
-            //        if (string.IsNullOrEmpty(match.Value))
-            //        {
-            //            string pattern1 = @"\d{2}/\d{2}/\d{2}";
-            //            match = Regex.Match(admissionDate, pattern1);
-            //        }
-            //        admissionDate = match.Success ? match.Value : string.Empty;
-            //        dischargeDate = admissionDate;
-            //    }
-            //}
-
             var qBuilder = new StringBuilder();
             qBuilder.Append("select int_date_admission, int_date_discharge ")
                 .Append("from cl_t_intimation  ")
@@ -678,7 +651,15 @@ namespace Testing.Forms
             //oudom
             if (sp_type == "RejNew")
             {
-                btnAttachClaimRejection.Visible = true;
+                var pro = lbClaimNo.Text.Substring(6, 4).ToLower();
+
+                int count = 0;
+                if (pro.Contains("trv")) count++;
+                if (pro.Contains("tri")) count++;
+                if (pro.Contains("tra")) count++;
+                if (pro.Contains("trp")) count++;
+
+                btnAttachClaimRejection.Visible = (count != 1);
                 btnGenerateSettlementNotice.Visible = false;
             }
             else if (sp_type == "ParNew" || sp_type == "PayNew")
@@ -755,7 +736,7 @@ namespace Testing.Forms
                     dtExc = crud.ExecQuery("select * from user_email_bhp_excludef where PRODUCTS = 'BHP' order by PARTS, ENG");
                 }
 
-                if (pro.Contains("trv"))
+                if (pro.Contains("trv") || pro.Contains("tri"))
                 {
                     cboExclusionSection.Visible = true;
                     var dtSection = crud.ExecQuery("select distinct PARTS from user_email_trv_excludef order by PARTS");
@@ -780,7 +761,7 @@ namespace Testing.Forms
                     cboExclusionSection.DataSource = dtSection;
                 }
 
-                if (dtExc.Rows.Count == 0 && !pro.Contains("trv") && !pro.Contains("trp") && !pro.Contains("tra"))
+                if (dtExc.Rows.Count == 0 && !pro.Contains("trv") && !pro.Contains("trp") && !pro.Contains("tra") && !pro.Contains("tri"))
                 {
                     dtExc.Clear();
                     dtExc = crud.ExecQuery("select * from user_claim_email_exclus");
@@ -1814,7 +1795,7 @@ namespace Testing.Forms
         {
             var proCode = lbClaimNo.Text.Substring(6, 4).ToLower();
 
-            if (proCode.Contains("trv"))
+            if (proCode.Contains("trv") || proCode.Contains("tri"))
             {
                 string parts = cboExclusionSection.SelectedValue == null ? "ALL" : cboExclusionSection.SelectedValue.ToString();
                 dtExc = crud.ExecQuery("select * from user_email_trv_excludef where PRODUCTS = 'TRV' and PARTS = '" + parts + "' order by PARTS");
@@ -1834,7 +1815,7 @@ namespace Testing.Forms
 
             foreach (DataRow dr in dtExc.Rows)
             {
-                if (proCode.Contains("trv"))
+                if (proCode.Contains("trv") || proCode.Contains("tri"))
                 {
                     ListViewItem lvi = new ListViewItem(dr["TRV_CODE"].ToString());
                     lvi.SubItems.Add(dr["ENG"].ToString());

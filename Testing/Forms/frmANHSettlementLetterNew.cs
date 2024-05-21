@@ -654,7 +654,7 @@ namespace Testing.Forms
 
         private System.Data.DataTable GetExplBeni(string proCode)
         {
-            var dtList = crud.ExecQuery("select * from user_settlement_letter_explbeni where product_code = '" + proCode + "'");
+            var dtList = crud.ExecQuery("select * from user_settlement_letter_explbeni where product_code = '" + (proCode.Equals("TRI") ? "TRV" : proCode) + "'");
             return dtList;
         }
 
