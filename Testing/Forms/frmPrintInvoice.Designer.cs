@@ -44,22 +44,23 @@
             this.cbListAllTran = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvCoIn = new System.Windows.Forms.DataGridView();
+            this.gbCOI = new System.Windows.Forms.GroupBox();
+            this.chkPrintStamp = new System.Windows.Forms.CheckBox();
+            this.rdbNo = new System.Windows.Forms.RadioButton();
+            this.rdbYes = new System.Windows.Forms.RadioButton();
+            this.lbCOI = new System.Windows.Forms.Label();
             this.btnClear = new Testing.cus_button();
             this.btnPrint = new Testing.cus_button();
             this.bnSearch = new Testing.cus_button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rdbNo = new System.Windows.Forms.RadioButton();
-            this.rdbYes = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoIn)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.gbCOI.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbPolicyNo
             // 
             this.tbPolicyNo.Location = new System.Drawing.Point(73, 59);
-            this.tbPolicyNo.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbPolicyNo.Margin = new System.Windows.Forms.Padding(5);
             this.tbPolicyNo.MaxLength = 20;
             this.tbPolicyNo.Name = "tbPolicyNo";
             this.tbPolicyNo.Size = new System.Drawing.Size(183, 22);
@@ -107,7 +108,7 @@
             // 
             this.comBoxDebit.FormattingEnabled = true;
             this.comBoxDebit.Location = new System.Drawing.Point(363, 59);
-            this.comBoxDebit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comBoxDebit.Margin = new System.Windows.Forms.Padding(4);
             this.comBoxDebit.Name = "comBoxDebit";
             this.comBoxDebit.Size = new System.Drawing.Size(135, 24);
             this.comBoxDebit.TabIndex = 52;
@@ -129,7 +130,7 @@
             // 
             this.comboBank.FormattingEnabled = true;
             this.comboBank.Location = new System.Drawing.Point(1119, 6);
-            this.comboBank.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBank.Margin = new System.Windows.Forms.Padding(4);
             this.comboBank.Name = "comboBank";
             this.comboBank.Size = new System.Drawing.Size(69, 24);
             this.comboBank.TabIndex = 54;
@@ -143,11 +144,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.crystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crystalReportViewer1.Location = new System.Drawing.Point(3, 168);
-            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.crystalReportViewer1.Location = new System.Drawing.Point(3, 189);
+            this.crystalReportViewer1.Margin = new System.Windows.Forms.Padding(4);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
             this.crystalReportViewer1.ShowGroupTreeButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(1290, 588);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1290, 567);
             this.crystalReportViewer1.TabIndex = 57;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
@@ -156,7 +157,7 @@
             this.cbListAll.AutoSize = true;
             this.cbListAll.ForeColor = System.Drawing.Color.White;
             this.cbListAll.Location = new System.Drawing.Point(939, 10);
-            this.cbListAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbListAll.Margin = new System.Windows.Forms.Padding(4);
             this.cbListAll.Name = "cbListAll";
             this.cbListAll.Size = new System.Drawing.Size(114, 21);
             this.cbListAll.TabIndex = 58;
@@ -170,7 +171,7 @@
             this.BHPLetterPrnt.AutoSize = true;
             this.BHPLetterPrnt.ForeColor = System.Drawing.Color.White;
             this.BHPLetterPrnt.Location = new System.Drawing.Point(623, 102);
-            this.BHPLetterPrnt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BHPLetterPrnt.Margin = new System.Windows.Forms.Padding(4);
             this.BHPLetterPrnt.Name = "BHPLetterPrnt";
             this.BHPLetterPrnt.Size = new System.Drawing.Size(266, 21);
             this.BHPLetterPrnt.TabIndex = 59;
@@ -194,7 +195,7 @@
             // 
             this.cbListAllTran.FormattingEnabled = true;
             this.cbListAllTran.Location = new System.Drawing.Point(360, 100);
-            this.cbListAllTran.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbListAllTran.Margin = new System.Windows.Forms.Padding(4);
             this.cbListAllTran.Name = "cbListAllTran";
             this.cbListAllTran.Size = new System.Drawing.Size(240, 24);
             this.cbListAllTran.TabIndex = 52;
@@ -204,9 +205,9 @@
             this.groupBox1.Controls.Add(this.dgvCoIn);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(939, 39);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(344, 101);
             this.groupBox1.TabIndex = 61;
             this.groupBox1.TabStop = false;
@@ -218,12 +219,70 @@
             this.dgvCoIn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCoIn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCoIn.Location = new System.Drawing.Point(4, 19);
-            this.dgvCoIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCoIn.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCoIn.Name = "dgvCoIn";
             this.dgvCoIn.RowHeadersVisible = false;
             this.dgvCoIn.Size = new System.Drawing.Size(336, 78);
             this.dgvCoIn.TabIndex = 0;
             this.dgvCoIn.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCoIn_DataBindingComplete);
+            // 
+            // gbCOI
+            // 
+            this.gbCOI.Controls.Add(this.chkPrintStamp);
+            this.gbCOI.Controls.Add(this.rdbNo);
+            this.gbCOI.Controls.Add(this.rdbYes);
+            this.gbCOI.ForeColor = System.Drawing.Color.White;
+            this.gbCOI.Location = new System.Drawing.Point(3, 91);
+            this.gbCOI.Name = "gbCOI";
+            this.gbCOI.Size = new System.Drawing.Size(145, 70);
+            this.gbCOI.TabIndex = 62;
+            this.gbCOI.TabStop = false;
+            this.gbCOI.Text = "Print with COI?";
+            // 
+            // chkPrintStamp
+            // 
+            this.chkPrintStamp.AutoSize = true;
+            this.chkPrintStamp.Location = new System.Drawing.Point(6, 43);
+            this.chkPrintStamp.Name = "chkPrintStamp";
+            this.chkPrintStamp.Size = new System.Drawing.Size(115, 21);
+            this.chkPrintStamp.TabIndex = 2;
+            this.chkPrintStamp.Text = "Sign && Stamp";
+            this.chkPrintStamp.UseVisualStyleBackColor = true;
+            // 
+            // rdbNo
+            // 
+            this.rdbNo.AutoSize = true;
+            this.rdbNo.Location = new System.Drawing.Point(76, 19);
+            this.rdbNo.Name = "rdbNo";
+            this.rdbNo.Size = new System.Drawing.Size(47, 21);
+            this.rdbNo.TabIndex = 1;
+            this.rdbNo.TabStop = true;
+            this.rdbNo.Text = "No";
+            this.rdbNo.UseVisualStyleBackColor = true;
+            this.rdbNo.CheckedChanged += new System.EventHandler(this.rdbNo_CheckedChanged);
+            // 
+            // rdbYes
+            // 
+            this.rdbYes.AutoSize = true;
+            this.rdbYes.Location = new System.Drawing.Point(6, 19);
+            this.rdbYes.Name = "rdbYes";
+            this.rdbYes.Size = new System.Drawing.Size(53, 21);
+            this.rdbYes.TabIndex = 0;
+            this.rdbYes.TabStop = true;
+            this.rdbYes.Text = "Yes";
+            this.rdbYes.UseVisualStyleBackColor = true;
+            this.rdbYes.CheckedChanged += new System.EventHandler(this.rdbYes_CheckedChanged);
+            // 
+            // lbCOI
+            // 
+            this.lbCOI.AutoSize = true;
+            this.lbCOI.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCOI.ForeColor = System.Drawing.Color.Red;
+            this.lbCOI.Location = new System.Drawing.Point(8, 162);
+            this.lbCOI.Name = "lbCOI";
+            this.lbCOI.Size = new System.Drawing.Size(320, 24);
+            this.lbCOI.TabIndex = 63;
+            this.lbCOI.Text = "*Note: COI is available for PE&&M only";
             // 
             // btnClear
             // 
@@ -232,7 +291,7 @@
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
             this.btnClear.Location = new System.Drawing.Point(844, 52);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 37);
             this.btnClear.TabIndex = 60;
@@ -247,7 +306,7 @@
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.White;
             this.btnPrint.Location = new System.Drawing.Point(599, 52);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 37);
             this.btnPrint.TabIndex = 56;
@@ -263,58 +322,13 @@
             this.bnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bnSearch.ForeColor = System.Drawing.Color.White;
             this.bnSearch.Location = new System.Drawing.Point(684, 52);
-            this.bnSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.bnSearch.Margin = new System.Windows.Forms.Padding(5);
             this.bnSearch.Name = "bnSearch";
             this.bnSearch.Size = new System.Drawing.Size(149, 37);
             this.bnSearch.TabIndex = 20;
             this.bnSearch.Text = "Create Bank";
             this.bnSearch.UseVisualStyleBackColor = false;
             this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rdbNo);
-            this.groupBox2.Controls.Add(this.rdbYes);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(3, 91);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(145, 46);
-            this.groupBox2.TabIndex = 62;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Print with COI?";
-            // 
-            // rdbNo
-            // 
-            this.rdbNo.AutoSize = true;
-            this.rdbNo.Location = new System.Drawing.Point(76, 19);
-            this.rdbNo.Name = "rdbNo";
-            this.rdbNo.Size = new System.Drawing.Size(47, 21);
-            this.rdbNo.TabIndex = 1;
-            this.rdbNo.TabStop = true;
-            this.rdbNo.Text = "No";
-            this.rdbNo.UseVisualStyleBackColor = true;
-            // 
-            // rdbYes
-            // 
-            this.rdbYes.AutoSize = true;
-            this.rdbYes.Location = new System.Drawing.Point(6, 19);
-            this.rdbYes.Name = "rdbYes";
-            this.rdbYes.Size = new System.Drawing.Size(53, 21);
-            this.rdbYes.TabIndex = 0;
-            this.rdbYes.TabStop = true;
-            this.rdbYes.Text = "Yes";
-            this.rdbYes.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(8, 140);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(320, 24);
-            this.label5.TabIndex = 63;
-            this.label5.Text = "*Note: COI is available for PE&&M only";
             // 
             // frmPrintInvoice
             // 
@@ -323,8 +337,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1299, 753);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.lbCOI);
+            this.Controls.Add(this.gbCOI);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.BHPLetterPrnt);
@@ -342,15 +356,15 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimizeBox = false;
             this.Name = "frmPrintInvoice";
             this.Text = "frmPrintInvoice";
             this.Load += new System.EventHandler(this.frmPrintInvoice_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoIn)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbCOI.ResumeLayout(false);
+            this.gbCOI.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,9 +390,10 @@
         private cus_button btnClear;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvCoIn;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbCOI;
         private System.Windows.Forms.RadioButton rdbNo;
         private System.Windows.Forms.RadioButton rdbYes;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbCOI;
+        private System.Windows.Forms.CheckBox chkPrintStamp;
     }
 }

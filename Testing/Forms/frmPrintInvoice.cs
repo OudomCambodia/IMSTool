@@ -51,6 +51,8 @@ namespace Testing.Forms
             dgvCoIn.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
 
             rdbNo.Checked = true;
+            chkPrintStamp.Visible = false;
+            gbCOI.Size = new Size(145, 50);
         }
 
         private void bnSearch_Click(object sender, EventArgs e)
@@ -120,6 +122,8 @@ namespace Testing.Forms
             {
                 BindComboBox(tbPolicyNo.Text.ToUpper());
 
+                if (rdbYes.Checked)
+                    rdbYes_CheckedChanged(null, null);
             }
 
             catch (Exception ex)
@@ -305,6 +309,7 @@ namespace Testing.Forms
 
                     dt.Columns.Add("COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
+                    dt.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
                     if (rdbYes.Checked && mainClass.Equals("PROP"))
                     {
                         var splitDebNote = dt.Rows[0]["DEBIT_NOTE"].ToString().Split('/');
@@ -371,11 +376,14 @@ namespace Testing.Forms
                             dt.Rows[0]["COI"] = string.Empty;
                             dt.Rows[0]["IS_PRINTED_COI"] = "FALSE";
                         }
+
+                        dt.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE");
                     }
                     else
                     {
                         dt.Rows[0]["COI"] = string.Empty;
                         dt.Rows[0]["IS_PRINTED_COI"] = "FALSE";
+                        dt.Rows[0]["IS_PRINTED_STAMP"] = "FALSE";
                     }
 
                     if (dnNumber[0] == 'D') //Debit Note
@@ -604,5 +612,31 @@ namespace Testing.Forms
             CommonFunctions.HighLightGrid(dgvCoIn);
         }
 
+        private void rdbYes_CheckedChanged(object sender, EventArgs e)
+        {
+            string subClass = (!string.IsNullOrEmpty(tbPolicyNo.Text) ? tbPolicyNo.Text.ToUpper().Split('/')[2].Trim().Substring(1) : string.Empty);
+            string mainClass = string.Empty;
+            var dtMainClass = crud.ExecQuery("SELECT PRD_CLA_CODE FROM UW_M_PRODUCTS WHERE PRD_CODE = '" + subClass + "'");
+            if (dtMainClass.Rows.Count > 0)
+                mainClass = dtMainClass.Rows[0]["PRD_CLA_CODE"].ToString();
+
+            if (mainClass.Equals("PROP"))
+            {
+                chkPrintStamp.Visible = true;
+                gbCOI.Size = new Size(145, 70);
+            }
+            else
+            {
+                chkPrintStamp.Visible = false;
+                gbCOI.Size = new Size(145, 50);
+            }
+        }
+
+        private void rdbNo_CheckedChanged(object sender, EventArgs e)
+        {
+            chkPrintStamp.Visible = false;
+            chkPrintStamp.Checked = false;
+            gbCOI.Size = new Size(145, 50);
+        }
     }
 }

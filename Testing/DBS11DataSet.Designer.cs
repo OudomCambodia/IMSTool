@@ -3765,6 +3765,8 @@ namespace Testing {
             
             private global::System.Data.DataColumn columnIS_PRINTED_COI;
             
+            private global::System.Data.DataColumn columnIS_PRINTED_STAMP;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public VIEW_INVOICEDataTable() {
@@ -4072,6 +4074,14 @@ namespace Testing {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IS_PRINTED_STAMPColumn {
+                get {
+                    return this.columnIS_PRINTED_STAMP;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4141,7 +4151,8 @@ namespace Testing {
                         string clADDRESS, 
                         string clNUMBER, 
                         string COI, 
-                        string IS_PRINTED_COI) {
+                        string IS_PRINTED_COI, 
+                        string IS_PRINTED_STAMP) {
                 VIEW_INVOICERow rowVIEW_INVOICERow = ((VIEW_INVOICERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NAME,
@@ -4177,7 +4188,8 @@ namespace Testing {
                         clADDRESS,
                         clNUMBER,
                         COI,
-                        IS_PRINTED_COI};
+                        IS_PRINTED_COI,
+                        IS_PRINTED_STAMP};
                 rowVIEW_INVOICERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVIEW_INVOICERow);
                 return rowVIEW_INVOICERow;
@@ -4234,6 +4246,7 @@ namespace Testing {
                 this.columnclNUMBER = base.Columns["clNUMBER"];
                 this.columnCOI = base.Columns["COI"];
                 this.columnIS_PRINTED_COI = base.Columns["IS_PRINTED_COI"];
+                this.columnIS_PRINTED_STAMP = base.Columns["IS_PRINTED_STAMP"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4307,6 +4320,8 @@ namespace Testing {
                 base.Columns.Add(this.columnCOI);
                 this.columnIS_PRINTED_COI = new global::System.Data.DataColumn("IS_PRINTED_COI", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIS_PRINTED_COI);
+                this.columnIS_PRINTED_STAMP = new global::System.Data.DataColumn("IS_PRINTED_STAMP", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIS_PRINTED_STAMP);
                 this.columnDEBIT_NOTE.AllowDBNull = false;
             }
             
@@ -15812,6 +15827,22 @@ namespace Testing {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string IS_PRINTED_STAMP {
+                get {
+                    try {
+                        return ((string)(this[this.tableVIEW_INVOICE.IS_PRINTED_STAMPColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IS_PRINTED_STAMP\' in table \'VIEW_INVOICE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVIEW_INVOICE.IS_PRINTED_STAMPColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNAMENull() {
                 return this.IsNull(this.tableVIEW_INVOICE.NAMEColumn);
             }
@@ -16204,6 +16235,18 @@ namespace Testing {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetIS_PRINTED_COINull() {
                 this[this.tableVIEW_INVOICE.IS_PRINTED_COIColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIS_PRINTED_STAMPNull() {
+                return this.IsNull(this.tableVIEW_INVOICE.IS_PRINTED_STAMPColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIS_PRINTED_STAMPNull() {
+                this[this.tableVIEW_INVOICE.IS_PRINTED_STAMPColumn] = global::System.Convert.DBNull;
             }
         }
         

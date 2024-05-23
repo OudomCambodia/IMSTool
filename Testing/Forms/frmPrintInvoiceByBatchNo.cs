@@ -36,6 +36,8 @@ namespace Testing.Forms
         private void frmPrintInvoiceByBatchNo_Load(object sender, EventArgs e)
         {
             rdbNo.Checked = true;
+            chkPrintStamp.Visible = false;
+            gbCOI.Size = new Size(145, 45);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -86,6 +88,7 @@ namespace Testing.Forms
                 {
                     dtInvoiceInfo.Columns.Add("COI", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("IS_PRINTED_COI", typeof(System.String));
+                    dtInvoiceInfo.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
 
                     if (rdbYes.Checked && mainClass.Equals("PROP"))
                     {
@@ -126,6 +129,8 @@ namespace Testing.Forms
                         dtInvoiceInfo.Rows[0]["COI"] = string.Empty;
                         dtInvoiceInfo.Rows[0]["IS_PRINTED_COI"] = "FALSE";
                     }
+
+                    dtInvoiceInfo.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE"); ;
 
                     dtInvoiceInfo.Columns.Add("EXCHANGE_RATE", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("TOTAL_FUND_KH", typeof(System.String));
@@ -349,6 +354,19 @@ namespace Testing.Forms
             }
 
             Cursor.Current = Cursors.Arrow;
+        }
+
+        private void rdbYes_CheckedChanged(object sender, EventArgs e)
+        {
+            chkPrintStamp.Visible = true;
+            gbCOI.Size = new Size(145, 65);
+        }
+
+        private void rdbNo_CheckedChanged(object sender, EventArgs e)
+        {
+            chkPrintStamp.Visible = false;
+            chkPrintStamp.Checked = false;
+            gbCOI.Size = new Size(145, 45);
         }
     }
 }

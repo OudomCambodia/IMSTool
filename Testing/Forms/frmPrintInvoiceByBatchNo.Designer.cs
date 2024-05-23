@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbCOI = new System.Windows.Forms.GroupBox();
             this.rdbNo = new System.Windows.Forms.RadioButton();
             this.rdbYes = new System.Windows.Forms.RadioButton();
             this.btnSearch = new Testing.cus_button();
@@ -41,9 +41,10 @@
             this.lbPolicyNo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvBathData = new System.Windows.Forms.DataGridView();
+            this.chkPrintStamp = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbCOI.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBathData)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +78,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.gbCOI);
             this.panel2.Controls.Add(this.btnSearch);
             this.panel2.Controls.Add(this.btnPrint);
             this.panel2.Controls.Add(this.txtBatchNo);
@@ -85,7 +86,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 68);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1167, 51);
+            this.panel2.Size = new System.Drawing.Size(1167, 76);
             this.panel2.TabIndex = 1;
             // 
             // label2
@@ -99,17 +100,18 @@
             this.label2.TabIndex = 60;
             this.label2.Text = "*Note: COI is available for PE&&M only";
             // 
-            // groupBox1
+            // gbCOI
             // 
-            this.groupBox1.Controls.Add(this.rdbNo);
-            this.groupBox1.Controls.Add(this.rdbYes);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(487, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(145, 46);
-            this.groupBox1.TabIndex = 59;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Print with COI?";
+            this.gbCOI.Controls.Add(this.chkPrintStamp);
+            this.gbCOI.Controls.Add(this.rdbNo);
+            this.gbCOI.Controls.Add(this.rdbYes);
+            this.gbCOI.ForeColor = System.Drawing.Color.White;
+            this.gbCOI.Location = new System.Drawing.Point(487, 2);
+            this.gbCOI.Name = "gbCOI";
+            this.gbCOI.Size = new System.Drawing.Size(145, 68);
+            this.gbCOI.TabIndex = 59;
+            this.gbCOI.TabStop = false;
+            this.gbCOI.Text = "Print with COI?";
             // 
             // rdbNo
             // 
@@ -121,6 +123,7 @@
             this.rdbNo.TabStop = true;
             this.rdbNo.Text = "No";
             this.rdbNo.UseVisualStyleBackColor = true;
+            this.rdbNo.CheckedChanged += new System.EventHandler(this.rdbNo_CheckedChanged);
             // 
             // rdbYes
             // 
@@ -132,6 +135,7 @@
             this.rdbYes.TabStop = true;
             this.rdbYes.Text = "Yes";
             this.rdbYes.UseVisualStyleBackColor = true;
+            this.rdbYes.CheckedChanged += new System.EventHandler(this.rdbYes_CheckedChanged);
             // 
             // btnSearch
             // 
@@ -188,9 +192,9 @@
             // 
             this.panel3.Controls.Add(this.dgvBathData);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 119);
+            this.panel3.Location = new System.Drawing.Point(0, 144);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1167, 563);
+            this.panel3.Size = new System.Drawing.Size(1167, 538);
             this.panel3.TabIndex = 2;
             // 
             // dgvBathData
@@ -205,8 +209,18 @@
             this.dgvBathData.ReadOnly = true;
             this.dgvBathData.RowTemplate.Height = 24;
             this.dgvBathData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBathData.Size = new System.Drawing.Size(1167, 563);
+            this.dgvBathData.Size = new System.Drawing.Size(1167, 538);
             this.dgvBathData.TabIndex = 0;
+            // 
+            // chkPrintStamp
+            // 
+            this.chkPrintStamp.AutoSize = true;
+            this.chkPrintStamp.Location = new System.Drawing.Point(6, 41);
+            this.chkPrintStamp.Name = "chkPrintStamp";
+            this.chkPrintStamp.Size = new System.Drawing.Size(115, 21);
+            this.chkPrintStamp.TabIndex = 3;
+            this.chkPrintStamp.Text = "Sign && Stamp";
+            this.chkPrintStamp.UseVisualStyleBackColor = true;
             // 
             // frmPrintInvoiceByBatchNo
             // 
@@ -226,8 +240,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbCOI.ResumeLayout(false);
+            this.gbCOI.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBathData)).EndInit();
             this.ResumeLayout(false);
@@ -245,10 +259,11 @@
         private cus_button btnPrint;
         private System.Windows.Forms.DataGridView dgvBathData;
         private cus_button btnSearch;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbCOI;
         private System.Windows.Forms.RadioButton rdbNo;
         private System.Windows.Forms.RadioButton rdbYes;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkPrintStamp;
 
     }
 }
