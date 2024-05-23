@@ -248,7 +248,7 @@ namespace Testing.Forms
                     dt.Columns.Add("KH_ADDR", typeof(System.String));
 
                     //DataTable dtTemp = crud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + DateTime.Now.ToString("dd-MMM-yyyy") + "'");
-                    DataTable dtTemp = crud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + dt.Rows[0]["EX_TRAN_DATE"].ToString() + "'");
+                    DataTable dtTemp = crud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + (string.IsNullOrEmpty(dt.Rows[0]["EX_TRAN_DATE"].ToString()) ? dt.Rows[0]["TRAN_DATE"].ToString() : dt.Rows[0]["EX_TRAN_DATE"].ToString()) + "'");
                     int ExchangeRate = 0;
                     if (dtTemp.Rows.Count > 0)
                     {
