@@ -366,6 +366,7 @@ namespace Testing.Forms
 
                             dt.Columns.Add("COI", typeof(System.String));
                             dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
+                            dt.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
                             //crud.Executing("Update tbDOC set DN_CN= '" + note + "' where DOC_CODE=" + RefID); 
                             //dtTemp = maincrud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + DateTime.Now.ToString("dd-MMM-yyyy") + "'");
                             dtTemp = maincrud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + dt.Rows[0]["TRAN_DATE"].ToString() + "'");
@@ -395,6 +396,7 @@ namespace Testing.Forms
 
                                 r["COI"] = string.Empty;
                                 r["IS_PRINTED_COI"] = "FALSE";
+                                r["IS_PRINTED_STAMP"] = "FALSE";
                             }
 
                             ReportClass rpt = new ReportClass();
