@@ -103,7 +103,7 @@ namespace Testing.Forms
                 body = body.Replace("{username}", dt.Rows[0]["SENDER"].ToString()); //Update 16-Jul-19 (Edit Email Content)
                 body = body.Replace("{phone}", dt.Rows[0]["PHONE_NUMBER"].ToString()); //Update 16-Jul-19 (Edit Email Content)
                 body = body.Replace("{user_email}", dt.Rows[0]["SENDER_EMAIL"].ToString()); //Update 16-Jul-19 (Edit Email Content)
-                
+
                 senderEmail = dt.Rows[0]["SENDER_EMAIL"].ToString();
 
                 //body = body.Replace("{username}", dt.Rows[0][1].ToString());
@@ -1360,6 +1360,12 @@ namespace Testing.Forms
                     frmANHSettlementLetterNew.NonPaid = string.Empty;
                     frmANHSettlementLetterNew.NonPayableReason = string.Empty;
 
+                    if (!string.IsNullOrEmpty(frmANHSettlementLetterNew.FClaimNo))
+                    {
+                        File.Delete(frmANHSettlementLetterNew.FilePath);
+                        File.Delete(frmANHSettlementLetterNew.FilePath.Replace(".pdf", ".docx"));
+                    }
+
                     //Delete Email Rejection Notice folder
                     //if (!string.IsNullOrEmpty(frmEmailNoticeAttachmentEdit.FolderPath))
                     //{
@@ -1777,10 +1783,10 @@ namespace Testing.Forms
             //frm.ShowDialog();
 
             frmANHSettlementLetterNew frm = new frmANHSettlementLetterNew(lbClaimNo.Text);
-            frm.ShowDialog(); 
+            frm.ShowDialog();
 
             //attachfile.Add(frmANHSettlementLetterNewRV.FPath);
-           
+
             //if (!string.IsNullOrEmpty(frmANHSettlementLetterNewRV.FPath))
             //    tbAttachFile.Text = frmANHSettlementLetterNewRV.FPath + ";";
 

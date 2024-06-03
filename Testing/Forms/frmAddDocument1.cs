@@ -56,15 +56,15 @@ namespace Testing.Forms
         //    {"HOM", "PE&M"}, {"BBD", "PE&M"}, {"EQU", "PE&M"}, {"MUL", "PE&M"},
         //    {"BUR", "PE&M"},{"AHL","PE&M"},{"PNI","PE&M"},
         //    {"CON", "PE&M"}, {"CPE", "PE&M"}, {"MBD", "PE&M"}, {"EAR", "PE&M"}, {"BEX", "PE&M"}, {"ONG", "PE&M"}, 
-            
-            
+
+
         //    {"WID", "MICR"},{"HNA","MICR"}
 
 
         //};
 
         public static Dictionary<string, string> product = new Dictionary<string, string>();
-       
+
         //print card
         //VPC,VCM,CYC,BHP,GPA,HNS,MCW
         //
@@ -133,7 +133,7 @@ namespace Testing.Forms
             //cbProLine.SelectedIndex = 0;
 
             //select latest Info for default setting
-            DataTable dtTemp = sqlcrud.LoadData("SELECT PRODUCT_LINE,PRODUCT_TYPE,SUBMIT_VIA,PRIORITY_TYPE,PRINT_CARD FROM dbo.tbDOC WHERE CREATE_BY = '"+usercode+"' ORDER BY CREATE_DATE DESC").Tables[0];
+            DataTable dtTemp = sqlcrud.LoadData("SELECT PRODUCT_LINE,PRODUCT_TYPE,SUBMIT_VIA,PRIORITY_TYPE,PRINT_CARD FROM dbo.tbDOC WHERE CREATE_BY = '" + usercode + "' ORDER BY CREATE_DATE DESC").Tables[0];
             if (dtTemp.Rows.Count > 0)
             {
                 string line = dtTemp.Rows[0]["PRODUCT_LINE"].ToString(),
@@ -373,7 +373,7 @@ namespace Testing.Forms
                         "@p_ORIGINAL_RATE", tbOriginalRate.Text, "@p_GROUP_DISCOUNT", tbGroupDiscount.Text, "@p_LOYALTY_DISCOUNT", tbLoyaltyDiscount.Text,
                         "@p_NCD", tbNCD.Text, "@p_SPECIAL_DISCOUNT", tbSpecialDiscount.Text, "@p_FLEET_SIZE_DISCOUNT", tbFleetSizeDiscount.Text,
                         "@p_DISCOUNT", tbDiscount.Text, "@p_LOADING", tbLoading.Text, "@p_FINAL_PREMIUM_PER_PERSON", tbFinalPremium.Text, "@p_PREMIUM", tbPremium.Value,
-                        "@p_PRREMIUM_TYPE", premiumtype,"@p_CLIENT_CATAG", clienttype, "p_ClientDetails",tbClientDetails.Text, 
+                        "@p_PRREMIUM_TYPE", premiumtype, "@p_CLIENT_CATAG", clienttype, "p_ClientDetails", tbClientDetails.Text,
                         "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text, "@p_Department", txtDept.Text.Trim());
 
                         string DocCode = "";
@@ -383,24 +383,31 @@ namespace Testing.Forms
                             Msgbox.Show("Document Added!");
                             DocCode = dtTemp.Rows[0][0].ToString();
 
-                            if (!Directory.Exists(drivePath))
-                            {
-                                if (drivePath.Contains("192.168.110.228"))
-                                    drivePath = drivePath.Replace("192.168.110.228", "AD02");
-                                else if (drivePath.Contains("AD02"))
-                                    drivePath = drivePath.Replace("AD02", "192.168.110.228");
-                            }
+                            //if (!Directory.Exists(drivePath))
+                            //{
+                            //    if (drivePath.Contains("192.168.110.228"))
+                            //        drivePath = drivePath.Replace("192.168.110.228", "AD02");
+                            //    else if (drivePath.Contains("AD02"))
+                            //        drivePath = drivePath.Replace("AD02", "192.168.110.228");
+                            //}
 
                             if (dgvFile.Rows.Count > 0)
                             {
-                                string DocCodeFolder = DocCode + "\\";
-                                Directory.CreateDirectory(drivePath + DocCodeFolder);
+                                //string DocCodeFolder = DocCode + "\\";
+                                //Directory.CreateDirectory(drivePath + DocCodeFolder);
+
                                 string fileName = "", fullPath = "", sql = "";
+                                var dateTimeAndGuid = new Tuple<string, string>(string.Empty, string.Empty);
+
                                 foreach (DataGridViewRow dgvr in dgvFile.Rows)
                                 {
+                                    //fullPath = drivePath + DocCodeFolder + fileName;
+                                    //File.Copy(dgvr.Cells[1].Value.ToString(), fullPath, true);
+
                                     fileName = dgvr.Cells[0].Value.ToString();
-                                    fullPath = drivePath + DocCodeFolder + fileName;
-                                    File.Copy(dgvr.Cells[1].Value.ToString(), fullPath, true);
+                                    AWSHelper.UploadFiles(string.Format("document-control/{0}", cbProLine.Text.ToUpper().Trim()), DocCode, dgvr.Cells["File_Path"].Value.ToString());
+                                    fullPath = string.Format("https://imstools-docs.s3.ap-southeast-1.amazonaws.com/document-control/{0}/{1}/{2}", cbProLine.Text.ToUpper().Trim(), DocCode, fileName);
+
                                     sql = @"INSERT INTO dbo.tbAttachment (DOC_CODE,PATH,FILENAME,ADD_DATE) VALUES (" + DocCode + ",N'" + fullPath + "',N'" + fileName + "','" + DateTime.Now + "')";
                                     sqlcrud.Executing(sql);
                                 }
@@ -688,7 +695,7 @@ namespace Testing.Forms
                         string DocType = "", CusCode = "", ProType = "", ABCode = "", Priority = "", PrintCard = "", SubmitVia = "", PolicyNo = "", QuotNo = "";
                         string Commission = "", EffectiveDate = "", OtherInstruction = "", RemarkNote = "", RemarkRate = "", OriginalRate = "", GroupDiscount = "",
                             LoyaltyDiscount = "", NCD = "", SpecialDiscount = "", FleetSizeDiscount = "", Discount = "", Loading = "", FinalPremium = "", Attachment = "",
-                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails="", SalePerson="", StaffID="", Department="";
+                            Premium = "", PremiumType = "", ClientCatag = "", ClientDetails = "", SalePerson = "", StaffID = "", Department = "";
                         DateTime ToBeFinish = new DateTime();
 
                         //DataTable 
@@ -708,7 +715,7 @@ namespace Testing.Forms
                             SubmitVia = row[7].ToString().Trim();
                             PolicyNo = row[8].ToString().Trim().ToUpper();
                             QuotNo = row[9].ToString().Trim();
-                            Attachment = row[24].ToString().Trim().Replace("\"","");
+                            Attachment = row[24].ToString().Trim().Replace("\"", "");
                             Premium = row[25].ToString().Trim();
                             //Update purposes for Acleda Bank
                             PremiumType = row[26].ToString().Trim();
@@ -814,7 +821,7 @@ namespace Testing.Forms
                         //
 
                         string CusName = "", ProducerCode = "", ProducerName = "";
-                        string printedDocCodeANH = "", printedDocCodeAuto = "", printedDocCodeFLM = "", printedDocCodePNE = "", printedDocCodeMICR="";
+                        string printedDocCodeANH = "", printedDocCodeAuto = "", printedDocCodeFLM = "", printedDocCodePNE = "", printedDocCodeMICR = "";
 
                         //Insert
                         for (int i = 0; i < uploaddt.Rows.Count; i++)
@@ -845,7 +852,7 @@ namespace Testing.Forms
                             Discount = row[21].ToString().Trim();
                             Loading = row[22].ToString().Trim();
                             FinalPremium = row[23].ToString().Trim();
-                            Attachment = row[24].ToString().Trim().Replace("\"","");
+                            Attachment = row[24].ToString().Trim().Replace("\"", "");
                             Premium = row[25].ToString().Trim();
                             //Update for Acleda Purposes add more field
                             PremiumType = row[26].ToString().Trim();
@@ -887,9 +894,9 @@ namespace Testing.Forms
                                 "@p_ORIGINAL_RATE", OriginalRate, "@p_GROUP_DISCOUNT", GroupDiscount, "@p_LOYALTY_DISCOUNT", LoyaltyDiscount,
                                 "@p_NCD", NCD, "@p_SPECIAL_DISCOUNT", SpecialDiscount, "@p_FLEET_SIZE_DISCOUNT", FleetSizeDiscount,
                                 "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium,
-                                "@p_PRREMIUM_TYPE", PremiumType,"@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails",ClientDetails,
+                                "@p_PRREMIUM_TYPE", PremiumType, "@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails", ClientDetails,
                                 "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text, "@p_Department", txtDept.Text.Trim());
-                                
+
 
                             if (dtTemp.Rows.Count <= 0)
                             {
@@ -903,30 +910,37 @@ namespace Testing.Forms
                                 //Add Attachment
                                 if (Attachment != "")
                                 {
-                                    if (!Directory.Exists(drivePath))
-                                    {
-                                        if (drivePath.Contains("192.168.110.228"))
-                                            drivePath = drivePath.Replace("192.168.110.228", "AD02");
-                                        else if (drivePath.Contains("AD02"))
-                                            drivePath = drivePath.Replace("AD02", "192.168.110.228");
-                                    }
+                                    //if (!Directory.Exists(drivePath))
+                                    //{
+                                    //    if (drivePath.Contains("192.168.110.228"))
+                                    //        drivePath = drivePath.Replace("192.168.110.228", "AD02");
+                                    //    else if (drivePath.Contains("AD02"))
+                                    //        drivePath = drivePath.Replace("AD02", "192.168.110.228");
+                                    //}
 
-                                    string DocCodeFolder = DocCode + "\\";
-                                    Directory.CreateDirectory(drivePath + DocCodeFolder);
+                                    //string DocCodeFolder = DocCode + "\\";
+                                    //Directory.CreateDirectory(drivePath + DocCodeFolder);
+
                                     string fileName = "", fullPath = "", sql = "";
+                                    var dateTimeAndGuid = new Tuple<string, string>(string.Empty, string.Empty);
                                     string[] files = Attachment.Split('|');
                                     foreach (string f in files)
                                     {
+                                        //fullPath = drivePath + DocCodeFolder + fileName;
+                                        //File.Copy(f, fullPath, true);
+
                                         if (f.Trim() == "") continue;
+
                                         fileName = Path.GetFileName(f);
-                                        fullPath = drivePath + DocCodeFolder + fileName;
-                                        File.Copy(f, fullPath, true);
+                                        fullPath = string.Format("https://imstools-docs.s3.ap-southeast-1.amazonaws.com/document-control/{0}/{1}/{2}", product[ProType].ToUpper().Trim(), DocCode, fileName);
+                                        AWSHelper.UploadFiles(string.Format("document-control/{0}", product[ProType].ToUpper().Trim()), DocCode, f);
+
                                         sql = @"INSERT INTO dbo.tbAttachment (DOC_CODE,PATH,FILENAME,ADD_DATE) VALUES (" + DocCode + ",N'" + fullPath + "',N'" + fileName + "','" + DateTime.Now + "')";
                                         sqlcrud.Executing(sql);
                                     }
                                 }
                                 //
-                                
+
                                 switch (product[ProType])
                                 {
                                     case "A&H":
@@ -944,7 +958,7 @@ namespace Testing.Forms
                                     case "MICR":
                                         printedDocCodeMICR += "'" + DocCode + "',";
                                         break;
-                                    
+
                                 }
                             }
                         }
@@ -1079,7 +1093,7 @@ namespace Testing.Forms
                     tabControl1.Location = new Point(39, gbBanc.Location.Y + 10);
                     panel1.Location = new Point(39, tabControl1.Location.Y + 220);
                 }
-            } 
+            }
             if (selectedABName != "")
                 tbABName.Text = selectedABName;
 

@@ -116,6 +116,10 @@ namespace Testing.Forms
             cboAddress.ValueMember = "Value";
             cboAddress.DisplayMember = "Name";
             cboAddress.DataSource = CommonFunctions.Provinces();
+
+            TabPage tabPageToHide = tabControl1.TabPages["tpMedicalRejectionLetter"];
+            if (tabPageToHide != null)
+                tabControl1.TabPages.Remove(tabPageToHide);
         }
         //private void Combobox_Load()
         //{
@@ -834,7 +838,7 @@ namespace Testing.Forms
                 //"where INT_CLAIM_NO = '" + clno + "')";
 
                 string cmd = "select POLICY_HOLDER,ADDRESS,CLAIM_NO,INSURED_MEMBER,ACCIDENT_DATE, " +
-        //"PAYABLE,CC from " +
+                    //"PAYABLE,CC from " +
         "TOTAL_COST,CC from " +
         "(select INT_CLAIM_NO CLAIM_NO,INT_PRS_NAME INSURED_MEMBER,pk_uw_m_customers.fn_get_cust_name_full(INT_CUS_CODE) POLICY_HOLDER,to_char(INT_DATE_LOSS,'dd/mm/yyyy') ACCIDENT_DATE, " +
         "nvl((select SUM(PRD_VALUE) from CL_T_PROVISION_DTLS where PRD_INT_SEQ = INT_SEQ_NO and PRD_COMMENTS is null),0) TOTAL_COST, " +
@@ -2034,7 +2038,7 @@ namespace Testing.Forms
                     Msgbox.Show("Only GPA PAC TRI PAE, and PAP product available in this function.");
                     return;
                 }
-                
+
                 string[] Key = new string[] { "p_claim_no" };
                 string[] Value = new string[] { clno };
 
@@ -2669,7 +2673,7 @@ namespace Testing.Forms
 
         private void btnViewFolder_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\");
+            //System.Diagnostics.Process.Start(@"\\192.168.110.228\Infoins_IMS_Upload_doc$\Medical_Rejection_Letter_Doc\");
         }
 
         private void btnDocReceive_Click(object sender, EventArgs e)
@@ -2700,12 +2704,19 @@ namespace Testing.Forms
 
         private void btnSettlementNoticeHist_Click(object sender, EventArgs e)
         {
-            string folderPath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + tbClaimNo.Text.ToUpper().Replace("/", "-");
+            Cursor = Cursors.WaitCursor;
 
-            if (!Directory.Exists(folderPath))
-                Msgbox.Show("This claim has no settlement notice history.");
-            else
-                System.Diagnostics.Process.Start(folderPath);
+            frmViewAttachments frmViewAttachments = new frmViewAttachments(false, tbClaimNo.Text.ToUpper().Replace("/", "-"));
+            frmViewAttachments.ShowDialog();
+
+            Cursor = Cursors.Arrow;
+
+            //string folderPath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + tbClaimNo.Text.ToUpper().Replace("/", "-");
+
+            //if (!Directory.Exists(folderPath))
+            //    Msgbox.Show("This claim has no settlement notice history.");
+            //else
+            //    System.Diagnostics.Process.Start(folderPath);
         }
     }
 }

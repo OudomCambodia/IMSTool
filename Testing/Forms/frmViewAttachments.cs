@@ -18,9 +18,16 @@ namespace Testing.Forms
         public string DocCode = "1"; //default
         DBS11SqlCrud crud = new DBS11SqlCrud();
 
-        public frmViewAttachments()
+        private bool isDocumentControl = false;
+        private string claimNo = string.Empty;
+
+
+        public frmViewAttachments(bool IsDocumentControl, string ClaimNo = "")
         {
             InitializeComponent();
+
+            isDocumentControl = IsDocumentControl;
+            claimNo = ClaimNo;
         }
 
         private void frmViewAttachments_Load(object sender, EventArgs e)
@@ -30,18 +37,52 @@ namespace Testing.Forms
 
         void Requery()
         {
-            DataTable dtTemp = crud.LoadData("SELECT CREATE_DATE,DOC_TYPE,PRODUCT_TYPE,CUS_NAME FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE = " + DocCode).Tables[0];
-            tbDocID.Text = DocCode;
-            tbCreateDate.Text = dtTemp.Rows[0]["CREATE_DATE"].ToString();
-            tbDocType.Text = dtTemp.Rows[0]["DOC_TYPE"].ToString();
-            tbProType.Text = dtTemp.Rows[0]["PRODUCT_TYPE"].ToString();
-            tbCusName.Text = dtTemp.Rows[0]["CUS_NAME"].ToString();
+            dgvFile.Rows.Clear();
 
-            dtTemp = crud.LoadData("SELECT FILENAME,PATH FROM dbo.tbAttachment WHERE DOC_CODE = " + DocCode).Tables[0];
-            if (dtTemp.Rows.Count > 0)
+            if (isDocumentControl)
             {
-                for (int i = 0; i < dtTemp.Rows.Count; i++)
-                    dgvFile.Rows.Add((i + 1).ToString(), dtTemp.Rows[i][0], dtTemp.Rows[i][1]);
+                DataTable dtTemp = crud.LoadData("SELECT CREATE_DATE,DOC_TYPE,PRODUCT_TYPE,CUS_NAME FROM dbo.VIEW_DOC_DETAIL WHERE DOC_CODE = " + DocCode).Tables[0];
+                tbDocID.Text = DocCode;
+                tbCreateDate.Text = dtTemp.Rows[0]["CREATE_DATE"].ToString();
+                tbDocType.Text = dtTemp.Rows[0]["DOC_TYPE"].ToString();
+                tbProType.Text = dtTemp.Rows[0]["PRODUCT_TYPE"].ToString();
+                tbCusName.Text = dtTemp.Rows[0]["CUS_NAME"].ToString();
+
+                dtTemp = crud.LoadData("SELECT FILENAME,PATH FROM dbo.tbAttachment WHERE DOC_CODE = " + DocCode).Tables[0];
+                if (dtTemp.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dtTemp.Rows.Count; i++)
+                        dgvFile.Rows.Add((i + 1).ToString(), dtTemp.Rows[i][0], dtTemp.Rows[i][1]);
+                }
+            }
+            else
+            {
+                lbRefID.Visible = false;
+                tbDocID.Visible = false;
+                lbCreatedDate.Visible = false;
+                tbCreateDate.Visible = false;
+                lbDocumentType.Visible = false;
+                tbDocType.Visible = false;
+                lbProductType.Visible = false;
+                tbProType.Visible = false;
+                lbCustomerName.Visible = false;
+                tbCusName.Visible = false;
+                btnAddFile.Visible = false;
+                btnClose.Visible = false;
+
+                //dgvFile.Columns["File_Name"].Width = 392;
+                //dgvFile.Columns["Download"].Visible = false;
+
+                dgvFile.Size = new Size(550, 260);
+                dgvFile.Location = new Point(35, 50);
+
+                var tpFiles = AWSHelper.RetrieveFiles("settlement-notice", claimNo);
+
+                if (tpFiles.Count > 0)
+                {
+                    for (int i = 0; i < tpFiles.Count; i++)
+                        dgvFile.Rows.Add((i + 1).ToString(), tpFiles[i].Item1, tpFiles[i].Item2);
+                }
             }
         }
 
@@ -59,23 +100,28 @@ namespace Testing.Forms
 
                 try
                 {
+                    //int RowIndex = dgvFile.SelectedRows[0].Index;
+                    //string path = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
+                    //Directory.CreateDirectory(TempFolder);
+                    //Array.ForEach(Directory.GetFiles(TempFolder), File.Delete);
+                    //string TempPath = TempFolder + dgvFile.Rows[RowIndex].Cells[1].Value.ToString();
+                    //if (!File.Exists(path))
+                    //{
+                    //    if (path.Contains("192.168.110.228"))
+                    //        path = path.Replace("192.168.110.228", "AD02");
+                    //    else if (path.Contains("AD02"))
+                    //        path = path.Replace("AD02", "192.168.110.228");
+                    //}
+                    //File.Copy(path, TempPath, true);
+                    //var attributes = File.GetAttributes(TempPath);
+                    //File.SetAttributes(TempPath, attributes | FileAttributes.ReadOnly);
+                    //System.Diagnostics.Process.Start(TempPath);
+                    //File.SetAttributes(TempPath, attributes);
+
                     int RowIndex = dgvFile.SelectedRows[0].Index;
-                    string path = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
-                    Directory.CreateDirectory(TempFolder);
-                    Array.ForEach(Directory.GetFiles(TempFolder), File.Delete);
-                    string TempPath = TempFolder + dgvFile.Rows[RowIndex].Cells[1].Value.ToString();
-                    if (!File.Exists(path))
-                    {
-                        if (path.Contains("192.168.110.228"))
-                            path = path.Replace("192.168.110.228", "AD02");
-                        else if (path.Contains("AD02"))
-                            path = path.Replace("AD02", "192.168.110.228");
-                    }
-                    File.Copy(path, TempPath, true);
-                    var attributes = File.GetAttributes(TempPath);
-                    File.SetAttributes(TempPath, attributes | FileAttributes.ReadOnly);
-                    System.Diagnostics.Process.Start(TempPath);
-                    File.SetAttributes(TempPath, attributes);
+                    string filePath = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
+
+                    AWSHelper.OpenFiles(filePath);
                 }
                 catch (Exception ex)
                 {
@@ -86,23 +132,40 @@ namespace Testing.Forms
             }
             else if (e.ColumnIndex == dgvFile.Columns["Download"].Index && e.RowIndex >= 0)
             {
-                if (fbdDownload.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(fbdDownload.SelectedPath))
-                {
-                    Cursor.Current = Cursors.WaitCursor;
-                    int RowIndex = dgvFile.SelectedRows[0].Index;
-                    string path = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
-                    if (!File.Exists(path))
-                    {
-                        if (path.Contains("192.168.110.228"))
-                            path = path.Replace("192.168.110.228", "AD02");
-                        else if (path.Contains("AD02"))
-                            path = path.Replace("AD02", "192.168.110.228");
-                    }
-                    File.Copy(path, fbdDownload.SelectedPath + @"\\" + dgvFile.Rows[RowIndex].Cells[1].Value.ToString(), true);
+                //if (fbdDownload.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(fbdDownload.SelectedPath))
+                //{
+                //    Cursor.Current = Cursors.WaitCursor;
+                //    int RowIndex = dgvFile.SelectedRows[0].Index;
+                //    string path = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
+                //    if (!File.Exists(path))
+                //    {
+                //        if (path.Contains("192.168.110.228"))
+                //            path = path.Replace("192.168.110.228", "AD02");
+                //        else if (path.Contains("AD02"))
+                //            path = path.Replace("AD02", "192.168.110.228");
+                //    }
+                //    File.Copy(path, fbdDownload.SelectedPath + @"\\" + dgvFile.Rows[RowIndex].Cells[1].Value.ToString(), true);
 
-                    Msgbox.Show("File downloaded successfully!");
-                    Cursor.Current = Cursors.AppStarting;
+                //    Msgbox.Show("File downloaded successfully!");
+                //    Cursor.Current = Cursors.AppStarting;
+                //}
+
+                Cursor.Current = Cursors.WaitCursor;
+
+                try
+                {
+                    int RowIndex = dgvFile.SelectedRows[0].Index;
+                    string filePath = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
+
+                    if (AWSHelper.DownloadFiles(filePath))
+                        Msgbox.Show("File downloaded successfully!");
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                Cursor.Current = Cursors.Arrow;
             }
         }
 
@@ -115,19 +178,22 @@ namespace Testing.Forms
             if (ofdUpload.ShowDialog() == DialogResult.OK)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string drivePath = frmAddDocument1.drivePath;
-                string DocCodeFolder = DocCode + "\\";
 
-                if (!Directory.Exists(drivePath))
-                {
-                    if (drivePath.Contains("192.168.110.228"))
-                        drivePath = drivePath.Replace("192.168.110.228", "AD02");
-                    else if (drivePath.Contains("AD02"))
-                        drivePath = drivePath.Replace("AD02", "192.168.110.228");
-                }
+                var dateTimeAndGuid = new Tuple<string, string>(string.Empty, string.Empty);
 
-                if (!Directory.Exists(drivePath + DocCodeFolder))
-                    Directory.CreateDirectory(drivePath + DocCodeFolder);
+                //string drivePath = frmAddDocument1.drivePath;
+                //string DocCodeFolder = DocCode + "\\";
+
+                //if (!Directory.Exists(drivePath))
+                //{
+                //    if (drivePath.Contains("192.168.110.228"))
+                //        drivePath = drivePath.Replace("192.168.110.228", "AD02");
+                //    else if (drivePath.Contains("AD02"))
+                //        drivePath = drivePath.Replace("AD02", "192.168.110.228");
+                //}
+
+                //if (!Directory.Exists(drivePath + DocCodeFolder))
+                //    Directory.CreateDirectory(drivePath + DocCodeFolder);
 
                 foreach (string path in ofdUpload.FileNames)
                 {
@@ -141,8 +207,20 @@ namespace Testing.Forms
                             return;
                         }
                     }
-                    string fullPath = drivePath + DocCodeFolder + filename;
-                    File.Copy(path, fullPath, true);
+
+                    string proLine = string.Empty;
+
+                    var dtProLine = crud.LoadData("select PRODUCT_LINE from tbDOC where DOC_CODE = " + DocCode.Trim() + "").Tables[0];
+                    if (dtProLine.Rows.Count > 0)
+                        proLine = dtProLine.Rows[0][0].ToString();
+
+                    AWSHelper.UploadFiles(string.Format("document-control/{0}", proLine), DocCode, path);
+
+                    string fullPath = string.Format("https://imstools-docs.s3.ap-southeast-1.amazonaws.com/document-control/{0}/{1}/{2}", proLine, DocCode, filename);
+
+                    //string fullPath = drivePath + DocCodeFolder + filename;
+                    //File.Copy(path, fullPath, true);
+
                     //string sql = @"INSERT INTO dbo.tbAttachment (DOC_CODE,PATH,FILENAME,ADD_DATE) VALUES (" + DocCode + ",N'" + fullPath + "',N'" + filename + "','" + DateTime.Now + "')";
                     System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
                     cmd.CommandText = "INSERT INTO dbo.tbAttachment (DOC_CODE,PATH,FILENAME,ADD_DATE) VALUES (" + DocCode + ",@fullpath,@filename,'" + DateTime.Now + "')";

@@ -174,20 +174,26 @@ namespace Testing.Forms
 
                 SaveOrUpdateToDatabase();
 
-                string folderPath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-");
-                string fileName = pClaimNo.Replace("/", "-") + " " + DateTime.Now.ToString("dd-MMM-yyyy hh-mm-ss");
-                Directory.CreateDirectory(folderPath);
+                string folderPath = Path.GetTempPath();
 
-                templateDoc.SaveAs2(folderPath + @"\" + fileName + ".docx");
+                //string folderPath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-");
+                string fileName = pClaimNo.Replace("/", "-") + " " + DateTime.Now.ToString("dd-MMM-yyyy hh-mm-ss");
+                //Directory.CreateDirectory(folderPath);
+
+                templateDoc.SaveAs2(folderPath + @"\" + fileName + ".docx"); // to be able to convert docx to pdf
                 templateDoc.ExportAsFixedFormat(folderPath + @"\" + fileName + ".pdf", WdExportFormat.wdExportFormatPDF, true);
+
+                AWSHelper.UploadFiles("settlement-notice", pClaimNo.Replace("/", "-"), folderPath + @"\" + fileName + ".pdf");
 
                 templateDoc.Close();
                 oWord.Quit();
 
-                File.Delete(folderPath + @"\" + fileName + ".docx");
+                //File.Delete(folderPath + @"\" + fileName + ".docx");
+                //File.Delete(folderPath + @"\" + fileName + ".pdf");
 
                 FClaimNo = @"\" + fileName + ".pdf";
-                FilePath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + FClaimNo;
+                FilePath = folderPath + FClaimNo;
+                //FilePath = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Settlement_Notice\" + pClaimNo.Replace("/", "-") + FClaimNo;
 
                 Close();
 
@@ -440,7 +446,7 @@ namespace Testing.Forms
                         txtDiagnosis.Text = dtClaimInfo.Rows[0]["CAUSE"].ToString();
                         txtEmail.Text = GetEmailByProduct(proCode);
                     }
-                    
+
 
                     BindToDgvExplBeni(proCode);
                 }
@@ -856,7 +862,7 @@ namespace Testing.Forms
                 }
             }
         }
-        
+
 
         //private void ClearTotalValue()
         //{

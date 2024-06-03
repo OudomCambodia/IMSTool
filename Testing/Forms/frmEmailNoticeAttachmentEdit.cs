@@ -76,7 +76,7 @@ namespace Testing.Forms
         private DataTable dtClaims = frmEmailNoticeAttachment.dtClaimDt;
         private string khBody = string.Empty;
         private string engBody = string.Empty;
-        private string path = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Email_Claim_Rejection_Notice\";
+        //private string path = @"\\192.168.110.228\Infoins_IMS_Upload_doc$\Email_Claim_Rejection_Notice\";
         //private string path = @"D:\Email_Claim_Rejection_Notice\";
 
         public static string FolderPath = string.Empty;
@@ -116,11 +116,13 @@ namespace Testing.Forms
                 {
                     Cursor = Cursors.WaitCursor;
 
+                    string path = Path.GetTempPath();
+
                     var claimNo = frmEmailNoticeAttachment.dtClaimDt.Rows[0]["CLAIM_NO"].ToString().Trim();
                     claimNo = frmEmailNoticeAttachment.dtClaimDt.Rows[0]["CLAIM_NO"].ToString().Trim().Replace("/", "-");
                     System.IO.Directory.CreateDirectory(path + claimNo);
 
-                    path = path + claimNo;
+                    //path = path + claimNo;
 
                     FolderPath = path;
 
@@ -242,7 +244,7 @@ namespace Testing.Forms
                     {
                         accountHandler = dtSf.Rows[0][0].ToString();
                     }
-                } 
+                }
 
                 engBody = engBody.Replace("%DateTimeN%", currentDate);
                 engBody = engBody.Replace("%PolicyHolder%", policyHolder);

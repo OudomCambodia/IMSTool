@@ -31,15 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewAttachments));
             this.fbdDownload = new System.Windows.Forms.FolderBrowserDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbProductType = new System.Windows.Forms.Label();
             this.tbProType = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbCustomerName = new System.Windows.Forms.Label();
             this.tbCusName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbDocumentType = new System.Windows.Forms.Label();
             this.tbDocType = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbRefID = new System.Windows.Forms.Label();
             this.tbDocID = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lbCreatedDate = new System.Windows.Forms.Label();
             this.tbCreateDate = new System.Windows.Forms.TextBox();
             this.dgvFile = new System.Windows.Forms.DataGridView();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,106 +59,116 @@
             this.label1.Font = new System.Drawing.Font("Palatino Linotype", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(617, 37);
+            this.label1.Size = new System.Drawing.Size(823, 46);
             this.label1.TabIndex = 60;
             this.label1.Text = "Attachments";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // lbProductType
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(360, 78);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 13);
-            this.label7.TabIndex = 76;
-            this.label7.Text = "Product Type: ";
+            this.lbProductType.AutoSize = true;
+            this.lbProductType.ForeColor = System.Drawing.Color.White;
+            this.lbProductType.Location = new System.Drawing.Point(480, 96);
+            this.lbProductType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbProductType.Name = "lbProductType";
+            this.lbProductType.Size = new System.Drawing.Size(101, 17);
+            this.lbProductType.TabIndex = 76;
+            this.lbProductType.Text = "Product Type: ";
             // 
             // tbProType
             // 
-            this.tbProType.Location = new System.Drawing.Point(439, 75);
+            this.tbProType.Location = new System.Drawing.Point(585, 92);
+            this.tbProType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbProType.MaxLength = 20;
             this.tbProType.Name = "tbProType";
             this.tbProType.ReadOnly = true;
-            this.tbProType.Size = new System.Drawing.Size(145, 20);
+            this.tbProType.Size = new System.Drawing.Size(192, 22);
             this.tbProType.TabIndex = 72;
             // 
-            // label5
+            // lbCustomerName
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(31, 104);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 13);
-            this.label5.TabIndex = 75;
-            this.label5.Text = "Customer Name: ";
+            this.lbCustomerName.AutoSize = true;
+            this.lbCustomerName.ForeColor = System.Drawing.Color.White;
+            this.lbCustomerName.Location = new System.Drawing.Point(41, 128);
+            this.lbCustomerName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCustomerName.Name = "lbCustomerName";
+            this.lbCustomerName.Size = new System.Drawing.Size(117, 17);
+            this.lbCustomerName.TabIndex = 75;
+            this.lbCustomerName.Text = "Customer Name: ";
             // 
             // tbCusName
             // 
-            this.tbCusName.Location = new System.Drawing.Point(126, 101);
+            this.tbCusName.Location = new System.Drawing.Point(168, 124);
+            this.tbCusName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbCusName.MaxLength = 20;
             this.tbCusName.Name = "tbCusName";
             this.tbCusName.ReadOnly = true;
-            this.tbCusName.Size = new System.Drawing.Size(458, 20);
+            this.tbCusName.Size = new System.Drawing.Size(609, 22);
             this.tbCusName.TabIndex = 71;
             // 
-            // label3
+            // lbDocumentType
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(31, 78);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
-            this.label3.TabIndex = 74;
-            this.label3.Text = "Document Type: ";
+            this.lbDocumentType.AutoSize = true;
+            this.lbDocumentType.ForeColor = System.Drawing.Color.White;
+            this.lbDocumentType.Location = new System.Drawing.Point(41, 96);
+            this.lbDocumentType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbDocumentType.Name = "lbDocumentType";
+            this.lbDocumentType.Size = new System.Drawing.Size(116, 17);
+            this.lbDocumentType.TabIndex = 74;
+            this.lbDocumentType.Text = "Document Type: ";
             // 
             // tbDocType
             // 
-            this.tbDocType.Location = new System.Drawing.Point(126, 75);
+            this.tbDocType.Location = new System.Drawing.Point(168, 92);
+            this.tbDocType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocType.MaxLength = 20;
             this.tbDocType.Name = "tbDocType";
             this.tbDocType.ReadOnly = true;
-            this.tbDocType.Size = new System.Drawing.Size(187, 20);
+            this.tbDocType.Size = new System.Drawing.Size(248, 22);
             this.tbDocType.TabIndex = 70;
             // 
-            // label2
+            // lbRefID
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(31, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 73;
-            this.label2.Text = "Ref ID: ";
+            this.lbRefID.AutoSize = true;
+            this.lbRefID.ForeColor = System.Drawing.Color.White;
+            this.lbRefID.Location = new System.Drawing.Point(41, 64);
+            this.lbRefID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbRefID.Name = "lbRefID";
+            this.lbRefID.Size = new System.Drawing.Size(55, 17);
+            this.lbRefID.TabIndex = 73;
+            this.lbRefID.Text = "Ref ID: ";
             // 
             // tbDocID
             // 
-            this.tbDocID.Location = new System.Drawing.Point(126, 49);
+            this.tbDocID.Location = new System.Drawing.Point(168, 60);
+            this.tbDocID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbDocID.MaxLength = 20;
             this.tbDocID.Name = "tbDocID";
             this.tbDocID.ReadOnly = true;
-            this.tbDocID.Size = new System.Drawing.Size(187, 20);
+            this.tbDocID.Size = new System.Drawing.Size(248, 22);
             this.tbDocID.TabIndex = 69;
             // 
-            // label11
+            // lbCreatedDate
             // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(360, 52);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(70, 13);
-            this.label11.TabIndex = 78;
-            this.label11.Text = "Create Date: ";
+            this.lbCreatedDate.AutoSize = true;
+            this.lbCreatedDate.ForeColor = System.Drawing.Color.White;
+            this.lbCreatedDate.Location = new System.Drawing.Point(480, 64);
+            this.lbCreatedDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCreatedDate.Name = "lbCreatedDate";
+            this.lbCreatedDate.Size = new System.Drawing.Size(92, 17);
+            this.lbCreatedDate.TabIndex = 78;
+            this.lbCreatedDate.Text = "Create Date: ";
             // 
             // tbCreateDate
             // 
-            this.tbCreateDate.Location = new System.Drawing.Point(439, 49);
+            this.tbCreateDate.Location = new System.Drawing.Point(585, 60);
+            this.tbCreateDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbCreateDate.MaxLength = 20;
             this.tbCreateDate.Name = "tbCreateDate";
             this.tbCreateDate.ReadOnly = true;
-            this.tbCreateDate.Size = new System.Drawing.Size(145, 20);
+            this.tbCreateDate.Size = new System.Drawing.Size(192, 22);
             this.tbCreateDate.TabIndex = 77;
             // 
             // dgvFile
@@ -176,7 +186,8 @@
             this.File_Path,
             this.Open,
             this.Download});
-            this.dgvFile.Location = new System.Drawing.Point(34, 127);
+            this.dgvFile.Location = new System.Drawing.Point(45, 156);
+            this.dgvFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvFile.MultiSelect = false;
             this.dgvFile.Name = "dgvFile";
             this.dgvFile.ReadOnly = true;
@@ -184,7 +195,7 @@
             this.dgvFile.RowTemplate.Height = 30;
             this.dgvFile.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvFile.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFile.Size = new System.Drawing.Size(550, 159);
+            this.dgvFile.Size = new System.Drawing.Size(733, 196);
             this.dgvFile.TabIndex = 79;
             this.dgvFile.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFile_CellClick);
             // 
@@ -235,9 +246,10 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(511, 298);
+            this.btnClose.Location = new System.Drawing.Point(681, 367);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(73, 30);
+            this.btnClose.Size = new System.Drawing.Size(97, 37);
             this.btnClose.TabIndex = 80;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -249,9 +261,10 @@
             this.btnAddFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddFile.ForeColor = System.Drawing.Color.White;
-            this.btnAddFile.Location = new System.Drawing.Point(34, 298);
+            this.btnAddFile.Location = new System.Drawing.Point(45, 367);
+            this.btnAddFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(150, 30);
+            this.btnAddFile.Size = new System.Drawing.Size(200, 37);
             this.btnAddFile.TabIndex = 81;
             this.btnAddFile.Text = "Add File(s)";
             this.btnAddFile.UseVisualStyleBackColor = true;
@@ -259,26 +272,27 @@
             // 
             // frmViewAttachments
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(617, 340);
+            this.ClientSize = new System.Drawing.Size(823, 418);
             this.Controls.Add(this.btnAddFile);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.dgvFile);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lbCreatedDate);
             this.Controls.Add(this.tbCreateDate);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lbProductType);
             this.Controls.Add(this.tbProType);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lbCustomerName);
             this.Controls.Add(this.tbCusName);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbDocumentType);
             this.Controls.Add(this.tbDocType);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbRefID);
             this.Controls.Add(this.tbDocID);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmViewAttachments";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Attachments";
@@ -293,15 +307,15 @@
 
         private System.Windows.Forms.FolderBrowserDialog fbdDownload;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbProductType;
         private System.Windows.Forms.TextBox tbProType;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbCustomerName;
         private System.Windows.Forms.TextBox tbCusName;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbDocumentType;
         private System.Windows.Forms.TextBox tbDocType;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbRefID;
         private System.Windows.Forms.TextBox tbDocID;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lbCreatedDate;
         private System.Windows.Forms.TextBox tbCreateDate;
         private System.Windows.Forms.DataGridView dgvFile;
         private System.Windows.Forms.DataGridViewTextBoxColumn No;

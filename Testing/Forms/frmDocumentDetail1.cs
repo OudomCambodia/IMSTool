@@ -207,7 +207,7 @@ namespace Testing.Forms
                 //if (tbProLine.Text == "A&H")
                 //{
                 //    rpt = new Reports.InstructionNoteANH();
-                    
+
                 //}                   
                 //else if (tbProLine.Text == "AUTO")
                 //{
@@ -261,7 +261,7 @@ namespace Testing.Forms
                 frm.rpt = rpt;
                 frm.Show();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Msgbox.Show(ex.Message);
             }
@@ -310,7 +310,7 @@ namespace Testing.Forms
 
         private void btnAttachment_Click(object sender, EventArgs e)
         {
-            frmViewAttachments frm = new frmViewAttachments();
+            frmViewAttachments frm = new frmViewAttachments(true);
             frm.DocCode = DocId;
             frm.Show();
         }

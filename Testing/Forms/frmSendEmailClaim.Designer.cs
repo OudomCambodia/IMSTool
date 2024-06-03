@@ -203,7 +203,7 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.tbGrandTotal = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tpMedicalRejectionLetter = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
@@ -271,7 +271,7 @@
             this.tabPage3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tpMedicalRejectionLetter.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel11.SuspendLayout();
             this.groupBox13.SuspendLayout();
@@ -320,7 +320,7 @@
             this.tabControl1.Controls.Add(this.tpRejection);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tpMedicalRejectionLetter);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -2399,16 +2399,16 @@
             this.tbGrandTotal.Size = new System.Drawing.Size(196, 27);
             this.tbGrandTotal.TabIndex = 30;
             // 
-            // tabPage4
+            // tpMedicalRejectionLetter
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.tabPage4.Controls.Add(this.panel8);
-            this.tabPage4.Location = new System.Drawing.Point(4, 28);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1363, 715);
-            this.tabPage4.TabIndex = 7;
-            this.tabPage4.Text = "Medical Rejection Letter";
+            this.tpMedicalRejectionLetter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.tpMedicalRejectionLetter.Controls.Add(this.panel8);
+            this.tpMedicalRejectionLetter.Location = new System.Drawing.Point(4, 28);
+            this.tpMedicalRejectionLetter.Name = "tpMedicalRejectionLetter";
+            this.tpMedicalRejectionLetter.Padding = new System.Windows.Forms.Padding(3);
+            this.tpMedicalRejectionLetter.Size = new System.Drawing.Size(1363, 715);
+            this.tpMedicalRejectionLetter.TabIndex = 7;
+            this.tpMedicalRejectionLetter.Text = "Medical Rejection Letter";
             // 
             // panel8
             // 
@@ -2801,7 +2801,7 @@
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.tpMedicalRejectionLetter.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
@@ -2988,7 +2988,7 @@
         private cus_button btnClearDef;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer2;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tpMedicalRejectionLetter;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;
         private cus_button btnGenerateClaim;
