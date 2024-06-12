@@ -908,6 +908,12 @@ namespace Testing
             openForm(tr, (Button)sender);
         }
 
+        private void tsmiPEMReport_Click(object sender, EventArgs e)
+        {
+            Forms.frmPEMReport frmPEMReport = new Forms.frmPEMReport();
+            openForm(frmPEMReport, (ToolStripMenuItem)sender);
+        }
+
         private void tsmiPrintAutoLabel_Click(object sender, EventArgs e)
         {
             Forms.frmPrintAutoLabel frm = new Forms.frmPrintAutoLabel();

@@ -61,6 +61,7 @@
             this.acledaSalesPersonReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPolicyUpload = new System.Windows.Forms.ToolStripMenuItem();
             this.autoMonthlyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPEMReport = new System.Windows.Forms.ToolStripMenuItem();
             this.InvoiceSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renewalListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -370,6 +371,7 @@
             this.Pipay,
             this.monthlyReportToolStripMenuItem,
             this.autoMonthlyReportToolStripMenuItem,
+            this.tsmiPEMReport,
             this.InvoiceSettingToolStripMenuItem,
             this.renewalListToolStripMenuItem,
             this.adminToolStripMenuItem,
@@ -542,6 +544,15 @@
             this.autoMonthlyReportToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
             this.autoMonthlyReportToolStripMenuItem.Text = "Auto Monthly Report";
             this.autoMonthlyReportToolStripMenuItem.Click += new System.EventHandler(this.autoMonthlyReportToolStripMenuItem_Click);
+            // 
+            // tsmiPEMReport
+            // 
+            this.tsmiPEMReport.Enabled = false;
+            this.tsmiPEMReport.ForeColor = System.Drawing.Color.White;
+            this.tsmiPEMReport.Name = "tsmiPEMReport";
+            this.tsmiPEMReport.Size = new System.Drawing.Size(111, 24);
+            this.tsmiPEMReport.Text = "PE&&M Report";
+            this.tsmiPEMReport.Click += new System.EventHandler(this.tsmiPEMReport_Click);
             // 
             // InvoiceSettingToolStripMenuItem
             // 
@@ -1581,5 +1592,6 @@
         public System.Windows.Forms.Button btnSendClaimEmailReport;
         public System.Windows.Forms.Button btnSendClaimEmail;
         public System.Windows.Forms.Button btnPrintInvoiceBatch;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPEMReport;
     }
 }
