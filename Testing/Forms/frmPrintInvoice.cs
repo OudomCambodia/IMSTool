@@ -310,7 +310,7 @@ namespace Testing.Forms
                     dt.Columns.Add("COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
-                    if (rdbYes.Checked && mainClass.Equals("PROP"))
+                    if (rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI")))
                     {
                         var splitDebNote = dt.Rows[0]["DEBIT_NOTE"].ToString().Split('/');
                         var isDebNote = splitDebNote[0].Trim().Equals("DN");
@@ -369,7 +369,7 @@ namespace Testing.Forms
                         if (dtCoi.Rows.Count > 0)
                         {
                             dt.Rows[0]["COI"] = dtCoi.Rows[0]["COI"].ToString();
-                            dt.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE");
+                            dt.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE");
                         }
                         else
                         {
@@ -377,7 +377,7 @@ namespace Testing.Forms
                             dt.Rows[0]["IS_PRINTED_COI"] = "FALSE";
                         }
 
-                        dt.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE");
+                        dt.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE");
                     }
                     else
                     {
@@ -620,7 +620,7 @@ namespace Testing.Forms
             if (dtMainClass.Rows.Count > 0)
                 mainClass = dtMainClass.Rows[0]["PRD_CLA_CODE"].ToString();
 
-            if (mainClass.Equals("PROP"))
+            if (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))
             {
                 chkPrintStamp.Visible = true;
                 gbCOI.Size = new Size(145, 70);

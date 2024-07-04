@@ -90,7 +90,7 @@ namespace Testing.Forms
                     dtInvoiceInfo.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
 
-                    if (rdbYes.Checked && mainClass.Equals("PROP"))
+                    if (rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI")))
                     {
                         var qBuilder = new StringBuilder();
                         qBuilder.Append("SELECT PCI_CHAR_VALUE COI ")
@@ -116,7 +116,7 @@ namespace Testing.Forms
                         if (dtCoi.Rows.Count > 0)
                         {
                             dtInvoiceInfo.Rows[0]["COI"] = dtCoi.Rows[0]["COI"].ToString();
-                            dtInvoiceInfo.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE");
+                            dtInvoiceInfo.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE");
                         }
                         else
                         {
@@ -130,7 +130,7 @@ namespace Testing.Forms
                         dtInvoiceInfo.Rows[0]["IS_PRINTED_COI"] = "FALSE";
                     }
 
-                    dtInvoiceInfo.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && mainClass.Equals("PROP")) ? "TRUE" : "FALSE"); ;
+                    dtInvoiceInfo.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE"); ;
 
                     dtInvoiceInfo.Columns.Add("EXCHANGE_RATE", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("TOTAL_FUND_KH", typeof(System.String));
