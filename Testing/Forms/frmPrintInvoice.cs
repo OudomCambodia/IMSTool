@@ -310,7 +310,7 @@ namespace Testing.Forms
                     dt.Columns.Add("COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
-                    if (rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI")))
+                    if (rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI") || mainClass.Equals("AUTO")))
                     {
                         var splitDebNote = dt.Rows[0]["DEBIT_NOTE"].ToString().Split('/');
                         var isDebNote = splitDebNote[0].Trim().Equals("DN");
@@ -369,7 +369,7 @@ namespace Testing.Forms
                         if (dtCoi.Rows.Count > 0)
                         {
                             dt.Rows[0]["COI"] = dtCoi.Rows[0]["COI"].ToString();
-                            dt.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE");
+                            dt.Rows[0]["IS_PRINTED_COI"] = ((rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI") || mainClass.Equals("AUTO"))) ? "TRUE" : "FALSE");
                         }
                         else
                         {

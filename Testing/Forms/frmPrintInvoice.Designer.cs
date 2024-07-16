@@ -280,9 +280,9 @@
             this.lbCOI.ForeColor = System.Drawing.Color.Red;
             this.lbCOI.Location = new System.Drawing.Point(8, 162);
             this.lbCOI.Name = "lbCOI";
-            this.lbCOI.Size = new System.Drawing.Size(320, 24);
+            this.lbCOI.Size = new System.Drawing.Size(415, 24);
             this.lbCOI.TabIndex = 63;
-            this.lbCOI.Text = "*Note: COI is available for PE&&M only";
+            this.lbCOI.Text = "*Note: COI is available for PE&&M and AUTO only";
             // 
             // btnClear
             // 
