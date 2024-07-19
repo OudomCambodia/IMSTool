@@ -78,9 +78,20 @@ namespace Testing.Forms
                     }
                     if (loctemp.Rows.Count <= 0)
                     {
+                        bool isExist = false;
+                        string gplCode = string.Empty;
+
+                        // if GPL_CODE exists, random the number again.
+                        do
+                        {
+                            gplCode = string.Concat("N0", rnd.Next(1, 9999).ToString("D4"));
+                            isExist = crud.ExecQuery("select GPL_CODE from SM_M_GEOAREA_PARAMLN where GPL_CODE = '" + gplCode + "'").Rows.Count > 0;
+                        }
+                        while (isExist);
+
                         Oracle.ManagedDataAccess.Client.OracleCommand cmd = new Oracle.ManagedDataAccess.Client.OracleCommand();
                         cmd.CommandText = "INSERT INTO SM_M_GEOAREA_PARAMLN(GPL_CODE, GPL_DESC, GPL_SMG_CODE, GPL_SMG_LEVEL, GPL_SEQ_NO, GPL_DTL_INSERT) VALUES(:gpl_code, :gpl_desc, :gpl_smg_code, :gpl_smg_level, :gpl_seq_no, :gpl_dtl_insert)";
-                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_code", string.Concat("N0", rnd.Next(10, 99) + rnd.Next(10, 80))));
+                        cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_code", gplCode));
                         cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_desc", dt.Rows[i][10].ToString()));
                         cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_smg_code", "9"));
                         cmd.Parameters.Add(new Oracle.ManagedDataAccess.Client.OracleParameter("gpl_smg_level", "9"));
