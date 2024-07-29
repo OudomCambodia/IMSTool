@@ -367,6 +367,7 @@ namespace Testing.Forms
                             dt.Columns.Add("COI", typeof(System.String));
                             dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                             dt.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
+                            dt.Columns.Add("IS_PRINTED_AUTO_STAMP", typeof(System.String));
                             //crud.Executing("Update tbDOC set DN_CN= '" + note + "' where DOC_CODE=" + RefID); 
                             //dtTemp = maincrud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + DateTime.Now.ToString("dd-MMM-yyyy") + "'");
                             dtTemp = maincrud.ExecQuery("SELECT RATE FROM USER_EXCHANGE_RATE WHERE ON_DATE = '" + dt.Rows[0]["TRAN_DATE"].ToString() + "'");
@@ -391,12 +392,14 @@ namespace Testing.Forms
                             {
                                 r["EXCHANGE_RATE"] = String.Format("{0:N}", ExchangeRate).Replace(".00", "");
                                 r["TOTAL_FUND_KH"] = String.Format("{0:N}", Convert.ToDouble(r["TOTAL_FUND"]) * ExchangeRate);
+                                //r["TOTAL_FUND_KH"] = String.Format("{0:N}", Decimal.Round(Convert.ToDecimal(row["TOTAL_FUND"]) * ExchangeRate, 0));
                                 r["KH_NAME"] = KhName;
                                 r["KH_ADDR"] = KhAddr;
 
                                 r["COI"] = string.Empty;
                                 r["IS_PRINTED_COI"] = "FALSE";
                                 r["IS_PRINTED_STAMP"] = "FALSE";
+                                r["IS_PRINTED_AUTO_STAMP"] = "FALSE";
                             }
 
                             ReportClass rpt = new ReportClass();

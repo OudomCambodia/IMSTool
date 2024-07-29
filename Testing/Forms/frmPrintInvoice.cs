@@ -310,6 +310,7 @@ namespace Testing.Forms
                     dt.Columns.Add("COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                     dt.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
+                    dt.Columns.Add("IS_PRINTED_AUTO_STAMP", typeof(System.String));
                     if (rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI") || mainClass.Equals("AUTO")))
                     {
                         var splitDebNote = dt.Rows[0]["DEBIT_NOTE"].ToString().Split('/');
@@ -378,12 +379,14 @@ namespace Testing.Forms
                         }
 
                         dt.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE");
+                        dt.Rows[0]["IS_PRINTED_AUTO_STAMP"] = (chkPrintStamp.Checked && mainClass.Equals("AUTO")) ? "TRUE" : "FALSE";
                     }
                     else
                     {
                         dt.Rows[0]["COI"] = string.Empty;
                         dt.Rows[0]["IS_PRINTED_COI"] = "FALSE";
                         dt.Rows[0]["IS_PRINTED_STAMP"] = "FALSE";
+                        dt.Rows[0]["IS_PRINTED_AUTO_STAMP"] = "FALSE";
                     }
 
                     if (dnNumber[0] == 'D') //Debit Note
@@ -620,7 +623,7 @@ namespace Testing.Forms
             if (dtMainClass.Rows.Count > 0)
                 mainClass = dtMainClass.Rows[0]["PRD_CLA_CODE"].ToString();
 
-            if (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))
+            if (mainClass.Equals("PROP") || mainClass.Equals("ENGI") || mainClass.Equals("AUTO"))
             {
                 chkPrintStamp.Visible = true;
                 gbCOI.Size = new Size(145, 70);

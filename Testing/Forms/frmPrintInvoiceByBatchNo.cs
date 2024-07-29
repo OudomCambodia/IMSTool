@@ -89,6 +89,7 @@ namespace Testing.Forms
                     dtInvoiceInfo.Columns.Add("COI", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("IS_PRINTED_COI", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("IS_PRINTED_STAMP", typeof(System.String));
+                    dtInvoiceInfo.Columns.Add("IS_PRINTED_AUTO_STAMP", typeof(System.String));
 
                     if (rdbYes.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI") || mainClass.Equals("AUTO")))
                     {
@@ -130,7 +131,8 @@ namespace Testing.Forms
                         dtInvoiceInfo.Rows[0]["IS_PRINTED_COI"] = "FALSE";
                     }
 
-                    dtInvoiceInfo.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE"); ;
+                    dtInvoiceInfo.Rows[0]["IS_PRINTED_STAMP"] = ((chkPrintStamp.Checked && (mainClass.Equals("PROP") || mainClass.Equals("ENGI"))) ? "TRUE" : "FALSE");
+                    dtInvoiceInfo.Rows[0]["IS_PRINTED_AUTO_STAMP"] = (chkPrintStamp.Checked && mainClass.Equals("AUTO")) ? "TRUE" : "FALSE";
 
                     dtInvoiceInfo.Columns.Add("EXCHANGE_RATE", typeof(System.String));
                     dtInvoiceInfo.Columns.Add("TOTAL_FUND_KH", typeof(System.String));
