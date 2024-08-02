@@ -391,8 +391,9 @@ namespace Testing.Forms
                             foreach (DataRow r in dt.Rows)
                             {
                                 r["EXCHANGE_RATE"] = String.Format("{0:N}", ExchangeRate).Replace(".00", "");
-                                r["TOTAL_FUND_KH"] = String.Format("{0:N}", Convert.ToDouble(r["TOTAL_FUND"]) * ExchangeRate);
-                                //r["TOTAL_FUND_KH"] = String.Format("{0:N}", Decimal.Round(Convert.ToDecimal(row["TOTAL_FUND"]) * ExchangeRate, 0));
+                                //r["TOTAL_FUND_KH"] = String.Format("{0:N}", Convert.ToDouble(r["TOTAL_FUND"]) * ExchangeRate);
+                                r["TOTAL_FUND_KH"] = String.Format("{0:N}", Decimal.Round(Convert.ToDecimal(row["TOTAL_FUND"]) * ExchangeRate, 0));
+
                                 r["KH_NAME"] = KhName;
                                 r["KH_ADDR"] = KhAddr;
 
