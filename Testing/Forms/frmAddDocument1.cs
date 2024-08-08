@@ -895,7 +895,7 @@ namespace Testing.Forms
                                 "@p_NCD", NCD, "@p_SPECIAL_DISCOUNT", SpecialDiscount, "@p_FLEET_SIZE_DISCOUNT", FleetSizeDiscount,
                                 "@p_DISCOUNT", Discount, "@p_LOADING", Loading, "@p_FINAL_PREMIUM_PER_PERSON", FinalPremium, "@p_PREMIUM", Premium,
                                 "@p_PRREMIUM_TYPE", PremiumType, "@p_CLIENT_CATAG", ClientCatag, "p_ClientDetails", ClientDetails,
-                                "@p_StaffID", txtStaffID.Text, "@p_SalePersonName", txtSalePerson.Text, "@p_Department", txtDept.Text.Trim());
+                                "@p_StaffID", StaffID, "@p_SalePersonName", SalePerson, "@p_Department", Department);
 
 
                             if (dtTemp.Rows.Count <= 0)
