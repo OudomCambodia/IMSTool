@@ -40,6 +40,8 @@ namespace Testing.Forms
             txtUsername.CharacterCasing = CharacterCasing.Upper;
             txtRemark.CharacterCasing = CharacterCasing.Upper;
 
+            chkActive.Checked = true;
+
             string sql = "SELECT DISTINCT(CODE) FROM USER_PRINT_CONTROL_ACCESS ORDER BY CODE";
             DataTable dtTypes = crud.ExecQuery(sql);
 
@@ -75,6 +77,7 @@ namespace Testing.Forms
                     txtRemark.Text = dtUsername.Rows[0]["REMARK"].ToString();
                     txtEmail.Text = dtUsername.Rows[0]["EMAIL"].ToString();
                     txtEmailPassword.Text = !string.IsNullOrEmpty(dtUsername.Rows[0]["EMAIL_PW"].ToString()) ? Cipher.Decrypt(dtUsername.Rows[0]["EMAIL_PW"].ToString(), _hashPass) : string.Empty;
+                    chkActive.Checked = dtUsername.Rows[0]["USER_STATUS"].ToString() == "A";
                 }
                 else
                 {
@@ -271,92 +274,106 @@ namespace Testing.Forms
 
         private void CreateUser(bool createOnlyDocUser)
         {
-            if (!createOnlyDocUser)
+            try
+            {
+                if (!createOnlyDocUser)
+                {
+                    var encryptPassword = Cipher.Encrypt(txtPassword.Text.Trim(), _hashPass);
+                    var encryptEmailPassword = string.IsNullOrEmpty(txtEmailPassword.Text) ? null : Cipher.Encrypt(txtEmailPassword.Text.Trim(), _hashPass);
+                    var createdDate = dtpCreatedDate.Value.ToString("dd-MMM-yyyy");
+                    var expiryDate = dtpExpiryDate.Value.ToString("dd-MMM-yyyy");
+
+                    StringBuilder queryBuilder = new StringBuilder();
+                    queryBuilder.Append("INSERT INTO USER_PRINT_SYSTEM (USER_CODE, USER_NAME, USER_CREATE_DATE, REMARK, EXPIRY_DATE, PASSWORD, TYPE, EMAIL, EMAIL_PW, USER_STATUS) ")
+                        .Append("VALUES ('" + txtUserCode.Text.Trim() + "', '" + txtUsername.Text.Trim() + "', '" + createdDate + "', ")
+                        .Append("'" + txtRemark.Text.Trim() + "', '" + expiryDate + "', '" + encryptPassword + "', '" + cboType.SelectedValue + "', ")
+                        .Append("'" + txtEmail.Text.Trim() + "', '" + encryptEmailPassword + "', '" + (chkActive.Checked ? "A" : "R") + "')");
+
+                    crud.ExecNonQuery(queryBuilder.ToString());
+                }
+
+                if (chkCreateDocUser.Checked)
+                {
+                    var maxUserCode = string.Empty;
+                    var username = txtUsername.Text.Trim();
+                    var role = cboRole.Text.Replace(" ", string.Empty);
+                    var team = cboTeam.Text.Replace(" ", string.Empty);
+                    var group = team.Contains("Brokers") ? "BROKERTEAM" : null;
+
+                    string sql = "SELECT TOP 1 USER_CODE AS MAX_USER_CODE FROM tbDOC_USER where USER_CODE LIKE '%D%' ORDER BY CAST(RIGHT(USER_CODE, LEN(USER_CODE) - 1) AS INT) DESC";
+                    var dtMaxUserCode = sqlCrud.LoadData(sql).Tables[0];
+
+                    if (dtMaxUserCode.Rows.Count > 0)
+                    {
+                        maxUserCode = dtMaxUserCode.Rows[0]["MAX_USER_CODE"].ToString();
+                        var incraseMaxUserCode = Convert.ToInt32(maxUserCode.ToString().Substring(1)) + 1;
+                        maxUserCode = string.Concat("D", incraseMaxUserCode < 10 ? "0" : "", incraseMaxUserCode.ToString());
+                    }
+                    maxUserCode = maxUserCode == string.Empty ? "D01" : maxUserCode;
+
+                    string[] splitUsernames = username.Split(' ');
+                    string fullName = string.Empty;
+
+                    foreach (var splitUsername in splitUsernames)
+                    {
+                        var concatName = string.Concat(splitUsername.Substring(0, 1), splitUsername.Substring(1).ToLower(), " ");
+                        fullName += concatName;
+                    }
+
+                    StringBuilder queryBuilderSql = new StringBuilder();
+                    queryBuilderSql.Append("INSERT INTO tbDOC_USER (USER_CODE, USER_NAME, ROLE, TEAM, FULL_NAME, [GROUP], SELECTION_COLOR) ")
+                        .Append("VALUES ('" + maxUserCode + "', '" + txtUserCode.Text.Trim() + "', '" + role + "', '" + team + "', '" + fullName.Trim() + "', '" + group + "', '0,153,153')");
+
+                    sqlCrud.Executing(queryBuilderSql.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Msgbox.Show(ex.ToString());
+            }
+        }
+
+        private void UpdateUser(DataTable dtDocUser)
+        {
+            try
             {
                 var encryptPassword = Cipher.Encrypt(txtPassword.Text.Trim(), _hashPass);
                 var encryptEmailPassword = string.IsNullOrEmpty(txtEmailPassword.Text) ? null : Cipher.Encrypt(txtEmailPassword.Text.Trim(), _hashPass);
                 var createdDate = dtpCreatedDate.Value.ToString("dd-MMM-yyyy");
                 var expiryDate = dtpExpiryDate.Value.ToString("dd-MMM-yyyy");
 
-                StringBuilder queryBuilder = new StringBuilder();
-                queryBuilder.Append("INSERT INTO USER_PRINT_SYSTEM (USER_CODE, USER_NAME, USER_CREATE_DATE, REMARK, EXPIRY_DATE, PASSWORD, TYPE, EMAIL, EMAIL_PW) ")
-                    .Append("VALUES ('" + txtUserCode.Text.Trim() + "', '" + txtUsername.Text.Trim() + "', '" + createdDate + "', ")
-                    .Append("'" + txtRemark.Text.Trim() + "', '" + expiryDate + "', '" + encryptPassword + "', '" + cboType.SelectedValue + "', ")
-                    .Append("'" + txtEmail.Text.Trim() + "', '" + encryptEmailPassword + "')");
+                StringBuilder updateBuilder = new StringBuilder();
+                updateBuilder.Append("UPDATE USER_PRINT_SYSTEM SET USER_NAME = '" + txtUsername.Text + "', USER_CREATE_DATE = '" + createdDate + "', PASSWORD = '" + encryptPassword + "', ")
+                    .Append("EXPIRY_DATE = '" + expiryDate + "', \"TYPE\" = '" + cboType.SelectedValue + "', ")
+                    .Append("REMARK = '" + txtRemark.Text.Trim() + "', EMAIL = '" + txtEmail.Text.Trim() + "', EMAIL_PW = '" + encryptEmailPassword + "', USER_STATUS = '" + (chkActive.Checked ? "A" : "R") + "' ")
+                    .Append("WHERE USER_CODE = '" + txtUserCode.Text.Trim() + "' ");
 
-                crud.ExecNonQuery(queryBuilder.ToString());
+                crud.ExecNonQuery(updateBuilder.ToString());
+
+                if (dtDocUser.Rows.Count > 0)
+                {
+                    string[] splitUsernames = txtUsername.Text.Trim().Split(' ');
+                    string fullName = string.Empty;
+
+                    foreach (var splitUsername in splitUsernames)
+                    {
+                        var concatName = string.Concat(splitUsername.Substring(0, 1), splitUsername.Substring(1).ToLower(), " ");
+                        fullName += concatName;
+                    }
+                    var role = cboRole.Text.Replace(" ", string.Empty);
+                    var team = cboTeam.Text.Replace(" ", string.Empty);
+                    var group = team.Contains("Brokers") ? "BROKERTEAM" : null;
+
+                    StringBuilder updateSqlBuilder = new StringBuilder();
+                    updateSqlBuilder.Append("UPDATE tbDOC_USER SET FULL_NAME = '" + fullName.Trim() + "', ROLE = '" + role + "', TEAM = '" + team + "', [GROUP] = '" + group + "' ")
+                        .Append("WHERE USER_NAME = '" + txtUserCode.Text.Trim() + "'");
+
+                    sqlCrud.Executing(updateSqlBuilder.ToString());
+                }
             }
-            
-            if (chkCreateDocUser.Checked)
+            catch (Exception ex)
             {
-                var maxUserCode = string.Empty;
-                var username = txtUsername.Text.Trim();
-                var role = cboRole.Text.Replace(" ", string.Empty);
-                var team = cboTeam.Text.Replace(" ", string.Empty);
-                var group = team.Contains("Brokers") ? "BROKERTEAM" : null;
-
-                string sql = "SELECT TOP 1 USER_CODE AS MAX_USER_CODE FROM tbDOC_USER where USER_CODE LIKE '%D%' ORDER BY CAST(RIGHT(USER_CODE, LEN(USER_CODE) - 1) AS INT) DESC";
-                var dtMaxUserCode = sqlCrud.LoadData(sql).Tables[0];
-                
-                if (dtMaxUserCode.Rows.Count > 0)
-                {
-                    maxUserCode = dtMaxUserCode.Rows[0]["MAX_USER_CODE"].ToString();
-                    var incraseMaxUserCode = Convert.ToInt32(maxUserCode.ToString().Substring(1)) + 1;
-                    maxUserCode = string.Concat("D", incraseMaxUserCode < 10 ? "0" : "",  incraseMaxUserCode.ToString());
-                }
-                maxUserCode = maxUserCode == string.Empty ? "D01" : maxUserCode;
-
-                string[] splitUsernames = username.Split(' ');
-                string fullName = string.Empty;
-
-                foreach (var splitUsername in splitUsernames)
-                {
-                    var concatName = string.Concat(splitUsername.Substring(0, 1), splitUsername.Substring(1).ToLower(), " ");
-                    fullName += concatName;
-                }
-                
-                StringBuilder queryBuilderSql = new StringBuilder();
-                queryBuilderSql.Append("INSERT INTO tbDOC_USER (USER_CODE, USER_NAME, ROLE, TEAM, FULL_NAME, [GROUP], SELECTION_COLOR) ")
-                    .Append("VALUES ('" + maxUserCode + "', '" + txtUserCode.Text.Trim() + "', '" + role + "', '" + team + "', '" + fullName.Trim() + "', '" + group + "', '0,153,153')");
-
-                sqlCrud.Executing(queryBuilderSql.ToString());
-            }
-        }
-
-        private void UpdateUser(DataTable dtDocUser)
-        {
-            var encryptPassword = Cipher.Encrypt(txtPassword.Text.Trim(), _hashPass);
-            var encryptEmailPassword = string.IsNullOrEmpty(txtEmailPassword.Text) ? null : Cipher.Encrypt(txtEmailPassword.Text.Trim(), _hashPass);
-            var createdDate = dtpCreatedDate.Value.ToString("dd-MMM-yyyy");
-            var expiryDate = dtpExpiryDate.Value.ToString("dd-MMM-yyyy");
-
-            StringBuilder updateBuilder = new StringBuilder();
-            updateBuilder.Append("UPDATE USER_PRINT_SYSTEM SET USER_NAME = '" + txtUsername.Text + "', USER_CREATE_DATE = '" + createdDate + "', PASSWORD = '" + encryptPassword + "', ")
-                .Append("EXPIRY_DATE = '" + expiryDate + "', TYPE = '" + cboType.SelectedValue + "', ")
-                .Append("REMARK = '" + txtRemark.Text.Trim() + "', EMAIL = '" + txtEmail.Text.Trim() + "', EMAIL_PW = '" + encryptEmailPassword + "' ")
-                .Append("WHERE USER_CODE = '" + txtUserCode.Text.Trim() + "' ");
-
-            crud.ExecNonQuery(updateBuilder.ToString());
-
-            if (dtDocUser.Rows.Count > 0)
-            {
-                string[] splitUsernames = txtUsername.Text.Trim().Split(' ');
-                string fullName = string.Empty;
-
-                foreach (var splitUsername in splitUsernames)
-                {
-                    var concatName = string.Concat(splitUsername.Substring(0, 1), splitUsername.Substring(1).ToLower(), " ");
-                    fullName += concatName;
-                }
-                var role = cboRole.Text.Replace(" ", string.Empty);
-                var team = cboTeam.Text.Replace(" ", string.Empty);
-                var group = team.Contains("Brokers") ? "BROKERTEAM" : null;
-
-                StringBuilder updateSqlBuilder = new StringBuilder();
-                updateSqlBuilder.Append("UPDATE tbDOC_USER SET FULL_NAME = '" + fullName.Trim() + "', ROLE = '" + role + "', TEAM = '" + team + "', [GROUP] = '" + group + "' ")
-                    .Append("WHERE USER_NAME = '" +  txtUserCode.Text.Trim() + "'");
-
-                sqlCrud.Executing(updateSqlBuilder.ToString());
+                Msgbox.Show(ex.ToString());
             }
         }
 

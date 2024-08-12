@@ -67,6 +67,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cboTeam = new PresentationControls.CheckBoxComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -76,6 +78,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.groupBox1.Controls.Add(this.chkActive);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.cboType);
             this.groupBox1.Controls.Add(this.dtpExpiryDate);
             this.groupBox1.Controls.Add(this.dtpCreatedDate);
@@ -94,7 +98,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(667, 219);
+            this.groupBox1.Size = new System.Drawing.Size(667, 242);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Information";
@@ -105,21 +109,21 @@
             this.cboType.FormattingEnabled = true;
             this.cboType.Location = new System.Drawing.Point(422, 93);
             this.cboType.Name = "cboType";
-            this.cboType.Size = new System.Drawing.Size(211, 26);
+            this.cboType.Size = new System.Drawing.Size(211, 30);
             this.cboType.TabIndex = 6;
             // 
             // dtpExpiryDate
             // 
             this.dtpExpiryDate.Location = new System.Drawing.Point(96, 92);
             this.dtpExpiryDate.Name = "dtpExpiryDate";
-            this.dtpExpiryDate.Size = new System.Drawing.Size(211, 26);
+            this.dtpExpiryDate.Size = new System.Drawing.Size(211, 30);
             this.dtpExpiryDate.TabIndex = 5;
             // 
             // dtpCreatedDate
             // 
             this.dtpCreatedDate.Location = new System.Drawing.Point(422, 61);
             this.dtpCreatedDate.Name = "dtpCreatedDate";
-            this.dtpCreatedDate.Size = new System.Drawing.Size(211, 26);
+            this.dtpCreatedDate.Size = new System.Drawing.Size(211, 30);
             this.dtpCreatedDate.TabIndex = 4;
             // 
             // btnViewPassword
@@ -145,7 +149,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(23, 128);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 18);
+            this.label7.Size = new System.Drawing.Size(66, 22);
             this.label7.TabIndex = 13;
             this.label7.Text = "Remark:";
             // 
@@ -154,7 +158,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(326, 97);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(37, 18);
+            this.label6.Size = new System.Drawing.Size(47, 22);
             this.label6.TabIndex = 7;
             this.label6.Text = "Type:";
             // 
@@ -163,7 +167,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(326, 65);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 18);
+            this.label5.Size = new System.Drawing.Size(100, 22);
             this.label5.TabIndex = 9;
             this.label5.Text = "Created Date:";
             // 
@@ -171,7 +175,7 @@
             // 
             this.txtUsername.Location = new System.Drawing.Point(422, 28);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(211, 26);
+            this.txtUsername.Size = new System.Drawing.Size(211, 30);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
             this.txtUsername.Leave += new System.EventHandler(this.txtUsername_Leave);
@@ -181,7 +185,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(326, 33);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 18);
+            this.label4.Size = new System.Drawing.Size(90, 22);
             this.label4.TabIndex = 7;
             this.label4.Text = "User Name:";
             // 
@@ -190,7 +194,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(23, 96);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 18);
+            this.label3.Size = new System.Drawing.Size(90, 22);
             this.label3.TabIndex = 5;
             this.label3.Text = "Expiry Date:";
             // 
@@ -198,7 +202,7 @@
             // 
             this.txtPassword.Location = new System.Drawing.Point(96, 60);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(170, 26);
+            this.txtPassword.Size = new System.Drawing.Size(170, 30);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
@@ -207,7 +211,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(23, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 18);
+            this.label2.Size = new System.Drawing.Size(80, 22);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password:";
             // 
@@ -215,7 +219,7 @@
             // 
             this.txtUserCode.Location = new System.Drawing.Point(96, 28);
             this.txtUserCode.Name = "txtUserCode";
-            this.txtUserCode.Size = new System.Drawing.Size(211, 26);
+            this.txtUserCode.Size = new System.Drawing.Size(211, 30);
             this.txtUserCode.TabIndex = 0;
             this.txtUserCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserCode_KeyDown);
             this.txtUserCode.Leave += new System.EventHandler(this.txtUserCode_Leave);
@@ -225,7 +229,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(23, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 18);
+            this.label1.Size = new System.Drawing.Size(84, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "User Code:";
             // 
@@ -238,7 +242,7 @@
             this.groupBox2.Controls.Add(this.txtEmail);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(12, 246);
+            this.groupBox2.Location = new System.Drawing.Point(12, 267);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(667, 67);
             this.groupBox2.TabIndex = 1;
@@ -259,7 +263,7 @@
             // 
             this.txtEmailPassword.Location = new System.Drawing.Point(422, 25);
             this.txtEmailPassword.Name = "txtEmailPassword";
-            this.txtEmailPassword.Size = new System.Drawing.Size(170, 26);
+            this.txtEmailPassword.Size = new System.Drawing.Size(170, 30);
             this.txtEmailPassword.TabIndex = 1;
             this.txtEmailPassword.UseSystemPasswordChar = true;
             // 
@@ -268,7 +272,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(326, 30);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 18);
+            this.label8.Size = new System.Drawing.Size(121, 22);
             this.label8.TabIndex = 15;
             this.label8.Text = "Email Password:";
             // 
@@ -276,7 +280,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(96, 25);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(211, 26);
+            this.txtEmail.Size = new System.Drawing.Size(211, 30);
             this.txtEmail.TabIndex = 0;
             // 
             // label9
@@ -284,13 +288,13 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(23, 29);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(41, 18);
+            this.label9.Size = new System.Drawing.Size(51, 22);
             this.label9.TabIndex = 13;
             this.label9.Text = "Email:";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(498, 527);
+            this.btnSave.Location = new System.Drawing.Point(498, 548);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 30);
             this.btnSave.TabIndex = 0;
@@ -300,7 +304,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(592, 527);
+            this.btnClose.Location = new System.Drawing.Point(592, 548);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(88, 30);
             this.btnClose.TabIndex = 1;
@@ -318,9 +322,9 @@
             this.chkCreateDocUser.Checked = true;
             this.chkCreateDocUser.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkCreateDocUser.ForeColor = System.Drawing.Color.White;
-            this.chkCreateDocUser.Location = new System.Drawing.Point(12, 319);
+            this.chkCreateDocUser.Location = new System.Drawing.Point(12, 340);
             this.chkCreateDocUser.Name = "chkCreateDocUser";
-            this.chkCreateDocUser.Size = new System.Drawing.Size(275, 22);
+            this.chkCreateDocUser.Size = new System.Drawing.Size(351, 26);
             this.chkCreateDocUser.TabIndex = 2;
             this.chkCreateDocUser.Text = "Create Document Control account for this user?";
             this.chkCreateDocUser.UseVisualStyleBackColor = true;
@@ -335,7 +339,7 @@
             this.cboRole.FormattingEnabled = true;
             this.cboRole.Location = new System.Drawing.Point(109, 23);
             this.cboRole.Name = "cboRole";
-            this.cboRole.Size = new System.Drawing.Size(524, 26);
+            this.cboRole.Size = new System.Drawing.Size(524, 30);
             this.cboRole.TabIndex = 3;
             // 
             // gbDocumentControl
@@ -350,7 +354,7 @@
             this.gbDocumentControl.Controls.Add(this.label10);
             this.gbDocumentControl.Controls.Add(this.cboRole);
             this.gbDocumentControl.ForeColor = System.Drawing.Color.White;
-            this.gbDocumentControl.Location = new System.Drawing.Point(12, 348);
+            this.gbDocumentControl.Location = new System.Drawing.Point(12, 369);
             this.gbDocumentControl.Name = "gbDocumentControl";
             this.gbDocumentControl.Size = new System.Drawing.Size(667, 173);
             this.gbDocumentControl.TabIndex = 16;
@@ -364,7 +368,7 @@
             this.label13.ForeColor = System.Drawing.Color.Tomato;
             this.label13.Location = new System.Drawing.Point(106, 117);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(48, 19);
+            this.label13.Size = new System.Drawing.Size(62, 25);
             this.label13.TabIndex = 20;
             this.label13.Text = "*Note:";
             // 
@@ -384,7 +388,7 @@
             this.cboSpecialCode.FormattingEnabled = true;
             this.cboSpecialCode.Location = new System.Drawing.Point(109, 87);
             this.cboSpecialCode.Name = "cboSpecialCode";
-            this.cboSpecialCode.Size = new System.Drawing.Size(524, 26);
+            this.cboSpecialCode.Size = new System.Drawing.Size(524, 30);
             this.cboSpecialCode.TabIndex = 14;
             this.cboSpecialCode.SelectedIndexChanged += new System.EventHandler(this.cboSpecialCode_SelectedIndexChanged);
             // 
@@ -393,7 +397,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(23, 91);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 18);
+            this.label12.Size = new System.Drawing.Size(100, 22);
             this.label12.TabIndex = 18;
             this.label12.Text = "Special Code:";
             // 
@@ -402,7 +406,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(23, 59);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 18);
+            this.label11.Size = new System.Drawing.Size(52, 22);
             this.label11.TabIndex = 16;
             this.label11.Text = "Team:";
             // 
@@ -415,7 +419,7 @@
             this.cboTeam.FormattingEnabled = true;
             this.cboTeam.Location = new System.Drawing.Point(109, 55);
             this.cboTeam.Name = "cboTeam";
-            this.cboTeam.Size = new System.Drawing.Size(524, 26);
+            this.cboTeam.Size = new System.Drawing.Size(524, 30);
             this.cboTeam.TabIndex = 15;
             // 
             // label10
@@ -423,16 +427,35 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(23, 28);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(34, 18);
+            this.label10.Size = new System.Drawing.Size(43, 22);
             this.label10.TabIndex = 14;
             this.label10.Text = "Role:";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(23, 208);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(93, 22);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "User Status:";
+            // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Location = new System.Drawing.Point(105, 206);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(71, 26);
+            this.chkActive.TabIndex = 15;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
+            // 
             // frmUserManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(692, 563);
+            this.ClientSize = new System.Drawing.Size(692, 589);
             this.Controls.Add(this.gbDocumentControl);
             this.Controls.Add(this.chkCreateDocUser);
             this.Controls.Add(this.btnClose);
@@ -497,5 +520,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblSpecialCodeInfo;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox chkActive;
     }
 }
