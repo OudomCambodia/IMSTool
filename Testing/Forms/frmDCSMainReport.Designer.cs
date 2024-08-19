@@ -137,12 +137,12 @@
             // 
             // cmbBank
             // 
+            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(653, 65);
+            this.cmbBank.Location = new System.Drawing.Point(653, 64);
             this.cmbBank.Name = "cmbBank";
             this.cmbBank.Size = new System.Drawing.Size(163, 24);
             this.cmbBank.TabIndex = 39;
-           
             // 
             // btnExcel
             // 

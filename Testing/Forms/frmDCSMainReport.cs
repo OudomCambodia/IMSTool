@@ -29,20 +29,42 @@ namespace Testing.Forms
 
         DataTable dtBank;
 
+        private bool isBrokerTeam = false;
+        private bool isAgencyTeam = false;
+
+        private void frmDCSMainReport_Load(object sender, EventArgs e)
+        {
+            var dtTeam = crud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+
+            if (dtTeam.Rows.Count > 0)
+            {
+                string group = dtTeam.Rows[0]["GROUP"].ToString();
+                isBrokerTeam = group == "BROKERTEAM";
+                isAgencyTeam = group == "V-AGENCY";
+            }
+
+            dtpFrom.Value = DateTime.Now;
+            dtpTo.Value = DateTime.Now;
+
+            if (isAgencyTeam || frmLogIn.Usert.ToUpper() == "ADMIN")
+            {
+                dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY ORDER_SEQ ASC");
+                cmbBank.DataSource = dtBank;
+                cmbBank.DisplayMember = "BANK_NAME";
+                cmbBank.ValueMember = "BANK_FULL_NAME";
+            }
+            else
+            {
+                lblBank.Visible = false;
+                cmbBank.Visible = false;
+            }
+        }
+
         private void bnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-
                 Cursor = Cursors.WaitCursor;
-
-                var isBrokerTeam = false;
-                var dtBrokerTeams = crud.LoadData("select [GROUP] from tbDOC_USER where USER_NAME = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
-
-                if (dtBrokerTeams.Rows.Count > 0)
-                {
-                    isBrokerTeam = dtBrokerTeams.Rows[0]["GROUP"].ToString().Equals("BROKERTEAM");
-                }
 
                 if (isBrokerTeam)
                 {
@@ -87,10 +109,9 @@ namespace Testing.Forms
                         {
                             ProType = ProType.Remove(ProType.Length - 1);
 
-                            if (dtBrokerTeams.Rows[0]["GROUP"].ToString().ToUpper() == "V-AGENCY")
+                            if (isAgencyTeam)
                             {
                                 string bankname = cmbBank.SelectedValue.ToString().ToUpper();
-
 
                                 main_rpt = "SELECT * from dbo.VIEW_AGENCY_REPORT " +
                                               "where convert(datetime,SUBMISSION_DATE,103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
@@ -111,43 +132,27 @@ namespace Testing.Forms
 
                                 if (bankname != "ALL BANK")
                                 {
-                                    main_rpt += " and SALE_AGENT_NAME like '" + (bankname == "FTB" ? "FOREIGN TRADE BANK" : bankname) + "%'";
-                                    third_rpt += " WHERE AGENT_NAME LIKE '" + (bankname == "FTB" ? "FOREIGN TRADE BANK" : bankname) + "%'";
+                                    main_rpt += " and SALE_AGENT_NAME like '" + bankname + "%'";
+                                    third_rpt += " WHERE AGENT_NAME LIKE '" + bankname + "%'";
                                 }
                                 else
                                 {
+                                    main_rpt += "and (";
+                                    foreach (DataRow bankInfo in dtBank.Rows)
+                                    {
+                                        main_rpt += "SALE_AGENT_NAME like '" + bankInfo["BANK_FULL_NAME"].ToString() + "%' or ";
+                                    }
+                                    main_rpt = main_rpt.Remove(main_rpt.Length - 3); // remove "or" from last index
+                                    main_rpt += ")";
+
                                     bankname = "";
                                     for (int i = 0; i < dtBank.Rows.Count; i++)
                                     {
                                         bankname += dtBank.Rows[i][1].ToString() + "|";
                                     }
                                     bankname = bankname.Remove(bankname.Length - 1, 1);
-                                    main_rpt += " and (SALE_AGENT_NAME like 'PRINCE BANK%' " +
-                                                " or SALE_AGENT_NAME like 'ACLEDA%' " +
-                                                " or SALE_AGENT_NAME like 'CIMB%' " +
-                                                " or SALE_AGENT_NAME like 'SATHAPANA%' " +
-                                                " or SALE_AGENT_NAME like 'BRED%' " +
-                                                " or SALE_AGENT_NAME like 'RHB%' " +
-                                                " or SALE_AGENT_NAME like 'ADVANCE%' " +
-                                                " or SALE_AGENT_NAME like 'VATTANAC%' " +
-                                                " or SALE_AGENT_NAME like 'J TRUST%' " +
-                                                " or SALE_AGENT_NAME like 'BANK OF CHINA%' " +
-                                                " or SALE_AGENT_NAME like 'ARDB%' " +
-                                                " or SALE_AGENT_NAME like 'CANADIA%' " +
-                                                " or SALE_AGENT_NAME like 'CHIP MONG%'" +
-                                                " or SALE_AGENT_NAME like 'ORIENTAL%' " +
-                                                " or SALE_AGENT_NAME like 'MEGA LEASING%' " +
-                                                " or SALE_AGENT_NAME like 'CATHAY UNITED%' " +
-                                                " or SALE_AGENT_NAME like 'MB BANK%' " +
-                                                " or SALE_AGENT_NAME like 'CHIEF%' " +
-                                                " or SALE_AGENT_NAME like 'CAM CAPITAL%' " +
-                                                " or SALE_AGENT_NAME like 'CAMBODIA POST%' " +
-                                                " or SALE_AGENT_NAME like 'KASIKORN%' " +
-                                                " or SALE_AGENT_NAME like 'FOREIGN TRADE BANK%' " + 
-                                                " or SALE_AGENT_NAME like 'SHINHAN%' " +
-                                                " or SALE_AGENT_NAME like 'AMK%' or SALE_AGENT_NAME like 'HONG LEONG%' or SALE_AGENT_NAME like 'MAYBANK%') ";
-                                    third_rpt += " WHERE regexp_like(nvl(AGENT_NAME, '*'), '" + bankname + "' ,'i')";
 
+                                    third_rpt += " WHERE regexp_like(nvl(AGENT_NAME, '*'), '" + bankname + "' ,'i')";
                                 }
 
                                 dt = crud.LoadData(main_rpt).Tables[0];
@@ -258,7 +263,6 @@ namespace Testing.Forms
                                 {
                                     DataRow dr = dtTemp.NewRow();
 
-
                                     dr["SUBMISSION_DATE"] = item.SUBMISSION_DATE.ToString();
                                     dr["DP_ISSUED_DATE"] = String.Format("{0:d}", item.DP_ISSUED_DATE.ToString());
                                     dr["POLICY_NO"] = item.POLICY_NO;
@@ -310,10 +314,7 @@ namespace Testing.Forms
 
                                     dtTemp.Rows.Add(dr);
                                 }
-
-
                                 dgv.DataSource = dtTemp;
-
                             }
 
                             else
@@ -322,13 +323,11 @@ namespace Testing.Forms
                                 dt = crud.LoadData(main_rpt).Tables[0];
                                 dgv.DataSource = dt;
                             }
-
                         }
                     }
                 }
 
                 Cursor = Cursors.Arrow;
-                //dtTemp.Clear();
             }
             catch (Exception ex)
             {
@@ -351,8 +350,7 @@ namespace Testing.Forms
             if (dgv.RowCount > 0)
             {
                 Cursor.Current = Cursors.WaitCursor;
-                //My_DataTable_Extensions.ExportToExcel(dt, "");
-                if (frmLogIn.Usert.ToUpper() == "U-BVC")
+                if (isAgencyTeam)
                     My_DataTable_Extensions.ExportToExcelXML(dtTemp, "");
                 else
                     My_DataTable_Extensions.ExportToExcelXML(dt, "");
@@ -364,30 +362,5 @@ namespace Testing.Forms
                 Msgbox.Show("No data found.");
             }
         }
-
-        private void frmDCSMainReport_Load(object sender, EventArgs e)
-        {
-            dtpFrom.Value = DateTime.Now;
-            dtpTo.Value = DateTime.Now;
-
-            if (frmLogIn.Usert.ToUpper() == "U-BVC" || frmLogIn.Usert.ToUpper() == "ADMIN")
-            {
-                dtBank = crud_oracle.ExecQuery("select * from IMSTOOL_BANK_INFO ORDER BY ORDER_SEQ ASC");
-                cmbBank.DataSource = dtBank;
-                cmbBank.DisplayMember = "BANK_NAME";
-                cmbBank.ValueMember = "BANK_NAME";
-            }
-            else
-            {
-                lblBank.Visible = false;
-                cmbBank.Visible = false;
-            }
-
-
-
-
-        }
-
-
     }
 }
