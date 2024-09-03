@@ -92,6 +92,7 @@ namespace Testing.Forms
             cbPriority.Items.Add(new ComboboxItem("Normal", "N"));
             cbPriority.Items.Add(new ComboboxItem("Urgent", "U"));
             cbPriority.Items.Add(new ComboboxItem("Very Urgent", "VU"));
+            cbPriority.Items.Add(new ComboboxItem("Internal Only", "IO"));
             cbPriority.SelectedIndex = -1;
 
             cbSubmitVia.Items.Add(new ComboboxItem("Hard Copy", "HC"));
@@ -558,14 +559,14 @@ namespace Testing.Forms
             if (cbProLine.Text == "A&H")
             {
                 // Remove Internal Only
+                //if (cbPriority.Items.Count == 5)
+                //    cbPriority.Items.RemoveAt(4);
+
+                // Remove Leasing
                 if (cbPriority.Items.Count == 5)
                     cbPriority.Items.RemoveAt(4);
 
-                // Remove Leasing
-                if (cbPriority.Items.Count == 4)
-                    cbPriority.Items.RemoveAt(3);
-
-                cbPriority.Items.Add(new ComboboxItem("Internal Only", "IO"));
+                //cbPriority.Items.Add(new ComboboxItem("Internal Only", "IO"));
                 tbNCD.Enabled = false; tbNCD.Text = "";
                 tbFleetSizeDiscount.Enabled = false; tbFleetSizeDiscount.Text = "";
                 tbDiscount.Enabled = false; tbDiscount.Text = "";
@@ -573,12 +574,12 @@ namespace Testing.Forms
             else if (cbProLine.Text == "AUTO")
             {
                 // Remove Internal Only
-                if (cbPriority.Items.Count == 5)
-                    cbPriority.Items.RemoveAt(4);
+                //if (cbPriority.Items.Count == 5)
+                //    cbPriority.Items.RemoveAt(4);
 
                 // Remove Leasing
-                if (cbPriority.Items.Count == 4)
-                    cbPriority.Items.RemoveAt(3);
+                if (cbPriority.Items.Count == 5)
+                    cbPriority.Items.RemoveAt(4);
 
                 cbPriority.Items.Add(new ComboboxItem("Leasing", "L"));
                 tbOriginalRate.Enabled = false; tbOriginalRate.Text = "";
@@ -589,12 +590,12 @@ namespace Testing.Forms
             else if (cbProLine.Text == "FL" || cbProLine.Text == "PE&M" || cbProLine.Text == "MICR")
             {
                 // Remove Internal Only
-                if (cbPriority.Items.Count == 5)
-                    cbPriority.Items.RemoveAt(4);
+                //if (cbPriority.Items.Count == 5)
+                //    cbPriority.Items.RemoveAt(4);
 
                 // Remove Leasing
-                if (cbPriority.Items.Count == 4)
-                    cbPriority.Items.RemoveAt(3);
+                if (cbPriority.Items.Count == 5)
+                    cbPriority.Items.RemoveAt(4);
 
                 tbFleetSizeDiscount.Enabled = false; tbFleetSizeDiscount.Text = "";
                 tbGroupDiscount.Enabled = false; tbGroupDiscount.Text = "";
@@ -783,12 +784,12 @@ namespace Testing.Forms
                                 Msgbox.Show("Priority: " + Priority + " is available for product type AUTO only, upload unsucessful. (Row " + (i + 2) + ")");
                                 return;
                             }
-                            if (Priority == "IO" && proLine != "A&H")
-                            {
-                                Cursor.Current = Cursors.AppStarting;
-                                Msgbox.Show("Priority: " + Priority + " is available for product type A&H only, upload unsucessful. (Row " + (i + 2) + ")");
-                                return;
-                            }
+                            //if (Priority == "IO" && proLine != "A&H")
+                            //{
+                            //    Cursor.Current = Cursors.AppStarting;
+                            //    Msgbox.Show("Priority: " + Priority + " is available for product type A&H only, upload unsucessful. (Row " + (i + 2) + ")");
+                            //    return;
+                            //}
                             if (Priority != "N" && Priority != "U" && Priority != "VU" && Priority != "L" && Priority != "IO")
                             {
                                 Cursor.Current = Cursors.AppStarting;
