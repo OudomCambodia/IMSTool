@@ -25,7 +25,7 @@ namespace Testing.Forms
         DataTable dtInvoice = new DataTable();
         public string Team = "";
         DataTable dtTemp = new DataTable();
-        string autoTeam = "u-rnk,u-bnw,u-ksb,u-srn";
+        private string stfStatus = string.Empty;
 
         DataTable dtBank;
 
@@ -58,6 +58,10 @@ namespace Testing.Forms
                 lblBank.Visible = false;
                 cmbBank.Visible = false;
             }
+
+            var dtSpCondition = crud.LoadData("select DOC_STATUS from tbDOC_REPORT_SPECIAL_CASE where UPPER(USER_NAME) = '" + frmLogIn.Usert.ToUpper() + "'").Tables[0];
+            if (dtSpCondition.Rows.Count > 0)
+                stfStatus = dtSpCondition.Rows[0]["DOC_STATUS"].ToString().Trim();
         }
 
         private void bnSearch_Click(object sender, EventArgs e)
@@ -87,8 +91,8 @@ namespace Testing.Forms
                 else
                 {
                     string main_rpt = "SELECT * from dbo.VIEW_MAIN_REPORT " +
-                        "where convert(datetime," + (autoTeam.Contains(frmLogIn.Usert.ToLower().Trim()) ? "DP_PROCESSED" : "CREATE_DATE") + ",103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
-                        "and convert(datetime," + (autoTeam.Contains(frmLogIn.Usert.ToLower().Trim()) ? "DP_PROCESSED" : "CREATE_DATE") + ",103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
+                        "where convert(datetime," + (!string.IsNullOrEmpty(stfStatus) ? stfStatus : "CREATE_DATE") + ",103) >= convert(datetime,'" + dtpFrom.Value.ToString("yyyy/MM/dd ") + " 00:00:00') " +
+                        "and convert(datetime," + (!string.IsNullOrEmpty(stfStatus) ? stfStatus : "CREATE_DATE") + ",103) <= convert(datetime,'" + dtpTo.Value.ToString("yyyy/MM/dd ") + " 23:59:59') ";
                     string[] TeamSplit = Team.Split(',');
                     if (!String.IsNullOrEmpty(Team) && frmAddDocument1.product.ContainsValue(TeamSplit[0]))
                     {
