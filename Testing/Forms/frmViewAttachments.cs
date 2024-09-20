@@ -20,7 +20,7 @@ namespace Testing.Forms
 
         private bool isDocumentControl = false;
         private string claimNo = string.Empty;
-
+        private string productType = string.Empty;
 
         public frmViewAttachments(bool IsDocumentControl, string ClaimNo = "")
         {
@@ -45,7 +45,7 @@ namespace Testing.Forms
                 tbDocID.Text = DocCode;
                 tbCreateDate.Text = dtTemp.Rows[0]["CREATE_DATE"].ToString();
                 tbDocType.Text = dtTemp.Rows[0]["DOC_TYPE"].ToString();
-                tbProType.Text = dtTemp.Rows[0]["PRODUCT_TYPE"].ToString();
+                tbProType.Text = productType = dtTemp.Rows[0]["PRODUCT_TYPE"].ToString();
                 tbCusName.Text = dtTemp.Rows[0]["CUS_NAME"].ToString();
 
                 dtTemp = crud.LoadData("SELECT FILENAME,PATH FROM dbo.tbAttachment WHERE DOC_CODE = " + DocCode).Tables[0];
@@ -76,6 +76,7 @@ namespace Testing.Forms
                 dgvFile.Size = new Size(550, 260);
                 dgvFile.Location = new Point(35, 50);
 
+                productType = claimNo.Split('-')[2].Substring(1);
                 var tpFiles = AWSHelper.RetrieveFiles("settlement-notice", claimNo);
 
                 if (tpFiles.Count > 0)
@@ -121,7 +122,7 @@ namespace Testing.Forms
                     int RowIndex = dgvFile.SelectedRows[0].Index;
                     string filePath = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
 
-                    AWSHelper.OpenFiles(filePath);
+                    AWSHelper.OpenFiles(filePath, productType);
                 }
                 catch (Exception ex)
                 {
@@ -157,7 +158,7 @@ namespace Testing.Forms
                     int RowIndex = dgvFile.SelectedRows[0].Index;
                     string filePath = dgvFile.Rows[RowIndex].Cells[2].Value.ToString();
 
-                    if (AWSHelper.DownloadFiles(filePath))
+                    if (AWSHelper.DownloadFiles(filePath, productType))
                         Msgbox.Show("File downloaded successfully!");
                 }
                 catch (Exception ex)
@@ -214,7 +215,7 @@ namespace Testing.Forms
                     if (dtProLine.Rows.Count > 0)
                         proLine = dtProLine.Rows[0][0].ToString();
 
-                    AWSHelper.UploadFiles(string.Format("document-control/{0}", proLine), DocCode, path);
+                    AWSHelper.UploadFiles(string.Format("document-control/{0}", proLine), DocCode, path, productType);
 
                     string fullPath = string.Format("https://imstools-docs.s3.ap-southeast-1.amazonaws.com/document-control/{0}/{1}/{2}", proLine, DocCode, filename);
 

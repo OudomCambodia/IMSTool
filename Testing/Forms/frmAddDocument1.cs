@@ -406,7 +406,7 @@ namespace Testing.Forms
                                     //File.Copy(dgvr.Cells[1].Value.ToString(), fullPath, true);
 
                                     fileName = dgvr.Cells[0].Value.ToString();
-                                    AWSHelper.UploadFiles(string.Format("document-control/{0}", cbProLine.Text.ToUpper().Trim()), DocCode, dgvr.Cells["File_Path"].Value.ToString());
+                                    AWSHelper.UploadFiles(string.Format("document-control/{0}", cbProLine.Text.ToUpper().Trim()), DocCode, dgvr.Cells["File_Path"].Value.ToString(), cbProType.Text.ToUpper());
                                     fullPath = string.Format("https://imstools-docs.s3.ap-southeast-1.amazonaws.com/document-control/{0}/{1}/{2}", cbProLine.Text.ToUpper().Trim(), DocCode, fileName);
 
                                     sql = @"INSERT INTO dbo.tbAttachment (DOC_CODE,PATH,FILENAME,ADD_DATE) VALUES (" + DocCode + ",N'" + fullPath + "',N'" + fileName + "','" + DateTime.Now + "')";
@@ -953,7 +953,7 @@ namespace Testing.Forms
 
                                         fileName = Path.GetFileName(f);
                                         fullPath = string.Format("https://imstools-docs.s3.ap-southeast-1.amazonaws.com/document-control/{0}/{1}/{2}", product[ProType].ToUpper().Trim(), DocCode, fileName);
-                                        AWSHelper.UploadFiles(string.Format("document-control/{0}", product[ProType].ToUpper().Trim()), DocCode, f);
+                                        AWSHelper.UploadFiles(string.Format("document-control/{0}", product[ProType].ToUpper().Trim()), DocCode, f, ProType);
 
                                         sql = @"INSERT INTO dbo.tbAttachment (DOC_CODE,PATH,FILENAME,ADD_DATE) VALUES (" + DocCode + ",N'" + fullPath + "',N'" + fileName + "','" + DateTime.Now + "')";
                                         sqlcrud.Executing(sql);

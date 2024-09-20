@@ -183,7 +183,7 @@ namespace Testing.Forms
                 templateDoc.SaveAs2(folderPath + @"\" + fileName + ".docx"); // to be able to convert docx to pdf
                 templateDoc.ExportAsFixedFormat(folderPath + @"\" + fileName + ".pdf", WdExportFormat.wdExportFormatPDF, true);
 
-                AWSHelper.UploadFiles("settlement-notice", pClaimNo.Replace("/", "-"), folderPath + @"\" + fileName + ".pdf");
+                AWSHelper.UploadFiles("settlement-notice", pClaimNo.Replace("/", "-"), folderPath + @"\" + fileName + ".pdf", pClaimNo.Split('/')[2].Substring(1));
 
                 templateDoc.Close();
                 oWord.Quit();

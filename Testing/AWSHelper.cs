@@ -15,6 +15,7 @@ using System.Net;
 using System.Diagnostics;
 using System.Data;
 using Testing;
+using System.Data.SqlClient;
 
 namespace Testing
 {
@@ -28,7 +29,7 @@ namespace Testing
 
         public static AmazonS3Client s3Client = new AmazonS3Client(AccessKey, SecretKey, BucketRegion);
 
-        public static void UploadFiles(string folderType, string folderName, string localFilePath)
+        public static void UploadFiles(string folderType, string folderName, string localFilePath, string productType)
         {
             try
             {
@@ -47,6 +48,8 @@ namespace Testing
                 };
 
                 fileTransferUtility.UploadAsync(fileTransferUtilityRequest).GetAwaiter().GetResult();
+
+                InsertLog((folderType.Contains(@"/") ? folderType.Split('/')[0].ToUpper() : folderType.ToUpper()), "UPLOAD", frmLogIn.Usert.ToUpper(), productType, Path.GetFileName(localFilePath));
             }
             catch (Exception ex)
             {
@@ -81,10 +84,12 @@ namespace Testing
             }
         }
 
-        public static void OpenFiles(string s3FilePath)
+        public static void OpenFiles(string s3FilePath, string productType)
         {
             try
             {
+                string folderType = s3FilePath.Split('/')[3].ToUpper();
+
                 string tempFilePath = Path.GetTempFileName();
                 string dirPath = Path.GetDirectoryName(tempFilePath);
 
@@ -112,6 +117,8 @@ namespace Testing
 
                     process.Start();
                 }
+
+                InsertLog(s3FilePath.Split('/')[3].ToUpper(), "RETRIEVE", frmLogIn.Usert.ToUpper(), productType, GetKeyAndFileNameFromS3FilePath(s3FilePath).Item2);
             }
             catch (Exception ex)
             {
@@ -119,7 +126,7 @@ namespace Testing
             }
         }
 
-        public static bool DownloadFiles(string s3FilePath)
+        public static bool DownloadFiles(string s3FilePath, string productType)
         {
             try
             {
@@ -137,6 +144,7 @@ namespace Testing
                     using (FileStream fileStream = new FileStream(Path.Combine(dialog.SelectedPath, GetKeyAndFileNameFromS3FilePath(s3FilePath).Item2), FileMode.Create, FileAccess.Write))
                     {
                         responseStream.CopyTo(fileStream);
+                        InsertLog(s3FilePath.Split('/')[3].ToUpper(), "DOWNLOAD", frmLogIn.Usert.ToUpper(), productType, GetKeyAndFileNameFromS3FilePath(s3FilePath).Item2);
                         return true;
                     }
                 }
@@ -187,6 +195,39 @@ namespace Testing
             fileName = System.IO.Path.GetFileName(key);
 
             return Tuple.Create(key, fileName);
+        }
+
+        public static void InsertLog(string folderType, string logType, string userName, string productType, string fileName)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DBS11SQLConnectionString"].ConnectionString;
+            string query = "INSERT INTO tbAttachmentLog(FOLDER_TYPE, LOG_TYPE, USER_NAME, PRODUCT_TYPE, FILE_NAME, CREATED_DATE) VALUES(@folder_type, @log_type, @user_name, @product_type, @file_name, @created_date)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Create the SqlCommand and assign the query and connection
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    // Define and add the parameters with values
+                    cmd.Parameters.Add(new SqlParameter("@folder_type", SqlDbType.VarChar)).Value = folderType;
+                    cmd.Parameters.Add(new SqlParameter("@log_type", SqlDbType.VarChar)).Value = logType;
+                    cmd.Parameters.Add(new SqlParameter("@user_name", SqlDbType.VarChar)).Value = userName;
+                    cmd.Parameters.Add(new SqlParameter("@product_type", SqlDbType.VarChar)).Value = productType;
+                    cmd.Parameters.Add(new SqlParameter("@file_name", SqlDbType.VarChar)).Value = fileName;
+                    cmd.Parameters.Add(new SqlParameter("@created_date", SqlDbType.DateTime)).Value = DateTime.Now;
+
+                    try
+                    {
+                        // Open the connection
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any errors that occur
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+            }  
         }
     }
 }
