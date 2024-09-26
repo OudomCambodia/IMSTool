@@ -34,11 +34,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.bnClear = new Testing.cus_button();
             this.bnExcel = new Testing.cus_button();
+            this.bnSearch = new Testing.cus_button();
             this.txtExcelPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvView = new System.Windows.Forms.DataGridView();
-            this.bnSearch = new Testing.cus_button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvView)).BeginInit();
@@ -128,6 +128,20 @@
             this.bnExcel.UseVisualStyleBackColor = false;
             this.bnExcel.Click += new System.EventHandler(this.bnExcel_Click);
             // 
+            // bnSearch
+            // 
+            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
+            this.bnSearch.FlatAppearance.BorderSize = 2;
+            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bnSearch.ForeColor = System.Drawing.Color.White;
+            this.bnSearch.Location = new System.Drawing.Point(365, 57);
+            this.bnSearch.Name = "bnSearch";
+            this.bnSearch.Size = new System.Drawing.Size(108, 32);
+            this.bnSearch.TabIndex = 50;
+            this.bnSearch.Text = "Generate";
+            this.bnSearch.UseVisualStyleBackColor = false;
+            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
+            // 
             // txtExcelPath
             // 
             this.txtExcelPath.Location = new System.Drawing.Point(174, 62);
@@ -165,33 +179,21 @@
             this.dgvView.AllowUserToAddRows = false;
             this.dgvView.AllowUserToDeleteRows = false;
             this.dgvView.AllowUserToOrderColumns = true;
-            this.dgvView.AllowUserToResizeColumns = false;
             this.dgvView.AllowUserToResizeRows = false;
             this.dgvView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvView.Location = new System.Drawing.Point(3, 18);
             this.dgvView.Name = "dgvView";
+            this.dgvView.ReadOnly = true;
             this.dgvView.RowTemplate.Height = 24;
+            this.dgvView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvView.Size = new System.Drawing.Size(1240, 395);
             this.dgvView.TabIndex = 0;
             // 
-            // bnSearch
-            // 
-            this.bnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(47)))));
-            this.bnSearch.FlatAppearance.BorderSize = 2;
-            this.bnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bnSearch.ForeColor = System.Drawing.Color.White;
-            this.bnSearch.Location = new System.Drawing.Point(365, 57);
-            this.bnSearch.Name = "bnSearch";
-            this.bnSearch.Size = new System.Drawing.Size(108, 32);
-            this.bnSearch.TabIndex = 50;
-            this.bnSearch.Text = "Generate";
-            this.bnSearch.UseVisualStyleBackColor = false;
-            this.bnSearch.Click += new System.EventHandler(this.bnSearch_Click);
-            // 
             // frmAutoUploadReport
             // 
+            this.AcceptButton = this.bnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
