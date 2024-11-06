@@ -22,10 +22,11 @@ namespace Testing.Forms
             InitializeComponent();
         }
 
-        public void BindComboBox1()
+        public void BindComboBox1(string proType)
         {
             DataRow dr;
-            string SQLcombox = "SELECT PRO_CODE,PRO_DES,USER_C FROM MRPRC";
+            string SQLcombox = proType == "ALL" ? "SELECT 'ALL' AS PRO_CODE, '' AS PRO_DES, '' USER_C FROM DUAL UNION SELECT PRO_CODE,PRO_DES,USER_C FROM MRPRC"
+                : "SELECT 'ALL' AS PRO_CODE, '' AS PRO_DES, '' USER_C FROM DUAL UNION SELECT PRO_CODE,PRO_DES,USER_C FROM MRPRC WHERE PRO_TYPE = '" + proType + "'";
             DataTable dtCombox = new DataTable();
             dtCombox = crud.ExecQuery(SQLcombox);
             dr = dtCombox.NewRow();
@@ -35,6 +36,7 @@ namespace Testing.Forms
             cboprdcode.DisplayMember = "PRO_CODE";
             cboprdcode.DataSource = dtCombox;
         }
+
         public void BindComboBox2()
         {
             DataRow dr;
@@ -48,6 +50,19 @@ namespace Testing.Forms
             cboreport.DisplayMember = "REP_NAME";
             cboreport.DataSource = dtCombox;
         }
+
+        private void BindComboBox3()
+        {
+            DataRow dr;
+            string SQLcombox = "SELECT 'ALL' AS PRO_TYPE FROM DUAL UNION SELECT DISTINCT(PRO_TYPE) AS PRO_TYPE FROM MRPRC ORDER BY PRO_TYPE";
+            DataTable dtCombox = new DataTable();
+            dtCombox = crud.ExecQuery(SQLcombox);
+            dr = dtCombox.NewRow();
+            cboProductType.ValueMember = "PRO_TYPE";
+            cboProductType.DisplayMember = "PRO_TYPE";
+            cboProductType.DataSource = dtCombox;
+        }
+
         private void bnSearch_Click(object sender, EventArgs e)
         {
 
@@ -64,9 +79,32 @@ namespace Testing.Forms
                     string sql = "SELECT * FROM VIEW_PRE_REGISTER_BREAK_DOWN where";
                     sql += " TRN_DATE >= TO_DATE('" + dtpFrom.Value.ToString("yyyy/MM/dd") + " 00:00:00','YYYY/MM/DD HH24:MI:SS')";
                     sql += " and TRN_DATE <= TO_DATE('" + dtpTo.Value.ToString("yyyy/MM/dd") + " 23:59:59','YYYY/MM/DD HH24:MI:SS')";
-                    if(username != "ADMIN")
-                    sql += "and SUB_CLASS = '" + cboprdcode.Text + "'";
-                   
+
+                    if (username != "ADMIN")
+                    {
+                        if (cboprdcode.Text == "ALL")
+                        {
+                            string subClasses = string.Empty;
+                            if (cboprdcode.DataSource != null)
+                            {
+                                var dtProdCode = cboprdcode.DataSource as DataTable;
+                                for (int i = 0; i < dtProdCode.Rows.Count; i++)
+                                {
+                                    string prodCode = dtProdCode.Rows[i]["PRO_CODE"].ToString();
+
+                                    if (prodCode == "ALL")
+                                        continue;
+
+                                    subClasses += "'" + prodCode + "',";
+                                }
+                            }
+                            sql += " and SUB_CLASS in (" + subClasses.Remove(subClasses.Length - 1) + ")";
+                        }
+                        else
+                            sql += " and SUB_CLASS = '" + cboprdcode.Text + "'";
+                    }
+                        
+                    //sql += "and SUB_CLASS = '" + cboprdcode.Text + "'";
 
                     DataTable dtNUMmAX = new DataTable();
                     string sqlNUMmAX = "SELECT MAX(NUMBER_OF_COMMISSION) FROM VIEW_PRE_REGISTER_BREAK_DOWN where";
@@ -118,50 +156,117 @@ namespace Testing.Forms
 
             else
             {
-                //string cs = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
-                using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
+                if (cboprdcode.Text == "ALL")
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-                    con.Open();
-                    OracleCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "MPRT";
+                    Msgbox.Show("Please select one specific product code for Reinsurance report.");
+                    return;
 
-                    cmd.Parameters.Add("P_PRO_CODE", OracleDbType.NVarchar2).Value = cboprdcode.Text;
-                    cmd.Parameters.Add("P_RE", OracleDbType.NVarchar2).Value = cboreport.Text;
-                    //cmd.Parameters.Add("P_DATETO", OracleDbType.NVarchar2).Value = dtpTo.Value.ToString("yyyy/MM/dd HH:mm:ss");
-                    //cmd.Parameters.Add("P_DATEFR", OracleDbType.NVarchar2).Value = dtpFrom.Value.ToString("yyyy/MM/dd HH:mm:ss");
-                    cmd.Parameters.Add("P_DATETO", OracleDbType.NVarchar2).Value = dtpTo.Value.ToString("yyyy/MM/dd")+" 23:59:59";
-                    cmd.Parameters.Add("P_DATEFR", OracleDbType.NVarchar2).Value = dtpFrom.Value.ToString("yyyy/MM/dd")+" 00:00:00";
-                    cmd.Parameters.Add("P_DEC", OracleDbType.NVarchar2).Value = cboprdcode.SelectedValue;
-                    OracleParameter OUA = cmd.Parameters.Add("DATAOUTPUT", OracleDbType.RefCursor);
-                    OUA.Value = DateTime.Now;
-                    OUA.Direction = ParameterDirection.Output;
+                    //if (cboprdcode.DataSource != null)
+                    //{
+                    //    Cursor.Current = Cursors.WaitCursor;
 
-                    try
+                    //    var dtProdCode = cboprdcode.DataSource as DataTable;
+                    //    var isClone = false;
+                        
+                    //    for (int i = 0; i < dtProdCode.Rows.Count; i++)
+                    //    {
+                    //        var dtTemp = new DataTable();
+                    //        string prodCode = dtProdCode.Rows[i]["PRO_CODE"].ToString();
+                    //        string prodDes = dtProdCode.Rows[i]["PRO_DES"].ToString();
+
+                    //        using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
+                    //        {
+                                
+                    //            con.Open();
+                    //            OracleCommand cmd = con.CreateCommand();
+                    //            cmd.CommandType = CommandType.StoredProcedure;
+                    //            cmd.CommandText = "MPRT";
+                    //            cmd.Parameters.Add("P_PRO_CODE", OracleDbType.NVarchar2).Value = prodCode;
+                    //            cmd.Parameters.Add("P_RE", OracleDbType.NVarchar2).Value = cboreport.Text;
+                    //            //cmd.Parameters.Add("P_DATETO", OracleDbType.NVarchar2).Value = dtpTo.Value.ToString("yyyy/MM/dd HH:mm:ss");
+                    //            //cmd.Parameters.Add("P_DATEFR", OracleDbType.NVarchar2).Value = dtpFrom.Value.ToString("yyyy/MM/dd HH:mm:ss");
+                    //            cmd.Parameters.Add("P_DATETO", OracleDbType.NVarchar2).Value = dtpTo.Value.ToString("yyyy/MM/dd") + " 23:59:59";
+                    //            cmd.Parameters.Add("P_DATEFR", OracleDbType.NVarchar2).Value = dtpFrom.Value.ToString("yyyy/MM/dd") + " 00:00:00";
+                    //            cmd.Parameters.Add("P_DEC", OracleDbType.NVarchar2).Value = prodDes;
+                    //            OracleParameter OUA = cmd.Parameters.Add("DATAOUTPUT", OracleDbType.RefCursor);
+                    //            OUA.Value = DateTime.Now;
+                    //            OUA.Direction = ParameterDirection.Output;
+
+                    //            try
+                    //            {
+                    //                // DataTable dt = new DataTable();
+                    //                dtTemp.Load(cmd.ExecuteReader());
+
+                    //                foreach (DataRow row in dtTemp.Rows)
+                    //                {
+                    //                    if (row[0].ToString().Contains("PLEASE CONTACT ADMINISTRATOR"))
+                    //                        break;
+
+                    //                    if (!isClone)
+                    //                    {
+                    //                        dt = dtTemp.Clone();
+                    //                        isClone = true;
+                    //                    }
+
+                    //                    dt.ImportRow(row);
+                    //                }
+                    //            }
+                    //            catch (Exception ex)
+                    //            {
+                    //                Msgbox.Show(ex.Message + "\n" + ex.Source);
+                    //            }
+                    //        }
+                    //    }
+
+                    //    dataGridView1.DataSource = dt;
+
+                    //    Cursor.Current = Cursors.AppStarting;
+                    //}
+                }
+                else
+                {
+                    //string cs = ConfigurationManager.ConnectionStrings["Testing.Properties.Settings.ConnectionString"].ConnectionString;
+                    using (OracleConnection con = new OracleConnection(frmLogIn.OracleConnectionString))
                     {
-                        // DataTable dt = new DataTable();
-                        dt.Load(cmd.ExecuteReader());
+                        Cursor.Current = Cursors.WaitCursor;
+                        con.Open();
+                        OracleCommand cmd = con.CreateCommand();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "MPRT";
 
-                        dataGridView1.DataSource = dt;
+                        cmd.Parameters.Add("P_PRO_CODE", OracleDbType.NVarchar2).Value = cboprdcode.Text;
+                        cmd.Parameters.Add("P_RE", OracleDbType.NVarchar2).Value = cboreport.Text;
+                        //cmd.Parameters.Add("P_DATETO", OracleDbType.NVarchar2).Value = dtpTo.Value.ToString("yyyy/MM/dd HH:mm:ss");
+                        //cmd.Parameters.Add("P_DATEFR", OracleDbType.NVarchar2).Value = dtpFrom.Value.ToString("yyyy/MM/dd HH:mm:ss");
+                        cmd.Parameters.Add("P_DATETO", OracleDbType.NVarchar2).Value = dtpTo.Value.ToString("yyyy/MM/dd") + " 23:59:59";
+                        cmd.Parameters.Add("P_DATEFR", OracleDbType.NVarchar2).Value = dtpFrom.Value.ToString("yyyy/MM/dd") + " 00:00:00";
+                        cmd.Parameters.Add("P_DEC", OracleDbType.NVarchar2).Value = cboprdcode.SelectedValue;
+                        OracleParameter OUA = cmd.Parameters.Add("DATAOUTPUT", OracleDbType.RefCursor);
+                        OUA.Value = DateTime.Now;
+                        OUA.Direction = ParameterDirection.Output;
 
+                        try
+                        {
+                            // DataTable dt = new DataTable();
+                            dt.Load(cmd.ExecuteReader());
 
+                            dataGridView1.DataSource = dt;
+                        }
+                        catch (Exception ex)
+                        {
+                            Msgbox.Show(ex.Message + "\n" + ex.Source);
+                        }
 
+                        Cursor.Current = Cursors.AppStarting;
                     }
-                    catch (Exception ex)
-                    {
-                        Msgbox.Show(ex.Message + "\n" + ex.Source);
-                    }
-
-                    Cursor.Current = Cursors.AppStarting;
                 }
             }
         }
 
         private void MReport_Load(object sender, EventArgs e)
         {
-            BindComboBox1();
             BindComboBox2();
+            BindComboBox3();
             dtpFrom.Value = DateTime.Now;
             dtpTo.Value = DateTime.Now;
         }
@@ -204,6 +309,10 @@ namespace Testing.Forms
             lbTotalNum.Text = dataGridView1.RowCount.ToString();
         }
 
-
+        private void cboProductType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string proType = cboProductType.SelectedValue.ToString();
+            BindComboBox1(proType);
+        }
     }
 }
