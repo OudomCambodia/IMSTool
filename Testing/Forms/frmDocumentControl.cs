@@ -395,7 +395,8 @@ namespace Testing.Forms
                     if (Role[0] == "FILLING")
                     {
                         if (Team != "A&H")// Filling For A&H
-                            dgvOpensqlstring += " AND PRODUCT_TYPE NOT IN ('EMC','STN','MED','Chinese PA') ";
+                            dgvOpensqlstring += " AND PRODUCT_TYPE NOT IN ('EMC') ";
+                            //dgvOpensqlstring += " AND PRODUCT_TYPE NOT IN ('EMC','STN','MED','Chinese PA') ";
                         //else
                         //    dgvOpensqlstring += " AND PRODUCT_TYPE IN ('EMC','STN','MED','Chinese PA') ";
                     }
