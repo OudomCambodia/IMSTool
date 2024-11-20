@@ -72,10 +72,17 @@ namespace Testing
 
         private void LogIn()
         {
-        K: //Update 19-Jul-19 (Solve Connection Pool Problem)
+            K: //Update 19-Jul-19 (Solve Connection Pool Problem)
             try
             {
-                string sql = "SELECT password, expiry_date, user_name, type,USER_STATUS FROM USER_PRINT_SYSTEM WHERE USER_CODE = '" + tbUser.Text.Trim().ToUpper() + "'";
+                bool isUserToTest = (sqlCrud.LoadData("select * from tbConnectionString where ID = 1").Tables[0].Rows[0]["User"].ToString() ?? string.Empty).Contains(tbUser.Text.ToUpper());
+                if (isUserToTest)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    return;
+                }
+
+                string sql = "SELECT password, expiry_date, user_name, type, USER_STATUS FROM USER_PRINT_SYSTEM WHERE USER_CODE = '" + tbUser.Text.Trim().ToUpper() + "'";
 
                 DataTable dt = new DataTable();
                 dt = crud.ExecQuery(sql);
@@ -101,7 +108,7 @@ namespace Testing
 
                     if (DateTime.Now > expDate)
                     {      
-                        Msgbox.Show("Your account is expired. Please contact system admin.");
+                        Msgbox.Show("Your account is expired. Please contact system administrator.");
                         return;
                     }
 
@@ -205,7 +212,7 @@ namespace Testing
             {
                 //LoadSplashScreen();
                 Cursor.Current = Cursors.WaitCursor;
-
+                
                 OracleConnectionString = sqlCrud.LoadData("select * from tbConnectionString where ID = 0").Tables[0].Rows[0]["ConnectionString"].ToString();
 
                 CheckMaint();

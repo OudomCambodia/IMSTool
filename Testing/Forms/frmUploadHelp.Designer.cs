@@ -58,7 +58,7 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1064, 46);
+            this.label1.Size = new System.Drawing.Size(1143, 46);
             this.label1.TabIndex = 60;
             this.label1.Text = "Upload Help";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,9 +81,9 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(20, 116);
+            this.label2.Location = new System.Drawing.Point(20, 114);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(317, 16);
+            this.label2.Size = new System.Drawing.Size(408, 22);
             this.label2.TabIndex = 155;
             this.label2.Text = "Upload file fields\' value (Value : Description)";
             // 
@@ -102,18 +102,19 @@
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(162, 151);
+            this.label4.Location = new System.Drawing.Point(148, 151);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 111);
+            this.label4.Size = new System.Drawing.Size(173, 147);
             this.label4.TabIndex = 157;
-            this.label4.Text = "Priority\r\n\r\nN : Normal\r\nU : Urgent\r\nVU : Very Urgent\r\nL : Leasing";
+            this.label4.Text = "Priority\r\n\r\nN : Normal\r\nU : Urgent\r\nVU : Very Urgent\r\nL : Leasing\r\nIO: Internal O" +
+    "nly";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(275, 151);
+            this.label5.Location = new System.Drawing.Point(327, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 80);
             this.label5.TabIndex = 158;
@@ -123,9 +124,9 @@
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(133, 262);
+            this.label6.Location = new System.Drawing.Point(133, 306);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(266, 16);
+            this.label6.Size = new System.Drawing.Size(365, 28);
             this.label6.TabIndex = 159;
             this.label6.Text = "* For \"Print Card\" please input \"Yes\" or \"No\"\r\n";
             // 
@@ -133,7 +134,7 @@
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(20, 305);
+            this.label7.Location = new System.Drawing.Point(20, 338);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(322, 39);
             this.label7.TabIndex = 160;
@@ -147,7 +148,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(949, 355);
+            this.btnClose.Location = new System.Drawing.Point(1001, 355);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(85, 35);
             this.btnClose.TabIndex = 161;
@@ -169,7 +170,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(640, 136);
+            this.label9.Location = new System.Drawing.Point(713, 136);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(327, 20);
             this.label9.TabIndex = 163;
@@ -179,7 +180,7 @@
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(640, 211);
+            this.label10.Location = new System.Drawing.Point(713, 211);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(346, 55);
             this.label10.TabIndex = 164;
@@ -191,7 +192,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(640, 282);
+            this.label11.Location = new System.Drawing.Point(713, 282);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(421, 20);
             this.label11.TabIndex = 165;
@@ -202,7 +203,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(640, 298);
+            this.label12.Location = new System.Drawing.Point(713, 298);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(283, 36);
             this.label12.TabIndex = 166;
@@ -212,7 +213,7 @@
             // 
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(640, 152);
+            this.label13.Location = new System.Drawing.Point(713, 152);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(346, 55);
             this.label13.TabIndex = 167;
@@ -223,7 +224,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(640, 195);
+            this.label14.Location = new System.Drawing.Point(713, 195);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(206, 20);
             this.label14.TabIndex = 168;
@@ -233,7 +234,7 @@
             // 
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(382, 151);
+            this.label15.Location = new System.Drawing.Point(434, 151);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(121, 111);
             this.label15.TabIndex = 169;
@@ -243,7 +244,7 @@
             // 
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(508, 151);
+            this.label16.Location = new System.Drawing.Point(560, 151);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(146, 147);
             this.label16.TabIndex = 170;
@@ -254,7 +255,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1064, 402);
+            this.ClientSize = new System.Drawing.Size(1143, 417);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);

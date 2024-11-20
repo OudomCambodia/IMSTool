@@ -127,6 +127,7 @@
             this.pSendEmailsClaim = new System.Windows.Forms.Panel();
             this.btnSendClaimEmailReport = new System.Windows.Forms.Button();
             this.btnSendClaimEmail = new System.Windows.Forms.Button();
+            this.btnClaimRejectionReport = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -710,15 +711,16 @@
             // 
             this.pnSubClaim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.pnSubClaim.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnSubClaim.Controls.Add(this.btnClaimRejectionReport);
             this.pnSubClaim.Controls.Add(this.clmPaymentReq);
             this.pnSubClaim.Controls.Add(this.bnClaimOSRI);
             this.pnSubClaim.Controls.Add(this.bnClaimPaidRI);
             this.pnSubClaim.Controls.Add(this.bnClaimRI);
             this.pnSubClaim.Controls.Add(this.btnClaimPaidPayee);
             this.pnSubClaim.Controls.Add(this.btnClaimRequisitionReport);
-            this.pnSubClaim.Location = new System.Drawing.Point(189, 107);
+            this.pnSubClaim.Location = new System.Drawing.Point(191, 71);
             this.pnSubClaim.Name = "pnSubClaim";
-            this.pnSubClaim.Size = new System.Drawing.Size(180, 238);
+            this.pnSubClaim.Size = new System.Drawing.Size(180, 274);
             this.pnSubClaim.TabIndex = 4;
             this.pnSubClaim.Visible = false;
             // 
@@ -1443,6 +1445,22 @@
             this.btnSendClaimEmail.UseVisualStyleBackColor = false;
             this.btnSendClaimEmail.Click += new System.EventHandler(this.btnSendClaimEmail_Click);
             // 
+            // btnClaimRejectionReport
+            // 
+            this.btnClaimRejectionReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnClaimRejectionReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClaimRejectionReport.Enabled = false;
+            this.btnClaimRejectionReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClaimRejectionReport.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClaimRejectionReport.ForeColor = System.Drawing.Color.White;
+            this.btnClaimRejectionReport.Location = new System.Drawing.Point(-4, 232);
+            this.btnClaimRejectionReport.Name = "btnClaimRejectionReport";
+            this.btnClaimRejectionReport.Size = new System.Drawing.Size(187, 40);
+            this.btnClaimRejectionReport.TabIndex = 13;
+            this.btnClaimRejectionReport.Text = "Claim Rejection Report";
+            this.btnClaimRejectionReport.UseVisualStyleBackColor = false;
+            this.btnClaimRejectionReport.Click += new System.EventHandler(this.btnClaimRejectionReport_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1593,5 +1611,6 @@
         public System.Windows.Forms.Button btnSendClaimEmail;
         public System.Windows.Forms.Button btnPrintInvoiceBatch;
         private System.Windows.Forms.ToolStripMenuItem tsmiPEMReport;
+        public System.Windows.Forms.Button btnClaimRejectionReport;
     }
 }

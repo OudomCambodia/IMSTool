@@ -920,6 +920,12 @@ namespace Testing
             frm.ShowDialog();
         }
 
+        private void btnClaimRejectionReport_Click(object sender, EventArgs e)
+        {
+            Forms.frmANHClaimRejectionReport frm = new Forms.frmANHClaimRejectionReport();
+            openForm(frm, (Button)sender);
+        }
+
         private void SendANHDocReqEmailReminder()
         {
             string claimNo = string.Empty;

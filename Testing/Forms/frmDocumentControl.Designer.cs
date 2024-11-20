@@ -33,6 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pDoc = new System.Windows.Forms.Panel();
+            this.lblError = new System.Windows.Forms.Label();
             this.dgvDoc = new System.Windows.Forms.DataGridView();
             this.pNotification = new System.Windows.Forms.Panel();
             this.dgvNoti = new System.Windows.Forms.DataGridView();
@@ -119,7 +120,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 57);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1449, 776);
             this.panel1.TabIndex = 12;
@@ -130,20 +131,36 @@
             this.panel4.Controls.Add(this.pNotification);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 154);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1449, 622);
             this.panel4.TabIndex = 46;
             // 
             // pDoc
             // 
+            this.pDoc.Controls.Add(this.lblError);
             this.pDoc.Controls.Add(this.dgvDoc);
             this.pDoc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pDoc.Location = new System.Drawing.Point(0, 0);
-            this.pDoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pDoc.Margin = new System.Windows.Forms.Padding(4);
             this.pDoc.Name = "pDoc";
             this.pDoc.Size = new System.Drawing.Size(1136, 622);
             this.pDoc.TabIndex = 10;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblError.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.lblError.ForeColor = System.Drawing.Color.White;
+            this.lblError.Location = new System.Drawing.Point(0, 548);
+            this.lblError.Name = "lblError";
+            this.lblError.Padding = new System.Windows.Forms.Padding(10);
+            this.lblError.Size = new System.Drawing.Size(40, 74);
+            this.lblError.TabIndex = 9;
+            this.lblError.Text = "\r\n ";
+            this.lblError.Paint += new System.Windows.Forms.PaintEventHandler(this.lblError_Paint);
             // 
             // dgvDoc
             // 
@@ -155,8 +172,9 @@
             this.dgvDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDoc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDoc.Location = new System.Drawing.Point(0, 0);
-            this.dgvDoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDoc.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDoc.Name = "dgvDoc";
+            this.dgvDoc.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvDoc.RowHeadersVisible = false;
             this.dgvDoc.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvDoc.RowTemplate.Height = 30;
@@ -175,7 +193,7 @@
             this.pNotification.Controls.Add(this.panel7);
             this.pNotification.Dock = System.Windows.Forms.DockStyle.Right;
             this.pNotification.Location = new System.Drawing.Point(1136, 0);
-            this.pNotification.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pNotification.Margin = new System.Windows.Forms.Padding(4);
             this.pNotification.Name = "pNotification";
             this.pNotification.Size = new System.Drawing.Size(313, 622);
             this.pNotification.TabIndex = 9;
@@ -203,7 +221,7 @@
             this.dgvNoti.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNoti.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvNoti.Location = new System.Drawing.Point(0, 36);
-            this.dgvNoti.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvNoti.Margin = new System.Windows.Forms.Padding(4);
             this.dgvNoti.MultiSelect = false;
             this.dgvNoti.Name = "dgvNoti";
             this.dgvNoti.ReadOnly = true;
@@ -228,7 +246,7 @@
             this.panel7.Controls.Add(this.pReject);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(313, 36);
             this.panel7.TabIndex = 11;
@@ -270,7 +288,7 @@
             // 
             this.pReverse.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.pReverse.Location = new System.Drawing.Point(213, 26);
-            this.pReverse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pReverse.Margin = new System.Windows.Forms.Padding(4);
             this.pReverse.Name = "pReverse";
             this.pReverse.Size = new System.Drawing.Size(57, 4);
             this.pReverse.TabIndex = 9;
@@ -295,7 +313,7 @@
             // 
             this.pPending.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.pPending.Location = new System.Drawing.Point(125, 26);
-            this.pPending.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pPending.Margin = new System.Windows.Forms.Padding(4);
             this.pPending.Name = "pPending";
             this.pPending.Size = new System.Drawing.Size(48, 4);
             this.pPending.TabIndex = 8;
@@ -304,7 +322,7 @@
             // 
             this.pReject.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.pReject.Location = new System.Drawing.Point(32, 26);
-            this.pReject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pReject.Margin = new System.Windows.Forms.Padding(4);
             this.pReject.Name = "pReject";
             this.pReject.Size = new System.Drawing.Size(56, 4);
             this.pReject.TabIndex = 10;
@@ -328,7 +346,7 @@
             this.panel8.Controls.Add(this.btnSubmittedtoUW);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 102);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1449, 52);
             this.panel8.TabIndex = 45;
@@ -339,7 +357,7 @@
             this.btnSentOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSentOut.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnSentOut.Location = new System.Drawing.Point(833, 7);
-            this.btnSentOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSentOut.Margin = new System.Windows.Forms.Padding(4);
             this.btnSentOut.Name = "btnSentOut";
             this.btnSentOut.Size = new System.Drawing.Size(91, 44);
             this.btnSentOut.TabIndex = 15;
@@ -353,7 +371,7 @@
             this.btnReceived.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReceived.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnReceived.Location = new System.Drawing.Point(743, 7);
-            this.btnReceived.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReceived.Margin = new System.Windows.Forms.Padding(4);
             this.btnReceived.Name = "btnReceived";
             this.btnReceived.Size = new System.Drawing.Size(91, 44);
             this.btnReceived.TabIndex = 14;
@@ -383,7 +401,7 @@
             this.btnNotification.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNotification.Image = global::Testing.Properties.Resources.notification_unscreen;
             this.btnNotification.Location = new System.Drawing.Point(1377, 7);
-            this.btnNotification.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNotification.Margin = new System.Windows.Forms.Padding(4);
             this.btnNotification.Name = "btnNotification";
             this.btnNotification.Size = new System.Drawing.Size(43, 39);
             this.btnNotification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -398,7 +416,7 @@
             this.btnPendingAtDP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPendingAtDP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPendingAtDP.Location = new System.Drawing.Point(1105, 7);
-            this.btnPendingAtDP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPendingAtDP.Margin = new System.Windows.Forms.Padding(4);
             this.btnPendingAtDP.Name = "btnPendingAtDP";
             this.btnPendingAtDP.Size = new System.Drawing.Size(117, 44);
             this.btnPendingAtDP.TabIndex = 11;
@@ -412,7 +430,7 @@
             this.btnAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnAll.Location = new System.Drawing.Point(1015, 7);
-            this.btnAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(91, 44);
             this.btnAll.TabIndex = 1;
@@ -426,7 +444,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnCancel.Location = new System.Drawing.Point(924, 7);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 44);
             this.btnCancel.TabIndex = 2;
@@ -440,7 +458,7 @@
             this.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnDone.Location = new System.Drawing.Point(652, 7);
-            this.btnDone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDone.Margin = new System.Windows.Forms.Padding(4);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(91, 44);
             this.btnDone.TabIndex = 3;
@@ -454,7 +472,7 @@
             this.btnPackaged.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPackaged.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPackaged.Location = new System.Drawing.Point(561, 7);
-            this.btnPackaged.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPackaged.Margin = new System.Windows.Forms.Padding(4);
             this.btnPackaged.Name = "btnPackaged";
             this.btnPackaged.Size = new System.Drawing.Size(91, 44);
             this.btnPackaged.TabIndex = 4;
@@ -468,7 +486,7 @@
             this.btnPackaging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPackaging.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPackaging.Location = new System.Drawing.Point(471, 7);
-            this.btnPackaging.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPackaging.Margin = new System.Windows.Forms.Padding(4);
             this.btnPackaging.Name = "btnPackaging";
             this.btnPackaging.Size = new System.Drawing.Size(91, 44);
             this.btnPackaging.TabIndex = 4;
@@ -482,7 +500,7 @@
             this.btnPendingforSign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPendingforSign.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnPendingforSign.Location = new System.Drawing.Point(365, 7);
-            this.btnPendingforSign.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPendingforSign.Margin = new System.Windows.Forms.Padding(4);
             this.btnPendingforSign.Name = "btnPendingforSign";
             this.btnPendingforSign.Size = new System.Drawing.Size(105, 44);
             this.btnPendingforSign.TabIndex = 6;
@@ -496,7 +514,7 @@
             this.btnDPProcessed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDPProcessed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnDPProcessed.Location = new System.Drawing.Point(275, 7);
-            this.btnDPProcessed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDPProcessed.Margin = new System.Windows.Forms.Padding(4);
             this.btnDPProcessed.Name = "btnDPProcessed";
             this.btnDPProcessed.Size = new System.Drawing.Size(91, 44);
             this.btnDPProcessed.TabIndex = 7;
@@ -510,7 +528,7 @@
             this.btnDPProcessing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDPProcessing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnDPProcessing.Location = new System.Drawing.Point(181, 7);
-            this.btnDPProcessing.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDPProcessing.Margin = new System.Windows.Forms.Padding(4);
             this.btnDPProcessing.Name = "btnDPProcessing";
             this.btnDPProcessing.Size = new System.Drawing.Size(93, 44);
             this.btnDPProcessing.TabIndex = 8;
@@ -524,7 +542,7 @@
             this.btnControllerAccepted.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnControllerAccepted.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnControllerAccepted.Location = new System.Drawing.Point(91, 7);
-            this.btnControllerAccepted.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnControllerAccepted.Margin = new System.Windows.Forms.Padding(4);
             this.btnControllerAccepted.Name = "btnControllerAccepted";
             this.btnControllerAccepted.Size = new System.Drawing.Size(91, 44);
             this.btnControllerAccepted.TabIndex = 9;
@@ -538,7 +556,7 @@
             this.btnSubmittedtoUW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmittedtoUW.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.btnSubmittedtoUW.Location = new System.Drawing.Point(0, 7);
-            this.btnSubmittedtoUW.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSubmittedtoUW.Margin = new System.Windows.Forms.Padding(4);
             this.btnSubmittedtoUW.Name = "btnSubmittedtoUW";
             this.btnSubmittedtoUW.Size = new System.Drawing.Size(91, 44);
             this.btnSubmittedtoUW.TabIndex = 10;
@@ -562,7 +580,7 @@
             this.panel3.Controls.Add(this.tbFilterdgvDoc);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 50);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1449, 52);
             this.panel3.TabIndex = 45;
@@ -576,9 +594,9 @@
             this.gbAllRecordOption.Controls.Add(this.rbAll);
             this.gbAllRecordOption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.gbAllRecordOption.Location = new System.Drawing.Point(857, 6);
-            this.gbAllRecordOption.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAllRecordOption.Margin = new System.Windows.Forms.Padding(4);
             this.gbAllRecordOption.Name = "gbAllRecordOption";
-            this.gbAllRecordOption.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAllRecordOption.Padding = new System.Windows.Forms.Padding(4);
             this.gbAllRecordOption.Size = new System.Drawing.Size(453, 42);
             this.gbAllRecordOption.TabIndex = 45;
             this.gbAllRecordOption.TabStop = false;
@@ -602,7 +620,7 @@
             this.dtpSpecificDateTo.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.dtpSpecificDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpSpecificDateTo.Location = new System.Drawing.Point(335, 12);
-            this.dtpSpecificDateTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpSpecificDateTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpSpecificDateTo.Name = "dtpSpecificDateTo";
             this.dtpSpecificDateTo.Size = new System.Drawing.Size(92, 22);
             this.dtpSpecificDateTo.TabIndex = 48;
@@ -613,7 +631,7 @@
             this.dtpSpecificDateFr.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.dtpSpecificDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpSpecificDateFr.Location = new System.Drawing.Point(207, 12);
-            this.dtpSpecificDateFr.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpSpecificDateFr.Margin = new System.Windows.Forms.Padding(4);
             this.dtpSpecificDateFr.Name = "dtpSpecificDateFr";
             this.dtpSpecificDateFr.Size = new System.Drawing.Size(92, 22);
             this.dtpSpecificDateFr.TabIndex = 47;
@@ -623,7 +641,7 @@
             this.rbSpecificDate.AutoSize = true;
             this.rbSpecificDate.ForeColor = System.Drawing.Color.White;
             this.rbSpecificDate.Location = new System.Drawing.Point(91, 14);
-            this.rbSpecificDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbSpecificDate.Margin = new System.Windows.Forms.Padding(4);
             this.rbSpecificDate.Name = "rbSpecificDate";
             this.rbSpecificDate.Size = new System.Drawing.Size(110, 21);
             this.rbSpecificDate.TabIndex = 46;
@@ -636,7 +654,7 @@
             this.rbAll.AutoSize = true;
             this.rbAll.ForeColor = System.Drawing.Color.White;
             this.rbAll.Location = new System.Drawing.Point(24, 14);
-            this.rbAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbAll.Margin = new System.Windows.Forms.Padding(4);
             this.rbAll.Name = "rbAll";
             this.rbAll.Size = new System.Drawing.Size(44, 21);
             this.rbAll.TabIndex = 45;
@@ -652,7 +670,7 @@
             this.cboColor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cboColor.FormattingEnabled = true;
             this.cboColor.Location = new System.Drawing.Point(777, 14);
-            this.cboColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboColor.Margin = new System.Windows.Forms.Padding(4);
             this.cboColor.Name = "cboColor";
             this.cboColor.Size = new System.Drawing.Size(44, 23);
             this.cboColor.TabIndex = 47;
@@ -676,7 +694,7 @@
             this.rbCustomer.AutoSize = true;
             this.rbCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rbCustomer.Location = new System.Drawing.Point(280, 6);
-            this.rbCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.rbCustomer.Name = "rbCustomer";
             this.rbCustomer.Size = new System.Drawing.Size(107, 21);
             this.rbCustomer.TabIndex = 44;
@@ -690,7 +708,7 @@
             this.rbRefID.AutoSize = true;
             this.rbRefID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.rbRefID.Location = new System.Drawing.Point(280, 27);
-            this.rbRefID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbRefID.Margin = new System.Windows.Forms.Padding(4);
             this.rbRefID.Name = "rbRefID";
             this.rbRefID.Size = new System.Drawing.Size(77, 21);
             this.rbRefID.TabIndex = 43;
@@ -739,7 +757,7 @@
             this.panel5.BackColor = System.Drawing.Color.Khaki;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Location = new System.Drawing.Point(513, 28);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(21, 19);
             this.panel5.TabIndex = 0;
@@ -749,7 +767,7 @@
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(39)))), ((int)(((byte)(43)))));
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Location = new System.Drawing.Point(513, 5);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(21, 19);
             this.panel6.TabIndex = 0;
@@ -769,7 +787,7 @@
             // 
             this.tbFilterdgvDoc.ForeColor = System.Drawing.Color.Black;
             this.tbFilterdgvDoc.Location = new System.Drawing.Point(71, 14);
-            this.tbFilterdgvDoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbFilterdgvDoc.Margin = new System.Windows.Forms.Padding(4);
             this.tbFilterdgvDoc.Multiline = true;
             this.tbFilterdgvDoc.Name = "tbFilterdgvDoc";
             this.tbFilterdgvDoc.Size = new System.Drawing.Size(203, 25);
@@ -797,7 +815,7 @@
             this.panel2.Controls.Add(this.btnRefreshdgv);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1449, 50);
             this.panel2.TabIndex = 44;
@@ -809,7 +827,7 @@
             this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReturn.ForeColor = System.Drawing.Color.White;
             this.btnReturn.Location = new System.Drawing.Point(459, 7);
-            this.btnReturn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(133, 33);
             this.btnReturn.TabIndex = 17;
@@ -823,7 +841,7 @@
             this.btnReassignDP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReassignDP.ForeColor = System.Drawing.Color.White;
             this.btnReassignDP.Location = new System.Drawing.Point(317, 7);
-            this.btnReassignDP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReassignDP.Margin = new System.Windows.Forms.Padding(4);
             this.btnReassignDP.Name = "btnReassignDP";
             this.btnReassignDP.Size = new System.Drawing.Size(133, 33);
             this.btnReassignDP.TabIndex = 16;
@@ -837,7 +855,7 @@
             this.btnChangeStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangeStatus.ForeColor = System.Drawing.Color.White;
             this.btnChangeStatus.Location = new System.Drawing.Point(623, 7);
-            this.btnChangeStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnChangeStatus.Margin = new System.Windows.Forms.Padding(4);
             this.btnChangeStatus.Name = "btnChangeStatus";
             this.btnChangeStatus.Size = new System.Drawing.Size(133, 33);
             this.btnChangeStatus.TabIndex = 18;
@@ -851,7 +869,7 @@
             this.btnCloseReopen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseReopen.ForeColor = System.Drawing.Color.White;
             this.btnCloseReopen.Location = new System.Drawing.Point(155, 7);
-            this.btnCloseReopen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCloseReopen.Margin = new System.Windows.Forms.Padding(4);
             this.btnCloseReopen.Name = "btnCloseReopen";
             this.btnCloseReopen.Size = new System.Drawing.Size(133, 33);
             this.btnCloseReopen.TabIndex = 15;
@@ -865,20 +883,19 @@
             this.btnAddDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddDoc.ForeColor = System.Drawing.Color.White;
             this.btnAddDoc.Location = new System.Drawing.Point(13, 7);
-            this.btnAddDoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddDoc.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddDoc.Name = "btnAddDoc";
             this.btnAddDoc.Size = new System.Drawing.Size(133, 33);
             this.btnAddDoc.TabIndex = 14;
             this.btnAddDoc.Text = "Add Document";
             this.btnAddDoc.UseVisualStyleBackColor = false;
-            this.btnAddDoc.Click += new System.EventHandler(this.btnAddDoc_Click_1);
             // 
             // btnPrint
             // 
             this.btnPrint.BackgroundImage = global::Testing.Properties.Resources.print;
             this.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPrint.Location = new System.Drawing.Point(941, 10);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(32, 30);
             this.btnPrint.TabIndex = 13;
@@ -891,7 +908,7 @@
             this.btnReport.BackgroundImage = global::Testing.Properties.Resources.report;
             this.btnReport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnReport.Location = new System.Drawing.Point(975, 10);
-            this.btnReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(32, 30);
             this.btnReport.TabIndex = 12;
@@ -926,7 +943,7 @@
             this.btnExportRecord.BackgroundImage = global::Testing.Properties.Resources.export;
             this.btnExportRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnExportRecord.Location = new System.Drawing.Point(841, 10);
-            this.btnExportRecord.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExportRecord.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportRecord.Name = "btnExportRecord";
             this.btnExportRecord.Size = new System.Drawing.Size(32, 30);
             this.btnExportRecord.TabIndex = 11;
@@ -963,7 +980,7 @@
             this.btnDPPendingRemark.BackgroundImage = global::Testing.Properties.Resources.remark;
             this.btnDPPendingRemark.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDPPendingRemark.Location = new System.Drawing.Point(908, 10);
-            this.btnDPPendingRemark.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDPPendingRemark.Margin = new System.Windows.Forms.Padding(4);
             this.btnDPPendingRemark.Name = "btnDPPendingRemark";
             this.btnDPPendingRemark.Size = new System.Drawing.Size(32, 30);
             this.btnDPPendingRemark.TabIndex = 10;
@@ -976,7 +993,7 @@
             this.btnManageCrono.BackgroundImage = global::Testing.Properties.Resources.Crono;
             this.btnManageCrono.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnManageCrono.Location = new System.Drawing.Point(808, 10);
-            this.btnManageCrono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnManageCrono.Margin = new System.Windows.Forms.Padding(4);
             this.btnManageCrono.Name = "btnManageCrono";
             this.btnManageCrono.Size = new System.Drawing.Size(32, 30);
             this.btnManageCrono.TabIndex = 9;
@@ -989,7 +1006,7 @@
             this.btnReverse.BackgroundImage = global::Testing.Properties.Resources.reverse;
             this.btnReverse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnReverse.Location = new System.Drawing.Point(875, 10);
-            this.btnReverse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReverse.Margin = new System.Windows.Forms.Padding(4);
             this.btnReverse.Name = "btnReverse";
             this.btnReverse.Size = new System.Drawing.Size(32, 30);
             this.btnReverse.TabIndex = 8;
@@ -1002,7 +1019,7 @@
             this.btnRefreshdgv.BackgroundImage = global::Testing.Properties.Resources.refresh;
             this.btnRefreshdgv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRefreshdgv.Location = new System.Drawing.Point(775, 10);
-            this.btnRefreshdgv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefreshdgv.Margin = new System.Windows.Forms.Padding(4);
             this.btnRefreshdgv.Name = "btnRefreshdgv";
             this.btnRefreshdgv.Size = new System.Drawing.Size(32, 30);
             this.btnRefreshdgv.TabIndex = 7;
@@ -1039,7 +1056,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmDocumentControl";
             this.Text = "frmDocumentControl";
             this.Activated += new System.EventHandler(this.frmDocumentControl_Activated);
@@ -1048,6 +1065,7 @@
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.pDoc.ResumeLayout(false);
+            this.pDoc.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDoc)).EndInit();
             this.pNotification.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNoti)).EndInit();
@@ -1135,6 +1153,7 @@
         private System.Windows.Forms.DataGridView dgvNoti;
         private System.Windows.Forms.Button btnSentOut;
         private System.Windows.Forms.Button btnReceived;
+        private System.Windows.Forms.Label lblError;
 
     }
 }

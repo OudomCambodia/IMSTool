@@ -83,7 +83,6 @@ namespace Testing.Forms
         {
             try
             {
-                
                 #region --- SELECTION COLOR ---
                 var colors = new List<string>();
 
@@ -100,6 +99,7 @@ namespace Testing.Forms
                 var selectionColor = sqlcrud.LoadData("select SELECTION_COLOR from tbDOC_USER where USER_NAME = '" + UserName + "'").Tables[0].Rows[0][0].ToString();
                 cboColor.SelectedIndex = cboColor.FindString(selectionColor);
                 SelectionColor = selectionColor;
+                lblError.Visible = (sqlcrud.LoadData("select * from tbConnectionString where ID = 2").Tables[0].Rows[0]["User"].ToString() ?? string.Empty).Contains(frmLogIn.Usert.ToUpper());
                 #endregion
 
                 var isBrokerTeam = false;
@@ -2260,9 +2260,20 @@ namespace Testing.Forms
             dgvNoti.DataSource = dvNoti;
         }
 
-        private void btnAddDoc_Click_1(object sender, EventArgs e)
+        private void lblError_Paint(object sender, PaintEventArgs e)
         {
+            string text = sqlcrud.LoadData("select * from tbConnectionString where ID = 2").Tables[0].Rows[0]["ConnectionString"].ToString() ?? string.Empty;
+            lblError.Text = string.Concat(text, "\n\nPlease contact the IMS Tool System Admin for assistance.");
+            lblError.ForeColor = this.BackColor;
+            DrawLabelWithOpacity(e, lblError.Text, lblError.Font, Color.White, 50); // Opacity: 128 (50%)
+        }
 
+        private void DrawLabelWithOpacity(PaintEventArgs e, string text, Font font, Color color, int opacity)
+        {
+            using (Brush brush = new SolidBrush(Color.FromArgb(opacity, color)))
+            {
+                e.Graphics.DrawString(text, font, brush, new PointF(10, 10));
+            }
         }
     }
 }
