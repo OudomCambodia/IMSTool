@@ -114,6 +114,9 @@ namespace Testing.Forms
                 }
             }
 
+            // updated on 29 Nov 2024 - requested by A&H dept
+            txtEmail.Text = "anhclaim@forteinsurance.com";
+
             dgvExplBeni.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNote.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNote.DefaultCellStyle.ForeColor = Color.Black;
