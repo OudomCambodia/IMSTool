@@ -114,15 +114,15 @@ namespace Testing.Forms
                 }
             }
 
-            // updated on 29 Nov 2024 - requested by A&H dept
-            txtEmail.Text = "anhclaim@forteinsurance.com";
-
             dgvExplBeni.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNote.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNote.DefaultCellStyle.ForeColor = Color.Black;
             dgvExplBeni.DefaultCellStyle.ForeColor = Color.Black;
 
             LoadData();
+
+            // updated on 29 Nov 2024 - requested by A&H dept
+            txtEmail.Text = "anhclaim@forteinsurance.com";
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
