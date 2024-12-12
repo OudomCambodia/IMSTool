@@ -1233,5 +1233,11 @@ namespace Testing
             }
             return content;
         }
+
+        private void policyPaymentCommissionReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.frmPolicyPremiumAndCommissionReport pre = new Forms.frmPolicyPremiumAndCommissionReport();
+            pre.Show();
+        }
     }
 }

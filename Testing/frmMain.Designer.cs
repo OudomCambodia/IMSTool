@@ -60,6 +60,7 @@
             this.CusProfitV2 = new System.Windows.Forms.ToolStripMenuItem();
             this.acledaSalesPersonReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsPolicyUpload = new System.Windows.Forms.ToolStripMenuItem();
+            this.policyPaymentCommissionReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoMonthlyReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPEMReport = new System.Windows.Forms.ToolStripMenuItem();
             this.InvoiceSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +80,7 @@
             this.CreateTicket = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPrintAutoLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.pnSubClaim = new System.Windows.Forms.Panel();
+            this.btnClaimRejectionReport = new System.Windows.Forms.Button();
             this.clmPaymentReq = new System.Windows.Forms.Button();
             this.bnClaimOSRI = new System.Windows.Forms.Button();
             this.bnClaimPaidRI = new System.Windows.Forms.Button();
@@ -127,7 +129,6 @@
             this.pSendEmailsClaim = new System.Windows.Forms.Panel();
             this.btnSendClaimEmailReport = new System.Windows.Forms.Button();
             this.btnSendClaimEmail = new System.Windows.Forms.Button();
-            this.btnClaimRejectionReport = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnSubClaim.SuspendLayout();
             this.pnSubFL.SuspendLayout();
@@ -441,7 +442,8 @@
             this.tsPremiumRegister,
             this.CusProfitV2,
             this.acledaSalesPersonReportToolStripMenuItem,
-            this.tsPolicyUpload});
+            this.tsPolicyUpload,
+            this.policyPaymentCommissionReportToolStripMenuItem});
             this.monthlyReportToolStripMenuItem.Enabled = false;
             this.monthlyReportToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.monthlyReportToolStripMenuItem.Name = "monthlyReportToolStripMenuItem";
@@ -451,44 +453,44 @@
             // 
             // monthlyReportToolStripMenuItem1
             // 
-            this.monthlyReportToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.monthlyReportToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.monthlyReportToolStripMenuItem1.Enabled = false;
             this.monthlyReportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.monthlyReportToolStripMenuItem1.Name = "monthlyReportToolStripMenuItem1";
-            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(264, 26);
+            this.monthlyReportToolStripMenuItem1.Size = new System.Drawing.Size(332, 26);
             this.monthlyReportToolStripMenuItem1.Text = "Monthly Report";
             this.monthlyReportToolStripMenuItem1.Click += new System.EventHandler(this.monthlyReportToolStripMenuItem1_Click);
             // 
             // aCPREMIUMREPORTToolStripMenuItem
             // 
-            this.aCPREMIUMREPORTToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.aCPREMIUMREPORTToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.aCPREMIUMREPORTToolStripMenuItem.Enabled = false;
             this.aCPREMIUMREPORTToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aCPREMIUMREPORTToolStripMenuItem.Name = "aCPREMIUMREPORTToolStripMenuItem";
-            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
+            this.aCPREMIUMREPORTToolStripMenuItem.Size = new System.Drawing.Size(332, 26);
             this.aCPREMIUMREPORTToolStripMenuItem.Text = "AC_PREMIUM REPORT";
             this.aCPREMIUMREPORTToolStripMenuItem.Click += new System.EventHandler(this.aCPREMIUMREPORTToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(264, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(332, 26);
             this.toolStripMenuItem1.Text = "IEMA Report";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click_1);
             // 
             // tsPremiumRegister
             // 
-            this.tsPremiumRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.tsPremiumRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.tsPremiumRegister.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsPMAllDept,
             this.tsPMAdmin});
             this.tsPremiumRegister.Enabled = false;
             this.tsPremiumRegister.ForeColor = System.Drawing.Color.White;
             this.tsPremiumRegister.Name = "tsPremiumRegister";
-            this.tsPremiumRegister.Size = new System.Drawing.Size(264, 26);
+            this.tsPremiumRegister.Size = new System.Drawing.Size(332, 26);
             this.tsPremiumRegister.Text = "Premium Register";
             // 
             // tsPMAllDept
@@ -513,29 +515,42 @@
             // 
             // CusProfitV2
             // 
-            this.CusProfitV2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.CusProfitV2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.CusProfitV2.Enabled = false;
             this.CusProfitV2.ForeColor = System.Drawing.Color.White;
             this.CusProfitV2.Name = "CusProfitV2";
-            this.CusProfitV2.Size = new System.Drawing.Size(264, 26);
+            this.CusProfitV2.Size = new System.Drawing.Size(332, 26);
             this.CusProfitV2.Text = "Customer Profitability";
             this.CusProfitV2.Click += new System.EventHandler(this.CusProfitV2_Click);
             // 
             // acledaSalesPersonReportToolStripMenuItem
             // 
-            this.acledaSalesPersonReportToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.acledaSalesPersonReportToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
             this.acledaSalesPersonReportToolStripMenuItem.Enabled = false;
             this.acledaSalesPersonReportToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.acledaSalesPersonReportToolStripMenuItem.Name = "acledaSalesPersonReportToolStripMenuItem";
-            this.acledaSalesPersonReportToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
+            this.acledaSalesPersonReportToolStripMenuItem.Size = new System.Drawing.Size(332, 26);
             this.acledaSalesPersonReportToolStripMenuItem.Text = "Acleda Sales Person Report";
             this.acledaSalesPersonReportToolStripMenuItem.Click += new System.EventHandler(this.acledaSalesPersonReportToolStripMenuItem_Click);
             // 
             // tsPolicyUpload
             // 
+            this.tsPolicyUpload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.tsPolicyUpload.Enabled = false;
+            this.tsPolicyUpload.ForeColor = System.Drawing.Color.White;
             this.tsPolicyUpload.Name = "tsPolicyUpload";
-            this.tsPolicyUpload.Size = new System.Drawing.Size(264, 26);
+            this.tsPolicyUpload.Size = new System.Drawing.Size(332, 26);
             this.tsPolicyUpload.Text = "Policy Upload Report";
+            // 
+            // policyPaymentCommissionReportToolStripMenuItem
+            // 
+            this.policyPaymentCommissionReportToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.policyPaymentCommissionReportToolStripMenuItem.Enabled = false;
+            this.policyPaymentCommissionReportToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.policyPaymentCommissionReportToolStripMenuItem.Name = "policyPaymentCommissionReportToolStripMenuItem";
+            this.policyPaymentCommissionReportToolStripMenuItem.Size = new System.Drawing.Size(332, 26);
+            this.policyPaymentCommissionReportToolStripMenuItem.Text = "Policy Payment && Commission Report";
+            this.policyPaymentCommissionReportToolStripMenuItem.Click += new System.EventHandler(this.policyPaymentCommissionReportToolStripMenuItem_Click);
             // 
             // autoMonthlyReportToolStripMenuItem
             // 
@@ -723,6 +738,22 @@
             this.pnSubClaim.Size = new System.Drawing.Size(180, 274);
             this.pnSubClaim.TabIndex = 4;
             this.pnSubClaim.Visible = false;
+            // 
+            // btnClaimRejectionReport
+            // 
+            this.btnClaimRejectionReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
+            this.btnClaimRejectionReport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClaimRejectionReport.Enabled = false;
+            this.btnClaimRejectionReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClaimRejectionReport.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClaimRejectionReport.ForeColor = System.Drawing.Color.White;
+            this.btnClaimRejectionReport.Location = new System.Drawing.Point(-4, 232);
+            this.btnClaimRejectionReport.Name = "btnClaimRejectionReport";
+            this.btnClaimRejectionReport.Size = new System.Drawing.Size(187, 40);
+            this.btnClaimRejectionReport.TabIndex = 13;
+            this.btnClaimRejectionReport.Text = "Claim Rejection Report";
+            this.btnClaimRejectionReport.UseVisualStyleBackColor = false;
+            this.btnClaimRejectionReport.Click += new System.EventHandler(this.btnClaimRejectionReport_Click);
             // 
             // clmPaymentReq
             // 
@@ -1445,22 +1476,6 @@
             this.btnSendClaimEmail.UseVisualStyleBackColor = false;
             this.btnSendClaimEmail.Click += new System.EventHandler(this.btnSendClaimEmail_Click);
             // 
-            // btnClaimRejectionReport
-            // 
-            this.btnClaimRejectionReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(38)))), ((int)(((byte)(58)))));
-            this.btnClaimRejectionReport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClaimRejectionReport.Enabled = false;
-            this.btnClaimRejectionReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClaimRejectionReport.Font = new System.Drawing.Font("Cambria", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClaimRejectionReport.ForeColor = System.Drawing.Color.White;
-            this.btnClaimRejectionReport.Location = new System.Drawing.Point(-4, 232);
-            this.btnClaimRejectionReport.Name = "btnClaimRejectionReport";
-            this.btnClaimRejectionReport.Size = new System.Drawing.Size(187, 40);
-            this.btnClaimRejectionReport.TabIndex = 13;
-            this.btnClaimRejectionReport.Text = "Claim Rejection Report";
-            this.btnClaimRejectionReport.UseVisualStyleBackColor = false;
-            this.btnClaimRejectionReport.Click += new System.EventHandler(this.btnClaimRejectionReport_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1612,5 +1627,6 @@
         public System.Windows.Forms.Button btnPrintInvoiceBatch;
         private System.Windows.Forms.ToolStripMenuItem tsmiPEMReport;
         public System.Windows.Forms.Button btnClaimRejectionReport;
+        private System.Windows.Forms.ToolStripMenuItem policyPaymentCommissionReportToolStripMenuItem;
     }
 }
